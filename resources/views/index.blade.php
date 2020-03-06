@@ -18,6 +18,7 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
+luhhkjhg
 
 
 @endsection

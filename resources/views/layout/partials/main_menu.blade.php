@@ -138,7 +138,7 @@
 
         <!-- Imagem do utilizador -->
         <div style="float:left;width:40px;height:40px;overflow:hidden;" class="rounded-circle shadow">
-            <img src="#" style="width:100%">
+            <img src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
         </div>
 
         <!-- Nome e Tipo de utilizador -->
