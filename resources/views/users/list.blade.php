@@ -2,7 +2,7 @@
 
 
 {{-- Titulo da Página --}}
-@section('title', 'Página Exemplo')
+@section('title', 'Lista de utilizadores')
 
 
 
@@ -18,8 +18,8 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-luhhkjhg
 
+<h3>Lista de utilizadores</h3>
 
 @endsection
 

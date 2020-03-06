@@ -3,7 +3,7 @@
 html,body{
     height: 100%;
     font-family: 'Nunito', sans-serif;
-    font-weight: 700;
+/*     font-weight: 700; */
     background-color: #EAEAEA;
     min-width: 750px;
 }
@@ -39,6 +39,7 @@ html,body{
 
 .active{
     color:#6A74C9;
+    font-weight: 700;
 }
 
 .menu-list a{
@@ -70,8 +71,8 @@ html,body{
 
 /* SIDEBAR */
 .sidebar{
-    -ms-flex: 0 0 230px;
-    flex: 0 0 230px;
+    -ms-flex: 0 0 270px;
+    flex: 0 0 270px;
     background-color: white;
     min-height: 100%;
 }

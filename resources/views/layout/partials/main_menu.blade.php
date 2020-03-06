@@ -3,7 +3,9 @@
     <!-- LYKA Logotipo -->
     <div class="row pt-3 pb-3">
         <div class="col text-center">
-            <div style="font-weight:700;font-size:30px;color:#6A74C9">LYKA.</div>
+            <div style="font-weight:700;font-size:30px;color:#6A74C9">
+                <a href="{{route('dashboard')}}">LYKA.</a>
+            </div>
         </div>
     </div>
 
@@ -15,23 +17,23 @@
 
         <!-- Dashboard -->
         <li class="menu_option">
-            <a href="#">
+            <a href="{{route('dashboard')}}">
                 <div class="menu_icon">
                     <i class="fas fa-tachometer-alt mr-2"></i>
                 </div>
-                <span class="active">Dashboard</span>
+                <span class="{{Route::is('dashboard') ? 'active' : ''}}">Dashboard</span>
             </a>
         </li>
 
         <li class="menu_option"></li>
 
         <!-- Estudantes  -->
-        <li class="menu_option active">
+        <li class="menu_option">
             <a href="#">
                 <div class="menu_icon">
                     <i class="fas fa-user-graduate mr-2"></i>
                 </div>
-                <span>Estudantes</span>
+                <span >Estudantes</span>
             </a>
         </li>
 
@@ -121,11 +123,11 @@
 
         <!-- Utilizadores -->
         <li class="menu_option">
-            <a href="#">
+            <a href="{{route('users.index')}}">
                 <div class="menu_icon">
                     <i class="fas fa-users mr-2"></i>
                 </div>
-                <span>Utilizadores</span>
+                <span class="{{Route::is('users') ? 'active' : ''}}">Utilizadores</span>
             </a>
         </li>
 

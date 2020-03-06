@@ -34,25 +34,30 @@
 <body>
 
 
-   <!-- Estrutura & Navegação -->
-   <div class="container-fluid ">
-    <div class="row" style="min-height:100%">
+    <!-- Estrutura & Navegação -->
+    <div class="container-fluid ">
+        <div class="row" style="min-height:100%">
 
-        <!-- Menu principal - Esquerda -->
-        <div class="col main_menu shadow">
-            @include('layout.partials.main_menu')
+            <!-- Menu principal - Esquerda -->
+            <div class="col main_menu shadow">
+                @include('layout.partials.main_menu')
+            </div>
+
+            <!-- Conteudo Principal -->
+            <div class="col pb-5 pt-3">
+                @yield('content')
+            </div>
+
+            <!--Barra Direita (notificações) -->
+            <div class="col sidebar shadow p-2">
+                @include('layout.partials.sidebar')
+            </div>
         </div>
+    </div>
 
-        <!-- Conteudo Principal -->
-        <div class="col ">
-            @yield('content')            
-        </div>
 
-        <!--Barra Direita (notificações) -->
-        <div class="col sidebar shadow p-2" >
-            @include('layout.partials.sidebar')
-        </div>
-
+    <!-- Footer: SCRIPTS -->
+    @include('layout.partials.footer')
 
 </body>
 
