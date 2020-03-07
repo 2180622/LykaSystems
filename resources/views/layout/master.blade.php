@@ -36,7 +36,7 @@
 
     <!-- Estrutura & Navegação -->
     <div class="container-fluid ">
-        <div class="row" style="min-height:100%">
+        <div class="row" style="min-height:100%; height:100%">
 
             <!-- Menu principal - Esquerda -->
             <div class="col main_menu shadow">

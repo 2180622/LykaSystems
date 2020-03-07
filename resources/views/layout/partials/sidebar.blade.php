@@ -5,15 +5,15 @@
           aria-hidden="true"></i></span>
     </div>
   </div> --}}
-  
-  <div class="mx-auto mb-3 font-weight-bold"><i class="fas fa-bell mr-2" style="color:#6A74C9"></i>Notificações</div>
-  
-  
+
+  <div class="mx-auto mb-3 pt-3 font-weight-bold text-center" style="color:#6A74C9;font-size:20px"><i class="fas fa-bell mr-2" ></i>Notificações</div>
+
+
   <div class="notification_area">
-  
-  
-      
-  
+
+
+
+
       <div class="alert alert-dark alert-dismissible fade show" role="alert">
 
         {{-- Titulo da notificação --}}
@@ -29,6 +29,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-  
-  
+
+
   </div>

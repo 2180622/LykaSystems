@@ -10,6 +10,14 @@ html,body{
 
 
 
+.logotype{
+    font-weight:700;
+    font-size:30px;
+    color:#6A74C9;
+}
+.logotype:hover{
+    text-decoration: none;
+}
 
 
 /* Menu Principal */
@@ -17,7 +25,6 @@ html,body{
     -ms-flex: 0 0 210px;
     flex: 0 0 210px;
     background-color: white;
-    min-height: 100%;
     padding:0px!important;
 }
 
@@ -34,7 +41,7 @@ html,body{
     padding-top:8px;
     padding-bottom:8px;
     padding-left: 15px;
-    
+
 }
 
 .active{
@@ -60,11 +67,10 @@ html,body{
     color:#6A74C9;
 }
 
-.main_menu_user{
-    font-size: 16px;
-    height:200px;
-}
 
+
+
+/* Utilizador e opçoes */
 
 
 
@@ -75,39 +81,6 @@ html,body{
     flex: 0 0 270px;
     background-color: white;
     min-height: 100%;
-}
-
-
-
-
-
-
-.custom-scrollbar-js,
-.custom-scrollbar-css {
-  height: 200px;
-}
-
-
-/* Custom Scrollbar using CSS */
-.custom-scrollbar-css {
-  overflow-y: scroll;
-}
-
-/* scrollbar width */
-.custom-scrollbar-css::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* scrollbar track */
-.custom-scrollbar-css::-webkit-scrollbar-track {
-  background: #eee;
-}
-
-/* scrollbar handle */
-.custom-scrollbar-css::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
-  background-color: #00d2ff;
-  background-image: linear-gradient(to top, #00d2ff 0%, #3a7bd5 100%);
 }
 
 
