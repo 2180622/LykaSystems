@@ -150,13 +150,11 @@
             </div>
         </div>
 
-        <div class="mt-5 alert-dark rounded ">
-            <ul class="list-group">
-                <li class="list-group-item"><a href="#"><i class="fas fa-sliders-h m-2"></i>Definições</a></li>
-                <li class="list-group-item"><a href="#"><i class="far fa-question-circle m-2"></i>Ajuda</a></li>
-                <li class="list-group-item"><a href="#"><i class="fas fa-power-off m-2"></i>Logout</a></li>
-            </ul>
+        <div class="mt-5 p-2 rounded bg-dark text-center ">
 
+            <a href="#" class="btn btn-sm btn-dark mr-2"><i class="fas fa-sliders-h m-2"></i></a>
+            <a href="#" class="btn btn-sm btn-dark mr-2"><i class="far fa-question-circle m-2"></i></a>
+            <a href="#" class="btn btn-sm btn-dark"><i class="fas fa-power-off m-2"></i></a>
         </div>
 
 
@@ -169,3 +167,6 @@
 
 
 </div>
+
+
+

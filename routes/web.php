@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Console\Kernel;
 
+
+
 /* Dashboard */
-
-
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/', 'DashboardController@index')->name('dashboard');
 
 
 
@@ -18,6 +18,4 @@ Route::resource('/users', 'UserController');
 
 
 
-Route::get('/', function () {
-    return view('PAGINA_EXEMPLO');
-});
+
