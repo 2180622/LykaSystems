@@ -134,7 +134,7 @@
 
 
 
-    <div class="mt-5 m-2 ">
+    <div class="mt-5 m-2 rounded">
 
 
         <div class="p-2">
@@ -150,11 +150,10 @@
             </div>
         </div>
 
-        <div class="mt-5 p-2 rounded bg-dark text-center ">
-
-            <a href="#" class="btn btn-sm btn-dark mr-2"><i class="fas fa-sliders-h m-2"></i></a>
-            <a href="#" class="btn btn-sm btn-dark mr-2"><i class="far fa-question-circle m-2"></i></a>
-            <a href="#" class="btn btn-sm btn-dark"><i class="fas fa-power-off m-2"></i></a>
+        <div class="mt-5 p-2 rounded  text-center ">
+            <a href="#" class="btn btn-sm btn-light mr-2"><i class="fas fa-sliders-h m-2"></i></a>
+            <a href="#" class="btn btn-sm btn-light mr-2"><i class="far fa-question-circle m-2"></i></a>
+            <a href="#" class="btn btn-sm btn-light"><i class="fas fa-power-off m-2"></i></a>
         </div>
 
 
