@@ -36,7 +36,7 @@
 
     <!-- Estrutura & Navegação -->
     <div class="container-fluid ">
-        <div class="row" style="min-height:100%; height:100%">
+        <div class="row" style="min-height:100vh">
 
             <!-- Menu principal - Esquerda -->
             <div class="col main_menu shadow">
@@ -44,7 +44,7 @@
             </div>
 
             <!-- Conteudo Principal -->
-            <div class="col pb-5 pt-3">
+            <div class="col pb-5 pt-3 " style="">
                 @yield('content')
             </div>
 
