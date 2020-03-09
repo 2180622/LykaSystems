@@ -14,6 +14,8 @@ class DocTransacao extends Migration
     public function up()
     {
         Schema::create('DocTransacao', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocTransacao');
             $table->string('descricao',255);
             $table->decimal('valorRecebido', 18, 2)->default(0);

@@ -14,6 +14,8 @@ class Contacto extends Migration
     public function up()
     {
         Schema::create('Contacto', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idContacto');
             $table->string('nome',255);
             $table->string('fotografia',255)->nullable();

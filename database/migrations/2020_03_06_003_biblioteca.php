@@ -14,6 +14,8 @@ class Biblioteca extends Migration
     public function up()
     {
         Schema::create('Biblioteca', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idBiblioteca');
             $table->string('nome',255);
             $table->string('imagem',255);

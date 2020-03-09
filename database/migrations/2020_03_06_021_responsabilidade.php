@@ -14,6 +14,8 @@ class Responsabilidade extends Migration
     public function up()
     {
         Schema::create('Responsabilidade', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idResponsabilidade');
             $table->string('descricao',255);
             $table->decimal('valorCliente', 18, 2);

@@ -14,6 +14,8 @@ class ProdutoStock extends Migration
     public function up()
     {
         Schema::create('ProdutoStock', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idProdutoStock');
             $table->string('descricao',255);
             $table->enum('tipo',['Licenciatura','Mestrado','Doutoramento','Curso de Verão','Estágio Profissional','Transferência de Curso','Curso Indiomas','Erasmus','Pré-Universitário']);

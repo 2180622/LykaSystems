@@ -21,6 +21,8 @@
     <!-- CSS Link -->
     <link href="{{asset('/css/master.css')}}" rel="stylesheet">
 
+    <script src="https://unpkg.com/feather-icons"></script>
+
     @yield('styleLinks')
 
 </head>
@@ -42,7 +44,7 @@
             </div>
 
             <!-- Right Sidebar -->
-            <div class="col sidebar shadow p-2">
+            <div class="col sidebar shadow">
                 @include('layout.partials.sidebar')
             </div>
         </div>

@@ -14,10 +14,13 @@ class Administrador extends Migration
     public function up()
     {
         Schema::create('Administrador', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idAdmin');
             $table->string('nome',255);
             $table->string('apelido',255);
             $table->string('email',255);
+                $table->unique('email');
             $table->date('dataNasc');
             $table->string('fotografia',255)->nullable();
             $table->integer('telefone1');

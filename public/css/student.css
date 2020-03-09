@@ -1,0 +1,15 @@
+.checkbox-lg .custom-control-label::before,
+.checkbox-lg .custom-control-label::after {
+    width: 1.20rem;
+    height: 1.20rem;
+}
+
+.fotoPerfil{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    background-color: red;
+    margin-left: 10px;
+}

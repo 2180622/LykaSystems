@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Phonebook extends Model
+class FaseStock extends Model
 {
-    //
+    protected $table = 'FaseStock';
 }
