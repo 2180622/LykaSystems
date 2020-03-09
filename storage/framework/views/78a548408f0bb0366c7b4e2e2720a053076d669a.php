@@ -2,7 +2,7 @@
     <!-- Lyka Name -->
     <div class="row pt-3 pb-3 logo">
         <div class="col">
-            <a class="logotype" href="{{route('dashboard')}}">lyka.</a>
+            <a class="logotype" href="<?php echo e(route('dashboard')); ?>">lyka.</a>
         </div>
     </div>
 
@@ -10,11 +10,11 @@
     <ul class="menu-list">
         <!-- Dashboard -->
         <li class="menu-option">
-            <a href="{{route('dashboard')}}">
+            <a href="<?php echo e(route('dashboard')); ?>">
                 <div class="menu-icon">
                     <ion-icon name="cloud-outline" style="font-size: 16pt; position: relative; top: 3px; right: 3px; --ionicon-stroke-width: 40px;"></ion-icon>
                 </div>
-                <span class="{{Route::is('dashboard') ? 'active' : ''}}" style="bottom:2px;">Dashboard</span>
+                <span class="<?php echo e(Route::is('dashboard') ? 'active' : ''); ?>" style="bottom:2px;">Dashboard</span>
             </a>
         </li>
 
@@ -127,11 +127,11 @@
 
         <!-- Utilizadores -->
         <li class="menu-option">
-            <a href="{{route('users.index')}}">
+            <a href="<?php echo e(route('users.index')); ?>">
                 <div class="menu-icon">
                     <i class="fas fa-users mr-2"></i>
                 </div>
-                <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Utilizadores</span>
+                <span class="<?php echo e(Route::is('users.*') ? 'active' : ''); ?> option-name">Utilizadores</span>
             </a>
         </li>
     </ul>
@@ -139,12 +139,12 @@
     <div class="mt-5 m-2 rounded">
         <div class="p-2">
             <div style="float:left; width: 50px;">
-                {{-- Foto Utilizador --}}
-                <img class="shadow" src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
+                
+                <img class="shadow" src="<?php echo e(asset('storage/user-photos/user.jpg')); ?>" style="width:100%">
             </div>
 
             <div class="pl-2" style="float:left;">
-                {{-- Nome e Perfil --}}
+                
                 <span class="font-weight-bold">Nome</span><br>
                 <span class="text-muted" style="font-size:14px">Administrador</span>
             </div>
@@ -157,3 +157,4 @@
         </div>
     </div>
 </div>
+<?php /**PATH /home/joseareia/Desktop/LykaSystems/resources/views/layout/partials/main-menu.blade.php ENDPATH**/ ?>

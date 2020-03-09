@@ -23,8 +23,8 @@ html, body {
 }
 
 .main-menu {
-    flex: 0 0 250px;
-    -ms-flex: 0 0 250px;
+    flex: 0 0 260px;
+    -ms-flex: 0 0 260px;
     background-color: white;
 }
 
