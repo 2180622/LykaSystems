@@ -12,7 +12,7 @@
         <li class="menu-option">
             <a href="{{route('dashboard')}}">
                 <div class="menu-icon">
-                    <i class="far fa-hdd mr-2"></i>
+                    <ion-icon name="cloud-outline" style="font-size: 16pt; position: relative; top: 3px; right: 3px; --ionicon-stroke-width: 40px;"></ion-icon>
                 </div>
                 <span class="{{Route::is('dashboard') ? 'active' : ''}}" style="bottom:2px;">Dashboard</span>
             </a>
@@ -24,7 +24,7 @@
         <li class="menu-option">
             <a href="#">
                 <div class="menu-icon">
-                    <ion-icon name="person-circle-outline" style="font-size: 16pt;"></ion-icon>
+                    <ion-icon name="person-circle-outline" style="font-size: 16pt; position: relative; top: 5px; right: 3px;"></ion-icon>
                 </div>
                 <span class="option-name">Estudantes</span>
             </a>
@@ -57,7 +57,7 @@
         <li class="menu-option">
             <a href="#">
                 <div class="menu-icon">
-                    <ion-icon name="wallet-outline" style="font-size:16pt; --ionicon-stroke-width: 50px;"></ion-icon>
+                    <ion-icon name="wallet-outline" style="font-size:16pt; --ionicon-stroke-width: 50px; position: relative; top: 3px; right: 3px;"></ion-icon>
                 </div>
                 <span class="option-name">Pagamentos</span>
             </a>
