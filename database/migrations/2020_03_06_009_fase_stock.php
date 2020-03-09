@@ -14,7 +14,10 @@ class FaseStock extends Migration
     public function up()
     {
         Schema::create('FaseStock', function (Blueprint $table) {
-            $table->increments('idFaseStock');
+            $table->bigIncrements('idFaseStock');
+            $table->string('descricao',255);
+            $table->unsignedBigInteger('idProdutoStock');
+                $table->foreign('idProdutoStock')->references('idProdutoStock')->on('ProdutoStock');
         });
     }
 

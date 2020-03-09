@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
 {
@@ -24,7 +25,19 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+      $user = new User;
+
+      return view('users.add', compact('user'));
+      /*return User::create([
+          'username' => $data['username'],
+          'name' => $data['name'],
+          'apelido' => $data['apelido'],
+          'email' => $data['email'],
+          'datanasc' => $data['datanasc'],
+          'telefone1' => $data['telefone1'],
+          'telefone2' => $data['telefone2'],
+          'password' => Hash::make($data['password']),
+      ]);*/
     }
 
     /**
@@ -33,9 +46,23 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+      $fields = $request->validated();
+      $user = new User;
+      $user->fill($fields);
+      $user->password = Hash::make('username');
+      $user->save();
+
+      // if ($request->hasFile('photo')) {
+      // $photo = $request->file('photo');
+      // $profileImg = $user->id . '_' . time() . '.' . $photo->getClientOriginalExtension();
+      // Storage::disk('public')->putFileAs('users_photos', $photo, $profileImg);
+      // $user->photo = $profileImg;
+      //$user->save();
+      //}
+      //$user->sendEmailVerificationNotification();
+      return redirect()->route('users.index')->with('success', 'User successfully created');
     }
 
     /**
@@ -73,7 +100,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from s.addstorage.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response

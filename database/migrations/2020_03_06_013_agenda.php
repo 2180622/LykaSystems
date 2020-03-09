@@ -15,6 +15,13 @@ class Agenda extends Migration
     {
         Schema::create('Agenda', function (Blueprint $table) {
             $table->bigIncrements('idAgenda');
+            $table->text('descricao');
+            $table->boolean('visibilidade')->default(false);
+            $table->dateTime('dataInicio');
+            $table->dateTime('dataFim');
+            $table->dateTime('dataCriacao')->useCurrent();
+            $table->unsignedBigInteger('idUser');
+                $table->foreign('idUser')->references('idUser')->on('User');
         });
     }
 

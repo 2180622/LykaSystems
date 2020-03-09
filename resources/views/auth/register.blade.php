@@ -14,7 +14,7 @@
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="text" class="form-control" name="password_confirmation" required autocomplete="new-password" autofocus>
+                                <input id="username" type="text" class="form-control" name="password_confirmation" required autocomplete="username" autofocus>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -34,7 +34,7 @@
                             <label for="apelido" class="col-md-4 col-form-label text-md-right">{{ __('Apelido') }}</label>
 
                             <div class="col-md-6">
-                                <input id="apelido" type="text" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="apelido" type="text" class="form-control" name="password_confirmation" required autocomplete="apelido">
                             </div>
                         </div>
 
@@ -46,7 +46,7 @@
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $message }}</strong>new-password
                                     </span>
                                 @enderror
                             </div>
@@ -55,21 +55,21 @@
                             <label for="datanasc" class="col-md-4 col-form-label text-md-right">{{ __('Data de Nascimento') }}</label>
 
                             <div class="col-md-6">
-                                <input id="datanasc" type="text" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="datanasc" type="text" class="form-control" name="password_confirmation" required autocomplete="datanasc">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="telefone1" class="col-md-4 col-form-label text-md-right">{{ __('Telefone 1') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefone1" type="text" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="telefone1" type="text" class="form-control" name="password_confirmation" required autocomplete="telefone">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="telefone2" class="col-md-4 col-form-label text-md-right">{{ __('Telefone 2') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefone2" type="text" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="telefone2" type="text" class="form-control" name="password_confirmation">
                             </div>
                         </div>
 
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 ofnew-passwordfset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>

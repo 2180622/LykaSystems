@@ -14,7 +14,14 @@ class Contacto extends Migration
     public function up()
     {
         Schema::create('Contacto', function (Blueprint $table) {
-            $table->increments('idContacto');
+            $table->bigIncrements('idContacto');
+            $table->string('nome',255);
+            $table->string('fotografia',255)->nullable();
+            $table->integer('telefone1')->nullable();
+            $table->integer('telefone2')->nullable();
+            $table->string('email',255)->nullable();
+            $table->integer('fax')->nullable();
+            $table->text('observacao')->nullable();
         });
     }
 

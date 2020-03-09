@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Fase extends Migration
+class Fornecedor extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class Fase extends Migration
      */
     public function up()
     {
-        Schema::create('Fase', function (Blueprint $table) {
-            $table->increments('idFase');
+        Schema::create('Fornecedor', function (Blueprint $table) {
+            $table->bigIncrements('idFornecedor');
+            $table->string('nome',255);
+            $table->string('morada',255);
+            $table->text('descricao');
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +29,6 @@ class Fase extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Fase');
+        Schema::dropIfExists('Fornecedor');
     }
 }
