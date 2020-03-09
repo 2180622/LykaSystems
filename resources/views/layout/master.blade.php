@@ -9,23 +9,17 @@
     <!-- Favicon -->
     {{-- <link rel="shortcut icon" href="/img/icon_logo.png" type="image/x-icon"> --}}
 
-
-
     <!-- Bootstrap core CSS -->
     <link href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
 
     <!-- Fontawesome core CSS -->
     <link href="{{asset('/vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
 
-
-    <!-- LYKA FONT -->
+    <!-- Lyka Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-
 
     <!-- CSS Link -->
     <link href="{{asset('/css/master.css')}}" rel="stylesheet">
-
 
     @yield('styleLinks')
 
@@ -33,30 +27,28 @@
 
 <body>
 
-
-    <!-- Estrutura & Navegação -->
+    <!-- Structure and Navigation -->
     <div class="container-fluid ">
         <div class="row" style="min-height:100vh">
 
-            <!-- Menu principal - Esquerda -->
+            <!-- Left SIdebar -->
             <div class="col main_menu shadow">
                 @include('layout.partials.main-menu')
             </div>
 
-            <!-- Conteudo Principal -->
+            <!-- Content -->
             <div class="col pb-5 pt-3 " style="">
                 @yield('content')
             </div>
 
-            <!--Barra Direita (notificações) -->
+            <!-- Right Sidebar -->
             <div class="col sidebar shadow p-2">
                 @include('layout.partials.sidebar')
             </div>
         </div>
     </div>
 
-
-    <!-- Footer: SCRIPTS -->
+    <!-- Scripts -->
     @include('layout.partials.footer')
 
 </body>

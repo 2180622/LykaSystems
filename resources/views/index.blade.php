@@ -1,37 +1,21 @@
 @extends('layout.master')
 
+{{-- Page Title --}}
+@section('title', 'Página Inicial')
 
-{{-- Titulo da Página --}}
-@section('title', 'Dashboard')
-
-
-
-
-{{-- Estilos de CSS --}}
+{{-- CSS Style Link --}}
 @section('styleLinks')
-{{-- <link href="{{asset('css/NOME_DO_FICHEIRO.css')}}" rel="stylesheet"> --}}
+{{-- <link href="{{asset('/css/NOME_DO_FICHEIRO.css')}}" rel="stylesheet"> --}}
 @endsection
 
-
-
-
-
-{{-- Conteudo da Página --}}
+{{-- Page Content --}}
 @section('content')
-
-{{-- Todo o conteudo deve ser inserido aqui --}}
 
 Dashboard
 
 @endsection
 
-
-
-
-
-
-
-{{-- Utilização de scripts: --}}
+{{-- Scripts --}}
 @section('scripts')
 
 {{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
