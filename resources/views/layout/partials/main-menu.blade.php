@@ -123,26 +123,38 @@
                 <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Utilizadores</span>
             </a>
         </li>
+
     </ul>
 
-    <div class="mt-5 m-2 rounded">
-        <div class="p-2">
-            <div style="float:left; width: 50px;">
-                {{-- Foto Utilizador --}}
-                <img class="shadow" src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
-            </div>
 
-            <div class="pl-2" style="float:left;">
-                {{-- Nome e Perfil --}}
-                <span class="font-weight-bold">Nome</span><br>
-                <span class="text-muted" style="font-size:14px">Administrador</span>
-            </div>
+
+    <div class="text-center  mb-4">
+
+
+        <a href="#" title="Definições" class="user_btn"><div class="opts_btn shadow-sm align-self-center">
+            <i class="fas fa-sliders-h"></i>
+        </div></a>
+
+        <a href="#" title="Terminar sessão" class="user_btn"><div class="user_opts shadow-sm align-self-center">
+            <i class="fas fa-power-off"></i>
+        </div></a>
+
+
+        <div class="mx-auto user_photo rounded-circle shadow">
+            {{-- Foto Utilizador --}}
+            <img src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
         </div>
 
-        <div class="mt-5 p-2 rounded  text-center ">
-            <a href="#" class="btn btn-sm btn-light mr-2"><i class="fas fa-sliders-h m-2"></i></a>
-            <a href="#" class="btn btn-sm btn-light mr-2"><i class="far fa-question-circle m-2"></i></a>
-            <a href="#" class="btn btn-sm btn-light"><i class="fas fa-power-off m-2"></i></a>
+        <div class="text-center mt-3">
+            {{-- Nome e Perfil --}}
+            <span class="font-weight-bold text-uppercase">Nome</span><br>
+            <span class="text-muted " style="font-size:14px">Administrador</span>
         </div>
+
     </div>
+
+
+
+
+
 </div>
