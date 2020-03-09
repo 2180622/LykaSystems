@@ -16,7 +16,7 @@
     <link href="{{asset('/vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
 
     <!-- Lyka Font -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- CSS Link -->
     <link href="{{asset('/css/master.css')}}" rel="stylesheet">
@@ -32,12 +32,12 @@
         <div class="row" style="min-height:100vh">
 
             <!-- Left Sidebar -->
-            <div class="col main_menu shadow">
+            <div class="col main-menu">
                 @include('layout.partials.main-menu')
             </div>
 
             <!-- Content -->
-            <div class="col pb-5 pt-3 " style="">
+            <div class="col pb-5 pt-3">
                 @yield('content')
             </div>
 
