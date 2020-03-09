@@ -14,7 +14,7 @@ class Responsabilidade extends Model
         ];
 
     public function conta(){
-        return $this->belongsTo("App\Conta","idConta");
+        return $this->belongsTo("App\Conta","idConta")->withTrashed();
     }
 
     public function fase(){

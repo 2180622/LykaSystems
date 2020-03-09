@@ -13,7 +13,7 @@ class RelFornResp extends Model
         ];
 
     public function fornecedor(){
-        return $this->belongsTo("App\Fornecedor","idFornecedor");
+        return $this->belongsTo("App\Fornecedor","idFornecedor")->withTrashed();
     }
 
     public function responsabilidade(){

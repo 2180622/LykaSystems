@@ -17,10 +17,10 @@ class Agenda extends Model
     }
 
     public function produtoA(){
-        return $this->hasMany("App\Produto","idAgente");
+        return $this->hasMany("App\Produto","idAgente")->withTrashed();
     }
 
     public function produtoSubA(){
-        return $this->hasMany("App\Produto","idSubAgente");
+        return $this->hasMany("App\Produto","idSubAgente")->withTrashed();
     }
 }

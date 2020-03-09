@@ -26,6 +26,8 @@ class Fase extends Migration
             $table->decimal('valorComSubAgente', 18, 2)->nullable();
             $table->unsignedBigInteger('idProduto');
                 $table->foreign('idProduto')->references('idProduto')->on('Produto');
+            $table->unsignedBigInteger('idFaseStock');
+                $table->foreign('idFaseStock')->references('idFaseStock')->on('FaseStock');
         });
     }
 

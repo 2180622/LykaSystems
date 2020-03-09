@@ -19,23 +19,19 @@ class Produto extends Model
     }
 
     public function agente(){
-        return $this->belongsTo("App\Agente","idAgente");
+        return $this->belongsTo("App\Agente","idAgente")->withTrashed();
     }
 
     public function subAgente(){
-        return $this->belongsTo("App\Agente","idSubAgente");
+        return $this->belongsTo("App\Agente","idSubAgente")->withTrashed();
     }
 
     public function universidade1(){
-        return $this->belongsTo("App\Universidade","idUniversidade1");
+        return $this->belongsTo("App\Universidade","idUniversidade1")->withTrashed();
     }
 
     public function universidade2(){
-        return $this->belongsTo("App\Universidade","idUniversidade2");
-    }
-
-    public function produtoStock(){
-        return $this->belongsTo("App\ProdutoStock","idProdutoStock");
+        return $this->belongsTo("App\Universidade","idUniversidade2")->withTrashed();
     }
 
     public function fase(){
