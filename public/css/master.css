@@ -1,4 +1,4 @@
-/* lyka blue: #6A74C9 */
+/* General Style */
 html, body {
     height: 100%;
     min-width: 750px;
@@ -6,6 +6,7 @@ html, body {
     font-family: 'Nunito', sans-serif;
 }
 
+/* Main Menu Style */
 .logotype {
     color: #6A74C9;
     font-weight: 700;
@@ -16,7 +17,10 @@ html, body {
     text-decoration: none;
 }
 
-/* Menu Principal */
+.menu-content {
+    padding-top: 25px !important;
+}
+
 .main-menu {
     flex: 0 0 250px;
     -ms-flex: 0 0 250px;
