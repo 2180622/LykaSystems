@@ -14,6 +14,8 @@ class Agenda extends Migration
     public function up()
     {
         Schema::create('Agenda', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idAgenda');
             $table->text('descricao');
             $table->boolean('visibilidade')->default(false);

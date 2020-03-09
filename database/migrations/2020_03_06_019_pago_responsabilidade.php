@@ -14,6 +14,8 @@ class PagoResponsabilidade extends Migration
     public function up()
     {
         Schema::create('PagoResponsabilidade', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idPagoResp');
             $table->date('data');
             $table->string('nomeAutor',255);

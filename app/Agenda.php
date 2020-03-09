@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Phonebook extends Model
+class Agenda extends Model
 {
-    //
+    protected $table = 'Agenda';
 }

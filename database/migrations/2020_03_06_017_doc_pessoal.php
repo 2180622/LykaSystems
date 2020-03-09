@@ -14,6 +14,8 @@ class DocPessoal extends Migration
     public function up()
     {
         Schema::create('DocPessoal', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocPessoal');
             $table->string('nome',255);
             $table->string('apelido',255);

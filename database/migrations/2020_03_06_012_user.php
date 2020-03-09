@@ -14,8 +14,11 @@ class User extends Migration
     public function up()
     {
         Schema::create('User', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idUser');
             $table->string('username',255);
+                $table->unique('username');
             $table->enum('tipo',['admin', 'agente', 'cliente']);
             $table->string('password_hash',255);
             $table->string('password_reset_token',255)->nullable();

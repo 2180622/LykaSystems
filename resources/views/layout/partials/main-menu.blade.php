@@ -1,30 +1,29 @@
-<div class="menu-content"> 
+<div class="menu-content">
     <!-- Lyka Name -->
-    <div class="row pt-3 pb-3">
-        <div class="col text-center">
+    <div class="row pt-3 pb-3 logo">
+        <div class="col">
             <a class="logotype" href="{{route('dashboard')}}">lyka.</a>
         </div>
     </div>
 
     <!-- Menu Options -->
     <ul class="menu-list">
-
         <!-- Dashboard -->
         <li class="menu-option">
             <a href="{{route('dashboard')}}">
-                <div class="menu_icon">
-                    <i class="fas fa-tachometer-alt mr-2"></i>
+                <div class="menu-icon">
+                    <i class="far fa-hdd mr-2"></i>
                 </div>
-                <span class="{{Route::is('dashboard') ? 'active' : ''}} option-name">Dashboard</span>
+                <span class="{{Route::is('dashboard') ? 'active' : ''}}" style="bottom:2px;">Dashboard</span>
             </a>
         </li>
 
-        <li class="menu-option"></li>
+        <br>
 
         <!-- Estudantes  -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="fas fa-user-graduate mr-2"></i>
                 </div>
                 <span class="option-name">Estudantes</span>
@@ -35,7 +34,7 @@
         <!-- Universidades  -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="fas fa-university mr-2"></i>
                 </div>
                 <span class="option-name">Universidades</span>
@@ -45,19 +44,19 @@
         <!-- Agentes  -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="fas fa-user-tie mr-2"></i>
                 </div>
                 <span class="option-name">Agentes</span>
             </a>
         </li>
 
-        <li class="menu-option"></li>
+        <br>
 
         <!-- Listagens -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="fas fa-stream mr-2"></i>
                 </div>
                 <span class="option-name">Listagens</span>
@@ -67,7 +66,7 @@
         <!-- Relatório de contas -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="fas fa-chart-line mr-2"></i>
                 </div>
                 <span class="option-name">Relatório de contas</span>
@@ -78,8 +77,8 @@
         <!-- Biblioteca -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
-                    <i class="fas fa-photo-video mr-2"></i>
+                <div class="menu-icon">
+                    <i class="far fa-folder mr-2"></i>
                 </div>
                 <span class="option-name">Biblioteca</span>
             </a>
@@ -88,7 +87,7 @@
         <!-- Lista telefónica -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="fas fa-phone-alt mr-2"></i>
                 </div>
                 <span class="option-name">Lista telefónica</span>
@@ -98,7 +97,7 @@
         <!-- Agenda -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="far fa-calendar-alt mr-2"></i>
                 </div>
                 <span class="option-name">Agenda</span>
@@ -108,7 +107,7 @@
         <!-- Pagamentos -->
         <li class="menu-option">
             <a href="#">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="far fa-credit-card mr-2"></i>
                 </div>
                 <span class="option-name">Pagamentos</span>
@@ -118,7 +117,7 @@
         <!-- Utilizadores -->
         <li class="menu-option">
             <a href="{{route('users.index')}}">
-                <div class="menu_icon">
+                <div class="menu-icon">
                     <i class="fas fa-users mr-2"></i>
                 </div>
                 <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Utilizadores</span>

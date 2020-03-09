@@ -21,6 +21,8 @@
     <!-- CSS Link -->
     <link href="{{asset('/css/master.css')}}" rel="stylesheet">
 
+    <script src="https://unpkg.com/feather-icons"></script>
+
     @yield('styleLinks')
 
 </head>
