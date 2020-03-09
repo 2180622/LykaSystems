@@ -12,11 +12,11 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
     <!-- Fontawesome core CSS -->
-    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
+    <link href="{{asset('/vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
 
 
     <!-- LYKA FONT -->
@@ -24,7 +24,7 @@
 
 
     <!-- CSS Link -->
-    <link href="{{asset('css/style_master.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/master.css')}}" rel="stylesheet">
 
 
     @yield('styleLinks')
@@ -40,7 +40,7 @@
 
             <!-- Menu principal - Esquerda -->
             <div class="col main_menu shadow">
-                @include('layout.partials.main_menu')
+                @include('layout.partials.main-menu')
             </div>
 
             <!-- Conteudo Principal -->
