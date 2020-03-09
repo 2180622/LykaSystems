@@ -28,7 +28,7 @@ class Cliente extends Migration
                 $table->unique('numCCid');
             $table->string('numPassaport',255);
             $table->date('dataValidPP');
-            $table->string('paisEmissaoPP',255);
+            $table->string('localEmissaoPP',255);
             $table->string('paisNaturalidade',255);
             $table->string('morada',255);
             $table->string('cidade',255);
