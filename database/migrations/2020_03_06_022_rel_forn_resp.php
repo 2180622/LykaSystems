@@ -14,6 +14,8 @@ class RelFornResp extends Migration
     public function up()
     {
         Schema::create('RelFornResp', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idRelacao');
             $table->decimal('valor', 18, 2);
             $table->unsignedBigInteger('idResponsabilidade');

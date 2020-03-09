@@ -14,10 +14,13 @@ class Conta extends Migration
     public function up()
     {
         Schema::create('Conta', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idConta');
             $table->string('descricao',255);
             $table->string('local',255);
             $table->integer('numConta');
+                $table->unique('numConta');
             $table->string('IBAN',255);
             $table->string('instituicao',255);
             $table->integer('telefone');

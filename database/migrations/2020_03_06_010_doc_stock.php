@@ -14,6 +14,8 @@ class DocStock extends Migration
     public function up()
     {
         Schema::create('DocStock', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocStock');
             $table->enum('tipo',['Pessoal', 'Academico']);
             $table->enum('tipoPessoal',['Passaport','Cartão Cidadão','Carta Condução','Doc. Oficial'])->nullable();

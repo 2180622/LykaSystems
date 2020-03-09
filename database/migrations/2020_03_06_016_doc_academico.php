@@ -14,6 +14,8 @@ class DocAcademico extends Migration
     public function up()
     {
         Schema::create('DocAcademico', function (Blueprint $table) {
+            $table->charset = 'latin1';
+            $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocAcademico');
             $table->string('nome',255);
             $table->enum('tipo',['Exame Universitário','Exame Nacional','Diploma','Certificado']);
