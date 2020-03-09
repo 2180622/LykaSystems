@@ -44,7 +44,7 @@ body, html {
 
 #email:focus, #password:focus {
     border-color: #6A74C9;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 5px rgba(0, 64, 118, 0.6);
+    box-shadow: inset 0 1px 1px #6A74C9, 0 0 5px #565eac;
     border-radius: 50px;
 }
 
