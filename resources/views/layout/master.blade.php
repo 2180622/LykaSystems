@@ -31,7 +31,7 @@
     <div class="container-fluid ">
         <div class="row" style="min-height:100vh">
 
-            <!-- Left SIdebar -->
+            <!-- Left Sidebar -->
             <div class="col main_menu shadow">
                 @include('layout.partials.main-menu')
             </div>
