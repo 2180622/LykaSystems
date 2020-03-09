@@ -106,11 +106,11 @@
 
             <!-- Lista telefónica -->
             <li class="menu-option">
-                <a href="#">
+                <a href="{{route('phonebook.index')}}">
                     <div class="menu-icon">
                         <i class="fas fa-phone-alt mr-2"></i>
                     </div>
-                    <span class="option-name">Lista telefónica</span>
+                    <span class="{{Route::is('phonebook.*') ? 'active' : ''}} option-name">Lista telefónica</span>
                 </a>
             </li>
 

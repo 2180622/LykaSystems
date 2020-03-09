@@ -14,7 +14,7 @@ html, body {
     background-color: rgba(230,230,230,1);
     }
 
-    
+
 
 /* Main Menu Style */
 .logotype {
@@ -101,7 +101,7 @@ html, body {
 
 .opts_btn{
     position: relative;
-    left:60px;
+    left:65px;
     top:145px;
     width: 24px;
     height:24px;
@@ -132,6 +132,10 @@ html, body {
     color:black;
 }
 
+
+
+
+
 /* Right Sidebar Style */
 .sidebar {
     flex: 0 0 270px;
@@ -157,6 +161,14 @@ html, body {
 .close_btn a:hover{
     color:blue;
 }
+
+
+
+
+
+
+
+/* RESPONSIVE */
 
 @media screen and (max-width: 950px) {
     .sidebar {

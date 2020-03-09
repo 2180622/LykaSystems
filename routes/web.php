@@ -13,6 +13,14 @@ Route::resource('/users', 'UserController');
 /* Estudantes */
 Route::resource('/students', 'StudentController');
 
+
+
+
+/* Phonebook */
+Route::resource('/phonebook', 'PhonebookController');
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
