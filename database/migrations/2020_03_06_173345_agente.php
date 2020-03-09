@@ -14,7 +14,7 @@ class Agente extends Migration
     public function up()
     {
         Schema::create('Agente', function (Blueprint $table) {
-            $table->increments('idAgente');
+            $table->bigIncrements('idAgente');
         });
     }
 

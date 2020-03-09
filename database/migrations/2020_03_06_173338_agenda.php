@@ -14,7 +14,7 @@ class Agenda extends Migration
     public function up()
     {
         Schema::create('Agenda', function (Blueprint $table) {
-            $table->increments('idAgenda');
+            $table->bigIncrements('idAgenda');
         });
     }
 

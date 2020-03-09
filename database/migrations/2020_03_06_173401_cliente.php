@@ -14,7 +14,7 @@ class Cliente extends Migration
     public function up()
     {
         Schema::create('Cliente', function (Blueprint $table) {
-            $table->increments('idCliente');
+            $table->bigIncrements('idCliente');
         });
     }
 

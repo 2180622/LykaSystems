@@ -24,12 +24,13 @@ class User extends Migration
             $table->integer('status');
             $table->timestamps();
             $table->unsignedBigInteger('idAdmin')->nullable();
-            $table->unsignedBigInteger('idAgente')->nullable();
-            $table->unsignedBigInteger('idCliente')->nullable();
+                $table->foreign('idAdmin')->references('idAdmin')->on('Administrador');
 
-            /*$table->foreign('idAdmin')->references('idAdmin')->on('Administrador');
-            $table->foreign('idAgente')->references('idAgente')->on('Agente');
-            $table->foreign('idCliente')->references('idCliente')->on('Cliente');*/
+            $table->unsignedBigInteger('idAgente')->nullable();
+                $table->foreign('idAgente')->references('idAgente')->on('Agente');
+
+            $table->unsignedBigInteger('idCliente')->nullable();
+                $table->foreign('idCliente')->references('idCliente')->on('Cliente');
         });
     }
 

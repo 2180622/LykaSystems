@@ -14,7 +14,7 @@ class Administrador extends Migration
     public function up()
     {
         Schema::create('Administrador', function (Blueprint $table) {
-            $table->increments('idAdmin');
+            $table->bigIncrements('idAdmin');
         });
     }
 
