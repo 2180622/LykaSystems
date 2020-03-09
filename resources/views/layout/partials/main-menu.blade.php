@@ -24,7 +24,7 @@
         <li class="menu-option">
             <a href="#">
                 <div class="menu-icon">
-                    <i class="fas fa-user-graduate mr-2"></i>
+                    <ion-icon name="person-circle-outline" style="font-size: 16pt;"></ion-icon>
                 </div>
                 <span class="option-name">Estudantes</span>
             </a>
@@ -53,6 +53,16 @@
 
         <br>
 
+        <!-- Pagamentos -->
+        <li class="menu-option">
+            <a href="#">
+                <div class="menu-icon">
+                    <ion-icon name="wallet-outline" style="font-size:16pt; --ionicon-stroke-width: 50px;"></ion-icon>
+                </div>
+                <span class="option-name">Pagamentos</span>
+            </a>
+        </li>
+
         <!-- Listagens -->
         <li class="menu-option">
             <a href="#">
@@ -63,56 +73,57 @@
             </a>
         </li>
 
-        <!-- Relatório de contas -->
         <li class="menu-option">
-            <a href="#">
+            <a data-toggle="collapse" href="#collapseDiv" aria-expanded="false" aria-controls="collapseDiv">
                 <div class="menu-icon">
-                    <i class="fas fa-chart-line mr-2"></i>
+                    <i class="fas fa-stream mr-2"></i>
                 </div>
-                <span class="option-name">Relatório de contas</span>
+                <span class="option-name">Diversos</span>
             </a>
         </li>
 
+        <div class="collapse" id="collapseDiv">
+            <!-- Relatório de contas -->
+            <li class="menu-option">
+                <a href="#">
+                    <div class="menu-icon">
+                        <i class="fas fa-chart-line mr-2"></i>
+                    </div>
+                    <span class="option-name">Relatório de contas</span>
+                </a>
+            </li>
 
-        <!-- Biblioteca -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="far fa-folder mr-2"></i>
-                </div>
-                <span class="option-name">Biblioteca</span>
-            </a>
-        </li>
 
-        <!-- Lista telefónica -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="fas fa-phone-alt mr-2"></i>
-                </div>
-                <span class="option-name">Lista telefónica</span>
-            </a>
-        </li>
+            <!-- Biblioteca -->
+            <li class="menu-option">
+                <a href="#">
+                    <div class="menu-icon">
+                        <i class="far fa-folder mr-2"></i>
+                    </div>
+                    <span class="option-name">Biblioteca</span>
+                </a>
+            </li>
 
-        <!-- Agenda -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="far fa-calendar-alt mr-2"></i>
-                </div>
-                <span class="option-name">Agenda</span>
-            </a>
-        </li>
+            <!-- Lista telefónica -->
+            <li class="menu-option">
+                <a href="#">
+                    <div class="menu-icon">
+                        <i class="fas fa-phone-alt mr-2"></i>
+                    </div>
+                    <span class="option-name">Lista telefónica</span>
+                </a>
+            </li>
 
-        <!-- Pagamentos -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="far fa-credit-card mr-2"></i>
-                </div>
-                <span class="option-name">Pagamentos</span>
-            </a>
-        </li>
+            <!-- Agenda -->
+            <li class="menu-option">
+                <a href="#">
+                    <div class="menu-icon">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                    </div>
+                    <span class="option-name">Agenda</span>
+                </a>
+            </li>
+        </div>
 
         <!-- Utilizadores -->
         <li class="menu-option">
