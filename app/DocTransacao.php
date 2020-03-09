@@ -7,4 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class DocTransacao extends Model
 {
     protected $table = 'DocTransacao';
+
+    protected $fillable = [
+        'descricao','valorRecebido','dataOperacao','dataRecebido','verificacao',
+        'imagem','$idConta','$idFase'
+        ];
+
+    public function fase(){
+        return $this->belongsTo("App\Fase","idFase");
+    }
+
+    public function conta(){
+        return $this->belongsTo("App\Conta","idConta");
+    }
 }
