@@ -9,6 +9,13 @@ html, body {
     font-family: 'Nunito', sans-serif;
 }
 
+.collapse{
+    border-radius:15px;
+    background-color: rgba(230,230,230,1);
+    }
+
+    
+
 /* Main Menu Style */
 .logotype {
     color: #6A74C9;
