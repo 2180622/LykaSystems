@@ -17,31 +17,30 @@ html, body {
     text-decoration: none;
 }
 
-.menu-content {
-    padding-top: 25px !important;
+.logo {
+    padding-left: 20px;
+    padding-top: 60px !important;
 }
 
 .main-menu {
     flex: 0 0 250px;
     -ms-flex: 0 0 250px;
     background-color: white;
-    padding: 0px !important;
-    transition: all 0.2s ease-in;
 }
 
 .menu-list {
-    list-style-type: none;
-    padding-left: 0px;
-    font-size: 16px;
-    padding: 0px;
-    width: 100%;
     margin: 0px;
+    width: 100%;
+    padding-top: 10px;
+    font-size: 16px;
+    padding-left: 4px;
+    list-style-type: none;
 }
 
 .menu-option {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 12px;
     padding-left: 15px;
+    padding-bottom: 8px;
 }
 
 .active {
@@ -49,49 +48,69 @@ html, body {
     font-weight: 700;
 }
 
-.menu-list a {
+.menu-list .active {
+    color: #6A74C9;
+    font-weight: 800;
+}
+
+.menu-list a span {
+    color: #252525;
+    font-weight: 700;
+    position: relative;
+    font-size: 0.85rem;
     text-decoration: none;
-    color: #000000;
+    transition: 0.3s ease-in-out;
 }
 
 .menu-list a:hover {
     color: #6A74C9;
+    text-decoration: none;
 }
 
-.menu_icon {
-    display: inline-block;
-    width: 18px;
-    margin-right: 10px;
-    text-align: center;
+.menu-list span:hover {
     color: #6A74C9;
 }
 
-
-/* Utilizador e opçoes */
-
-
-/* SIDEBAR */
-.sidebar {
-    -ms-flex: 0 0 270px;
-    flex: 0 0 270px;
-    min-height: 100%;
-    padding: 5px!important;
+.menu-icon {
+    width: 18px;
+    color: #6A74C9;
+    text-align: center;
+    margin-right: 10px;
+    display: inline-block;
 }
 
+.collapse{
+  border-radius: 15px;
+  background-color: rgba(230, 230, 230, 1);
+}
 
+/* Right Sidebar Style */
+.sidebar {
+    flex: 0 0 270px;
+    min-height: 100%;
+    padding: 0px!important;
+}
 
+.close_btn{
+    position: absolute;
+    right:-5px;
+    top:-7px;
+    height:20px;
+    width:20px;
+    background-color: white;
+    padding-top: -3px;
+    border-radius: 50%;
+
+}
+.close_btn a{
+    color:gray;
+}
+.close_btn a:hover{
+    color:blue;
+}
 
 @media screen and (max-width: 950px) {
     .sidebar {
-        display: none;
-    }
-
-    .main-menu{
-        flex: 0 0 50px;
-        -ms-flex: 0 0 50px;
-        overflow: hidden;
-    }
-    .option-name{
         display: none;
     }
 }
