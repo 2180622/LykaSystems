@@ -3,7 +3,7 @@
 
 <div class="container-fluid " style="font-size:14px; height:70%">
 
-  <div class="mt-5 mx-auto mb-4 pt-3 font-weight-bold text-center" style="font-size:18px">
+  <div class="mt-5 mx-auto mb-4 pt-3 font-weight-bold text-center" style="font-size:18px;color:#6A74C9">
     <i class="fas fa-bell mr-2"></i>Notificações
 </div>
 

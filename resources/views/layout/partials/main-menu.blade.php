@@ -76,7 +76,7 @@
         <li class="menu-option">
             <a data-toggle="collapse" href="#collapseDiv" aria-expanded="false" aria-controls="collapseDiv">
                 <div class="menu-icon">
-                    <i class="fas fa-stream mr-2"></i>
+                    <i class="fas fa-tools mr-2"></i>
                 </div>
                 <span class="option-name">Diversos</span>
             </a>
@@ -139,16 +139,16 @@
 
 
 
-    <div class="text-center  mb-4">
+    <div class="text-center mb-4">
 
 
-        <a href="#" title="Definições" class="user_btn"><div class="opts_btn shadow-sm align-self-center">
-            <i class="fas fa-sliders-h"></i>
-        </div></a>
+        <div class="opts_btn shadow-sm align-self-center">
+            <a href="#" title="Definições" class="user_btn"><i class="fas fa-cog"></i></a>
+        </div>
 
-        <a href="#" title="Terminar sessão" class="user_btn"><div class="user_opts shadow-sm align-self-center">
-            <i class="fas fa-power-off"></i>
-        </div></a>
+        <div class="user_opts shadow-sm align-self-center">
+            <a href="#" title="Terminar sessão" class="user_btn"><i class="fas fa-power-off"></i></a>
+        </div>
 
 
         <div class="mx-auto user_photo rounded-circle shadow">

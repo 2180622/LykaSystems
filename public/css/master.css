@@ -124,11 +124,12 @@ html, body {
 
 
 .user_btn{
+
     color:#6A74C9;
 }
 
 .user_btn:hover{
-    color:red;
+    color:black;
 }
 
 /* Right Sidebar Style */
