@@ -17,8 +17,21 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'name', 'apelido', 'email', 'datanasc', 'telefone1', 'telefone2', 'password', 'password_confirmation',
+        'username','tipo','password_hash','password_reset_token',
+        'verification_token','auth_key','status','$idAdmin','$idAgente','$idCliente'
     ];
+
+    public function admin(){
+        return $this->belongsTo("App\Administrador","idAdmin")->withTrashed();
+    }
+
+    public function agente(){
+        return $this->belongsTo("App\Agente","idAgente")->withTrashed();
+    }
+
+    public function cliente(){
+        return $this->belongsTo("App\Cliente","idCliente");
+    }
 
     /**
      * The attributes that should be hidden for arrays.

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> @yield('title') | LYKA</title>
+    <title> @yield('title') | lyka.</title>
 
     <!-- Favicon -->
     {{-- <link rel="shortcut icon" href="/img/icon_logo.png" type="image/x-icon"> --}}
@@ -34,7 +34,7 @@
         <div class="row" style="min-height:100vh">
 
             <!-- Left Sidebar -->
-            <div class="col main-menu">
+            <div class="col main-menu shadow">
                 @include('layout.partials.main-menu')
             </div>
 

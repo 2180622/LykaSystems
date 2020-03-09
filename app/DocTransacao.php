@@ -18,6 +18,6 @@ class DocTransacao extends Model
     }
 
     public function conta(){
-        return $this->belongsTo("App\Conta","idConta");
+        return $this->belongsTo("App\Conta","idConta")->withTrashed();
     }
 }

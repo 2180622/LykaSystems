@@ -36,4 +36,8 @@ class Fase extends Model
     public function pagoResponsabilidade(){
         return $this->hasMany("App\PagoResponsabilidade","idFase");
     }
+
+    public function faseStock(){
+        return $this->belongsTo("App\FaseStock","idFaseStock");
+    }
 }
