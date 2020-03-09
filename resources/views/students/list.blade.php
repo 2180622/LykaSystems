@@ -39,14 +39,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="fotoPerfilImagem"></div>
-                            </td>
+                        <tr class="bg-hover-row">
+                            <td><div class="fotoPerfilImagem"></div></td>
                             <td style="width:20%; text-align: left; padding-top:20px">Sebastian Sion</td>
                             <td style="padding-top:20px">sebastian@gmail.com</td>
                             <td style="padding-top:20px">México</td>
-                            <td style="padding-top:20px;  cursor: pointer">
+                            <td style="padding-top:20px; cursor: pointer">
                                 <i class="fas fa-ellipsis-h mr-3" title="Outros"></i>
                                 <i class="fas fa-pencil-alt mr-3" title="Editar"></i>
                                 <i class="far fa-trash-alt" title="Eliminar"></i>
