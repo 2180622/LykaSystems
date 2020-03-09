@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -25,10 +26,13 @@
     <link href="{{asset('css/login.css')}}" rel="stylesheet">
 </head>
 <body>
-    <div class="form">
-        <main>
-            @yield('content')
-        </main>
-    </div>
+<div class="form">
+    <main>
+        @yield('content')
+    </main>
+</div>
+<script>
+    feather.replace()
+</script>
 </body>
 </html>

@@ -29,10 +29,11 @@
                         <thead>
                         <tr>
                             <th style="width:10%">
-                                <div class="custom-control custom-checkbox checkbox-lg">
-                                    <input type="checkbox" class="custom-control-input" id="checkbox-2"
-                                           checked="">
-                                    <label class="custom-control-label" for="checkbox-2"></label>
+                                <div class="fotoPerfil">
+                                    <div class="check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1"></label>
+                                    </div>
                                 </div>
                             </th>
                             <th style="width:20%; text-align: left">Nome de Utilizador</th>
@@ -43,7 +44,9 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td><div class="fotoPerfil"></div></td>
+                            <td>
+                                <div class="fotoPerfil"></div>
+                            </td>
                             <td style="width:20%; text-align: left; padding-top:20px">Sebastian Sion</td>
                             <td style="padding-top:20px">sebastian@gmail.com</td>
                             <td style="padding-top:20px">México</td>
