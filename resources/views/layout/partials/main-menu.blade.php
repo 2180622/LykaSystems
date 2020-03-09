@@ -26,7 +26,7 @@
                 <div class="menu-icon">
                     <i class="fas fa-user-graduate mr-2"></i>
                 </div>
-                <span>Estudantes</span>
+                <span class="option-name">Estudantes</span>
             </a>
         </li>
 
@@ -37,7 +37,7 @@
                 <div class="menu-icon">
                     <i class="fas fa-university mr-2"></i>
                 </div>
-                <span>Universidades</span>
+                <span class="option-name">Universidades</span>
             </a>
         </li>
 
@@ -47,7 +47,7 @@
                 <div class="menu-icon">
                     <i class="fas fa-user-tie mr-2"></i>
                 </div>
-                <span>Agentes</span>
+                <span class="option-name">Agentes</span>
             </a>
         </li>
 
@@ -59,7 +59,7 @@
                 <div class="menu-icon">
                     <i class="fas fa-stream mr-2"></i>
                 </div>
-                <span>Listagens</span>
+                <span class="option-name">Listagens</span>
             </a>
         </li>
 
@@ -69,7 +69,7 @@
                 <div class="menu-icon">
                     <i class="fas fa-chart-line mr-2"></i>
                 </div>
-                <span>Relatório de contas</span>
+                <span class="option-name">Relatório de contas</span>
             </a>
         </li>
 
@@ -80,7 +80,7 @@
                 <div class="menu-icon">
                     <i class="far fa-folder mr-2"></i>
                 </div>
-                <span>Biblioteca</span>
+                <span class="option-name">Biblioteca</span>
             </a>
         </li>
 
@@ -90,7 +90,7 @@
                 <div class="menu-icon">
                     <i class="fas fa-phone-alt mr-2"></i>
                 </div>
-                <span>Lista telefónica</span>
+                <span class="option-name">Lista telefónica</span>
             </a>
         </li>
 
@@ -100,7 +100,7 @@
                 <div class="menu-icon">
                     <i class="far fa-calendar-alt mr-2"></i>
                 </div>
-                <span>Agenda</span>
+                <span class="option-name">Agenda</span>
             </a>
         </li>
 
@@ -110,7 +110,7 @@
                 <div class="menu-icon">
                     <i class="far fa-credit-card mr-2"></i>
                 </div>
-                <span>Pagamentos</span>
+                <span class="option-name">Pagamentos</span>
             </a>
         </li>
 
@@ -120,7 +120,7 @@
                 <div class="menu-icon">
                     <i class="fas fa-users mr-2"></i>
                 </div>
-                <span class="{{Route::is('users.*') ? 'active' : ''}}">Utilizadores</span>
+                <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Utilizadores</span>
             </a>
         </li>
     </ul>
