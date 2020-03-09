@@ -15,12 +15,4 @@ class Agenda extends Model
     public function user(){
         return $this->belongsTo("App\User","idUser");
     }
-
-    public function produtoA(){
-        return $this->hasMany("App\Produto","idAgente")->withTrashed();
-    }
-
-    public function produtoSubA(){
-        return $this->hasMany("App\Produto","idSubAgente")->withTrashed();
-    }
 }
