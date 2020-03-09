@@ -33,7 +33,6 @@ class Cliente extends Migration
             $table->string('morada',255);
             $table->string('cidade',255);
             $table->string('moradaResidencia',255);
-            $table->string('passaportPaisEmi',255);
             $table->string('nomePai',255)->nullable();
             $table->integer('telefonePai')->nullable();
             $table->string('emailPai',255)->nullable();
