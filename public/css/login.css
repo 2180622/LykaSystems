@@ -1,0 +1,27 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: 50% 70%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/media/contact-image.jpg");
+}
+
+.container span {
+    font-weight: 700;
+}
+
+.form {
+    width: 35%;
+    float: right;
+    height: 100%;
+    position: relative;
+    background-color: white;
+    border-top: 5px solid #6A74C9;
+}
+
+.form input{
+    border-radius: 10px;
+}
