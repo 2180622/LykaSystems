@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Contracts\Console\Kernel;
 
-Route::get('/', function () {
-    return view('index');
-});
+/* Dashboard */
+Route::get('/', 'DashboardController@index')->name('dashboard');
+
+/* Utilizadores */
+Route::resource('/users', 'UserController');

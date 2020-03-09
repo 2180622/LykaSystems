@@ -12,11 +12,11 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
     <!-- Fontawesome core CSS -->
-    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
+    <link href="{{asset('/vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
 
 
     <!-- LYKA FONT -->
@@ -24,7 +24,7 @@
 
 
     <!-- CSS Link -->
-    <link href="{{asset('css/style_master.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/master.css')}}" rel="stylesheet">
 
 
     @yield('styleLinks')
@@ -34,25 +34,30 @@
 <body>
 
 
-   <!-- Estrutura & Navegação -->
-   <div class="container-fluid ">
-    <div class="row" style="min-height:100%">
+    <!-- Estrutura & Navegação -->
+    <div class="container-fluid ">
+        <div class="row" style="min-height:100vh">
 
-        <!-- Menu principal - Esquerda -->
-        <div class="col main_menu shadow">
-            @include('layout.partials.main_menu')
+            <!-- Menu principal - Esquerda -->
+            <div class="col main_menu shadow">
+                @include('layout.partials.main-menu')
+            </div>
+
+            <!-- Conteudo Principal -->
+            <div class="col pb-5 pt-3 " style="">
+                @yield('content')
+            </div>
+
+            <!--Barra Direita (notificações) -->
+            <div class="col sidebar shadow p-2">
+                @include('layout.partials.sidebar')
+            </div>
         </div>
+    </div>
 
-        <!-- Conteudo Principal -->
-        <div class="col ">
-            @yield('content')            
-        </div>
 
-        <!--Barra Direita (notificações) -->
-        <div class="col sidebar shadow p-2" >
-            @include('layout.partials.sidebar')
-        </div>
-
+    <!-- Footer: SCRIPTS -->
+    @include('layout.partials.footer')
 
 </body>
 

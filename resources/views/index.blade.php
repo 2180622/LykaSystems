@@ -2,7 +2,7 @@
 
 
 {{-- Titulo da Página --}}
-@section('title', 'Página Exemplo')
+@section('title', 'Dashboard')
 
 
 
@@ -18,8 +18,10 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-luhhkjhg
 
+{{-- Todo o conteudo deve ser inserido aqui --}}
+
+Dashboard
 
 @endsection
 

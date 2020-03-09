@@ -3,7 +3,7 @@
     <!-- LYKA Logotipo -->
     <div class="row pt-3 pb-3">
         <div class="col text-center">
-            <div style="font-weight:700;font-size:30px;color:#6A74C9">LYKA.</div>
+            <a class="logotype" href="{{route('dashboard')}}">LYKA.</a>
         </div>
     </div>
 
@@ -15,18 +15,18 @@
 
         <!-- Dashboard -->
         <li class="menu_option">
-            <a href="#">
+            <a href="{{route('dashboard')}}">
                 <div class="menu_icon">
                     <i class="fas fa-tachometer-alt mr-2"></i>
                 </div>
-                <span class="active">Dashboard</span>
+                <span class="{{Route::is('dashboard') ? 'active' : ''}}">Dashboard</span>
             </a>
         </li>
 
         <li class="menu_option"></li>
 
         <!-- Estudantes  -->
-        <li class="menu_option active">
+        <li class="menu_option">
             <a href="#">
                 <div class="menu_icon">
                     <i class="fas fa-user-graduate mr-2"></i>
@@ -109,23 +109,23 @@
             </a>
         </li>
 
-        <!-- Forncecedores -->
+        <!-- Pagamentos -->
         <li class="menu_option">
             <a href="#">
                 <div class="menu_icon">
-                    <i class="fas fa-bus-alt mr-2"></i>
+                    <i class="far fa-credit-card mr-2"></i>
                 </div>
-                <span>Forncecedores</span>
+                <span>Pagamentos</span>
             </a>
         </li>
 
         <!-- Utilizadores -->
         <li class="menu_option">
-            <a href="#">
+            <a href="{{route('users.index')}}">
                 <div class="menu_icon">
                     <i class="fas fa-users mr-2"></i>
                 </div>
-                <span>Utilizadores</span>
+                <span class="{{Route::is('users.*') ? 'active' : ''}}">Utilizadores</span>
             </a>
         </li>
 
@@ -134,20 +134,38 @@
 
 
 
-    <div class="mt-5 m-2 pl-2 main_menu_user" class="bg-light">
+    <div class="mt-5 m-2 rounded">
 
-        <!-- Imagem do utilizador -->
-        <div style="float:left;width:40px;height:40px;overflow:hidden;" class="rounded-circle shadow">
-            <img src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
+
+        <div class="p-2">
+            <div style="float:left; width: 50px;">
+                {{-- Foto Utilizador --}}
+                <img class="shadow" src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
+            </div>
+
+            <div class="pl-2" style="float:left;">
+                {{-- Nome e Role --}}
+                <span class="font-weight-bold">Nome</span><br>
+                <span class="text-muted" style="font-size:14px">Administrador</span>
+            </div>
         </div>
 
-        <!-- Nome e Tipo de utilizador -->
-        <div class="ml-3" style="float:left">
-            <span>Nome</span><br>
-            <span class="text-muted" style="font-size:14px">Administrador</span>
+        <div class="mt-5 p-2 rounded  text-center ">
+            <a href="#" class="btn btn-sm btn-light mr-2"><i class="fas fa-sliders-h m-2"></i></a>
+            <a href="#" class="btn btn-sm btn-light mr-2"><i class="far fa-question-circle m-2"></i></a>
+            <a href="#" class="btn btn-sm btn-light"><i class="fas fa-power-off m-2"></i></a>
         </div>
+
+
+
     </div>
 
 
 
+
+
+
 </div>
+
+
+

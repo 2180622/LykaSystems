@@ -1,91 +1,70 @@
-<div class="input-group md-form form-sm form-2 pl-0">
-    <input class="form-control my-0 py-1 " type="text" placeholder="Procurar" aria-label="Procurar">
-    <div class="input-group-append">
-      <span class="input-group-text lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
-          aria-hidden="true"></i></span>
-    </div>
-  </div>
-  
-  <div class="mx-auto mt-3 mb-3" >Notificações</div>
-  
-  
+
+<div class="mx-auto mb-3 pt-3 font-weight-bold text-center" style="color:#6A74C9;font-size:20px">
+    <i class="fas fa-bell mr-2" ></i>Notificações<br>
+    <div class="text-muted"style="font-size:16px">xx de Março de 2020</div>
+</div>
+
+
   <div class="notification_area">
-  
-  
-      
-  
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+
+
+    {{-- EXEMPLO DE NOTIFICAÇÃO --}}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+        {{-- Titulo da notificação --}}
+        <strong><i class="fas fa-hand-holding-usd mr-2"></i>Existem pagamentos em atraso</strong><br>
+
+        {{-- Texto da notificação --}}
+        <div style="font-size:14px;">
+            - <a href="#">Consultar listagem</a>
+        </div>
+
+        {{-- Botão de fechar --}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-  
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+
+
+
+    {{-- EXEMPLO DE NOTIFICAÇÃO --}}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+        {{-- Titulo da notificação --}}
+        <strong><i class="fas fa-university mr-2"></i>Candidaturas UBI</strong><br>
+
+        {{-- Texto da notificação --}}
+        <div style="font-size:14px;">
+            Fase de canidaturas começa hoje!<br>
+            - <a href="#">Abrir website</a>
+        </div>
+
+        {{-- Botão de fechar --}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>     
+      </div>
+
+
+
+
+    {{-- EXEMPLO DE NOTIFICAÇÃO --}}
       <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+
+        {{-- Titulo da notificação --}}
+        <strong><i class="fas fa-birthday-cake mr-2"></i>Juan faz anos hoje!</strong><br>
+
+        {{-- Texto da notificação --}}
+        <div style="font-size:14px;">
+            - <a href="#">Enviar e-mail</a><br>
+            - <a href="#">Abrir Whatsapp</a>
+        </div>
+
+        {{-- Botão de fechar --}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-  
-      <div class="alert alert-dark alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-  
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> 
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-  
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-  
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> 
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-  
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-  
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>                
-  
+
+
   </div>
