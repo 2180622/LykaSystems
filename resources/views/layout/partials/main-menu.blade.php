@@ -145,7 +145,7 @@
 
             <div class="pl-2" style="float:left;">
                 {{-- Nome e Role --}}
-                <span class="font-weight-bold">Nome</span><br>
+                <span class="font-weight-bold">{{route(user.index)}}</span><br>
                 <span class="text-muted" style="font-size:14px">Administrador</span>
             </div>
         </div>
@@ -166,6 +166,3 @@
 
 
 </div>
-
-
-

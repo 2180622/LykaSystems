@@ -8,3 +8,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 
 /* Utilizadores */
 Route::resource('/users', 'UserController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
