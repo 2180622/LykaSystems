@@ -17,30 +17,30 @@ html, body {
     text-decoration: none;
 }
 
-.menu-content {
-    padding-top: 25px !important;
+.logo {
+    padding-left: 20px;
+    padding-top: 60px !important;
 }
 
 .main-menu {
     flex: 0 0 250px;
     -ms-flex: 0 0 250px;
     background-color: white;
-    padding: 0px !important;
 }
 
 .menu-list {
-    list-style-type: none;
-    padding-left: 0px;
-    font-size: 16px;
-    padding: 0px;
-    width: 100%;
     margin: 0px;
+    width: 100%;
+    padding-top: 10px;
+    font-size: 16px;
+    padding-left: 4px;
+    list-style-type: none;
 }
 
 .menu-option {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 12px;
     padding-left: 15px;
+    padding-bottom: 8px;
 }
 
 .active {
@@ -48,32 +48,44 @@ html, body {
     font-weight: 700;
 }
 
-.menu-list a {
+.menu-list .active {
+    color: #6A74C9;
+    font-weight: 800;
+}
+
+.menu-list a span {
+    color: #252525;
+    font-weight: 700;
+    position: relative;
+    font-size: 0.85rem;
+    padding-left: 5px;
     text-decoration: none;
-    color: #000000;
+    transition: 0.3s ease-in-out;
 }
 
 .menu-list a:hover {
     color: #6A74C9;
+    text-decoration: none;
 }
 
-.menu_icon {
-    display: inline-block;
-    width: 18px;
-    margin-right: 10px;
-    text-align: center;
+.menu-list span:hover {
     color: #6A74C9;
 }
 
-.btn-sm {}
+.menu-icon {
+    width: 18px;
+    color: #6A74C9;
+    text-align: center;
+    margin-right: 10px;
+    display: inline-block;
+}
 
-/* Utilizador e opçoes */
-/* SIDEBAR */
+/* Right Sidebar Style */
 .sidebar {
-    -ms-flex: 0 0 270px;
     flex: 0 0 270px;
-    background-color: white;
     min-height: 100%;
+    -ms-flex: 0 0 270px;
+    background-color: white;
 }
 
 @media screen and (max-width: 950px) {
