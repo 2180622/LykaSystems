@@ -1,11 +1,13 @@
-<div class="mx-auto mb-3 pt-3 font-weight-bold text-center" style="color:#6A74C9;font-size:18px">
-    <i class="fas fa-bell mr-2"></i>Notificações<br>
-</div>
+
 
 
 <div class="container-fluid " style="font-size:14px; height:70%">
 
-    <div class="text-muted text-center m-2" style="font-size:12px">6 de Março de 2020</div>
+  <div class="mt-5 mx-auto mb-4 pt-3 font-weight-bold text-center" style="font-size:18px">
+    <i class="fas fa-bell mr-2"></i>Notificações
+</div>
+
+{{--     <div class="text-muted text-center m-2" style="font-size:12px">6 de Março de 2020</div> --}}
 
 
 
@@ -22,10 +24,11 @@
         </div>
 
         <div class="col p-2 ">
-            {{-- MENSAGEM da notificação --}}
+            {{-- MENSAGEM da notificação --}} {{-- <small>00/00/2020</small><br>  --}}
             Existem pagamentos em atraso. <a href="#">Ver lista</a>
         </div>
     </div>
+
 
 
 
@@ -66,7 +69,7 @@
 
       <div class="col p-2 ">
           {{-- MENSAGEM da notificação --}}
-          Juan faz anos hoje! <a href="#">Enviar mensagem</a>
+          Juan faz anos hoje! <br><a href="#">Enviar mensagem</a>
       </div>
   </div>
   
@@ -77,7 +80,7 @@
 
 
     {{-- Divisão por data --}}
-    <div class="text-muted text-center m-2 mt-3" style="font-size:12px">8 de Março de 2020</div>
+{{--     <div class="text-muted text-center m-2 mt-3" style="font-size:12px">8 de Março de 2020</div> --}}
 
 
 
@@ -96,7 +99,7 @@
 
       <div class="col p-2 ">
           {{-- MENSAGEM da notificação --}}
-         Foi registado um novo aluno no sistema <a href="#">Ver ficha</a>
+         Foi registado um novo aluno no sistema <br><a href="#">Ver ficha</a>
       </div>
   </div>
 

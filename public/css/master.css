@@ -1,3 +1,6 @@
+/* LYKA BLUE: #6A74C9 */
+
+
 /* General Style */
 html, body {
     height: 100%;
@@ -5,6 +8,13 @@ html, body {
     background-color: #EAEAEA;
     font-family: 'Nunito', sans-serif;
 }
+
+.collapse{
+    border-radius:15px;
+    background-color: rgba(230,230,230,1);
+    }
+
+    
 
 /* Main Menu Style */
 .logotype {
@@ -79,15 +89,53 @@ html, body {
     display: inline-block;
 }
 
-.collapse{
-  border-radius: 15px;
-  background-color: rgba(230, 230, 230, 1);
+
+
+.user_photo{
+
+    height: 120px;
+    width: 120px;
+    border:1px solid lightgray;
+    overflow: hidden;
+}
+
+.opts_btn{
+    position: relative;
+    left:60px;
+    top:145px;
+    width: 24px;
+    height:24px;
+    border-radius: 50%;
+    background-color: white;
+    border:1px solid lightgray;
+}
+
+.user_opts{
+    position: relative;
+    left:140px;
+    top:120px;
+    width: 24px;
+    height:24px;
+    border-radius: 50%;
+    background-color: white;
+    border:1px solid lightgray;
+}
+
+
+
+.user_btn{
+    color:#6A74C9;
+}
+
+.user_btn:hover{
+    color:red;
 }
 
 /* Right Sidebar Style */
 .sidebar {
     flex: 0 0 270px;
     min-height: 100%;
+    background-color: white;
     padding: 0px!important;
 }
 
