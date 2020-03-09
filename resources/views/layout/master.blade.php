@@ -42,7 +42,7 @@
             </div>
 
             <!-- Right Sidebar -->
-            <div class="col sidebar shadow p-2">
+            <div class="col sidebar shadow">
                 @include('layout.partials.sidebar')
             </div>
         </div>

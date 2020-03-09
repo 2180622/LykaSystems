@@ -26,6 +26,7 @@ html, body {
     -ms-flex: 0 0 250px;
     background-color: white;
     padding: 0px !important;
+    transition: all 0.2s ease-in;
 }
 
 .menu-list {
@@ -65,19 +66,32 @@ html, body {
     color: #6A74C9;
 }
 
-.btn-sm {}
 
 /* Utilizador e opçoes */
+
+
 /* SIDEBAR */
 .sidebar {
     -ms-flex: 0 0 270px;
     flex: 0 0 270px;
-    background-color: white;
     min-height: 100%;
+    padding: 5px!important;
 }
+
+
+
 
 @media screen and (max-width: 950px) {
     .sidebar {
+        display: none;
+    }
+
+    .main-menu{
+        flex: 0 0 50px;
+        -ms-flex: 0 0 50px;
+        overflow: hidden;
+    }
+    .option-name{
         display: none;
     }
 }
