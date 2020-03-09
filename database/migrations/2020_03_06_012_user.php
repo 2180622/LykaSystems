@@ -14,7 +14,7 @@ class User extends Migration
     public function up()
     {
         Schema::create('User', function (Blueprint $table) {
-            $table->increments('idUser');
+            $table->bigIncrements('idUser');
             $table->string('username',255);
             $table->enum('tipo',['admin', 'agente', 'cliente']);
             $table->string('password_hash',255);
@@ -22,7 +22,8 @@ class User extends Migration
             $table->string('verification_token',255)->nullable();
             $table->string('auth_key',50);
             $table->integer('status');
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->dateTime('updated_at')->nullable();
             $table->unsignedBigInteger('idAdmin')->nullable();
                 $table->foreign('idAdmin')->references('idAdmin')->on('Administrador');
 

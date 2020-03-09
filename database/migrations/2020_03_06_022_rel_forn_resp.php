@@ -14,7 +14,12 @@ class RelFornResp extends Migration
     public function up()
     {
         Schema::create('RelFornResp', function (Blueprint $table) {
-            $table->increments('idRelFornResp');
+            $table->bigIncrements('idRelacao');
+            $table->decimal('valor', 18, 2);
+            $table->unsignedBigInteger('idResponsabilidade');
+                $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
+            $table->unsignedBigInteger('idFornecedor');
+                $table->foreign('idFornecedor')->references('idFornecedor')->on('Fornecedor');
         });
     }
 

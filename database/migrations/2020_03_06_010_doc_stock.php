@@ -14,7 +14,12 @@ class DocStock extends Migration
     public function up()
     {
         Schema::create('DocStock', function (Blueprint $table) {
-            $table->increments('idDocStock');
+            $table->bigIncrements('idDocStock');
+            $table->enum('tipo',['Pessoal', 'Academico']);
+            $table->enum('tipoPessoal',['Passaport','Cartão Cidadão','Carta Condução','Doc. Oficial'])->nullable();
+            $table->enum('tipoAcademico',['Exame Universitário','Exame Nacional','Diploma','Certificado'])->nullable();
+            $table->unsignedBigInteger('idFaseStock');
+                $table->foreign('idFaseStock')->references('idFaseStock')->on('FaseStock');
         });
     }
 

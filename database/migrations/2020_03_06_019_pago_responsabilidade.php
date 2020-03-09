@@ -14,7 +14,12 @@ class PagoResponsabilidade extends Migration
     public function up()
     {
         Schema::create('PagoResponsabilidade', function (Blueprint $table) {
-            $table->increments('idPagoResp');
+            $table->bigIncrements('idPagoResp');
+            $table->date('data');
+            $table->string('nomeAutor',255);
+            $table->string('imagem',255);
+            $table->unsignedBigInteger('idFase');
+                $table->foreign('idFase')->references('idFase')->on('Fase');
         });
     }
 
