@@ -122,28 +122,51 @@
 
 
         {{-- Contactos PESSOAIS --}}
-        <div class="row">
-            <div class="col mb-2" style="color:black">
-                Contactos do aluno
-            </div>
-        </div>
 
         <div class="row">
             <div class="col">
-                <label for="telefone1">Telefone:</label><br>
+                <label for="telefone1">Telefone pessoal:</label><br>
                 <input type="text" class="form-control" name="telefone1" id="telefone1" placeholder=""><br>                
             </div>
             <div class="col">
-                <label for="telefone2">Telemóvel:</label><br>
+                <label for="telefone2">Telemóvel pessoal:</label><br>
                 <input type="text" class="form-control" name="telefone2" id="telefone2" placeholder=""><br>                
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <label for="email">E-mail:</label><br>
+                <label for="email">E-mail pessoal:</label><br>
                 <input type="text" class="form-control" name="email" id="email" placeholder=""><br>                
             </div>
         </div>
+
+        {{-- Contactos dos PAIS --}}
+        <div class="row mt-4">
+            <div class="col">
+                <label for="nomePai">Nome do pai:</label><br>
+                <input type="text" class="form-control" name="nomePai" id="nomePai" placeholder=""><br>                
+
+                <label for="telefonePai">Telefone do pai:</label><br>
+                <input type="text" class="form-control" name="telefonePai" id="telefonePai" placeholder=""><br>                
+
+                <label for="emailPai">E-mail do pai:</label><br>
+                <input type="text" class="form-control" name="emailPai" id="emailPai" placeholder=""><br>                
+            </div>
+
+            <div class="col">
+                <label for="nomeMae">Nome da mãe:</label><br>
+                <input type="text" class="form-control" name="nomeMae" id="nomeMae" placeholder=""><br>                
+
+                <label for="telefoneMae">Telefone da mãe:</label><br>
+                <input type="text" class="form-control" name="telefoneMae" id="telefoneMae" placeholder=""><br>                
+
+                <label for="emailMae">E-mail da mãe:</label><br>
+                <input type="text" class="form-control" name="emailMae" id="emailMae" placeholder=""><br>                
+            </div>
+
+
+        </div>
+
     </div>
 
 
