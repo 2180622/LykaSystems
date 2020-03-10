@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Phonebook;
+use App\Contacto;
 use Illuminate\Http\Request;
 
 class PhonebookController extends Controller
@@ -14,7 +14,7 @@ class PhonebookController extends Controller
      */
     public function index()
     {
-        //
+        return view('phonebook.list');
     }
 
     /**
@@ -44,7 +44,7 @@ class PhonebookController extends Controller
      * @param  \App\Phonebook  $phonebook
      * @return \Illuminate\Http\Response
      */
-    public function show(Phonebook $phonebook)
+    public function show(Contacto $contacto)
     {
         //
     }
@@ -55,7 +55,7 @@ class PhonebookController extends Controller
      * @param  \App\Phonebook  $phonebook
      * @return \Illuminate\Http\Response
      */
-    public function edit(Phonebook $phonebook)
+    public function edit(Contacto $contacto)
     {
         //
     }
@@ -67,7 +67,7 @@ class PhonebookController extends Controller
      * @param  \App\Phonebook  $phonebook
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phonebook $phonebook)
+    public function update(Request $request, Contacto $contacto)
     {
         //
     }
@@ -78,7 +78,7 @@ class PhonebookController extends Controller
      * @param  \App\Phonebook  $phonebook
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Phonebook $phonebook)
+    public function destroy(Contacto $contacto)
     {
         //
     }

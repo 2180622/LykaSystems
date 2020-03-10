@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Administrador;
+use App\Cliente;
+use App\Agente;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use Carbon\Carbon;
+// use App\Http\Controllers\AdministradorC
 
 class UserController extends Controller
 {
+  public $storeAdmin;
+  public $storeAgente;
+  public $storeCliente;
     /**
      * Display a listing of the resource.
      *
@@ -26,18 +34,11 @@ class UserController extends Controller
     public function create()
     {
       $user = new User;
+      $admin = new Administrador;
+      $agente = new Agente;
+      $cliente = new Cliente;
 
-      return view('users.add', compact('user'));
-      /*return User::create([
-          'username' => $data['username'],
-          'name' => $data['name'],
-          'apelido' => $data['apelido'],
-          'email' => $data['email'],
-          'datanasc' => $data['datanasc'],
-          'telefone1' => $data['telefone1'],
-          'telefone2' => $data['telefone2'],
-          'password' => Hash::make($data['password']),
-      ]);*/
+      return view('users.add', compact('user', 'admin', 'agente', 'cliente', 'storeAdmin', 'storeAgente', 'storeCliente'));
     }
 
     /**
@@ -46,13 +47,33 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function storeAdmin(StoreUserRequest $request)
     {
-      $fields = $request->validated();
+      //$fields = $request->validated();
+      $curTime = Carbon\Carbon::now();
+
       $user = new User;
-      $user->fill($fields);
-      $user->password = Hash::make('username');
+      $admin = new Administrador;
+      $admin->nome = "username";
+      $admin->apelido = "username";
+      $admin->email = "username@hotmail.com";
+      $admin->dataNasc = "2000-10-10";
+      //$admin->fotografia = "adfgdfsg.jpg";
+      $admin->telefone1 = "915996639";
+      $admin->telefone2 = "910000000";
+      $admin->dataRegis = $curTime->now ();
+
+      //$user->fill($fields);
+      $user->username = "username";
+      $user->password_hash = Hash::make('username');
+      $user->tipo = "admin";
+      $user->auth_key = "sdfglnsdbhkfnjslkdfgn";
+      $user->status = 10;
+      $user->created_at = $curTime->now();
+      //$user->idAdmin = 1;
+
       $user->save();
+      $admin->save();
 
       // if ($request->hasFile('photo')) {
       // $photo = $request->file('photo');
@@ -62,7 +83,35 @@ class UserController extends Controller
       //$user->save();
       //}
       //$user->sendEmailVerificationNotification();
-      return redirect()->route('users.index')->with('success', 'User successfully created');
+      return redirect()->route('users.index', compact('user', 'admin'))->with('success', 'Admin successfully created');
+    }
+
+    public function storeAgente(StoreUserRequest $request)
+    {
+      $fields = $request->validated();
+      $user = new User;
+      $agente = new Agente;
+      $agente->fill($fields);
+      $user->fill($fields);
+      $user->password = Hash::make('username');
+      $user->save();
+      $agente->save();
+
+      return redirect()->route('users.index')->with('success', 'Agent successfully created');
+    }
+
+    public function storeCliente(StoreUserRequest $request)
+    {
+      $fields = $request->validated();
+      $user = new User;
+      $cliente = new Cliente;
+      $cliente->fill($fields);
+      $user->fill($fields);
+      $user->password = Hash::make('username');
+      $user->save();
+      $cliente->save();
+
+      return redirect()->route('users.index')->with('success', 'Client successfully created');
     }
 
     /**
