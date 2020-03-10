@@ -22,13 +22,13 @@
                         <form method="POST" action="" class="form-group" enctype="multipart/form-data">
                             @csrf
                             @method("PUT")
-                            @include('students.partials.add-edit')
+                            @include('clients.partials.add-edit')
                             <div class="text-right">
                                 <div class="form-group col-md-12 text-right mt-3 ml-3">
                                     <button type="submit" class="btn btn-md btn-success text-white mr-1" name="ok"
                                             title="Guardar"><i class="far fa-save mr-2"></i> Guardar
                                     </button>
-                                    <a href="{{route('students.index')}}"
+                                    <a href="{{route('clients.index')}}"
                                        class="btn btn-md btn-secondary text-white mr-1 my-1"
                                        title="Cancelar Publicação">Cancelar</a>
                                 </div>

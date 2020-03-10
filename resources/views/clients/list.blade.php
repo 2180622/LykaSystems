@@ -52,9 +52,24 @@
                                 <td style="text-align: left; padding-top:20px">sebastian@gmail.com</td>
                                 <td style="text-align: center; padding-top:20px">México</td>
                                 <td style="text-align: center; padding-top:20px">
-                                    <i class="fas fa-ellipsis-h mr-3" title="Outros"></i>
-                                    <i class="fas fa-pencil-alt mr-3" title="Editar"></i>
-                                    <i class="far fa-trash-alt" title="Eliminar"></i>
+                                    <a class="btn btn-sm btn-outline-primary rounded"
+                                       href="{{route('clients.show',$client)}}"
+                                       title="Outros">
+                                        <i class="fas fa-ellipsis-h mr-3"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm btn-outline-primary rounded"
+                                       href="{{route('clients.edit',$client)}}"
+                                       title="Editar">
+                                        <i class="fas fa-pencil-alt mr-3"></i>
+                                    </a>
+
+                                    <a class="btn btn-sm btn-outline-primary rounded"
+                                       href="{{route('clients.destroy',$client)}}"
+                                       title="Eliminar">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+
                                 </td>
                             </tr>
                             <tr class="bg-hover-row">
