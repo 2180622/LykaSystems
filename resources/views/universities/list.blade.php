@@ -2,12 +2,12 @@
 
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de Estudantes')
+@section('title', 'Lista de Universidades')
 
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-    <link href="{{asset('css/client.css')}}" rel="stylesheet">
+    <link href="{{asset('css/university.css')}}" rel="stylesheet">
 @endsection
 
 
@@ -15,12 +15,12 @@
 @section('content')
     <div class="container mt-2">
         <div class="float-right">
-            <a href="{{route('clients.create')}}" class="top-button">Adicionar Estudante</a>
+            <a href="#" class="top-button">Adicionar Licenciatura</a>
         </div>
         <br>
         <div class="cards-navigation">
             <div class="title">
-                <h6>Listagem de estudantes</h6>
+                <h6>Listagem de Licenciaturas</h6>
             </div>
             <br>
             <div class="row cards-group">
@@ -35,10 +35,10 @@
                                         <label class="form-check-label" for="exampleCheck1"></label>
                                     </div>
                                 </th>
-                                <th style="text-align: left; padding-bottom: 20px">Nome de Utilizador</th>
-                                <th style="text-align: left; padding-bottom: 20px">Endereço Eletrónico</th>
-                                <th style="text-align: center; padding-bottom: 20px">Naturalidade</th>
-                                <th style="text-align: center; padding-bottom: 20px; width: 15%">Opções</th>
+                                <th style="text-align: left; padding-bottom: 20px;">Nome da Licenciatura</th>
+                                <th style="text-align: left; padding-bottom: 20px;">Endereço Eletrónico</th>
+                                <th style="text-align: center; padding-bottom: 20px">Telefone/Telemóvel</th>
+                                <th style="text-align: center; padding-bottom: 20px">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,10 +46,10 @@
                                 <td>
                                     <div class="fotoPerfilImagem"></div>
                                 </td>
-                                <td style="text-align: left; padding-top:20px">Sebastian Sion</td>
-                                <td style="text-align: left; padding-top:20px">sebastian@gmail.com</td>
-                                <td style="text-align: center; padding-top:20px">México</td>
-                                <td style="text-align: center; padding-top:20px;">
+                                <td style="text-align: left; padding-top:20px">Instituto Universitário de Lisboa</td>
+                                <td style="text-align: left; padding-top:20px">iul@gmail.com</td>
+                                <td style="text-align: center; padding-top:20px">(+351) 915251542</td>
+                                <td style="text-align: center; padding-top:20px">
                                     <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
                                     </a>
                                     <a class="btnOption" href="#" title="Editar"> <i class="fas fa-pencil-alt mr-3"></i>
@@ -70,6 +70,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-    <script src="{{asset('/js/student-list.js')}}"></script>
+    <script src="{{asset('/js/university-list.js')}}"></script>
 
 @endsection

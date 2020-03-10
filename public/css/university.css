@@ -8,7 +8,7 @@
 }
 
 th.sorting {
-    width: 150px !important;
+    width: 100px !important;
 }
 
 th.sorting_desc{
@@ -37,11 +37,11 @@ th.sorting_desc{
     float: right;
 }
 
-a.btnOption i{
+a.btnOption i {
     color: #252525;
 }
 
-a:hover{
+a:hover {
     text-decoration: none !important;
 }
 
