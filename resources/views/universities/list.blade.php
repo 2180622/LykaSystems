@@ -37,7 +37,6 @@
                                 </th>
                                 <th style="text-align: left; padding-bottom: 20px;">Nome da Licenciatura</th>
                                 <th style="text-align: left; padding-bottom: 20px;">Endereço Eletrónico</th>
-                                <th style="text-align: center; padding-bottom: 20px">Telefone/Telemóvel</th>
                                 <th style="text-align: center; padding-bottom: 20px">Opções</th>
                             </tr>
                             </thead>
@@ -48,7 +47,6 @@
                                 </td>
                                 <td style="text-align: left; padding-top:20px">Instituto Universitário de Lisboa</td>
                                 <td style="text-align: left; padding-top:20px">iul@gmail.com</td>
-                                <td style="text-align: center; padding-top:20px">(+351) 915251542</td>
                                 <td style="text-align: center; padding-top:20px">
                                     <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
                                     </a>
