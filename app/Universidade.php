@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Universidade extends Model
 {
     protected $table = 'Universidade';
+    
+    public $timestamps = false;
 
     protected $fillable = [
         'nome','morada','telefone','email','NIF','IBAN','obsContactos','obsCursos','obsCandidaturas'

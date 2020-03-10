@@ -21,3 +21,7 @@ Route::resource('/students', 'StudentController');
 Route::resource('/phonebook', 'PhonebookController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/* Edgar Teste */ /* eliminar no futuro */
+Route::get('/edgarteste', 'EdgarTesteController@index')->name('teste');

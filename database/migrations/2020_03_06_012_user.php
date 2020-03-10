@@ -25,8 +25,7 @@ class User extends Migration
             $table->string('verification_token',255)->nullable();
             $table->string('auth_key',50);
             $table->integer('status');
-            $table->dateTime('created_at')->useCurrent();
-            $table->dateTime('updated_at')->nullable();
+            $table->timestamps();
             $table->unsignedBigInteger('idAdmin')->nullable();
                 $table->foreign('idAdmin')->references('idAdmin')->on('Administrador');
 

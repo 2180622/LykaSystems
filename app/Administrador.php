@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Administrador extends Model
 {
     protected $table = 'Administrador';
+    
     public $timestamps = false;
 
     protected $fillable = [
