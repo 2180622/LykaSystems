@@ -8,8 +8,9 @@ use App\Cliente;
 use App\Agente;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\StoreAdministradorRequest;
 use Carbon\Carbon;
-// use App\Http\Controllers\AdministradorC
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -34,11 +35,8 @@ class UserController extends Controller
     public function create()
     {
       $user = new User;
-      $admin = new Administrador;
-      $agente = new Agente;
-      $cliente = new Cliente;
 
-      return view('users.add', compact('user', 'admin', 'agente', 'cliente', 'storeAdmin', 'storeAgente', 'storeCliente'));
+      return view('users.add', compact('user'));
     }
 
     /**
@@ -47,30 +45,30 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeAdmin(StoreUserRequest $request)
+    public function storeAdmin(Request $request)
     {
-      //$fields = $request->validated();
-      $curTime = Carbon\Carbon::now();
-
+      $curTime = Carbon::now();
       $user = new User;
+
+      $user->username = "username";
+      $user->tipo = "admin";
+      $user->password_hash = Hash::make('username');
+      $user->password_reset_token = "sd65fg4s65d4g65sd4gf6";
+      $user->verification_token = "65sd41g65sd14fg654sdfg";
+      $user->auth_key = "65sdf4g65sdf41gh654s1g";
+      $user->status = 10;
+      $user->created_at = $curTime;
+      $user->updated_at = $curTime;
+
       $admin = new Administrador;
       $admin->nome = "username";
-      $admin->apelido = "username";
-      $admin->email = "username@hotmail.com";
+      $admin->apelido = "emanresu";
+      $admin->email = "username@gmail.com";
       $admin->dataNasc = "2000-10-10";
-      //$admin->fotografia = "adfgdfsg.jpg";
-      $admin->telefone1 = "915996639";
-      $admin->telefone2 = "910000000";
-      $admin->dataRegis = $curTime->now ();
-
-      //$user->fill($fields);
-      $user->username = "username";
-      $user->password_hash = Hash::make('username');
-      $user->tipo = "admin";
-      $user->auth_key = "sdfglnsdbhkfnjslkdfgn";
-      $user->status = 10;
-      $user->created_at = $curTime->now();
-      //$user->idAdmin = 1;
+      $admin->telefone1 = "915632269";
+      $admin->dataRegis = $curTime;
+      // $admin->created_at = $curTime;
+      // $admin->updated_at = $curTime;
 
       $user->save();
       $admin->save();
@@ -94,13 +92,15 @@ class UserController extends Controller
       $agente->fill($fields);
       $user->fill($fields);
       $user->password = Hash::make('username');
+
+      dd($user);
       $user->save();
       $agente->save();
 
       return redirect()->route('users.index')->with('success', 'Agent successfully created');
     }
 
-    public function storeCliente(StoreUserRequest $request)
+    public function storeCliente(Request $request)
     {
       $fields = $request->validated();
       $user = new User;

@@ -31,9 +31,32 @@
 .card-navigation {
     width: 85%;
     height: 110px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 11px;
     background-color: white;
-    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
+}
+
+.card-navigation .help-button {
+    top: 7px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    float: right;
+    position: relative;
+    border-radius: 50%;
+    background-color: #DFDFDF;
+}
+
+.card-navigation .help-button span {
+    top: -10%;
+    left: 32%;
+    color: white;
+    font-weight: 800;
+    font-size: 0.9rem;
+    position: relative;
+    transform: translate(-50%, -50%);
 }
 
 .card-navigation .info {
@@ -57,4 +80,24 @@
     position: relative;
     margin: 0 !important;
     text-transform: uppercase;
+}
+
+/* Report Navigation Style */
+.report {
+    margin-top: 30px;
+}
+
+.report button {
+    color: #A9A9A9;
+    font-weight: 800;
+    padding: 8px 18px;
+    font-size: 0.6rem;
+    border-radius: 25px;
+    border: 2px solid #A9A9A9;
+    text-transform: uppercase;
+    background-color: #EAEAEA;
+}
+
+.report .graphic {
+  margin-top: 20px;
 }

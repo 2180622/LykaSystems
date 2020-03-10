@@ -10,7 +10,7 @@ class Fase extends Model
 
     protected $fillable = [
         'descricao','dataVencimento','valorFase','verificacaoPago','valorComissaoAgente',
-        'valorComSubAgente','$idProduto'
+        'valorComSubAgente','$idProduto','$idFaseStock'
         ];
 
     public function produto(){

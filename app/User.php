@@ -17,8 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username','tipo','password_hash','password_reset_token',
-        'verification_token','auth_key','status','$idAdmin','$idAgente','$idCliente'
+        'username','tipo','password',
     ];
 
     public function admin(){

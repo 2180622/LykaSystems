@@ -20,12 +20,14 @@ class Administrador extends Migration
             $table->string('nome',255);
             $table->string('apelido',255);
             $table->string('email',255);
-                $table->unique('email');
+            $table->unique('email');
             $table->date('dataNasc');
             $table->string('fotografia',255)->nullable();
             $table->integer('telefone1');
             $table->integer('telefone2')->nullable();
             $table->dateTime('dataRegis')->useCurrent();
+            $table->timestamp('deleted_at')->nullable();
+
             $table->softDeletes();
         });
     }
