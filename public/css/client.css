@@ -58,6 +58,14 @@ div.dataTables_wrapper div.dataTables_length label {
     padding-left: 270px !important;
 }
 
+a.btnOption i{
+    color: #252525;
+}
+
+a:hover{
+    text-decoration: none !important;
+}
+
 .fotoPerfil {
     width: 40px;
     height: 40px;
@@ -104,3 +112,4 @@ table tbody tr.bg-hover-row:hover {
     background-color: white;
     cursor: pointer;
 }
+
