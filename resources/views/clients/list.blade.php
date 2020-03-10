@@ -7,27 +7,27 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-    <link href="{{asset('css/client.css')}}" rel="stylesheet">
+<link href="{{asset('css/client.css')}}" rel="stylesheet">
 @endsection
 
 
 {{-- Conteudo da Página --}}
 @section('content')
-    <div class="container mt-2">
-        <div class="float-right">
-            <a href="#" class="top-button">adicionar estudante</a>
+<div class="container mt-2">
+    <div class="float-right">
+        <a href="{{route('clients.create')}}" class="top-button">adicionar estudante</a>
+    </div>
+    <br>
+    <div class="cards-navigation">
+        <div class="title">
+            <h6>Listagem de estudantes</h6>
         </div>
         <br>
-        <div class="cards-navigation">
-            <div class="title">
-                <h6>Listagem de estudantes</h6>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-6">
-                    <div class="table-responsive">
-                        <table id="dataTable" class="table" style="width:100%; text-align: center;">
-                            <thead>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-6">
+                <div class="table-responsive">
+                    <table id="dataTable" class="table" style="width:100%; text-align: center;">
+                        <thead>
                             <tr>
                                 <th style="">
                                     <div class="fotoPerfil">
@@ -42,8 +42,8 @@
                                 <th style="text-align: center; padding-bottom: 20px">Naturalidade</th>
                                 <th style="text-align: center; padding-bottom: 20px">Opções</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             <tr class="bg-hover-row">
                                 <td>
                                     <div class="fotoPerfilImagem"></div>
@@ -83,18 +83,18 @@
                                     <i class="far fa-trash-alt" title="Eliminar"></i>
                                 </td>
                             </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-    <script src="{{asset('/js/student-list.js')}}"></script>
+<script src="{{asset('/js/student-list.js')}}"></script>
 
 @endsection
