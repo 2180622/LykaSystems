@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreAdministradorRequest;
 use App\Http\Requests\StoreAgenteRequest;
+use App\Http\Requests\StoreClienteRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -57,7 +58,7 @@ class UserController extends Controller
       $fieldsAgente = $requestAgente->validated();
 
       $user = new User;
-      $user->tipo = "admin";
+      $user->tipo = "agente";
       $user->auth_key = rand(655541,getrandmax());
       $user->status = 10;
       $user->fill($fieldsUser);
@@ -72,17 +73,26 @@ class UserController extends Controller
       return redirect()->route('users.index')->with('success', 'Admin successfully created');
     }
 
-    public function storeCliente(StoreUserRequest $request){
-      $fields = $request->validate();
+    public function storeCliente(StoreUserRequest $requestUser, StoreClienteRequest $requestCliente){
+      $curTime = Carbon::now();
+
+      $fieldsUser = $requestUser->validated();
+      $fieldsCliente = $requestCliente->validated();
+
       $user = new User;
-      $cliente = new Cliente;
-      $cliente->fill($fields);
-      $user->fill($fields);
-      $user->password = Hash::make('username');
+      $user->tipo = "cliente";
+      $user->auth_key = rand(655541,getrandmax());
+      $user->status = 10;
+      $user->fill($fieldsUser);
+
+      $cliente= new Cliente;
+      $cliente->dataRegis = $curTime;
+      $cliente->fill($fieldsCliente);
+
       $user->save();
       $cliente->save();
 
-      return redirect()->route('users.index')->with('success', 'Client successfully created');
+      return redirect()->route('users.index')->with('success', 'Admin successfully created');
     }
 
 
