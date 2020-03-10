@@ -16,6 +16,14 @@ Route::post('/users/storeCliente', 'UserController@storeCliente')->name('users.s
 /* Estudantes */
 Route::resource('/students', 'StudentController');
 
+
+
+
+/* Phonebook */
+Route::resource('/phonebook', 'PhonebookController');
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

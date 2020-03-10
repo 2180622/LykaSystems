@@ -12,7 +12,7 @@
         <li class="menu-option">
             <a href="{{route('dashboard')}}">
                 <div class="menu-icon">
-                    <i class="far fa-hdd mr-2"></i>
+                    <ion-icon name="cloud-outline" style="font-size: 16pt; position: relative; top: 3px; right: 3px; --ionicon-stroke-width: 40px;"></ion-icon>
                 </div>
                 <span class="{{Route::is('dashboard') ? 'active' : ''}}" style="bottom:2px;">Dashboard</span>
             </a>
@@ -24,7 +24,7 @@
         <li class="menu-option">
             <a href="#">
                 <div class="menu-icon">
-                    <i class="fas fa-user-graduate mr-2"></i>
+                    <ion-icon name="person-circle-outline" style="font-size: 16pt; position: relative; top: 5px; right: 3px;"></ion-icon>
                 </div>
                 <span class="option-name">Estudantes</span>
             </a>
@@ -53,6 +53,16 @@
 
         <br>
 
+        <!-- Pagamentos -->
+        <li class="menu-option">
+            <a href="#">
+                <div class="menu-icon">
+                    <ion-icon name="wallet-outline" style="font-size:16pt; --ionicon-stroke-width: 50px; position: relative; top: 3px; right: 3px;"></ion-icon>
+                </div>
+                <span class="option-name">Pagamentos</span>
+            </a>
+        </li>
+
         <!-- Listagens -->
         <li class="menu-option">
             <a href="#">
@@ -63,56 +73,57 @@
             </a>
         </li>
 
-        <!-- Relatório de contas -->
         <li class="menu-option">
-            <a href="#">
+            <a data-toggle="collapse" href="#collapseDiv" aria-expanded="false" aria-controls="collapseDiv">
                 <div class="menu-icon">
-                    <i class="fas fa-chart-line mr-2"></i>
+                    <i class="fas fa-tools mr-2"></i>
                 </div>
-                <span class="option-name">Relatório de contas</span>
+                <span class="option-name">Diversos</span>
             </a>
         </li>
 
+        <div class="collapse" id="collapseDiv">
+            <!-- Relatório de contas -->
+            <li class="menu-option">
+                <a href="#">
+                    <div class="menu-icon">
+                        <i class="fas fa-chart-line mr-2"></i>
+                    </div>
+                    <span class="option-name">Relatório de contas</span>
+                </a>
+            </li>
 
-        <!-- Biblioteca -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="far fa-folder mr-2"></i>
-                </div>
-                <span class="option-name">Biblioteca</span>
-            </a>
-        </li>
 
-        <!-- Lista telefónica -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="fas fa-phone-alt mr-2"></i>
-                </div>
-                <span class="option-name">Lista telefónica</span>
-            </a>
-        </li>
+            <!-- Biblioteca -->
+            <li class="menu-option">
+                <a href="#">
+                    <div class="menu-icon">
+                        <i class="far fa-folder mr-2"></i>
+                    </div>
+                    <span class="option-name">Biblioteca</span>
+                </a>
+            </li>
 
-        <!-- Agenda -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="far fa-calendar-alt mr-2"></i>
-                </div>
-                <span class="option-name">Agenda</span>
-            </a>
-        </li>
+            <!-- Lista telefónica -->
+            <li class="menu-option">
+                <a href="{{route('phonebook.index')}}">
+                    <div class="menu-icon">
+                        <i class="fas fa-phone-alt mr-2"></i>
+                    </div>
+                    <span class="{{Route::is('phonebook.*') ? 'active' : ''}} option-name">Lista telefónica</span>
+                </a>
+            </li>
 
-        <!-- Pagamentos -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="far fa-credit-card mr-2"></i>
-                </div>
-                <span class="option-name">Pagamentos</span>
-            </a>
-        </li>
+            <!-- Agenda -->
+            <li class="menu-option">
+                <a href="#">
+                    <div class="menu-icon">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                    </div>
+                    <span class="option-name">Agenda</span>
+                </a>
+            </li>
+        </div>
 
         <!-- Utilizadores -->
         <li class="menu-option">
@@ -123,26 +134,38 @@
                 <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Utilizadores</span>
             </a>
         </li>
+
     </ul>
 
-    <div class="mt-5 m-2 rounded">
-        <div class="p-2">
-            <div style="float:left; width: 50px;">
-                {{-- Foto Utilizador --}}
-                <img class="shadow" src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
-            </div>
 
-            <div class="pl-2" style="float:left;">
-                {{-- Nome e Perfil --}}
-                <span class="font-weight-bold">Nome</span><br>
-                <span class="text-muted" style="font-size:14px">Administrador</span>
-            </div>
+
+    <div class="text-center mb-4">
+
+
+        <div class="opts_btn shadow-sm align-self-center">
+            <a href="#" title="Definições" class="user_btn"><i class="fas fa-cog"></i></a>
         </div>
 
-        <div class="mt-5 p-2 rounded  text-center ">
-            <a href="#" class="btn btn-sm btn-light mr-2"><i class="fas fa-sliders-h m-2"></i></a>
-            <a href="#" class="btn btn-sm btn-light mr-2"><i class="far fa-question-circle m-2"></i></a>
-            <a href="#" class="btn btn-sm btn-light"><i class="fas fa-power-off m-2"></i></a>
+        <div class="user_opts shadow-sm align-self-center">
+            <a href="#" title="Terminar sessão" class="user_btn"><i class="fas fa-power-off"></i></a>
         </div>
+
+
+        <div class="mx-auto user_photo rounded-circle shadow">
+            {{-- Foto Utilizador --}}
+            <img src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
+        </div>
+
+        <div class="text-center mt-3">
+            {{-- Nome e Perfil --}}
+            <span class="font-weight-bold text-uppercase">Nome</span><br>
+            <span class="text-muted " style="font-size:14px">Administrador</span>
+        </div>
+
     </div>
+
+
+
+
+
 </div>
