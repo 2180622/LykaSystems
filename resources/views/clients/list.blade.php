@@ -7,7 +7,7 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-    <link href="{{asset('css/student.css')}}" rel="stylesheet">
+    <link href="{{asset('css/client.css')}}" rel="stylesheet">
 @endsection
 
 
@@ -15,7 +15,7 @@
 @section('content')
     <div class="container mt-2">
         <div class="float-right">
-            <button type="button" name="button" id="add-student">ADICIONAR CLIENTE</button>
+            <a href="#" class="top-button">adicionar estudante</a>
         </div>
         <br>
         <div class="cards-navigation">

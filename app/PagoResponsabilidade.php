@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class PagoResponsabilidade extends Model
 {
     protected $table = 'PagoResponsabilidade';
+    
+    public $timestamps = false;
 
     protected $fillable = [
         'data','nomeAutor','imagem','$idFase'

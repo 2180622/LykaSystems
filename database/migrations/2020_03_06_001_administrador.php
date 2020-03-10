@@ -26,7 +26,6 @@ class Administrador extends Migration
             $table->integer('telefone1');
             $table->integer('telefone2')->nullable();
             $table->dateTime('dataRegis')->useCurrent();
-            $table->timestamp('deleted_at')->nullable();
 
             $table->softDeletes();
         });
