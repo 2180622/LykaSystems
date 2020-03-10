@@ -1,19 +1,35 @@
-h5 {
-    padding-top: 50px;
-    font-family: "Nunito", sans-serif;
-    font-weight: bold;
-    padding-left: 20px;
+/* Button Style -> Adicionar Estudante */
+#add-student {
+    border: none;
+    color: white;
+    font-weight: 800;
+    padding: 8px 18px;
+    font-size: 0.6rem;
+    border-radius: 25px;
+    text-transform: uppercase;
+    background-color: #6A74C9;
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
 }
 
-.table thead th, td {
+/* Title */
+.cards-navigation {
+    margin-top: 19px;
+}
+
+.title h6 {
+    color: #252525;
+    font-weight: 700;
+    font-size: 1.1rem;
     font-family: "Nunito", sans-serif;
+}
+
+/* Table */
+.table thead th, td {
     border-top: none !important;
     border-bottom: none !important;
 }
 
 .table-responsive {
-    display: block;
-    width: 100%;
     overflow-x: hidden !important;
 }
 
