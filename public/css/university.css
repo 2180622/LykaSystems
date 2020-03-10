@@ -7,6 +7,14 @@
     border-bottom: none !important;
 }
 
+th.sorting {
+    width: 100px !important;
+}
+
+th.sorting_desc{
+    width: 5px !important;
+}
+
 .custom-select {
     margin-left: 0.3rem;
     margin-right: 0.3rem;
@@ -29,11 +37,11 @@
     float: right;
 }
 
-a.btnOption i{
+a.btnOption i {
     color: #252525;
 }
 
-a:hover{
+a:hover {
     text-decoration: none !important;
 }
 

@@ -35,9 +35,10 @@
                                         <label class="form-check-label" for="exampleCheck1"></label>
                                     </div>
                                 </th>
-                                <th style="text-align: left; padding-bottom: 20px">Nome da Licenciatura</th>
-                                <th style="text-align: left; padding-bottom: 20px">Custo</th>
-                                <th style="text-align: center; padding-bottom: 20px; width: 15%">Opções</th>
+                                <th style="text-align: left; padding-bottom: 20px;">Nome da Licenciatura</th>
+                                <th style="text-align: left; padding-bottom: 20px;">Endereço Eletrónico</th>
+                                <th style="text-align: center; padding-bottom: 20px">Telefone/Telemóvel</th>
+                                <th style="text-align: center; padding-bottom: 20px">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -45,9 +46,10 @@
                                 <td>
                                     <div class="fotoPerfilImagem"></div>
                                 </td>
-                                <td style="text-align: left; padding-top:20px">Licenciatura de Biomecânica</td>
-                                <td style="text-align: left; padding-top:20px">65,00€</td>
-                                <td style="text-align: center; padding-top:20px; width: 15%">
+                                <td style="text-align: left; padding-top:20px">Instituto Universitário de Lisboa</td>
+                                <td style="text-align: left; padding-top:20px">iul@gmail.com</td>
+                                <td style="text-align: center; padding-top:20px">(+351) 915251542</td>
+                                <td style="text-align: center; padding-top:20px">
                                     <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
                                     </a>
                                     <a class="btnOption" href="#" title="Editar"> <i class="fas fa-pencil-alt mr-3"></i>
