@@ -8,12 +8,16 @@
 }
 
 th.sorting {
-    width: 150px !important;
+    width: 300px !important;
     padding: 12px 12px 20px;
 }
 
 th.sorting_desc{
     width: 5px !important;
+}
+
+th.sorting_disabled{
+    width: 190px !important;
 }
 
 .custom-select {

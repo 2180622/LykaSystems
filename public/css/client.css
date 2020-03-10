@@ -8,12 +8,16 @@
 }
 
 th.sorting {
-    width: 150px !important;
+    width: 300px !important;
     padding: 12px 12px 20px;
 }
 
-th.sorting_desc{
+th.sorting_desc {
     width: 5px !important;
+}
+
+th.sorting_disabled{
+    width: 270px !important;
 }
 
 .custom-select {
@@ -38,11 +42,11 @@ th.sorting_desc{
     float: right;
 }
 
-a.btnOption i{
+a.btnOption i {
     color: #252525;
 }
 
-a:hover{
+a:hover {
     text-decoration: none !important;
 }
 
