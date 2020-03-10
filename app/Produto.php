@@ -11,7 +11,7 @@ class Produto extends Model
     protected $fillable = [
         'descricao','tipo','anoAcademico','valorTotal','valorTotalAgente',
         'valorTotalSubAgente','$idAgente','$idSubAgente','$idCliente',
-        '$idUniversidade1','$idUniversidade2','$idProdutoStock'
+        '$idUniversidade1','$idUniversidade2'
         ];
 
     public function cliente(){

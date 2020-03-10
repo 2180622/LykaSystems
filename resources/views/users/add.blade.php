@@ -22,7 +22,7 @@
 
 
   {{-- Form para admin --}}
-  <form class="form-group" id="form-admin" action="{{route('users.storeAdmin')}}" style="display: none" method="POST">
+  <form class="form-group" id="form-admin" action="{{route('users.storeAdmin')}}" style="display: none" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
        <label for="inputFullname">Username</label>
@@ -30,18 +30,16 @@
     </div>
     <div class="form-group">
        <label for="inputFullname">Nome</label>
-       <input type="text" class="form-control" name="nome"
-       value="{{old('name',$user->name)}}" />
+       <input type="text" class="form-control" name="nome" />
     </div>
     <div class="form-group">
        <label for="inputFullname">Apelido</label>
-       <input type="text" class="form-control" name="apelido"
-       value="{{old('name',$user->name)}}" />
+       <input type="text" class="form-control" name="apelido" />
     </div>
     <div class="form-group">
        <label for="inputEmail">Email</label>
        <input type="text" class="form-control" name="email" id="inputEmail"
-       placeholder="username@gmail.com" value="{{old('email',$user->email)}}" />
+       placeholder="username@gmail.com" />
     </div>
     <div class="form-group">
        <label for="inputFullname">Data de Nascimento</label>
@@ -74,18 +72,16 @@
     </div>
     <div class="form-group">
        <label >Nome</label>
-       <input type="text" class="form-control" name="name"
-       value="{{old('name',$user->name)}}" />
+       <input type="text" class="form-control" name="name" />
     </div>
     <div class="form-group">
        <label >Apelido</label>
-       <input type="text" class="form-control" name="name"
-       value="{{old('name',$user->name)}}" />
+       <input type="text" class="form-control" name="name" />
     </div>
     <div class="form-group">
        <label for="inputEmail">Email</label>
        <input type="text" class="form-control" name="email"
-       placeholder="username@gmail.com" value="{{old('email',$user->email)}}" />
+       placeholder="username@gmail.com" />
     </div>
     <div class="form-group">
        <label for="inputFullname">Data de Nascimento</label>
@@ -141,18 +137,16 @@
     </div>
     <div class="form-group">
        <label >Nome</label>
-       <input type="text" class="form-control" name="name"
-       value="{{old('name',$user->name)}}" />
+       <input type="text" class="form-control" name="name" />
     </div>
     <div class="form-group">
        <label >Apelido</label>
-       <input type="text" class="form-control" name="name"
-       value="{{old('name',$user->name)}}" />
+       <input type="text" class="form-control" name="name" />
     </div>
     <div class="form-group">
        <label for="inputEmail">Email</label>
        <input type="text" class="form-control" name="email"
-       placeholder2="username@gmail.com" value="{{old('email',$user->email)}}" />
+       placeholder2="username@gmail.com" />
     </div>
     <div class="form-group">
        <label for="inputFullname">Telefone 1</label>
