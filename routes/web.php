@@ -10,6 +10,9 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 
 /* Utilizadores */
 Route::resource('/users', 'UserController');
+Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
+Route::post('/users/storeAgente', 'UserController@storeAgente')->name('users.storeAgente');
+Route::post('/users/storeCliente', 'UserController@storeCliente')->name('users.storeCliente');
 
 /* Estudantes */
 Route::resource('/students', 'StudentController');
