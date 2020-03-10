@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function storeAdmin(StoreUserRequest $requestUser, StoreAdministradorRequest $requestAdmin){
       $curTime = Carbon::now();
-      echo "5";
+
       $fieldsUser = $requestUser->validated();
       $fieldsAdmin = $requestAdmin->validated();
 
@@ -41,8 +41,8 @@ class UserController extends Controller
 
       $admin = new Administrador;
       $admin->dataRegis = $curTime;
-      $admin->fills($fieldsAdmin);
-      dd($user);
+      $admin->fill($fieldsAdmin);
+
       $user->save();
       $admin->save();
 

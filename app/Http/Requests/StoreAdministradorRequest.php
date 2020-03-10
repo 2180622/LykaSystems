@@ -19,10 +19,10 @@ class StoreAdministradorRequest extends FormRequest
             'apelido' => 'required',
             'email' => 'required',
             'dataNasc' => 'required',
-            'fotografia' => 'nullable',
+            //'fotografia' => 'nullable',
             'telefone1' => 'required',
             'telefone2' => 'nullable',
-            'dataRegis'=> 'required',
+            //'dataRegis'=> 'required',
         ];
     }
 }
