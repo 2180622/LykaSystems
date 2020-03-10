@@ -55,16 +55,16 @@
     </div>
     <div class="form-group">
        <label for="inputFullname">Password</label>
-       <input type="password" class="form-control" name="password" />
+       <input type="password" class="form-control" name="password_hash" />
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-success" name="ok">Save</button>
+      <button type="submit" class="btn btn-success">Save</button>
       <a href="{{route('users.index')}}" class="btn btn-default">Cancel</a>
     </div>
   </form>
 
   {{-- Form para agente --}}
-  <form class="form-group" id="form-agente" action="{{route('users.storeAgente')}}" style="display: none" method="POST" enctype="multipart/form-data">
+  <form class="form-group" id="form-agente" action="#" style="display: none" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
        <label for="inputFullname">Username</label>
@@ -129,7 +129,7 @@
   </form>
 
   {{-- Form para cliente --}}
-  <form class="form-group" id="form-cliente" action="{{route('users.storeCliente')}}" style="display: none" method="POST" enctype="multipart/form-data">
+  <form class="form-group" id="form-cliente" action="#" style="display: none" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
        <label for="inputFullname">Username</label>
