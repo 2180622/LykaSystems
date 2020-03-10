@@ -15,7 +15,7 @@
 @section('content')
     <div class="container mt-2">
         <div class="float-right">
-            <button type="button" name="button" class="report-problem">Adicionar Estudante</button>
+            <a href="#" class="top-button">adicionar estudante</a>
         </div>
         <br>
         <div class="cards-navigation">

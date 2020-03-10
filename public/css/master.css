@@ -1,5 +1,5 @@
 /* LYKA BLUE: #6A74C9 */
-.report-problem {
+.top-button {
     border: none;
     color: white;
     font-weight: 800;
@@ -9,6 +9,10 @@
     text-transform: uppercase;
     background-color: #6A74C9;
     box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
+}
+.top-button:hover{
+    color:white;
+    text-decoration: none;
 }
 
 /* General Style */
