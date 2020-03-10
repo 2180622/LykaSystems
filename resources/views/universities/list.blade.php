@@ -2,12 +2,12 @@
 
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de Estudantes')
+@section('title', 'Lista de Universidades')
 
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-    <link href="{{asset('css/client.css')}}" rel="stylesheet">
+    <link href="{{asset('css/university.css')}}" rel="stylesheet">
 @endsection
 
 
@@ -15,12 +15,12 @@
 @section('content')
     <div class="container mt-2">
         <div class="float-right">
-            <a href="{{route('clients.create')}}" class="top-button">Adicionar Estudante</a>
+            <a href="#" class="top-button">Adicionar Licenciatura</a>
         </div>
         <br>
         <div class="cards-navigation">
             <div class="title">
-                <h6>Listagem de estudantes</h6>
+                <h6>Listagem de Licenciaturas</h6>
             </div>
             <br>
             <div class="row cards-group">
@@ -35,9 +35,8 @@
                                         <label class="form-check-label" for="exampleCheck1"></label>
                                     </div>
                                 </th>
-                                <th style="text-align: left; padding-bottom: 20px">Nome de Utilizador</th>
-                                <th style="text-align: left; padding-bottom: 20px">Endereço Eletrónico</th>
-                                <th style="text-align: center; padding-bottom: 20px">Naturalidade</th>
+                                <th style="text-align: left; padding-bottom: 20px">Nome da Licenciatura</th>
+                                <th style="text-align: left; padding-bottom: 20px">Custo</th>
                                 <th style="text-align: center; padding-bottom: 20px; width: 15%">Opções</th>
                             </tr>
                             </thead>
@@ -46,9 +45,8 @@
                                 <td>
                                     <div class="fotoPerfilImagem"></div>
                                 </td>
-                                <td style="text-align: left; padding-top:20px">Sebastian Sion</td>
-                                <td style="text-align: left; padding-top:20px">sebastian@gmail.com</td>
-                                <td style="text-align: center; padding-top:20px">México</td>
+                                <td style="text-align: left; padding-top:20px">Licenciatura de Biomecânica</td>
+                                <td style="text-align: left; padding-top:20px">65,00€</td>
                                 <td style="text-align: center; padding-top:20px; width: 15%">
                                     <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
                                     </a>
@@ -70,6 +68,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-    <script src="{{asset('/js/student-list.js')}}"></script>
+    <script src="{{asset('/js/university-list.js')}}"></script>
 
 @endsection

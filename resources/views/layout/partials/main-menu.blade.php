@@ -33,11 +33,11 @@
 
         <!-- Universidades  -->
         <li class="menu-option">
-            <a href="#">
+            <a href="{{route('universities.index')}}">
                 <div class="menu-icon">
                     <i class="fas fa-university mr-2"></i>
                 </div>
-                <span class="option-name">Universidades</span>
+                <span class="option-name {{Route::is('universities.*') ? 'active' : ''}}">Universidades</span>
             </a>
         </li>
 

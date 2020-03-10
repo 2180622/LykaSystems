@@ -17,6 +17,9 @@ Route::post('/users/storeCliente', 'UserController@storeCliente')->name('users.s
 /* Estudantes */
 Route::resource('/clients', 'ClientController');
 
+/* Universidades */
+Route::resource('/universities', 'UniversityController');
+
 /* Phonebook */
 Route::resource('/phonebook', 'PhonebookController');
 
