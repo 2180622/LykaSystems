@@ -15,9 +15,16 @@ Route::post('/users/storeAgente', 'UserController@storeAgente')->name('users.sto
 Route::post('/users/storeCliente', 'UserController@storeCliente')->name('users.storeCliente');
 
 /* Estudantes */
-Route::resource('/students', 'StudentController');
+Route::resource('/clients', 'ClientController');
+
+/* Universidades */
+Route::resource('/universities', 'UniversityController');
 
 /* Phonebook */
 Route::resource('/phonebook', 'PhonebookController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/* Edgar Teste */ /* eliminar no futuro */
+Route::get('/edgarteste', 'EdgarTesteController@index')->name('teste');

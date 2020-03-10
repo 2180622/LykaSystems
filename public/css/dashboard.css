@@ -1,60 +1,31 @@
-/* Button Style -> Reportar Problema */
-#report-problem {
-    border: none;
-    color: white;
+
+
+/* Report Navigation Style */
+.report {
+    margin-top: 30px;
+}
+
+.report button {
+    color: #A9A9A9;
     font-weight: 800;
     padding: 8px 18px;
     font-size: 0.6rem;
     border-radius: 25px;
+    border: 2px solid #A9A9A9;
     text-transform: uppercase;
-    background-color: #6A74C9;
-    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
+    background-color: #EAEAEA;
 }
 
-/* Cards Navigation Style */
-/* Title */
-.cards-navigation {
-    margin-top: 19px;
+.report .graphic-group {
+    margin-top: 40px;
 }
 
-.title h6 {
-    color: #252525;
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
-/* Cards */
-.cards-group {
-    margin-top: 10px;
-}
-
-.card-navigation {
-    width: 85%;
-    height: 110px;
+.report .graphic-group .graphic {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 230px;
     border-radius: 11px;
     background-color: white;
-    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .05);
-}
-
-.card-navigation .info {
-    padding-top: 5px;
-    padding-left: 15px;
-    display: inline-block;
-}
-
-.card-navigation .info .number {
-    color: #575757;
-    font-weight: 700;
-    font-size: 2.6rem;
-    margin: 0 !important;
-}
-
-.card-navigation .info .word {
-    bottom: 7px;
-    color: #C8C8C8;
-    font-weight: 800;
-    font-size: .72rem;
-    position: relative;
-    margin: 0 !important;
-    text-transform: uppercase;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
 }

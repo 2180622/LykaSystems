@@ -12,7 +12,7 @@
 @section('content')
 <div class="container mt-2">
     <div class="float-right">
-        <button type="button" name="button" id="report-problem">reportar problema</button>
+        <a href="#" class="top-button">reportar problema</a>
     </div>
     <br>
     <div class="cards-navigation">
@@ -23,7 +23,11 @@
         <div class="row cards-group">
             <div class="col-md-4">
                 <div class="card-navigation">
-                    <div class="help-button"></div>
+                    <div class="help-button">
+                        <span>
+                            ?
+                        </span>
+                    </div>
                     <div class="info">
                         <p class="number">503</p>
                         <p class="word">clientes</p>
@@ -32,6 +36,11 @@
             </div>
             <div class="col-md-4">
                 <div class="card-navigation">
+                    <div class="help-button">
+                        <span>
+                            ?
+                        </span>
+                    </div>
                     <div class="info">
                         <p class="number">14</p>
                         <p class="word">universidades</p>
@@ -40,10 +49,38 @@
             </div>
             <div class="col-md-4">
                 <div class="card-navigation">
+                    <div class="help-button">
+                        <span>
+                            ?
+                        </span>
+                    </div>
                     <div class="info">
                         <p class="number">124</p>
                         <p class="word">agentes</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="report">
+        <div class="row">
+            <div class="title col-md-10">
+                <h6>Relatório e contas</h6>
+            </div>
+            <div class="col-md-2 text-right">
+                <button type="button" name="button">ver todos</button>
+            </div>
+        </div>
+        <div class="row graphic-group">
+            <div class="col-md-8">
+                <div class="graphic">
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="graphic">
+
                 </div>
             </div>
         </div>

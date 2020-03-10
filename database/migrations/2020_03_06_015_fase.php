@@ -19,7 +19,7 @@ class Fase extends Migration
             $table->bigIncrements('idFase');
             $table->string('descricao',255);
             $table->dateTime('dataVencimento');
-            $table->dateTime('update_at')->nullable();
+            $table->timestamps();
             $table->decimal('valorFase', 18, 2);
             $table->boolean('verificacaoPago')->default(false);
             $table->decimal('valorComissaoAgente', 18, 2);

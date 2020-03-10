@@ -28,8 +28,7 @@ use App\Universidade;
 use App\User;
 
 
-
-class ExtraFunctionController extends Controller
+class ExtraFunctionsController extends Controller
 {
     public function createData(){
 
@@ -308,10 +307,10 @@ class ExtraFunctionController extends Controller
         $user = new User;
         $user->username = 'Nildgar';
         $user->tipo = 'admin';
-        $user->password_hash = '09151a42659cfc08aff86820f973f640';
+        $user->password_hash = Hash::make('teste1234');
         $user->password_reset_token = null;
         $user->verification_token = null;
-        $user->auth_key = 'imDmHzp1Cm5ak1pkra9ajcxSudPcrPE3';
+        $user->auth_key = 'sdfglnsdbhkfnjslkdfgn';
         $user->status = '10';
         $user->idAdmin = 1;
         $user->idAgente = null;

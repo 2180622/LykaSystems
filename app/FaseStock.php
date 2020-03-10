@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class FaseStock extends Model
 {
     protected $table = 'FaseStock';
+    
+    public $timestamps = false;
 
     protected $fillable = [
         'descricao','$idProdutoStock'
