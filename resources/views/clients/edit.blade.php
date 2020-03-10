@@ -1,43 +1,49 @@
 @extends('layout.master')
 
+{{-- Page Title --}}
+@section('title', 'Página Exemplo')
 
-{{-- Titulo da Página --}}
-@section('title', 'Lista de Estudantes')
-
-
-{{-- Estilos de CSS --}}
+{{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('css/student.css')}}" rel="stylesheet">
+{{-- <link href="{{asset('/css/NOME_DO_FICHEIRO.css')}}" rel="stylesheet"> --}}
 @endsection
 
-
-{{-- Conteudo da Página --}}
+{{-- Page Content --}}
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form method="POST" action="" class="form-group" enctype="multipart/form-data">
-                            @csrf
-                            @method("PUT")
-                            @include('clients.partials.add-edit')
-                            <div class="text-right">
-                                <div class="form-group col-md-12 text-right mt-3 ml-3">
-                                    <button type="submit" class="btn btn-md btn-success text-white mr-1" name="ok"
-                                            title="Guardar"><i class="far fa-save mr-2"></i> Guardar
-                                    </button>
-                                    <a href="{{route('clients.index')}}"
-                                       class="btn btn-md btn-secondary text-white mr-1 my-1"
-                                       title="Cancelar Publicação">Cancelar</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+<div class="container mt-2">
+    <div class="float-right">
+        <a href="#" class="top-button">reportar problema</a>
     </div>
+    <br>
+    <div class="cards-navigation">
+        <div class="title">
+            <h6>Adicionar estudante</h6>
+        </div>
+        <br>
+
+
+        <form method="PUT" action="{{route('clients.store')}}" class="form-group pt-3" id="form_client" enctype="multipart/form-data">
+            @csrf
+            @include('clients.partials.add-edit')
+            <div class="form-group text-right">
+                <br><br>
+                <button type="button" class="top-button" name="ok" id="buttonSubmit"><i class="fas fa-plus text-white-50 mr-2"></i>Adicionar estudante</button>
+                <a href="{{route('clients.index')}}" class="top-button">Cancelar</a>
+            </div> </form>
+
+
+    </div>
+</div>
+
+
+
+@endsection
+
+{{-- Scripts --}}
+@section('scripts')
+
+{{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
 
 @endsection
