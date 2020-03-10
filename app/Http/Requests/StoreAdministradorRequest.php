@@ -6,21 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAdministradorRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
     public function rules()
     {
         return [
@@ -28,8 +19,10 @@ class StoreAdministradorRequest extends FormRequest
             'apelido' => 'required',
             'email' => 'required',
             'dataNasc' => 'required',
+            //'fotografia' => 'nullable',
             'telefone1' => 'required',
-            'dataRegis'=> 'required',
+            'telefone2' => 'nullable',
+            //'dataRegis'=> 'required',
         ];
     }
 }
