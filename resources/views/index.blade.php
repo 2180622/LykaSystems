@@ -72,12 +72,16 @@
                 <button type="button" name="button">ver todos</button>
             </div>
         </div>
-        <div class="row graphic">
+        <div class="row graphic-group">
             <div class="col-md-8">
-                test
+                <div class="graphic">
+
+                </div>
             </div>
             <div class="col-md-4">
-                test
+                <div class="graphic">
+
+                </div>
             </div>
         </div>
     </div>
