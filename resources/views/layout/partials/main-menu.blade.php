@@ -22,11 +22,11 @@
 
         <!-- Estudantes  -->
         <li class="menu-option">
-            <a href="#">
+            <a href="{{route('students.index')}}">
                 <div class="menu-icon">
                     <ion-icon name="person-circle-outline" style="font-size: 16pt; position: relative; top: 5px; right: 3px;"></ion-icon>
                 </div>
-                <span class="option-name">Estudantes</span>
+                <span class="option-name {{Route::is('students.*') ? 'active' : ''}}">Estudantes</span>
             </a>
         </li>
 

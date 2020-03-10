@@ -9,8 +9,7 @@ class Universidade extends Model
     protected $table = 'Universidade';
 
     protected $fillable = [
-        'nome','morada','telefone','email','NIF','IBAN','obsContactos','obsCursos',
-        'obsCandidaturas'
+        'nome','morada','telefone','email','NIF','IBAN','obsContactos','obsCursos','obsCandidaturas'
         ];
 
     public function produto(){
