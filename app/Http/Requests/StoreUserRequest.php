@@ -25,11 +25,16 @@ class StoreUserRequest extends FormRequest
     {
         return [
           'username' => 'required|min:3|max:40|regex:/^[A-ZÀ-úa-z\s]+$/',
-          'tipo' => 'required',
+          'tipo' => 'required|in:admin,agente,cliente',
           'password_hash' => 'required',
+          'password_reset_token' => 'nullable',
+          'verification_token' => 'nullable',
           'auth_key' => 'required',
           'status' => 'required',
           'created_at' => 'required',
+          'idAmin' => 'nullable',
+          'idAgente' => 'nullable',
+          'idCliente' => 'nullable',
         ];
     }
 
