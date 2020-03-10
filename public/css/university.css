@@ -8,7 +8,8 @@
 }
 
 th.sorting {
-    width: 100px !important;
+    width: 150px !important;
+    padding: 12px 12px 20px;
 }
 
 th.sorting_desc{

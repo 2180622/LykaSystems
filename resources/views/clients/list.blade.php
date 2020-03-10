@@ -38,7 +38,7 @@
                                 <th style="text-align: left; padding-bottom: 20px">Nome de Utilizador</th>
                                 <th style="text-align: left; padding-bottom: 20px">Endereço Eletrónico</th>
                                 <th style="text-align: center; padding-bottom: 20px">Naturalidade</th>
-                                <th style="text-align: center; padding-bottom: 20px; width: 15%">Opções</th>
+                                <th style="text-align: center; padding-bottom: 20px">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,7 +49,7 @@
                                 <td style="text-align: left; padding-top:20px">Sebastian Sion</td>
                                 <td style="text-align: left; padding-top:20px">sebastian@gmail.com</td>
                                 <td style="text-align: center; padding-top:20px">México</td>
-                                <td style="text-align: center; padding-top:20px;">
+                                <td style="text-align: center; padding-top:20px">
                                     <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
                                     </a>
                                     <a class="btnOption" href="#" title="Editar"> <i class="fas fa-pencil-alt mr-3"></i>
