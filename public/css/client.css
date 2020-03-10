@@ -9,6 +9,7 @@
 
 th.sorting {
     width: 150px !important;
+    padding: 12px 12px 20px;
 }
 
 th.sorting_desc{
