@@ -28,7 +28,6 @@ use App\Universidade;
 use App\User;
 
 
-
 class ExtraFunctionsController extends Controller
 {
     public function createData(){
@@ -41,7 +40,7 @@ class ExtraFunctionsController extends Controller
         $admin->email = 'nill546@hotmail.com';
         $admin->dataNasc = date('Y-m-d',strtotime('17-12-1997'));
         $admin->fotografia = null;
-        $admin->telefone1 = 919245453;
+        $admin->telefone1 = 'testhasdh';
         $admin->telefone1 = null;
         $admin->save();
 
