@@ -14,7 +14,7 @@
                 <div class="menu-icon">
                     <ion-icon name="cloud-outline" style="font-size: 16pt; position: relative; top: 3px; right: 3px; --ionicon-stroke-width: 40px;"></ion-icon>
                 </div>
-                <span class="{{Route::is('dashboard') ? 'active' : ''}}" style="bottom:2px;">Dashboard</span>
+                <span class="{{Route::is('dashboard') ? 'active' : ''}} option-name" style="bottom:2px;">Dashboard</span>
             </a>
         </li>
 
@@ -22,11 +22,11 @@
 
         <!-- Estudantes  -->
         <li class="menu-option">
-            <a href="{{route('students.index')}}">
+            <a href="{{route('clients.index')}}">
                 <div class="menu-icon">
                     <ion-icon name="person-circle-outline" style="font-size: 16pt; position: relative; top: 5px; right: 3px;"></ion-icon>
                 </div>
-                <span class="option-name {{Route::is('students.*') ? 'active' : ''}}">Estudantes</span>
+                <span class="option-name {{Route::is('clients.*') ? 'active' : ''}} option-name">Estudantes</span>
             </a>
         </li>
 
