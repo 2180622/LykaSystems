@@ -1,5 +1,15 @@
 /* LYKA BLUE: #6A74C9 */
-
+.report-problem {
+    border: none;
+    color: white;
+    font-weight: 800;
+    padding: 8px 18px;
+    font-size: 0.6rem;
+    border-radius: 25px;
+    text-transform: uppercase;
+    background-color: #6A74C9;
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
+}
 
 /* General Style */
 html, body {

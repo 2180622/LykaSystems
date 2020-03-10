@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/student.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/student.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/students/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/students/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/client.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/client.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/master.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/master.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clients/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clients/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,7 +135,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../portal_divulgacoes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mexico-eportugal" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -176,7 +178,7 @@
       <workItem from="1583751321910" duration="11389000" />
       <workItem from="1583765772835" duration="8640000" />
       <workItem from="1583780068449" duration="570000" />
-      <workItem from="1583832277872" duration="9863000" />
+      <workItem from="1583832277872" duration="12540000" />
     </task>
     <servers />
   </component>
@@ -187,9 +189,9 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1583834050308">
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1583843002391">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583834050308" />
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583843002391" />
   </component>
 </project>
