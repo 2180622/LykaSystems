@@ -1,12 +1,10 @@
+.table-responsive {
+    overflow-x: hidden !important;
+}
 
-/* Table */
 .table thead th, td {
     border-top: none !important;
     border-bottom: none !important;
-}
-
-.table-responsive {
-    overflow-x: hidden !important;
 }
 
 .custom-select {
@@ -16,35 +14,19 @@
     width: auto;
 }
 
-div.dataTables_wrapper div.dataTables_length label {
-    font-family: "Nunito", sans-serif !important;
-    padding-left: 20px !important;
-    display: inline-block;
-    margin-bottom: -90px;
-    margin-top: 20px;
-}
-
 #dataTable_filter .form-control.form-control-sm {
-    float: right;
-    font-weight: 400;
-    font-size: 0.75rem;
     border-radius: 50px;
-    text-transform: uppercase;
     padding: 15px 20px;
     color: #252525;
 }
 
 #dataTable_filter label {
-    width: 60%;
-    margin-left: 130px;
-}
-
-.dataTables_info {
-    padding-left: 20px;
+    width: 50%;
+    float: right;
 }
 
 .pagination {
-    padding-left: 270px !important;
+    float: right;
 }
 
 a.btnOption i{
@@ -78,16 +60,6 @@ a:hover{
     margin-left: 8px;
 }
 
-
-.fotoPerfilImagem:hover {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    text-align: center;
-    background-color: white;
-}
-
 #exampleCheck1 {
     margin-top: 12px;
     margin-left: -7px;
@@ -101,4 +73,3 @@ table tbody tr.bg-hover-row:hover {
     background-color: white;
     cursor: pointer;
 }
-
