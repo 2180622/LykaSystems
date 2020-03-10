@@ -9,6 +9,7 @@ use App\Agente;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreAdministradorRequest;
+use App\Http\Requests\StoreAgenteRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -49,35 +50,40 @@ class UserController extends Controller
       return redirect()->route('users.index')->with('success', 'Admin successfully created');
     }
 
-    // public function storeAgente(Request $request)
-    // {
-    //   $fields = $request->validate();
-    //   $user = new User;
-    //   $agente = new Agente;
-    //   $agente->fill($fields);
-    //   $user->fill($fields);
-    //   $user->password = Hash::make('username');
-    //
-    //   dd($user);
-    //   $user->save();
-    //   $agente->save();
-    //
-    //   return redirect()->route('users.index')->with('success', 'Agent successfully created');
-    // }
-    //
-    // public function storeCliente(StoreUserRequest $request)
-    // {
-    //   $fields = $request->validate();
-    //   $user = new User;
-    //   $cliente = new Cliente;
-    //   $cliente->fill($fields);
-    //   $user->fill($fields);
-    //   $user->password = Hash::make('username');
-    //   $user->save();
-    //   $cliente->save();
-    //
-    //   return redirect()->route('users.index')->with('success', 'Client successfully created');
-    // }
+    public function storeAgente(StoreUserRequest $requestUser, StoreAgenteRequest $requestAgente){
+      $curTime = Carbon::now();
+
+      $fieldsUser = $requestUser->validated();
+      $fieldsAgente = $requestAgente->validated();
+
+      $user = new User;
+      $user->tipo = "admin";
+      $user->auth_key = rand(655541,getrandmax());
+      $user->status = 10;
+      $user->fill($fieldsUser);
+
+      $agente = new Agente;
+      $agente->dataRegis = $curTime;
+      $agente->fill($fieldsAgente);
+
+      $user->save();
+      $agente->save();
+
+      return redirect()->route('users.index')->with('success', 'Admin successfully created');
+    }
+
+    public function storeCliente(StoreUserRequest $request){
+      $fields = $request->validate();
+      $user = new User;
+      $cliente = new Cliente;
+      $cliente->fill($fields);
+      $user->fill($fields);
+      $user->password = Hash::make('username');
+      $user->save();
+      $cliente->save();
+
+      return redirect()->route('users.index')->with('success', 'Client successfully created');
+    }
 
 
     public function show(User $user)
