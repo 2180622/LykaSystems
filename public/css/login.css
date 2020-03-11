@@ -1,5 +1,4 @@
 body, html {
-    font-family: "Nunito", sans-serif;
     margin: 0;
     height: 100%;
     overflow: hidden;
@@ -7,11 +6,13 @@ body, html {
     background-size: cover;
     background-position: 50% 70%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/media/contact-image.jpg");
+    font-family: "Nunito", sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/media/contact-image.jpg");
 }
 
 .login-form p {
-    font-weight: bolder;
+    color: #ADADAD;
+    font-weight: 800;
     text-align: left;
 }
 
@@ -25,11 +26,12 @@ body, html {
 }
 
 .login-form {
-    top: 200px;
-    position: relative;
-    padding: 0 40px;
-    margin: 0 30px;
+    left: 50%;
+    top: 280px;
     width: 90%;
+    padding: 0 20px;
+    position: relative;
+    transform: translate(-50%, -50%);
 }
 
 .login-form #username {
@@ -37,9 +39,28 @@ body, html {
 }
 
 #username, #password {
+    font-weight: 700;
     font-size: 0.8rem;
-    padding: 20px 10px 20px 10px;
+    padding: 25px 20px;
     border-radius: 50px;
+    border: 2px solid #ADADAD;
+    color: #252525 !important;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+#username {
+    text-transform: uppercase;
+}
+
+#username::placeholder, #password::placeholder {
+    color: #ADADAD;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+form-control::placeholder {
+    opacity: 0 !important;
 }
 
 #username:focus, #password:focus {
@@ -50,15 +71,15 @@ body, html {
 
 .submit-button {
     float: right;
-    font-weight: 400;
-    font-size: 0.75rem;
+    font-weight: 700;
+    font-size: 0.76rem;
+    padding: 10px 20px;
     border-radius: 50px;
     color: white !important;
     text-transform: uppercase;
-    padding: 10px 20px;
     background-color: #6A74C9 !important;
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2) !important;
 }
-
 
 @media screen and (max-width: 1000px) {
     .login-form {
