@@ -3,12 +3,31 @@
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/StoreUniversidadeRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/StoreUniversidadeRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/client.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/client.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/master.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/master.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UniversityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UniversityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Universidade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Universidade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_001_administrador.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_001_administrador.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_002_agente.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_002_agente.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_003_biblioteca.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_003_biblioteca.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_004_cliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_004_cliente.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_005_conta.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_005_conta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_006_contacto.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_006_contacto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_007_fornecedor.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_007_fornecedor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_008_produto_stock.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_008_produto_stock.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_009_fase_stock.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_009_fase_stock.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_010_doc_stock.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_010_doc_stock.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_011_universidade.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_011_universidade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_012_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_012_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_013_agenda.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_013_agenda.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_014_produto.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_014_produto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_015_fase.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_015_fase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_016_doc_academico.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_016_doc_academico.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_017_doc_pessoal.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_017_doc_pessoal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_018_doc_transacao.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_018_doc_transacao.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_019_pago_responsabilidade.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_019_pago_responsabilidade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_021_responsabilidade.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_021_responsabilidade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_022_rel_forn_resp.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_022_rel_forn_resp.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/university.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/university.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/universities/partials/add-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/partials/add-edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +207,7 @@
       <workItem from="1583832277872" duration="12609000" />
       <workItem from="1583849032009" duration="5197000" />
       <workItem from="1583855841477" duration="4002000" />
-      <workItem from="1583918409316" duration="8247000" />
+      <workItem from="1583918409316" duration="11153000" />
     </task>
     <servers />
   </component>
@@ -199,6 +218,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1583929291934">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1583929291934" />
     <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1583919169945">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

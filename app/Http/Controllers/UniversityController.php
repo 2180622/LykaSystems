@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUniversidadeRequest;
-use App\University;
+use App\Universidade;
 use Illuminate\Http\Request;
 
 class UniversityController extends Controller
@@ -15,8 +15,8 @@ class UniversityController extends Controller
      */
     public function index()
     {
-        //$universities = University::all();
-        return view('universities.list');
+        $universities = Universidade::all();
+        return view('universities.list', compact('universities'));
     }
 
     /**
@@ -26,8 +26,8 @@ class UniversityController extends Controller
      */
     public function create()
     {
-        //$university = new University;
-        return view('universities.add');
+        $university = new Universidade;
+        return view('universities.add', compact('university'));
     }
 
     /**
@@ -38,7 +38,17 @@ class UniversityController extends Controller
      */
     public function store(StoreUniversidadeRequest $request)
     {
-        //
+        $fields = $request->validated();
+        $university = new Universidade;
+        $university->fill($fields);
+
+        // Data em que o registo é criado
+        $t = time();
+        $university->create_at == date("Y-m-d", $t);
+
+        $university->save();
+
+        return redirect()->route('universities.index')->with('success', 'Universidade Adicionada com Sucesso!');
     }
 
     /**
