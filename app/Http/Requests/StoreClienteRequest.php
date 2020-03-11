@@ -40,6 +40,9 @@ class StoreClienteRequest extends FormRequest
           'nivEstudoAtual' => 'required',
           'nomeInstituicaoOrigem' => 'required',
           'cidadeInstituicaoOrigem' => 'required',
+          'obsPessoais' => 'nullable',
+          'obsAcademicas' => 'nullable',
+          'obsFinanceiras' => 'nullable',
         ];
     }
 }
