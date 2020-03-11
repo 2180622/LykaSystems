@@ -9,9 +9,9 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $clientes = Cliente::all();
 
-        return view('clients.list', compact('clientes'));
+        $clients = Cliente::all();
+        return view('clients.list', compact('clients'));
     }
 
 
