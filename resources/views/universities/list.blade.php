@@ -26,7 +26,7 @@
             <div class="row cards-group">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="dataTable" class="table" style="width:100%; text-align: center;">
+                        <table id="dataTable" class="table" style="width:100%; text-align: center">
                             <thead>
                             <tr>
                                 <th>
@@ -35,15 +35,18 @@
                                         <label class="form-check-label" for="exampleCheck1"></label>
                                     </div>
                                 </th>
-                                <th style="text-align: left; padding-bottom: 20px;">Nome da Licenciatura</th>
-                                <th style="text-align: left; padding-bottom: 20px;">Endereço Eletrónico</th>
+                                <th style="text-align: left; padding-bottom: 20px">Nome da Licenciatura</th>
+                                <th style="text-align: left; padding-bottom: 20px">Endereço Eletrónico</th>
                                 <th style="text-align: center; padding-bottom: 20px">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr class="bg-hover-row">
                                 <td>
-                                    <div class="fotoPerfilImagem"></div>
+                                    <div class="fotoPerfil check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1"></label>
+                                    </div>
                                 </td>
                                 <td style="text-align: left; padding-top:20px">Instituto Universitário de Lisboa</td>
                                 <td style="text-align: left; padding-top:20px">iul@gmail.com</td>
