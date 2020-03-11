@@ -19,8 +19,8 @@
 
 
           "language": {
-              "lengthMenu":  "Mostrar _MENU_ registos por página",
-              "search":      "",
+              "lengthMenu":  "Mostrar _MENU_ por página",
+              "search":      "Procurar",
               "zeroRecords": "Sem registos",
               "paginate": {
                 "first":      "Primeiro",
