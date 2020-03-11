@@ -13,7 +13,7 @@ class User extends Authenticatable
     protected $primaryKey = 'idUser';
 
     protected $fillable = [
-        'username','tipo','password',
+        'email','tipo','password',
     ];
 
     public function admin(){
