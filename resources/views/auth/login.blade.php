@@ -1,47 +1,47 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="login-form">
+<div class="login-form">
+    <div>
+        <p class="text-muted">Insira os seus dados de autenticação para aceder a aplicação, por favor.</p>
         <div>
-            <p class="text-muted">Insira os seus dados de autenticação para aceder a aplicação, por favor.</p>
-            <div>
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div>
                     <div>
-                        <div>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                   name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
+
+                        <input id="username" type="username" class="form-control @error('username') is-invalid @enderror"
+                        name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                        @error('username')
+                        <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                            @enderror
-                        </div>
+                        @enderror
                     </div>
-                    <br>
+                </div>
+                <br>
+                <div>
                     <div>
-                        <div>
-                            <input id="password" type="password"
-                                   class="form-control @error('password') is-invalid @enderror" name="password" required
-                                   autocomplete="current-password">
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required
+                        autocomplete="current-password">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                            @enderror
-                        </div>
+                        @enderror
                     </div>
-                    <br>
+                </div>
+                <br>
+                <div>
                     <div>
-                        <div>
-                            <button type="submit" class="btn submit-button">
-                                {{ __('Iniciar Sessão') }}
-                            </button>
-                        </div>
+                        <button type="submit" class="btn submit-button">
+                            {{ __('Iniciar Sessão') }}
+                        </button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
 @endsection

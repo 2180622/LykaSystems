@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserRequest extends FormRequest
@@ -16,8 +14,7 @@ class StoreUserRequest extends FormRequest
     {
         return [
           'username' => 'required|min:3|max:40|regex:/^[A-ZÀ-úa-z\s]+$/',
-          //'tipo' => 'required|in:admin,agente,cliente',
-          'password_hash' => 'required',
+          'password' => 'required',
         ];
     }
 

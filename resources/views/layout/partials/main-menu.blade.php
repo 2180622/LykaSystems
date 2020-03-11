@@ -147,13 +147,15 @@
         </div>
 
         <div class="user_opts shadow-sm align-self-center">
-            <a href="#" title="Terminar sessão" class="user_btn"><i class="fas fa-power-off"></i></a>
+            <a href="{{ route('logout') }}" title="Terminar sessão" class="user_btn"><i class="fas fa-power-off"></i></a>
+            @csrf
+            @method('POST')
         </div>
 
 
         <div class="mx-auto user_photo rounded-circle shadow">
             {{-- Foto Utilizador --}}
-            <img src="{{asset('storage/user-photos/user.jpg')}}" style="width:100%">
+            <img src="{{asset('/storage/user-photos/user.jpg')}}" style="width:100%">
         </div>
 
         <div class="text-center mt-3">
@@ -163,9 +165,4 @@
         </div>
 
     </div>
-
-
-
-
-
 </div>

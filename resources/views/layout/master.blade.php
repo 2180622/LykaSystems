@@ -40,6 +40,14 @@
 
             <!-- Content -->
             <div class="col pb-5 pt-3">
+                <!-- Error and Success Message -->
+                @if ($errors->any())
+                    @include ('layout.msg-error-message.partials.errors')
+                @endif
+                @if (!empty(session('success')))
+                    @include ('layout.msg-error-message.partials.success')
+                @endif
+                <!-- Content -->
                 @yield('content')
             </div>
 

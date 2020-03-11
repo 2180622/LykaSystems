@@ -7,6 +7,10 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $routeMiddleware = [
+      'preventBackHistory' => \App\Http\Middleware\PreventBackHistory::class,
+    ];
     /**
      * The Artisan commands provided by your application.
      *

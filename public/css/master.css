@@ -1,6 +1,4 @@
 /* LYKA BLUE: #6A74C9 */
-
-
 /* General Style */
 html, body {
     height: 100%;
@@ -9,7 +7,6 @@ html, body {
     font-family: 'Nunito', sans-serif;
     transition: all 0.3 ease;
 }
-
 .top-button {
     border: none;
     color: white;
@@ -21,12 +18,11 @@ html, body {
     background-color: #6A74C9;
     box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
 }
-.top-button:hover{
-    color:white;
+
+.top-button:hover {
+    color: white;
     text-decoration: none;
 }
-
-
 
 
 /* Cards Navigation Style */
@@ -40,6 +36,7 @@ html, body {
     font-weight: 700;
     font-size: 1.1rem;
 }
+
 
 /* Cards */
 .cards-group {
@@ -100,20 +97,11 @@ html, body {
     text-transform: uppercase;
 }
 
+.collapse {
+    border-radius: 15px;
+    background-color: rgba(230, 230, 230, 1);
+}
 
-
-
-
-
-.collapse{
-    border-radius:15px;
-    background-color: rgba(230,230,230,1);
-    }
-
-
-
-
-    
 
 /* Main Menu Style */
 .logotype {
@@ -188,51 +176,43 @@ html, body {
     display: inline-block;
 }
 
-
-
-.user_photo{
+.user_photo {
 
     height: 120px;
     width: 120px;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
     overflow: hidden;
 }
 
-.opts_btn{
+.opts_btn {
     position: relative;
-    left:65px;
-    top:145px;
+    left: 65px;
+    top: 145px;
     width: 24px;
-    height:24px;
+    height: 24px;
     border-radius: 50%;
     background-color: white;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
 }
 
-.user_opts{
+.user_opts {
     position: relative;
-    left:140px;
-    top:120px;
+    left: 140px;
+    top: 120px;
     width: 24px;
-    height:24px;
+    height: 24px;
     border-radius: 50%;
     background-color: white;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
 }
 
-
-
-.user_btn{
-
-    color:#6A74C9;
+.user_btn {
+    color: #6A74C9;
 }
 
-.user_btn:hover{
-    color:black;
+.user_btn:hover {
+    color: black;
 }
-
-
-
 
 
 /* Right Sidebar Style */
@@ -240,35 +220,30 @@ html, body {
     flex: 0 0 270px;
     min-height: 100%;
     background-color: white;
-    padding: 0px!important;
+    padding: 0px !important;
 }
 
-.close_btn{
+.close_btn {
     position: absolute;
-    right:-5px;
-    top:-7px;
-    height:20px;
-    width:20px;
+    right: -5px;
+    top: -7px;
+    height: 20px;
+    width: 20px;
     background-color: white;
     padding-top: -3px;
     border-radius: 50%;
-
-}
-.close_btn a{
-    color:gray;
-}
-.close_btn a:hover{
-    color:blue;
 }
 
+.close_btn a {
+    color: gray;
+}
 
-
-
-
+.close_btn a:hover {
+    color: blue;
+}
 
 
 /* RESPONSIVE */
-
 @media screen and (max-width: 950px) {
     .sidebar {
         display: none;

@@ -24,9 +24,17 @@
 
 <h3>Lista de utilizadores</h3>
 
-<button type="button" name="button"><a href="{{route('users.create')}}">Adicionar Cliente</a></button>
+<button type="button" name="button"><a href="{{route('users.create')}}">Adicionar Cliente</a></button><br><br><br><br>
 
+<table>
+  <tr>
+    <th></th>
+  </tr>
+  <tr>
 
+  </tr>
+</table>
+{{foreach $users as $user}}
 
 
 
