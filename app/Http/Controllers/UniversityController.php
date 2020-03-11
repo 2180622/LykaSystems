@@ -16,8 +16,8 @@ class UniversityController extends Controller
      */
     public function index()
     {
-        $universities = Universidade::all();
-        return view('universities.list', compact('universities'));
+        $universidades = Universidade::all();
+        return view('universities.list', compact('universidades'));
     }
 
     /**
@@ -27,28 +27,28 @@ class UniversityController extends Controller
      */
     public function create()
     {
-        $university = new Universidade;
-        return view('universities.add', compact('university'));
+        $universidade = new Universidade;
+        return view('universities.add', compact('universidade'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUniversidadeRequest $request)
     {
         $fields = $request->validated();
 
-        $university = new Universidade;
-        $university->fill($fields);
+        $universidade = new Universidade;
+        $universidade->fill($fields);
 
         // Data em que o registo é criado
         $t = time();
-        $university->create_at == date("Y-m-d", $t);
+        $universidade->create_at == date("Y-m-d", $t);
 
-        $university->save();
+        $universidade->save();
 
         return redirect()->route('universities.index')->with('success', 'Universidade Adicionada com Sucesso!');
     }
@@ -56,41 +56,42 @@ class UniversityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\University $university
+     * @param  \App\Universidade  $universidade
      * @return \Illuminate\Http\Response
      */
-    public function show(University $university)
+    public function show(Universidade $universidade)
     {
-        return view('universities.show', compact($university));
+        return view('universities.show', compact('universidade'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\University $university
+     * @param  \App\Universidade  $Universidade
      * @return \Illuminate\Http\Response
      */
-    public function edit(University $university)
+    public function edit(Universidade $universidade)
     {
-        return view('universities.edit', compact($university));
+
+        return view('universities.edit', compact('universidade'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\University $university
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Universidade  $universidade
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUniversidadeRequest $request, University $university)
+    public function update(UpdateUniversidadeRequest $request, Universidade $universidade)
     {
         $fields = $request->validated();
-        $university->fill($fields);
+        $universidade->fill($fields);
 
         // Data em que o registo é modificado
         $t = time();
-        $university->updated_at == date("Y-m-d", $t);
-        $university->save();
+        $universidade->updated_at == date("Y-m-d", $t);
+        $universidade->save();
 
         return redirect()->route('universities.index')->with('success', 'Universidade Editada com Sucesso!');
 
@@ -99,12 +100,12 @@ class UniversityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\University $university
+     * @param  \App\Universidade  $universidade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(University $university)
+    public function destroy(Universidade $universidade)
     {
-        $university->delete();
+        $universidade->delete();
 
         return redirect()->route('universities.index')->with('success', 'Universidade Eliminada com Sucesso!');
     }

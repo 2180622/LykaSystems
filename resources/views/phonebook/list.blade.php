@@ -63,5 +63,5 @@
 {{-- Scripts --}}
 @section('scripts')
 
-<script src="{{asset('/js/script-phonebook.js')}}"></script>
+<script src="{{asset('/js/phonebook.js')}}"></script>
 @endsection
