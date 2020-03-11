@@ -5,12 +5,11 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-{{-- <link href="{{asset('/css/NOME_DO_FICHEIRO.css')}}" rel="stylesheet"> --}}
+<link href="{{asset('/css/client.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
 @section('content')
-
 
 <div class="container mt-2">
     <div class="float-right">
@@ -22,8 +21,6 @@
             <h6>Adicionar estudante</h6>
         </div>
         <br>
-
-
         <form method="POST" action="{{route('clients.store')}}" class="form-group pt-3" id="form_client" enctype="multipart/form-data">
             @csrf
             @include('clients.partials.add-edit')
@@ -31,19 +28,14 @@
                 <br><br>
                 <button type="button" class="top-button" name="ok" id="buttonSubmit"><i class="fas fa-plus text-white-50 mr-2"></i>Adicionar estudante</button>
                 <a href="{{route('clients.index')}}" class="top-button">Cancelar</a>
-            </div> </form>
-
-
+            </div>
+        </form>
     </div>
 </div>
-
-
 
 @endsection
 
 {{-- Scripts --}}
 @section('scripts')
-
 {{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
-
 @endsection

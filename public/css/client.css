@@ -16,7 +16,7 @@ th.sorting_desc {
     width: 5px !important;
 }
 
-th.sorting_disabled{
+th.sorting_disabled {
     width: 270px !important;
 }
 
@@ -85,4 +85,9 @@ a:hover {
 table tbody tr.bg-hover-row:hover {
     background-color: white;
     cursor: pointer;
+}
+
+/* Add Client Style */
+label {
+    color: #6A6A6A;
 }
