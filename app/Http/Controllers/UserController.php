@@ -40,10 +40,11 @@ class UserController extends Controller
       $user->auth_key = rand(655541,getrandmax());
       $user->status = 10;
       $user->fill($fieldsUser);
+
       //gerar hash a partir da pass inserida
-      $password = $requestUser->get('password_hash');
+      $password = $requestUser->get('password');
       $hashed = Hash::make($password);
-      $user->password_hash = $hashed;
+      $user->password = $hashed;
 
       $admin = new Administrador;
       $admin->dataRegis = $curTime;

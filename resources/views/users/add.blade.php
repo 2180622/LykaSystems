@@ -55,7 +55,7 @@
     </div>
     <div class="form-group">
        <label for="inputFullname">Password</label>
-       <input type="password" class="form-control" name="password_hash" />
+       <input type="password" class="form-control" name="password" />
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-success">Save</button>
