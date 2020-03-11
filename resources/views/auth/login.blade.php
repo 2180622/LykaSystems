@@ -9,9 +9,9 @@
                 @csrf
                 <div>
                     <div>
-                        <input id="username" type="username" class="form-control @error('username') is-invalid @enderror"
-                        name="username" value="{{ old('username') }}" required autocomplete="off" autofocus placeholder="Endereço eletrónico">
-                        @error('username')
+                        <input id="username" type="e-mail" class="form-control @error('e-mail') is-invalid @enderror"
+                        name="e-mail" value="{{ old('e-mail') }}" required autocomplete="off" autofocus placeholder="Endereço eletrónico">
+                        @error('e-mail')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
