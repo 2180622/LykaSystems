@@ -27,6 +27,7 @@ class Universidade extends Migration
             $table->longText('obsContactos')->nullable();
             $table->longText('obsCursos')->nullable();
             $table->longText('obsCandidaturas')->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
     }
