@@ -82,7 +82,8 @@ class UniversityController extends Controller
      */
     public function update(Request $request, University $university)
     {
-        //
+        $fields = $request->validated();
+        $university->fill($fields);
     }
 
     /**
