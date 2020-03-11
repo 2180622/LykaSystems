@@ -3,15 +3,14 @@
 @section('content')
 <div class="login-form">
     <div>
-        <p class="text-muted">Insira os seus dados de autenticação para aceder a aplicação, por favor.</p>
+        <p>Insira os seus dados de autenticação para aceder a aplicação, por favor.</p>
         <div>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div>
                     <div>
-
                         <input id="username" type="username" class="form-control @error('username') is-invalid @enderror"
-                        name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                        name="username" value="{{ old('username') }}" required autocomplete="off" autofocus placeholder="Endereço eletrónico">
                         @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -23,7 +22,7 @@
                 <div>
                     <div>
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required
-                        autocomplete="current-password">
+                        autocomplete="current-password" placeholder="Palavra-chave">
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
