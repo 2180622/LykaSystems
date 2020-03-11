@@ -44,11 +44,11 @@
                 <tbody>
 
                     @foreach ($clients as $client)
-                        <tr>
+                        <tr class="big-hover-row">
                             <th class="text-center">CHECK</th>
-                            <th>{{ $client->nome }}</th>
-                            <th>{{ $client->email }}</th>
-                            <th>{{ $client->paisNaturalidade }}</th>
+                            <th style="text-align: left;padding-top: 20px">{{ $client->nome }}</th>
+                            <th style="text-align: left;padding-top: 20px">{{ $client->email }}</th>
+                            <th style="text-align: center;padding-top: 20px">{{ $client->paisNaturalidade }}</th>
                             <th class="text-center">
                                 <a href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
                                 </a>
