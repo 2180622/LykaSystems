@@ -17,7 +17,7 @@ class User extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idUser');
-            $table->varchar('email', 255);
+            $table->string('email', 255);
             $table->unique('username');
             $table->enum('tipo',['admin', 'agente', 'cliente']);
             $table->string('password',255)->nullable();
