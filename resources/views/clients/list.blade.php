@@ -42,14 +42,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                              @foreach($clientes as $cliente)
+                              @foreach ($clientes as $cliente)
                                 <tr class="bg-hover-row">
-                                    {{-- <td>
+                                    <td>
                                         <div class="fotoPerfilImagem"></div>
-                                    </td> --}}
-                                    <td style="text-align: left; padding-top:20px">{{$cliente}}</td>
-                                    <td style="text-align: left; padding-top:20px">sebastian@gmail.com</td>
-                                    <td style="text-align: center; padding-top:20px">México</td>
+                                    </td>
+                                    <td style="text-align: left; padding-top:20px">{{$cliente->nome}}</td>
+                                    <td style="text-align: left; padding-top:20px">{{$cliente->email}}</td>
+                                    <td style="text-align: center; padding-top:20px">{{$cliente->paisNaturalidade}}</td>
                                     <td style="text-align: center; padding-top:20px">
                                         <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
                                         </a>
