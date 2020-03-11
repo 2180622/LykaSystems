@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\User;
@@ -70,18 +69,20 @@ class UserController extends Controller
       $user->status = 10;
       $user->fill($fieldsUser);
       //gerar hash a partir da pass inserida
-      $password = $requestUser->get('password_hash');
+      $password = $requestUser->get('password');
       $hashed = Hash::make($password);
-      $user->password_hash = $hashed;
+      $user->password = $hashed;
 
       $agente = new Agente;
       $agente->dataRegis = $curTime;
       $agente->fill($fieldsAgente);
 
-      $user->save();
       $agente->save();
+      $user->idAgente = $agente->idAgente;
 
-      return redirect()->route('users.index')->with('success', 'Admin successfully created');
+      $user->save();
+
+      return redirect()->route('users.index')->with('success', 'Agent successfully created');
     }
 
     public function storeCliente(StoreUserRequest $requestUser, StoreClienteRequest $requestCliente){
@@ -96,18 +97,20 @@ class UserController extends Controller
       $user->status = 10;
       $user->fill($fieldsUser);
       //gerar hash a partir da pass inserida
-      $password = $requestUser->get('password_hash');
+      $password = $requestUser->get('password');
       $hashed = Hash::make($password);
-      $user->password_hash = $hashed;
+      $user->password = $hashed;
 
       $cliente= new Cliente;
       $cliente->dataRegis = $curTime;
       $cliente->fill($fieldsCliente);
 
-      $user->save();
       $cliente->save();
+      $user->idCliente = $cliente->idCliente;
 
-      return redirect()->route('users.index')->with('success', 'Admin successfully created');
+      $user->save();
+
+      return redirect()->route('users.index')->with('success', 'Client successfully created');
     }
 
 
