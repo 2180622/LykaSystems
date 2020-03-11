@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUniversidadeRequest;
+use App\Http\Requests\UpdateUniversidadeRequest;
 use App\Universidade;
 use Illuminate\Http\Request;
 
@@ -33,12 +34,13 @@ class UniversityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUniversidadeRequest $request)
     {
         $fields = $request->validated();
+
         $university = new Universidade;
         $university->fill($fields);
 
@@ -54,33 +56,33 @@ class UniversityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\University  $university
+     * @param \App\University $university
      * @return \Illuminate\Http\Response
      */
     public function show(University $university)
     {
-        return view('universities.show');
+        return view('universities.show', compact($university));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\University  $university
+     * @param \App\University $university
      * @return \Illuminate\Http\Response
      */
     public function edit(University $university)
     {
-        return view('universities.edit');
+        return view('universities.edit', compact($university));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\University  $university
+     * @param \Illuminate\Http\Request $request
+     * @param \App\University $university
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, University $university)
+    public function update(UpdateUniversidadeRequest $request, University $university)
     {
         $fields = $request->validated();
         $university->fill($fields);
@@ -97,7 +99,7 @@ class UniversityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\University  $university
+     * @param \App\University $university
      * @return \Illuminate\Http\Response
      */
     public function destroy(University $university)

@@ -18,13 +18,13 @@ Route::group(['middleware' => ['auth']], function () {
   /* Estudantes */
   Route::resource('/clients', 'ClientController');
 
-  /* Universidades */
-  Route::resource('/universities', 'UniversityController');
 
   /* Phonebook */
   Route::resource('/phonebook', 'PhonebookController');
 });
 
+/* Universidades */
+Route::resource('/universities', 'UniversityController');
 
 /* Edgar Teste */ /* eliminar no futuro */
 Route::get('/edgarteste', 'EdgarTesteController@index')->name('teste');
