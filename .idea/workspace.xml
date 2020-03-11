@@ -2,6 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UniversityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UniversityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateUniversidadeRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateUniversidadeRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/clients-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/clients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/script-phonebook.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/phonebook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clients/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/phonebook/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/phonebook/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/universities/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/universities/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/universities/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/universities/partials/add-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/partials/add-edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,14 +203,18 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583944437074">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1583944437074" />
     <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1583929291934">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1583929291934" />
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1583941829476">
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1583945193923">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583941829476" />
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583945193923" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1583856576611">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -208,9 +223,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1583849788358" />
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1583942430655">
+    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1583944136298">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1583942430655" />
+    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1583944136298" />
   </component>
 </project>

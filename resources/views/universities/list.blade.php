@@ -26,7 +26,7 @@
             <br>
             <div class="row cards-group">
                 <div class="col-12">
-                    @if (count($universities))
+                    @if (count($universidades))
                         <div class="table-responsive">
                             <table id="dataTable" class="table" style="width:100%; text-align: center">
                                 <thead>
@@ -43,7 +43,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($universities as $university)
+                                @foreach($universidades as $universidade)
                                     <tr class="bg-hover-row">
                                         <td>
                                             <div class="fotoPerfil check">
@@ -52,26 +52,26 @@
                                             </div>
                                         </td>
 
-                                        <td style="text-align: left; padding-top:20px">{{$university->nome}}</td>
-                                        <td style="text-align: left; padding-top:20px">{{$university->email}}</td>
+                                        <td style="text-align: left; padding-top:20px">{{$universidade->nome}}</td>
+                                        <td style="text-align: left; padding-top:20px">{{$universidade->email}}</td>
                                         <td style="text-align: center; padding-top:20px">
 
-                                            <a class="btnOption" href="#" title="Outros">
-                                                <i class="fas fa-ellipsis-h mr-3"></i>
+                                            <a class="btn btn-sm btnOption" href="#" title="Outros">
+                                                <i class="fas fa-ellipsis-h"></i>
                                             </a>
 
-                                            <a class="btnOption" href="{{route('universities.edit',$university)}}"
+                                            <a class="btn btn-sm btnOption" href=""
                                                title="Editar">
-                                                <i class="fas fa-pencil-alt mr-3"></i>
+                                                <i class="fas fa-pencil-alt"></i>
                                             </a>
 
-                                            <form method="POST" action="{{route('universities.destroy',$university)}}"
+                                            <form method="POST" action=""
                                                   role="form" class="btnOption" title='Eliminar'>
                                                 @csrf
                                                 @method("DELETE")
-                                                <button type="button" class="btn btn-sm btn-outline-danger rounded"
+                                                <button type="button" class="btn btn-sm btnOption"
                                                         data-toggle="modal" data-target="#eliminarUniversidade"
-                                                        data-title="{{$university->nome}}">
+                                                        data-title="{{$universidade->nome}}">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>

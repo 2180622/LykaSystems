@@ -14,7 +14,6 @@ class StoreUserRequest extends FormRequest
     {
         return [
           'email' => 'required',
-          // 'username' => 'required|min:3|max:40|regex:/^[A-ZÀ-úa-z\s]+$/',
           'password' => 'nullable',
         ];
     }
@@ -22,7 +21,7 @@ class StoreUserRequest extends FormRequest
     public function messages()
     {
        return [
-       'username.required' => 'Name should contain only letters and spaces'
+       'email.required' => 'email should contain only letters and underscores'
        ];
     }
 }

@@ -11,6 +11,11 @@ Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.store
 Route::post('/users/storeAgente', 'UserController@storeAgente')->name('users.storeAgente');
 Route::post('/users/storeCliente', 'UserController@storeCliente')->name('users.storeCliente');
 
+
+/* Universidades */
+Route::resource('/universities', 'UniversityController');
+
+
 Route::group(['middleware' => ['auth']], function () {
     /* Dashboard */
     Route::get('/', 'DashboardController@index')->name('dashboard');

@@ -14,9 +14,9 @@ class ClientController extends Controller
 {
     public function index()
     {
-
+        $username = Auth()->user();
         $clients = Cliente::all();
-        return view('clients.list', compact('clients'));
+        return view('clients.list', compact('clients', 'username'));
     }
 
 
