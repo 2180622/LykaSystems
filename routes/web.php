@@ -19,12 +19,13 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/', 'DashboardController@index')->name('dashboard');
 
   /* Universidades */
-  Route::resource('/universities', 'UniversityController');
 
   /* Phonebook */
   Route::resource('/phonebook', 'PhonebookController');
 });
 
+/* Universidades */
+Route::resource('/universities', 'UniversityController');
 
 /* Edgar Teste */ /* eliminar no futuro */
 Route::get('/edgarteste', 'EdgarTesteController@index')->name('teste');
