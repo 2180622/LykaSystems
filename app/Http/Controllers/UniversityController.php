@@ -15,8 +15,8 @@ class UniversityController extends Controller
      */
     public function index()
     {
-        $universities = University::all();
-        return view('universities.list', compact('universities'));
+        //$universities = University::all();
+        return view('universities.list');
     }
 
     /**
@@ -26,8 +26,8 @@ class UniversityController extends Controller
      */
     public function create()
     {
-        $university = new University;
-        return view('universities.add', compact('university'));
+        //$university = new University;
+        return view('universities.add');
     }
 
     /**
@@ -49,7 +49,7 @@ class UniversityController extends Controller
      */
     public function show(University $university)
     {
-        //
+        return view('universities.show');
     }
 
     /**
@@ -60,7 +60,7 @@ class UniversityController extends Controller
      */
     public function edit(University $university)
     {
-        return view('universities.edit', compact('university'));
+        return view('universities.edit');
     }
 
     /**

@@ -15,7 +15,7 @@
 @section('content')
     <div class="container mt-2">
         <div class="float-right">
-            <a href="#" class="top-button">Adicionar Licenciatura</a>
+            <a href="{{route('universities.create')}}" class="top-button">Adicionar Licenciatura</a>
         </div>
         <br>
         <div class="cards-navigation">
