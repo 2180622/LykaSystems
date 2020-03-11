@@ -17,10 +17,10 @@ class User extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idUser');
-            $table->string('username',255);
-                $table->unique('username');
+            $table->string('email', 255);
+            $table->unique('username');
             $table->enum('tipo',['admin', 'agente', 'cliente']);
-            $table->string('password',255);
+            $table->string('password',255)->nullable();
             $table->string('password_reset_token',255)->nullable();
             $table->string('verification_token',255)->nullable();
             $table->string('auth_key',50);

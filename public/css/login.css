@@ -39,7 +39,7 @@ body, html {
 }
 
 #username, #password {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.8rem;
     padding: 25px 20px;
     border-radius: 50px;
@@ -47,10 +47,6 @@ body, html {
     color: #252525 !important;
     transition: 0.3s ease-in-out;
     box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15) !important;
-}
-
-#username {
-    text-transform: uppercase;
 }
 
 #username::placeholder, #password::placeholder {
