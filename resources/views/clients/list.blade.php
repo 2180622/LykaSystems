@@ -42,22 +42,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="bg-hover-row">
-                                <td>
-                                    <div class="fotoPerfilImagem"></div>
-                                </td>
-                                <td style="text-align: left; padding-top:20px">Sebastian Sion</td>
-                                <td style="text-align: left; padding-top:20px">sebastian@gmail.com</td>
-                                <td style="text-align: center; padding-top:20px">México</td>
-                                <td style="text-align: center; padding-top:20px">
-                                    <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
-                                    </a>
-                                    <a class="btnOption" href="#" title="Editar"> <i class="fas fa-pencil-alt mr-3"></i>
-                                    </a>
-                                    <a class="btnOption" href="#" title="Eliminar"> <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                              @foreach($clientes as $cliente)
+                                <tr class="bg-hover-row">
+                                    {{-- <td>
+                                        <div class="fotoPerfilImagem"></div>
+                                    </td> --}}
+                                    <td style="text-align: left; padding-top:20px">{{$cliente}}</td>
+                                    <td style="text-align: left; padding-top:20px">sebastian@gmail.com</td>
+                                    <td style="text-align: center; padding-top:20px">México</td>
+                                    <td style="text-align: center; padding-top:20px">
+                                        <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
+                                        </a>
+                                        <a class="btnOption" href="#" title="Editar"> <i class="fas fa-pencil-alt mr-3"></i>
+                                        </a>
+                                        <a class="btnOption" href="#" title="Eliminar"> <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                              @endforeach
                             </tbody>
                         </table>
                     </div>
