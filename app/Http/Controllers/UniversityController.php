@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUniversidadeRequest;
 use App\University;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ class UniversityController extends Controller
      */
     public function index()
     {
+        //$universities = University::all();
         return view('universities.list');
     }
 
@@ -24,7 +26,8 @@ class UniversityController extends Controller
      */
     public function create()
     {
-        //
+        //$university = new University;
+        return view('universities.add');
     }
 
     /**
@@ -33,7 +36,7 @@ class UniversityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUniversidadeRequest $request)
     {
         //
     }
@@ -46,7 +49,7 @@ class UniversityController extends Controller
      */
     public function show(University $university)
     {
-        //
+        return view('universities.show');
     }
 
     /**
@@ -57,7 +60,7 @@ class UniversityController extends Controller
      */
     public function edit(University $university)
     {
-        //
+        return view('universities.edit');
     }
 
     /**
