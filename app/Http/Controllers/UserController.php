@@ -49,8 +49,10 @@ class UserController extends Controller
       $admin->dataRegis = $curTime;
       $admin->fill($fieldsAdmin);
 
-      $user->save();
       $admin->save();
+      $user->idAdmin = $admin->idAdmin;
+
+      $user->save();
 
       return redirect()->route('users.index')->with('success', 'Admin successfully created');
     }
@@ -91,7 +93,8 @@ class UserController extends Controller
       $user->tipo = "cliente";
       $user->auth_key = rand(655541,getrandmax());
       $user->status = 10;
-      $user->fill($fieldsUser);//gerar hash a partir da pass inserida
+      $user->fill($fieldsUser);
+      //gerar hash a partir da pass inserida
       $password = $requestUser->get('password_hash');
       $hashed = Hash::make($password);
       $user->password_hash = $hashed;
