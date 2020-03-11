@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreClienteRequest;
+use App\User;
 use Carbon\Carbon;
 
 class ClientController extends Controller
@@ -46,7 +48,7 @@ class ClientController extends Controller
 
       $cliente->save();
       $user->idCliente = $cliente->idCliente;
-
+      $user->email = $cliente->email;
       $user->save();
 
       return redirect()->route('users.index')->with('success', 'Client successfully created');

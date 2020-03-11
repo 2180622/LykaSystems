@@ -13,8 +13,9 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-          'username' => 'required|min:3|max:40|regex:/^[A-ZÀ-úa-z\s]+$/',
-          'password' => 'required',
+          'email' => 'required',
+          // 'username' => 'required|min:3|max:40|regex:/^[A-ZÀ-úa-z\s]+$/',
+          'password' => 'nullable',
         ];
     }
 
