@@ -151,11 +151,17 @@
     {{-- Conteudo: Moradas --}}
     <div class="tab-pane fade" id="adresses" role="tabpanel" aria-labelledby="adresses-tab">
 
-        <div class="row">
+        <div class="row mt-4">
             <div class="col">
                 {{-- Morada de residência em Portugal --}}
                 <label for="moradaResidencia">Morada de residência em Portugal:</label><br>
                 <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia" placeholder=""><br>
+            </div>
+
+            <div class="col">
+                {{-- Cidade de Origem  --}}
+                <label for="morada">Cidade da Instituição de Origem:</label><br>
+                <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="morada" placeholder=""><br>
             </div>
         </div>
 
@@ -171,7 +177,7 @@
             <div class="col">
                 {{-- Cidade de Origem  --}}
                 <label for="morada">Cidade de origem:</label><br>
-                <input type="text" class="form-control" name="morada" id="morada" placeholder=""><br>
+                <input type="text" class="form-control" name="cidade" id="morada" placeholder=""><br>
             </div>
 
         </div>
