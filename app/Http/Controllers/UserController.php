@@ -40,6 +40,10 @@ class UserController extends Controller
       $user->auth_key = rand(655541,getrandmax());
       $user->status = 10;
       $user->fill($fieldsUser);
+      //gerar hash a partir da pass inserida
+      $password = $requestUser->get('password_hash');
+      $hashed = Hash::make($password);
+      $user->password_hash = $hashed;
 
       $admin = new Administrador;
       $admin->dataRegis = $curTime;
@@ -62,6 +66,10 @@ class UserController extends Controller
       $user->auth_key = rand(655541,getrandmax());
       $user->status = 10;
       $user->fill($fieldsUser);
+      //gerar hash a partir da pass inserida
+      $password = $requestUser->get('password_hash');
+      $hashed = Hash::make($password);
+      $user->password_hash = $hashed;
 
       $agente = new Agente;
       $agente->dataRegis = $curTime;
@@ -83,7 +91,10 @@ class UserController extends Controller
       $user->tipo = "cliente";
       $user->auth_key = rand(655541,getrandmax());
       $user->status = 10;
-      $user->fill($fieldsUser);
+      $user->fill($fieldsUser);//gerar hash a partir da pass inserida
+      $password = $requestUser->get('password_hash');
+      $hashed = Hash::make($password);
+      $user->password_hash = $hashed;
 
       $cliente= new Cliente;
       $cliente->dataRegis = $curTime;

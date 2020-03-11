@@ -126,7 +126,7 @@
   </form>
 
   {{-- Form para cliente --}}
-  <form class="form-group" id="form-cliente" action="#" style="display: none" method="POST" enctype="multipart/form-data">
+  <form class="form-group" id="form-cliente" action="{{route('users.storeCliente')}}" style="display: none" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
        <label for="inputFullname">Username</label>
@@ -161,7 +161,7 @@
        <label for="inputFullname">Número do CC</label>
        <input type="text" class="form-control" name="name" />
     </div>
-    <div class="form-group">Admin
+    <div class="form-group">
        <label for="inputFullname">Número do Passaporte</label>
        <input type="text" class="form-control" name="name" />
     </div>
