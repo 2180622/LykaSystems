@@ -34,10 +34,23 @@
               "infoFiltered": "(filtrado de um total de _MAX_ registos)"
           },
 
-          "order": [1, 'desc']
+          "order": [1, 'desc'],
+
+          "bLengthChange": false,
+          "bFilter": false,
+
+  
 
 
       } );
+
+
+
+
+      $("input").keyup(function(){
+          alert("fg");
+        $('#dataTable').search( this.value ).draw();
+      });
 
 
 

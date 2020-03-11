@@ -17,7 +17,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('users.list');
+      $users = User::all();
+        return view('users.list', compact('users'));
     }
 
 
@@ -51,7 +52,7 @@ class UserController extends Controller
 
       $admin->save();
       $user->idAdmin = $admin->idAdmin;
-
+      $user->email = $admin->email;
       $user->save();
 
       return redirect()->route('users.index')->with('success', 'Admin successfully created');

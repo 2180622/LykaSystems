@@ -14,9 +14,9 @@ class ClientController extends Controller
 {
     public function index()
     {
-
+        $username = Auth()->user();
         $clients = Cliente::all();
-        return view('clients.list', compact('clients'));
+        return view('clients.list', compact('clients', 'username'));
     }
 
 
@@ -38,8 +38,8 @@ class ClientController extends Controller
       $user->status = 10;
       $user->fill($fieldsUser);
       //gerar hash a partir da pass inserida
-      $password = $requestUser->get('password');
-      $hashed = Hash::make($password);
+      // $password = $requestUser->get('password');
+      $hashed = Hash::make('password');
       $user->password = $hashed;
 
       $cliente= new Cliente;

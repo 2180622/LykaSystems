@@ -42,4 +42,18 @@ table{
 
 .btn_list_opt:hover{
     color:#6A74C9;
+
 }
+
+.btn_list_opt_delete:hover{
+    color:red;
+}
+
+
+.btn_list_opt_edit:hover{
+    color:#eac300;
+}
+
+
+
+

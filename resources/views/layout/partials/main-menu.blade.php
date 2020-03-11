@@ -5,7 +5,16 @@
             <a class="logotype" href="{{route('dashboard')}}">lyka.</a>
         </div>
     </div>
-
+  @php
+  $username = Auth()->user();
+  // if($username->tipo == "admin"){
+  //   $nome = $username->admin->nome;
+  // }elseif ($username->tipo == "agente") {
+  //   $nome = $username->agente->nome;
+  // }elseif ($username->tipo == "cliente") {
+  //   $nome = $username->cliente->nome;
+  // }
+  @endphp
     <!-- Menu Options -->
     <ul class="menu-list">
         <!-- Dashboard -->
@@ -106,7 +115,7 @@
 
             <!-- Lista telefónica -->
             <li class="menu-option">
-                <a href="{{route('phonebook.index')}}">
+                <a href="{{route('phonebook.index')}}">login
                     <div class="menu-icon">
                         <i class="fas fa-phone-alt mr-2"></i>
                     </div>
@@ -160,8 +169,8 @@
 
         <div class="text-center mt-3">
             {{-- Nome e Perfil --}}
-            <span class="font-weight-bold text-uppercase">Nome</span><br>
-            <span class="text-muted " style="font-size:14px">Administrador</span>
+            <span class="font-weight-bold text-uppercase">{{"TESTE"}}</span><br>
+            <span class="text-muted " style="font-size:14px">{{$username->tipo}}</span>
         </div>
 
     </div>
