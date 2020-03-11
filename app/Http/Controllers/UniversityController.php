@@ -84,6 +84,14 @@ class UniversityController extends Controller
     {
         $fields = $request->validated();
         $university->fill($fields);
+
+        // Data em que o registo é modificado
+        $t = time();
+        $university->updated_at == date("Y-m-d", $t);
+        $university->save();
+
+        return redirect()->route('universities.index')->with('success', 'Universidade Editada com Sucesso!');
+
     }
 
     /**
@@ -94,6 +102,8 @@ class UniversityController extends Controller
      */
     public function destroy(University $university)
     {
-        //
+        $university->delete();
+
+        return redirect()->route('universities.index')->with('success', 'Universidade Eliminada com Sucesso!');
     }
 }

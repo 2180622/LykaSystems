@@ -15,12 +15,12 @@
 @section('content')
     <div class="container mt-2">
         <div class="float-right">
-            <a href="{{route('universities.create')}}" class="top-button">Adicionar Licenciatura</a>
+            <a href="{{route('universities.create')}}" class="top-button">Adicionar Universidade</a>
         </div>
         <br>
         <div class="cards-navigation">
             <div class="title">
-                <h6>Listagem de Licenciaturas</h6>
+                <h6>Listagem de Universidade</h6>
             </div>
             <br>
             <div class="row cards-group">
@@ -41,24 +41,40 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="bg-hover-row">
-                                <td>
-                                    <div class="fotoPerfil check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1"></label>
-                                    </div>
-                                </td>
-                                <td style="text-align: left; padding-top:20px">Instituto Universitário de Lisboa</td>
-                                <td style="text-align: left; padding-top:20px">iul@gmail.com</td>
-                                <td style="text-align: center; padding-top:20px">
-                                    <a class="btnOption" href="#" title="Outros"> <i class="fas fa-ellipsis-h mr-3"></i>
-                                    </a>
-                                    <a class="btnOption" href="#" title="Editar"> <i class="fas fa-pencil-alt mr-3"></i>
-                                    </a>
-                                    <a class="btnOption" href="#" title="Eliminar"> <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach($universities as $university)
+                                <tr class="bg-hover-row">
+                                    <td>
+                                        <div class="fotoPerfil check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1"></label>
+                                        </div>
+                                    </td>
+
+                                    <td style="text-align: left; padding-top:20px">{{$university->nome}}</td>
+                                    <td style="text-align: left; padding-top:20px">{{$university->email}}</td>
+                                    <td style="text-align: center; padding-top:20px">
+                                        <a class="btnOption" href="#" title="Outros"> <i
+                                                class="fas fa-ellipsis-h mr-3"></i>
+                                        </a>
+                                        <a class="btnOption" href="{{route('universities.edit',$university)}}"
+                                           title="Editar"> <i
+                                                class="fas fa-pencil-alt mr-3"></i>
+                                        </a>
+
+                                        <form method="POST" action="{{route('universities.destroy',$university)}}"
+                                              role="form"
+                                              class="btnOption" title='Eliminar'>
+                                            @csrf
+                                            @method("DELETE")
+                                            <button type="button" class="btn btn-sm btn-outline-danger rounded"
+                                                    data-toggle="modal" data-target="#eliminarUniversidade"
+                                                    data-title="{{$post->title}}">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
