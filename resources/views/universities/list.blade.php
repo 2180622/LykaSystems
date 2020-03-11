@@ -13,6 +13,7 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
+    @include('universities.partials.modal')
     <div class="container mt-2">
         <div class="float-right">
             <a href="{{route('universities.create')}}" class="top-button">Adicionar Universidade</a>
@@ -25,59 +26,65 @@
             <br>
             <div class="row cards-group">
                 <div class="col-12">
-                    <div class="table-responsive">
-                        <table id="dataTable" class="table" style="width:100%; text-align: center">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <div class="fotoPerfil check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1"></label>
-                                    </div>
-                                </th>
-                                <th style="text-align: left; padding-bottom: 20px">Nome da Licenciatura</th>
-                                <th style="text-align: left; padding-bottom: 20px">Endereço Eletrónico</th>
-                                <th style="text-align: center; padding-bottom: 20px">Opções</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($universities as $university)
-                                <tr class="bg-hover-row">
-                                    <td>
+                    @if (count($universities))
+                        <div class="table-responsive">
+                            <table id="dataTable" class="table" style="width:100%; text-align: center">
+                                <thead>
+                                <tr>
+                                    <th>
                                         <div class="fotoPerfil check">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                             <label class="form-check-label" for="exampleCheck1"></label>
                                         </div>
-                                    </td>
-
-                                    <td style="text-align: left; padding-top:20px">{{$university->nome}}</td>
-                                    <td style="text-align: left; padding-top:20px">{{$university->email}}</td>
-                                    <td style="text-align: center; padding-top:20px">
-                                        <a class="btnOption" href="#" title="Outros"> <i
-                                                class="fas fa-ellipsis-h mr-3"></i>
-                                        </a>
-                                        <a class="btnOption" href="{{route('universities.edit',$university)}}"
-                                           title="Editar"> <i
-                                                class="fas fa-pencil-alt mr-3"></i>
-                                        </a>
-
-                                        <form method="POST" action="{{route('universities.destroy',$university)}}"
-                                              role="form"
-                                              class="btnOption" title='Eliminar'>
-                                            @csrf
-                                            @method("DELETE")
-                                            <button type="button" class="btn btn-sm btn-outline-danger rounded"
-                                                    data-toggle="modal" data-target="#eliminarUniversidade"
-                                                    data-title="{{$post->title}}">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
-                                    </td>
+                                    </th>
+                                    <th style="text-align: left; padding-bottom: 20px">Nome da Licenciatura</th>
+                                    <th style="text-align: left; padding-bottom: 20px">Endereço Eletrónico</th>
+                                    <th style="text-align: center; padding-bottom: 20px">Opções</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                @foreach($universities as $university)
+                                    <tr class="bg-hover-row">
+                                        <td>
+                                            <div class="fotoPerfil check">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1"></label>
+                                            </div>
+                                        </td>
+
+                                        <td style="text-align: left; padding-top:20px">{{$university->nome}}</td>
+                                        <td style="text-align: left; padding-top:20px">{{$university->email}}</td>
+                                        <td style="text-align: center; padding-top:20px">
+
+                                            <a class="btnOption" href="#" title="Outros">
+                                                <i class="fas fa-ellipsis-h mr-3"></i>
+                                            </a>
+
+                                            <a class="btnOption" href="{{route('universities.edit',$university)}}"
+                                               title="Editar">
+                                                <i class="fas fa-pencil-alt mr-3"></i>
+                                            </a>
+
+                                            <form method="POST" action="{{route('universities.destroy',$university)}}"
+                                                  role="form" class="btnOption" title='Eliminar'>
+                                                @csrf
+                                                @method("DELETE")
+                                                <button type="button" class="btn btn-sm btn-outline-danger rounded"
+                                                        data-toggle="modal" data-target="#eliminarUniversidade"
+                                                        data-title="{{$university->nome}}">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <h6 style="text-align: center">Sem Universidades Disponíveis</h6>
+                    @endif
                 </div>
             </div>
         </div>
@@ -87,6 +94,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-    <script src="{{asset('/js/university-list.js')}}"></script>
+    <script src="{{asset('/js/university.js')}}"></script>
 
 @endsection
