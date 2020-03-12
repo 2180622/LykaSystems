@@ -29,4 +29,8 @@ class User extends Authenticatable
     public function cliente(){
         return $this->belongsTo("App\Cliente","idCliente","idCliente");
     }
+
+    public function cliente(){
+        return $this->hasMany("App\Notificacao","idUser","idUser");
+    }
 }
