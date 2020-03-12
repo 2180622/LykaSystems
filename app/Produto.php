@@ -39,6 +39,6 @@ class Produto extends Model
     }
 
     public function fase(){
-        return $this->hasMany("App\Fase","idProduto");
+        return $this->hasMany("App\Fase","idProduto","idProduto");
     }
 }

@@ -17,10 +17,10 @@ class Conta extends Model
     ];
 
     public function responsabilidade(){
-        return $this->hasMany("App\Responsabilidade","idConta");
+        return $this->hasMany("App\Responsabilidade","idConta","idConta");
     }
 
     public function docTransacao(){
-        return $this->hasMany("App\DocTransacao","idConta");
+        return $this->hasMany("App\DocTransacao","idConta","idConta");
     }
 }

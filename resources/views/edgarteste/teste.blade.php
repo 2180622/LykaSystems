@@ -29,7 +29,7 @@
 
                         @if ($notificacoes)
                             @foreach ($notificacoes as $notificacao)
-                                <p class="word"> {{$notificacao->Assunto}} </p> 
+                                <p class="word"> {{$notificacao['Assunto']}} </p> 
                             @endforeach  
                         @endif
                     </div>

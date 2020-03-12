@@ -486,26 +486,29 @@ class ExtraFunctionsController extends Controller
         }
         $idNot = 0;
         $Notificacoes = null;
+        $Assunto = null;
         /*************************** NOTIFICAÇÕES PARA SEU ANIVERSARIO **************************/
         $dataNasc = null;
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
             $Admin = Auth()->user()->admin;
             $dataNasc = new DateTime($Admin->dataNasc);
+            $Assunto = 'PARABÉNS '.Auth()->user()->admin->nome.' '.Auth()->user()->admin->apelido;
         }
         if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null){
             $Agente = Auth()->user()->agente;
             $dataNasc = new DateTime($Agente->dataNasc);
+            $Assunto = 'PARABÉNS '.Auth()->user()->agente->nome.' '.Auth()->user()->agente->apelido;
         }
         if(Auth()->user()->tipo == 'cliente' && Auth()->user()->idCliente != null){
             $Cliente = Auth()->user()->cliente;
             $dataNasc = new DateTime($Cliente->dataNasc);
+            $Assunto = 'PARABÉNS '.Auth()->user()->cliente->nome.' '.Auth()->user()->cliente->apelido;
         }
         $diff = $dataNasc->diff(new DateTime());
         if($diff->d == 0 && $diff->m == 0){
-            $Assunto = 'PARABÉNS '.Auth()->user()->nome.' '.Auth()->user()->apelido;
             $Descricao = 'Hoje um ciclo de sua vida se finaliza e outro recomeça. Faça deste novo recomeço uma nova oportunidade para fazer tudo o que sempre sonhou! \nParabéns!';
             $idNot++;
-            $Notificacoes = [
+            $Notificacoes[] = [
                 'Id' => $idNot,
                 'Tipo' => 'Aniversario',
                 'Assunto' => $Assunto,
@@ -525,16 +528,14 @@ class ExtraFunctionsController extends Controller
                 ->where('dataVencimento','<=',(new DateTime())->add(new DateInterval('P7D')))
                 ->get()->all();
             $agenteProdutos = Auth()->user()->agente->produtoA->all();
-            dd($agenteProdutos);
             if($agenteProdutos && $todasFases){
                 foreach($agenteProdutos as $produto){
-                    $fasesProduto = $produto->fase;
+                    $fasesProduto = $produto->fase->all();
                     foreach($todasFases as $fase){
                         foreach($fasesProduto as $faseP){
                             if($faseP == $fase){
-                                dd($fase);
-                                $DocsAcademicos = $fase->docAcademico()->where('verificacao','=',0)->get()->all();
-                                $DocsPessoais = $fase->docPessoal()->where('verificacao','=',0)->get()->all();
+                                $DocsAcademicos = $fase->docAcademico->where('verificacao','=',0)->all();
+                                $DocsPessoais = $fase->docPessoal->where('verificacao','=',0)->all();
                                 if(count($DocsAcademicos) >=1 || count($DocsAcademicos) >=1 || $fase->verificacaoPago == 0){
                                     if($Fases){
                                         $Fases[] = $fase;
@@ -564,17 +565,13 @@ class ExtraFunctionsController extends Controller
                     'DataLimite' => null,
                     'DataInicio' => null,
                 ];
-                if($Notificacoes){
-                    $Notificacoes[] = $novaNot;
-                }else{
-                    $Notificacoes = $novaNot;
-                }
+                $Notificacoes[] = $novaNot;
             }
         }
         /******************* NOTIFICAÇÕES PARA DOCUMENTOS E PAGAMENTOS EM FALTA *****************/
         $FasesFalta = null;
         if(Auth()->user()->tipo == 'cliente'){
-            $produtosCliente = Auth()->user()->produto;
+            $produtosCliente = Auth()->user()->cliente->produto->all();
             $fasesCliente = null;
             foreach($produtosCliente as $produto){
                 $fasesProduto = $produto->fase
@@ -594,8 +591,8 @@ class ExtraFunctionsController extends Controller
             if($fasesCliente){
                 foreach($fasesCliente as $fase){
                     $falta = false;
-                    $docsAcademicos = $fase->docAcademico->where('verificacao','=',0)->get()->all();
-                    $docsPessoais = $fase->docPessoal->where('verificacao','=',0)->get()->all();
+                    $docsAcademicos = $fase->docAcademico->where('verificacao','=',0)->all();
+                    $docsPessoais = $fase->docPessoal->where('verificacao','=',0)->all();
                     if($fase->verificacaoPago = 0 || $docsAcademicos || $docsPessoais){
                         $falta = true;
                     }
@@ -645,11 +642,7 @@ class ExtraFunctionsController extends Controller
                         'DataLimite' => $DataLimite,
                         'DataInicio' => null,
                     ];
-                    if($Notificacoes){
-                        $Notificacoes[] = $novaNot;
-                    }else{
-                        $Notificacoes = $novaNot;
-                    }
+                    $Notificacoes[] = $novaNot;
                 }
             }
         }

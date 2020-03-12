@@ -17,10 +17,10 @@ class ProdutoStock extends Model
         ];
 
     public function produto(){
-        return $this->hasMany("App\Produto","idProdutoStock");
+        return $this->hasMany("App\Produto","idProdutoStock","idProdutoStock");
     }
 
     public function faseStock(){
-        return $this->hasMany("App\faseStock","idProdutoStock");
+        return $this->hasMany("App\faseStock","idProdutoStock","idProdutoStock");
     }
 }

@@ -24,6 +24,6 @@ class Responsabilidade extends Model
     }
 
     public function relacao(){
-        return $this->hasMany("App\RelFornResp","idResponsabilidade");
+        return $this->hasMany("App\RelFornResp","idResponsabilidade","idResponsabilidade");
     }
 }
