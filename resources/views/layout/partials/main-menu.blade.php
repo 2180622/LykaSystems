@@ -169,8 +169,8 @@
 
         <div class="text-center mt-3">
             {{-- Nome e Perfil --}}
-            <span class="font-weight-bold text-uppercase">{{"TESTE"}}</span><br>
-            <span class="text-muted " style="font-size:14px">{{$username->tipo}}</span>
+            <span class="font-weight-bold text-uppercase">{{"TESTE"}}{{-- {{Auth::user()->NOME ???}} --}}</span><br>
+            <span class="text-muted " style="font-size:14px">{{$username->tipo}}{{-- {{Auth::user()->tipo}} --}}</span>
         </div>
 
     </div>

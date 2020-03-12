@@ -38,9 +38,9 @@
             </div>
             <div class="col ">
                 <div class="input-group pl-0 float-right" style="width:250px">
-                    <input class="form-control my-0 py-1 red-border" type="text"  placeholder="Procurar" aria-label="Procurar">
+                    <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
                     <div class="input-group-append">
-                      <span class="input-group-text red lighten-3" id="table-filter"><i class="fas fa-search text-grey"
+                      <span class="input-group-text red lighten-3" ><i class="fas fa-search text-grey"
                           aria-hidden="true"></i></span>
                     </div>
                   </div>
@@ -82,7 +82,7 @@
                                     </div>
                                 {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}"> --}}
                             </th>
-                            <th class="align-middle">{{ $client->nome }}</th>
+                            <th class="align-middle">{{ $client->nome }} {{ $client->apelido }}</th>
                             <th class="align-middle">{{ $client->email }}</th>
                             <th class="align-middle">{{ $client->paisNaturalidade }}</th>
                             <th class="text-center align-middle">
@@ -106,6 +106,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-<script src="{{asset('/js/clients-list.js')}}"></script>
+<script src="{{asset('/js/clients.js')}}"></script>
 
 @endsection

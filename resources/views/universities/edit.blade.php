@@ -1,24 +1,22 @@
 @extends('layout.master')
 
-
 {{-- Titulo da Página --}}
 @section('title', 'Editar Universidade')
-
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
     <link href="{{asset('css/university.css')}}" rel="stylesheet">
 @endsection
 
-
 {{-- Conteudo da Página --}}
 @section('content')
+    
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('universities.update',$university)}}" class="form-group"
+                        <form method="POST" action="{{route('universities.update',$universidade)}}" class="form-group"
                               enctype="multipart/form-data">
                             @csrf
                             @method("PUT")

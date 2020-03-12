@@ -3,8 +3,7 @@
 
 
 
-        $('#dataTable').DataTable( {
-
+        var table = $('#dataTable').DataTable( {
 
           "columnDefs": [
               { "orderable": false, "targets": 0 },
@@ -29,33 +28,26 @@
                 "previous":   "Anterior"
             },
 
-              "info": "A mostrar página _PAGE_ de _PAGES_",
+              "info": "",
               "infoEmpty": "Sem registos disponiveis",
-              "infoFiltered": "(filtrado de um total de _MAX_ registos)"
+              "infoFiltered": ""
           },
 
           "order": [1, 'desc'],
 
           "bLengthChange": false,
-          "bFilter": false,
-
-  
+          /* "bFilter": false, */
 
 
       } );
 
 
+       $(".dataTables_filter").hide();
 
-
-      $("input").keyup(function(){
-          alert("fg");
-        $('#dataTable').search( this.value ).draw();
-      });
-
-
+      $("#customSearchBox").on( 'keyup', function () {
+        $(".dataTables_filter input").val( $("#customSearchBox").val() )
+        table.search( $(".dataTables_filter input").val() ).draw();
+    } );
 
 });
-
-
-
 
