@@ -48,7 +48,7 @@ class ClientController extends Controller
       $user->idCliente = $cliente->idCliente;
       $user->email = $cliente->email;
       $user->save();
-      
+
       $email = $user->email;
       $id = $user->idUser;
       Mail::to($email)->send(new SendEmailConfirmation($id));

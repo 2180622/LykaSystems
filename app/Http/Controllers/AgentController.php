@@ -38,13 +38,14 @@ class AgentController extends Controller
       $user->status = 10;
       $user->fill($fieldsUser);
       //gerar hash a partir da pass inserida
+      $password = $requestUser->get('password');
       $hashed = Hash::make($password);
       $user->password = $hashed;
 
       $agente = new Agente;
       $agente->dataRegis = $curTime;
       $agente->fill($fieldsAgente);
-
+      $name = $agente->nome;
       $agente->save();
       $user->idAgente = $agente->idAgente;
       $user->email = $agente->email;
@@ -52,7 +53,7 @@ class AgentController extends Controller
 
       $email = $user->email;
       $id = $user->idUser;
-      Mail::to($email)->send(new SendEmailConfirmation($id));
+      Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
       return redirect()->route('users.index')->with('success', 'Agent successfully created');
     }

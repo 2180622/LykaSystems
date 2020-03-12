@@ -42,7 +42,7 @@
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number">14</p>
+                        <p class="number">{{$universidadeCount}}</p>
                         <p class="word">universidades</p>
                     </div>
                 </div>
