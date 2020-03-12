@@ -3,17 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UniversityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UniversityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateUniversidadeRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateUniversidadeRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/clients-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/clients.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/script-phonebook.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/phonebook.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clients/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/phonebook/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/phonebook/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/university.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/university.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/university.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/university.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/universities/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/universities/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/universities/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/universities/partials/add-edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universities/partials/add-edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,6 +187,7 @@
       <workItem from="1583849032009" duration="5197000" />
       <workItem from="1583855841477" duration="4002000" />
       <workItem from="1583918409316" duration="11153000" />
+      <workItem from="1584004295465" duration="672000" />
     </task>
     <servers />
   </component>

@@ -21,72 +21,83 @@
         <br>
         <div class="cards-navigation">
             <div class="title">
-                <h6>Listagem de Universidade</h6>
+                <h6>Listagem de Universidades</h6>
             </div>
             <br>
-            <div class="row cards-group">
-                <div class="col-12">
-                    @if (count($universidades))
-                        <div class="table-responsive">
-                            <table id="dataTable" class="table" style="width:100%; text-align: center">
-                                <thead>
-                                <tr>
-                                    <th>
-                                        <div class="fotoPerfil check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1"></label>
-                                        </div>
-                                    </th>
-                                    <th style="text-align: left; padding-bottom: 20px">Nome da Licenciatura</th>
-                                    <th style="text-align: left; padding-bottom: 20px">Endereço Eletrónico</th>
-                                    <th style="text-align: center; padding-bottom: 20px">Opções</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($universidades as $universidade)
-                                    <tr class="bg-hover-row">
-                                        <td>
-                                            <div class="fotoPerfil check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                <label class="form-check-label" for="exampleCheck1"></label>
-                                            </div>
-                                        </td>
 
-                                        <td style="text-align: left; padding-top:20px">{{$universidade->nome}}</td>
-                                        <td style="text-align: left; padding-top:20px">{{$universidade->email}}</td>
-                                        <td style="text-align: center; padding-top:20px">
 
-                                            <a class="btn btn-sm btnOption" href="#" title="Outros">
-                                                <i class="fas fa-ellipsis-h"></i>
-                                            </a>
-
-                                            <a class="btn btn-sm btnOption" href=""
-                                               title="Editar">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
-
-                                            <form method="POST" action=""
-                                                  role="form" class="btnOption" title='Eliminar'>
-                                                @csrf
-                                                @method("DELETE")
-                                                <button type="button" class="btn btn-sm btnOption"
-                                                        data-toggle="modal" data-target="#eliminarUniversidade"
-                                                        data-title="{{$universidade->nome}}">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form>
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    <span class="mr-2">Mostrar</span>
+                    <select class="custom-select" style="width:50px">
+                        <option selected>10</option>
+                        <option>25</option>
+                        <option>50</option>
+                        <option>50</option>
+                    </select>
+                    <span class="ml-2">por página</span>
+                </div>
+                <div class="col ">
+                    <div class="input-group pl-0 float-right" style="width:250px">
+                        <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox"
+                               placeholder="Procurar" aria-label="Procurar">
+                        <div class="input-group-append">
+                      <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey"
+                                                                      aria-hidden="true"></i></span>
                         </div>
-                    @else
-                        <h6 style="text-align: center">Sem Universidades Disponíveis</h6>
-                    @endif
+                    </div>
                 </div>
             </div>
+            <hr>
+            @if (count($universidades))
+                <div class="table-responsive " style="overflow:hidden">
+                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                           style="overflow:hidden;">
+
+                        {{-- Cabeçalho da tabela --}}
+                        <thead>
+                        <tr>
+                            <th class="text-center align-content-center ">Foto
+                                {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
+                            </th>
+                            <th>Nome da Universidade</th>
+                            <th>Morada</th>
+                            <th>E-mail</th>
+                            <th class="text-center">Opções</th>
+                        </tr>
+                        </thead>
+                        {{-- Corpo da tabela --}}
+                        <tbody>
+                        @foreach ($universidades as $universidade)
+                            <tr>
+                                <th class="">
+                                    <div class="align-middle mx-auto shadow-sm rounded-circle"
+                                         style="overflow:hidden; width:50px; height:50px">
+                                        <img
+                                            src=""
+                                            width="100%" class="mx-auto">
+                                    </div>
+                                    {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}"> --}}
+                                </th>
+                                <th class="align-middle">{{ $universidade->nome }}</th>
+                                <th class="align-middle">{{ $universidade->morada }}</th>
+                                <th class="align-middle">{{ $universidade->email }}</th>
+                                <th class="text-center align-middle">
+                                    <a href="#fghjk" class="btn_list_opt " title="Ver ficha completa"><i
+                                            class="far fa-eye mr-2"></i></a>
+                                    <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                            class="fas fa-pencil-alt mr-2"></i></a>
+                                    <a href="#" class="btn_list_opt btn_list_opt_delete" title="Eliminar"><i
+                                            class="far fa-trash-alt"></i></a>
+                                </th>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <h6 style="text-align: center">Sem Universidades Disponíveis</h6>
+            @endif
         </div>
     </div>
 @endsection

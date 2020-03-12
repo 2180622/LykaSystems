@@ -10,6 +10,7 @@
 
 {{-- Page Content --}}
 @section('content')
+
     <div class="container mt-2">
         <div class="float-right">
             <a href="#" class="top-button">Reportar Problema</a>
