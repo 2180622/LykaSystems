@@ -18,23 +18,23 @@ class Fase extends Model
     }
 
     public function responsabilidade(){
-        return $this->hasMany("App\Responsabilidade","idFase");
+        return $this->hasMany("App\Responsabilidade","idFase","idFase");
     }
 
     public function docTransacao(){
-        return $this->hasMany("App\DocTransacao","idFase");
+        return $this->hasMany("App\DocTransacao","idFase","idFase");
     }
 
     public function docAcademico(){
-        return $this->hasMany("App\DocAcademico","idFase");
+        return $this->hasMany("App\DocAcademico","idFase","idFase");
     }
 
     public function docPessoal(){
-        return $this->hasMany("App\DocPessoal","idFase");
+        return $this->hasMany("App\DocPessoal","idFase","idFase");
     }
 
     public function pagoResponsabilidade(){
-        return $this->hasMany("App\PagoResponsabilidade","idFase");
+        return $this->hasMany("App\PagoResponsabilidade","idFase","idFase");
     }
 
     public function faseStock(){

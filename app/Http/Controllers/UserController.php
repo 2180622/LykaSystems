@@ -12,6 +12,8 @@ use App\Http\Requests\StoreAgenteRequest;
 use App\Http\Requests\StoreClienteRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\SendEmailConfirmation;
+use Mail;
 
 class UserController extends Controller
 {
@@ -54,6 +56,10 @@ class UserController extends Controller
       $user->idAdmin = $admin->idAdmin;
       $user->email = $admin->email;
       $user->save();
+
+      $email = $user->email;
+      $id = $user->idUser;
+      Mail::to($email)->send(new SendEmailConfirmation($id));
 
       return redirect()->route('users.index')->with('success', 'Admin successfully created');
     }

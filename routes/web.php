@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Console\Kernel;
+use App\Mail\SendEmailConfirmation;
+use Illuminate\Support\Facades\Mail;
 
 Auth::routes();
 
@@ -16,6 +18,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 /* Utilizadores */
 Route::resource('/users', 'UserController');
+
+/* Email Confirmation */
+Route::get('/confirmation/{user}', 'AccountConfirmationController@index')->name('confirmation.index');
+Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
 
 /* Universidades */
 Route::resource('/universities', 'UniversityController');

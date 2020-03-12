@@ -25,10 +25,10 @@ class Agente extends Model
     }
 
     public function produtoA(){
-        return $this->hasMany("App\Produto","idAgente")->withTrashed();
+        return $this->hasMany("App\Produto","idAgente","idAgente")->withTrashed();
     }
 
     public function produtoSubA(){
-        return $this->hasMany("App\Produto","idSubAgente")->withTrashed();
+        return $this->hasMany("App\Produto","idSubAgente","idAgente")->withTrashed();
     }
 }

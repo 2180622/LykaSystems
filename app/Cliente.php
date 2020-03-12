@@ -24,6 +24,6 @@ class Cliente extends Model
     }
 
     public function produto(){
-        return $this->hasMany("App\Produto","idCliente");
+        return $this->hasMany("App\Produto","idCliente","idCliente");
     }
 }
