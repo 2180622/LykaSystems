@@ -26,7 +26,7 @@ class DocPessoal extends Migration
             $table->string('pais',255);
             $table->string('morada',255);
             $table->boolean('verificacao')->default(false);
-            $table->dateTime('dataPublicacao')->useCurrent();
+            $table->timestamps();
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
         });

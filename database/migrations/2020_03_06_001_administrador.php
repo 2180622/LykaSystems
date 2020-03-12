@@ -25,7 +25,7 @@ class Administrador extends Migration
             $table->string('fotografia',255)->nullable();
             $table->integer('telefone1');
             $table->integer('telefone2')->nullable();
-            $table->dateTime('dataRegis')->useCurrent();
+            $table->timestamps();
 
             $table->softDeletes();
         });

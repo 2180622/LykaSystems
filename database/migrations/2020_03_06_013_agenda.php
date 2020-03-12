@@ -21,9 +21,10 @@ class Agenda extends Migration
             $table->boolean('visibilidade')->default(false);
             $table->dateTime('dataInicio');
             $table->dateTime('dataFim');
-            $table->dateTime('dataCriacao')->useCurrent();
+            $table->timestamps();
             $table->unsignedBigInteger('idUser');
                 $table->foreign('idUser')->references('idUser')->on('User');
+
         });
     }
 

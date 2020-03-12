@@ -19,12 +19,13 @@ class Conta extends Migration
             $table->bigIncrements('idConta');
             $table->string('descricao',255);
             $table->string('local',255);
-            $table->integer('numConta');
+            $table->bigInteger('numConta');
                 $table->unique('numConta');
             $table->string('IBAN',255);
             $table->string('instituicao',255);
             $table->integer('telefone');
             $table->longText('obsConta')->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
     }

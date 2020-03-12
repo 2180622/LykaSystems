@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ExtraFunction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use App\Administrador;
 use App\Agenda;
@@ -41,7 +42,7 @@ class ExtraFunctionsController extends Controller
         $admin->dataNasc = date('Y-m-d',strtotime('17-12-1997'));
         $admin->fotografia = null;
         $admin->telefone1 = 919245453;
-        $admin->telefone1 = null;
+        $admin->telefone2 = null;
         $admin->save();
 
         $admin = new Administrador;
@@ -51,7 +52,7 @@ class ExtraFunctionsController extends Controller
         $admin->dataNasc = date('Y-m-d',strtotime('30-10-1999'));
         $admin->fotografia = null;
         $admin->telefone1 = 919200000;
-        $admin->telefone1 = null;
+        $admin->telefone2 = null;
         $admin->save();
 
         /********************          Agentes          ********************/
@@ -305,9 +306,9 @@ class ExtraFunctionsController extends Controller
         /*********************          Users          *********************/
 
         $user = new User;
-        $user->username = 'Nildgar';
+        $user->email = 'nill546@hotmail.com';
         $user->tipo = 'admin';
-        $user->password_hash = Hash::make('teste1234');
+        $user->password = Hash::make('teste1234');
         $user->password_reset_token = null;
         $user->verification_token = null;
         $user->auth_key = 'sdfglnsdbhkfnjslkdfgn';
@@ -322,9 +323,9 @@ class ExtraFunctionsController extends Controller
         $agenda = new Agenda;
         $agenda->descricao = 'Teste';
         $agenda->visibilidade = false;
-        $agenda->dataInicio = date('d/M/Y H:i',strtotime('01/03/2020 14:30'));
-        $agenda->dataFim = date('d/M/Y H:i',strtotime('20-06-2020 18:25'));
-        $agenda->idUser = 1;
+        $agenda->dataInicio = date('Y-m-d H:i',strtotime('01-03-2020 14:30'));
+        $agenda->dataFim = date('Y-m-d H:i',strtotime('20-06-2020 18:25'));
+        $agenda->idUser = 2;
         $agenda->save();
 
         /*******************          Produtos          ********************/
@@ -347,7 +348,7 @@ class ExtraFunctionsController extends Controller
 
         $fase = new Fase;
         $fase->descricao = 'Inscrição';
-        $fase->dataVencimento = date('d/M/Y H:i',strtotime('11/03/2020 15:00'));
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('11-03-2020 15:00'));
         $fase->valorFase = 50;
         $fase->verificacaoPago = true;
         $fase->valorComissaoAgente = 0;
@@ -358,7 +359,7 @@ class ExtraFunctionsController extends Controller
 
         $fase = new Fase;
         $fase->descricao = 'Matricula';
-        $fase->dataVencimento = date('d/M/Y H:i',strtotime('06/09/2020 18:30'));
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
         $fase->valorFase = 300;
         $fase->verificacaoPago = false;
         $fase->valorComissaoAgente = 50;
@@ -369,7 +370,7 @@ class ExtraFunctionsController extends Controller
 
         $fase = new Fase;
         $fase->descricao = 'Propinas';
-        $fase->dataVencimento = date('d/M/Y H:i',strtotime('25/09/2020 23:59'));
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $fase->valorFase = 1000;
         $fase->verificacaoPago = false;
         $fase->valorComissaoAgente = 100;
@@ -380,7 +381,7 @@ class ExtraFunctionsController extends Controller
 
         $fase = new Fase;
         $fase->descricao = 'Final';
-        $fase->dataVencimento = date('d/M/Y H:i',strtotime('01/07/2021 18:30'));
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('01-07-2021 18:30'));
         $fase->valorFase = 150;
         $fase->verificacaoPago = false;
         $fase->valorComissaoAgente = 150;
