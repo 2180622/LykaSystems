@@ -161,11 +161,11 @@
             {{-- Nome e Perfil --}}
             <span class="font-weight-bold text-uppercase">@php
             if(Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null){
-              echo Auth::user()->admin->nome;
+            echo Auth::user()->admin->nome;
             }elseif (Auth::user()->tipo == "agente" && Auth::user()->idAgente != null) {
-              echo Auth::user()->agente->nome;
+            echo Auth::user()->agente->nome;
             }elseif (Auth::user()->tipo == "cliente" && Auth::user()->idCliente != null) {
-              echo Auth::user()->cliente->nome;
+            echo Auth::user()->cliente->nome;
             }
             @endphp</span><br>
             <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>

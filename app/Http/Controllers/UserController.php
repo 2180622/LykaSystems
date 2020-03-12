@@ -44,7 +44,7 @@ class UserController extends Controller
       $user->fill($fieldsUser);
 
       //gerar hash a partir da pass inserida
-      $password = $requestUser->get('password');
+      $password = $requestUser->input('password');
       $hashed = Hash::make($password);
       $user->password = $hashed;
 
