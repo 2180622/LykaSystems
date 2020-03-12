@@ -20,6 +20,7 @@ class PagoResponsabilidade extends Migration
             $table->date('data');
             $table->string('nomeAutor',255);
             $table->string('imagem',255);
+            $table->timestamps();
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
         });

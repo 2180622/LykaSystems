@@ -11,25 +11,6 @@ use Carbon\Carbon;
 
 class EdgarTesteController extends Controller
   {
-    /*public function index()
-    {
-        if(!Auth()->user()){
-          $user = User::first();
-          do{
-            if($user){
-              Auth::login($user[0], true);
-            }else{
-              ExtraFunctionsController::createData();
-            }
-          }while(!Auth()->user());
-        }
-        if(Auth()->user()){
-          $notificacoes = ExtraFunctionsController::getNotificacoes();
-        }
-        return view('edgarteste.teste');
-    }/** Teste 1 */
-
-
     protected $Extrafuntions;
     public function __construct(ExtraFunctionsController $Extrafuntions)
     {
@@ -37,24 +18,24 @@ class EdgarTesteController extends Controller
     }
     public function index()
     {
-        if(!Auth()->user()){
-          $user = User::first();
-          do{
-            if($user){
-              Auth::login($user[0], true);
-            }else{
-              $this->Extrafuntions->createData();
-            }
-          }while(!Auth()->user());
-        }
+      $notificacoes = null;
+
         if(Auth()->user()){
           $notificacoes = $this->Extrafuntions->getNotificacoes();
+        }else {
+          $users = User::all();
+          $cria = true;
+          foreach($users as $user){
+            if($user->email == 'nill546@hotmail.com'){
+              $cria = false;
+            }
+          }
+          if($cria){
+            $this->Extrafuntions->createData();
+          }
         }
-        return view('edgarteste.teste');
-    }/** Teste 2 */
-
-
-
+        return view('edgarteste.teste', compact('notificacoes'));
+    }
     
     
     public function create()

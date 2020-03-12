@@ -23,6 +23,7 @@ class DocTransacao extends Migration
             $table->date('dataRecebido')->nullable();
             $table->boolean('verificacao')->default(false);
             $table->string('imagem',255);
+            $table->timestamps();
             $table->unsignedBigInteger('idConta');
                 $table->foreign('idConta')->references('idConta')->on('Conta');
             $table->unsignedBigInteger('idFase');

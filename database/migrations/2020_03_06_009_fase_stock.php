@@ -18,8 +18,11 @@ class FaseStock extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idFaseStock');
             $table->string('descricao',255);
+            $table->timestamps();
             $table->unsignedBigInteger('idProdutoStock');
                 $table->foreign('idProdutoStock')->references('idProdutoStock')->on('ProdutoStock');
+
+            $table->softDeletes();
         });
     }
 

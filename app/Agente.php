@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Agente extends Model
 {
+
+    use SoftDeletes;
+
     protected $table = 'Agente';
     protected $primaryKey = 'idAgente';
     public $timestamps = false;
@@ -20,10 +25,10 @@ class Agente extends Model
     }
 
     public function produtoA(){
-        return $this->hasMany("App\Produto","idAgente")->withTrashed();
+        return $this->hasMany("App\Produto","idAgente","idAgente")->withTrashed();
     }
 
     public function produtoSubA(){
-        return $this->hasMany("App\Produto","idSubAgente")->withTrashed();
+        return $this->hasMany("App\Produto","idSubAgente","idAgente")->withTrashed();
     }
 }

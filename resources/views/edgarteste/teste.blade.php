@@ -21,13 +21,17 @@
         </div>
         <br>
         <div class="row cards-group">
-            @foreach()
             <div class="col-md-4">
                 <div class="card-navigation">
                     <div class="help-button"></div>
                     <div class="info">
                         <p class="number">503</p>
-                        <p class="word">Criar Dados</p>
+
+                        @if ($notificacoes)
+                            @foreach ($notificacoes as $notificacao)
+                                <p class="word"> {{$notificacao['Assunto']}} </p> 
+                            @endforeach  
+                        @endif
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Universidade extends Model
 {
+    use SoftDeletes;
     protected $table = 'Universidade';
 
     public $timestamps = false;
@@ -16,11 +17,11 @@ class Universidade extends Model
         ];
 
     public function produto(){
-        return $this->hasMany("App\Produto","idUniversidade1");
+        return $this->hasMany("App\Produto","idUniversidade1","idUniversidade");
     }
 
     public function produto2(){
-        return $this->hasMany("App\Produto","idUniversidade2");
+        return $this->hasMany("App\Produto","idUniversidade2","idUniversidade");
     }
 
     use SoftDeletes;

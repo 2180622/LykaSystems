@@ -20,8 +20,12 @@ class DocStock extends Migration
             $table->enum('tipo',['Pessoal', 'Academico']);
             $table->enum('tipoPessoal',['Passaport','Cartão Cidadão','Carta Condução','Doc. Oficial'])->nullable();
             $table->enum('tipoAcademico',['Exame Universitário','Exame Nacional','Diploma','Certificado'])->nullable();
+            $table->timestamps();
             $table->unsignedBigInteger('idFaseStock');
                 $table->foreign('idFaseStock')->references('idFaseStock')->on('FaseStock');
+
+            $table->softDeletes();
+
         });
     }
 
