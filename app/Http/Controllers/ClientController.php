@@ -12,8 +12,7 @@ use Carbon\Carbon;
 
 class ClientController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $username = Auth()->user();
         $clients = Cliente::all();
         return view('clients.list', compact('clients', 'username'));
@@ -38,7 +37,6 @@ class ClientController extends Controller
       $user->status = 10;
       $user->fill($fieldsUser);
       //gerar hash a partir da pass inserida
-      // $password = $requestUser->get('password');
       $hashed = Hash::make('password');
       $user->password = $hashed;
 
@@ -50,6 +48,10 @@ class ClientController extends Controller
       $user->idCliente = $cliente->idCliente;
       $user->email = $cliente->email;
       $user->save();
+      
+      $email = $user->email;
+      $id = $user->idUser;
+      Mail::to($email)->send(new SendEmailConfirmation($id));
 
       return redirect()->route('users.index')->with('success', 'Client successfully created');
     }

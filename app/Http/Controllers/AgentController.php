@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Agent;
+use App\Agente;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAgenteRequest;
@@ -16,14 +16,13 @@ class AgentController extends Controller
 {
 
     public function index(){
-        $agents = Agent::all();
+        $agents = Agente::all();
         return view('agents.list', compact('agents'));
     }
 
 
     public function create(){
-        $agent = new Agente;
-        return view('agents.add', compact('agent'));
+        return view('agents.add');
     }
 
 
@@ -39,7 +38,6 @@ class AgentController extends Controller
       $user->status = 10;
       $user->fill($fieldsUser);
       //gerar hash a partir da pass inserida
-      $password = $requestUser->get('password');
       $hashed = Hash::make($password);
       $user->password = $hashed;
 
@@ -49,8 +47,12 @@ class AgentController extends Controller
 
       $agente->save();
       $user->idAgente = $agente->idAgente;
-
+      $user->email = $agente->email;
       $user->save();
+
+      $email = $user->email;
+      $id = $user->idUser;
+      Mail::to($email)->send(new SendEmailConfirmation($id));
 
       return redirect()->route('users.index')->with('success', 'Agent successfully created');
     }

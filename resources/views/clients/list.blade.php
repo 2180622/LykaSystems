@@ -20,7 +20,7 @@
     <br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Listagem de estudantes</h6>
+            <h6>Listagem de Estudantes</h6>
         </div>
         <br>
 

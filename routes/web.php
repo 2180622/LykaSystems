@@ -19,8 +19,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
   /* Estudantes */
   Route::resource('/clients', 'ClientController');
 
-  /* Utilizadores */
-  Route::resource('/users', 'UserController');
+  /* Agentes */
+  Route::resource('agents', 'AgentController');
 
   /* Logout */
   Route::get('logout', 'Auth\LoginController@logout');
@@ -31,7 +31,6 @@ Route::resource('/users', 'UserController');
 
 Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
 Route::post('/users/storeAgente', 'UserController@storeAgente')->name('users.storeAgente');
-Route::post('/users/storeCliente', 'UserController@storeCliente')->name('users.storeCliente');
 
 /* Email Confirmation */
 Route::get('/confirmation/{user}', 'AccountConfirmationController@index')->name('confirmation.index');
