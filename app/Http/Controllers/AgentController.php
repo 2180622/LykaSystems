@@ -3,81 +3,77 @@
 namespace App\Http\Controllers;
 
 use App\Agent;
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAgenteRequest;
+use App\Http\Requests\StoreUserRequest;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use App\Mail\SendEmailConfirmation;
+use Mail;
 
 class AgentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+
+    public function index(){
+        $agents = Agent::all();
+        return view('agents.list', compact('agents'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+
+    public function create(){
+        $agent = new Agente;
+        return view('agents.add', compact('agent'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+
+    public function store(StoreUserRequest $requestUser, StoreAgenteRequest $requestAgente){
+      $curTime = Carbon::now();
+
+      $fieldsUser = $requestUser->validated();
+      $fieldsAgente = $requestAgente->validated();
+
+      $user = new User;
+      $user->tipo = "agente";
+      $user->auth_key = rand(655541,getrandmax());
+      $user->status = 10;
+      $user->fill($fieldsUser);
+      //gerar hash a partir da pass inserida
+      $password = $requestUser->get('password');
+      $hashed = Hash::make($password);
+      $user->password = $hashed;
+
+      $agente = new Agente;
+      $agente->dataRegis = $curTime;
+      $agente->fill($fieldsAgente);
+
+      $agente->save();
+      $user->idAgente = $agente->idAgente;
+
+      $user->save();
+
+      return redirect()->route('users.index')->with('success', 'Agent successfully created');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Agent  $agent
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Agent $agent)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Agent  $agent
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Agent $agent)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Agent  $agent
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Agent $agent)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Agent  $agent
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Agent $agent)
     {
         //
