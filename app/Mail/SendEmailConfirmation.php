@@ -11,20 +11,21 @@ class SendEmailConfirmation extends Mailable
     use Queueable, SerializesModels;
 
     public $id;
+    public $name;
 
-    public function __construct(string $id){
+    public function __construct(string $id, string $name){
       $this->id = $id;
-
+      $this->name = $name;
     }
 
 
     public function build()
     {
-        return $this->from('username@hotmail.com', 'Mailtrap')
-            ->subject('Email Confirmation')
+        return $this->from('username@hotmail.com', 'LYKA SYSTEMS')
+            ->subject('Ativação de conta')
             ->markdown('mails.confirmation')
             ->with([
-                'name' => 'New LYKA User'.$this->id,
+                'name' => $this->name,
                 'link' => 'http://lyka.com/confirmation/'.$this->id
             ]);
     }

@@ -333,6 +333,19 @@ class ExtraFunctionsController extends Controller
         $user->idCliente = null;
         $user->save();
 
+        $user = new User;
+        $user->email = 'tiaveira@gmail.com';
+        $user->tipo = 'cliente';
+        $user->password = Hash::make('teste1234');
+        $user->password_reset_token = null;
+        $user->verification_token = null;
+        $user->auth_key = 'sdfglnsdbhkfnjslkdfgn';
+        $user->status = '10';
+        $user->idAdmin = null;
+        $user->idAgente = null;
+        $user->idCliente = 1;
+        $user->save();
+
         /********************          Agendas          ********************/
 
         $agenda = new Agenda;
@@ -520,7 +533,7 @@ class ExtraFunctionsController extends Controller
         /*************************** NOTIFICAÇÕES PARA INICIO PRODUTOS **************************/
 
         /*************************** NOTIFICAÇÕES PARA VENCIMENTO FASES *************************/
-        if(Auth()->user()->tipo == 'agente'){
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null){
             $Fases = null;
             $Assunto = 'Clientes com documentos ou pagamentos em atraso';
             $Descricao = null;
@@ -537,11 +550,7 @@ class ExtraFunctionsController extends Controller
                                 $DocsAcademicos = $fase->docAcademico->where('verificacao','=',0)->all();
                                 $DocsPessoais = $fase->docPessoal->where('verificacao','=',0)->all();
                                 if(count($DocsAcademicos) >=1 || count($DocsAcademicos) >=1 || $fase->verificacaoPago == 0){
-                                    if($Fases){
-                                        $Fases[] = $fase;
-                                    }else{
-                                        $Fases = $fase;
-                                    }
+                                    $Fases[] = $fase;
                                 }
                             }
                         }
@@ -570,21 +579,21 @@ class ExtraFunctionsController extends Controller
         }
         /******************* NOTIFICAÇÕES PARA DOCUMENTOS E PAGAMENTOS EM FALTA *****************/
         $FasesFalta = null;
-        if(Auth()->user()->tipo == 'cliente'){
+        if(Auth()->user()->tipo == 'cliente' && Auth()->user()->idCliente != null){
             $produtosCliente = Auth()->user()->cliente->produto->all();
             $fasesCliente = null;
             foreach($produtosCliente as $produto){
-                $fasesProduto = $produto->fase
-                    ->where('dataVencimento','>=',new DateTime())
-                    ->where('dataVencimento','<=',(new DateTime())->sub(new DateInterval('P14D')))
-                    ->get()->all();
+                $fasesProduto = null;/*->where('dataVencimento','>=',new DateTime())
+                    ->where('dataVencimento','<=',(new DateTime())->add(new DateInterval('P14D')))
+                    ->all();*/
+                foreach($produto->fase as $fase){
+                    if((new DateTime($fase->dataVencimento))>=(new DateTime()) && (new DateTime($fase->dataVencimento))<=((new DateTime())->add(new DateInterval('P14D')))){
+                        $fasesProduto[] = $fase;
+                    }
+                }
                 if($fasesProduto){
-                    if($fasesCliente){
-                        foreach($fasesProduto as $fase){
-                            $fasesCliente[] = $fase;
-                        }
-                    }else{
-                        $fasesCliente = $fasesProduto;
+                    foreach($fasesProduto as $fase){
+                        $fasesCliente[] = $fase;
                     }
                 }
             }
@@ -597,28 +606,24 @@ class ExtraFunctionsController extends Controller
                         $falta = true;
                     }
                     if($falta){
-                        if($FasesFalta){
-                            $FasesFalta[] = $fase;
-                        }else{
-                            $FasesFalta = $fase;
-                        }
+                        $FasesFalta[] = $fase;
                     }
                 }
             }
         }
         if($FasesFalta){
             foreach($FasesFalta as $Fase){
-                $DocsAcademicos = $Fase->docAcademico->where('verificacao','=',0)->get()->all();
-                $DocsPessoais = $Fase->docPessoal->where('verificacao','=',0)->get()->all();
+                $DocsAcademicos = $Fase->docAcademico->where('verificacao','=',0)->all();
+                $DocsPessoais = $Fase->docPessoal->where('verificacao','=',0)->all();
                 $novaNot = null;
                 $Assunto = null;
                 $Descricao = null;
                 $diff = (new DateTime($Fase->dataVencimento))->diff(new DateTime());
                 $DataLimite = 'Falta '.$diff->d.' dias';
-                if($diff == 0){
+                if($diff->d == 0){
                     $DataLimite = 'Só falta hoje';
                 }
-                $NumDocumentos = $NumDocumentos + count($DocsAcademicos) + count($DocsPessoais);
+                $NumDocumentos = count($DocsAcademicos) + count($DocsPessoais);
                 if($Fase->verificacaoPago == 0 && $NumDocumentos >= 1){
                     $Assunto = 'Pagamento e documentos em Falta';
                     $Descricao = 'Pagamento em falta: \n - '.$Fase->descricao.' -> '.$Fase->valorFase.'€ \n\nDocumentos em Falta: \n - '.count($DocsAcademicos).' Documentos Académicos \n - '.count($DocsPessoais).' Documentos Pessoais';

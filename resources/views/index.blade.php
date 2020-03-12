@@ -29,7 +29,7 @@
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number">503</p>
+                        <p class="number">{{$clienteCount}}</p>
                         <p class="word">clientes</p>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number">14</p>
+                        <p class="number">{{$universidadeCount}}</p>
                         <p class="word">universidades</p>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number">124</p>
+                        <p class="number">{{$agenteCount}}</p>
                         <p class="word">agentes</p>
                     </div>
                 </div>

@@ -21,7 +21,7 @@ class Agente extends Model
         ];
 
     public function user(){
-        return $this->belongsTo("App\User","idUser");
+        return $this->belongsTo("App\User","idUser","idUser");
     }
 
     public function produtoA(){

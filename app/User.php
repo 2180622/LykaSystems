@@ -19,14 +19,18 @@ class User extends Authenticatable
     ];
 
     public function admin(){
-        return $this->belongsTo("App\Administrador","idAdmin")->withTrashed();
+        return $this->belongsTo("App\Administrador","idAdmin","idAdmin")->withTrashed();
     }
 
     public function agente(){
-        return $this->belongsTo("App\Agente","idAgente")->withTrashed();
+        return $this->belongsTo("App\Agente","idAgente","idAgente")->withTrashed();
     }
 
     public function cliente(){
-        return $this->belongsTo("App\Cliente","idCliente");
+        return $this->belongsTo("App\Cliente","idCliente","idCliente");
+    }
+
+    public function cliente(){
+        return $this->hasMany("App\Notificacao","idUser","idUser");
     }
 }

@@ -4,15 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Agenda extends Model
+class Notificacao extends Model
 {
-    protected $table = 'Agenda';
-    
+    protected $table = 'Notificacao';
+
     public $timestamps = false;
+    protected $primaryKey = 'idNotificacao';
 
     protected $fillable = [
-        'descricao','visibilidade','dataInicio','dataFim','$idUser'
-    ];
+        'urgencia','tipo','dataInicio','dataFim','assunto','descricao','$idUser',
+        ];
 
     public function user(){
         return $this->belongsTo("App\User","idUser","idUser");

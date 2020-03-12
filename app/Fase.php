@@ -14,7 +14,7 @@ class Fase extends Model
         ];
 
     public function produto(){
-        return $this->belongsTo("App\Produto","idProduto");
+        return $this->belongsTo("App\Produto","idProduto","idProduto");
     }
 
     public function responsabilidade(){
@@ -38,6 +38,6 @@ class Fase extends Model
     }
 
     public function faseStock(){
-        return $this->belongsTo("App\FaseStock","idFaseStock");
+        return $this->belongsTo("App\FaseStock","idFaseStock","idFaseStock");
     }
 }

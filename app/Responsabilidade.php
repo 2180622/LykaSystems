@@ -16,11 +16,11 @@ class Responsabilidade extends Model
         ];
 
     public function conta(){
-        return $this->belongsTo("App\Conta","idConta")->withTrashed();
+        return $this->belongsTo("App\Conta","idConta","idConta")->withTrashed();
     }
 
     public function fase(){
-        return $this->belongsTo("App\Fase","idFase");
+        return $this->belongsTo("App\Fase","idFase","idFase");
     }
 
     public function relacao(){
