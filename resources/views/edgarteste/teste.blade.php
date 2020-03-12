@@ -26,8 +26,12 @@
                     <div class="help-button"></div>
                     <div class="info">
                         <p class="number">503</p>
-                        <p class="word"> {{$notificacoes}} </p>
-                        
+
+                        @if ($notificacoes)
+                            @foreach ($notificacoes as $notificacao)
+                                <p class="word"> {{$notificacao->Assunto}} </p> 
+                            @endforeach  
+                        @endif
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Universidade extends Model
 {
+    use SoftDeletes;
     protected $table = 'Universidade';
 
     public $timestamps = false;
