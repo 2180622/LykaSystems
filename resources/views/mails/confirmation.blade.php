@@ -1,10 +1,10 @@
 @component('mail::message')
-Hello **{{$name}}**,  {{-- use double space for line break --}}
+Olá **{{$name}}**,
 
-Click below to start working right now
+Clique no botão abaixo para ativar a sua conta LYKA.
 @component('mail::button', ['url' => $link])
-Go to your inbox
+Ativar Conta
 @endcomponent
-Sincerely,
-LYKA team.
+Bom trabalho,
+LYKA SYSTEMS.
 @endcomponent

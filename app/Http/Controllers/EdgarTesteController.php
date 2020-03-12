@@ -22,6 +22,7 @@ class EdgarTesteController extends Controller
 
         if(Auth()->user()){
           $notificacoes = $this->Extrafuntions->getNotificacoes();
+          return view('edgarteste.teste', compact('notificacoes'));
         }else {
           $users = User::all();
           $cria = true;
@@ -34,7 +35,7 @@ class EdgarTesteController extends Controller
             $this->Extrafuntions->createData();
           }
         }
-        return view('edgarteste.teste', compact('notificacoes'));
+        return null;
     }
     
     
