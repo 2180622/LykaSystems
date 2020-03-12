@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Console\Kernel;
+use App\Mail\SendEmailConfirmation;
+use Illuminate\Support\Facades\Mail;
 
 Auth::routes();
 
@@ -11,25 +13,20 @@ Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.store
 Route::post('/users/storeAgente', 'UserController@storeAgente')->name('users.storeAgente');
 Route::post('/users/storeCliente', 'UserController@storeCliente')->name('users.storeCliente');
 
+/* Email Confirmation */
+Route::get('/confirmation/{user}', 'AccountConfirmationController@index')->name('confirmation.index');
+Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
 
 /* Universidades */
 Route::resource('/universities', 'UniversityController');
-
 
 Route::group(['middleware' => ['auth']], function () {
     /* Dashboard */
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
-
-
-
-
     /* Phonebook */
     Route::resource('/phonebook', 'PhonebookController');
 });
-
-    /* Universidades */
-    Route::resource('/universities', 'UniversityController');
     /* Estudantes */
     Route::resource('/clients', 'ClientController');
 

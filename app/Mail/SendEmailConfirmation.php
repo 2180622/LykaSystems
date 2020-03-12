@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -11,23 +10,22 @@ class SendEmailConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
+    public $id;
+
+    public function __construct(string $id){
+      $this->id = $id;
+
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
+
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from('username@hotmail.com', 'Mailtrap')
+            ->subject('Email Confirmation')
+            ->markdown('mails.confirmation')
+            ->with([
+                'name' => 'New LYKA User'.$this->id,
+                'link' => 'http://lyka.com/confirmation/'.$this->id
+            ]);
     }
 }
