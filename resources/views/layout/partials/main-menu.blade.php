@@ -5,15 +5,6 @@
             <a class="logotype" href="{{route('dashboard')}}">lyka.</a>
         </div>
     </div>
-  @php
-  // if(Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null){
-  //   $nome = Auth::user()->admin->nome;
-  // }elseif (Auth::user()->tipo == "agente" && Auth::user()->idAgente != null) {
-  //   $nome = Auth::user()->agente->nome;
-  // }elseif ($user->tipo == "cliente" && Auth::user()->idCliente != null) {
-  //   $nome = Auth::user()->cliente->nome;
-  // }
-  @endphp
     <!-- Menu Options -->
     <ul class="menu-list">
         <!-- Dashboard -->
@@ -168,8 +159,16 @@
 
         <div class="text-center mt-3">
             {{-- Nome e Perfil --}}
-            <span class="font-weight-bold text-uppercase">{{"TESTE"}}{{-- {{Auth::user()->NOME ???}} --}}</span><br>
-            <span class="text-muted " style="font-size:14px">{{-- {{Auth::user()->tipo}} --}}</span>
+            <span class="font-weight-bold text-uppercase">@php
+            if(Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null){
+              echo Auth::user()->admin->nome;
+            }elseif (Auth::user()->tipo == "agente" && Auth::user()->idAgente != null) {
+              echo Auth::user()->agente->nome;
+            }elseif (Auth::user()->tipo == "cliente" && Auth::user()->idCliente != null) {
+              echo Auth::user()->cliente->nome;
+            }
+            @endphp</span><br>
+            <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>
         </div>
 
     </div>

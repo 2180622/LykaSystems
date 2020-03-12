@@ -72,8 +72,8 @@
           Juan faz anos hoje! <br><a href="#">Enviar mensagem</a>
       </div>
   </div>
-  
-  
+
+
 
 
 
