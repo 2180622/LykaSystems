@@ -29,25 +29,35 @@
             },
 
               "info": "",
-              "infoEmpty": "Sem registos disponiveis",
+              "infoEmpty": "",
               "infoFiltered": ""
           },
 
           "order": [1, 'desc'],
 
-          "bLengthChange": false,
+          /* "bLengthChange": false, */
           /* "bFilter": false, */
 
 
       } );
 
 
-       $(".dataTables_filter").hide();
 
+      $(".dataTables_filter").hide(); // Esconde o input search por defeito
       $("#customSearchBox").on( 'keyup', function () {
         $(".dataTables_filter input").val( $("#customSearchBox").val() )
         table.search( $(".dataTables_filter input").val() ).draw();
-    } );
+      } );
+
+
+
+
+
+      $('.dataTables_length').hide(); // Esconde o select "rows per page" por defeito
+      $('#records_per_page').val(table.page.len());
+      $('#records_per_page').change( function() {
+        table.page.len( $(this).val() ).draw();
+    });
+
 
 });
-
