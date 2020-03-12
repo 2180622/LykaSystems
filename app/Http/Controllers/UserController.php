@@ -1,19 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 
+use Mail;
 use App\User;
-use App\Administrador;
-use App\Cliente;
 use App\Agente;
+use App\Cliente;
+use Carbon\Carbon;
+use App\Administrador;
 use Illuminate\Http\Request;
+use App\Mail\SendEmailConfirmation;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\StoreAdministradorRequest;
 use App\Http\Requests\StoreAgenteRequest;
 use App\Http\Requests\StoreClienteRequest;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
-use App\Mail\SendEmailConfirmation;
-use Mail;
+use App\Http\Requests\StoreAdministradorRequest;
 
 class UserController extends Controller
 {
@@ -51,6 +51,7 @@ class UserController extends Controller
       $admin = new Administrador;
       $admin->dataRegis = $curTime;
       $admin->fill($fieldsAdmin);
+      $name = $admin->nome;
 
       $admin->save();
       $user->idAdmin = $admin->idAdmin;
@@ -59,7 +60,7 @@ class UserController extends Controller
 
       $email = $user->email;
       $id = $user->idUser;
-      Mail::to($email)->send(new SendEmailConfirmation($id));
+      Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
       return redirect()->route('users.index')->with('success', 'Admin successfully created');
     }

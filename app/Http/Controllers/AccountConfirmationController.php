@@ -11,11 +11,11 @@ class AccountConfirmationController extends Controller
 {
     public function index($user){
       $user = User::findOrFail($user);
-      return view('confirmation', compact('user'));
+      return view('auth.confirmation', compact('user'));
     }
 
     public function edit(User $user){
-      return view('confirmation', compact('user'));
+      return view('auth.confirmation', compact('user'));
     }
 
     public function update(UpdateUserRequest $request, User $user){
