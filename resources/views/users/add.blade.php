@@ -16,7 +16,6 @@
        <option class="option" selected>Escolha uma opção...</option>
        <option class="option" >Administrador</option>
        <option class="option" >Agente</option>
-       <option class="option" >Cliente</option>
      </select>
   </div>
 
@@ -124,133 +123,6 @@
       <a href="{{route('users.index')}}" class="btn btn-default">Cancel</a>
     </div>
   </form>
-
-  {{-- Form para cliente --}}
-  <form class="form-group" id="form-cliente" action="{{route('users.storeCliente')}}" style="display: none" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="form-group">
-       <label for="inputFullname">Username</label>
-       <input type="text" class="form-control" name="username" id="inputUsername3"/>
-    </div>
-    <div class="form-group">
-       <label >Nome</label>
-       <input type="text" class="form-control" name="nome" />
-    </div>
-    <div class="form-group">
-       <label >Apelido</label>
-       <input type="text" class="form-control" name="apelido" />
-    </div>
-    <div class="form-group">
-       <label for="inputEmail">Email</label>
-       <input type="text" class="form-control" name="email"
-       placeholder2="username@gmail.com" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Telefone 1</label>
-       <input type="text" class="form-control" name="telefone1" />
-    </div>
-    <div class="form-group">
-       <labe_hashl for="inputFullname">Telefone 2</label>
-       <input type="text" class="form-control" name="telefone2" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Data de Nascimento</label>
-       <input type2="text" class="form-control" name="dataNasc" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Número do CC</label>
-       <input type="text" class="form-control" name="numCCid" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Número do Passaporte</label>
-       <input type="text" class="form-control" name="numPassaport" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Data de Validade do Passaporte</label>
-       <input type="text" class="form-control" name="dataValidPP" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Local de Emissão do Passaporte</label>
-       <input type="text" class="form-control" name="localEmissaoPP" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">País de Naturalidade</label>
-       <input type="text" class="form-control" name="paisNaturalidade" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Morada</label>
-       <input type="text" class="form-control" name="morada" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Cidade</label>
-       <input type="text" class="form-control" name="cidade" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Morada de Residência</label>
-       <input type="text" class="form-control" name="moradaResidencia" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">País de Emissão de Passaporte</label>
-       <input type="text" class="form-control" name="passaportPaisEmi" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Nome do Pai</label>
-       <input type="text" class="form-control" name="nomePai" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Telefone do Pai</label>
-       <input type="text" class="form-control" name="telefonePai" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Email do Pai</label>
-       <input type="text" class="form-control" name="emailPai" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Nome da Mãe</label>
-       <input type="text" class="form-control" name="nomeMae" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Telefone da Mãe</label>
-       <input type="text" class="form-control" name="telefoneMae" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Email da Mãe</label>
-       <input type="text" class="form-control" name="emailMae" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Fotografia</label>
-       <input type="file" alt="submit" class="form-control" name="fotografia" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">NIF</label>
-       <input type="text" class="form-control" name="NIF" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">IBAN</label>
-       <input type="text" class="form-control" name="IBAN" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Nível de Estudo Atual</label>
-       <input type="text" class="form-control" name="nivEstudoAtual" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Nome da Instituição de Origem</label>
-       <input type="text" class="form-control" name="nomeInstituicaoOrigem" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Cidade da Instituição de Origem</label>
-       <input type="text" class="form-control" name="cidadeInstituicaoOrigem" />
-    </div>
-    <div class="form-group">
-       <label for="inputFullname">Password</label>
-       <input type="password" class="form-control" name="password" />
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-success" name="ok">Save</button>
-      <a href="{{route('users.index')}}" class="btn btn-default">Cancel</a>
-    </div>
-  </form>
-
 @endsection
 
 {{-- Scripts --}}
@@ -260,23 +132,15 @@
       function visibility() {
         var idformadmin = document.getElementById("form-admin");
         var idformagente = document.getElementById("form-agente");
-        var idformcliente = document.getElementById("form-cliente");
         var x = document.getElementById("inputRole").selectedIndex;
 
         if(x == '1'){
           idformagente.style.display = "none";
-          idformcliente.style.display = "none";
           idformadmin.style.display = "block";
         }
         else if(x == '2'){
           idformadmin.style.display = "none";
-          idformcliente.style.display = "none";
           idformagente.style.display = "block";
-        }
-        else if(x == '3'){
-          idformadmin.style.display = "none";
-          idformagente.style.display = "none";
-          idformcliente.style.display = "block";
         }
       }
   </script>

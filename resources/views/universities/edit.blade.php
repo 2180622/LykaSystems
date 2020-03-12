@@ -1,18 +1,16 @@
 @extends('layout.master')
 
-
 {{-- Titulo da Página --}}
 @section('title', 'Editar Universidade')
-
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
     <link href="{{asset('css/university.css')}}" rel="stylesheet">
 @endsection
 
-
 {{-- Conteudo da Página --}}
 @section('content')
+    
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
