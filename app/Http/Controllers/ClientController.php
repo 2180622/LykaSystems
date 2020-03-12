@@ -8,15 +8,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreClienteRequest;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class ClientController extends Controller
 {
     public function index()
     {
-        $username = Auth()->user();
+
         $clients = Cliente::all();
-        return view('clients.list', compact('clients', 'username'));
+        $totalestudantes = DB::table('cliente')->count();
+        return view('clients.list', compact('clients', 'totalestudantes'));
     }
 
 
@@ -55,25 +57,26 @@ class ClientController extends Controller
     }
 
 
-    public function show(Client $client)
+    public function show(Cliente $client)
     {
-        return view('clients.show');
+
+        return view('clients.show',compact("client"));
     }
 
 
-    public function edit(Client $client)
+    public function edit(Cliente $client)
     {
-        return view('clients.edit');
+        return view('clients.edit',$client);
     }
 
 
-    public function update(Request $request, Client $client)
+    public function update(Request $request, Cliente $client)
     {
         //
     }
 
 
-    public function destroy(Client $client)
+    public function destroy(Cliente $client)
     {
         //
     }

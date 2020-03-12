@@ -72,20 +72,31 @@
         <div class="row">
             <div class="col">
                 {{-- INPUT nivEstudoAtual --}}
-                <label for="dataNasc">Nivel de estudos(atual):</label><br>
-                <select class="form-control" name="nivEstudoAtual" id="nivEstudoAtual" width="250px">
+                <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
+                <select class="form-control" name="nivEstudoAtual" id="nivEstudoAtual" >
                     <option selected hidden></option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
-                </select>
+                </select><br>
             </div>
+        </div>
 
+
+        <div class="row">
             <div class="col">
                 {{-- INPUT nivEstudoAtual --}}
                 <label for="nomeInstituicaoOrigem">Nome da instituição de origem:</label><br>
                 <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem" placeholder=""><br>
             </div>
+
+
+            <div class="col">
+                {{-- Cidade de Origem  --}}
+                <label for="morada">Cidade da Instituição de Origem:</label><br>
+                <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="morada" placeholder=""><br>
+            </div>
+
         </div>
 
         <div class="row">
@@ -122,6 +133,7 @@
         {{-- Contactos dos PAIS --}}
         <div class="row mt-4">
             <div class="col">
+
                 <label for="nomePai">Nome do pai:</label><br>
                 <input type="text" class="form-control" name="nomePai" id="nomePai" placeholder=""><br>
 
@@ -151,18 +163,14 @@
     {{-- Conteudo: Moradas --}}
     <div class="tab-pane fade" id="adresses" role="tabpanel" aria-labelledby="adresses-tab">
 
-        <div class="row mt-4">
+        <div class="row ">
             <div class="col">
                 {{-- Morada de residência em Portugal --}}
                 <label for="moradaResidencia">Morada de residência em Portugal:</label><br>
                 <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia" placeholder=""><br>
             </div>
 
-            <div class="col">
-                {{-- Cidade de Origem  --}}
-                <label for="morada">Cidade da Instituição de Origem:</label><br>
-                <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="morada" placeholder=""><br>
-            </div>
+
         </div>
 
 
@@ -177,7 +185,7 @@
             <div class="col">
                 {{-- Cidade de Origem  --}}
                 <label for="morada">Cidade de origem:</label><br>
-                <input type="text" class="form-control" name="cidade" id="morada" placeholder=""><br>
+                <input type="text" class="form-control" name="cidade" id="cidade" placeholder=""><br>
             </div>
 
         </div>
