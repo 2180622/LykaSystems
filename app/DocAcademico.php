@@ -15,6 +15,6 @@ class DocAcademico extends Model
         ];
 
     public function fase(){
-        return $this->belongsTo("App\User","idFase");
+        return $this->belongsTo("App\User","idFase","idFase");
     }
 }

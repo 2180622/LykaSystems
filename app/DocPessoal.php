@@ -16,6 +16,6 @@ class DocPessoal extends Model
         ];
 
     public function fase(){
-        return $this->belongsTo("App\Fase","idFase");
+        return $this->belongsTo("App\Fase","idFase","idFase");
     }
 }
