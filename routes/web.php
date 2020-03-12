@@ -30,7 +30,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 Route::resource('/users', 'UserController');
 
 Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
-Route::post('/users/storeAgente', 'UserController@storeAgente')->name('users.storeAgente');
 
 /* Email Confirmation */
 Route::get('/confirmation/{user}', 'AccountConfirmationController@index')->name('confirmation.index');
