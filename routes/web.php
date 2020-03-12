@@ -32,4 +32,4 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 /* Edgar Teste */ /* eliminar no futuro */
-Route::get('/edgarteste', 'EdgarTesteController@index')->name('teste');
+Route::get('/edgarteste', 'EdgarTesteController@index');

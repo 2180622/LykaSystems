@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Administrador extends Model
 {
+
+    use SoftDeletes;
+
     protected $table = 'Administrador';
 
     public $timestamps = false;

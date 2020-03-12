@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Agente extends Model
 {
+
+    use SoftDeletes;
+
     protected $table = 'Agente';
     protected $primaryKey = 'idAgente';
     public $timestamps = false;

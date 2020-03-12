@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ExtraFunction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use DateTime;
 
 use App\Administrador;
 use App\Agenda;
@@ -318,6 +319,19 @@ class ExtraFunctionsController extends Controller
         $user->idCliente = null;
         $user->save();
 
+        $user = new User;
+        $user->email = 'jose.fer@gmail.com';
+        $user->tipo = 'agente';
+        $user->password = Hash::make('teste1234');
+        $user->password_reset_token = null;
+        $user->verification_token = null;
+        $user->auth_key = 'sdfglnsdbhkfnjslkdfgn';
+        $user->status = '10';
+        $user->idAdmin = null;
+        $user->idAgente = 1;
+        $user->idCliente = null;
+        $user->save();
+
         /********************          Agendas          ********************/
 
         $agenda = new Agenda;
@@ -348,9 +362,9 @@ class ExtraFunctionsController extends Controller
 
         $fase = new Fase;
         $fase->descricao = 'Inscrição';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('11-03-2020 15:00'));
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('16-03-2020 15:00'));
         $fase->valorFase = 50;
-        $fase->verificacaoPago = true;
+        $fase->verificacaoPago = false;
         $fase->valorComissaoAgente = 0;
         $fase->valorComSubAgente = null;
         $fase->idProduto = 1;
@@ -394,8 +408,8 @@ class ExtraFunctionsController extends Controller
 
         $docacademico = new DocAcademico;
         $docacademico->nome = 'Tiago Oliveira';
-        $docacademico->tipo = 'Doc. Oficial';
-        $docacademico->imagem = 'docs/DocAcademico-3490587685-001-001-Doc_Oficial';
+        $docacademico->tipo = 'Diploma';
+        $docacademico->imagem = 'docs/DocAcademico-3490587685-001-001-Diploma';
         $docacademico->pais = 'Paris';
         $docacademico->nota = 16;
         $docacademico->pontuacao = '0/20';

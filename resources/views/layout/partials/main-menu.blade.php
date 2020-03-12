@@ -6,13 +6,12 @@
         </div>
     </div>
   @php
-  $username = Auth()->user();
-  // if($username->tipo == "admin"){
-  //   $nome = $username->admin->nome;
-  // }elseif ($username->tipo == "agente") {
-  //   $nome = $username->agente->nome;
-  // }elseif ($username->tipo == "cliente") {
-  //   $nome = $username->cliente->nome;
+  // if(Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null){
+  //   $nome = Auth::user()->admin->nome;
+  // }elseif (Auth::user()->tipo == "agente" && Auth::user()->idAgente != null) {
+  //   $nome = Auth::user()->agente->nome;
+  // }elseif ($user->tipo == "cliente" && Auth::user()->idCliente != null) {
+  //   $nome = Auth::user()->cliente->nome;
   // }
   @endphp
     <!-- Menu Options -->
@@ -170,7 +169,7 @@
         <div class="text-center mt-3">
             {{-- Nome e Perfil --}}
             <span class="font-weight-bold text-uppercase">{{"TESTE"}}{{-- {{Auth::user()->NOME ???}} --}}</span><br>
-            <span class="text-muted " style="font-size:14px">{{$username->tipo}}{{-- {{Auth::user()->tipo}} --}}</span>
+            <span class="text-muted " style="font-size:14px">{{-- {{Auth::user()->tipo}} --}}</span>
         </div>
 
     </div>
