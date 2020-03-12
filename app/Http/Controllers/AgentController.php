@@ -38,6 +38,7 @@ class AgentController extends Controller
       $user->status = 10;
       $user->fill($fieldsUser);
       //gerar hash a partir da pass inserida
+      $password = $requestUser->get('password');
       $hashed = Hash::make($password);
       $user->password = $hashed;
 

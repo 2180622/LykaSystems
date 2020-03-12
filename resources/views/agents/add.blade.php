@@ -26,7 +26,7 @@
             @include('agents.partials.add-edit')
             <div class="form-group text-right">
                 <br><br>
-                <button type="submit" class="top-button" name="ok" id="buttonSubmit"><i class="fas fa-plus text-white-50 mr-2"></i>Adicionar estudante</button>
+                <button type="submit" class="top-button" name="ok" id="buttonSubmit"><i class="fas fa-plus text-white-50 mr-2"></i>Adicionar Agente</button>
                 <a href="{{route('agents.index')}}" class="top-button">Cancelar</a>
             </div>
         </form>
