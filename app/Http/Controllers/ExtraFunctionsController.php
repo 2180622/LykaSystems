@@ -537,11 +537,7 @@ class ExtraFunctionsController extends Controller
                                 $DocsAcademicos = $fase->docAcademico->where('verificacao','=',0)->all();
                                 $DocsPessoais = $fase->docPessoal->where('verificacao','=',0)->all();
                                 if(count($DocsAcademicos) >=1 || count($DocsAcademicos) >=1 || $fase->verificacaoPago == 0){
-                                    if($Fases){
-                                        $Fases[] = $fase;
-                                    }else{
-                                        $Fases = $fase;
-                                    }
+                                    $Fases[] = $fase;
                                 }
                             }
                         }
@@ -597,11 +593,7 @@ class ExtraFunctionsController extends Controller
                         $falta = true;
                     }
                     if($falta){
-                        if($FasesFalta){
-                            $FasesFalta[] = $fase;
-                        }else{
-                            $FasesFalta = $fase;
-                        }
+                        $FasesFalta[] = $fase;
                     }
                 }
             }

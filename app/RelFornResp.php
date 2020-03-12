@@ -15,10 +15,10 @@ class RelFornResp extends Model
         ];
 
     public function fornecedor(){
-        return $this->belongsTo("App\Fornecedor","idFornecedor")->withTrashed();
+        return $this->belongsTo("App\Fornecedor","idFornecedor","idFornecedor")->withTrashed();
     }
 
     public function responsabilidade(){
-        return $this->belongsTo("App\Responsabilidade","idResponsabilidade");
+        return $this->belongsTo("App\Responsabilidade","idResponsabilidade","idResponsabilidade");
     }
 }

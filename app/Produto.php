@@ -19,23 +19,23 @@ class Produto extends Model
         ];
 
     public function cliente(){
-        return $this->belongsTo("App\Cliente","idCliente");
+        return $this->belongsTo("App\Cliente","idCliente","idCliente");
     }
 
     public function agente(){
-        return $this->belongsTo("App\Agente","idAgente")->withTrashed();
+        return $this->belongsTo("App\Agente","idAgente","idAgente")->withTrashed();
     }
 
     public function subAgente(){
-        return $this->belongsTo("App\Agente","idSubAgente")->withTrashed();
+        return $this->belongsTo("App\Agente","idSubAgente","idAgente")->withTrashed();
     }
 
     public function universidade1(){
-        return $this->belongsTo("App\Universidade","idUniversidade1")->withTrashed();
+        return $this->belongsTo("App\Universidade","idUniversidade1","idUniversidade")->withTrashed();
     }
 
     public function universidade2(){
-        return $this->belongsTo("App\Universidade","idUniversidade2")->withTrashed();
+        return $this->belongsTo("App\Universidade","idUniversidade2","idUniversidade")->withTrashed();
     }
 
     public function fase(){
