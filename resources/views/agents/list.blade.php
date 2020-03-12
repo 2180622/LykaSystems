@@ -2,7 +2,7 @@
 
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de Estudantes')
+@section('title', 'Lista de Agentes')
 
 
 {{-- Estilos de CSS --}}
@@ -15,12 +15,12 @@
 @section('content')
 <div class="container mt-2">
     <div class="float-right">
-        <a href="{{route('clients.create')}}" class="top-button">Adicionar Estudante</a>
+        <a href="{{route('agents.create')}}" class="top-button">Adicionar Agente</a>
     </div>
     <br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Listagem de Estudantes</h6>
+            <h6>Listagem de Agentes</h6>
         </div>
         <br>
 
@@ -73,18 +73,18 @@
                 {{-- Corpo da tabela --}}
                 <tbody >
 
-                    @foreach ($clients as $client)
+                    @foreach ($agents as $agent)
                         <tr>
                             <th class="">
                                 <div class="align-middle mx-auto shadow-sm rounded-circle" style="overflow:hidden; width:50px; height:50px">
-                                    <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
+                                    <img src="{{Storage::disk('public')->url('client-photos/').$agent->fotografia}}"
                                         width="100%" class="mx-auto">
                                     </div>
                                 {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}"> --}}
                             </th>
-                            <th class="align-middle">{{ $client->nome }} {{ $client->apelido }}</th>
-                            <th class="align-middle">{{ $client->email }}</th>
-                            <th class="align-middle">{{ $client->paisNaturalidade }}</th>
+                            <th class="align-middle">{{ $agent->nome }} {{ $agent->apelido }}</th>
+                            <th class="align-middle">{{ $agent->email }}</th>
+                            <th class="align-middle">{{ $agent->pais }}</th>
                             <th class="text-center align-middle">
                                 <a href="#fghjk" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                                 <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>

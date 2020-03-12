@@ -42,11 +42,11 @@
 
         <!-- Agentes  -->
         <li class="menu-option">
-            <a href="#">
+            <a href="{{route('agents.index')}}">
                 <div class="menu-icon">
                     <i class="fas fa-user-tie mr-2"></i>
                 </div>
-                <span class="option-name">Agentes</span>
+                <span class="option-name {{Route::is('agents.*') ? 'active' : ''}}">Agentes</span>
             </a>
         </li>
 
