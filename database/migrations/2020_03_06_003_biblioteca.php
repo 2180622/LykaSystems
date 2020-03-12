@@ -19,6 +19,7 @@ class Biblioteca extends Migration
             $table->bigIncrements('idBiblioteca');
             $table->string('nome',255);
             $table->string('imagem',255);
+            $table->timestamps();
         });
     }
 

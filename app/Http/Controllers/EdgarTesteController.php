@@ -37,24 +37,13 @@ class EdgarTesteController extends Controller
     }
     public function index()
     {
-        if(!Auth()->user()){
-          $user = User::first();
-          do{
-            if($user){
-              Auth::login($user[0], true);
-            }else{
-              $this->Extrafuntions->createData();
-            }
-          }while(!Auth()->user());
-        }
         if(Auth()->user()){
           $notificacoes = $this->Extrafuntions->getNotificacoes();
+        }else {
+          $this->Extrafuntions->createData();
         }
         return view('edgarteste.teste');
     }/** Teste 2 */
-
-
-
     
     
     public function create()

@@ -23,7 +23,7 @@ class DocAcademico extends Migration
             $table->string('pais',255);
             $table->decimal('nota', 18, 2);
             $table->string('pontuacao',255);
-            $table->dateTime('dataPublicacao')->useCurrent();
+            $table->timestamps();
             $table->boolean('verificacao')->default(false);
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');

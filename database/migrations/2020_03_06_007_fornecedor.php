@@ -20,6 +20,7 @@ class Fornecedor extends Migration
             $table->string('nome',255);
             $table->string('morada',255);
             $table->text('descricao');
+            $table->timestamps();
             $table->softDeletes();
         });
     }

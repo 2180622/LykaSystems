@@ -21,9 +21,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
 
-
-
-
     /* Phonebook */
     Route::resource('/phonebook', 'PhonebookController');
 });

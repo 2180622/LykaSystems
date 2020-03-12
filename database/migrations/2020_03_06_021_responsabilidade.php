@@ -24,7 +24,7 @@ class Responsabilidade extends Migration
             $table->decimal('valorUniversidade1', 18, 2);
             $table->decimal('valorUniversidade2', 18, 2)->nullable();
             $table->string('imagem',255);
-            $table->dateTime('dataPublicacao')->useCurrent();
+            $table->timestamps();
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
             $table->unsignedBigInteger('idConta');

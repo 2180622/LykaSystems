@@ -24,6 +24,7 @@ class Contacto extends Migration
             $table->string('email',255)->nullable();
             $table->integer('fax')->nullable();
             $table->text('observacao')->nullable();
+            $table->timestamps();
         });
     }
 

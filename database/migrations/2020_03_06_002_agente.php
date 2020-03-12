@@ -25,12 +25,12 @@ class Agente extends Migration
             $table->string('fotografia',255)->nullable();
             $table->string('morada',255);
             $table->string('pais',255);
-            $table->integer('NIF');
+            $table->bigInteger('NIF');
                 $table->unique('NIF');
             $table->integer('telefoneW');
             $table->integer('telefone2')->nullable();
             $table->enum('tipo',['Agente', 'Subagente']);
-            $table->dateTime('dataRegis')->useCurrent();
+            $table->timestamps();
             $table->softDeletes();
         });
     }
