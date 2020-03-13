@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUniversidadeRequest;
 use App\Http\Requests\UpdateUniversidadeRequest;
 use App\Universidade;
+use App\User;
 use Illuminate\Http\Request;
 
 class UniversityController extends Controller
 {
     public function index()
     {
+        $username = Auth()->user();
         $universidades = Universidade::all();
-        return view('universities.list', compact('universidades'));
+        return view('universities.list', compact('universidades', 'username'));
     }
 
     public function create()
