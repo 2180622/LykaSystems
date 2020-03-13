@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Responsabilidade extends Model
 {
     protected $table = 'Responsabilidade';
-    
-    public $timestamps = false;
+
+    protected $primaryKey = 'idResponsabilidade';
 
     protected $fillable = [
         'descricao','valorCliente','valorAgente','valorSubAgente',

@@ -9,8 +9,8 @@ class DocStock extends Model
 {
     use SoftDeletes;
     protected $table = 'DocStock';
-    
-    public $timestamps = false;
+
+    protected $primaryKey = 'idDocStock';
 
     protected $fillable = [
         'tipo','tipoPessoal','tipoAcademico','$idFaseStock'

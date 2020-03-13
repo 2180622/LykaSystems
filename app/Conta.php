@@ -9,8 +9,8 @@ class Conta extends Model
 {
     use SoftDeletes;
     protected $table = 'Conta';
-    
-    public $timestamps = false;
+
+    protected $primaryKey = 'idConta';
 
     protected $fillable = [
         'descricao','local','numConta','IBAN','instituicao','telefone','obsConta'

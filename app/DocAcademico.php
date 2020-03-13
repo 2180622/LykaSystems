@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class DocAcademico extends Model
 {
     protected $table = 'DocAcademico';
-    
-    public $timestamps = false;
+
+    protected $primaryKey = 'idDocAcademico';
 
     protected $fillable = [
         'nome','tipo','imagem','pais','nota','pontuacao','verificacao','$idFase'

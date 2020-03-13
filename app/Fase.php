@@ -8,6 +8,8 @@ class Fase extends Model
 {
     protected $table = 'Fase';
 
+    protected $primaryKey = 'idFase';
+
     protected $fillable = [
         'descricao','dataVencimento','valorFase','verificacaoPago','valorComissaoAgente',
         'valorComSubAgente','$idProduto','$idFaseStock'

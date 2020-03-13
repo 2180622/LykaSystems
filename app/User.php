@@ -12,6 +12,7 @@ class User extends Authenticatable
 
     use Notifiable;
     protected $table = 'User';
+    
     protected $primaryKey = 'idUser';
 
     protected $fillable = [
