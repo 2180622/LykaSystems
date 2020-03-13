@@ -8,7 +8,6 @@ class Notificacao extends Model
 {
     protected $table = 'Notificacao';
 
-    public $timestamps = false;
     protected $primaryKey = 'idNotificacao';
 
     protected $fillable = [

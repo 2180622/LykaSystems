@@ -10,7 +10,7 @@ class Universidade extends Model
     use SoftDeletes;
     protected $table = 'Universidade';
 
-    public $timestamps = false;
+    protected $primaryKey = 'idUniversidade';
 
     protected $fillable = [
         'nome','morada','telefone','email','NIF','IBAN','obsContactos','obsCursos','obsCandidaturas',

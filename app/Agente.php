@@ -12,8 +12,8 @@ class Agente extends Model
     use SoftDeletes;
 
     protected $table = 'Agente';
+    
     protected $primaryKey = 'idAgente';
-    public $timestamps = false;
 
     protected $fillable = [
         'nome','apelido','email','dataNasc','fotografia','morada','pais',

@@ -9,8 +9,8 @@ class Fornecedor extends Model
 {
     use SoftDeletes;
     protected $table = 'Fornecedor';
-    
-    public $timestamps = false;
+
+    protected $primaryKey = 'idFornecedor';
 
     protected $fillable = [
         'nome','morada','descricao'

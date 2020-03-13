@@ -17,15 +17,14 @@ class Notificacao extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idnotificacao');
-            $table->boolean('urgencia')->default(false);
-            $table->enum('tipo',['Atraso','Aniversario','Adicionado','Abertura']);
-            $table->dateTime('dataInicio');
-            $table->dateTime('dataFim');
-            $table->string('assunto',255);
-            $table->string('descricao',255);
+            $table->string('type');
+            $table->morphs('notificable');
+            $table->text('data');
+            $table->string('code');
+            $table->dateTime('dataComeco');
+            $table->boolean('urgencia');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('idUser');
-                $table->foreign('idUser')->references('idUser')->on('User');
         });
     }
 

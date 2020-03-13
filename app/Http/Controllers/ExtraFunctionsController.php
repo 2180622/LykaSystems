@@ -583,9 +583,7 @@ class ExtraFunctionsController extends Controller
             $produtosCliente = Auth()->user()->cliente->produto->all();
             $fasesCliente = null;
             foreach($produtosCliente as $produto){
-                $fasesProduto = null;/*->where('dataVencimento','>=',new DateTime())
-                    ->where('dataVencimento','<=',(new DateTime())->add(new DateInterval('P14D')))
-                    ->all();*/
+                $fasesProduto = null;
                 foreach($produto->fase as $fase){
                     if((new DateTime($fase->dataVencimento))>=(new DateTime()) && (new DateTime($fase->dataVencimento))<=((new DateTime())->add(new DateInterval('P14D')))){
                         $fasesProduto[] = $fase;

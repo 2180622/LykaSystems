@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Biblioteca extends Model
 {
     protected $table = 'Biblioteca';
-    
-    public $timestamps = false;
+
+    protected $primaryKey = 'idBiblioteca';
 
     protected $fillable = [
         'nome','imagem'

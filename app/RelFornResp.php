@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class RelFornResp extends Model
 {
     protected $table = 'RelFornResp';
-    
-    public $timestamps = false;
+
+    protected $primaryKey = 'idRelacao';
 
     protected $fillable = [
         'valor','$idResponsabilidade','$idFornecedor'
