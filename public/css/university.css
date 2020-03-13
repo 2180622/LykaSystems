@@ -16,20 +16,15 @@ table{
     border-bottom-left-radius: 15px;
 }
 
-
 .table-borderless tbody th:last-child{
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
 
-
-
 .table-borderless tbody tr:hover{
     border-radius: 20%;
     background-color: white;
 }
-
-
 
 .btn_list_opt{
     color:gray;
@@ -43,7 +38,6 @@ table{
 .btn_list_opt_delete:hover{
     color:red;
 }
-
 
 .btn_list_opt_edit:hover{
     color:#eac300;
