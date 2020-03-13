@@ -7,7 +7,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/media/favicon.png" type="image/x-icon">
+
+    <title>Autenticação - Lyka Systems</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
