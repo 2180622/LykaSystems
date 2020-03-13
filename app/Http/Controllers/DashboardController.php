@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Agente;
 use App\Cliente;
 use App\Universidade;
-
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller{
 
