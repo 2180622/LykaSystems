@@ -81,6 +81,8 @@ class ClientController extends Controller
 
     public function destroy(Cliente $client)
     {
-        //
+                //$user = User::findOrFail($request->modalUserid);
+                $client->delete();
+                return redirect()->route('clients.index')->with('success', 'Estudante eliminado com sucesso');
     }
 }

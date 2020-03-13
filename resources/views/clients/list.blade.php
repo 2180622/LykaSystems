@@ -100,7 +100,7 @@
                         <th class="text-center align-middle">
                             <a href="{{route('clients.show',$client)}}" class="btn_list_opt " title="Ver ficha completa"><i
                                     class="far fa-eye mr-2"></i></a>
-                            <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                            <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
                                     class="fas fa-pencil-alt mr-2"></i></a>
                             <a href="#" class="btn_list_opt btn_list_opt_delete" title="Eliminar"><i
                                     class="far fa-trash-alt"></i></a>
