@@ -8,7 +8,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-<link href="{{asset('css/client.css')}}" rel="stylesheet">
+<link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
 
 @endsection
 

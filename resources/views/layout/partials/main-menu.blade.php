@@ -105,7 +105,7 @@
 
             <!-- Lista telefónica -->
             <li class="menu-option">
-                <a href="{{route('phonebook.index')}}">login
+                <a href="{{route('phonebook.index')}}">
                     <div class="menu-icon">
                         <i class="fas fa-phone-alt mr-2"></i>
                     </div>
