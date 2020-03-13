@@ -10,6 +10,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
   /* Dashboard */
   Route::get('/', 'DashboardController@index')->name('dashboard');
 
+  /* Report Problem */
+  Route::get('/reportproblem', 'DashboardController@report')->name('report');
+
   /* Phonebook */
   Route::resource('/phonebook', 'PhonebookController');
 

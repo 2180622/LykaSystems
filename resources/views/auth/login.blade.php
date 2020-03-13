@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', 'Autenticação')
+
 @section('content')
 <div class="login-form">
     <div>

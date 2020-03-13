@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Agente;
 use App\Cliente;
 use App\Universidade;
-
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller{
 
@@ -21,27 +20,7 @@ class DashboardController extends Controller{
         return view('index', compact('agenteCount', 'clienteCount', 'universidadeCount'));
     }
 
-    public function create(){
-        //
-    }
-
-    public function store(Request $request){
-        //
-    }
-
-    public function show($id){
-        //
-    }
-
-    public function edit($id){
-        //
-    }
-
-    public function update(Request $request, $id){
-        //
-    }
-
-    public function destroy($id){
-        //
+    public function report(){
+        return view('report');
     }
 }
