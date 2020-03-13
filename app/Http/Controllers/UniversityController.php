@@ -2,72 +2,114 @@
 
 namespace App\Http\Controllers;
 
+use App\Universidade;
+use Illuminate\Http\Request;
+use App\User;
 use App\Http\Requests\StoreUniversidadeRequest;
 use App\Http\Requests\UpdateUniversidadeRequest;
-use App\Universidade;
-use App\User;
-use Illuminate\Http\Request;
 
 class UniversityController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $username = Auth()->user();
-        $universidades = Universidade::all();
-        return view('universities.list', compact('universidades', 'username'));
+        $universities = Universidade::all();
+        $totaluniversidades = $universities->count();
+        return view('universities.list', compact('universities', 'totaluniversidades'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $universidade = new Universidade;
-        return view('universities.add', compact('universidade'));
+        $university = new Universidade;
+        return view('universities.add', compact('university'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(StoreUniversidadeRequest $request)
     {
         $fields = $request->validated();
 
-        $universidade = new Universidade;
-        $universidade->fill($fields);
+        $university = new Universidade;
+        $university->fill($fields);
 
         // Data em que o registo é criado
         $t = time();
-        $universidade->create_at == date("Y-m-d", $t);
+        $university->create_at == date("Y-m-d", $t);
 
-        $universidade->save();
+        $university->save();
 
         return redirect()->route('universities.index')->with('success', 'Universidade Adicionada com Sucesso!');
+
     }
 
-    public function show(Universidade $universidade)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\University  $university
+     * @return \Illuminate\Http\Response
+     */
+    public function show(University $university)
     {
-        return view('universities.show', compact('universidade'));
+        return view('universities.show', compact('university'));
     }
 
-    public function edit(Universidade $universidade)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\University  $university
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(University $university)
     {
-
-        return view('universities.edit', compact('universidade'));
+        return view('universities.edit', compact('university'));
     }
 
-    public function update(UpdateUniversidadeRequest $request, Universidade $universidade)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\University  $university
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateUniversidadeRequest $request, University $university)
     {
         $fields = $request->validated();
-        $universidade->fill($fields);
+        $university->fill($fields);
 
         // Data em que o registo é modificado
         $t = time();
-        $universidade->updated_at == date("Y-m-d", $t);
-        $universidade->save();
+        $university->updated_at == date("Y-m-d", $t);
+        $university->save();
 
         return redirect()->route('universities.index')->with('success', 'Universidade Editada com Sucesso!');
 
     }
 
-    public function destroy(Universidade $universidade)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\University  $university
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(University $university)
     {
-        $universidade->delete();
+        $university->delete();
 
         return redirect()->route('universities.index')->with('success', 'Universidade Eliminada com Sucesso!');
+
     }
 }

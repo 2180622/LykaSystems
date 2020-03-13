@@ -25,6 +25,12 @@
             </div>
             <br>
 
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    Estão registados no sistema <strong>{{$totaluniversidades}}</strong> universidades
+                </div>
+            </div>
+
 
             <div class="row mt-3 mb-4">
                 <div class="col">
@@ -42,62 +48,69 @@
                         <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox"
                                placeholder="Procurar" aria-label="Procurar">
                         <div class="input-group-append">
-                      <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey"
-                                                                      aria-hidden="true"></i></span>
+                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey"
+                                                                        aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
-            @if (count($universidades))
-                <div class="table-responsive " style="overflow:hidden">
-                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                           style="overflow:hidden;">
 
-                        {{-- Cabeçalho da tabela --}}
-                        <thead>
+
+            <div class="table-responsive " style="overflow:hidden">
+
+
+                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                       style="overflow:hidden;">
+
+                    {{-- Cabeçalho da tabela --}}
+                    <thead>
+                    <tr>
+
+
+                        <th class="text-center align-content-center ">Foto
+                            {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
+                        </th>
+
+                        <th>Nome Universidade</th>
+                        <th>Morada</th>
+                        <th>E-mail</th>
+                        <th class="text-center">Opções</th>
+                    </tr>
+                    </thead>
+
+                    {{-- Corpo da tabela --}}
+                    <tbody>
+
+                    @foreach ($universities as $university)
                         <tr>
-                            <th class="text-center align-content-center ">Foto
-                                {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
+                            <th class="">
+                                <div class="align-middle mx-auto shadow-sm rounded-circle"
+                                     style="overflow:hidden; width:50px; height:50px">
+                                    {{--<img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
+                                         width="100%" class="mx-auto">--}}
+                                </div>
+                                {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
+                                --}}
                             </th>
-                            <th>Nome da Universidade</th>
-                            <th>Morada</th>
-                            <th>E-mail</th>
-                            <th class="text-center">Opções</th>
+                            <th class="align-middle">{{ $university->nome }}</th>
+                            <th class="align-middle">{{ $university->morada }}</th>
+                            <th class="align-middle">{{ $university->email }}</th>
+                            <th class="text-center align-middle">
+                                <a href="{{route('universities.show',$university)}}" class="btn_list_opt "
+                                   title="Ver ficha completa"><i
+                                        class="far fa-eye mr-2"></i></a>
+                                <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                        class="fas fa-pencil-alt mr-2"></i></a>
+                                <a href="#" class="btn_list_opt btn_list_opt_delete" title="Eliminar"><i
+                                        class="far fa-trash-alt"></i></a>
+                            </th>
                         </tr>
-                        </thead>
-                        {{-- Corpo da tabela --}}
-                        <tbody>
-                        @foreach ($universidades as $universidade)
-                            <tr>
-                                <th class="">
-                                    <div class="align-middle mx-auto shadow-sm rounded-circle"
-                                         style="overflow:hidden; width:50px; height:50px">
-                                        <img
-                                            src=""
-                                            width="100%" class="mx-auto">
-                                    </div>
-                                    {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}"> --}}
-                                </th>
-                                <th class="align-middle">{{ $universidade->nome }}</th>
-                                <th class="align-middle">{{ $universidade->morada }}</th>
-                                <th class="align-middle">{{ $universidade->email }}</th>
-                                <th class="text-center align-middle">
-                                    <a href="#fghjk" class="btn_list_opt " title="Ver ficha completa"><i
-                                            class="far fa-eye mr-2"></i></a>
-                                    <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                            class="fas fa-pencil-alt mr-2"></i></a>
-                                    <a href="#" class="btn_list_opt btn_list_opt_delete" title="Eliminar"><i
-                                            class="far fa-trash-alt"></i></a>
-                                </th>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @else
-                <h6 style="text-align: center">Sem Universidades Disponíveis</h6>
-            @endif
+                    @endforeach
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

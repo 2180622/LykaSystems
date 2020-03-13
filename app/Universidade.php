@@ -14,6 +14,10 @@ class Universidade extends Model
         'nome','morada','telefone','email','NIF','IBAN','obsContactos','obsCursos','obsCandidaturas',
         ];
 
+    public function user(){
+        return $this->belongsTo("App\User","idUser","idUser");
+    }
+
     public function produto(){
         return $this->hasMany("App\Produto","idUniversidade1","idUniversidade");
     }

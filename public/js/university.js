@@ -1,5 +1,8 @@
 $(document).ready(function() {
-    
+
+
+
+
     var table = $('#dataTable').DataTable( {
 
         "columnDefs": [
@@ -48,8 +51,4 @@ $(document).ready(function() {
     $('#records_per_page').change( function() {
         table.page.len( $(this).val() ).draw();
     });
-});
-
-$(function () {
-    $('input[type=text], textarea').keyup();
 });
