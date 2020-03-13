@@ -20,20 +20,19 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
   Route::resource('/clients', 'ClientController');
 
   /* Agentes */
-  Route::resource('agents', 'AgentController');
+  Route::resource('/agents', 'AgentController');
 
   /* Logout */
-  Route::get('logout', 'Auth\LoginController@logout');
+  Route::get('/logout', 'Auth\LoginController@logout');
+
+  /* Utilizadores */
+  Route::resource('/users', 'UserController');
+  Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
 });
-
-/* Utilizadores */
-Route::resource('/users', 'UserController');
-
-Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
 
 /* Email Confirmation */
 Route::get('/confirmation/{user}', 'AccountConfirmationController@index')->name('confirmation.index');
 Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
 
-/* Edgar Teste */ /* eliminar no futuro */
+/* Edgar Teste -> Eliminar no futuro */
 Route::get('/edgarteste', 'EdgarTesteController@index');

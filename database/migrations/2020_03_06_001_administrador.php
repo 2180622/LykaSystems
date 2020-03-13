@@ -19,23 +19,22 @@ class Administrador extends Migration
             $table->bigIncrements('idAdmin');
             $table->string('nome',255);
             $table->string('apelido',255);
-            $table->string('email',255);
-            $table->unique('email');
+            $table->string('email',255)->unique();
             $table->date('dataNasc');
             $table->string('fotografia',255)->nullable();
             $table->integer('telefone1');
             $table->integer('telefone2')->nullable();
             $table->timestamps();
-
             $table->softDeletes();
         });
+
+        $data = array(
+            array('idAdmin'=>'1', 'nome'=>'Administrador', 'apelido'=>'Administrador', 'email' => 'admin@test.com', 'dataNasc'=>'2000-01-01', 'telefone1'=>'912345678', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
+        );
+
+        DB::table('Administrador')->insert($data);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('Administrador');

@@ -29,11 +29,11 @@
             <div class="row mt-3 mb-4">
                 <div class="col">
                     <span class="mr-2">Mostrar</span>
-                    <select class="custom-select" style="width:50px">
+                    <select class="custom-select" id="records_per_page" style="width:80px">
                         <option selected>10</option>
                         <option>25</option>
                         <option>50</option>
-                        <option>50</option>
+                        <option>100</option>
                     </select>
                     <span class="ml-2">por página</span>
                 </div>

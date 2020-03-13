@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Universidade extends Model
 {
-    use SoftDeletes;
     protected $table = 'Universidade';
-
     protected $primaryKey = 'idUniversidade';
 
     protected $fillable = [

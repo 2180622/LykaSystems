@@ -40,7 +40,7 @@ class User extends Migration
     $password = Hash::make('admin');
 
     $data = array(
-        array('idUser'=>'1', 'email'=>'admin@test.com', 'password'=> $password, 'tipo'=>'admin', 'auth_key' => '6512155125412', 'status'=>'10', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
+        array('idUser'=>'1', 'email'=>'admin@test.com', 'password'=> $password, 'tipo'=>'admin', 'auth_key' => '6512155125412', 'status'=>'10', 'idAdmin'=>'1', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
     );
 
     DB::table('User')->insert($data);

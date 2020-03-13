@@ -26,7 +26,7 @@ class SendEmailConfirmation extends Mailable
             ->markdown('mails.confirmation')
             ->with([
                 'name' => $this->name,
-                'link' => 'http://lyka.test/confirmation/'.$this->id
+                'link' => url('/').'/confirmation/'.$this->id
             ]);
     }
 }
