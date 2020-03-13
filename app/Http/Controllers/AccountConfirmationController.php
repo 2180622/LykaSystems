@@ -30,7 +30,7 @@ class AccountConfirmationController extends Controller
         $user->save();
         return view('auth.accountactive', compact('user'));
       }else {
-        return redirect()->route('confirmation.update', $user)->with('error', 'As passwords não coincidem');
+        return redirect()->route('confirmation.update', $user)->with('error', 'As passwords não coincidem. Verique a sua inserção.');
       }
     }
 }

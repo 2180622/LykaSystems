@@ -12,7 +12,7 @@
 @section('content')
 <div class="container mt-2">
     <div class="float-right">
-        <a href="#" class="top-button">reportar problema</a>
+        <a href="{{route('report')}}" class="top-button">reportar problema</a>
     </div>
     <br>
     <div class="cards-navigation">
