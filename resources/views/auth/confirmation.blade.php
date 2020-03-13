@@ -4,7 +4,7 @@
 
 <div class="login-form">
     <div>
-        <p>Confirmação de conta - <b>LOREM</b> </p>
+        <p>Confirmação de conta - <b>{{$user->admin->nome}} {{$user->admin->apelido}}</b> </p>
         <div>
             <form class="form-group" action="{{route('confirmation.update', $user)}}" method="post">
                 @csrf
