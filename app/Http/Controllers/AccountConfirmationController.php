@@ -28,10 +28,9 @@ class AccountConfirmationController extends Controller
         $hashed = Hash::make($password);
         $user->password = $hashed;
         $user->save();
-        return redirect()->route('confirmation.index', $user)->with('success', 'Password successfully updated');
+        return view('auth.accountactive', compact('user'));
       }else {
-        $error = "lorem ipsum";
-        return redirect()->route('confirmation.update', $user)->with('error');
+        return redirect()->route('confirmation.update', $user)->with('error', 'As passwords não coincidem');
       }
     }
 }

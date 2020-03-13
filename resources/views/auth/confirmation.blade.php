@@ -6,20 +6,13 @@
     <div>
         <p>Confirmação de conta - <b>{{$user->admin->nome}} {{$user->admin->apelido}}</b> </p>
         <br>
-        {{session('success')}}
         <div>
             <form class="form-group" action="{{route('confirmation.update', $user)}}" method="post">
                 @csrf
                 <div class="form-group">
                     <input id="password" type="password" class="form-control" name="password" placeholder="password" />
-                    <span class="invalid-feedback" role="alert">
-                        @if ($error = null)
-                        <strong></strong>
-                        @else
-                        <strong>{{$error}}</strong>
-                        @endif
-                    </span>
                 </div>
+                <strong>{{session('error')}}</strong>
                 <div class="form-group">
                     <input id="password-conf" type="password" class="form-control" name="password-confirmation" placeholder="confirmar password" />
                 </div>
