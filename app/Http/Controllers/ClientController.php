@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
 use Hash;
+use App\User;
+use App\Cliente;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreClienteRequest;
-use App\User;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class ClientController extends Controller
 {
@@ -17,7 +17,7 @@ class ClientController extends Controller
     {
 
         $clients = Cliente::all();
-        $totalestudantes = DB::table('cliente')->count();
+        $totalestudantes = $clients->count();
         return view('clients.list', compact('clients', 'totalestudantes'));
     }
 

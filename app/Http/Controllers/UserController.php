@@ -39,7 +39,8 @@ class UserController extends Controller
 
       $admin = new Administrador;
       $admin->fill($fieldsAdmin);
-      $name = $admin->nome;
+
+      $name = $admin->nome .' '. $admin->apelido;
 
       $admin->save();
       $user->idAdmin = $admin->idAdmin;
