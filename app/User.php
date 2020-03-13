@@ -30,7 +30,7 @@ class User extends Authenticatable
         return $this->belongsTo("App\Cliente","idCliente","idCliente");
     }
 
-    public function cliente(){
+    public function notificacao(){
         return $this->hasMany("App\Notificacao","idUser","idUser");
     }
 }
