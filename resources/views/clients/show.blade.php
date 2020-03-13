@@ -69,8 +69,7 @@
                         <div><span class="text-secondary">Data de nascimento:</span>
                             {{ date('d-M-y', strtotime($client->dataNasc)) }}</div><br>
 
-                        <div><span class="text-secondary">Observações pessoais:</span></div>
-                        <div>{{ $client->obsPessoais }}</div><br>
+                        <div><span class="text-secondary">Observações pessoais: </span>{{ $client->obsPessoais }}</div><br>
 
                         <hr><br>
 
@@ -84,8 +83,7 @@
                         <div><span class="text-secondary">Local da instituição:</span>
                             {{$client->cidadeInstituicaoOrigem}}</div><br>
 
-                        <div><span class="text-secondary">Observações académicas:</span></div>
-                        <div>{{$client->obsAcademicas}}</div><br>
+                        <div><span class="text-secondary">Observações académicas: </span>{{$client->obsAcademicas}}</div><br>
 
                     </div>
 
