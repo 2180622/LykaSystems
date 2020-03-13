@@ -9,34 +9,18 @@ use Illuminate\Http\Request;
 
 class UniversityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $universidades = Universidade::all();
         return view('universities.list', compact('universidades'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $universidade = new Universidade;
         return view('universities.add', compact('universidade'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreUniversidadeRequest $request)
     {
         $fields = $request->validated();
@@ -53,36 +37,17 @@ class UniversityController extends Controller
         return redirect()->route('universities.index')->with('success', 'Universidade Adicionada com Sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Universidade  $universidade
-     * @return \Illuminate\Http\Response
-     */
     public function show(Universidade $universidade)
     {
         return view('universities.show', compact('universidade'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Universidade  $Universidade
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Universidade $universidade)
     {
 
         return view('universities.edit', compact('universidade'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Universidade  $universidade
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateUniversidadeRequest $request, Universidade $universidade)
     {
         $fields = $request->validated();
@@ -97,12 +62,6 @@ class UniversityController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Universidade  $universidade
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Universidade $universidade)
     {
         $universidade->delete();
