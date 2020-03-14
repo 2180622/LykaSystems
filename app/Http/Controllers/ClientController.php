@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
-use App\User;
 use App\Cliente;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\StoreClienteRequest;
+use App\Http\Requests\UpdateClienteRequest;
+use App\Http\Requests\StoreClientRequest;
 
 class ClientController extends Controller
 {
@@ -22,44 +19,60 @@ class ClientController extends Controller
     }
 
 
+
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
-        return view('clients.add');
+        $client = new Cliente;
+        return view('clients.add',compact('client'));
     }
 
 
-    public function store(StoreUserRequest $requestUser, StoreClienteRequest $requestCliente){
-      $curTime = Carbon::now();
 
-      $fieldsUser = $requestUser->validated();
-      $fieldsCliente = $requestCliente->validated();
 
-      $user = new User;
-      $user->tipo = "cliente";
-      $user->auth_key = rand(655541,getrandmax());
-      $user->status = 10;
-      $user->fill($fieldsUser);
-      //gerar hash a partir da pass inserida
-      $hashed = Hash::make('password');
-      $user->password = $hashed;
+    /***********************************************************************//*
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    * @param  \App\User  $user
+    */
+    public function store(StoreClientRequest $request){
 
-      $cliente= new Cliente;
-      $cliente->dataRegis = $curTime;
-      $cliente->fill($fieldsCliente);
+        $fields = $request->validated();
+        $client = new Cliente;
+        $client->fill($fields);
 
-      $cliente->save();
-      $user->idCliente = $cliente->idCliente;
-      $user->email = $cliente->email;
-      $user->save();
 
-      $email = $user->email;
-      $id = $user->idUser;
-      Mail::to($email)->send(new SendEmailConfirmation($id));
+        if ($request->hasFile('fotografia')) {
+            $photo = $request->file('fotografia');
+            $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('users_photos/', $photo, $profileImg);
+            $client->fotografia = $profileImg;
+            $client->save();
+        }
 
-      return redirect()->route('users.index')->with('success', 'Client successfully created');
+        // data em que foi criado
+        $t=time();
+        $client->create_at == date("Y-m-d",$t);
+
+        $client->save();
+        return redirect()->route('clients.index')->with('success', 'Ficha de estudante criada com sucesso');
     }
 
 
+
+
+    /**
+    * Display the specified resource.
+    *
+    * @param  \App\Cliente  $client
+    * @return \Illuminate\Http\Response
+    */
     public function show(Cliente $client)
     {
 
@@ -67,21 +80,77 @@ class ClientController extends Controller
     }
 
 
+
+
+
+    /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Cliente  $client
+    * @return \Illuminate\Http\Response
+    */
     public function edit(Cliente $client)
     {
-        return view('clients.edit',$client);
+
+        return view('clients.edit', compact('client'));
     }
 
 
-    public function update(Request $request, Cliente $client)
+
+    /**
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  \App\User  $user
+    * @return \Illuminate\Http\Response
+    */
+    public function update(UpdateClienteRequest $request, Cliente $client)
     {
-        //
+        $fields = $request->validated();
+        $client->fill($fields);
+
+
+        if ($request->fotografia==null){
+            $client->fotografia = "default_client.png";
+        }
+
+        if ($request->hasFile('fotografia')) {
+            $photo = $request->file('fotografia');
+            $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            if (!empty($client->fotografia)) {
+                Storage::disk('public')->delete('client-photos/' . $client->fotografia);
+            }
+            Storage::disk('public')->putFileAs('client-photos/', $photo, $profileImg);
+            $client->fotografia = $profileImg;
+        }
+
+        // data em que foi modificado
+        $t=time();
+        $client->updated_at == date("Y-m-d",$t);
+
+        $client->save();
+
+
+
+         return redirect()->route('clients.index')->with('success', 'Dados do estudante modificados com sucesso');
+
     }
 
+
+
+
+
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  \App\Cliente  $client
+    * @return \Illuminate\Http\Response
+    */
 
     public function destroy(Cliente $client)
     {
-                //$user = User::findOrFail($request->modalUserid);
+                //$client = client::findOrFail($request->modalclientid);
                 $client->delete();
                 return redirect()->route('clients.index')->with('success', 'Estudante eliminado com sucesso');
     }

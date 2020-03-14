@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Page Title --}}
-@section('title', 'Página Exemplo')
+@section('title', 'Editar informações')
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
@@ -19,17 +19,17 @@
     <br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Adicionar estudante</h6>
+            <h6>Editar informações</h6>
         </div>
         <br>
 
 
-        <form method="PUT" action="{{route('clients.store')}}" class="form-group pt-3" id="form_client" enctype="multipart/form-data">
+        <form method="PUT" action="{{route('clients.update',$client)}}" class="form-group pt-3" id="form_client" enctype="multipart/form-data">
             @csrf
             @include('clients.partials.add-edit')
             <div class="form-group text-right">
                 <br><br>
-                <button type="button" class="top-button" name="ok" id="buttonSubmit"></i>Guardar ficha</button>
+                <button type="submit" class="top-button" name="submit"></i>Guardar ficha</button>
                 <a href="{{route('clients.index')}}" class="top-button">Cancelar</a>
             </div> </form>
 

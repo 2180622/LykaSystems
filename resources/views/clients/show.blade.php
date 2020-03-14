@@ -15,7 +15,7 @@
 
 <div class="container mt-2">
     <div class="float-right">
-        <a href="#" class="top-button">Editar informação</a>
+        <a href="#" class="top-button mr-2">Editar informação</a>
         <a href="#" class="top-button">Imprimir</a>
     </div>
     <br>
@@ -229,7 +229,7 @@
 
                         <hr>
 
-                        <div><span class="text-secondary">Observações Financeiras:</span>{{$client->obsFinanceiras}}
+                        <div><span class="text-secondary">Observações Financeiras: </span>{{$client->obsFinanceiras}}
                         </div>
                     </div>
                 </div>
