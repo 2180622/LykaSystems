@@ -47,7 +47,7 @@
 
                 {{-- INPUT dataNasc --}}
                 <label for="dataNasc">Data de nascimento:</label><br>
-                <input type="date" class="form-control" name="dataNasc" id="dataNasc" value="{{old('nome',$client->dataNasc)}}" style="width:250px"><br>
+                <input type="date" class="form-control" name="dataNasc" id="dataNasc" value="{{old('dataNasc',$client->dataNasc)}}" style="width:250px"><br>
             </div>
 
             <div class="col col-4 text-center">
@@ -68,7 +68,7 @@
             <div class="col-md-12">
                 {{-- INPUT obsPessoais --}}
                 <label for="obsPessoais">Observações pessoais:</label><br>
-                <textarea name="obsPessoais" id="obsPessoais" rows="5" class="form-control">{{old('nome',$client->obsPessoais)}}</textarea>
+                <textarea name="obsPessoais" id="obsPessoais" rows="5" class="form-control">{{old('obsPessoais',$client->obsPessoais)}}</textarea>
             </div>
         </div>
     </div>
@@ -93,14 +93,14 @@
             <div class="col">
                 {{-- INPUT nivEstudoAtual --}}
                 <label for="nomeInstituicaoOrigem">Nome da instituição de origem:</label><br>
-                <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem" value="{{old('nome',$client->nomeInstituicaoOrigem)}}"><br>
+                <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem" value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}"><br>
             </div>
 
 
             <div class="col">
                 {{-- Cidade de Origem  --}}
                 <label for="morada">Cidade da Instituição de Origem:</label><br>
-                <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="morada" value="{{old('nome',$client->cidadeInstituicaoOrigem)}}"><br>
+                <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="morada" value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}"><br>
             </div>
 
         </div>
@@ -109,7 +109,7 @@
             <div class="col-md-12">
                 {{-- INPUT obsAcademicas --}}
                 <label for="obsAcademicas">Observações académicas:</label><br>
-                <textarea name="obsAcademicas" id="obsAcademicas" rows="5" class="form-control">{{old('nome',$client->obsAcademicas)}}</textarea>
+                <textarea name="obsAcademicas" id="obsAcademicas" rows="5" class="form-control">{{old('obsAcademicas',$client->obsAcademicas)}}</textarea>
             </div>
         </div>
     </div>
@@ -121,18 +121,18 @@
         <div class="row">
             <div class="col">
                 <label for="telefone1">Telefone pessoal:</label><br>
-                <input type="text" class="form-control" name="telefone1" id="telefone1" value="{{old('nome',$client->telefone1)}}"><br>
+                <input type="text" class="form-control" name="telefone1" id="telefone1" value="{{old('telefone1',$client->telefone1)}}"><br>
             </div>
             <div class="col">
                 <label for="telefone2">Telemóvel pessoal:</label><br>
-                <input type="text" class="form-control" name="telefone2" id="telefone2" value="{{old('nome',$client->telefone2)}}"><br>
+                <input type="text" class="form-control" name="telefone2" id="telefone2" value="{{old('telefone2',$client->telefone2)}}"><br>
             </div>
         </div>
 
         <div class="row">
             <div class="col">
                 <label for="email">E-mail pessoal:</label><br>
-                <input type="text" class="form-control" name="email" id="email" value="{{old('nome',$client->email)}}"><br>
+                <input type="text" class="form-control" name="email" id="email" value="{{old('email',$client->email)}}"><br>
             </div>
         </div>
 
@@ -141,24 +141,24 @@
             <div class="col">
 
                 <label for="nomePai">Nome do pai:</label><br>
-                <input type="text" class="form-control" name="nomePai" id="nomePai" value="{{old('nome',$client->nomePai)}}"><br>
+                <input type="text" class="form-control" name="nomePai" id="nomePai" value="{{old('nomePai',$client->nomePai)}}"><br>
 
                 <label for="telefonePai">Telefone do pai:</label><br>
-                <input type="text" class="form-control" name="telefonePai" id="telefonePai" value="{{old('nome',$client->telefonePai)}}"><br>
+                <input type="text" class="form-control" name="telefonePai" id="telefonePai" value="{{old('telefonePai',$client->telefonePai)}}"><br>
 
                 <label for="emailPai">E-mail do pai:</label><br>
-                <input type="text" class="form-control" name="emailPai" id="emailPai" value="{{old('nome',$client->emailPai)}}"><br>
+                <input type="text" class="form-control" name="emailPai" id="emailPai" value="{{old('emailPai',$client->emailPai)}}"><br>
             </div>
 
             <div class="col">
                 <label for="nomeMae">Nome da mãe:</label><br>
-                <input type="text" class="form-control" name="nomeMae" id="nomeMae" value="{{old('nome',$client->nomeMae)}}"><br>
+                <input type="text" class="form-control" name="nomeMae" id="nomeMae" value="{{old('nomeMae',$client->nomeMae)}}"><br>
 
                 <label for="telefoneMae">Telefone da mãe:</label><br>
-                <input type="text" class="form-control" name="telefoneMae" id="telefoneMae" value="{{old('nome',$client->telefoneMae)}}"><br>
+                <input type="text" class="form-control" name="telefoneMae" id="telefoneMae" value="{{old('telefoneMae',$client->telefoneMae)}}"><br>
 
                 <label for="emailMae">E-mail da mãe:</label><br>
-                <input type="text" class="form-control" name="emailMae" id="emailMae" value="{{old('nome',$client->emailMae)}}"><br>
+                <input type="text" class="form-control" name="emailMae" id="emailMae" value="{{old('emailMae',$client->emailMae)}}"><br>
             </div>
 
         </div>
@@ -173,7 +173,7 @@
             <div class="col">
                 {{-- Morada de residência em Portugal --}}
                 <label for="moradaResidencia">Morada de residência em Portugal:</label><br>
-                <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia" value="{{old('nome',$client->moradaResidencia)}}"><br>
+                <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia" value="{{old('moradaResidencia',$client->moradaResidencia)}}"><br>
             </div>
 
 
@@ -185,13 +185,13 @@
             <div class="col">
                 {{-- Morada de residência no pais de origem --}}
                 <label for="morada">Morada no pais de origem:</label><br>
-                <input type="text" class="form-control" name="morada" id="morada" value="{{old('nome',$client->morada)}}"><br>
+                <input type="text" class="form-control" name="morada" id="morada" value="{{old('morada',$client->morada)}}"><br>
             </div>
 
             <div class="col">
                 {{-- Cidade de Origem  --}}
                 <label for="morada">Cidade de origem:</label><br>
-                <input type="text" class="form-control" name="cidade" id="cidade" value="{{old('nome',$client->cidade)}}"><br>
+                <input type="text" class="form-control" name="cidade" id="cidade" value="{{old('cidade',$client->cidade)}}"><br>
             </div>
 
         </div>
@@ -208,11 +208,11 @@
         <div class="row">
             <div class="col">
                 <label for="numCCid">Número de cartão de cidadão:</label><br>
-                <input type="text" class="form-control" name="numCCid" id="numCCid" value="{{old('nome',$client->numCCid)}}"><br>
+                <input type="text" class="form-control" name="numCCid" id="numCCid" value="{{old('numCCid',$client->numCCid)}}"><br>
             </div>
             <div class="col">
                 <label for="NIF">Número de identificação fiscal:</label><br>
-                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('nome',$client->NIF)}}"><br>
+                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}"><br>
             </div>
         </div>
 
@@ -225,12 +225,12 @@
             <div class="col">
                 {{-- INUPUT numPassaport --}}
                 <label for="numPassaport">Numero do passaporte:</label><br>
-                <input type="text" class="form-control" name="numPassaport" id="numPassaport" value="{{old('nome',$client->numPassaport)}}"><br>
+                <input type="text" class="form-control" name="numPassaport" id="numPassaport" value="{{old('numPassaport',$client->numPassaport)}}"><br>
             </div>
             <div class="col">
                 {{-- INUPUT dataValidPP --}}
                 <label for="dataValidPP">Data de validade do passaporte:</label><br>
-                <input type="date" class="form-control" name="dataValidPP" id="dataValidPP" value="{{old('nome',$client->dataValidPP)}}"><br>
+                <input type="date" class="form-control" name="dataValidPP" id="dataValidPP" value="{{old('dataValidPP',$client->dataValidPP)}}"><br>
             </div>
         </div>
 
@@ -246,7 +246,7 @@
             <div class="col">
                 {{-- INUPUT dataValidPP --}}
                 <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
-                <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP" value="{{old('nome',$client->localEmissaoPP)}}"><br>
+                <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP" value="{{old('localEmissaoPP',$client->localEmissaoPP)}}"><br>
             </div>
         </div>
 
@@ -255,10 +255,10 @@
         <div class="row mt-4">
             <div class="col">
                 <label for="IBAN" class="mr-2">IBAN: </label><small>(25 caracteres)</small><br>
-                <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('nome',$client->IBAN)}}"><br>
+                <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}"><br>
 
                 <label for="obsFinanceiras">Observações Financeiras:</label><br>
-                <textarea name="obsFinanceiras" id="obsFinanceiras" rows="5" class="form-control">{{old('nome',$client->obsFinanceiras)}}</textarea>
+                <textarea name="obsFinanceiras" id="obsFinanceiras" rows="5" class="form-control">{{old('obsFinanceiras',$client->obsFinanceiras)}}</textarea>
             </div>
         </div>
 

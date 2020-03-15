@@ -15,7 +15,7 @@
 
 <div class="container mt-2">
     <div class="float-right">
-        <a href="#" class="top-button mr-2">Editar informação</a>
+        <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
         <a href="#" class="top-button">Imprimir</a>
     </div>
     <br>
@@ -92,9 +92,18 @@
                     <div class="col col-4 text-center" style="min-width:195px">
                         {{-- Fotografia --}}
                         <div><label for="fotografia"><span class="text-secondary">Fotografia:</span></label></div>
-                        <img class="m-2 p-1 rounded bg-white shadow-sm"
+
+                        @if ($client->fotografia==null)
+                            <img class="m-2 p-1 rounded bg-white shadow-sm"
+                                src="{{Storage::disk('public')->url('client-photos/default.png')}}"
+                                style="width:80%">
+                        @else
+                            <img class="m-2 p-1 rounded bg-white shadow-sm"
                             src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
                             style="width:80%">
+                        @endif
+
+
                     </div>
                 </div>
 

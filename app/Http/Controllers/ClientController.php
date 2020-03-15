@@ -101,9 +101,10 @@ class ClientController extends Controller
     * Update the specified resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
-    * @param  \App\User  $user
+    * @param  \App\Cliente  $user
     * @return \Illuminate\Http\Response
     */
+
     public function update(UpdateClienteRequest $request, Cliente $client)
     {
         $fields = $request->validated();
@@ -111,7 +112,7 @@ class ClientController extends Controller
 
 
         if ($request->fotografia==null){
-            $client->fotografia = "default_client.png";
+            $client->fotografia = "default.png";
         }
 
         if ($request->hasFile('fotografia')) {

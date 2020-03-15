@@ -24,8 +24,9 @@
         <br>
 
 
-        <form method="PUT" action="{{route('clients.update',$client)}}" class="form-group pt-3" id="form_client" enctype="multipart/form-data">
+        <form method="POST" action="{{route('clients.update',$client)}}" class="form-group pt-3" id="form_client" enctype="multipart/form-data">
             @csrf
+            @method("PUT")
             @include('clients.partials.add-edit')
             <div class="form-group text-right">
                 <br><br>
