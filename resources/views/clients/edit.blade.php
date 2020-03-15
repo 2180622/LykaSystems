@@ -24,15 +24,17 @@
         <br>
 
 
-        <form method="POST" action="{{route('clients.update',$client)}}" class="form-group pt-3" id="form_client" enctype="multipart/form-data">
+        <form method="POST" action="{{route('clients.update',$client)}}" class="form-group pt-3" id="form_client"
+            enctype="multipart/form-data">
             @csrf
             @method("PUT")
             @include('clients.partials.add-edit')
             <div class="form-group text-right">
                 <br><br>
-                <button type="submit" class="top-button" name="submit"></i>Guardar ficha</button>
+                <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
                 <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
-            </div> </form>
+            </div>
+        </form>
 
 
     </div>

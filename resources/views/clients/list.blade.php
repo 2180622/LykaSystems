@@ -15,6 +15,9 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
+@include('clients.partials.modal')
+<!-- MODAL DE INFORMAÇÔES -->
+
 <div class="container mt-2">
     <div class="float-right">
         <a href="{{route('clients.create')}}" class="top-button">Adicionar Estudante</a>
@@ -28,7 +31,7 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-            Estão registados no sistema <strong>{{$totalestudantes}}</strong> estudantes
+                Estão registados no sistema <strong>{{$totalestudantes}}</strong> estudantes
             </div>
         </div>
 
@@ -86,7 +89,7 @@
                     @foreach ($clients as $client)
                     <tr>
                         <th class="">
-                            <div class="align-middle mx-auto shadow-sm rounded-circle"
+                            <div class="align-middle mx-auto shadow-sm rounded"
                                 style="overflow:hidden; width:50px; height:50px">
                                 <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
                                     width="100%" class="mx-auto">
@@ -94,16 +97,32 @@
                             {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
                             --}}
                         </th>
+
+                        {{-- Nome e Apelido --}}
                         <th class="align-middle">{{ $client->nome }} {{ $client->apelido }}</th>
+
+                        {{-- E-Mail --}}
                         <th class="align-middle">{{ $client->email }}</th>
+
+                        {{-- PaisNaturalidade --}}
                         <th class="align-middle">{{ $client->paisNaturalidade }}</th>
+
+
+                        {{-- OPÇÔES --}}
                         <th class="text-center align-middle">
-                            <a href="{{route('clients.show',$client)}}" class="btn_list_opt " title="Ver ficha completa"><i
-                                    class="far fa-eye mr-2"></i></a>
-                            <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                    class="fas fa-pencil-alt mr-2"></i></a>
-                            <a href="#" class="btn_list_opt btn_list_opt_delete" title="Eliminar"><i
-                                    class="far fa-trash-alt"></i></a>
+                            <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
+                                title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                            <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
+                                title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                            <form method="POST" role="form" id="{{ $client->idCliente }}"
+                                action="{{route('clients.destroy',$client)}}" class="d-inline-block form_client_id">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
+                                    data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+
                         </th>
                     </tr>
                     @endforeach

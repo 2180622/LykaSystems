@@ -131,7 +131,6 @@ class ClientController extends Controller
         $client->save();
 
 
-
          return redirect()->route('clients.index')->with('success', 'Dados do estudante modificados com sucesso');
 
     }
