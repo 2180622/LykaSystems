@@ -47,13 +47,16 @@ class ClientController extends Controller
         $client = new Cliente;
         $client->fill($fields);
 
-
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('users_photos/', $photo, $profileImg);
+            Storage::disk('public')->putFileAs('client-photos/', $photo, $profileImg);
             $client->fotografia = $profileImg;
             $client->save();
+        }
+
+        if ($request->fotografia==null){
+            $client->fotografia = "default.png";
         }
 
         // data em que foi criado
@@ -110,10 +113,6 @@ class ClientController extends Controller
         $fields = $request->validated();
         $client->fill($fields);
 
-
-        if ($request->fotografia==null){
-            $client->fotografia = "default.png";
-        }
 
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');

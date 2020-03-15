@@ -37,7 +37,7 @@
 
                 {{-- INPUT apelido --}}
                 <label for="apelido">Apelido:</label><br>
-                <input type="text" class="form-control" name="apelido" id="apelido" value="{{old('nome',$client->apelido)}}" placeholder="Insira o apelido do aluno"><br>
+                <input type="text" class="form-control" name="apelido" id="apelido" value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno"><br>
 
                 {{-- INPUT paisNaturalidade --}}
                 <label for="paisNaturalidade">Naturalidade:</label><br>
@@ -52,15 +52,19 @@
 
             <div class="col col-4 text-center">
                 {{-- INPUT fotografia --}}
-                <div><label for="fotografia">Fotografia:</label></div>
+                <div>
+                    <label for="fotografia">Fotografia:</label>
+                    <input type='file' id="fotografia" name="fotografia" style="display:none"/>
+
+                </div>
 
                             <!-- Verifica se a imagem já existe-->
             @if ($client->fotografia!=null)
-                <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" id="preview" class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;clear:both" alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+                <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" id="preview" class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer" alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
             @else
-                <img src="{{Storage::disk('public')->url('client-photos/').'default.png'}}" id="preview" class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;clear:both" alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+                <img src="{{Storage::disk('public')->url('client-photos/').'default.png'}}" id="preview" class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer" alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
             @endif
-                <br><a href="#" class="top-button">Procurar ficheiro</a>
+                <br><a href="#" id="search_btn" class="top-button">Procurar ficheiro</a>
             </div>
         </div>
 

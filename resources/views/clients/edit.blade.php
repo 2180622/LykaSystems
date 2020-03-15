@@ -31,7 +31,7 @@
             <div class="form-group text-right">
                 <br><br>
                 <button type="submit" class="top-button" name="submit"></i>Guardar ficha</button>
-                <a href="{{route('clients.index')}}" class="top-button">Cancelar</a>
+                <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
             </div> </form>
 
 
@@ -45,6 +45,6 @@
 {{-- Scripts --}}
 @section('scripts')
 
-{{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
+<script src="{{asset('/js/clients.js')}}"></script>
 
 @endsection
