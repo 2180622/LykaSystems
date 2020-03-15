@@ -1,8 +1,5 @@
     $(document).ready(function () {
 
-
-
-
         var table = $('#dataTable').DataTable({
 
             "columnDefs": [{
@@ -65,14 +62,11 @@
         });
 
 
-
         $(".dataTables_filter").hide(); // Esconde o input search por defeito
         $("#customSearchBox").on('keyup', function () {
             $(".dataTables_filter input").val($("#customSearchBox").val())
             table.search($(".dataTables_filter input").val()).draw();
         });
-
-
 
 
 
@@ -83,9 +77,39 @@
         });
 
 
+        $('#search_btn').on('click', function (e) {
+            e.preventDefault();
+            $('#fotografia').trigger('click');
+        });
+
+        $('#preview').on('click', function (e) {
+            e.preventDefault();
+            $('#fotografia').trigger('click');
+        });
+
+        /* FIM configs DATATABLES */
 
 
-        //Preview da imagem
+
+
+
+
+        /* Definir paisNaturalidade */
+        var str_paisNaturalidade = $("#hidden_paisNaturalidade").val();
+        $('#paisNaturalidade').val(str_paisNaturalidade);
+
+
+        /* Definir passaportPaisEmi */
+        var str_passaportPaisEmi = $("#hidden_passaportPaisEmi").val();
+        $('#passaportPaisEmi').val(str_passaportPaisEmi);
+
+
+
+
+
+
+
+        //Preview da fotografia
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -104,21 +128,8 @@
 
 
 
-        $('#search_btn').on('click', function (e) {
-            e.preventDefault();
-            $('#fotografia').trigger('click');
-        });
 
-        $('#preview').on('click', function (e) {
-            e.preventDefault();
-            $('#fotografia').trigger('click');
-        });
-
-
-
-
-
-
+        /* OPÇÃO DE APAGAR */
         var formToSubmit //Varial para indicar o forumulário a submeter
 
         $(".form_client_id").submit(function (e) {

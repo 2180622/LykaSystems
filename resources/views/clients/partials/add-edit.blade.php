@@ -48,6 +48,7 @@
 
                 {{-- INPUT paisNaturalidade --}}
                 <label for="paisNaturalidade">Naturalidade:</label><br>
+                <input type="hidden" id="hidden_paisNaturalidade" value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
                 <select id="paisNaturalidade" name="paisNaturalidade" class="form-control">
                     @include('clients.partials.countries');
                 </select><br>
@@ -274,6 +275,7 @@
             <div class="col">
                 {{-- INUPUT numPassaport --}}
                 <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
+                <input type="hidden" id="hidden_passaportPaisEmi" value="{{old('passaportPaisEmi',$client->passaportPaisEmi)}}">
                 <select id="passaportPaisEmi" name="passaportPaisEmi" class="form-control">
                     @include('clients.partials.countries');
                 </select>
