@@ -23,14 +23,14 @@
         <a href="#" class="top-button">reportar problema</a>
     </div>
 
-    <br>
+    <br><br>
     <div class="cards-navigation">
         <div class="title">
             <h6>Adicionar estudante</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('clients.store')}}" class="form-group pt-3" id="form_client"
-            enctype="multipart/form-data">
+        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client"
+            enctype="multipart/form-data" novalidate>
             @csrf
             @include('clients.partials.add-edit')
             <div class="form-group text-right">
@@ -46,9 +46,17 @@
 
 
 
+
+
+
+
 {{-- Scripts --}}
 @section('scripts')
+
+{{-- script contem: datatable configs, input configs, validações --}}
 <script src="{{asset('/js/clients.js')}}"></script>
+
+{{-- script permite definir se um input recebe só numeros OU so letras --}}
 <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 
 @endsection

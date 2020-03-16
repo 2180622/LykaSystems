@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateClienteRequest;
@@ -79,7 +80,17 @@ class ClientController extends Controller
     public function show(Cliente $client)
     {
 
-        return view('clients.show',compact("client"));
+        // Produtos adquiridos pelo cliente
+        $produtos = DB::table("produto")
+        ->select('*')
+        ->where('produto.idCliente', '=', $client->idCliente)
+        ->get();
+
+        if ($produtos->isEmpty()) {
+            $produtos=null;
+        }
+
+        return view('clients.show',compact("client","produtos"));
     }
 
 

@@ -14,11 +14,20 @@
 @section('content')
 
 <div class="container mt-2">
+        {{-- Navegação --}}
+        <div class="float-left">
+            <a href="javascript:history.go(-1)" title="Voltar"><i
+                    class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
+            <a href="javascript:window.history.forward();" title="Avançar"><i
+                    class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+        </div>
     <div class="float-right">
         <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
         <a href="#" class="top-button">Imprimir</a>
     </div>
-    <br>
+
+    <br><br>
+    
     <div class="cards-navigation">
         <div class="title">
             <h6>Ficha de estudante - {{$client->nome}} {{$client->apelido}}</h6>
@@ -225,11 +234,17 @@
                 <div class="row ">
                     <div class="col">
                         <div><span class="text-secondary">Produtos adquiridos:</span><br>
-                            <ul>
-                                <li>Curso tal tal</li>
-                                <li>Curso tal tal</li>
-                                <li>Curso tal tal</li>
-                            </ul>
+
+                            @if($produtos!=null)
+                                <ul>
+                                    <li>Curso tal tal</li>
+                                    <li>Curso tal tal</li>
+                                    <li>Curso tal tal</li>
+                                </ul>
+                            @else
+                                <div>- Sem produtos adquiridos</div>
+                            @endif
+
                         </div>
                     </div>
 

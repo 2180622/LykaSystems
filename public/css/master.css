@@ -27,7 +27,7 @@ html, body {
 
 .nav_btns{
     color: gray !important;
-    background-color: none;
+    background-color: lightgray;
 }
 
 .nav_btns:hover{

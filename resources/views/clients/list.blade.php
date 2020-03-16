@@ -32,7 +32,7 @@
         <a href="{{route('clients.create')}}" class="top-button">Adicionar Estudante</a>
     </div>
 
-    <br>
+    <br><br>
 
 
     <div class="cards-navigation">

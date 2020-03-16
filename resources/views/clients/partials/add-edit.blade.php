@@ -2,13 +2,13 @@
     {{-- MENU: Informação pessoal --}}
     <li class="nav-item">
         <a class="nav-link active" id="pessoal-tab" data-toggle="tab" href="#pessoal" role="tab"
-            aria-controls="contacts" aria-selected="true"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos"></i>Informação pessoal</a>
+            aria-controls="contacts" aria-selected="true"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_info_pessoal"></i>Informação pessoal</a>
     </li>
 
     {{-- MENU: Dados académicos --}}
     <li class="nav-item">
         <a class="nav-link" id="school-tab" data-toggle="tab" href="#school" role="tab" aria-controls="school"
-            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos"></i>Dados académicos</a>
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_academico"></i>Dados académicos</a>
     </li>
 
     {{-- MENU: Contactos --}}
@@ -20,13 +20,13 @@
     {{-- MENU: Moradas --}}
     <li class="nav-item">
         <a class="nav-link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab" aria-controls="adresses"
-            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos"></i>Moradas</a>
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_moradas"></i>Moradas</a>
     </li>
 
     {{-- MENU: Documentação --}}
     <li class="nav-item">
         <a class="nav-link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
-            aria-controls="documentation" aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos"></i>Documentação</a>
+            aria-controls="documentation" aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_documentation"></i>Documentação</a>
     </li>
 </ul>
 
@@ -39,24 +39,24 @@
                 {{-- INPUT nome --}}
                 <label for="nome">Nome:</label><br>
                 <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$client->nome)}}"
-                    placeholder="Insira o nome do aluno" ><br>
+                    placeholder="Insira o nome do aluno" required><br>
 
                 {{-- INPUT apelido --}}
                 <label for="apelido">Apelido:</label><br>
                 <input type="text" class="form-control" name="apelido" id="apelido"
-                    value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" ><br>
+                    value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" required><br>
 
                 {{-- INPUT paisNaturalidade --}}
                 <label for="paisNaturalidade">Naturalidade:</label><br>
                 <input type="hidden" id="hidden_paisNaturalidade" value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
-                <select id="paisNaturalidade" name="paisNaturalidade" class="form-control" >
+                <select id="paisNaturalidade" name="paisNaturalidade" class="form-control" required>
                     @include('clients.partials.countries');
                 </select><br>
 
                 {{-- INPUT dataNasc --}}
                 <label for="dataNasc">Data de nascimento:</label><br>
                 <input type="date" class="form-control" name="dataNasc" id="dataNasc"
-                    value="{{old('dataNasc',$client->dataNasc)}}" style="width:250px" ><br>
+                    value="{{old('dataNasc',$client->dataNasc)}}" style="width:250px" required><br>
             </div>
 
             <div class="col col-4 text-center">
@@ -97,7 +97,8 @@
             <div class="col">
                 {{-- INPUT nivEstudoAtual --}}
                 <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
-                <select class="form-control" name="nivEstudoAtual" id="nivEstudoAtual" >
+                <select class="form-control" name="nivEstudoAtual" id="nivEstudoAtual" required>
+                    <option value="" selected hidden></option>
                     <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}}>1</option>
                     <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}}>2</option>
                     <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}}>3</option>
@@ -111,7 +112,7 @@
                 {{-- INPUT nivEstudoAtual --}}
                 <label for="nomeInstituicaoOrigem">Nome da instituição de origem:</label><br>
                 <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem"
-                    value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}" ><br>
+                    value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}" required><br>
             </div>
 
 
@@ -119,7 +120,7 @@
                 {{-- Cidade de Origem  --}}
                 <label for="morada">Cidade da Instituição de Origem:</label><br>
                 <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="cidadeInstituicaoOrigem"
-                    value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}" ><br>
+                    value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}" required><br>
             </div>
 
         </div>
@@ -142,7 +143,7 @@
             <div class="col">
                 <label for="telefone1">Telefone pessoal(1):</label><br>
                 <input type="text" class="form-control" name="telefone1" id="telefone1"
-                    value="{{old('telefone1',$client->telefone1)}}" ><br>
+                    value="{{old('telefone1',$client->telefone1)}}" required><br>
             </div>
             <div class="col">
                 <label for="telefone2">Telefone pessoal(2):</label><br>
@@ -155,7 +156,7 @@
             <div class="col">
                 <label for="email">E-mail pessoal:</label><br>
                 <input type="email" class="form-control" name="email" id="email"
-                    value="{{old('email',$client->email)}}" ><br>
+                    value="{{old('email',$client->email)}}" required><br>
             </div>
         </div>
 
@@ -203,7 +204,7 @@
                 {{-- Morada de residência em Portugal --}}
                 <label for="moradaResidencia">Morada de residência em Portugal:</label><br>
                 <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia"
-                    value="{{old('moradaResidencia',$client->moradaResidencia)}}" ><br>
+                    value="{{old('moradaResidencia',$client->moradaResidencia)}}" required><br>
             </div>
 
 
@@ -216,14 +217,14 @@
                 {{-- Morada de residência no pais de origem --}}
                 <label for="morada">Morada no pais de origem:</label><br>
                 <input type="text" class="form-control" name="morada" id="morada"
-                    value="{{old('morada',$client->morada)}}"  ><br>
+                    value="{{old('morada',$client->morada)}}"  required><br>
             </div>
 
             <div class="col">
                 {{-- Cidade de Origem  --}}
                 <label for="cidade">Cidade de origem:</label><br>
                 <input type="text" class="form-control" name="cidade" id="cidade"
-                    value="{{old('cidade',$client->cidade)}}" ><br>
+                    value="{{old('cidade',$client->cidade)}}" required><br>
             </div>
 
         </div>
@@ -241,11 +242,11 @@
             <div class="col">
                 <label for="numCCid">Número de cartão de cidadão:</label><br>
                 <input type="text" class="form-control" name="numCCid" id="numCCid"
-                    value="{{old('numCCid',$client->numCCid)}}" ><br>
+                    value="{{old('numCCid',$client->numCCid)}}" required><br>
             </div>
             <div class="col">
                 <label for="NIF">Número de identificação fiscal:</label><br>
-                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}" ><br>
+                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}" required><br>
             </div>
         </div>
 
@@ -259,13 +260,13 @@
                 {{-- INUPUT numPassaport --}}
                 <label for="numPassaport">Numero do passaporte:</label><br>
                 <input type="text" class="form-control" name="numPassaport" id="numPassaport"
-                    value="{{old('numPassaport',$client->numPassaport)}}" ><br>
+                    value="{{old('numPassaport',$client->numPassaport)}}" required><br>
             </div>
             <div class="col">
                 {{-- INUPUT dataValidPP --}}
                 <label for="dataValidPP">Data de validade do passaporte:</label><br>
                 <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                    value="{{old('dataValidPP',$client->dataValidPP)}}" ><br>
+                    value="{{old('dataValidPP',$client->dataValidPP)}}" required><br>
             </div>
         </div>
 
@@ -275,7 +276,7 @@
                 {{-- INUPUT numPassaport --}}
                 <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
                 <input type="hidden" id="hidden_passaportPaisEmi" value="{{old('passaportPaisEmi',$client->passaportPaisEmi)}}">
-                <select id="passaportPaisEmi" name="passaportPaisEmi" class="form-control" >
+                <select id="passaportPaisEmi" name="passaportPaisEmi" class="form-control" required>
                     @include('clients.partials.countries');
                 </select>
             </div>
@@ -283,7 +284,7 @@
                 {{-- INUPUT dataValidPP --}}
                 <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                 <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                    value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" ><br>
+                    value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" required><br>
             </div>
         </div>
 
@@ -292,7 +293,7 @@
         <div class="row mt-4">
             <div class="col">
                 <label for="IBAN" class="mr-2">IBAN: </label><small>(25 caracteres)</small><br>
-                <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}" ><br>
+                <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}" required><br>
 
                 <label for="obsFinanceiras">Observações Financeiras:</label><br>
                 <textarea name="obsFinanceiras" id="obsFinanceiras" rows="5"
