@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Page Title --}}
-@section('title', 'Ficha individual')
+@section('title', 'Ficha de estudante')
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
@@ -21,7 +21,7 @@
     <br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Ficha de estudante</h6>
+            <h6>Ficha de estudante - {{$client->nome}} {{$client->apelido}}</h6>
         </div>
         <br>
 
@@ -94,11 +94,10 @@
                         <div><label for="fotografia"><span class="text-secondary">Fotografia:</span></label></div>
 
                         @if ($client->fotografia==null)
-                            <img class="m-2 p-1 rounded bg-white shadow-sm"
-                                src="{{Storage::disk('public')->url('client-photos/default.png')}}"
-                                style="width:80%">
+                        <img class="m-2 p-1 rounded bg-white shadow-sm"
+                            src="{{Storage::disk('public')->url('client-photos/default.png')}}" style="width:80%">
                         @else
-                            <img class="m-2 p-1 rounded bg-white shadow-sm"
+                        <img class="m-2 p-1 rounded bg-white shadow-sm"
                             src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
                             style="width:80%">
                         @endif
@@ -107,10 +106,11 @@
                     </div>
                 </div>
 
+            </div>
 
 
-                <hr><br>
-
+            {{-- Conteudo: Contactos --}}
+            <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
 
                 <div class="row">
                     <div class="col">
@@ -131,15 +131,9 @@
                         <div>{{$client->moradaResidencia}}</div><br>
 
                     </div>
-
-
                 </div>
 
-            </div>
-
-
-            {{-- Conteudo: Contactos --}}
-            <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                <hr><br>
 
                 <div class="row">
                     <div class="col">
@@ -173,7 +167,7 @@
             <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
 
                 {{-- INUPUT IDENTIFICAÇÃO --}}
-                <div class="row mb-4">
+                <div class="row">
                     <div class="col">
                         <div><span class="text-secondary">Número de cartão de cidadão:</span> {{$client->numCCid}}</div>
 
@@ -181,13 +175,13 @@
                     <div class="col">
                         <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
                     </div>
-                </div>
+                </div><br>
 
-                <hr>
+                <hr><br>
 
 
                 {{-- INUPUTS DADOS DE PASSAPORTE --}}
-                <div class="row mt-4">
+                <div class="row">
 
                     <div class="col">
                         {{--  numPassaport --}}
@@ -207,9 +201,7 @@
                             {{$client->localEmissaoPP}}</div><br>
 
                     </div>
-                    <div class="col">
 
-                    </div>
                 </div>
 
 
@@ -224,10 +216,14 @@
 
                 <div class="row ">
                     <div class="col">
-                        <div><span class="text-secondary">IBAN:</span> {{$client->IBAN}}</div>
+                        <span class="text-secondary">Agente responsável:</span> "Nome do Agente"
+                    </div>
+                </div><br>
 
-                        <hr>
+                <hr><br>
 
+                <div class="row ">
+                    <div class="col">
                         <div><span class="text-secondary">Produtos adquiridos:</span><br>
                             <ul>
                                 <li>Curso tal tal</li>
@@ -235,11 +231,22 @@
                                 <li>Curso tal tal</li>
                             </ul>
                         </div>
+                    </div>
 
-                        <hr>
+                    <div class="col">
 
-                        <div><span class="text-secondary">Observações Financeiras: </span>{{$client->obsFinanceiras}}
-                        </div>
+                        <div><span class="text-secondary">Estado financeiro: </span><span class="text-success">Regularizado</span></div><br>
+
+                        <div><span class="text-secondary">Observações Financeiras: </span>{{$client->obsFinanceiras}}</div>
+
+                    </div>
+
+                </div><br>
+
+                <hr><br>
+                <div class="row">
+                    <div class="col">
+                        <div><span class="text-secondary">IBAN:</span> {{$client->IBAN}}</div><br>
                     </div>
                 </div>
             </div>

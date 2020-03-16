@@ -2,32 +2,31 @@
     {{-- MENU: Informação pessoal --}}
     <li class="nav-item">
         <a class="nav-link active" id="pessoal-tab" data-toggle="tab" href="#pessoal" role="tab"
-            aria-controls="contacts" aria-selected="true"><i class="fas fa-exclamation-circle text-danger mr-2" id="warning_contactos"></i>Informação pessoal</a>
+            aria-controls="contacts" aria-selected="true"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos"></i>Informação pessoal</a>
     </li>
 
     {{-- MENU: Dados académicos --}}
     <li class="nav-item">
         <a class="nav-link" id="school-tab" data-toggle="tab" href="#school" role="tab" aria-controls="school"
-            aria-selected="false"><i class="fas fa-exclamation-circle text-danger mr-2" id="warning_contactos"></i>Dados académicos</a>
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos"></i>Dados académicos</a>
     </li>
 
     {{-- MENU: Contactos --}}
     <li class="nav-item">
-
         <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab" aria-controls="contacts"
-            aria-selected="false"><i class="fas fa-exclamation-circle text-danger mr-2" id="warning_contactos"></i>Contactos</a>
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos" ></i>Contactos</a>
     </li>
 
     {{-- MENU: Moradas --}}
     <li class="nav-item">
         <a class="nav-link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab" aria-controls="adresses"
-            aria-selected="false"><i class="fas fa-exclamation-circle text-danger mr-2" id="warning_contactos"></i>Moradas</a>
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos"></i>Moradas</a>
     </li>
 
     {{-- MENU: Documentação --}}
     <li class="nav-item">
         <a class="nav-link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
-            aria-controls="documentation" aria-selected="false"><i class="fas fa-exclamation-circle text-danger mr-2" id="warning_contactos"></i>Documentação</a>
+            aria-controls="documentation" aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos"></i>Documentação</a>
     </li>
 </ul>
 

@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-{{-- <link href="{{asset('/css/NOME_DO_FICHEIRO.css')}}" rel="stylesheet"> --}}
+    <link href="{{asset('css/clients.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}

@@ -169,9 +169,14 @@
 
 
         /* VALIDAÇÃO DO FORUMLÁRIO */
-        $("#form_client").submit(function(e){
+/*         $("#form_client").submit(function(e){
             e.preventDefault();
-            alert("sdfsdf");
+            alert("Validação em cons");
+
+ */
+            /* LISTA DE CONDIÇÕES */
+
+
         });
 
 

@@ -40,7 +40,7 @@ class Cliente extends Migration
             $table->string('nomeMae',255)->nullable();
             $table->integer('telefoneMae')->nullable();
             $table->string('emailMae',255)->nullable();
-            $table->string('fotografia',255)->nullable();
+            $table->string('fotografia',255)->nullable()->default('default.png');
             $table->bigInteger('NIF');
                 $table->unique('NIF');
             $table->string('IBAN',255);
@@ -51,6 +51,7 @@ class Cliente extends Migration
             $table->longText('obsFinanceiras')->nullable();
             $table->longText('obsAcademicas')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
