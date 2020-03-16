@@ -106,9 +106,6 @@
 
 
 
-
-
-
         //Preview da fotografia
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -140,6 +137,41 @@
         //click sim na modal
         $(".btn_submit").click(function (e) {
             formToSubmit.submit();
+        });
+
+
+
+
+
+
+        /* VALIDAÇÃO DE INPUTS */
+
+        /* Apenas letras:  .lettersOnly();  */
+        $("#nome").lettersOnly();
+        $("#apelido").lettersOnly();
+        $("#cidadeInstituicaoOrigem").lettersOnly();
+        $("#nomePai").lettersOnly();
+        $("#nomeMae").lettersOnly();
+        $("#morada").lettersOnly();
+        $("#localEmissaoPP").lettersOnly();
+
+
+
+        /* Apenas numeros:  .numbersOnly();  */
+        $("#numCCid").numbersOnly();
+        $("#numPassaport").numbersOnly();
+        $("#IBAN").numbersOnly();
+
+
+
+
+
+
+
+        /* VALIDAÇÃO DO FORUMLÁRIO */
+        $("#form_client").submit(function(e){
+            e.preventDefault();
+            alert("sdfsdf");
         });
 
 

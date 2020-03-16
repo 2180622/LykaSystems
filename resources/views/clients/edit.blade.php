@@ -13,10 +13,19 @@
 
 
 <div class="container mt-2">
+    {{-- Navegação --}}
+    <div class="float-left">
+        <a href="javascript:history.go(-1)" title="Voltar"><i
+                class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
+        <a href="javascript:window.history.forward();" title="Avançar"><i
+                class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+    </div>
     <div class="float-right">
         <a href="#" class="top-button">reportar problema</a>
     </div>
+
     <br>
+
     <div class="cards-navigation">
         <div class="title">
             <h6>Editar informações</h6>
@@ -48,5 +57,6 @@
 @section('scripts')
 
 <script src="{{asset('/js/clients.js')}}"></script>
+<script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 
 @endsection

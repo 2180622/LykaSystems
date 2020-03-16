@@ -25,6 +25,16 @@ html, body {
 }
 
 
+.nav_btns{
+    color: gray !important;
+    background-color: none;
+}
+
+.nav_btns:hover{
+    background-color: white;
+}
+
+
 /* Cards Navigation Style */
 /* Title */
 .cards-navigation {
