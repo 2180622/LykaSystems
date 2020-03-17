@@ -47,7 +47,7 @@
 
 
             <div class="col">
-                <h3>Ficha de estudante</h3>
+                <h3><i class="fas fa-user-graduate mr-2"></i>Ficha de estudante</h3>
                 <hr style="border:1px solid lightgray"><br>
 
                 {{-- Informações Pessoais --}}
@@ -67,7 +67,15 @@
 
                 </div>
 
-                <div><span class="text-secondary font-weight-bold">E-mail:</span> {{$client->email}}</div><br>
+                <div><span class="text-secondary font-weight-bold">E-mail:</span> {{$client->email}}</div>
+
+                <div><span class="text-secondary font-weight-bold">Observações pessoais:</span>
+                    @if ($client->obsPessoais==null)
+                    <span class="text-muted"><small>(sem dados para mostrar)</small></span>
+                    @else
+                    {{ $client->obsPessoais }}
+                    @endif
+                </div><br>
 
                 <div><span class="text-secondary font-weight-bold">Adicionado em: </span>{{ date('d-M-y', strtotime($client->created_at)) }}</div><br>
 
@@ -92,8 +100,8 @@
 
         <div class="row ">
 
-            <div class="col p-3 mr-3 border-right">
-                <h5>Passaporte</h5><br>
+            <div class="col p-3 mr-3 ">
+                <h5><i class="fas fa-passport mr-2"></i>Passaporte</h5><br>
                 {{--  numPassaport --}}
                 <div><span class="text-secondary font-weight-bold">Número do passaporte:</span>
                     {{$client->numPassaport}}</div>
@@ -112,7 +120,7 @@
             </div>
 
             <div class="col p-3 ">
-                <h5>Documento de identificação</h5><br>
+                <h5><i class="far fa-id-card mr-2"></i>Documento de identificação</h5><br>
                 <div><span class="text-secondary font-weight-bold">Número de cartão de cidadão:</span>
                     {{$client->numCCid}}</div>
                 <div><span class="text-secondary font-weight-bold">Número de identificação fiscal:</span>
@@ -130,7 +138,7 @@
 
             <div class="col mr-4 ">
 
-                <h5>Dados académicos</h5><br>
+                <h5><i class="fas fa-university mr-2"></i>Dados académicos</h5><br>
                 {{-- Informações Escolares --}}
                 <div><span class="text-secondary font-weight-bold">Nivel de estudos(atual):</span>
                     {{$client->nivEstudoAtual}}
@@ -166,7 +174,7 @@
         <div class="row">
 
             <div class="col">
-                <h5>Contactos</h5><br>
+                <h5><i class="far fa-address-book mr-2"></i>Contactos</h5><br>
                 {{-- Morada em Portugal --}}
                 <div><span class="text-secondary font-weight-bold">Morada de residência (Portugal):</span> {{$client->moradaResidencia}}</div>
 
@@ -192,7 +200,7 @@
 
         <div class="row">
             <div class="col">
-                <div><span class="text-secondary font-weight-bold">Produtos aquiridos:</span>
+                <div><i class="fas fa-stream mr-2 "></i><span class="text-secondary font-weight-bold">Produtos aquiridos:</span>
                     curso1, curso2, curso3, curso4,
                 </div>
             </div>
@@ -203,18 +211,8 @@
 
         <div class="row">
 
-            <div class="col mr-2 border-right">
-                <div><span class="text-secondary font-weight-bold">Observações pessoais:</span><br>
-                    @if ($client->obsPessoais==null)
-                    <span class="text-muted"><small>(sem dados para mostrar)</small></span>
-                    @else
-                    {{ $client->obsPessoais }}
-                    @endif
-                </div><br>
-            </div>
-
             <div class="col">
-                <div><span class="text-secondary font-weight-bold">Observações Financeiras:</span><br>
+                <div><span class="text-secondary font-weight-bold">Observações Financeiras:</span>
 
                     @if ($client->obsFinanceiras==null)
                     <span class="text-muted font-weight-bold"><small>(sem dados para mostrar)</small></span>
@@ -224,19 +222,11 @@
                 </div>
             </div>
 
-        </div>
-
-        <br>
-        <hr style="border:1px solid lightgray"><br>
-
-        <div class="row">
             <div class="col">
-                <div><span class="text-secondary font-weight-bold">IBAN:</span> {{$client->IBAN}}</div><br>
+                <div><i class="fas fa-search-dollar mr-2"></i><span class="text-secondary font-weight-bold">IBAN:</span> {{$client->IBAN}}</div>
             </div>
+
         </div>
-
-
-
 
     </div>
 
