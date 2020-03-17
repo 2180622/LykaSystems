@@ -21,8 +21,8 @@ class Cliente extends Migration
             $table->string('apelido',255);
             $table->string('email',255);
                 $table->unique('email');
-            $table->integer('telefone1');
-            $table->integer('telefone2')->nullable();
+            $table->string('telefone1',255);
+            $table->string('telefone2',255)->nullable();
             $table->date('dataNasc');
             $table->string('numCCid',255);
                 $table->unique('numCCid');

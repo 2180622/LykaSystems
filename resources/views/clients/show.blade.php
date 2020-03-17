@@ -23,7 +23,7 @@
         </div>
     <div class="float-right">
         <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
-        <a href="#" class="top-button">Imprimir</a>
+        <a href="{{route('clients.print',$client)}}" target="_blank" class="top-button">Imprimir</a>
     </div>
 
     <br><br>
@@ -54,7 +54,7 @@
 
                 <div><span class="text-secondary">Naturalidade:</span> {{$client->paisNaturalidade}}</div><br>
 
-                <div><span class="text-secondary ">Data de nascimento:</span>
+                <div><span class="text-secondary ">Data de nascimento: </span>
                     {{ date('d-M-y', strtotime($client->dataNasc)) }}</div><br>
 
                 <div><span class="text-secondary">Telefone (principal):</span> {{$client->telefone1}}</div><br>
@@ -72,7 +72,10 @@
                     @else
                         {{ $client->obsPessoais }}
                     @endif
-                </div>
+                </div><br>
+
+                <div class="text-muted"><small>Adicionado: {{ date('d-M-y', strtotime($client->created_at)) }}</small></div>
+                <div class="text-muted"><small>Ultima atualização: {{ date('d-M-y', strtotime($client->updated_at)) }}</small></div>
 
 
 

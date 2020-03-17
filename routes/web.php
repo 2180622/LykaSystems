@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
   Route::resource('/universities', 'UniversityController');
 
   /* Estudantes */
+  Route::get('/clients/print/{client}', 'ClientController@print')->name('clients.print');
   Route::resource('/clients', 'ClientController');
 
   /* Agentes */
