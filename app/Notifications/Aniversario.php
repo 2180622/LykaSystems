@@ -11,6 +11,7 @@ class Aniversario extends Notification
 {
     use Queueable;
     protected $Urgencia;
+    protected $DataComeco;
     protected $Tipo;
     protected $DataInicio;
     protected $DataFim;
@@ -22,16 +23,17 @@ class Aniversario extends Notification
      *
      * @return void
      */
-    public function __construct($urgencia, $tipo, $dataInicio, $dataFim, $assunto, $descricao)
+    public function __construct($urgencia, $dataComeco, $tipo, $dataInicio, $dataFim, $assunto, $descricao)
     {
         $this->Urgencia = $urgencia;
+        $this->DataComeco = $dataComeco;
         $this->Tipo = $tipo;
         $this->DataInicio = $dataInicio;
         $this->DataFim = $dataFim;
         $this->Assunto = $assunto;
         $this->Descricao = $descricao;
     }
-
+    
     /**
      * Get the notification's delivery channels.
      *
@@ -72,6 +74,7 @@ class Aniversario extends Notification
     {
         return [
             'urgencia' => $this->Urgencia,
+            'dataComeco' => $this->DataComeco,
             'tipo' => $this->Tipo,
             'dataInicio' => $this->DataInicio,
             'dataFim' => $this->DataFim,

@@ -21,8 +21,6 @@ class Notificacao extends Migration
             $table->morphs('notifiable');
             $table->text('data');
             $table->string('code');
-            $table->dateTime('dataComeco');
-            $table->boolean('urgencia')->default(false);
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
