@@ -24,7 +24,27 @@ class UpdateUniversidadeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => 'required',
+            'morada' => 'required',
+            'telefone' => 'required',
+            'email' => 'required',
+            'NIF' => 'required',
+            'IBAN' => 'required',
+            'obsContactos' => 'nullable',
+            'obsCursos' => 'nullable',
+            'obsCandidaturas' => 'nullable',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nome.required' => 'O Nome da universidade é obrigatório ser preenchido.',
+            'morada.required' => 'A Morada é obrigatória ser preenchida.',
+
+            'email.required' => 'O Endereço Eletrónico é obrigatório ser preenchido.',
+            'NIF.required' => 'O NIF é obrigatório ser preenchido.',
+            'IBAN.required' => 'O IBAN é obrigatório ser preenchido.',
         ];
     }
 }

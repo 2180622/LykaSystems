@@ -27,7 +27,7 @@
     </div>
 
     <br><br>
-    
+
     <div class="cards-navigation">
         <div class="title">
             <h6>Ficha de estudante - {{$client->nome}} {{$client->apelido}}</h6>
@@ -121,26 +121,26 @@
             {{-- Conteudo: Contactos --}}
             <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
 
-                <div class="row">
-                    <div class="col">
+                    <div class="row">
+                        <div class="col">
 
-                        {{-- Contactos --}}
-                        <div><span class="text-secondary">Telefone (principal):</span> {{$client->telefone1}}</div><br>
+                            {{-- Contactos --}}
+                            <div><span class="text-secondary">Telefone (principal):</span> {{$client->telefone1}}</div><br>
 
-                        <div><span class="text-secondary">Telefone (secundário):</span> {{$client->telefone2}}</div><br>
+                            <div><span class="text-secondary">Telefone (secundário):</span> {{$client->telefone2}}</div><br>
 
-                        <div><span class="text-secondary">E-mail:</span> {{$client->email}}</div><br>
+                            <div><span class="text-secondary">E-mail:</span> {{$client->email}}</div><br>
+                        </div>
+
+
+                        <div class="col">
+
+                            {{-- Contactos --}}
+                            <div><span class="text-secondary">Morada de residência (Portugal):</span></div>
+                            <div>{{$client->moradaResidencia}}</div><br>
+
+                        </div>
                     </div>
-
-
-                    <div class="col">
-
-                        {{-- Contactos --}}
-                        <div><span class="text-secondary">Morada de residência (Portugal):</span></div>
-                        <div>{{$client->moradaResidencia}}</div><br>
-
-                    </div>
-                </div>
 
                 <hr><br>
 

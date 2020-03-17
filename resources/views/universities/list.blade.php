@@ -7,18 +7,35 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-    <link href="{{asset('css/university.css')}}" rel="stylesheet">
+
+    <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
+    {{--    <link href="{{asset('css/university.css')}}" rel="stylesheet">--}}
+
 @endsection
 
 
 {{-- Conteudo da Página --}}
 @section('content')
     @include('universities.partials.modal')
-    <div class="container mt-2">
+    <!-- MODAL DE INFORMAÇÔES -->
+
+    <div class="container mt-2 ">
+
+        {{-- Navegação --}}
+        <div class="float-left">
+            <a href="javascript:history.go(-1)" title="Voltar"><i
+                    class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
+            <a href="javascript:window.history.forward();" title="Avançar"><i
+                    class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+        </div>
+
         <div class="float-right">
             <a href="{{route('universities.create')}}" class="top-button">Adicionar Universidade</a>
         </div>
-        <br>
+
+        <br><br>
+
+
         <div class="cards-navigation">
             <div class="title">
                 <h6>Listagem de Universidades</h6>
@@ -73,8 +90,8 @@
                         </th>
 
                         <th>Nome Universidade</th>
-                        <th>Morada</th>
                         <th>E-mail</th>
+                        <th>Morada</th>
                         <th class="text-center">Opções</th>
                     </tr>
                     </thead>
@@ -85,25 +102,42 @@
                     @foreach ($universities as $university)
                         <tr>
                             <th class="">
-                                <div class="align-middle mx-auto shadow-sm rounded-circle"
+                                <div class="align-middle mx-auto shadow-sm rounded"
                                      style="overflow:hidden; width:50px; height:50px">
-                                    {{--<img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
-                                         width="100%" class="mx-auto">--}}
+                                    <img src="{{Storage::disk('public')->url('client-photos/').$university->fotografia}}"
+                                         width="100%" class="mx-auto">
                                 </div>
                                 {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
                                 --}}
                             </th>
+
+                            {{-- Nome --}}
                             <th class="align-middle">{{ $university->nome }}</th>
-                            <th class="align-middle">{{ $university->morada }}</th>
+
+                            {{-- E-Mail --}}
                             <th class="align-middle">{{ $university->email }}</th>
+
+                            {{-- Morada --}}
+                            <th class="align-middle">{{ $university->morada }}</th>
+
+
+                            {{-- OPÇÔES --}}
                             <th class="text-center align-middle">
                                 <a href="{{route('universities.show',$university)}}" class="btn_list_opt "
-                                   title="Ver ficha completa"><i
-                                        class="far fa-eye mr-2"></i></a>
-                                <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                        class="fas fa-pencil-alt mr-2"></i></a>
-                                <a href="#" class="btn_list_opt btn_list_opt_delete" title="Eliminar"><i
-                                        class="far fa-trash-alt"></i></a>
+                                   title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="{{route('universities.edit',$university)}}" class="btn_list_opt btn_list_opt_edit"
+                                   title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                                <form method="POST" role="form" id="{{ $university->idUniversidade }}"
+                                      action="{{route('universities.destroy',$university)}}"
+                                      class="d-inline-block form_university_id">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn_delete" title="Eliminar Universidade"
+                                            data-toggle="modal"
+                                            data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+
                             </th>
                         </tr>
                     @endforeach
@@ -111,6 +145,8 @@
                     </tbody>
                 </table>
             </div>
+
+
         </div>
     </div>
 @endsection

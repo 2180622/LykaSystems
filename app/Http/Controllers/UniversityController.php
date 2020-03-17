@@ -59,10 +59,10 @@ class UniversityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\University  $university
+     * @param  \App\Universidade  $university
      * @return \Illuminate\Http\Response
      */
-    public function show(University $university)
+    public function show(Universidade $university)
     {
         return view('universities.show', compact('university'));
     }
@@ -70,10 +70,10 @@ class UniversityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\University  $university
+     * @param  \App\Universidade  $university
      * @return \Illuminate\Http\Response
      */
-    public function edit(University $university)
+    public function edit(Universidade $university)
     {
         return view('universities.edit', compact('university'));
     }
@@ -82,10 +82,10 @@ class UniversityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\University  $university
+     * @param  \App\Universidade  $university
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUniversidadeRequest $request, University $university)
+    public function update(UpdateUniversidadeRequest $request, Universidade $university)
     {
         $fields = $request->validated();
         $university->fill($fields);
@@ -102,10 +102,10 @@ class UniversityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\University  $university
+     * @param  \App\Universidade  $university
      * @return \Illuminate\Http\Response
      */
-    public function destroy(University $university)
+    public function destroy(Universidade $university)
     {
         $university->delete();
 
