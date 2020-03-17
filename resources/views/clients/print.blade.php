@@ -61,7 +61,7 @@
                     </span>{{ date('d-M-y', strtotime($client->dataNasc)) }}</div>
 
                 <div><span class="text-secondary font-weight-bold">Telefone:</span> {{$client->telefone1}}
-                    @if ($client->fotografia!=null)
+                    @if ($client->telefone2!=null)
                     / {{$client->telefone2}}
                     @endif
 
