@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('css/universities.css')}}" rel="stylesheet">
+    <link href="{{asset('css/clients.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -33,14 +33,14 @@
             <br>
 
 
-            <form method="POST" action="{{route('universities.update',$university)}}" class="form-group needs-validation pt-3" id="form_university"
+            <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
-                @include('universities.partials.add-edit')
+                @include('clients.partials.add-edit')
                 <div class="form-group text-right">
                     <br><br>
-                    <button type="submit" class="top-button mr-2" name="submit">Guardar ficha</button>
+                    <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
                     <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
                 </div>
             </form>
@@ -61,7 +61,7 @@
 @section('scripts')
 
     {{-- script contem: datatable configs, input configs, validações --}}
-    <script src="{{asset('/js/university.js')}}"></script>
+    <script src="{{asset('/js/clients.js')}}"></script>
 
     {{-- script permite definir se um input recebe só numeros OU so letras --}}
     <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
