@@ -152,7 +152,6 @@
         $("#cidadeInstituicaoOrigem").lettersOnly();
         $("#nomePai").lettersOnly();
         $("#nomeMae").lettersOnly();
-        $("#morada").lettersOnly();
         $("#localEmissaoPP").lettersOnly();
 
 

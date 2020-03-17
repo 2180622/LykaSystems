@@ -34,6 +34,8 @@ class User extends Migration
 
             $table->unsignedBigInteger('idCliente')->nullable();
                 $table->foreign('idCliente')->references('idCliente')->on('Cliente');
+
+                $table->softDeletes();
         });
 
 

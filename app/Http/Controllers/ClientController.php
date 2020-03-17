@@ -96,6 +96,33 @@ class ClientController extends Controller
 
 
 
+    /**
+    * Prepares document for printing the specified client.
+    *
+    * @param  \App\Cliente  $client
+    * @return \Illuminate\Http\Response
+    */
+    public function print(Cliente $client)
+    {
+
+        // Produtos adquiridos pelo cliente
+        $produtos = DB::table("produto")
+        ->select('*')
+        ->where('produto.idCliente', '=', $client->idCliente)
+        ->get();
+
+        if ($produtos->isEmpty()) {
+            $produtos=null;
+        }
+
+        return view('clients.print',compact("client","produtos"));
+    }
+
+
+
+
+
+
 
     /**
     * Show the form for editing the specified resource.

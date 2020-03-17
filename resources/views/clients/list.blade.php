@@ -103,15 +103,15 @@
                         <th class="">
                             <div class="align-middle mx-auto shadow-sm rounded"
                                 style="overflow:hidden; width:50px; height:50px">
-                                <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
-                                    width="100%" class="mx-auto">
+                                <a class="name_link" href="{{route('clients.show',$client)}}"><img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
+                                    width="100%" class="mx-auto"></a>
                             </div>
                             {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
                             --}}
                         </th>
 
                         {{-- Nome e Apelido --}}
-                        <th class="align-middle">{{ $client->nome }} {{ $client->apelido }}</th>
+                        <th class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></th>
 
                         {{-- E-Mail --}}
                         <th class="align-middle">{{ $client->email }}</th>
