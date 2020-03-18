@@ -40,6 +40,7 @@ class ExtraFunctionsController extends Controller
         $admin = new Administrador;
         $admin->nome = 'Edgar';
         $admin->apelido = 'Cordeiro';
+        $admin->genero = 'M';
         $admin->email = 'nill546@hotmail.com';
         $admin->dataNasc = date('Y-m-d',strtotime('17-12-1997'));
         $admin->fotografia = null;
@@ -50,6 +51,7 @@ class ExtraFunctionsController extends Controller
         $admin = new Administrador;
         $admin->nome = 'Neuza';
         $admin->apelido = 'Cordeiro';
+        $admin->genero = 'F';
         $admin->email = 'nex543@hotmail.com';
         $admin->dataNasc = date('Y-m-d',strtotime('30-10-1999'));
         $admin->fotografia = null;
@@ -62,6 +64,7 @@ class ExtraFunctionsController extends Controller
         $agente = new Agente;
         $agente->nome = 'José';
         $agente->apelido = 'Fernandes';
+        $admin->genero = 'M';
         $agente->email = 'jose.fer@gmail.com';
         $agente->dataNasc = date('Y-m-d',strtotime('15-07-1990'));
         $agente->fotografia = null;
@@ -76,6 +79,7 @@ class ExtraFunctionsController extends Controller
         $agente = new Agente;
         $agente->nome = 'Michaela';
         $agente->apelido = 'Silva';
+        $admin->genero = 'F';
         $agente->email = 'michaela@outlook.com';
         $agente->dataNasc = date('Y-m-d',strtotime('16-03-1993'));
         $agente->fotografia = null;
@@ -90,6 +94,7 @@ class ExtraFunctionsController extends Controller
         $agente = new Agente;
         $agente->nome = 'João';
         $agente->apelido = 'Gama';
+        $admin->genero = 'M';
         $agente->email = 'gama.jonh@hotmail.com';
         $agente->dataNasc = date('Y-m-d',strtotime('15-07-1995'));
         $agente->fotografia = null;
@@ -113,6 +118,7 @@ class ExtraFunctionsController extends Controller
         $cliente = new Cliente;
         $cliente->nome = 'Tiago';
         $cliente->apelido = 'Oliveira';
+        $admin->genero = 'M';
         $cliente->email = 'tiaveira@gmail.com';
         $cliente->telefone1 = 913432423;
         $cliente->telefone2 = null;
@@ -146,6 +152,7 @@ class ExtraFunctionsController extends Controller
         $cliente = new Cliente;
         $cliente->nome = 'Katherine';
         $cliente->apelido = 'Romaria';
+        $admin->genero = 'F';
         $cliente->email = 'kathe@mail.ru';
         $cliente->telefone1 = 945345784;
         $cliente->telefone2 = null;

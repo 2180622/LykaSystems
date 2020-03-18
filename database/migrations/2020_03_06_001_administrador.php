@@ -19,6 +19,7 @@ class Administrador extends Migration
             $table->bigIncrements('idAdmin');
             $table->string('nome',255);
             $table->string('apelido',255);
+            $table->enum('genero',['F','M']);
             $table->string('email',255)->unique();
             $table->date('dataNasc');
             $table->string('fotografia',255)->nullable();

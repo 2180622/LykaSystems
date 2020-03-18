@@ -15,7 +15,7 @@ class Cliente extends Model
     protected $primaryKey = 'idCliente';
 
     protected $fillable = [
-        'nome','apelido','email','telefone1','telefone2','dataNasc','numCCid',
+        'nome','apelido','genero','email','telefone1','telefone2','dataNasc','numCCid',
         'numPassaport','dataValidPP','localEmissaoPP','paisNaturalidade','morada',
         'cidade','moradaResidencia','passaportPaisEmi','nomePai','telefonePai',
         'emailPai','nomeMae','telefoneMae','emailMae','fotografia','NIF','IBAN',

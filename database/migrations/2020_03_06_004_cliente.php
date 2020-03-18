@@ -19,6 +19,7 @@ class Cliente extends Migration
             $table->bigIncrements('idCliente');
             $table->string('nome',255);
             $table->string('apelido',255);
+            $table->enum('genero',['F','M']);
             $table->string('email',255);
                 $table->unique('email');
             $table->string('telefone1',255);
