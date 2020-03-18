@@ -23,7 +23,7 @@
         </div>
         <div class="float-right">
             <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
-            <a href="#" class="top-button">Imprimir</a>
+            <a href="{{route('clients.print',$client)}}" target="_blank" class="top-button">Imprimir</a>
         </div>
 
         <br><br>
