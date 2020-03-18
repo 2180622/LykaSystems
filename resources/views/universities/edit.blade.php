@@ -11,30 +11,38 @@
 {{-- Conteudo da Página --}}
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form method="POST" action="{{route('universities.update',$university)}}" class="form-group"
-                              enctype="multipart/form-data">
-                            @csrf
-                            @method("PUT")
-                            @include('universities.partials.add-edit')
-                            <div class="text-right">
-                                <div class="form-group col-md-12 text-right mt-3 ml-3">
-                                    <button type="submit" class="btn btn-md btn-success text-white mr-1" name="ok"
-                                            title="Guardar"><i class="far fa-save mr-2"></i> Guardar
-                                    </button>
-                                    <a href="{{route('universities.index')}}"
-                                       class="btn btn-md btn-secondary text-white mr-1 my-1"
-                                       title="Cancelar">Cancelar</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <div class="container mt-2">
+        {{-- Navegação --}}
+        <div class="float-left">
+            <a href="javascript:history.go(-1)" title="Voltar"><i
+                    class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
+            <a href="javascript:window.history.forward();" title="Avançar"><i
+                    class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+        </div>
+        <div class="float-right">
+            <a href="#" class="top-button">reportar problema</a>
+        </div>
+
+        <br><br>
+
+        <div class="cards-navigation">
+            <div class="title">
+                <h6>Editar informações</h6>
             </div>
+            <br>
+
+            <form method="POST" action="{{route('universities.update',$university)}}" class="form-group"
+                  enctype="multipart/form-data">
+                @csrf
+                @method("PUT")
+                @include('universities.partials.add-edit')
+                <div class="form-group text-right">
+                    <br><br>
+                    <button type="submit" class="top-button mr-2" name="submit" title="Guardar">Guardar</button>
+                    <a href="javascript:history.go(-1)" class="top-button" title="Cancelar">Cancelar</a>
+                </div>
+            </form>
         </div>
     </div>
+
 @endsection

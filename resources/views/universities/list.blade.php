@@ -133,9 +133,9 @@
                                       class="d-inline-block form_university_id">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn_delete" title="Eliminar Universidade"
+                                    <button type="button" class="btn_delete" title="Eliminar Universidade"
                                             data-toggle="modal"
-                                            data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                            data-target="#eliminarUniversidade" data-title="{{$university->nome}}"><i class="fas fa-trash-alt"></i></button>
                                 </form>
 
                             </th>

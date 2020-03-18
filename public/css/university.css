@@ -1,44 +1,8 @@
-table{
-    color:gray;
+.cards-navigation span.text-secondary{
+    font-weight: 700;
 }
 
-.pagination {
-    float: right;
-}
-
-.table-borderless td, .table-borderless th {
-    border: 0;
-    color:gray;
-}
-
-.table-borderless tbody th:first-child{
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.table-borderless tbody th:last-child{
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.table-borderless tbody tr:hover{
-    border-radius: 20%;
-    background-color: white;
-}
-
-.btn_list_opt{
-    color:gray;
-}
-
-.btn_list_opt:hover{
-    color:#6A74C9;
-
-}
-
-.btn_list_opt_delete:hover{
-    color:red;
-}
-
-.btn_list_opt_edit:hover{
-    color:#eac300;
+.cards-navigation div{
+    color: #6A74C9;
+    font-weight: 700;
 }

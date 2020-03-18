@@ -87,18 +87,22 @@ $(document).ready(function () {
 
 
     /* OPÇÃO DE APAGAR */
-    var formToSubmit //Varial para indicar o forumulário a submeter
 
-    $(".form_university_id").submit(function (e) {
-        formToSubmit = this;
-        return false;
+    $(document).ready(function () {
+        $('#eliminarUniversidade').on('show.bs.modal', function (e) {
+            $("#eliminar").click(function () {
+                $(e.relatedTarget).parent().submit();
+            });
+            $("#tituloUniversidade").text($(e.relatedTarget).data("title"));
+        });
     });
 
-    //click sim na modal
-    $(".btn_submit").click(function (e) {
-        formToSubmit.submit();
+    $('#eliminarUniversidade').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var recipient = button.data('whatever');
+        var modal = $(this);
+        modal.find('.modal-body input').val(recipient);
     });
-
 });
 
 
