@@ -130,7 +130,6 @@
 
         </div>
 
-        <br>
         <hr style="border:1px solid lightgray"><br>
 
 
