@@ -16,7 +16,7 @@ class Notificacao extends Migration
         Schema::create('Notificacao', function (Blueprint $table) {
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
-            $table->bigIncrements('idNotificacao');
+            $table->uuid('idNotificacao');
             $table->string('type');
             $table->morphs('notifiable');
             $table->text('data');
