@@ -15,7 +15,7 @@ class Administrador extends Model
     protected $primaryKey = 'idAdmin';
 
     protected $fillable = [
-        'nome','apelido','email','dataNasc','fotografia','telefone1','telefone2',
+        'nome','apelido','genero','email','dataNasc','fotografia','telefone1','telefone2',
         ];
 
     public function user(){

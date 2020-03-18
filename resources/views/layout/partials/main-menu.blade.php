@@ -203,25 +203,6 @@
             <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>
         </div>
         @endif
-        <!-- --><!--
-        <div class="mx-auto user_photo rounded-circle shadow">
-            {{-- Foto Utilizador --}}
-            <img src="{{asset('/storage/user-photos/user.jpg')}}" style="width:100%">
-        </div>
-
-        <div class="text-center mt-3">
-            {{-- Nome e Perfil --}}
-            <span class="font-weight-bold text-uppercase">@php
-            if(Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null){
-            echo Auth::user()->admin->nome;
-            }elseif (Auth::user()->tipo == "agente" && Auth::user()->idAgente != null) {
-            echo Auth::user()->agente->nome;
-            }elseif (Auth::user()->tipo == "cliente" && Auth::user()->idCliente != null) {
-            echo Auth::user()->cliente->nome;
-            }
-            @endphp</span><br>
-            <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>
-        </div>-->
 
     </div>
 </div>
