@@ -14,6 +14,15 @@ class AccountConfirmationController extends Controller
       return view('auth.confirmation', compact('user'));
     }
 
+    public function mailconfirmation(Request $request, User $user){
+      $mailinsert = $request->input('email');
+      if ($user->email == $mailinsert) {
+        return view('auth.login');
+      }else {
+        return view('auth.confirmation', compact('user'));
+      }
+    }
+
     public function edit(User $user){
       return view('auth.confirmation', compact('user'));
     }
