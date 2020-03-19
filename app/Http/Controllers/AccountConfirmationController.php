@@ -17,9 +17,9 @@ class AccountConfirmationController extends Controller
     public function mailconfirmation(Request $request, User $user){
       $mailinsert = $request->input('email');
       if ($user->email == $mailinsert) {
-        return view('auth.login');
+        return view('auth.verify');
       }else {
-        return view('auth.confirmation', compact('user'));
+        return view('auth.login', compact('user'));
       }
     }
 

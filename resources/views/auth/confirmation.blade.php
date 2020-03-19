@@ -19,7 +19,7 @@
             <form class="email-form" action="{{route('confirmation.mail', $user)}}" method="post">
                 @csrf
                 <div class="form-group">
-                    <input id="email" type="email" class="form-control" name="email" placeholder="endereço eletrónico">
+                    <input id="email" type="email" class="form-control" name="email" placeholder="Endereço eletrónico">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn submit-button">Confirmar</button>
