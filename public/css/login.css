@@ -63,7 +63,6 @@ form {
 #username::placeholder, #password::placeholder, #password-conf::placeholder, #email::placeholder {
     color: #ADADAD;
     font-weight: 700;
-    text-transform: uppercase;
 }
 
 #username:focus, #password:focus, #password-conf:focus, #email:focus {
@@ -85,9 +84,14 @@ form-control::placeholder {
     border-radius: 0px;
     color: white !important;
     text-transform: uppercase;
+    transition: 0.3s ease-in-out;
     transform: translate(-50%, 0%);
     background-color: #6A74C9 !important;
-    box-shadow: 0 0.5rem 1rem rgba(68, 75, 137, 0.7) !important;
+    box-shadow: 0 0.5rem 1rem rgba(68, 75, 137, 0.5) !important;
+}
+
+.submit-button:hover {
+  box-shadow: 0 0.5rem 1rem rgba(68, 75, 137, 0.7) !important;
 }
 
 .invalid-feedback {
