@@ -25,16 +25,13 @@
     <link href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-    <link href="{{asset('/css/login.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/login.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
     <div class="form">
-        <main>
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
 </body>
 

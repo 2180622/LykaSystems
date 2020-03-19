@@ -5,7 +5,8 @@
 @section('content')
 <div class="login-form">
     <div>
-        <p>Insira os seus dados de autenticação para aceder a aplicação, por favor.</p>
+        <p class="text-center">Iniciar Sessão</p>
+        <p class="text-center">Insira os seus dados de autenticação para aceder a aplicação, por favor.</p>
         <div>
             <form method="POST" action="{{ route('login') }}">
                 @csrf

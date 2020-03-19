@@ -1,51 +1,60 @@
+/* General Style */
 body, html {
     margin: 0;
     height: 100%;
     overflow: hidden;
     position: relative;
     background-size: cover;
-    background-position: 50% 70%;
+    background-position: 100% 10%;
     background-repeat: no-repeat;
     font-family: "Nunito", sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/media/contact-image.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/media/background.jpg");
 }
 
-.login-form p {
-    color: #ADADAD;
-    font-weight: 800;
-    text-align: left;
-}
-
+/* White Background */
 .form {
-    width: 35%;
-    float: right;
+    width: 40%;
     height: 100%;
-    position: relative;
     background-color: white;
     border-top: 5px solid #6A74C9;
 }
 
+/* Login Form */
 .login-form {
     left: 50%;
-    top: 280px;
-    width: 90%;
     padding: 0 20px;
     position: relative;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 40%);
 }
 
-.login-form #username {
+.login-form p:first-child {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #6A74C9 !important;
+}
+
+.login-form p {
+    color: #ADADAD;
+    font-weight: 700;
+    padding: 0 50px;
+}
+
+form {
     margin-top: 40px;
 }
 
 #username, #password, #password-conf {
+    left: 50%;
+    width: 65%;
     font-weight: 600;
     font-size: 0.8rem;
     padding: 25px 20px;
-    border-radius: 50px;
+    position: relative;
+    border-radius: 0px;
     border: 2px solid #ADADAD;
     color: #252525 !important;
     transition: 0.3s ease-in-out;
+    transform: translate(-50%, 0%);
     box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
@@ -59,31 +68,26 @@ form-control::placeholder {
     opacity: 0 !important;
 }
 
-#username:focus, #password:focus, #password-conf:focus{
+#username:focus, #password:focus, #password-conf:focus {
     border-color: #6A74C9;
     box-shadow: inset 0 1px 1px #6A74C9, 0 0 5px #565eac;
-    border-radius: 50px;
 }
 
 .submit-button {
-    float: right;
+    left: 50%;
+    width: 65%;
     font-weight: 700;
-    font-size: 0.76rem;
-    padding: 10px 20px;
-    border-radius: 50px;
+    font-size: 0.7rem;
+    padding: 15px 20px;
+    position: relative;
+    border-radius: 0px;
     color: white !important;
     text-transform: uppercase;
+    transform: translate(-50%, 0%);
     background-color: #6A74C9 !important;
-    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 0.5rem 1rem rgba(68, 75, 137, 0.7) !important;
 }
 
-@media screen and (max-width: 1000px) {
-    .login-form {
-        margin: 0;
-        width: 100%;
-    }
-
-    .submit-button {
-        width: 100%;
-    }
+.invalid-feedback {
+    padding: 0px 90px;
 }
