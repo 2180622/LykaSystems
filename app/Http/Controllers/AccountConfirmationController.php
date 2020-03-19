@@ -11,20 +11,24 @@ class AccountConfirmationController extends Controller
 {
     public function index($user){
       $user = User::findOrFail($user);
-      return view('auth.confirmation', compact('user'));
+      return view('auth.confirmation-mail', compact('user'));
     }
 
     public function mailconfirmation(Request $request, User $user){
       $mailinsert = $request->input('email');
-      if ($user->email == $mailinsert) {
-        return view('auth.verify');
+      if ($mailinsert == null) {
+        return view('auth.confirmation-mail', compact('user'));
       }else {
-        return view('auth.login', compact('user'));
+        if ($user->email == $mailinsert) {
+          return view('auth.confirmation-password', compact('user'));
+        }else {
+          abort(403);
+        }
       }
     }
 
     public function edit(User $user){
-      return view('auth.confirmation', compact('user'));
+      return view('auth.confirmation-password', compact('user'));
     }
 
     public function update(UpdateUserRequest $request, User $user){

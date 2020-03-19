@@ -45,7 +45,7 @@ form {
 }
 
 /* Input Styles */
-#username, #password, #password-conf, #email{
+#username, #password, #password-conf, #email {
     left: 50%;
     width: 65%;
     font-weight: 600;
@@ -91,9 +91,25 @@ form-control::placeholder {
 }
 
 .submit-button:hover {
-  box-shadow: 0 0.5rem 1rem rgba(68, 75, 137, 0.7) !important;
+    box-shadow: 0 0.5rem 1rem rgba(68, 75, 137, 0.7) !important;
 }
 
 .invalid-feedback {
     padding: 0px 90px;
+}
+
+/* Account Active - Style */
+h4 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #6A74C9 !important;
+}
+
+a{
+  color: white;
+}
+
+a:hover{
+  color: white;
+  text-decoration: none;
 }

@@ -6,12 +6,17 @@
 
 <div class="login-form">
     <div>
-        <h4>Bem-Vindo {{$user->admin->nome.' '.$user->admin->apelido}}!</h4>
-        <p>Para utilizar a sua conta LYKA, basta clicar no botão abaixo e inserir o seu e-mail e password.</p>
-        <button type="button" name="button">
-          <a href="{{route('login')}}">Iniciar Sessão!</a>
-        </button>
-        <p>Bom trabalho.</p>
+        <h4 class="text-center">Bem-vindo {{$user->admin->nome.' '.$user->admin->apelido}}!</h4>
+        <br>
+        <p class="text-center">Para utilizar a sua conta lyka, basta clicar no botão abaixo e inserir o seu e-mail e password.</p>
+        <br>
+        <div class="form-group">
+            <a href="{{route('login')}}">
+                <button type="submit" class="btn submit-button">
+                    Iniciar Sessão
+                </button>
+            </a>
+        </div>
     </div>
 </div>
 

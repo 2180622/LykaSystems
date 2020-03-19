@@ -16,7 +16,7 @@
         <br>
         @endif
         <div>
-            <form class="email-form" action="{{route('confirmation.mail', $user)}}" method="post">
+            <form class="email-form" action="{{route('confirmation.mail', $user)}}" method="get">
                 @csrf
                 <div class="form-group">
                     <input id="email" type="email" class="form-control" name="email" placeholder="Endereço eletrónico">
@@ -26,22 +26,6 @@
                 </div>
             </form>
         </div>
-
-
-        {{-- <div>
-            <form class="form-group" action="{{route('confirmation.update', $user)}}" method="post">
-        @csrf
-        <div class="form-group">
-            <input id="password" type="password" class="form-control" name="password" placeholder="password" />
-        </div>
-        <div class="form-group">
-            <input id="password-conf" type="password" class="form-control" name="password-confirmation" placeholder="confirmar password" />
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn submit-button">Confirmar</button>
-        </div>
-        </form>
-    </div> --}}
 </div>
 </div>
 
