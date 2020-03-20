@@ -3,7 +3,7 @@
 @section('title', 'Ativação de conta')
 
 @section('content')
-  
+
 <div class="login-form">
     <div>
         <p class="text-center">Ativação de conta</p>

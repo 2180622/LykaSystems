@@ -105,11 +105,25 @@ h4 {
     color: #6A74C9 !important;
 }
 
-a{
-  color: white;
+a {
+    color: white;
 }
 
-a:hover{
-  color: white;
-  text-decoration: none;
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+/* Others */
+.copyright {
+    position: absolute;
+    bottom: 0;
+    width: 40%;
+}
+
+.copyright p {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #ADADAD;
 }

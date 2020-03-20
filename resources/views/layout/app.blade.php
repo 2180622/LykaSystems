@@ -32,6 +32,9 @@
 <body>
     <div class="form">
         @yield('content')
+        <div class="copyright">
+            <p class="text-center">© <?php echo date('Y');?> Direitos de autor. Lyka Systems todos os direitos reservados.</p>
+        </div>
     </div>
 </body>
 
