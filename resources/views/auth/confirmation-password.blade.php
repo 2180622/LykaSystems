@@ -8,12 +8,11 @@
     <div>
         <p class="text-center">Ativação de conta</p>
         <p class="text-center">Introduza uma palavra-chave segura que irá ser necessária para aceder à sua conta.</p>
-        @if (session('error') == null)
+        @if ($error == null)
         @else
-        <strong style="color:#e3342f; display: inherit;">
-            {{session('error')}}
+        <strong class="text-center" style="color:#e3342f; display: inherit; margin-top: 20px; margin-bottom: -15px;">
+            {{$error}}
         </strong>
-        <br>
         @endif
         <div>
             <form class="form-group" action="{{route('confirmation.update', $user)}}" method="post">

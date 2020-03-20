@@ -19,7 +19,8 @@ class AccountConfirmationController extends Controller
           return view('auth.confirmation-mail', compact('user', 'error'));
         }else {
           if ($user->email == $mailinsert) {
-            return view('auth.confirmation-password', compact('user'));
+            $error = null;
+            return view('auth.confirmation-password', compact('user', 'error'));
           }else {
             $error = "O endereço eletrónico que introduziu é inválido.";
             return view('auth.confirmation-mail', compact('user', 'error'));
@@ -44,7 +45,8 @@ class AccountConfirmationController extends Controller
         $user->save();
         return view('auth.accountactive', compact('user'));
       }else {
-        return view('auth.confirmation-password', compact('user'));
+        $error = "As palavras-chaves não coincidem. Verifique a sua inserção.";
+        return view('auth.confirmation-password', compact('user', 'error'));
       }
     }
 }
