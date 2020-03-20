@@ -6,23 +6,22 @@
 
 <div class="login-form">
     <div>
-        <p>Ativação de conta - <b style="color:#252525;">{{$user->admin->nome.' '.$user->admin->apelido}}</b> </p>
-        <br>
-        @if (session('error') == null)
+        <p class="text-center">Ativação de conta</p>
+        <p class="text-center">Introduza uma palavra-chave segura que irá ser necessária para aceder à sua conta.</p>
+        @if ($error == null)
         @else
-        <strong style="color:#e3342f; display: inherit;">
-            {{session('error')}}
+        <strong class="text-center" style="color:#e3342f; display: inherit; margin-top: 20px; margin-bottom: -15px;">
+            {{$error}}
         </strong>
-        <br>
         @endif
         <div>
             <form class="form-group" action="{{route('confirmation.update', $user)}}" method="post">
                 @csrf
                 <div class="form-group">
-                    <input id="password" type="password" class="form-control" name="password" placeholder="password" />
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" />
                 </div>
                 <div class="form-group">
-                    <input id="password-conf" type="password" class="form-control" name="password-confirmation" placeholder="confirmar password" />
+                    <input id="password-conf" type="password" class="form-control" name="password-confirmation" placeholder="Confirmar password" />
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn submit-button">Confirmar</button>

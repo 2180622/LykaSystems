@@ -89,8 +89,8 @@
                         </th>
 
                         <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>Naturalidade</th>
+                        <th>Nº Identificação</th>
+                        <th>Nº Passaporte</th>
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -113,11 +113,11 @@
                         {{-- Nome e Apelido --}}
                         <th class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></th>
 
-                        {{-- E-Mail --}}
-                        <th class="align-middle">{{ $client->email }}</th>
+                        {{-- numCCid --}}
+                        <th class="align-middle">{{ $client->numCCid }}</th>
 
-                        {{-- PaisNaturalidade --}}
-                        <th class="align-middle">{{ $client->paisNaturalidade }}</th>
+                        {{-- numPassaport --}}
+                        <th class="align-middle">{{ $client->numPassaport }}</th>
 
 
                         {{-- OPÇÔES --}}
