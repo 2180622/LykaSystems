@@ -9,20 +9,21 @@ use App\Http\Requests\UpdateUserRequest;
 
 class AccountConfirmationController extends Controller
 {
-    public function index($user){
-      $user = User::findOrFail($user);
-      return view('auth.confirmation-mail', compact('user'));
-    }
-
     public function mailconfirmation(Request $request, User $user){
-      $mailinsert = $request->input('email');
-      if ($mailinsert == null) {
-        return view('auth.confirmation-mail', compact('user'));
+      if ($user->password != null) {
+        abort(404);
       }else {
-        if ($user->email == $mailinsert) {
-          return view('auth.confirmation-password', compact('user'));
+        $mailinsert = $request->input('email');
+        if ($mailinsert == null) {
+          $error = null;
+          return view('auth.confirmation-mail', compact('user', 'error'));
         }else {
-          abort(403);
+          if ($user->email == $mailinsert) {
+            return view('auth.confirmation-password', compact('user'));
+          }else {
+            $error = "O endereço eletrónico que introduziu é inválido.";
+            return view('auth.confirmation-mail', compact('user', 'error'));
+          }
         }
       }
     }
@@ -43,7 +44,7 @@ class AccountConfirmationController extends Controller
         $user->save();
         return view('auth.accountactive', compact('user'));
       }else {
-        return redirect()->route('confirmation.update', $user)->with('error', 'As passwords não coincidem. Verique a sua inserção.');
+        return view('auth.confirmation-password', compact('user'));
       }
     }
 }

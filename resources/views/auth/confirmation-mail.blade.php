@@ -8,12 +8,11 @@
     <div>
         <p class="text-center">Ativação de conta</p>
         <p class="text-center">Introduza o seu e-mail para dar continuidade a ativação da sua conta.</p>
-        @if (session('error') == null)
+        @if ($error == null)
         @else
-        <strong style="color:#e3342f; display: inherit;">
-            {{session('error')}}
+        <strong class="text-center" style="color:#e3342f; display: inherit; margin-top: 20px; margin-bottom: -15px;">
+            {{$error}}
         </strong>
-        <br>
         @endif
         <div>
             <form class="email-form" action="{{route('confirmation.mail', $user)}}" method="get">
@@ -26,7 +25,7 @@
                 </div>
             </form>
         </div>
-</div>
+    </div>
 </div>
 
 @endsection
