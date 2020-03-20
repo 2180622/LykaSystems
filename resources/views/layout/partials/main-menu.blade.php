@@ -125,6 +125,7 @@
         </div>
 
         <!-- Utilizadores -->
+        @if (Auth()->user()->tipo == 'admin')
         <li class="menu-option">
             <a href="{{route('users.index')}}">
                 <div class="menu-icon">
@@ -133,7 +134,7 @@
                 <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Utilizadores</span>
             </a>
         </li>
-
+        @endif
     </ul>
 
 
@@ -156,11 +157,11 @@
             {{-- Foto Utilizador --}}
             @if(Auth::user()->admin->fotografia != null)
                 <img src="{{asset(Auth::user()->admin->fotografia)}}" style="width:100%">
-            @elseif (Auth::user()->admin->genero == "F")
+                @elseif (Auth::user()->admin->genero == "F")
                 <img src="{{asset('/storage/user-photos/F-user.jpg')}}" style="width:100%">
-            @else
+                @else
                 <img src="{{asset('/storage/user-photos/M-user.png')}}" style="width:100%">
-            @endif
+                @endif
         </div>
 
         <div class="text-center mt-3">
@@ -173,11 +174,11 @@
             {{-- Foto Utilizador --}}
             @if(Auth::user()->agente->fotografia != null)
                 <img src="{{asset(Auth::user()->agente->fotografia)}}" style="width:100%">
-            @elseif (Auth::user()->agente->genero == "F")
+                @elseif (Auth::user()->agente->genero == "F")
                 <img src="{{asset('/storage/user-photos/F-user.jpg')}}" style="width:100%">
-            @else
+                @else
                 <img src="{{asset('/storage/user-photos/M-user.png')}}" style="width:100%">
-            @endif
+                @endif
         </div>
 
         <div class="text-center mt-3">
@@ -190,11 +191,11 @@
             {{-- Foto Utilizador --}}
             @if(Auth::user()->cliente->fotografia != null)
                 <img src="{{asset(Auth::user()->cliente->fotografia)}}" style="width:100%">
-            @elseif (Auth::user()->cliente->genero == "F")
+                @elseif (Auth::user()->cliente->genero == "F")
                 <img src="{{asset('/storage/user-photos/F-user.jpg')}}" style="width:100%">
-            @else
+                @else
                 <img src="{{asset('/storage/user-photos/M-user.png')}}" style="width:100%">
-            @endif
+                @endif
         </div>
 
         <div class="text-center mt-3">
