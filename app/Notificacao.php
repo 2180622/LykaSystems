@@ -11,10 +11,10 @@ class Notificacao extends Model
     protected $primaryKey = 'idNotificacao';
 
     protected $fillable = [
-        'urgencia','tipo','dataInicio','dataFim','assunto','descricao','$idUser',
+        'data'
         ];
 
     public function user(){
-        return $this->belongsTo("App\User","idUser","idUser");
+        return $this->belongsTo("App\User","notifiable_id","idUser");
     }
 }

@@ -12,10 +12,13 @@ use Carbon\Carbon;
 class EdgarTesteController extends Controller
   {
     protected $Extrafuntions;
-    public function __construct(ExtraFunctionsController $Extrafuntions)
+    protected $Data;
+    public function __construct(ExtraFunctionsController $Extrafuntions, DataController $data)
     {
       $this->Extrafuntions = $Extrafuntions;
+      $this->Data = $data;
     }
+
     public function index()
     {
       $notificacoes = null;
@@ -32,10 +35,10 @@ class EdgarTesteController extends Controller
             }
           }
           if($cria){
-            $this->Extrafuntions->createData();
+            $this->Data->createData();
           }
         }
-        return null;
+        return redirect()->route('dashboard');
     }
     
     

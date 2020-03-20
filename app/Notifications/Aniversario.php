@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notification;
 class Aniversario extends Notification
 {
     use Queueable;
+    protected $Code;
     protected $Urgencia;
     protected $DataComeco;
     protected $Tipo;
@@ -23,8 +24,9 @@ class Aniversario extends Notification
      *
      * @return void
      */
-    public function __construct($urgencia, $dataComeco, $tipo, $dataInicio, $dataFim, $assunto, $descricao)
+    public function __construct($codigo, $urgencia, $dataComeco, $tipo, $dataInicio, $dataFim, $assunto, $descricao)
     {
+        $this->Code = $codigo;
         $this->Urgencia = $urgencia;
         $this->DataComeco = $dataComeco;
         $this->Tipo = $tipo;
@@ -42,7 +44,7 @@ class Aniversario extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return [/*'mail',*/'database'];
     }
 
     /**
@@ -70,9 +72,10 @@ class Aniversario extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toDatabase($notifiable)
     {
         return [
+            'code' => $this->Code,
             'urgencia' => $this->Urgencia,
             'dataComeco' => $this->DataComeco,
             'tipo' => $this->Tipo,
@@ -80,6 +83,19 @@ class Aniversario extends Notification
             'dataFim' => $this->DataFim,
             'assunto' => $this->Assunto,
             'descricao' => $this->Descricao,
+        ];
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            //
         ];
     }
 }
