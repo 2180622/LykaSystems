@@ -7,6 +7,7 @@ html, body {
     font-family: 'Nunito', sans-serif;
     transition: all 0.3 ease;
 }
+
 .top-button {
     border: none;
     color: white;
@@ -24,16 +25,14 @@ html, body {
     text-decoration: none;
 }
 
-
-.nav_btns{
+.nav_btns {
     color: gray !important;
     background-color: lightgray;
 }
 
-.nav_btns:hover{
+.nav_btns:hover {
     background-color: white;
 }
-
 
 /* Cards Navigation Style */
 /* Title */
@@ -46,7 +45,6 @@ html, body {
     font-weight: 700;
     font-size: 1.1rem;
 }
-
 
 /* Cards */
 .cards-group {
@@ -112,7 +110,6 @@ html, body {
     background-color: rgba(230, 230, 230, 1);
 }
 
-
 /* Main Menu Style */
 .logotype {
     color: #6A74C9;
@@ -122,6 +119,7 @@ html, body {
 
 .logotype:hover {
     text-decoration: none;
+    color: #6A74C9;
 }
 
 .logo {
@@ -187,7 +185,6 @@ html, body {
 }
 
 .user_photo {
-
     height: 120px;
     width: 120px;
     border: 1px solid lightgray;
@@ -224,7 +221,6 @@ html, body {
     color: black;
 }
 
-
 /* Right Sidebar Style */
 .sidebar {
     flex: 0 0 270px;
@@ -252,8 +248,43 @@ html, body {
     color: blue;
 }
 
+.search-bar {
+    width: 100%;
+    height: 30px;
+    border-radius: 30px;
+    background-color: #EAEAEA;
+    position: relative;
+    top: 4%;
+}
 
-/* RESPONSIVE */
+.search-bar p {
+    font-weight: 800;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 8px 15px;
+    color: #BBBBBB;
+}
+
+.search-icon {
+    color: white;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -55%);
+    --ionicon-stroke-width: 60px;
+}
+
+.search-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #6A74C9;
+    position: relative;
+    float: right;
+}
+
+/* Responsive */
 @media screen and (max-width: 950px) {
     .sidebar {
         display: none;
