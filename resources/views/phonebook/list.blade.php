@@ -29,7 +29,7 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('clients.create')}}" class="top-button">Adicionar Contacto</a>
+        <a href="{{route('phonebook.create')}}" class="top-button">Adicionar Contacto</a>
     </div>
 
     <br><br>
