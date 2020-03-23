@@ -26,7 +26,7 @@ class PhonebookController extends Controller
         /* Fornecedores */
         $fornecedores = DB::table("contacto")
         ->select('*')
-        ->where('contacto.tipo', '=', 'Fornecedor')
+        ->where('tipo', '=', 'Fornecedor')
         ->get();
 
         if ($fornecedores->isEmpty()) {
