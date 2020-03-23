@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use DateTime;
 use DateInterval;
 
+use App\Fase;
 use App\Notificacao;
 use App\Notifications\Adicionado;
 use App\Notifications\Aniversario;
@@ -14,7 +15,7 @@ use App\Notifications\Atraso;
 use App\Notifications\AtrasoCliente;
 
 
-class ExtraFunctionsController extends Controller
+class NotificationController extends Controller
 {
     public function getNotificacaoAniversario($AllNotifications)
     {
@@ -39,7 +40,7 @@ class ExtraFunctionsController extends Controller
             $Assunto = 'PARABÉNS '.Auth()->user()->cliente->nome.' '.Auth()->user()->cliente->apelido;
         }
         $diff = $dataNasc->diff(new DateTime());
-        if($diff->d >= 0 && $diff->d <= 30){
+        if($diff->d >= 0 && $diff->d <= 20 && $diff->m == 0){
             $Descricao = 'Hoje um ciclo de sua vida se finaliza e outro recomeça. Faça deste novo recomeço uma nova oportunidade para fazer tudo o que sempre sonhou! \nParabéns!';
             $date = (new DateTime())->add(new DateInterval('P'.$diff->d.'D'));
             $code = Auth()->user()->idUser.'_aniversario_'.$date->format('d-m-Y');
@@ -53,7 +54,7 @@ class ExtraFunctionsController extends Controller
                 }
             }
             if(!$existe){
-                $Notdate = (new DateTime())->sub(new DateInterval('P'.$diff->d.'D'));
+                $Notdate = (new DateTime())->add(new DateInterval('P'.$diff->d.'D'));
                 Auth()->user()->notify(new Aniversario($code,false,$Notdate->format('Y-m-d'),'Aniversario',null,null,$Assunto,$Descricao));
             }
         }
@@ -69,8 +70,7 @@ class ExtraFunctionsController extends Controller
             $Fases = null;
             $Assunto = 'Clientes com documentos ou pagamentos em atraso';
             $Descricao = null;
-            $todasFases = Fase::where('dataVencimento','>=', new DateTime())
-                ->where('dataVencimento','<=',(new DateTime())->add(new DateInterval('P7D')))
+            $todasFases = Fase::where('dataVencimento','<=',(new DateTime())->add(new DateInterval('P7D')))
                 ->get()->all();
             $agenteProdutos = Auth()->user()->agente->produtoA->all();
             if($agenteProdutos && $todasFases){
@@ -92,28 +92,37 @@ class ExtraFunctionsController extends Controller
             if($Fases){
                 $urgencia = false;
                 $Descricao = 'Clientes: ';
+                $codecli = '';
                 foreach($Fases as $fase){
                     $produto = $fase->produto;
                     $cliente = $produto->cliente;
+                    $codecli = $codecli.'_'.$cliente->idCliente;
                     $diff = (new DateTime($fase->dataVencimento))->diff(new DateTime());
-                    $Descricao = $Descricao.'\n - '.$cliente->nome.' '.$cliente->apelido.' -> '.$diff->d.' dias';
+                    $Descricao = $Descricao.'\n - '.$cliente->nome.' '.$cliente->apelido.' -> '.(new DateTime($fase->dataVencimento))->format('d/m/Y');
                     if($diff->d <= 0){
                         $urgencia = true;
                     }
                 }
-                $date = (new DateTime())->add(new DateInterval('P'.$diff->d.'D'));
-                $code = Auth()->user()->idUser.'_atraso_'.$date->format('d-m-Y');
+                $code = Auth()->user()->idUser.'_atraso'.$codecli;
                 $existe=false;
                 if($AllNotifications){
                     foreach($AllNotifications as $notification){
                         $dados = json_decode($notification->data);
                         if($dados->code == $code){
                             $existe = true;
+                            auth()->user()->readNotifications->where('id','=',$notification->id)->markAsUnread();
+                        }
+                    }
+                    if(!$existe){
+                        foreach($AllNotifications as $notification){
+                            if($notification->type == 'App\Notifications\Atraso' && $notification->notifiable_id == Auth()->user()->idUser){
+                                auth()->user()->unreadNotifications->where('id','=',$notification->id)->markAsRead();
+                            }
                         }
                     }
                 }
                 if(!$existe){
-                    Auth()->user()->notify(new Aniversario($code,$urgencia,(new DateTime())->format('Y-m-d'),'Aniversario',null,null,$Assunto,$Descricao));
+                    Auth()->user()->notify(new Atraso($code,$urgencia,(new DateTime())->format('Y-m-d'),'Atraso',null,null,$Assunto,$Descricao));
                 }
             }
         }
@@ -158,10 +167,13 @@ class ExtraFunctionsController extends Controller
                 $novaNot = null;
                 $Assunto = null;
                 $Descricao = null;
+                $existe = false;
+                $urgencia = false;
                 $diff = (new DateTime($Fase->dataVencimento))->diff(new DateTime());
-                $DataLimite = 'Falta '.$diff->d.' dias';
-                if($diff->d == 0){
-                    $DataLimite = 'Só falta hoje';
+                $DataLimite = (new DateTime($Fase->dataVencimento));
+                if($diff->d <= 0){
+                    $urgencia = true;
+                    $DataLimite = new DateTime($Fase->dataVencimento);
                 }
                 $NumDocumentos = count($DocsAcademicos) + count($DocsPessoais);
                 if($Fase->verificacaoPago == 0 && $NumDocumentos >= 1){
@@ -177,17 +189,29 @@ class ExtraFunctionsController extends Controller
                         $Descricao = 'Documentos em Falta: \n - '.count($DocsAcademicos).' Documentos Académicos \n - '.count($DocsPessoais).' Documentos Pessoais';
                     }
                 }
-                if($Fase->verificacaoPago == 0 || $NumDocumentos >= 1){
-                    $idNot++;
-                    $novaNot = [
-                        'Id' => $idNot,
-                        'Tipo' => 'Falta',
-                        'Assunto' => $Assunto,
-                        'Descricao' => $Descricao,
-                        'DataLimite' => $DataLimite,
-                        'DataInicio' => null,
-                    ];
-                    $Notificacoes[] = $novaNot;
+                $pagamento =0;
+                if($Fase->verificacaoPago == 0){
+                    $pagamento = 1;
+                }
+                $code = Auth()->user()->idUser.'_atrasoCliente_'.$Fase->idFase.'_'.$NumDocumentos.'_'.$pagamento;
+                if($AllNotifications){
+                    foreach($AllNotifications as $notification){
+                        $dados = json_decode($notification->data);
+                        if($dados->code == $code){
+                            $existe = true;
+                            auth()->user()->readNotifications->where('id','=',$notification->id)->markAsUnread();
+                        }
+                    }
+                    if(!$existe){
+                        foreach($AllNotifications as $notification){
+                            if($notification->type == 'App\Notifications\AtrasoCliente' && $notification->notifiable_id == Auth()->user()->idUser){
+                                auth()->user()->readNotifications->where('id','=',$notification->id)->markAsRead();
+                            }
+                        }
+                    }
+                }
+                if(!$existe){
+                    Auth()->user()->notify(new AtrasoCliente($code,$urgencia,(new DateTime())->format('Y-m-d'),'AtrasoCliente',null,$DataLimite,$Assunto,$Descricao));
                 }
             }
         }

@@ -322,7 +322,7 @@ class DataController extends Controller
         $user->verification_token = null;
         $user->auth_key = 'sdfglnsdbhkfnjslkdfgn';
         $user->status = '10';
-        $user->idAdmin = 1;
+        $user->idAdmin = 2;
         $user->idAgente = null;
         $user->idCliente = null;
         $user->save();
