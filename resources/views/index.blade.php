@@ -22,43 +22,49 @@
         <br>
         <div class="row cards-group">
             <div class="col-md-4">
-                <div class="card-navigation">
-                    <div class="help-button">
-                        <span>
-                            ?
-                        </span>
+                <a href="{{route('clients.index')}}">
+                    <div class="card-navigation">
+                        <div class="help-button">
+                            <span>
+                                ?
+                            </span>
+                        </div>
+                        <div class="info">
+                            <p class="number">{{$clienteCount}}</p>
+                            <p class="word">clientes</p>
+                        </div>
                     </div>
-                    <div class="info">
-                        <p class="number">{{$clienteCount}}</p>
-                        <p class="word">clientes</p>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="card-navigation">
-                    <div class="help-button">
-                        <span>
-                            ?
-                        </span>
+                <a href="{{route('universities.index')}}">
+                    <div class="card-navigation">
+                        <div class="help-button">
+                            <span>
+                                ?
+                            </span>
+                        </div>
+                        <div class="info">
+                            <p class="number">{{$universidadeCount}}</p>
+                            <p class="word">universidades</p>
+                        </div>
                     </div>
-                    <div class="info">
-                        <p class="number">{{$universidadeCount}}</p>
-                        <p class="word">universidades</p>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="card-navigation">
-                    <div class="help-button">
-                        <span>
-                            ?
-                        </span>
+                <a href="{{route('agents.index')}}">
+                    <div class="card-navigation">
+                        <div class="help-button">
+                            <span>
+                                ?
+                            </span>
+                        </div>
+                        <div class="info">
+                            <p class="number">{{$agenteCount}}</p>
+                            <p class="word">agentes</p>
+                        </div>
                     </div>
-                    <div class="info">
-                        <p class="number">{{$agenteCount}}</p>
-                        <p class="word">agentes</p>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
