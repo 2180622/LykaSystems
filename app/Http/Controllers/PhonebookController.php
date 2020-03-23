@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Contacto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateContactoRequest;
+use App\Http\Requests\StoreContactoRequest;
 
 class PhonebookController extends Controller
 {
@@ -14,7 +18,34 @@ class PhonebookController extends Controller
      */
     public function index()
     {
-        return view('phonebook.list');
+
+        $contactos = Contacto::all();
+        $total = $contactos->count();
+
+
+        /* Fornecedores */
+        $fornecedores = DB::table("contacto")
+        ->select('*')
+        ->where('contacto.tipo', '=', 'Fornecedor')
+        ->get();
+
+        if ($fornecedores->isEmpty()) {
+            $fornecedores=null;
+        }
+
+
+
+        // Contactos Favoritos
+        $favoritos = DB::table("contacto")
+        ->select('*')
+        ->where('contacto.favorito', '=', true)
+        ->get();
+
+        if ($favoritos->isEmpty()) {
+            $favoritos=null;
+        }
+
+        return view('phonebook.list',compact('contactos','total','fornecedores','favoritos'));
     }
 
     /**
