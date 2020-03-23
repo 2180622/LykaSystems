@@ -82,16 +82,15 @@
             $('#fotografia').trigger('click');
         });
 
-        $('#preview').on('click', function (e) {
-            e.preventDefault();
-            $('#fotografia').trigger('click');
-        });
-
         /* FIM configs DATATABLES */
 
 
 
 
+        $('#preview').on('click', function (e) {
+            e.preventDefault();
+            $('#fotografia').trigger('click');
+        });
 
 
         /* Definir paisNaturalidade */
