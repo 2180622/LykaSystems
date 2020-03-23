@@ -14,7 +14,8 @@ class UniversityController extends Controller
     {
         $universities = Universidade::all();
         $totaluniversidades = $universities->count();
-        return view('universities.list', compact('universities', 'totaluniversidades'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('universities.list', compact('universities', 'totaluniversidades','Notificacoes'));
     }
 
     public function create()

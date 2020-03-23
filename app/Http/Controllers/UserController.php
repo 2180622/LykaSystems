@@ -18,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.list', compact('users'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('users.list', compact('users','Notificacoes'));
     }
 
     public function create()

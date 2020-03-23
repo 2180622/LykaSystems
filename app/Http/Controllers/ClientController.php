@@ -16,7 +16,8 @@ class ClientController extends Controller
 
         $clients = Cliente::all();
         $totalestudantes = $clients->count();
-        return view('clients.list', compact('clients', 'totalestudantes'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('clients.list', compact('clients', 'totalestudantes', 'Notificacoes'));
     }
 
 
