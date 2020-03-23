@@ -24,7 +24,8 @@ class PhonebookController extends Controller
      */
     public function create()
     {
-        //
+        $contacto = new Contacto;
+        return view('phonebook.add',compact("contacto"));
     }
 
     /**
@@ -46,7 +47,7 @@ class PhonebookController extends Controller
      */
     public function show(Contacto $contacto)
     {
-        //
+        return view('phonebook.show',compact("contacto"));
     }
 
     /**
@@ -57,7 +58,7 @@ class PhonebookController extends Controller
      */
     public function edit(Contacto $contacto)
     {
-        //
+        return view('phonebook.edit', compact('contacto'));
     }
 
     /**
@@ -80,6 +81,7 @@ class PhonebookController extends Controller
      */
     public function destroy(Contacto $contacto)
     {
-        //
+        $contacto->delete();
+                return redirect()->route('phonebook.index')->with('success', 'Contacto eliminado com sucesso');
     }
 }
