@@ -45,7 +45,8 @@ class PhonebookController extends Controller
             $favoritos=null;
         }
 
-        return view('phonebook.list',compact('contactos','total','fornecedores','favoritos'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('phonebook.list',compact('contactos','total','fornecedores','favoritos','Notificacoes'));
     }
 
     /**

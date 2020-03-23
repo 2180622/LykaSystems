@@ -11,11 +11,11 @@ use Carbon\Carbon;
 
 class EdgarTesteController extends Controller
   {
-    protected $Extrafuntions;
+    protected $NotController;
     protected $Data;
-    public function __construct(ExtraFunctionsController $Extrafuntions, DataController $data)
+    public function __construct(NotificationController $NotController, DataController $data)
     {
-      $this->Extrafuntions = $Extrafuntions;
+      $this->NotController = $NotController;
       $this->Data = $data;
     }
 
@@ -24,7 +24,7 @@ class EdgarTesteController extends Controller
       $notificacoes = null;
 
         if(Auth()->user()){
-          $notificacoes = $this->Extrafuntions->getNotificacoes();
+          //$notificacoes = $this->NotController->getNotificacoes();
           return view('edgarteste.teste', compact('notificacoes'));
         }else {
           $users = User::all();
