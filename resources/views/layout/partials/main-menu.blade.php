@@ -156,11 +156,11 @@
         <div class="mx-auto user_photo rounded-circle shadow">
             {{-- Foto Utilizador --}}
             @if(Auth::user()->admin->fotografia != null)
-                <img src="{{asset(Auth::user()->admin->fotografia)}}" style="width:100%">
+                <img src="{{asset('/storage/admin-photos/'.Auth::user()->admin->fotografia)}}" style="width:100%">
                 @elseif (Auth::user()->admin->genero == "F")
-                <img src="{{asset('/storage/user-photos/F-user.jpg')}}" style="width:100%">
+                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
                 @else
-                <img src="{{asset('/storage/user-photos/M-user.png')}}" style="width:100%">
+                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
                 @endif
         </div>
 
@@ -173,11 +173,11 @@
         <div class="mx-auto user_photo rounded-circle shadow">
             {{-- Foto Utilizador --}}
             @if(Auth::user()->agente->fotografia != null)
-                <img src="{{asset(Auth::user()->agente->fotografia)}}" style="width:100%">
+                <img src="{{asset('/storage/agent-photos/'.Auth::user()->agente->fotografia)}}" style="width:100%">
                 @elseif (Auth::user()->agente->genero == "F")
-                <img src="{{asset('/storage/user-photos/F-user.jpg')}}" style="width:100%">
+                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
                 @else
-                <img src="{{asset('/storage/user-photos/M-user.png')}}" style="width:100%">
+                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
                 @endif
         </div>
 
@@ -190,11 +190,11 @@
         <div class="mx-auto user_photo rounded-circle shadow">
             {{-- Foto Utilizador --}}
             @if(Auth::user()->cliente->fotografia != null)
-                <img src="{{asset(Auth::user()->cliente->fotografia)}}" style="width:100%">
+                <img src="{{asset('/storage/client-photos/'.Auth::user()->cliente->fotografia)}}" style="width:100%">
                 @elseif (Auth::user()->cliente->genero == "F")
-                <img src="{{asset('/storage/user-photos/F-user.jpg')}}" style="width:100%">
+                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
                 @else
-                <img src="{{asset('/storage/user-photos/M-user.png')}}" style="width:100%">
+                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
                 @endif
         </div>
 

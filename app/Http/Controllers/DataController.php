@@ -198,22 +198,26 @@ class DataController extends Controller
 
         $contacto = new Contacto;
         $contacto->nome = 'Pedro Costa';
+        $contacto->tipo = 'Fornecedor';
         $contacto->fotografia = null;
         $contacto->telefone1 = null;
         $contacto->telefone2 = null;
         $contacto->email = 'jonh@gmail.com';
         $contacto->fax = null;
         $contacto->observacao = null;
+        $favorito->favorito = true;
         $contacto->save();
 
         $contacto = new Contacto;
         $contacto->nome = 'Maria Pedro';
+        $contacto->tipo = 'Fornecedor';
         $contacto->fotografia = null;
         $contacto->telefone1 = 915642453;
         $contacto->telefone2 = null;
         $contacto->email = 'manie@hotmail.com';
         $contacto->fax = null;
         $contacto->observacao = null;
+        $favorito->favorito = false;
         $contacto->save();
 
         /*****************          Fornecedores          ******************/

@@ -104,8 +104,13 @@
                             <th class="">
                                 <div class="align-middle mx-auto shadow-sm rounded"
                                      style="overflow:hidden; width:50px; height:50px">
-                                    <img src="{{Storage::disk('public')->url('client-photos/').$university->fotografia}}"
+                                     @if($university->fotografia)
+                                     <img src="{{Storage::disk('public')->url('client-photos/').$university->fotografia}}"
+                                          width="100%" class="mx-auto">
+                                     @else
+                                         <img src="{{Storage::disk('public')->url('default-photos/university.png')}}"
                                          width="100%" class="mx-auto">
+                                     @endif
                                 </div>
                                 {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
                                 --}}

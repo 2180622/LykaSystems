@@ -131,8 +131,9 @@
                                 <th class="">
                                     <div class="align-middle mx-auto shadow-sm rounded"
                                         style="overflow:hidden; width:50px; height:50px">
-                                        <a class="name_link" href="#"><img src="#"
-                                            width="100%" class="mx-auto"></a>
+                                        <a class="name_link" href="#">
+                                            <img src="{{asset('storage/default-photos/contacto.png')}}" width="100%" class="mx-auto">
+                                        </a>
                                     </div>
 
                                 </th>
@@ -144,7 +145,7 @@
                                 <th class="align-middle"> E-Mail </th>
 
                                 {{-- Telefone(1) --}}
-                                <th class="align-middle">Telefone(1)</th>
+                                <th class="align-middle">Telefone(5)</th>
 
 
                                 {{-- OPÇÔES --}}

@@ -77,9 +77,18 @@
                         <tr>
                             <th class="">
                                 <div class="align-middle mx-auto shadow-sm rounded-circle" style="overflow:hidden; width:50px; height:50px">
-                                    <img src="{{Storage::disk('public')->url('client-photos/').$agent->fotografia}}"
+                                    @if($agent->fotografia)
+                                        <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}"
                                         width="100%" class="mx-auto">
-                                    </div>
+                                    @elseif($agent->genero == 'F')
+                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @else
+                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @endif
+                                </div>
+
                                 {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}"> --}}
                             </th>
                             <th class="align-middle">{{ $agent->nome }} {{ $agent->apelido }}</th>

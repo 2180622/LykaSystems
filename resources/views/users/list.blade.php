@@ -71,8 +71,43 @@
                     <tr>
                         <th>
                             <div class="align-middle mx-auto shadow-sm rounded-circle" style="overflow:hidden; width:50px; height:50px">
-                                {{--<img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
-                                width="100%" class="mx-auto">--}}
+                                @if($user->tipo == 'admin' && $user->idAdmin != null)
+                                    @if($user->admin->fotografia)
+                                        <img src="{{Storage::disk('public')->url('admin-photos/').$user->admin->fotografia}}"
+                                        width="100%" class="mx-auto">
+                                    @elseif($user->admin->genero == 'F')
+                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @else
+                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @endif
+                                @elseif($user->tipo == 'agente' && $user->idAgente != null)
+                                    @if($user->agente->fotografia)
+                                        <img src="{{Storage::disk('public')->url('agent-photos/').$user->agente->fotografia}}"
+                                        width="100%" class="mx-auto">
+                                    @elseif($user->agente->genero == 'F')
+                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @else
+                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @endif
+                                @elseif($user->tipo == 'cliente' && $user->idCliente != null)
+                                    @if($user->cliente->fotografia)
+                                        <img src="{{Storage::disk('public')->url('client-photos/').$user->cliente->fotografia}}"
+                                        width="100%" class="mx-auto">
+                                    @elseif($user->cliente->genero == 'F')
+                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @else
+                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @endif
+                                @else
+                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                    width="100%" class="mx-auto">
+                                @endif
                             </div>
                         </th>
                         <th class="align-middle">{{ $user->nome }}</th>

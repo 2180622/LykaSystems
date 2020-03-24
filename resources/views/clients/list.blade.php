@@ -103,8 +103,18 @@
                         <th class="">
                             <div class="align-middle mx-auto shadow-sm rounded"
                                 style="overflow:hidden; width:50px; height:50px">
-                                <a class="name_link" href="{{route('clients.show',$client)}}"><img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
-                                    width="100%" class="mx-auto"></a>
+                                <a class="name_link" href="{{route('clients.show',$client)}}">
+                                    @if($client->fotografia)
+                                        <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
+                                        width="100%" class="mx-auto">
+                                    @elseif($client->genero == 'F')
+                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @else
+                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                        width="100%" class="mx-auto">
+                                    @endif
+                                </a>
                             </div>
                             {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
                             --}}
