@@ -9,7 +9,6 @@
 @section('styleLinks')
 
     <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
-    <link href="{{asset('css/university.css')}}" rel="stylesheet">
 
 @endsection
 
