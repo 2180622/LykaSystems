@@ -35,7 +35,6 @@ class UserController extends Controller
 
       $user = new User;
       $user->tipo = "admin";
-      $user->auth_key = rand(655541,getrandmax());
       $user->status = 10;
       $user->fill($fieldsUser);
 

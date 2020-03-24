@@ -23,7 +23,7 @@ class User extends Migration
             $table->enum('tipo',['admin', 'agente', 'cliente']);
             $table->string('password_reset_token',255)->nullable();
             $table->string('verification_token',255)->nullable();
-            $table->string('auth_key',50);
+            $table->string('auth_key',50)->nullable();
             $table->integer('status');
             $table->timestamps();
             $table->unsignedBigInteger('idAdmin')->nullable();

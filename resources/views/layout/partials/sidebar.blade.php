@@ -13,7 +13,7 @@
     @if($Notificacoes)
         <div class="text-muted text-center m-2" style="font-size:12px"> {{(new DateTime())->format('d/m/Y')}} </div>
         @php
-            $data = $Notificacoes[0]->data['dataComeco'];   
+            $data = $Notificacoes[0]->data['dataComeco'];
         @endphp
         @foreach($Notificacoes as $Notificacao)
             @if($Notificacao->data['dataComeco'] < $data)
@@ -35,7 +35,7 @@
                     <div class="alert-dismissible row p-1 mx-1 alert alert-secondary fade show">
                 @endif
                     <div class="close_btn text-center" style="font-size:14px;"><a href="#" data-dismiss="alert"><i title="Marcar como lido" class="far fa-check-circle"></i></a></div>
-                    
+
                     <div class="col col-2 text-center mr-1 p-2 align-self-center" style="font-size:16px">
                         @if($Notificacao->type == 'App\Notifications\Aniversario')
                             <i class="fas fa-birthday-cake"></i>
@@ -49,13 +49,13 @@
 
                     </div>
                     <div class="info-not">
-                        <div class="col p-2 assunto"> 
+                        <div class="col p-2 assunto">
                             <b>{{$Notificacao->data['assunto']}}</b>
                             <br>
                             <a class="mostra" href="#" onClick="show($(this).closest('.info-not'))">Ler Tudo</a>
                         </div>
                         <div class="col p-2 descricao" style="display: none;">
-                            @php 
+                            @php
                                 $descricoes = explode('*',str_replace(array("\\r\\n", "\\r", "\\n"), "*", $Notificacao->data['descricao']));
                             @endphp
                             @foreach($descricoes as $descricao)
