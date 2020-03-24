@@ -73,7 +73,7 @@
                     class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
                     alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
                 @else
-                <img src="{{Storage::disk('public')->url('client-photos/').'default.png'}}" id="preview"
+                <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
                     class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
                     alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
                 @endif

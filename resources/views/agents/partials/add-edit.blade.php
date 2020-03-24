@@ -43,7 +43,7 @@
             <div class="col col-4 text-center">
                 {{-- INPUT fotografia --}}
                 <div><label for="fotografia">Fotografia:</label></div>
-                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{asset('storage/user-photos/user.jpg')}}" style="width:80%">
+                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{asset('storage/default-photos/addImg.png')}}" style="width:80%">
                 <a href="#" class="top-button">Procurar ficheiro</a>
             </div>
         </div>
