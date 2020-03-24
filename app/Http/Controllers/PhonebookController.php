@@ -24,9 +24,9 @@ class PhonebookController extends Controller
 
 
         /* Fornecedores */
-        $fornecedores = DB::table("contacto")
+        $fornecedores = DB::table("Contacto")
         ->select('*')
-        ->where('tipo', '=', 'Fornecedor')
+        ->where('tipo', 'like', 'Fornecedor')
         ->get();
 
         if ($fornecedores->isEmpty()) {
@@ -36,9 +36,9 @@ class PhonebookController extends Controller
 
 
         // Contactos Favoritos
-        $favoritos = DB::table("contacto")
+        $favoritos = DB::table("Contacto")
         ->select('*')
-        ->where('contacto.favorito', '=', true)
+        ->where('favorito', '=', true)
         ->get();
 
         if ($favoritos->isEmpty()) {
