@@ -23,7 +23,8 @@ class AgentController extends Controller
 
 
     public function create(){
-        return view('agents.add');
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('agents.add',compact('Notificacoes'));
     }
 
 

@@ -31,7 +31,8 @@ class ClientController extends Controller
     public function create()
     {
         $client = new Cliente;
-        return view('clients.add',compact('client'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('clients.add',compact('client','Notificacoes'));
     }
 
 
