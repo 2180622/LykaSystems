@@ -17,7 +17,6 @@ class Contacto extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idContacto');
-            $table->enum('tipo',['Aluno','Agente','Sub Agente','Fornecedor','Universidade','Outro']);
             $table->string('nome',255);
             $table->string('fotografia',255)->nullable();
             $table->integer('telefone1')->nullable();
