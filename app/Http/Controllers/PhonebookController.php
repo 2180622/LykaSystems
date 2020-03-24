@@ -11,11 +11,6 @@ use App\Http\Requests\StoreContactoRequest;
 
 class PhonebookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
@@ -24,7 +19,7 @@ class PhonebookController extends Controller
 
 
         /* Fornecedores */
-        $fornecedores = DB::table("contacto")
+        $fornecedores = DB::table("Contacto")
         ->select('*')
         ->where('tipo', '=', 'Fornecedor')
         ->get();
@@ -36,9 +31,9 @@ class PhonebookController extends Controller
 
 
         // Contactos Favoritos
-        $favoritos = DB::table("contacto")
+        $favoritos = DB::table("Contacto")
         ->select('*')
-        ->where('contacto.favorito', '=', true)
+        ->where('favorito', '=', true)
         ->get();
 
         if ($favoritos->isEmpty()) {
