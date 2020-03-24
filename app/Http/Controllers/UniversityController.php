@@ -21,7 +21,8 @@ class UniversityController extends Controller
     public function create()
     {
         $university = new Universidade;
-        return view('universities.add', compact('university'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('universities.add', compact('university','Notificacoes'));
     }
 
     public function store(StoreUniversidadeRequest $request)

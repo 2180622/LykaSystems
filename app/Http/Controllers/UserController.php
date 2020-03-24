@@ -25,7 +25,8 @@ class UserController extends Controller
     public function create()
     {
       $user = new User;
-      return view('users.add', compact('user'));
+      $Notificacoes = Auth()->user()->getNotifications();
+      return view('users.add', compact('user','Notificacoes'));
     }
 
     public function storeAdmin(StoreUserRequest $requestUser, StoreAdministradorRequest $requestAdmin){
