@@ -17,8 +17,9 @@ class AgentController extends Controller
 
     public function index(){
         $agents = Agente::all();
+        $totalagentes = $agents->count();
         $Notificacoes = Auth()->user()->getNotifications();
-        return view('agents.list', compact('agents','Notificacoes'));
+        return view('agents.list', compact('agents','totalagentes','Notificacoes'));
     }
 
 

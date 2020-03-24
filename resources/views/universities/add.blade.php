@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('css/universities.css')}}" rel="stylesheet">
+    <link href="{{asset('css/university.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
