@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateUserRequest;
 class AccountConfirmationController extends Controller
 {
     public function mailconfirmation(Request $request, User $user){
-      if ($user->password != null) {
+      if ($user->auth_key != null) {
         abort(404);
       }else {
         $mailinsert = $request->input('email');
