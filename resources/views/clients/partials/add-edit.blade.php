@@ -2,31 +2,38 @@
     {{-- MENU: Informação pessoal --}}
     <li class="nav-item">
         <a class="nav-link active" id="pessoal-tab" data-toggle="tab" href="#pessoal" role="tab"
-            aria-controls="contacts" aria-selected="true"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_info_pessoal" title="Existem campos obrigatórios por preencher"></i>Informação pessoal</a>
+            aria-controls="contacts" aria-selected="true"><i
+                class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_info_pessoal"
+                title="Existem campos obrigatórios por preencher"></i>Informação pessoal</a>
     </li>
 
     {{-- MENU: Dados académicos --}}
     <li class="nav-item">
         <a class="nav-link" id="school-tab" data-toggle="tab" href="#school" role="tab" aria-controls="school"
-            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_academico" title="Existem campos obrigatórios por preencher"></i>Dados académicos</a>
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2"
+                id="warning_academico" title="Existem campos obrigatórios por preencher"></i>Dados académicos</a>
     </li>
 
     {{-- MENU: Contactos --}}
     <li class="nav-item">
         <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab" aria-controls="contacts"
-            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_contactos" title="Existem campos obrigatórios por preencher"></i>Contactos</a>
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2"
+                id="warning_contactos" title="Existem campos obrigatórios por preencher"></i>Contactos</a>
     </li>
 
     {{-- MENU: Moradas --}}
     <li class="nav-item">
         <a class="nav-link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab" aria-controls="adresses"
-            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_moradas" title="Existem campos obrigatórios por preencher"></i>Moradas</a>
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2"
+                id="warning_moradas" title="Existem campos obrigatórios por preencher"></i>Moradas</a>
     </li>
 
     {{-- MENU: Documentação --}}
     <li class="nav-item">
         <a class="nav-link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
-            aria-controls="documentation" aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_documentation" title="Existem campos obrigatórios por preencher"></i>Documentação</a>
+            aria-controls="documentation" aria-selected="false"><i
+                class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_documentation"
+                title="Existem campos obrigatórios por preencher"></i>Documentação</a>
     </li>
 </ul>
 
@@ -46,12 +53,33 @@
                 <input type="text" class="form-control" name="apelido" id="apelido"
                     value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" required><br>
 
-                {{-- INPUT paisNaturalidade --}}
-                <label for="paisNaturalidade">Naturalidade:</label><br>
-                <input type="hidden" id="hidden_paisNaturalidade" value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
-                <select id="paisNaturalidade" name="paisNaturalidade" class="form-control" required>
-                    @include('clients.partials.countries');
-                </select><br>
+
+                <div class="row mb-4">
+
+                    <div class="col">
+                        {{-- INPUT GENERO --}}
+                        <label for="paisNaturalidade">Género:</label><br>
+                        <input type="hidden" id="hidden_paisNaturalidade"
+                            value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
+                        <select id="genero" name="genero" class="form-control" required>
+                            <option value="" selected hidden></option>
+                            <option {{old('genero',$client->genero)=='F'?"selected":""}} value="F">Feminino</option>
+                            <option {{old('genero',$client->genero)=='M'?"selected":""}} value="M">Masculino</option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        {{-- INPUT paisNaturalidade --}}
+                        <label for="paisNaturalidade">Naturalidade:</label><br>
+                        <input type="hidden" id="hidden_paisNaturalidade"
+                            value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
+                        <select id="paisNaturalidade" name="paisNaturalidade" class="form-control" required>
+                            @include('clients.partials.countries');
+                        </select>
+                    </div>
+
+                </div>
+
 
                 {{-- INPUT dataNasc --}}
                 <label for="dataNasc">Data de nascimento:</label><br>
@@ -77,7 +105,8 @@
                     class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
                     alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
                 @endif
-                <div class="mt-2" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar ficheiro</a></div>
+                <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
+                        ficheiro</a></div>
             </div>
         </div>
 
@@ -148,15 +177,15 @@
             <div class="col">
                 <label for="telefone2">Telefone pessoal(2):</label><br>
                 <input type="text" class="form-control" name="telefone2" id="telefone2"
-                    value="{{old('telefone2',$client->telefone2)}}" ><br>
+                    value="{{old('telefone2',$client->telefone2)}}"><br>
             </div>
         </div>
 
         <div class="row">
             <div class="col">
                 <label for="email">E-mail pessoal:</label><br>
-                <input type="email" class="form-control" name="email" id="email"
-                    value="{{old('email',$client->email)}}" required><br>
+                <input type="email" class="form-control" name="email" id="email" value="{{old('email',$client->email)}}"
+                    required><br>
             </div>
         </div>
 
@@ -166,29 +195,29 @@
 
                 <label for="nomePai">Nome do pai:</label><br>
                 <input type="text" class="form-control" name="nomePai" id="nomePai"
-                    value="{{old('nomePai',$client->nomePai)}}" ><br>
+                    value="{{old('nomePai',$client->nomePai)}}"><br>
 
                 <label for="telefonePai">Telefone do pai:</label><br>
                 <input type="text" class="form-control" name="telefonePai" id="telefonePai"
-                    value="{{old('telefonePai',$client->telefonePai)}}" ><br>
+                    value="{{old('telefonePai',$client->telefonePai)}}"><br>
 
                 <label for="emailPai">E-mail do pai:</label><br>
                 <input type="email" class="form-control" name="emailPai" id="emailPai"
-                    value="{{old('emailPai',$client->emailPai)}}" ><br>
+                    value="{{old('emailPai',$client->emailPai)}}"><br>
             </div>
 
             <div class="col">
                 <label for="nomeMae">Nome da mãe:</label><br>
                 <input type="text" class="form-control" name="nomeMae" id="nomeMae"
-                    value="{{old('nomeMae',$client->nomeMae)}}" ><br>
+                    value="{{old('nomeMae',$client->nomeMae)}}"><br>
 
                 <label for="telefoneMae">Telefone da mãe:</label><br>
                 <input type="text" class="form-control" name="telefoneMae" id="telefoneMae"
-                    value="{{old('telefoneMae',$client->telefoneMae)}}" ><br>
+                    value="{{old('telefoneMae',$client->telefoneMae)}}"><br>
 
                 <label for="emailMae">E-mail da mãe:</label><br>
                 <input type="email" class="form-control" name="emailMae" id="emailMae"
-                    value="{{old('emailMae',$client->emailMae)}}" ><br>
+                    value="{{old('emailMae',$client->emailMae)}}"><br>
             </div>
 
         </div>
@@ -217,7 +246,7 @@
                 {{-- Morada de residência no pais de origem --}}
                 <label for="morada">Morada no pais de origem:</label><br>
                 <input type="text" class="form-control" name="morada" id="morada"
-                    value="{{old('morada',$client->morada)}}"  required><br>
+                    value="{{old('morada',$client->morada)}}" required><br>
             </div>
 
             <div class="col">
@@ -246,7 +275,8 @@
             </div>
             <div class="col">
                 <label for="NIF">Número de identificação fiscal:</label><br>
-                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}" required><br>
+                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}"
+                    required><br>
             </div>
         </div>
 
@@ -275,7 +305,8 @@
             <div class="col">
                 {{-- INUPUT numPassaport --}}
                 <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
-                <input type="hidden" id="hidden_passaportPaisEmi" value="{{old('passaportPaisEmi',$client->passaportPaisEmi)}}">
+                <input type="hidden" id="hidden_passaportPaisEmi"
+                    value="{{old('passaportPaisEmi',$client->passaportPaisEmi)}}">
                 <select id="passaportPaisEmi" name="passaportPaisEmi" class="form-control" required>
                     @include('clients.partials.countries');
                 </select>
@@ -293,7 +324,8 @@
         <div class="row mt-4">
             <div class="col">
                 <label for="IBAN" class="mr-2">IBAN: </label><br>
-                <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}" required><br>
+                <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}"
+                    required><br>
 
                 <label for="obsFinanceiras">Observações Financeiras:</label><br>
                 <textarea name="obsFinanceiras" id="obsFinanceiras" rows="5"

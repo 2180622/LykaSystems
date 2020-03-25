@@ -4,6 +4,7 @@
 
             "columnDefs": [{
                     "orderable": false,
+                    "width": "60px",
                     "targets": 0
                 },
                 {
@@ -12,28 +13,14 @@
                 },
                 {
                     "orderable": false,
+                    "width": "130px",
                     "targets": 4
-                },
-                {
-                    "width": "60px",
-                    "targets": 0
                 },
                 {
                     "width": "auto",
                     "targets": 1
                 },
-                {
-                    "width": "auto",
-                    "targets": 2
-                },
-                {
-                    "width": "auto",
-                    "targets": 3
-                },
-                {
-                    "width": "130px",
-                    "targets": 4
-                },
+
             ],
 
 
@@ -126,7 +113,7 @@
 
 
         /* OPÇÃO DE APAGAR */
-        var formToSubmit //Varial para indicar o forumulário a submeter
+        var formToSubmit //Variavel para indicar o forumulário a submeter
 
         $(".form_client_id").submit(function (e) {
             formToSubmit = this;
@@ -185,7 +172,7 @@
 
 
                     /* valida Campos da informação pessoal */
-                    if ( ($("#nome").val()=="") || ($("#apelido").val()=="") || ($("#paisNaturalidade").val()=="") || ($("#dataNasc").val()=="")){
+                    if ( ($("#nome").val()=="") || ($("#apelido").val()=="") || ($("#paisNaturalidade").val()=="") || ($("#dataNasc").val()=="") || ($("#genero").val()=="")){
                         $("#warning_info_pessoal").removeClass("warning_sign");
                     } else {
                         $("#warning_info_pessoal").addClass("warning_sign");

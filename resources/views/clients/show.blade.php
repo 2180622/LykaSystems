@@ -38,24 +38,29 @@
 
             <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
                 <div class="col p-0 text-center" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
-                    @if ($client->fotografia)
-                        <img class="m-2 p-1 rounded bg-white shadow-sm"
-                            src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
-                            style="width:90%">
+
+                    @if($client->fotografia)
+                        <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" style="width:90%">
+                    @elseif($client->genero == 'F')
+                        <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
                     @else
-                        @if($client->genero == 'F')
-                            <img class="m-2 p-1 rounded bg-white shadow-sm"
-                                src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
-                        @else
-                            <img class="m-2 p-1 rounded bg-white shadow-sm"
-                                src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
-                        @endif
+                        <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
                     @endif
+
                 </div>
+                
                 <div class="col p-2">
 
                     {{-- Informações Pessoais --}}
                     <div><span class="text-secondary ">Nome:</span> {{$client->nome}} {{$client->apelido}}</div><br>
+
+                    <div><span class="text-secondary ">Género: </span>
+                    @if ($client->genero == 'M')
+                        Masculino
+                    @else
+                        Feminino
+                    @endif
+                    </div><br>
 
                     <div><span class="text-secondary">Naturalidade:</span> {{$client->paisNaturalidade}}</div><br>
 

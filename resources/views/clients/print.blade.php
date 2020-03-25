@@ -54,6 +54,14 @@
                 <div><span class="text-secondary font-weight-bold">Nome:</span> {{$client->nome}} {{$client->apelido}}
                 </div>
 
+                <div><span class="text-secondary font-weight-bold">Género:</span>
+                    @if ($client->genero == 'M')
+                    Masculino
+                @else
+                    Feminino
+                @endif
+                </div>
+
                 <div><span class="text-secondary font-weight-bold">Naturalidade:</span> {{$client->paisNaturalidade}}
                 </div>
 
@@ -83,13 +91,14 @@
 
             {{-- Fotografia --}}
             <div class="col col-3">
-                @if ($client->fotografia==null)
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('client-photos/default.png')}}" style="width:90%">
-                @else
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" style="width:90%">
-                @endif
+
+            @if($client->fotografia)
+                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" style="width:90%">
+            @elseif($client->genero == 'F')
+                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
+            @else
+                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
+            @endif
 
             </div>
 

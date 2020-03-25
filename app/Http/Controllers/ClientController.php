@@ -130,7 +130,8 @@ class ClientController extends Controller
     public function edit(Cliente $client)
     {
 
-        return view('clients.edit', compact('client'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('clients.edit', compact('client','Notificacoes'));
     }
 
 

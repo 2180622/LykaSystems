@@ -4,33 +4,11 @@ $(document).ready(function () {
 
         "columnDefs": [{
                 "orderable": false,
-                "targets": 0
-            },
-            {
-                "orderable": false,
-                "targets": 2
-            },
-            {
-                "orderable": false,
-                "targets": 4
-            },
-            {
                 "width": "60px",
                 "targets": 0
             },
             {
-                "width": "auto",
-                "targets": 1
-            },
-            {
-                "width": "auto",
-                "targets": 2
-            },
-            {
-                "width": "auto",
-                "targets": 3
-            },
-            {
+                "orderable": false,
                 "width": "130px",
                 "targets": 4
             },
@@ -81,7 +59,18 @@ $(document).ready(function () {
 
 
 
+        /* OPÇÃO DE APAGAR */
+        var formToSubmit //Varivel para indicar o forumulário a submeter
 
+        $(".form_contacto_id").submit(function (e) {
+            formToSubmit = this;
+            return false;
+        });
+
+        //click sim na modal
+        $(".btn_submit").click(function (e) {
+            formToSubmit.submit();
+        });
 
 });
 
