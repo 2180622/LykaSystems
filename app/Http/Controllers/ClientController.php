@@ -13,7 +13,6 @@ class ClientController extends Controller
 {
     public function index()
     {
-
         $clients = Cliente::all();
         $totalestudantes = $clients->count();
 
@@ -58,7 +57,7 @@ class ClientController extends Controller
         }
 
         if ($request->fotografia==null){
-            $client->fotografia = "default.png";
+            $client->fotografia = null;
         }
 
         // data em que foi criado
@@ -81,17 +80,14 @@ class ClientController extends Controller
     public function show(Cliente $client)
     {
         // Produtos adquiridos pelo cliente
-        $produtos = DB::table("produto")
-        ->select('*')
-        ->where('produto.idCliente', '=', $client->idCliente)
-        ->get();
+        $produtos = $client->produto;
+        $Notificacoes = Auth()->user()->getNotifications();
 
         if ($produtos->isEmpty()) {
             $produtos=null;
         }
 
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('clients.show',compact("client","produtos","Notificacoes"));
+        return view('clients.show',compact("client","produtos",'Notificacoes'));
     }
 
 
@@ -107,11 +103,9 @@ class ClientController extends Controller
     {
 
         // Produtos adquiridos pelo cliente
-        $produtos = DB::table("produto")
-        ->select('*')
-        ->where('produto.idCliente', '=', $client->idCliente)
-        ->get();
-
+        //$produtos = Produto::where('idProduto','=',$client->idCliente)->get();
+        $produtos = $client->produto;
+        dd($produtos);
         if ($produtos->isEmpty()) {
             $produtos=null;
         }

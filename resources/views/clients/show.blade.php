@@ -93,12 +93,17 @@
 
             </div>
 
-
             <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
+
+                {{-- MENU: Produtos --}}
+                <li class="nav-item " style="width:25%">
+                    <a class="nav-link active" id="produtos-tab" data-toggle="tab" href="#produtos" role="tab"
+                       aria-controls="produto" aria-selected="false">Produtos</a>
+                </li>
 
                 {{-- MENU: Documentação --}}
                 <li class="nav-item " style="width:25%">
-                    <a class="nav-link active" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
+                    <a class="nav-link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
                        aria-controls="documentation" aria-selected="false">Documentação</a>
                 </li>
 
@@ -124,11 +129,71 @@
 
 
 
+            
 
 
             <div class="tab-content p-2 " id="myTabContent">
+                {{-- Conteudo: Produtos --}}
+                <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
+                    @if($produtos)
+                        <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                            style="overflow:hidden;">
+            
+                            {{-- Cabeçalho da tabela --}}
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                    <th>Ano Academico</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+            
+                            {{-- Corpo da tabela --}}
+                            <tbody>
+            
+                                @foreach ($produtos as $produto)
+                                <tr>
+                                    {{-- Tipo --}}
+                                    <th class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->tipo}}</a></th>
+            
+                                    {{-- Descrição --}}
+                                    <th class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></th>
+            
+                                    {{-- Ano Academico --}}
+                                    <th class="align-middle">{{$produto->anoAcademico}}</th>
+            
+                                    {{-- Total --}}
+                                    <th class="align-middle">{{$produto->valorTotal.'€'}}</th>
+            
+            
+                                    {{-- OPÇÔES --}}
+                                    <th class="text-center align-middle">
+                                        <a href="{{route('produtos.show',$produto)}}" class="btn_list_opt "
+                                            title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                        <a href="{{route('produtos.edit',$produto)}}" class="btn_list_opt btn_list_opt_edit"
+                                            title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+            
+                                        <form method="POST" role="form" id="{{$produto->idProduto}}"
+                                            action="{{route('produtos.destroy',$produto)}}" class="d-inline-block form_produto_id">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn_delete" title="Eliminar produto" data-toggle="modal"
+                                                data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+            
+                                    </th>
+                                </tr>
+                                @endforeach
+            
+                            </tbody>
+                        </table>
+                    @else
+                        <div><span class="text-secondary">Sem Produtos</div>
+                    @endif
+                </div>
                 {{-- Conteudo: Documentação --}}
-                <div class="tab-pane fade active show" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
+                <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
 
                     {{--  DADOS DE PASSAPORTE --}}
                     <div class="row">

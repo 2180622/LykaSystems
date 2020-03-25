@@ -38,11 +38,18 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Utilizadores */
     Route::resource('/users', 'UserController');
     Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
+
+  /* Produtos */
+  Route::resource('/produtos', 'ProdutoController');
 });
 
 /* Email Confirmation */
 Route::get('/confirmation/{user}', 'AccountConfirmationController@mailconfirmation')->name('confirmation.mail');
 Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
+
+
+
+
 
 /* Edgar Teste -> Eliminar no futuro */
 Route::get('/edgarteste', 'EdgarTesteController@index');
