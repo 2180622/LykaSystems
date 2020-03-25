@@ -29,6 +29,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Biblioteca */
     Route::resource('/libraries', 'LibraryController');
 
+    /* Agenda */
+    Route::resource('/agends', 'AgendController');
+
     /* Logout */
     Route::get('/logout', 'Auth\LoginController@logout');
 
