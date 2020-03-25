@@ -1,11 +1,11 @@
 @extends('layout.master')
 
 {{-- Page Title --}}
-@section('title', 'Adicionar estudante')
+@section('title', 'Adicionar produto')
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('css/clients.css')}}" rel="stylesheet">
+    <link href="{{asset('css/produtos.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -26,16 +26,16 @@
     <br><br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Adicionar estudante</h6>
+            <h6>Adicionar produto</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client"
+        <form method="POST" action="{{route('produtos.store')}}" class="form-group needs-validation pt-3" id="form_produto"
             enctype="multipart/form-data" novalidate>
             @csrf
-            @include('clients.partials.add-edit')
+            @include('produtos.partials.add-edit')
             <div class="form-group text-right">
                 <br><br>
-                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar estudante</button>
+                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar produto</button>
                 <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
             </div>
         </form>
@@ -54,7 +54,7 @@
 @section('scripts')
 
 {{-- script contem: datatable configs, input configs, validações --}}
-<script src="{{asset('/js/clients.js')}}"></script>
+<script src="{{asset('/js/produtos.js')}}"></script>
 
 {{-- script permite definir se um input recebe só numeros OU so letras --}}
 <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>

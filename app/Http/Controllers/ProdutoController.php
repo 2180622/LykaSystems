@@ -72,8 +72,9 @@ class ProdutoController extends Controller
     {
 
         $Notificacoes = Auth()->user()->getNotifications();
+        $Fases = $produto->fase;
 
-        return view('produtos.show',compact("produto",'Notificacoes'));
+        return view('produtos.show',compact("produto",'Notificacoes','Fases'));
     }
 
 
