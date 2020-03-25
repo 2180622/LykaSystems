@@ -105,7 +105,7 @@
                     class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
                     alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
                 @endif
-                <div class="mt-2" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
+                <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
                         ficheiro</a></div>
             </div>
         </div>

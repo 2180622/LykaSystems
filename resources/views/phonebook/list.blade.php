@@ -10,6 +10,7 @@
 
 <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
 
+
 @endsection
 
 
@@ -105,7 +106,6 @@
                         <thead>
                             <tr>
 
-
                                 <th class="text-center align-content-center ">Foto
                                     {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
                                 </th>
@@ -122,7 +122,7 @@
 
                             @foreach ($contactos as $contacto)
                             <tr>
-                                <th >
+                                <th>
                                     <div class="align-middle mx-auto shadow-sm rounded"
                                         style="overflow:hidden; width:50px; height:50px">
                                         <a class="name_link" href="#">
@@ -152,12 +152,12 @@
 
                                 {{-- OPÇÔES --}}
                                 <th class="text-center align-middle">
-                                    <a href="#" class="btn_list_opt " title="Ver ficha completa"><i
+                                    <a href="{{route('phonebook.show',$contacto)}}" class="btn_list_opt " title="Ver ficha completa"><i
                                             class="far fa-eye mr-2"></i></a>
-                                    <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                    <a href="{{route('phonebook.edit',$contacto)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
                                             class="fas fa-pencil-alt mr-2"></i></a>
 
-                                    <form method="POST" role="form" id="IDCONTACTO" action="#"
+                                    <form method="POST" role="form" id="IDCONTACTO{{$contacto->idContacto}}" action="#"
                                         class="d-inline-block form_contacto_id">
                                         @csrf
                                         @method('DELETE')
@@ -165,7 +165,6 @@
                                             data-toggle="modal" data-target="#deleteModal"><i
                                                 class="fas fa-trash-alt"></i></button>
                                     </form>
-
                                 </th>
                             </tr>
                             @endforeach
@@ -180,7 +179,7 @@
 
 
             {{-- FORNECEDORES --}}
-            <div class="tab-pane fade" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">Food truck
+            <div class="tab-pane fade show" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">Food truck
                 fixie
                 locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
                 blog sartorial
@@ -191,37 +190,26 @@
 
 
             {{-- FAVORITOS --}}
-            <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
+            <div class="tab-pane fade show " id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
                 <div class="row text-center">
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
 
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
+                    @foreach ($contactos as $contacto )
+                    @if( $contacto->favorito==true)
+                    <div class="col col-2 card m-2 p-3 ">
+                        <a href="{{route('phonebook.edit',$contacto)}}" style="text-decoration: none;">
+                            <div>
+                                @if($contacto->fotografia)
+                                    <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}" style="width:90%">
+                                @else
+                                    <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
+                                @endif
+                            </div>
+                            <div>{{$contacto->nome}}<br><small>( Ver detalhes )</small></div>
+                        </a>
                     </div>
+                    @endif
+                    @endforeach
 
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
-
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
-
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
-
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
 
                 </div>
             </div>
