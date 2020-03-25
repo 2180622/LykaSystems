@@ -16,7 +16,7 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-@include('phonebook.partials.modal')
+@include('contacts.partials.modal')
 
 <!-- MODAL DE INFORMAÇÔES -->
 
@@ -31,7 +31,7 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('phonebook.create')}}" class="top-button">Adicionar Contacto</a>
+        <a href="{{route('contacts.create')}}" class="top-button">Adicionar Contacto</a>
     </div>
 
     <br><br>
@@ -121,11 +121,11 @@
                         {{-- Corpo da tabela --}}
                         <tbody>
 
-                            @foreach ($contactos as $contacto)
+                            @foreach ($contactos as $key => $contacto)
                             <tr>
                                 <td>
                                     <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
-                                        <a class="name_link" href="{{route('phonebook.show',$contacto)}}">
+                                        <a class="name_link" href="{{route('contacts.show',$contacto)}}">
 
                                             @if($contacto->fotografia)
                                                 <img src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}" width="100%" class="mx-auto"">
@@ -139,7 +139,7 @@
                                 </td>
 
                                 {{-- Nome e Apelido --}}
-                                <td class="align-middle"><a class="name_link" href="{{route('phonebook.show',$contacto)}}">{{$contacto->nome}}</a></td>
+                                <td class="align-middle"><a class="name_link" href="{{route('contacts.show',$contacto)}}">{{$contacto->nome}}</a></td>
 
                                 {{-- e-mail --}}
                                 <td class="align-middle">{{$contacto->email}}</td>
@@ -150,12 +150,12 @@
 
                                 {{-- OPÇÔES --}}
                                 <td class="text-center align-middle">
-                                    <a href="{{route('phonebook.show',$contacto)}}" class="btn_list_opt " title="Ver ficha completa"><i
+                                    <a href="{{route('contacts.show',$contacto)}}" class="btn_list_opt " title="Ver ficha completa"><i
                                             class="far fa-eye mr-2"></i></a>
-                                    <a href="{{route('phonebook.edit',$contacto)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                    <a href="{{route('contacts.edit',$contacto)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
                                             class="fas fa-pencil-alt mr-2"></i></a>
 
-                                    <form method="POST" role="form" id="{{$contacto->idContacto}}" action="{{route('phonebook.destroy',$contacto)}}"
+                                    <form method="POST" role="form" id="{{$contacto->idContacto}}" action="{{route('contacts.destroy',$contacto)}}"
                                         class="d-inline-block form_contacto_id">
                                         @csrf
                                         @method('DELETE')
@@ -165,6 +165,7 @@
                                     </form>
                                 </td>
                             </tr>
+
                             @endforeach
 
                         </tbody>
@@ -192,7 +193,7 @@
                     @foreach ($contactos as $contacto )
                     @if( $contacto->favorito==true)
                     <div class="col col-2 card m-2 p-3 ">
-                        <a href="{{route('phonebook.edit',$contacto)}}" style="text-decoration: none;">
+                        <a href="{{route('contacts.show',$contacto)}}" style="text-decoration: none;">
                             <div>
                                 @if($contacto->fotografia)
                                     <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}" style="width:90%">
@@ -222,6 +223,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-<script src="{{asset('/js/phonebook.js')}}"></script>
+<script src="{{asset('/js/contacts.js')}}"></script>
 
 @endsection

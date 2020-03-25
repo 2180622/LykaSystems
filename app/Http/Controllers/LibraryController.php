@@ -15,8 +15,7 @@ class LibraryController extends Controller
     public function index()
     {
         $libraries = Biblioteca::all();
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('libraries.list', compact('libraries', 'Notificacoes'));
+        return view('libraries.list', compact('libraries'));
     }
 
     /**

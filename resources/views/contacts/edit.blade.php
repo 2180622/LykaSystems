@@ -1,0 +1,3 @@
+{{$contacto->nome}}
+<hr>
+cbcvbcvb

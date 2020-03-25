@@ -105,11 +105,11 @@
 
             <!-- Lista telefónica -->
             <li class="menu-option">
-                <a href="{{route('phonebook.index')}}">
+                <a href="{{route('contacts.index')}}">
                     <div class="menu-icon">
                         <i class="fas fa-phone-alt mr-2"></i>
                     </div>
-                    <span class="{{Route::is('phonebook.*') ? 'active' : ''}} option-name">Lista telefónica</span>
+                    <span class="{{Route::is('contacts.*') ? 'active' : ''}} option-name">Lista telefónica</span>
                 </a>
             </li>
 

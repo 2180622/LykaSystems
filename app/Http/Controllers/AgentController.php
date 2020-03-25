@@ -18,14 +18,13 @@ class AgentController extends Controller
     public function index(){
         $agents = Agente::where('tipo','=','Agente')->get();
         $totalagentes = $agents->count();
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('agents.list', compact('agents','totalagentes','Notificacoes'));
+
+        return view('agents.list', compact('agents','totalagentes'));
     }
 
 
     public function create(){
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('agents.add',compact('Notificacoes'));
+        return view('agents.add');
     }
 
 

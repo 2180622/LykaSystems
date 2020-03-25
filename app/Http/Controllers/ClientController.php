@@ -16,8 +16,8 @@ class ClientController extends Controller
 
         $clients = Cliente::all();
         $totalestudantes = $clients->count();
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('clients.list', compact('clients', 'totalestudantes', 'Notificacoes'));
+
+        return view('clients.list', compact('clients', 'totalestudantes'));
     }
 
 
@@ -31,8 +31,7 @@ class ClientController extends Controller
     public function create()
     {
         $client = new Cliente;
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('clients.add',compact('client','Notificacoes'));
+        return view('clients.add',compact('client'));
     }
 
 
@@ -81,7 +80,6 @@ class ClientController extends Controller
     */
     public function show(Cliente $client)
     {
-
         // Produtos adquiridos pelo cliente
         $produtos = DB::table("produto")
         ->select('*')
@@ -135,9 +133,7 @@ class ClientController extends Controller
     */
     public function edit(Cliente $client)
     {
-
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('clients.edit', compact('client','Notificacoes'));
+        return view('clients.edit', compact('client'));
     }
 
 

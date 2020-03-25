@@ -15,8 +15,7 @@ class AgendController extends Controller
     public function index()
     {
         $agends = Agenda::all();
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('agends.list', compact('agends','Notificacoes'));
+        return view('agends.list', compact('agends'));
     }
 
     /**

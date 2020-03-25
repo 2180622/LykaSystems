@@ -14,15 +14,15 @@ class UniversityController extends Controller
     {
         $universities = Universidade::all();
         $totaluniversidades = $universities->count();
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('universities.list', compact('universities', 'totaluniversidades','Notificacoes'));
+
+        return view('universities.list', compact('universities', 'totaluniversidades'));
     }
 
     public function create()
     {
         $university = new Universidade;
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('universities.add', compact('university','Notificacoes'));
+
+        return view('universities.add', compact('university'));
     }
 
     public function store(StoreUniversidadeRequest $request)

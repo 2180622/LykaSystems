@@ -25,6 +25,17 @@
 
     @yield('styleLinks')
 
+
+
+
+
+    {{-- NOTIFICAÇÔES PARA TODAS AS PÁGINAS --}}
+
+ @php
+        $Notificacoes = Auth()->user()->getNotifications();
+     @endphp
+
+
 </head>
 
 <body>

@@ -18,15 +18,15 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('users.list', compact('users','Notificacoes'));
+
+        return view('users.list', compact('users'));
     }
 
     public function create()
     {
       $user = new User;
       $Notificacoes = Auth()->user()->getNotifications();
-      return view('users.add', compact('user','Notificacoes'));
+      return view('users.add', compact('user'));
     }
 
     public function storeAdmin(StoreUserRequest $requestUser, StoreAdministradorRequest $requestAdmin){
