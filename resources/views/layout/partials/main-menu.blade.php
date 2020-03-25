@@ -95,11 +95,11 @@
 
             <!-- Biblioteca -->
             <li class="menu-option">
-                <a href="#">
+                <a href="{{route('libraries.index')}}">
                     <div class="menu-icon">
                         <i class="far fa-folder mr-2"></i>
                     </div>
-                    <span class="option-name">Biblioteca</span>
+                    <span class="option-name {{Route::is('libraries.*') ? 'active' : ''}}">Biblioteca</span>
                 </a>
             </li>
 
