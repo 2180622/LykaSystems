@@ -185,7 +185,7 @@
 
 
                     /* valida Campos da informação pessoal */
-                    if ( ($("#nome").val()=="") || ($("#apelido").val()=="") || ($("#paisNaturalidade").val()=="") || ($("#dataNasc").val()=="")){
+                    if ( ($("#nome").val()=="") || ($("#apelido").val()=="") || ($("#paisNaturalidade").val()=="") || ($("#dataNasc").val()=="") || ($("#genero").val()=="")){
                         $("#warning_info_pessoal").removeClass("warning_sign");
                     } else {
                         $("#warning_info_pessoal").addClass("warning_sign");
