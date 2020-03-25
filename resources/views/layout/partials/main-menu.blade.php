@@ -115,11 +115,11 @@
 
             <!-- Agenda -->
             <li class="menu-option">
-                <a href="#">
+                <a href="{{route('agends.index')}}">
                     <div class="menu-icon">
                         <i class="far fa-calendar-alt mr-2"></i>
                     </div>
-                    <span class="option-name">Agenda</span>
+                    <span class="option-name {{Route::is('agends.*') ? 'active' : ''}}">Agenda</span>
                 </a>
             </li>
         </div>

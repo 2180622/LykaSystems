@@ -2,7 +2,7 @@
 
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista da Biblioteca')
+@section('title', 'Biblioteca')
 
 
 {{-- Estilos de CSS --}}
