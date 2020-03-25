@@ -100,7 +100,7 @@
 
                     @foreach ($universities as $university)
                         <tr>
-                            <th class="">
+                            <td>
                                 <div class="align-middle mx-auto shadow-sm rounded"
                                      style="overflow:hidden; width:50px; height:50px">
                                      @if($university->fotografia)
@@ -113,20 +113,20 @@
                                 </div>
                                 {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
                                 --}}
-                            </th>
+                            </td>
 
                             {{-- Nome --}}
-                            <th class="align-middle">{{ $university->nome }}</th>
+                            <td class="align-middle">{{ $university->nome }}</td>
 
                             {{-- E-Mail --}}
-                            <th class="align-middle">{{ $university->email }}</th>
+                            <td class="align-middle">{{ $university->email }}</td>
 
                             {{-- Morada --}}
-                            <th class="align-middle">{{ $university->morada }}</th>
+                            <td class="align-middle">{{ $university->morada }}</td>
 
 
                             {{-- OPÇÔES --}}
-                            <th class="text-center align-middle">
+                            <td class="text-center align-middle">
                                 <a href="{{route('universities.show',$university)}}" class="btn_list_opt "
                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                                 <a href="{{route('universities.edit',$university)}}" class="btn_list_opt btn_list_opt_edit"
@@ -142,7 +142,7 @@
                                             data-target="#eliminarUniversidade" data-title="{{$university->nome}}"><i class="fas fa-trash-alt"></i></button>
                                 </form>
 
-                            </th>
+                            </td>
                         </tr>
                     @endforeach
 
