@@ -10,6 +10,7 @@
 
 <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
 
+
 @endsection
 
 
@@ -40,12 +41,6 @@
             <h6>Lista de contactos</h6>
         </div>
         <br>
-
-        <div class="row mt-3 mb-4">
-            <div class="col">
-                Estão registados no sistema <strong> XXX </strong> contactos
-            </div>
-        </div>
 
         <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
 
@@ -111,7 +106,6 @@
                         <thead>
                             <tr>
 
-
                                 <th class="text-center align-content-center ">Foto
                                     {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
                                 </th>
@@ -126,46 +120,54 @@
                         {{-- Corpo da tabela --}}
                         <tbody>
 
-                            {{-- @foreach ($clients as $client) --}}
+                            @foreach ($contactos as $contacto)
                             <tr>
-                                <th class="">
+                                <th>
                                     <div class="align-middle mx-auto shadow-sm rounded"
                                         style="overflow:hidden; width:50px; height:50px">
                                         <a class="name_link" href="#">
-                                            <img src="{{asset('storage/default-photos/contacto.png')}}" width="100%" class="mx-auto">
+
+                                            @if($contacto->fotografia)
+                                            <img src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}"
+                                                width="100%" class="mx-auto"">
+                                        @else
+                                            <img src=" {{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                                width="100%" class="mx-auto">
+                                            @endif
+
                                         </a>
                                     </div>
 
                                 </th>
 
                                 {{-- Nome e Apelido --}}
-                                <th class="align-middle"><a class="name_link" href="#">NOME E APELIDO</a></th>
+                                <th class="align-middle"><a class="name_link" href="#">{{$contacto->nome}}</a></th>
 
                                 {{-- e-mail --}}
-                                <th class="align-middle"> E-Mail </th>
+                                <th class="align-middle">{{$contacto->email}}</th>
 
                                 {{-- Telefone(1) --}}
-                                <th class="align-middle">Telefone(5)</th>
+                                <th class="align-middle">{{$contacto->telefone1}}</th>
 
 
                                 {{-- OPÇÔES --}}
                                 <th class="text-center align-middle">
-                                    <a href="#" class="btn_list_opt "
-                                        title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                    <a href="#" class="btn_list_opt btn_list_opt_edit"
-                                        title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                                    <a href="{{route('phonebook.show',$contacto)}}" class="btn_list_opt " title="Ver ficha completa"><i
+                                            class="far fa-eye mr-2"></i></a>
+                                    <a href="{{route('phonebook.edit',$contacto)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                            class="fas fa-pencil-alt mr-2"></i></a>
 
-                                    <form method="POST" role="form" id="IDCLIENTE"
-                                        action="#" class="d-inline-block form_client_id">
+                                    <form method="POST" role="form" id="IDCONTACTO{{$contacto->idContacto}}" action="#"
+                                        class="d-inline-block form_contacto_id">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
-                                            data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="submit" class="btn_delete" title="Eliminar contacto"
+                                            data-toggle="modal" data-target="#deleteModal"><i
+                                                class="fas fa-trash-alt"></i></button>
                                     </form>
-
                                 </th>
                             </tr>
-                            {{-- @endforeach --}}
+                            @endforeach
 
                         </tbody>
                     </table>
@@ -177,7 +179,8 @@
 
 
             {{-- FORNECEDORES --}}
-            <div class="tab-pane fade" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">Food truck fixie
+            <div class="tab-pane fade show" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">Food truck
+                fixie
                 locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
                 blog sartorial
             </div>
@@ -187,37 +190,26 @@
 
 
             {{-- FAVORITOS --}}
-            <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
+            <div class="tab-pane fade show " id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
                 <div class="row text-center">
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
 
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
+                    @foreach ($contactos as $contacto )
+                    @if( $contacto->favorito==true)
+                    <div class="col col-2 card m-2 p-3 ">
+                        <a href="{{route('phonebook.edit',$contacto)}}" style="text-decoration: none;">
+                            <div>
+                                @if($contacto->fotografia)
+                                    <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}" style="width:90%">
+                                @else
+                                    <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
+                                @endif
+                            </div>
+                            <div>{{$contacto->nome}}<br><small>( Ver detalhes )</small></div>
+                        </a>
                     </div>
+                    @endif
+                    @endforeach
 
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
-
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
-
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
-
-                    <div class="col col-2 card m-2 p-3">
-                        <div><img src="#" width="60%" class="rounded shadow-sm mx-auto"></div>
-                        <div>John Travolta<br>910 000 000</div>
-                    </div>
 
                 </div>
             </div>

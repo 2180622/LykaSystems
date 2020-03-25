@@ -92,7 +92,8 @@ class ClientController extends Controller
             $produtos=null;
         }
 
-        return view('clients.show',compact("client","produtos"));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('clients.show',compact("client","produtos","Notificacoes"));
     }
 
 
@@ -135,7 +136,8 @@ class ClientController extends Controller
     public function edit(Cliente $client)
     {
 
-        return view('clients.edit', compact('client'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('clients.edit', compact('client','Notificacoes'));
     }
 
 

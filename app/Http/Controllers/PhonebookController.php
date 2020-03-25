@@ -15,19 +15,6 @@ class PhonebookController extends Controller
     {
 
         $contactos = Contacto::all();
-        $total = $contactos->count();
-
-
-        /* Fornecedores */
-        $fornecedores = DB::table("Contacto")
-        ->select('*')
-        ->where('tipo', 'like', 'Fornecedor')
-        ->get();
-
-        if ($fornecedores->isEmpty()) {
-            $fornecedores=null;
-        }
-
 
 
         // Contactos Favoritos
@@ -40,8 +27,9 @@ class PhonebookController extends Controller
             $favoritos=null;
         }
 
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('phonebook.list',compact('contactos','total','fornecedores','favoritos','Notificacoes'));
+        $Notificacoes = Auth()->user()->getNotifications(); // PORQUE É QUE ESTÁ AQUI(EM TODAS AS PAGINAS), E NÃO ESTÁ SÓ NO MASTER?
+
+        return view('phonebook.list',compact('contactos','favoritos','Notificacoes'));
     }
 
     /**
@@ -66,6 +54,10 @@ class PhonebookController extends Controller
         //
     }
 
+
+
+
+
     /**
      * Display the specified resource.
      *
@@ -74,8 +66,13 @@ class PhonebookController extends Controller
      */
     public function show(Contacto $contacto)
     {
-        return view('phonebook.show',compact("contacto"));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('phonebook.show',compact("contacto","Notificacoes"));
     }
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -85,9 +82,17 @@ class PhonebookController extends Controller
      */
     public function edit(Contacto $contacto)
     {
-        return view('phonebook.edit', compact('contacto'));
+        $Notificacoes = Auth()->user()->getNotifications();
+        return view('phonebook.edit', compact('contacto','Notificacoes'));
     }
 
+
+
+
+
+
+
+    
     /**
      * Update the specified resource in storage.
      *
@@ -99,6 +104,9 @@ class PhonebookController extends Controller
     {
         //
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.

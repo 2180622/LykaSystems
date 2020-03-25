@@ -4,33 +4,11 @@ $(document).ready(function () {
 
         "columnDefs": [{
                 "orderable": false,
-                "targets": 0
-            },
-            {
-                "orderable": false,
-                "targets": 2
-            },
-            {
-                "orderable": false,
-                "targets": 4
-            },
-            {
                 "width": "60px",
                 "targets": 0
             },
             {
-                "width": "auto",
-                "targets": 1
-            },
-            {
-                "width": "auto",
-                "targets": 2
-            },
-            {
-                "width": "auto",
-                "targets": 3
-            },
-            {
+                "orderable": false,
                 "width": "130px",
                 "targets": 4
             },

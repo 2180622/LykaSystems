@@ -26,6 +26,7 @@ class UpdateClienteRequest extends FormRequest
         return [
             'nome' => 'required',
             'apelido' => 'required',
+            'genero'=>'required',
             'email' => 'required',
             'telefone1' => 'required',
             'telefone2' => 'nullable',
