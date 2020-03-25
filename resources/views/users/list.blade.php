@@ -5,7 +5,7 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-{{-- <link href="{{asset('css/NOME_DO_FICHEIRO.css')}}" rel="stylesheet"> --}}
+    <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
 @endsection
 
 
@@ -113,10 +113,24 @@
                         <th class="align-middle">{{ $user->nome }}</th>
                         <th class="align-middle">{{ $user->morada }}</th>
                         <th class="align-middle">{{ $user->email }}</th>
+
+                        {{-- OPÇÔES --}}
                         <th class="text-center align-middle">
-                            <a href="{{route('users.show',$user)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                            <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-                            <a href="#" class="btn_list_opt btn_list_opt_delete" title="Eliminar"><i class="far fa-trash-alt"></i></a>
+                            <a href="{{route('users.show',$user)}}" class="btn_list_opt "
+                               title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                            <a href="#" class="btn_list_opt btn_list_opt_edit"
+                               title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                            <form method="POST" role="form" id=""
+                                  action="#"
+                                  class="d-inline-block form_university_id">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn_delete" title="Eliminar Utilizador"
+                                        data-toggle="modal"
+                                        data-target="#eliminarUtilizador" data-title="{{$user->nome}}"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+
                         </th>
                     </tr>
                     @endforeach

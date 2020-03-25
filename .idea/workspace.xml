@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/list.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,16 +135,16 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\LykaSystems\resources\views" />
-      <recent name="C:\laragon\www\LykaSystems\public" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\laragon\www\LykaSystems\resources\views\universities\partials" />
       <recent name="C:\laragon\www\LykaSystems\public\js" />
       <recent name="C:\laragon\www\LykaSystems\resources\views\layout" />
       <recent name="C:\laragon\www\LykaSystems\public\css" />
       <recent name="C:\laragon\www\LykaSystems\resources\views\universities" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\LykaSystems\resources\views" />
+      <recent name="C:\laragon\www\LykaSystems\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -189,7 +190,8 @@
       <workItem from="1584475397169" duration="74000" />
       <workItem from="1584517425989" duration="2090000" />
       <workItem from="1584538305567" duration="148000" />
-      <workItem from="1585040994946" duration="3667000" />
+      <workItem from="1585040994946" duration="5465000" />
+      <workItem from="1585127467326" duration="306000" />
     </task>
     <servers />
   </component>
