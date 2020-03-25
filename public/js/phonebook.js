@@ -59,7 +59,18 @@ $(document).ready(function () {
 
 
 
+        /* OPÇÃO DE APAGAR */
+        var formToSubmit //Varivel para indicar o forumulário a submeter
 
+        $(".form_contacto_id").submit(function (e) {
+            formToSubmit = this;
+            return false;
+        });
+
+        //click sim na modal
+        $(".btn_submit").click(function (e) {
+            formToSubmit.submit();
+        });
 
 });
 

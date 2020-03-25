@@ -16,6 +16,7 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
+@include('phonebook.partials.modal')
 
 <!-- MODAL DE INFORMAÇÔES -->
 
@@ -122,42 +123,39 @@
 
                             @foreach ($contactos as $contacto)
                             <tr>
-                                <th>
-                                    <div class="align-middle mx-auto shadow-sm rounded"
-                                        style="overflow:hidden; width:50px; height:50px">
-                                        <a class="name_link" href="#">
+                                <td>
+                                    <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
+                                        <a class="name_link" href="{{route('phonebook.show',$contacto)}}">
 
                                             @if($contacto->fotografia)
-                                            <img src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}"
-                                                width="100%" class="mx-auto"">
-                                        @else
-                                            <img src=" {{Storage::disk('public')->url('default-photos/M.jpg')}}"
-                                                width="100%" class="mx-auto">
+                                                <img src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}" width="100%" class="mx-auto"">
+                                            @else
+                                                <img src=" {{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
                                             @endif
 
                                         </a>
                                     </div>
 
-                                </th>
+                                </td>
 
                                 {{-- Nome e Apelido --}}
-                                <th class="align-middle"><a class="name_link" href="#">{{$contacto->nome}}</a></th>
+                                <td class="align-middle"><a class="name_link" href="{{route('phonebook.show',$contacto)}}">{{$contacto->nome}}</a></td>
 
                                 {{-- e-mail --}}
-                                <th class="align-middle">{{$contacto->email}}</th>
+                                <td class="align-middle">{{$contacto->email}}</td>
 
                                 {{-- Telefone(1) --}}
-                                <th class="align-middle">{{$contacto->telefone1}}</th>
+                                <td class="align-middle">{{$contacto->telefone1}}</td>
 
 
                                 {{-- OPÇÔES --}}
-                                <th class="text-center align-middle">
+                                <td class="text-center align-middle">
                                     <a href="{{route('phonebook.show',$contacto)}}" class="btn_list_opt " title="Ver ficha completa"><i
                                             class="far fa-eye mr-2"></i></a>
                                     <a href="{{route('phonebook.edit',$contacto)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
                                             class="fas fa-pencil-alt mr-2"></i></a>
 
-                                    <form method="POST" role="form" id="IDCONTACTO{{$contacto->idContacto}}" action="#"
+                                    <form method="POST" role="form" id="{{$contacto->idContacto}}" action="{{route('phonebook.destroy',$contacto)}}"
                                         class="d-inline-block form_contacto_id">
                                         @csrf
                                         @method('DELETE')
@@ -165,7 +163,7 @@
                                             data-toggle="modal" data-target="#deleteModal"><i
                                                 class="fas fa-trash-alt"></i></button>
                                     </form>
-                                </th>
+                                </td>
                             </tr>
                             @endforeach
 
@@ -179,10 +177,8 @@
 
 
             {{-- FORNECEDORES --}}
-            <div class="tab-pane fade show" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">Food truck
-                fixie
-                locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
-                blog sartorial
+            <div class="tab-pane fade show" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">
+                FORNECEDORES
             </div>
 
 
@@ -204,7 +200,7 @@
                                     <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
                                 @endif
                             </div>
-                            <div>{{$contacto->nome}}<br><small>( Ver detalhes )</small></div>
+                            <div class="mt-2">{{$contacto->nome}}<br><small>( Ver detalhes )</small></div>
                         </a>
                     </div>
                     @endif

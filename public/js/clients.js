@@ -4,6 +4,7 @@
 
             "columnDefs": [{
                     "orderable": false,
+                    "width": "60px",
                     "targets": 0
                 },
                 {
@@ -12,28 +13,14 @@
                 },
                 {
                     "orderable": false,
+                    "width": "130px",
                     "targets": 4
-                },
-                {
-                    "width": "60px",
-                    "targets": 0
                 },
                 {
                     "width": "auto",
                     "targets": 1
                 },
-                {
-                    "width": "auto",
-                    "targets": 2
-                },
-                {
-                    "width": "auto",
-                    "targets": 3
-                },
-                {
-                    "width": "130px",
-                    "targets": 4
-                },
+
             ],
 
 
@@ -126,7 +113,7 @@
 
 
         /* OPÇÃO DE APAGAR */
-        var formToSubmit //Varial para indicar o forumulário a submeter
+        var formToSubmit //Variavel para indicar o forumulário a submeter
 
         $(".form_client_id").submit(function (e) {
             formToSubmit = this;

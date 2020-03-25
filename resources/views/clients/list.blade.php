@@ -100,7 +100,7 @@
 
                     @foreach ($clients as $client)
                     <tr>
-                        <th class="">
+                        <td class="">
                             <div class="align-middle mx-auto shadow-sm rounded"
                                 style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('clients.show',$client)}}">
@@ -118,20 +118,20 @@
                             </div>
                             {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
                             --}}
-                        </th>
+                        </td>
 
                         {{-- Nome e Apelido --}}
-                        <th class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></th>
+                        <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
 
                         {{-- numCCid --}}
-                        <th class="align-middle">{{ $client->numCCid }}</th>
+                        <td class="align-middle">{{ $client->numCCid }}</td>
 
                         {{-- numPassaport --}}
-                        <th class="align-middle">{{ $client->numPassaport }}</th>
+                        <td class="align-middle">{{ $client->numPassaport }}</td>
 
 
                         {{-- OPÇÔES --}}
-                        <th class="text-center align-middle">
+                        <td class="text-center align-middle">
                             <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
                                 title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                             <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
@@ -145,7 +145,7 @@
                                     data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                             </form>
 
-                        </th>
+                        </td>
                     </tr>
                     @endforeach
 

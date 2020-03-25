@@ -92,7 +92,7 @@ class PhonebookController extends Controller
 
 
 
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -117,6 +117,6 @@ class PhonebookController extends Controller
     public function destroy(Contacto $contacto)
     {
         $contacto->delete();
-                return redirect()->route('phonebook.index')->with('success', 'Contacto eliminado com sucesso');
+        return redirect()->route('phonebook.index')->with('success', 'Contacto eliminado com sucesso');
     }
 }
