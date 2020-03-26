@@ -24,7 +24,14 @@ class StoreContactoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => 'required',
+            'telefone1' => 'required',
+            'telefone2' => 'nullable',
+            'email' => 'nullable',
+            'fax' => 'nullable',
+            'observacoes' => 'nullable',
+            'favorito' => 'required|required|in:1,0',
+
         ];
     }
 }
