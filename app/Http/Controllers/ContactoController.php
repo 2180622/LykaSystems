@@ -18,15 +18,11 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        $contactos = Contacto::all();
+        $contacts = Contacto::all();
+        $totalcontacts = $contacts->count();
 
-        return view('contacts.list',compact('contactos'));
+        return view('contacts.list', compact('contacts', 'totalcontacts'));
     }
-
-
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -36,13 +32,8 @@ class ContactoController extends Controller
     public function create()
     {
         $contacto = new Contacto;
-        return view('contacts.add',compact("contacto"));
+        return view('contacts.add',compact('contacto'));
     }
-
-
-
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -65,7 +56,7 @@ class ContactoController extends Controller
         }
 
         if ($request->fotografia==null){
-            $contacto->fotografia = "default.png";
+            $contacto->fotografia = null;
         }
 
         // data em que foi criado
@@ -73,57 +64,39 @@ class ContactoController extends Controller
         $contacto->create_at == date("Y-m-d",$t);
 
         $contacto->save();
-        return redirect()->route('clients.index')->with('success', 'Novo contacto criado com sucesso');
+        return redirect()->route('contact.index')->with('success', 'Novo contacto criado com sucesso');
     }
-
-
-
-
-
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Contacto  $contacto
+     * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function show(Contacto $contacto)
+    public function show(contacto $contacto)
     {
-        $variavel="TESTE";
-        return view('contacts.show',compact("contacto","variavel"));
+        return view('contacts.show',compact("contacto"));
     }
-
-
-
-
-
-
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Contacto  $contacto
+     * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contacto $contacto)
+    public function edit(contacto $contacto)
     {
-
         return view('contacts.edit', compact('contacto'));
     }
-
-
-
-
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contacto  $contacto
+     * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateContactoRequest $request, Contacto $contacto)
+    public function update(UpdateContactoRequest $request, contacto $contacto)
     {
         $fields = $request->validated();
         $contacto->fill($fields);
@@ -146,24 +119,16 @@ class ContactoController extends Controller
         $contacto->save();
 
 
-         return redirect()->route('contacts.index')->with('success', 'Dados do contacto modificados com sucesso');
-
+         return redirect()->route('contacts.index')->with('success', 'Dados do contcto modificados com sucesso');
     }
-
-
-
-
-
-
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Contacto  $contacto
+     * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contacto $contacto)
+    public function destroy(contacto $contacto)
     {
         $contacto->delete();
         return redirect()->route('contacts.index')->with('success', 'Contacto eliminado com sucesso');

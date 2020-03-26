@@ -100,7 +100,7 @@
 
                     @foreach ($agents as $agent)
                         <tr>
-                            <th class="">
+                            <td>
                                 <div class="align-middle mx-auto shadow-sm rounded-circle" style="overflow:hidden; width:50px; height:50px">
                                     @if($agent->fotografia)
                                         <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}"
@@ -115,18 +115,18 @@
                                 </div>
 
                                 {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}"> --}}
-                            </th>
-                            <th class="align-middle">{{ $agent->nome }} {{ $agent->apelido }}</th>
-                            <th class="align-middle">{{ $agent->email }}</th>
-                            <th class="align-middle">{{ $agent->pais }}</th>
-                            <th class="text-center align-middle">
+                            </td>
+                            <td class="align-middle">{{ $agent->nome }} {{ $agent->apelido }}</td>
+                            <td class="align-middle">{{ $agent->email }}</td>
+                            <td class="align-middle">{{ $agent->pais }}</td>
+                            <td class="text-center align-middle">
                                 <a href="#fghjk" class="btn_list_opt " title="Ver ficha completa"><i
                                         class="far fa-eye mr-2"></i></a>
                                 <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
                                         class="fas fa-pencil-alt mr-2"></i></a>
                                 <a href="#" class="btn_list_opt btn_list_opt_delete" title="Eliminar"><i
                                         class="far fa-trash-alt"></i></a>
-                            </th>
+                            </td>
                         </tr>
                     @endforeach
 
