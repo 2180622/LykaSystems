@@ -143,29 +143,27 @@
                     @else
                         <div class="tab-pane fade active" id="{{'fase'.$num}}" role="tabpanel" aria-labelledby="{{'fase'.$num.'-tab'}}">
                     @endif
-                        {{--  DADOS DE PASSAPORTE --}}
                         <div class="row">
 
                             <div class="col">
-                                {{--  numPassaport --}}
-                                <div><span class="text-secondary">Número do passaporte:</span> {{$client->numPassaport}}</div>
-                                <br>
+                                <div><span><b>Info</b></span></div><br>
 
-                                {{--  dataValidPP --}}
-                                <div><span class="text-secondary">Data de validade do passaporte:</span>
-                                    {{$client->dataValidPP}}</div><br>
+                                <div><span class="text-secondary">Tipo:</span> {{$fase->descricao}}</div><br>
 
-                                {{--  passaportPaisEmi --}}
-                                <div><span class="text-secondary">Pais emissor do passaporte:</span>
-                                    {{$client->passaportPaisEmi}}</div><br>
+                                <div><span class="text-secondary">Data de vencimento:</span>{{$fase->dataVencimento}}</div><br>
 
-                                {{--  localEmissaoPP --}}
-                                <div><span class="text-secondary">Local de emissão do passaporte:</span>
-                                    {{$client->localEmissaoPP}}</div><br>
+                                <div><span class="text-secondary">Valor da fase:</span>{{$fase->valorFase.'€'}}</div><br>
+
+                                <div><span><b>Responsabilidades</b></span></div><br>
+
+                                <div><span class="text-secondary">Tipo:</span> {{$fase->descricao}}</div><br>
+
+                                <div><span class="text-secondary">Data de vencimento:</span>{{$fase->dataVencimento}}</div><br>
+
+                                <div><span class="text-secondary">Valor da fase:</span>{{$fase->valorFase.'€'}}</div><br>
 
                             </div>
 
-                            {{-- CC IDENTIFICAÇÃO --}}
                             <div class="col">
                                 <div><span class="text-secondary">Número de cartão de cidadão:</span> {{$client->numCCid}}</div><br>
                                 <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
