@@ -32,7 +32,7 @@
     {{-- NOTIFICAÇÔES PARA TODAS AS PÁGINAS --}}
 
  @php
-        $Notificacoes = Auth()->user()->getNotifications();
+      //  $Notificacoes = Auth()->user()->notificacao();
      @endphp
 
 

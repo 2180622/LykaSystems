@@ -45,7 +45,6 @@ class AgentController extends Controller
       $user->password = $hashed;
 
       $agente = new Agente;
-      $agente->dataRegis = $curTime;
       $agente->fill($fieldsAgente);
       $name = $agente->nome;
       $agente->save();
