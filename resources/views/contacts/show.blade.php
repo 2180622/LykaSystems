@@ -55,31 +55,32 @@
 
                 <div class="col p-2">
 
-                    {{-- Informações Pessoais --}}
-                    <div><span class="text-secondary ">Nome:</span> {{$contact->nome}}</div><br>
-
                     <div class="row">
                         <div class="col">
-                            <span class="text-secondary ">Telefone (principal):</span> {{$contact->nome}}
+                            {{-- Informações Pessoais --}}
+                            <div><span class="text-secondary ">Nome:</span> {{$contact->nome}}</div><br>
+
+                            <div><span class="text-secondary ">Telefone (principal):</span> {{$contact->nome}}</div><br>
+
+                            <div><span class="text-secondary ">Telefone (alternativo):</span> {{$contact->nome}}</div><br>
+
+                            <div><span class="text-secondary ">Fax:</span> {{$contact->fax}}</div><br>
+
+                            <div><span class="text-secondary ">E-mail:</span> {{$contact->email}}</div><br>
                         </div>
+
+
                         <div class="col">
-                            <span class="text-secondary ">Telefone (alternativo):</span> {{$contact->nome}}
+                            <span class="text-secondary ">Observações:</span><br>
+                            @if ($contact->observacao!=null)
+                                {{$contact->observacao}}
+                            @else
+                                <span class="text-muted"><small>(Sem observações)</small></span>
+                            @endif
                         </div>
+
                     </div>
 
-                    <br>
-
-                    <div><span class="text-secondary ">Fax:</span> {{$contact->fax}}</div><br>
-
-                    <div><span class="text-secondary ">E-mail:</span> {{$contact->email}}</div><br>
-
-                    <div><span class="text-secondary ">Observações:</span>
-                        @if ($contact->observacao!=null)
-                            {{$contact->observacao}}
-                        @else
-                            <span class="text-muted"><small>(Sem observações)</small></span>
-                        @endif
-                    </div><br>
 
                     <hr>
                     <small>Adicionado: {{ date('d-M-y', strtotime($contact->created_at)) }}</small><br>

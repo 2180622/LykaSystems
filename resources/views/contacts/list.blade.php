@@ -51,10 +51,10 @@
             </li>
 
 
-            <li class="nav-item">
+{{--             <li class="nav-item">
                 <a class="nav-link" id="fornecedores-tab" data-toggle="tab" href="#fornecedores" role="tab"
                     aria-controls="fornecedores" aria-selected="false">Fornecedores</a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
                 <a class="nav-link" id="Favoritos-tab" data-toggle="tab" href="#favorites" role="tab"
@@ -176,10 +176,10 @@
 
 
             {{-- FORNECEDORES --}}
-            <div class="tab-pane fade show" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">
+{{--             <div class="tab-pane fade show" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">
                 FORNECEDORES
             </div>
-
+ --}}
 
 
 

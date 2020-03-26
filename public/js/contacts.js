@@ -106,7 +106,7 @@ $(document).ready(function () {
         /* VALIDAÇÃO DE INPUTS */
 
         /* Apenas letras:  .lettersOnly();  */
-        $("#nome").lettersOnly();
+/*         $("#nome").lettersOnly(); */
 
 
         /* Apenas numeros:  .numbersOnly();  */
@@ -133,7 +133,7 @@ $(document).ready(function () {
       });
     }, false);
   })();
-  
+
 
 });
 
