@@ -13,11 +13,15 @@
 @section('content')
 
 <div class="container mt-2">
+    <div class="float-left">
+        <a href="javascript:history.go(-1)" title="Voltar"><i class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
+        <a href="javascript:window.history.forward();" title="Avançar"><i class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+    </div>
     <div class="float-right">
         <a href="{{route('users.create')}}" class="top-button">Adicionar Utilizador</a>
     </div>
 
-    <br>
+    <br><br>
     <div class="cards-navigation">
         <div class="title">
             <h6>Listagem de Utilizadores</h6>

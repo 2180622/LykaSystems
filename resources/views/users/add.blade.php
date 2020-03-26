@@ -1,15 +1,11 @@
 @extends('layout.master')
 
 {{-- Page Title --}}
-@section('title', 'Página Exemplo')
-
-{{-- CSS Style Link --}}
-@section('styleLinks')
-{{-- <link href="{{asset('/css/NOME_DO_FICHEIRO.css')}}" rel="stylesheet"> --}}
-@endsection
+@section('title', 'Adicionar Utilizador')
 
 {{-- Page Content --}}
 @section('content')
+
 <div class="container mt-2">
     {{-- Navegação --}}
     <div class="float-left">
@@ -23,12 +19,12 @@
     <br><br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Adicionar estudante</h6>
+            <h6>Adicionar utilizador</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('users.storeAdmin')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('users.storeAdmin')}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
             @csrf
-            {{-- @include('clients.partials.add-edit') --}}
+            @include('users.partials.add-edit')
             <div class="form-group text-right">
                 <br><br>
                 <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar utilizador</button>
