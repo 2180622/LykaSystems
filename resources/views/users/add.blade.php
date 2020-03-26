@@ -3,6 +3,11 @@
 {{-- Page Title --}}
 @section('title', 'Adicionar Utilizador')
 
+{{-- CSS Style Link --}}
+@section('styleLinks')
+<link href="{{asset('/css/users.css')}}" rel="stylesheet">
+@endsection
+
 {{-- Page Content --}}
 @section('content')
 
@@ -22,6 +27,7 @@
             <h6>Adicionar utilizador</h6>
         </div>
         <br>
+        <p>Ao adicionar um utilizador está a colocar esse mesmo utilizador como perfil de <b>administrador</b>.</p>
         <form method="POST" action="{{route('users.storeAdmin')}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
             @csrf
             @include('users.partials.add-edit')
