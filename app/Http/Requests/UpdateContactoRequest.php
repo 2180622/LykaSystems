@@ -24,7 +24,14 @@ class UpdateContactoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'fotografia'=> 'nullable',
+            'nome' => 'required',
+            'telefone1' => 'nullable',
+            'telefone2' => 'nullable',
+            'email' => 'nullable',
+            'fax' => 'nullable',
+            'observacoes' => 'nullable',
+            'favorito' => 'required|required|in:1,0',
         ];
     }
 }

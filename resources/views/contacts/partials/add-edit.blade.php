@@ -4,7 +4,9 @@
     <div class="col">
         <label for="nome">Nome:</label><br>
         <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$contact->nome)}}"
-            required><br>
+            required>
+        <div class="invalid-feedback">O nome é necessário</div>
+        <br>
 
         <div class="row mb-3">
             <div class="col mr-2">
@@ -25,7 +27,7 @@
         <label for="email">E-mail:</label><br>
         <input type="email" class="form-control" name="email" id="email" value="{{old('email',$contact->email)}}"><br>
 
-        <label for="favorito">Marcar como "favorito": </label>
+        <i class="fas fa-star text-warning mr-2"></i><label for="favorito">Marcar como "favorito": </label>
             <select id="favorito" name="favorito" class="custom-select ml-2" style="width:120px">
             <option {{old('favorito',$contact->favorito)=='0'?"selected":""}} value="0" selected>Não</option>
             <option {{old('favorito',$contact->favorito)=='1'?"selected":""}} value="1">Sim</option>
@@ -64,8 +66,8 @@
 
 <div class="row"  style="font-weight:bold;color:#6A74C9">
     <div class="col">
-    <label for="observacoes">Observações:</label><br>
-    <textarea name="observacoes" id="observacoes" rows="5"
-        class="form-control">{{old('observacoes',$contact->observacoes)}}</textarea>
+    <label for="observacao">Observações:</label><br>
+    <textarea name="observacao" id="observacao" rows="5"
+        class="form-control">{{old('observacao',$contact->observacao)}}</textarea>
     </div>
 </div>

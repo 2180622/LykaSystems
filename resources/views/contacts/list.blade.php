@@ -58,7 +58,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" id="Favoritos-tab" data-toggle="tab" href="#favorites" role="tab"
-                    aria-controls="favorites" aria-selected="false">Favoritos</a>
+                    aria-controls="favorites" aria-selected="false"><i class="fas fa-star text-warning mr-2"></i>Favoritos</a>
             </li>
 
         </ul>
@@ -199,7 +199,7 @@
                                     <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
                                 @endif
                             </div>
-                            <div class="mt-2">{{$contact->nome}}<br><small>( Ver detalhes )</small></div>
+                            <div class="mt-3">{{$contact->nome}}</div>
                         </a>
                     </div>
                     @endif

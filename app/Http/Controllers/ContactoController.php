@@ -64,7 +64,7 @@ class ContactoController extends Controller
         $contact->create_at == date("Y-m-d",$t);
 
         $contact->save();
-        return redirect()->route('contact.index')->with('success', 'Novo contacto criado com sucesso');
+        return redirect()->route('contacts.index')->with('success', 'Novo contacto criado com sucesso');
     }
 
     /**

@@ -51,7 +51,8 @@
                 {{-- INPUT apelido --}}
                 <label for="apelido">Apelido:</label><br>
                 <input type="text" class="form-control" name="apelido" id="apelido"
-                    value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" required><br>
+                    value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" required>
+                    <br>
 
 
                 <div class="row mb-4">
