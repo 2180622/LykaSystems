@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('css/clients.css')}}" rel="stylesheet">
+<link href="{{asset('/css/clients.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -14,10 +14,8 @@
 <div class="container mt-2">
     {{-- Navegação --}}
     <div class="float-left">
-        <a href="javascript:history.go(-1)" title="Voltar"><i
-                class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
-        <a href="javascript:window.history.forward();" title="Avançar"><i
-                class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+        <a href="javascript:history.go(-1)" title="Voltar"><i class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
+        <a href="javascript:window.history.forward();" title="Avançar"><i class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
     </div>
     <div class="float-right">
         <a href="#" class="top-button">reportar problema</a>
@@ -29,8 +27,7 @@
             <h6>Adicionar estudante</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client"
-            enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
             @csrf
             @include('clients.partials.add-edit')
             <div class="form-group text-right">
@@ -43,12 +40,6 @@
 </div>
 
 @endsection
-
-
-
-
-
-
 
 {{-- Scripts --}}
 @section('scripts')
