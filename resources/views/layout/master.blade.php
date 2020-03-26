@@ -31,8 +31,8 @@
 
     {{-- NOTIFICAÇÔES PARA TODAS AS PÁGINAS --}}
 
- @php
-      //  $Notificacoes = Auth()->user()->notificacao();
+   @php
+    $Notificacoes = Auth()->user()->notificacao();
      @endphp
 
 
