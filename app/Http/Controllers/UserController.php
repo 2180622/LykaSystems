@@ -52,7 +52,7 @@ class UserController extends Controller
       $id = $user->idUser;
       Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
-      return redirect()->route('users.index')->with('success', 'Admin successfully created');
+      return redirect()->route('users.index')->with('success', 'Utilizador criado com sucesso.');
     }
 
 
