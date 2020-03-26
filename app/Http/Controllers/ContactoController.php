@@ -23,6 +23,11 @@ class ContactoController extends Controller
         return view('contacts.list',compact('contactos'));
     }
 
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,6 +38,11 @@ class ContactoController extends Controller
         $contacto = new Contacto;
         return view('contacts.add',compact("contacto"));
     }
+
+
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -66,6 +76,11 @@ class ContactoController extends Controller
         return redirect()->route('clients.index')->with('success', 'Novo contacto criado com sucesso');
     }
 
+
+
+
+
+
     /**
      * Display the specified resource.
      *
@@ -74,10 +89,15 @@ class ContactoController extends Controller
      */
     public function show(Contacto $contacto)
     {
-
-
-        return view('contacts.show',compact("contacto"));
+        $variavel="TESTE";
+        return view('contacts.show',compact("contacto","variavel"));
     }
+
+
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -90,6 +110,11 @@ class ContactoController extends Controller
 
         return view('contacts.edit', compact('contacto'));
     }
+
+
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -124,6 +149,13 @@ class ContactoController extends Controller
          return redirect()->route('contacts.index')->with('success', 'Dados do contacto modificados com sucesso');
 
     }
+
+
+
+
+
+
+
 
     /**
      * Remove the specified resource from storage.

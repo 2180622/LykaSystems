@@ -29,7 +29,7 @@
 
         <div class="cards-navigation">
             <div class="title">
-                <h6>Detalhes do contacto</h6>
+                <h6>Detalhes do contacto {{$variavel}}</h6>
             </div>
             <br>
 

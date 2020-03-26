@@ -15,9 +15,7 @@ class ProdutoController extends Controller
     {
         $produtos = Produto::all();
 
-        $Notificacoes = Auth()->user()->getNotifications();
-
-        return view('produtos.list', compact('produtos', 'Notificacoes'));
+        return view('produtos.list', compact('produtos'));
     }
 
 
@@ -31,8 +29,7 @@ class ProdutoController extends Controller
     public function create()
     {
         $produto = new Produto;
-        $Notificacoes = Auth()->user()->getNotifications();
-        return view('produtos.add',compact('produto','Notificacoes'));
+        return view('produtos.add',compact('produto'));
     }
 
 
@@ -70,11 +67,9 @@ class ProdutoController extends Controller
     */
     public function show(Produto $produto)
     {
-
-        $Notificacoes = Auth()->user()->getNotifications();
         $Fases = $produto->fase;
 
-        return view('produtos.show',compact("produto",'Notificacoes','Fases'));
+        return view('produtos.show',compact("produto",'Fases'));
     }
 
 
@@ -89,9 +84,7 @@ class ProdutoController extends Controller
     public function print(Produto $produto)
     {
 
-        $Notificacoes = Auth()->user()->getNotifications();
-
-        return view('produtos.print',compact("produto",'Notificacoes'));
+        return view('produtos.print',compact("produto"));
     }
 
 

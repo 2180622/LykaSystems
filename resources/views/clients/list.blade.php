@@ -116,8 +116,7 @@
                                     @endif
                                 </a>
                             </div>
-                            {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
-                            --}}
+
                         </td>
 
                         {{-- Nome e Apelido --}}

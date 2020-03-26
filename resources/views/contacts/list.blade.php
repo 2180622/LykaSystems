@@ -10,15 +10,15 @@
 
 <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
 
-
 @endsection
 
 
 {{-- Conteudo da Página --}}
 @section('content')
-@include('contacts.partials.modal')
 
 <!-- MODAL DE INFORMAÇÔES -->
+@include('contacts.partials.modal')
+
 
 <div class="container mt-2 ">
 
@@ -122,6 +122,7 @@
                         <tbody>
 
                             @foreach ($contactos as $key => $contacto)
+
                             <tr>
                                 <td>
                                     <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
@@ -191,6 +192,7 @@
                 <div class="row text-center">
 
                     @foreach ($contactos as $contacto )
+
                     @if( $contacto->favorito==true)
                     <div class="col col-2 card m-2 p-3 ">
                         <a href="{{route('contacts.show',$contacto)}}" style="text-decoration: none;">
@@ -205,6 +207,7 @@
                         </a>
                     </div>
                     @endif
+
                     @endforeach
 
 

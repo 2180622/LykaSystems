@@ -80,14 +80,18 @@ class ClientController extends Controller
     public function show(Cliente $client)
     {
         // Produtos adquiridos pelo cliente
+        $produtos = DB::table('produto')
+        ->select('*')
+        ->where('idProduto', $client->idCliente)
+        ->get();
+
         $produtos = $client->produto;
-        $Notificacoes = Auth()->user()->getNotifications();
 
         if ($produtos->isEmpty()) {
             $produtos=null;
         }
 
-        return view('clients.show',compact("client","produtos",'Notificacoes'));
+        return view('clients.show',compact("client","produtos"));
     }
 
 
@@ -102,15 +106,7 @@ class ClientController extends Controller
     public function print(Cliente $client)
     {
 
-        // Produtos adquiridos pelo cliente
-        //$produtos = Produto::where('idProduto','=',$client->idCliente)->get();
-        $produtos = $client->produto;
-        dd($produtos);
-        if ($produtos->isEmpty()) {
-            $produtos=null;
-        }
-
-        return view('clients.print',compact("client","produtos"));
+        return view('clients.print',compact("client"));
     }
 
 

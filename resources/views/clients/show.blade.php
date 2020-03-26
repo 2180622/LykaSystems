@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-
+<link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
 @endsection
 
 
@@ -48,7 +48,7 @@
                     @endif
 
                 </div>
-                
+
                 <div class="col p-2">
 
                     {{-- Informações Pessoais --}}
@@ -96,31 +96,31 @@
             <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
 
                 {{-- MENU: Produtos --}}
-                <li class="nav-item " style="width:25%">
+                <li class="nav-item " style="width:20%">
                     <a class="nav-link active" id="produtos-tab" data-toggle="tab" href="#produtos" role="tab"
                        aria-controls="produto" aria-selected="false">Produtos</a>
                 </li>
 
                 {{-- MENU: Documentação --}}
-                <li class="nav-item " style="width:25%">
+                <li class="nav-item text-center" style="width:20%">
                     <a class="nav-link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
                        aria-controls="documentation" aria-selected="false">Documentação</a>
                 </li>
 
                 {{-- MENU: Informação pessoal --}}
-                <li class="nav-item text-center"style="width:25%">
+                <li class="nav-item text-center"style="width:20%">
                     <a class="nav-link" id="academicos-tab" data-toggle="tab" href="#academicos" role="tab"
                        aria-controls="contacts" aria-selected="true">Dados académicos</a>
                 </li>
 
                 {{-- MENU: Contactos --}}
-                <li class="nav-item text-center"style="width:25%">
+                <li class="nav-item text-center"style="width:20%">
                     <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
                        aria-controls="contacts" aria-selected="false">Contactos</a>
                 </li>
 
                 {{-- MENU: Moradas --}}
-                <li class="nav-item text-center"style="width:25%">
+                <li class="nav-item text-center"style="width:20%">
                     <a class="nav-link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab"
                        aria-controls="adresses" aria-selected="false">Financeiro</a>
                 </li>
@@ -129,65 +129,74 @@
 
 
 
-            
+
 
 
             <div class="tab-content p-2 " id="myTabContent">
                 {{-- Conteudo: Produtos --}}
                 <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
                     @if($produtos)
-                        <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                            style="overflow:hidden;">
-            
-                            {{-- Cabeçalho da tabela --}}
-                            <thead>
-                                <tr>
-                                    <th>Tipo</th>
-                                    <th>Descrição</th>
-                                    <th>Ano Academico</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-            
-                            {{-- Corpo da tabela --}}
-                            <tbody>
-            
-                                @foreach ($produtos as $produto)
-                                <tr>
-                                    {{-- Tipo --}}
-                                    <th class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->tipo}}</a></th>
-            
-                                    {{-- Descrição --}}
-                                    <th class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></th>
-            
-                                    {{-- Ano Academico --}}
-                                    <th class="align-middle">{{$produto->anoAcademico}}</th>
-            
-                                    {{-- Total --}}
-                                    <th class="align-middle">{{$produto->valorTotal.'€'}}</th>
-            
-            
-                                    {{-- OPÇÔES --}}
-                                    <th class="text-center align-middle">
-                                        <a href="{{route('produtos.show',$produto)}}" class="btn_list_opt "
-                                            title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                        <a href="{{route('produtos.edit',$produto)}}" class="btn_list_opt btn_list_opt_edit"
-                                            title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-            
-                                        <form method="POST" role="form" id="{{$produto->idProduto}}"
-                                            action="{{route('produtos.destroy',$produto)}}" class="d-inline-block form_produto_id">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn_delete" title="Eliminar produto" data-toggle="modal"
-                                                data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
-            
-                                    </th>
-                                </tr>
-                                @endforeach
-            
-                            </tbody>
-                        </table>
+
+
+
+
+                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                    style="overflow:hidden;">
+
+                    {{-- Cabeçalho da tabela --}}
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Descrição</th>
+                            <th>Ano Academico</th>
+                            <th>Total</th>
+                        </tr>
+
+
+
+                    </thead>
+
+                    {{-- Corpo da tabela --}}
+                    <tbody>
+
+                        @foreach ($produtos as $produto)
+                        <tr>
+                            {{-- Tipo --}}
+                            <td class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->tipo}}</a></td>
+
+                            {{-- Descrição --}}
+                            <td class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></td>
+
+                            {{-- Ano Academico --}}
+                            <td class="align-middle">{{$produto->anoAcademico}}</td>
+
+                            {{-- Total --}}
+                            <td class="align-middle">{{$produto->valorTotal.'€'}}</td>
+
+
+                            {{-- OPÇÔES --}}
+                           {{--  <th class="text-center align-middle">
+                                <a href="{{route('produtos.show',$produto)}}" class="btn_list_opt "
+                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="{{route('produtos.edit',$produto)}}" class="btn_list_opt btn_list_opt_edit"
+                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                                <form method="POST" role="form" id="{{$produto->idProduto}}"
+                                    action="{{route('produtos.destroy',$produto)}}" class="d-inline-block form_produto_id">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn_delete" title="Eliminar produto" data-toggle="modal"
+                                        data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+
+                            </th> --}}
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+
                     @else
                         <div><span class="text-secondary">Sem Produtos</div>
                     @endif
@@ -327,23 +336,6 @@
                         <div class="col">
                             <div><span class="text-secondary">Estado financeiro: </span><span class="text-success">Regularizado</span></div><br>
 
-                            <div><span class="text-secondary">Produtos adquiridos:</span><br>
-
-                                @if($produtos!=null)
-                                    <ul>
-                                        <li>Curso tal tal</li>
-                                        <li>Curso tal tal</li>
-                                        <li>Curso tal tal</li>
-                                    </ul>
-                                @else
-                                    <div>- Sem produtos adquiridos</div>
-                                @endif
-
-                            </div>
-
-                        </div>
-
-                        <div class="col">
                             <div><span class="text-secondary">Observações Financeiras:</span><br>
 
                                 @if ($client->obsFinanceiras==null)
@@ -352,18 +344,14 @@
                                     {{$client->obsFinanceiras}}
                                 @endif
 
-                            </div>
-
-                        </div>
-
-
-                    </div><br>
-
-                    <hr>
-                    <div class="row mt-3">
-                        <div class="col">
+                            </div><br>
+                            <hr>
                             <div><span class="text-secondary">IBAN:</span> {{$client->IBAN}}</div><br>
+
+
+
                         </div>
+
                     </div>
                 </div>
 
@@ -382,5 +370,5 @@
 
 {{-- Scripts --}}
 @section('scripts')
-    {{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
+<script src="{{asset('/js/show_client_details.js')}}"></script>
 @endsection

@@ -13,7 +13,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Report Problem */
     Route::get('/reportproblem', 'DashboardController@report')->name('report');
 
-    /* Phonebook */
+    /* contacts */
     Route::resource('/contacts', 'ContactoController');
 
     /* Universidades */
