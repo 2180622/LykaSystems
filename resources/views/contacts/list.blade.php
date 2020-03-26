@@ -10,15 +10,15 @@
 
 <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
 
+
 @endsection
 
 
 {{-- Conteudo da Página --}}
 @section('content')
-
-<!-- MODAL DE INFORMAÇÔES -->
 @include('contacts.partials.modal')
 
+<!-- MODAL DE INFORMAÇÔES -->
 
 <div class="container mt-2 ">
 
@@ -39,7 +39,7 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Lista de contactos</h6>
+            <h6>Lista telefónica</h6>
         </div>
         <br>
 
@@ -121,15 +121,14 @@
                         {{-- Corpo da tabela --}}
                         <tbody>
 
-                            @foreach ($contactos as $key => $contacto)
-
+                            @foreach ($contacts as $key => $contact)
                             <tr>
                                 <td>
                                     <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
-                                        <a class="name_link" href="{{route('contacts.show',$contacto)}}">
+                                        <a class="name_link" href="{{route('contacts.show',$contact)}}">
 
-                                            @if($contacto->fotografia)
-                                                <img src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}" width="100%" class="mx-auto"">
+                                            @if($contact->fotografia)
+                                                <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}" width="100%" class="mx-auto"">
                                             @else
                                                 <img src=" {{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
                                             @endif
@@ -140,23 +139,23 @@
                                 </td>
 
                                 {{-- Nome e Apelido --}}
-                                <td class="align-middle"><a class="name_link" href="{{route('contacts.show',$contacto)}}">{{$contacto->nome}}</a></td>
+                                <td class="align-middle"><a class="name_link" href="{{route('contacts.show',$contact)}}">{{$contact->nome}}</a></td>
 
                                 {{-- e-mail --}}
-                                <td class="align-middle">{{$contacto->email}}</td>
+                                <td class="align-middle">{{$contact->email}}</td>
 
                                 {{-- Telefone(1) --}}
-                                <td class="align-middle">{{$contacto->telefone1}}</td>
+                                <td class="align-middle">{{$contact->telefone1}}</td>
 
 
                                 {{-- OPÇÔES --}}
                                 <td class="text-center align-middle">
-                                    <a href="{{route('contacts.show',$contacto)}}" class="btn_list_opt " title="Ver ficha completa"><i
+                                    <a href="{{route('contacts.show',$contact)}}" class="btn_list_opt " title="Ver ficha completa"><i
                                             class="far fa-eye mr-2"></i></a>
-                                    <a href="{{route('contacts.edit',$contacto)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                    <a href="{{route('contacts.edit',$contact)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
                                             class="fas fa-pencil-alt mr-2"></i></a>
 
-                                    <form method="POST" role="form" id="{{$contacto->idContacto}}" action="{{route('contacts.destroy',$contacto)}}"
+                                    <form method="POST" role="form" id="{{$contact->idContacto}}" action="{{route('contacts.destroy',$contact)}}"
                                         class="d-inline-block form_contacto_id">
                                         @csrf
                                         @method('DELETE')
@@ -191,23 +190,21 @@
             <div class="tab-pane fade show " id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
                 <div class="row text-center">
 
-                    @foreach ($contactos as $contacto )
-
-                    @if( $contacto->favorito==true)
+                    @foreach ($contacts as $contact )
+                    @if( $contact->favorito==true)
                     <div class="col col-2 card m-2 p-3 ">
-                        <a href="{{route('contacts.show',$contacto)}}" style="text-decoration: none;">
+                        <a href="{{route('contacts.show',$contact)}}" style="text-decoration: none;">
                             <div>
-                                @if($contacto->fotografia)
-                                    <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('contact-photos/').$contacto->fotografia}}" style="width:90%">
+                                @if($contact->fotografia)
+                                    <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}" style="width:90%">
                                 @else
                                     <img width="60%" class="rounded shadow-sm mx-auto" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
                                 @endif
                             </div>
-                            <div class="mt-2">{{$contacto->nome}}<br><small>( Ver detalhes )</small></div>
+                            <div class="mt-2">{{$contact->nome}}<br><small>( Ver detalhes )</small></div>
                         </a>
                     </div>
                     @endif
-
                     @endforeach
 
 

@@ -69,7 +69,7 @@
                     @foreach ($users as $user)
                     <tr>
                         <td>
-                            <div class="align-middle mx-auto shadow-sm rounded-circle" style="overflow:hidden; width:50px; height:50px">
+                            <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
                                 @if($user->tipo == 'admin' && $user->idAdmin != null)
                                     @if($user->admin->fotografia)
                                         <img src="{{Storage::disk('public')->url('admin-photos/').$user->admin->fotografia}}" width="100%" class="mx-auto">

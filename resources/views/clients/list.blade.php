@@ -82,12 +82,7 @@
                 {{-- Cabeçalho da tabela --}}
                 <thead>
                     <tr>
-
-
-                        <th class="text-center align-content-center ">Foto
-                            {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
-                        </th>
-
+                        <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
                         <th>Nº Identificação</th>
                         <th>Nº Passaporte</th>

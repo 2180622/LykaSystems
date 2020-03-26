@@ -18,15 +18,11 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        $contactos = Contacto::all();
+        $contacts = Contacto::all();
+        $totalcontacts = $contacts->count();
 
-        return view('contacts.list',compact('contactos'));
+        return view('contacts.list', compact('contacts', 'totalcontacts'));
     }
-
-
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -35,14 +31,9 @@ class ContactoController extends Controller
      */
     public function create()
     {
-        $contacto = new Contacto;
-        return view('contacts.add',compact("contacto"));
+        $contact = new Contacto;
+        return view('contacts.add',compact('contact'));
     }
-
-
-
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -53,119 +44,93 @@ class ContactoController extends Controller
     public function store(StoreContactoRequest $request)
     {
         $fields = $request->validated();
-        $contacto = new Contacto;
-        $contacto->fill($fields);
+        $contact = new Contacto;
+        $contact->fill($fields);
 
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
-            $profileImg = $contacto->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
-            $contacto->fotografia = $profileImg;
-            $contacto->save();
+            $contact->fotografia = $profileImg;
+            $contact->save();
         }
 
         if ($request->fotografia==null){
-            $contacto->fotografia = "default.png";
+            $contact->fotografia = null;
         }
 
         // data em que foi criado
         $t=time();
-        $contacto->create_at == date("Y-m-d",$t);
+        $contact->create_at == date("Y-m-d",$t);
 
-        $contacto->save();
-        return redirect()->route('clients.index')->with('success', 'Novo contacto criado com sucesso');
+        $contact->save();
+        return redirect()->route('contact.index')->with('success', 'Novo contacto criado com sucesso');
     }
-
-
-
-
-
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Contacto  $contacto
+     * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function show(Contacto $contacto)
+    public function show(contacto $contact)
     {
-        $variavel="TESTE";
-        return view('contacts.show',compact("contacto","variavel"));
+        return view('contacts.show',compact("contact"));
     }
-
-
-
-
-
-
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Contacto  $contacto
+     * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contacto $contacto)
+    public function edit(contacto $contact)
     {
-
-        return view('contacts.edit', compact('contacto'));
+        return view('contacts.edit', compact('contact'));
     }
-
-
-
-
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contacto  $contacto
+     * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateContactoRequest $request, Contacto $contacto)
+    public function update(UpdateContactoRequest $request, contacto $contact)
     {
         $fields = $request->validated();
-        $contacto->fill($fields);
+        $contact->fill($fields);
 
 
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
-            $profileImg = $contacto->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            if (!empty($contacto->fotografia)) {
-                Storage::disk('public')->delete('contact-photos/' . $contacto->fotografia);
+            $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            if (!empty($contact->fotografia)) {
+                Storage::disk('public')->delete('contact-photos/' . $contact->fotografia);
             }
             Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
-            $contacto->fotografia = $profileImg;
+            $contact->fotografia = $profileImg;
         }
 
         // data em que foi modificado
         $t=time();
-        $contacto->updated_at == date("Y-m-d",$t);
+        $contact->updated_at == date("Y-m-d",$t);
 
-        $contacto->save();
+        $contact->save();
 
 
-         return redirect()->route('contacts.index')->with('success', 'Dados do contacto modificados com sucesso');
-
+         return redirect()->route('contacts.index')->with('success', 'Dados do contcto modificados com sucesso');
     }
-
-
-
-
-
-
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Contacto  $contacto
+     * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contacto $contacto)
+    public function destroy(contacto $contact)
     {
-        $contacto->delete();
+        $contact->delete();
         return redirect()->route('contacts.index')->with('success', 'Contacto eliminado com sucesso');
     }
 }
