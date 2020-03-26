@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\User;
+use Mail;
+use App\Mail\SendEmailConfirmation;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+
 use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\StoreUserRequest;
 
 class ClientController extends Controller
 {
@@ -42,21 +48,45 @@ class ClientController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreClientRequest $request){
+    public function store(StoreClientRequest $requestClient, StoreUserRequest $requestUser){
 
-        $fields = $request->validated();
+        $user = new User;
+        $fieldsUser = $requestUser->validated();
+        $user->fill($fieldsUser);
+
+
         $client = new Cliente;
+        $fields = $requestClient->validated();
         $client->fill($fields);
 
-        if ($request->hasFile('fotografia')) {
-            $photo = $request->file('fotografia');
+
+        /* Criação de utilizador */
+
+        $user->tipo = "cliente";
+        $user->status = 10;
+
+        $user->idCliente = $user->idUser;
+        $user->save();
+
+
+        $email = $user->email;
+        $id = $user->idUser;
+        $name = $client->nome;
+        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+
+
+
+        /* Criação de cliente */
+
+        if ($requestClient->hasFile('fotografia')) {
+            $photo = $requestClient->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('client-photos/', $photo, $profileImg);
             $client->fotografia = $profileImg;
             $client->save();
         }
 
-        if ($request->fotografia==null){
+        if ($requestClient->fotografia==null){
             $client->fotografia = null;
         }
 
@@ -80,11 +110,6 @@ class ClientController extends Controller
     public function show(Cliente $client)
     {
         // Produtos adquiridos pelo cliente
-        $produtos = DB::table('produto')
-        ->select('*')
-        ->where('idProduto', $client->idCliente)
-        ->get();
-
         $produtos = $client->produto;
 
         if ($produtos->isEmpty()) {
@@ -106,7 +131,14 @@ class ClientController extends Controller
     public function print(Cliente $client)
     {
 
-        return view('clients.print',compact("client"));
+        // Produtos adquiridos pelo cliente
+        $produtos = $client->produto;
+
+        if ($produtos->isEmpty()) {
+            $produtos=null;
+        }
+
+        return view('clients.print',compact("client","produtos"));
     }
 
 

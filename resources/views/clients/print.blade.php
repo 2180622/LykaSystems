@@ -209,7 +209,14 @@
         <div class="row">
             <div class="col">
                 <div><i class="fas fa-stream mr-2 "></i><span class="text-secondary font-weight-bold">Produtos aquiridos:</span>
-                    curso1, curso2, curso3, curso4,
+                    @if($produtos!=null)
+                        @foreach($produtos as $produto)
+                        {{$produto->descricao}}({{$produto->tipo}}),
+                        @endforeach
+                    @else
+                        Sem produtos adquiridos
+                    @endif
+
                 </div>
             </div>
         </div>

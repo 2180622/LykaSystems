@@ -101,7 +101,7 @@
                     @foreach ($agents as $agent)
                         <tr>
                             <td>
-                                <div class="align-middle mx-auto shadow-sm rounded-circle" style="overflow:hidden; width:50px; height:50px">
+                                <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
                                     @if($agent->fotografia)
                                         <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}"
                                         width="100%" class="mx-auto">

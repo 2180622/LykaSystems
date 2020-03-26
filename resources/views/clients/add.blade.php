@@ -30,10 +30,20 @@
         <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
             @csrf
             @include('clients.partials.add-edit')
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="alert alert-primary " role="alert">
+                        <i class="fas fa-info-circle mr-1"></i><strong>Nota: </strong>O estudante irá receber um e-mail para ativação da sua conta pessoal
+                    </div>
+
+                </div>
+                <div class="col col-4 text-right pt-2">
+                    <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar estudante</button>
+                    <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
+                </div>
+            </div>
             <div class="form-group text-right">
-                <br><br>
-                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar estudante</button>
-                <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
+
             </div>
         </form>
     </div>

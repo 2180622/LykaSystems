@@ -125,26 +125,43 @@
                                 <td>
                                     <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
                                         <a class="name_link" href="{{route('contacts.show',$contact)}}">
-
                                             @if($contact->fotografia)
                                                 <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}" width="100%" class="mx-auto"">
                                             @else
                                                 <img src=" {{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
                                             @endif
-
                                         </a>
                                     </div>
 
                                 </td>
 
                                 {{-- Nome e Apelido --}}
-                                <td class="align-middle"><a class="name_link" href="{{route('contacts.show',$contact)}}">{{$contact->nome}}</a></td>
+                                <td class="align-middle">
+                                    <a class="name_link" href="{{route('contacts.show',$contact)}}">
+                                    {{$contact->nome}}</a>
+
+                                    @if($contact->favorito)
+                                        <i class="fas fa-star text-warning ml-1" title="Contacto favorito" style="font-size:12px"></i>
+                                    @endif
+                                </td>
 
                                 {{-- e-mail --}}
-                                <td class="align-middle">{{$contact->email}}</td>
+                                <td class="align-middle">
+                                    @if ($contact->email==null)
+                                        <span class="text-muted" style="font-weight:normal"><small>(sem informação)</small><span>
+                                    @else
+                                        {{$contact->email}}
+                                    @endif
+                                </td>
 
                                 {{-- Telefone(1) --}}
-                                <td class="align-middle">{{$contact->telefone1}}</td>
+                                <td class="align-middle">
+                                    @if ($contact->telefone1==null)
+                                    <span class="text-muted" style="font-weight:normal"><small>(sem informação)</small><span>
+                                @else
+                                    {{$contact->telefone1}}
+                                @endif
+                                </td>
 
 
                                 {{-- OPÇÔES --}}

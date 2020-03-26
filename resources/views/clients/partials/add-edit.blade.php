@@ -289,7 +289,7 @@
 
             <div class="col">
                 {{-- INUPUT numPassaport --}}
-                <label for="numPassaport">Numero do passaporte:</label><br>
+                <label for="numPassaport">Número do passaporte:</label><br>
                 <input type="text" class="form-control" name="numPassaport" id="numPassaport"
                     value="{{old('numPassaport',$client->numPassaport)}}" required><br>
             </div>

@@ -30,7 +30,7 @@ class UpdateContactoRequest extends FormRequest
             'telefone2' => 'nullable',
             'email' => 'nullable',
             'fax' => 'nullable',
-            'observacoes' => 'nullable',
+            'observacao' => 'nullable',
             'favorito' => 'required|required|in:1,0',
         ];
     }
