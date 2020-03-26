@@ -21,7 +21,7 @@ class StoreUserRequest extends FormRequest
     public function messages()
     {
        return [
-       'email.required' => 'email should contain only letters and underscores'
+       'email.required' => 'O e-mail deve ser preenchido corretamente.'
        ];
     }
 }
