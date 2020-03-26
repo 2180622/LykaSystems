@@ -31,8 +31,8 @@ class ContactoController extends Controller
      */
     public function create()
     {
-        $contacto = new Contacto;
-        return view('contacts.add',compact('contacto'));
+        $contact = new Contacto;
+        return view('contacts.add',compact('contact'));
     }
 
     /**
@@ -44,26 +44,26 @@ class ContactoController extends Controller
     public function store(StoreContactoRequest $request)
     {
         $fields = $request->validated();
-        $contacto = new Contacto;
-        $contacto->fill($fields);
+        $contact = new Contacto;
+        $contact->fill($fields);
 
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
-            $profileImg = $contacto->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
-            $contacto->fotografia = $profileImg;
-            $contacto->save();
+            $contact->fotografia = $profileImg;
+            $contact->save();
         }
 
         if ($request->fotografia==null){
-            $contacto->fotografia = null;
+            $contact->fotografia = null;
         }
 
         // data em que foi criado
         $t=time();
-        $contacto->create_at == date("Y-m-d",$t);
+        $contact->create_at == date("Y-m-d",$t);
 
-        $contacto->save();
+        $contact->save();
         return redirect()->route('contact.index')->with('success', 'Novo contacto criado com sucesso');
     }
 
@@ -73,9 +73,9 @@ class ContactoController extends Controller
      * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function show(contacto $contacto)
+    public function show(contacto $contact)
     {
-        return view('contacts.show',compact("contacto"));
+        return view('contacts.show',compact("contact"));
     }
 
     /**
@@ -84,9 +84,9 @@ class ContactoController extends Controller
      * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function edit(contacto $contacto)
+    public function edit(contacto $contact)
     {
-        return view('contacts.edit', compact('contacto'));
+        return view('contacts.edit', compact('contact'));
     }
 
     /**
@@ -96,27 +96,27 @@ class ContactoController extends Controller
      * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateContactoRequest $request, contacto $contacto)
+    public function update(UpdateContactoRequest $request, contacto $contact)
     {
         $fields = $request->validated();
-        $contacto->fill($fields);
+        $contact->fill($fields);
 
 
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
-            $profileImg = $contacto->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            if (!empty($contacto->fotografia)) {
-                Storage::disk('public')->delete('contact-photos/' . $contacto->fotografia);
+            $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            if (!empty($contact->fotografia)) {
+                Storage::disk('public')->delete('contact-photos/' . $contact->fotografia);
             }
             Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
-            $contacto->fotografia = $profileImg;
+            $contact->fotografia = $profileImg;
         }
 
         // data em que foi modificado
         $t=time();
-        $contacto->updated_at == date("Y-m-d",$t);
+        $contact->updated_at == date("Y-m-d",$t);
 
-        $contacto->save();
+        $contact->save();
 
 
          return redirect()->route('contacts.index')->with('success', 'Dados do contcto modificados com sucesso');
@@ -128,9 +128,9 @@ class ContactoController extends Controller
      * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(contacto $contacto)
+    public function destroy(contacto $contact)
     {
-        $contacto->delete();
+        $contact->delete();
         return redirect()->route('contacts.index')->with('success', 'Contacto eliminado com sucesso');
     }
 }
