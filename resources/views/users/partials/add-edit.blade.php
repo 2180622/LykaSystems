@@ -2,13 +2,13 @@
     <div class="col">
         <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" class="form-control" name="nome" required>
+            <input type="text" class="form-control" name="nome" required value="{{old('nome', $user->nome)}}">
         </div>
     </div>
     <div class="col">
         <div class="form-group">
             <label for="inputFullname">Apelido:</label>
-            <input type="text" class="form-control" name="apelido" required>
+            <input type="text" class="form-control" name="apelido" required value="{{old('apelido', $user->apelido)}}">
         </div>
     </div>
 </div>
@@ -17,13 +17,13 @@
     <div class="col">
         <div class="form-group">
             <label for="inputEmail">E-mail:</label>
-            <input type="text" class="form-control" name="email" id="inputEmail" required>
+            <input type="text" class="form-control" name="email" id="inputEmail" required value="{{old('email', $user->email)}}">
         </div>
     </div>
     <div class="col">
         <div class="form-group">
             <label for="inputFullname">Data de Nascimento:</label>
-            <input type="text" class="form-control" name="dataNasc" required>
+            <input type="text" class="form-control" name="dataNasc" required value="{{old('dataNasc', $user->dataNasc)}}">
         </div>
     </div>
 </div>
@@ -32,13 +32,13 @@
   <div class="col">
     <div class="form-group">
         <label for="inputFullname">Telefone Princial:</label>
-        <input type="text" class="form-control" name="telefone1" required>
+        <input type="text" class="form-control" name="telefone1" required value="{{old('telefone1', $user->telefone1)}}">
     </div>
   </div>
   <div class="col">
     <div class="form-group">
-        <label for="inputFullname">Telefone Secundário:</label>
-        <input type="text" class="form-control" name="telefone2">
+        <label for="inputFullname">Telefone Secundário (Opcional):</label>
+        <input type="text" class="form-control" name="telefone2" value="{{old('telefone2', $user->telefone2)}}">
     </div>
   </div>
 </div>

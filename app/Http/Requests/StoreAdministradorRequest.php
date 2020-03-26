@@ -21,4 +21,14 @@ class StoreAdministradorRequest extends FormRequest
             'telefone2' => 'nullable',
         ];
     }
+
+    public function messages()
+    {
+       return [
+       'nome.required' => 'O nome deve ser preenchido corretamente.',
+       'apelido.required' => 'O apelido deve ser preenchido corretamente.',
+       'dataNasc.required' => 'A data deve ser preenchida corretamente.',
+       'telefone1.required' => 'O telefone deve ser preenchido corretamente.'
+       ];
+    }
 }

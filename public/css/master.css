@@ -25,6 +25,24 @@ html, body {
     text-decoration: none;
 }
 
+.cancel-button {
+  color: #A9A9A9;
+  font-weight: 800;
+  padding: 7px 17px;
+  font-size: 0.6rem;
+  border-radius: 25px;
+  border: 2px solid #A9A9A9;
+  text-transform: uppercase;
+  background-color: #EAEAEA;
+  transition: 0.3s ease-in-out;
+}
+
+.cancel-button:hover {
+    color: white;
+    text-decoration: none;
+    background-color: #A9A9A9;
+}
+
 .nav_btns {
     color: gray !important;
     background-color: lightgray;
