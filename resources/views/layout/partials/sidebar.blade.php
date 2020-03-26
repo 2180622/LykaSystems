@@ -10,7 +10,7 @@
     <div class="mt-5 mx-auto mb-4 pt-3 font-weight-bold" style="font-size:18px;">
         Notificações
     </div>
-    {{-- @if($Notificacoes)
+    @if($Notificacoes)
         <div class="text-muted text-center m-2" style="font-size:12px"> {{(new DateTime())->format('d/m/Y')}} </div>
         @php
             $data = $Notificacoes[0]->data['dataComeco'];
@@ -70,7 +70,7 @@
         @endforeach
     @else
         <div class="text-muted text-center m-2" style="font-size:12px"> Não tem notificações </div>
-    @endif --}}
+    @endif
 
     {{-- FIM DAS NOTIFICAÇÕES --}}
 
