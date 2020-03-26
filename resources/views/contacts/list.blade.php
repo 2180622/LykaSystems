@@ -17,7 +17,6 @@
 {{-- Conteudo da Página --}}
 @section('content')
 @include('contacts.partials.modal')
-
 <!-- MODAL DE INFORMAÇÔES -->
 
 <div class="container mt-2 ">
@@ -155,14 +154,12 @@
                                     <a href="{{route('contacts.edit',$contact)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
                                             class="fas fa-pencil-alt mr-2"></i></a>
 
-                                    <form method="POST" role="form" id="{{$contact->idContacto}}" action="{{route('contacts.destroy',$contact)}}"
-                                        class="d-inline-block form_contacto_id">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn_delete" title="Eliminar contacto"
-                                            data-toggle="modal" data-target="#deleteModal"><i
-                                                class="fas fa-trash-alt"></i></button>
-                                    </form>
+                                            <form method="POST" role="form" id="{{ $contact->idContacto }}"
+                                                action="{{route('contacts.destroy',$contact)}}" class="d-inline-block form_client_id">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn_delete" title="Eliminar contacto" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
                                 </td>
                             </tr>
 
@@ -170,6 +167,7 @@
 
                         </tbody>
                     </table>
+
                 </div>
             </div>
 

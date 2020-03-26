@@ -74,10 +74,7 @@
 
 
 
-        $('#preview').on('click', function (e) {
-            e.preventDefault();
-            $('#fotografia').trigger('click');
-        });
+
 
 
         /* Definir paisNaturalidade */
@@ -90,6 +87,14 @@
         $('#passaportPaisEmi').val(str_passaportPaisEmi);
 
 
+
+
+
+        
+        $('#preview').on('click', function (e) {
+            e.preventDefault();
+            $('#fotografia').trigger('click');
+        });
 
 
         //Preview da fotografia

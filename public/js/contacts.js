@@ -60,9 +60,9 @@ $(document).ready(function () {
 
 
         /* OPÇÃO DE APAGAR */
-        var formToSubmit //Varivel para indicar o forumulário a submeter
+        var formToSubmit //Variavel para indicar o forumulário a submeter
 
-        $(".form_contacto_id").submit(function (e) {
+        $(".form_client_id").submit(function (e) {
             formToSubmit = this;
             return false;
         });
@@ -72,6 +72,47 @@ $(document).ready(function () {
             formToSubmit.submit();
         });
 
+
+
+
+
+
+        //Preview da fotografia
+
+        $('#preview').on('click', function (e) {
+            e.preventDefault();
+            $('#fotografia').trigger('click');
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#fotografia").change(function () {
+            readURL(this);
+        });
+
+
+
+
+        /* VALIDAÇÃO DE INPUTS */
+
+        /* Apenas letras:  .lettersOnly();  */
+        $("#nome").lettersOnly();
+
+
+        /* Apenas numeros:  .numbersOnly();  */
+        $("#telefone1").numbersOnly();
+        $("#telefone2").numbersOnly();
+        $("#fax").numbersOnly();
 
 });
 

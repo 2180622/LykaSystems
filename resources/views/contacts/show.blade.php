@@ -49,9 +49,9 @@
                     {{-- Informações Pessoais --}}
                     <div><span class="text-secondary ">Nome:</span> {{$contact->nome}}</div><br>
 
-                    <div><span class="text-secondary ">Telefone (1):</span> {{$contact->nome}}</div><br>
+                    <div><span class="text-secondary ">Telefone (principal):</span> {{$contact->nome}}</div><br>
 
-                    <div><span class="text-secondary ">Telefone (2):</span> {{$contact->nome}}</div><br>
+                    <div><span class="text-secondary ">Telefone (alternativo):</span> {{$contact->nome}}</div><br>
 
                     <div><span class="text-secondary ">E-mail:</span> {{$contact->email}}</div><br>
 

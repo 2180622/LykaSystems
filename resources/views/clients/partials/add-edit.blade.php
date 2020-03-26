@@ -91,7 +91,7 @@
                 {{-- INPUT fotografia --}}
                 <div>
                     <label for="fotografia">Fotografia:</label>
-                    <input type='file' id="fotografia" name="fotografia" style="display:none" />
+                    <input type='file' id="fotografia" name="fotografia" style="display:none" accept="image/*"/>
 
                 </div>
 
