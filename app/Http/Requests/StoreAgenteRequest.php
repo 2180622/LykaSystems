@@ -27,7 +27,7 @@ class StoreAgenteRequest extends FormRequest
           'nome' => 'required',
           'apelido' => 'required',
           'genero'=>'required',
-          'email' => 'required|unique:agente',
+          'email' => 'required|unique:agente|unique:user|unique:cliente',
           'dataNasc' => 'required',
           'fotografia' => 'nullable',
           'morada' => 'required',
@@ -40,6 +40,3 @@ class StoreAgenteRequest extends FormRequest
     }
 }
 
-
-
-/* 	nome	apelido	genero	email	dataNasc	fotografia	morada	pais	NIF	telefoneW	telefone2	tipo */

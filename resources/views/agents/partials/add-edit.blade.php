@@ -46,7 +46,6 @@
                 {{-- INPUT GENERO --}}
                 <label for="genero">Género:</label><br>
                 <select id="genero" name="genero" class="form-control" required>
-                    <option value="" selected hidden></option>
                     <option {{old('genero',$agent->genero)=='F'?"selected":""}} value="F">Feminino</option>
                     <option {{old('genero',$agent->genero)=='M'?"selected":""}} value="M">Masculino</option>
                 </select>

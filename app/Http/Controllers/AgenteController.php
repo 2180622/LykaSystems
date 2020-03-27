@@ -53,7 +53,7 @@ class AgenteController extends Controller
     {
 
         /* obtem os dados para criar o agente */
-        $agene = new Agente;
+        $agent = new Agente;
         $fields = $requestAgent->validated();
         $agent->fill($fields);
 
@@ -67,7 +67,7 @@ class AgenteController extends Controller
         /* Criação de Agente */
 
         if ($requestAgent->hasFile('fotografia')) {
-            $photo = $requestAgene->file('fotografia');
+            $photo = $requestAgent->file('fotografia');
             $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
@@ -90,7 +90,7 @@ class AgenteController extends Controller
 
         $user->tipo = "agente";
         $user->status = 10;
-        $user->idAgente = $agente->idAgente;
+        $user->idAgente = $agent->idAgente;
         $user->save();
 
 
@@ -180,7 +180,17 @@ class AgenteController extends Controller
      */
     public function destroy(Agente $agent)
     {
+        /* "Apaga" dos agentes */
         $agent->delete();
+
+
+
+        /* "Apaga" dos utilizadores */
+        DB::table('user')
+        ->where('idAgente', $agent->idAgente)
+        ->update(['deleted_at' => time()]);
+
+
         return redirect()->route('agents.index')->with('success', 'Agente eliminado com sucesso');
     }
 }

@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <span>Tem a certeza que deseja eliminar este agente?</span><br><br>
+                <span>Tem a certeza que deseja eliminar este agente?<br><strong>Este agente deixará de ter acesso à plataforma.</strong></span><br><br>
 
             </div>
             <div class="modal-footer">

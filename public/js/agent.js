@@ -136,7 +136,7 @@
         /* Apenas numeros:  .numbersOnly();  */
         $("#telefoneW").numbersOnly();
         $("#telefone2").numbersOnly();
-        $("#nif").numbersOnly();
+        $("#NIF").numbersOnly();
 
 
 
