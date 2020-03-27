@@ -5,7 +5,7 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/datatables_general_style.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}

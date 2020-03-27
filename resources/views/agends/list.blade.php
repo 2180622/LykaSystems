@@ -8,8 +8,10 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-    <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
-
+    <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+    <link href="{{asset('css/agends.css')}}" rel="stylesheet"/>
+    <link href="{{asset('vendor/calendar/core/main.css')}}" rel='stylesheet'/>
+    <link href="{{asset('vendor/calendar/daygrid/main.css')}}" rel='stylesheet'/>
 @endsection
 
 
@@ -40,6 +42,7 @@
             </div>
             <br>
 
+            <div id='calendar'></div>
 
 
         </div>
@@ -48,7 +51,10 @@
 
 {{-- Utilização de scripts: --}}
 @section('scripts')
-
-    {{-- <script src="{{asset('/js/)}}"></script>--}}
+    <script src="{{asset('/vendor/calendar/core/locales/pt.js')}}"></script>
+    <script src="{{asset('/vendor/calendar/core/main.js')}}"></script>
+    <script src="{{asset('/vendor/calendar/core/locales-all.js')}}"></script>
+    <script src="{{asset('/vendor/calendar/daygrid/main.js')}}"></script>
+    <script src="{{asset('/js/agends.js')}}"></script>
 
 @endsection
