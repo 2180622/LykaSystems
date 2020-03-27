@@ -38,6 +38,13 @@ class UpdateAgenteRequest extends FormRequest
             'tipo' => 'required|in:Agente,Subagente',
         ];
     }
+
+        public function messages()
+    {
+       return [
+       'email.unique'=>'Este e-mail já está registado. Insira um e-mail diferente',
+       ];
+    }
 }
 
 

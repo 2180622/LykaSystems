@@ -39,7 +39,7 @@
                 </div>
                 <div class="col col-4 text-right pt-2">
                     <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar estudante</button>
-                    <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
+                    <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
                 </div>
             </div>
             <div class="form-group text-right">

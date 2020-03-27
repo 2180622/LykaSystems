@@ -27,7 +27,7 @@ class StoreAgenteRequest extends FormRequest
           'nome' => 'required',
           'apelido' => 'required',
           'genero'=>'required',
-          'email' => 'required|unique:agente|unique:user|unique:cliente',
+          'email' => 'required|unique:agente|unique:user',
           'dataNasc' => 'required',
           'fotografia' => 'nullable',
           'morada' => 'required',
@@ -38,5 +38,16 @@ class StoreAgenteRequest extends FormRequest
           'tipo' => 'required|in:Agente,Subagente',
         ];
     }
+
+
+    public function messages()
+    {
+       return [
+       'email.unique'=>'Este e-mail já está registado. Insira um e-mail diferente',
+       ];
+    }
+
+
+
 }
 
