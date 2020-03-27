@@ -24,7 +24,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/clients', 'ClientController');
 
     /* Agentes */
-    Route::resource('/agents', 'AgentController');
+    Route::get('/agents/print/{agent}', 'AgenteController@print')->name('agents.print');
+    Route::resource('/agents', 'AgenteController');
 
     /* Biblioteca */
     Route::resource('/libraries', 'LibraryController');

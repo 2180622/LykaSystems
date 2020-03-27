@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> Ficha de estudante - {{$client->nome}} {{$client->apelido}}</title>
+    <title> Ficha de agente - {{$agent->nome}} {{$agent->apelido}}</title>
 
     <!-- Favicon -->
     <!-- Bootstrap core CSS -->
@@ -47,15 +47,15 @@
 
 
             <div class="col">
-                <h3><i class="fas fa-user-graduate mr-2"></i>Ficha de estudante</h3>
+                <h3><i class="fas fa-user-graduate mr-2"></i>Ficha de agente</h3>
                 <hr style="border:1px solid lightgray"><br>
 
                 {{-- Informações Pessoais --}}
-                <div><span class="text-secondary font-weight-bold">Nome:</span> {{$client->nome}} {{$client->apelido}}
+                <div><span class="text-secondary font-weight-bold">Nome:</span> {{$agent->nome}} {{$agent->apelido}}
                 </div>
 
                 <div><span class="text-secondary font-weight-bold">Género:</span>
-                    @if ($client->genero == 'M')
+                    @if ($agent->genero == 'M')
                     Masculino
                 @else
                     Feminino

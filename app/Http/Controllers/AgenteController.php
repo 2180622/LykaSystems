@@ -49,13 +49,13 @@ class AgenteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAgenteRequest $requestAgente, StoreUserRequest $requestUser)
+    public function store(StoreAgenteRequest $requestAgent, StoreUserRequest $requestUser)
     {
 
         /* obtem os dados para criar o agente */
-        $agente = new Agente;
-        $fields = $requestAgente->validated();
-        $agente->fill($fields);
+        $agene = new Agente;
+        $fields = $requestAgent->validated();
+        $agent->fill($fields);
 
         /* obtem os dados para criar o utilizador */
         $user = new User;
@@ -66,23 +66,23 @@ class AgenteController extends Controller
 
         /* Criação de Agente */
 
-        if ($requestAgente->hasFile('fotografia')) {
-            $photo = $requestAgente->file('fotografia');
-            $profileImg = $agente->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+        if ($requestAgent->hasFile('fotografia')) {
+            $photo = $requestAgene->file('fotografia');
+            $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
-            $agente->fotografia = $profileImg;
-            $agente->save();
+            $agent->fotografia = $profileImg;
+            $agent->save();
         }
 
-        if ($requestAgente->fotografia==null){
-            $agente->fotografia = null;
+        if ($requestAgent->fotografia==null){
+            $agent->fotografia = null;
         }
 
         // data em que foi criado
         $t=time();
-        $agente->create_at == date("Y-m-d",$t);
+        $agent->create_at == date("Y-m-d",$t);
 
-        $agente->save();
+        $agent->save();
 
 
 
@@ -97,7 +97,7 @@ class AgenteController extends Controller
         /* Envia o e-mail para ativação */
         $email = $user->email;
         $id = $user->idUser;
-        $name = $agente->nome;
+        $name = $agent->nome;
         Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
         return redirect()->route('agents.index')->with('success', 'Agente criado com sucesso. Aguarda Ativação');
@@ -106,24 +106,24 @@ class AgenteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Agente  $agente
+     * @param  \App\Agente  $agent
      * @return \Illuminate\Http\Response
      */
-    public function show(Agente $agente)
+    public function show(Agente $agent)
     {
-        return view('agents.show',compact("agente"));
+        return view('agents.show',compact("agent"));
     }
 
 
    /**
     * Prepares document for printing the specified agent.
     *
-    * @param  \App\Agente  $agente
+    * @param  \App\Agente  $agent
     * @return \Illuminate\Http\Response
     */
-    public function print(Agente $agente)
+    public function print(Agente $agent)
     {
-        return view('agents.print',compact("agente"));
+        return view('agents.print',compact("agent"));
     }
 
 
@@ -132,42 +132,42 @@ class AgenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Agente  $agente
+     * @param  \App\Agente  $agent
      * @return \Illuminate\Http\Response
      */
-    public function edit(Agente $agente)
+    public function edit(Agente $agent)
     {
-        return view('agents.edit', compact('agente'));
+        return view('agents.edit', compact('agent'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Agente  $agente
+     * @param  \App\Agente  $agent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Agente $agente)
+    public function update(UpdateAgenteRequest $request, Agente $agent)
     {
         $fields = $request->validated();
-        $agente->fill($fields);
+        $agent->fill($fields);
 
 
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
-            $profileImg = $agente->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            if (!empty($agente->fotografia)) {
-                Storage::disk('public')->delete('agennt-photos/' . $agente->fotografia);
+            $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            if (!empty($agent->fotografia)) {
+                Storage::disk('public')->delete('agennt-photos/' . $agent->fotografia);
             }
             Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
-            $agente->fotografia = $profileImg;
+            $agent->fotografia = $profileImg;
         }
 
         // data em que foi modificado
         $t=time();
-        $agente->updated_at == date("Y-m-d",$t);
+        $agent->updated_at == date("Y-m-d",$t);
 
-        $agente->save();
+        $agent->save();
 
          return redirect()->route('agents.index')->with('success', 'Dados do agente modificados com sucesso');
     }
@@ -175,12 +175,12 @@ class AgenteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Agente  $agente
+     * @param  \App\Agente  $agent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Agente $agente)
+    public function destroy(Agente $agent)
     {
-        $agente->delete();
+        $agent->delete();
         return redirect()->route('agents.index')->with('success', 'Agente eliminado com sucesso');
     }
 }

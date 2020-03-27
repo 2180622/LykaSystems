@@ -33,11 +33,11 @@
             <br>
 
 
-            <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="POST" action="{{route('agents.update',$agent)}}" class="form-group needs-validation pt-3" id="form_agent"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
-                @include('clients.partials.add-edit')
+                @include('agents.partials.add-edit')
                 <div class="form-group text-right">
                     <br><br>
                     <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
@@ -61,7 +61,7 @@
 @section('scripts')
 
     {{-- script contem: datatable configs, input configs, validações --}}
-    <script src="{{asset('/js/clients.js')}}"></script>
+    <script src="{{asset('/js/agent.js')}}"></script>
 
     {{-- script permite definir se um input recebe só numeros OU so letras --}}
     <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>

@@ -84,8 +84,8 @@
                     <tr>
                         <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
-                        <th>Nº Identificação</th>
-                        <th>Nº Passaporte</th>
+                        <th>E-mail</th>
+                        <th>País</th>
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -93,16 +93,16 @@
                 {{-- Corpo da tabela --}}
                 <tbody>
 
-                    @foreach ($clients as $client)
+                    @foreach ($agents as $agent)
                     <tr>
-                        <td class="">
+                        <td >
                             <div class="align-middle mx-auto shadow-sm rounded"
                                 style="overflow:hidden; width:50px; height:50px">
-                                <a class="name_link" href="{{route('clients.show',$client)}}">
-                                    @if($client->fotografia)
-                                        <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
+                                <a class="name_link" href="{{route('agents.show',$agent)}}">
+                                    @if($agent->fotografia)
+                                        <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}"
                                         width="100%" class="mx-auto">
-                                    @elseif($client->genero == 'F')
+                                    @elseif($agent->genero == 'F')
                                         <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
                                         width="100%" class="mx-auto">
                                     @else
@@ -115,27 +115,27 @@
                         </td>
 
                         {{-- Nome e Apelido --}}
-                        <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
+                        <td class="align-middle"><a class="name_link" href="{{route('agents.show',$agent)}}">{{ $agent->nome }} {{ $agent->apelido }}</a></td>
 
-                        {{-- numCCid --}}
-                        <td class="align-middle">{{ $client->numCCid }}</td>
+                        {{-- e-mail --}}
+                        <td class="align-middle">{{ $agent->email }}</td>
 
-                        {{-- numPassaport --}}
-                        <td class="align-middle">{{ $client->numPassaport }}</td>
+                        {{-- País --}}
+                        <td class="align-middle">{{ $agent->pais }}</td>
 
 
                         {{-- OPÇÔES --}}
                         <td class="text-center align-middle">
-                            <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
+                            <a href="{{route('agents.show',$agent)}}" class="btn_list_opt "
                                 title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                            <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
+                            <a href="{{route('agents.edit',$agent)}}" class="btn_list_opt btn_list_opt_edit"
                                 title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
-                            <form method="POST" role="form" id="{{ $client->idCliente }}"
-                                action="{{route('clients.destroy',$client)}}" class="d-inline-block form_client_id">
+                            <form method="POST" role="form" id="{{ $agent->idAgente }}"
+                                action="{{route('agents.destroy',$agent)}}" class="d-inline-block form_agent_id">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
+                                <button type="submit" class="btn_delete" title="Eliminar agente" data-toggle="modal"
                                     data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                             </form>
 

@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Page Title --}}
-@section('title', 'Adicionar estudante')
+@section('title', 'Adicionar agente')
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
@@ -24,21 +24,21 @@
     <br><br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Adicionar estudante</h6>
+            <h6>Adicionar agente</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('agents.store')}}" class="form-group needs-validation pt-3" id="form_agent" enctype="multipart/form-data" novalidate>
             @csrf
-            @include('clients.partials.add-edit')
+            @include('agents.partials.add-edit')
             <div class="row mt-4">
                 <div class="col">
                     <div class="alert alert-primary " role="alert">
-                        <i class="fas fa-info-circle mr-1"></i><strong>Nota: </strong>O estudante irá receber um e-mail para ativação da sua conta pessoal
+                        <i class="fas fa-info-circle mr-1"></i><strong>Nota: </strong>O agente irá receber um e-mail para ativação da sua conta pessoal
                     </div>
 
                 </div>
                 <div class="col col-4 text-right pt-2">
-                    <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar estudante</button>
+                    <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar agente</button>
                     <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
                 </div>
             </div>
@@ -55,7 +55,7 @@
 @section('scripts')
 
 {{-- script contem: datatable configs, input configs, validações --}}
-<script src="{{asset('/js/clients.js')}}"></script>
+<script src="{{asset('/js/agent.js')}}"></script>
 
 {{-- script permite definir se um input recebe só numeros OU so letras --}}
 <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>

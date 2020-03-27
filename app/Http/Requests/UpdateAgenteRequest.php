@@ -13,7 +13,7 @@ class UpdateAgenteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class UpdateAgenteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => 'required',
+            'apelido' => 'required',
+            'genero'=>'required',
+            'email' => 'required',
+            'dataNasc' => 'required',
+            'fotografia' => 'nullable',
+            'morada' => 'required',
+            'pais' => 'required',
+            'NIF' => 'required',
+            'telefoneW' => 'required',
+            'telefone2' => 'nullable',
+            'tipo' => 'required|in:Agente,Subagente',
         ];
     }
 }
+
+
+

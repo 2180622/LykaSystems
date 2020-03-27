@@ -13,7 +13,7 @@ class StoreAgenteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class StoreAgenteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+          'nome' => 'required',
+          'apelido' => 'required',
+          'genero'=>'required',
+          'email' => 'required|unique:agente',
+          'dataNasc' => 'required',
+          'fotografia' => 'nullable',
+          'morada' => 'required',
+          'pais' => 'required',
+          'NIF' => 'required|unique:agente',
+          'telefoneW' => 'required',
+          'telefone2' => 'nullable',
+          'tipo' => 'required|in:Agente,Subagente',
         ];
     }
 }
+
+
+
+/* 	nome	apelido	genero	email	dataNasc	fotografia	morada	pais	NIF	telefoneW	telefone2	tipo */

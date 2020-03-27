@@ -75,12 +75,9 @@
 
 
 
-
-
         /* Definir pais */
         var str_pais = $("#hidden_pais").val();
-        $('#pais').val(str_paisNaturalidade);
-
+        $('#pais').val(str_pais);
 
 
 
@@ -137,8 +134,10 @@
 
 
         /* Apenas numeros:  .numbersOnly();  */
-        $("#telefone1").numbersOnly();
+        $("#telefoneW").numbersOnly();
         $("#telefone2").numbersOnly();
+        $("#nif").numbersOnly();
+
 
 
 
@@ -154,52 +153,6 @@
                   if (form.checkValidity() === false) {
                     event.preventDefault();
                     event.stopPropagation();
-
-
-                    /* valida Campos da informação pessoal */
-                    if ( ($("#nome").val()=="") || ($("#apelido").val()=="") || ($("#paisNaturalidade").val()=="") || ($("#dataNasc").val()=="") || ($("#genero").val()=="")){
-                        $("#warning_info_pessoal").removeClass("warning_sign");
-                    } else {
-                        $("#warning_info_pessoal").addClass("warning_sign");
-                    }
-
-
-                    /* valida Campos dos dados académicos */
-                    if ( ($("#nivEstudoAtual").val()=="") || ($("#nomeInstituicaoOrigem").val()=="") || ($("#cidadeInstituicaoOrigem").val()=="") ){
-                        $("#warning_academico").removeClass("warning_sign");
-                    } else {
-                        $("#warning_academico").addClass("warning_sign");
-                    }
-
-
-
-                    /* valida Campos dos contactos */
-                    if ( ($("#telefone1").val()=="") || ($("#email").val()=="")){
-                        $("#warning_contactos").removeClass("warning_sign");
-                    } else {
-                        $("#warning_contactos").addClass("warning_sign");
-                    }
-
-
-
-                    /* valida Campos das moradas */
-                    if ( ($("#moradaResidencia").val()=="") || ($("#morada").val()=="") || ($("#cidade").val()=="") ){
-                        $("#warning_moradas").removeClass("warning_sign");
-                    } else {
-                        $("#warning_moradas").addClass("warning_sign");
-                    }
-
-
-                    /* valida Campos dos documentos */
-                    if ( ($("#numCCid").val()=="") || ($("#NIF").val()=="") || ($("#numPassaport").val()=="")  || ($("#dataValidPP").val()=="") || ($("#passaportPaisEmi").val()=="") || ($("#localEmissaoPP").val()=="") || ($("#IBAN").val()=="") ){
-                        $("#warning_documentation").removeClass("warning_sign");
-                    } else {
-                        $("#warning_documentation").addClass("warning_sign");
-                    }
-
-
-
-
                   }
                   form.classList.add('was-validated');
                 }, false);
