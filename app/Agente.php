@@ -12,7 +12,7 @@ class Agente extends Model
     use SoftDeletes;
 
     protected $table = 'Agente';
-    
+
     protected $primaryKey = 'idAgente';
 
     protected $fillable = [

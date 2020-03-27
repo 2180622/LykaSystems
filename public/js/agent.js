@@ -77,15 +77,9 @@
 
 
 
-        /* Definir paisNaturalidade */
-        var str_paisNaturalidade = $("#hidden_paisNaturalidade").val();
-        $('#paisNaturalidade').val(str_paisNaturalidade);
-
-
-        /* Definir passaportPaisEmi */
-        var str_passaportPaisEmi = $("#hidden_passaportPaisEmi").val();
-        $('#passaportPaisEmi').val(str_passaportPaisEmi);
-
+        /* Definir pais */
+        var str_pais = $("#hidden_pais").val();
+        $('#pais').val(str_paisNaturalidade);
 
 
 
@@ -118,7 +112,7 @@
         /* OPÇÃO DE APAGAR */
         var formToSubmit //Variavel para indicar o forumulário a submeter
 
-        $(".form_client_id").submit(function (e) {
+        $(".form_agent_id").submit(function (e) {
             formToSubmit = this;
             return false;
         });
@@ -138,25 +132,13 @@
         /* Apenas letras:  .lettersOnly();  */
         $("#nome").lettersOnly();
         $("#apelido").lettersOnly();
-        $("#cidadeInstituicaoOrigem").lettersOnly();
-        $("#nomePai").lettersOnly();
-        $("#nomeMae").lettersOnly();
-        $("#localEmissaoPP").lettersOnly();
+
 
 
 
         /* Apenas numeros:  .numbersOnly();  */
         $("#telefone1").numbersOnly();
         $("#telefone2").numbersOnly();
-        $("#telefonePai").numbersOnly();
-        $("#telefoneMae").numbersOnly();
-        $("#numCCid").numbersOnly();
-        $("#numPassaport").numbersOnly();
-        $("#IBAN").numbersOnly();
-
-
-
-
 
 
 

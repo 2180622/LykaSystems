@@ -18,14 +18,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-
         return view('users.list', compact('users'));
     }
 
     public function create()
     {
       $user = new User;
-      $Notificacoes = Auth()->user()->getNotifications();
       return view('users.add', compact('user'));
     }
 
