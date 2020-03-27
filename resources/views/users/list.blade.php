@@ -108,7 +108,7 @@
                         {{-- OPÇÔES --}}
                         <td class="text-center align-middle">
                             <a href="{{route('users.show',$user)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                            <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                            <a href="{{route('users.edit', $user)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
                             <form method="POST" role="form" id="" action="#" class="d-inline-block form_university_id">
                                 @csrf
