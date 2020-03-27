@@ -47,54 +47,65 @@
 
 
             <div class="col">
-                <h3><i class="fas fa-user-graduate mr-2"></i>Ficha de agente</h3>
+                <h3><i class="fas fa-user-graduate mr-2"></i>
+                    @if ($agent->tipo=="Agente")
+                    Ficha de Agente
+                    @else
+                    Ficha de Subagente
+                    @endif
+                </h3>
                 <hr style="border:1px solid lightgray"><br>
 
                 {{-- Informações Pessoais --}}
-                <div><span class="text-secondary font-weight-bold">Nome:</span> {{$agent->nome}} {{$agent->apelido}}
+                <div class="row">
+                    <div class="col">
+                        <div><span class="text-secondary font-weight-bold">Nome:</span> {{$agent->nome}} {{$agent->apelido}}</div>
+
+                        <div><span class="text-secondary font-weight-bold">Género:</span>
+                            @if ($agent->genero == 'M')
+                            Masculino
+                        @else
+                            Feminino
+                        @endif
+                        </div>
+
+                        <div><span class="text-secondary font-weight-bold">Data de nascimento:
+                        </span>{{ date('d-M-y', strtotime($agent->dataNasc)) }}</div><br>
+
+
+
+                    </div>
+
                 </div>
 
-                <div><span class="text-secondary font-weight-bold">Género:</span>
-                    @if ($agent->genero == 'M')
-                    Masculino
-                @else
-                    Feminino
-                @endif
-                </div>
 
-                <div><span class="text-secondary font-weight-bold">Naturalidade:</span> {{$client->paisNaturalidade}}
-                </div>
+                <div><span class="text-secondary font-weight-bold">País:</span> {{$agent->pais}}</div>
 
-                <div><span class="text-secondary font-weight-bold">Data de nascimento:
-                    </span>{{ date('d-M-y', strtotime($client->dataNasc)) }}</div>
+                <div><span class="text-secondary font-weight-bold">Morada:</span> {{$agent->morada}}</div><br>
 
-                <div><span class="text-secondary font-weight-bold">Telefone:</span> {{$client->telefone1}}
-                    @if ($client->telefone2!=null)
-                    / {{$client->telefone2}}
+
+
+                <div><span class="text-secondary font-weight-bold">Telefone:</span> {{$agent->telefoneW}}
+                    @if ($agent->telefone2!=null)
+                    / {{$agent->telefone2}}
                     @endif
 
                 </div>
 
-                <div><span class="text-secondary font-weight-bold">E-mail:</span> {{$client->email}}</div>
+                <div><span class="text-secondary font-weight-bold">E-mail:</span> {{$agent->email}}</div><br>
 
-                <div><span class="text-secondary font-weight-bold">Observações pessoais:</span>
-                    @if ($client->obsPessoais==null)
-                    <span class="text-muted"><small>(sem dados para mostrar)</small></span>
-                    @else
-                    {{ $client->obsPessoais }}
-                    @endif
-                </div><br>
+                <div><span class="text-secondary font-weight-bold">NIF:</span> {{$agent->NIF}} {{$agent->NIF}}</div><br>
 
-                <div><span class="text-secondary font-weight-bold">Adicionado em: </span>{{ date('d-M-y', strtotime($client->created_at)) }}</div><br>
+                <div><span class="text-secondary font-weight-bold">Adicionado em: </span>{{ date('d-M-y', strtotime($agent->created_at)) }}</div><br>
 
             </div>
 
             {{-- Fotografia --}}
             <div class="col col-3">
 
-            @if($client->fotografia)
-                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" style="width:90%">
-            @elseif($client->genero == 'F')
+            @if($agent->fotografia)
+                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" style="width:90%">
+            @elseif($agent->genero == 'F')
                 <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
             @else
                 <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
@@ -104,141 +115,17 @@
 
         </div>
 
-        <hr style="border:1px solid lightgray"><br>
-
-
-        <div class="row ">
-
-            <div class="col p-3 mr-3 ">
-                <h5><i class="fas fa-passport mr-2"></i>Passaporte</h5><br>
-                {{--  numPassaport --}}
-                <div><span class="text-secondary font-weight-bold">Número do passaporte:</span>
-                    {{$client->numPassaport}}</div>
-
-                {{--  dataValidPP --}}
-                <div><span class="text-secondary font-weight-bold">Data de validade do passaporte:</span>
-                    {{$client->dataValidPP}}</div>
-
-                {{--  passaportPaisEmi --}}
-                <div><span class="text-secondary font-weight-bold">Pais emissor do passaporte:</span>
-                    {{$client->passaportPaisEmi}}</div>
-
-                {{--  localEmissaoPP --}}
-                <div><span class="text-secondary font-weight-bold">Local de emissão do passaporte:</span>
-                    {{$client->localEmissaoPP}}</div><br>
-            </div>
-
-            <div class="col p-3 ">
-                <h5><i class="far fa-id-card mr-2"></i>Documento de identificação</h5><br>
-                <div><span class="text-secondary font-weight-bold">Número de cartão de cidadão:</span>
-                    {{$client->numCCid}}</div>
-                <div><span class="text-secondary font-weight-bold">Número de identificação fiscal:</span>
-                    {{$client->NIF}}</div>
-            </div>
-
-
-        </div>
-
-        <hr style="border:1px solid lightgray"><br>
-
-
-        <div class="row">
-
-            <div class="col mr-4 ">
-
-                <h5><i class="fas fa-university mr-2"></i>Dados académicos</h5><br>
-                {{-- Informações Escolares --}}
-                <div><span class="text-secondary font-weight-bold">Nivel de estudos(atual):</span>
-                    {{$client->nivEstudoAtual}}
-                </div>
-
-                <div><span class="text-secondary font-weight-bold">Nome da instituição de origem:</span>
-                    {{$client->nomeInstituicaoOrigem}}</div>
-
-                <div><span class="text-secondary font-weight-bold">Local da instituição:</span>
-                    {{$client->cidadeInstituicaoOrigem}}</div>
-
-            </div>
-
-            <div class="col ">
-                {{-- Observações académicas --}}
-                <div><span class="text-secondary font-weight-bold">Observações académicas:</span>
-
-                    @if ($client->obsAcademicas==null)
-                    <span class="text-muted"><small>(sem dados para mostrar)</small></span>
-                    @else
-                    {{$client->obsAcademicas}}
-                    @endif
-                </div>
-            </div>
-
-        </div>
-
-
-        <br>
-        <hr style="border:1px solid lightgray"><br>
-
-
-        <div class="row">
-
-            <div class="col">
-                <h5><i class="far fa-address-book mr-2"></i>Contactos</h5><br>
-                {{-- Morada em Portugal --}}
-                <div><span class="text-secondary font-weight-bold">Morada de residência (Portugal):</span> {{$client->moradaResidencia}}</div>
-
-                {{-- Morada de residência no pais de origem --}}
-                <div><span class="text-secondary font-weight-bold">Morada (origem):</span> {{$client->morada}}</div>
-                <div><span class="text-secondary font-weight-bold">Cidade (origem):</span> {{$client->cidade}}</div>
-            </div>
-            <div class="col pt-4">
-                {{-- Contactos dos pais --}}
-                <div><span class="text-secondary font-weight-bold">Nome do pai:</span>{{$client->nomePai}}</div>
-                <div><span class="text-secondary font-weight-bold">Telefone do pai:</span> {{$client->telefonePai}}</div>
-                <div><span class="text-secondary font-weight-bold">E-mail do pai:</span> {{$client->emailPai}}</div>
-                <div><span class="text-secondary font-weight-bold">Nome da mãe:</span> {{$client->nomeMae}}</div>
-                <div><span class="text-secondary font-weight-bold">Telefone da mãe:</span> {{$client->telefoneMae}}</div>
-                <div><span class="text-secondary font-weight-bold">E-mail da mãe:</span> {{$client->emailMae}}</div>
-            </div>
-
-        </div>
-
-        <br>
-        <hr style="border:1px solid lightgray"><br>
-
-
-        <div class="row">
-            <div class="col">
-                <div><i class="fas fa-stream mr-2 "></i><span class="text-secondary font-weight-bold">Produtos aquiridos:</span>
-                    @if($produtos!=null)
-                        @foreach($produtos as $produto)
-                        {{$produto->descricao}}({{$produto->tipo}}),
-                        @endforeach
-                    @else
-                        Sem produtos adquiridos
-                    @endif
-
-                </div>
-            </div>
-        </div>
-
         <br>
         <hr style="border:1px solid lightgray"><br>
 
         <div class="row">
 
             <div class="col">
-                <div><span class="text-secondary font-weight-bold">Observações Financeiras:</span>
-
-                    @if ($client->obsFinanceiras==null)
-                    <span class="text-muted font-weight-bold"><small>(sem dados para mostrar)</small></span>
-                    @else
-                    {{$client->obsFinanceiras}}
-                    @endif
-                </div>
+                
             </div>
 
             <div class="col">
-                <div><i class="fas fa-search-dollar mr-2"></i><span class="text-secondary font-weight-bold">IBAN:</span> {{$client->IBAN}}</div>
+
             </div>
 
         </div>
@@ -248,10 +135,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-</div>

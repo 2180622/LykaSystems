@@ -64,10 +64,6 @@
         });
 
 
-        $('#search_btn').on('click', function (e) {
-            e.preventDefault();
-            $('#fotografia').trigger('click');
-        });
 
         /* FIM configs DATATABLES */
 
@@ -91,6 +87,13 @@
 
 
         //Preview da fotografia
+
+        $('#search_btn').on('click', function (e) {
+            e.preventDefault();
+            $('#fotografia').trigger('click');
+        });
+
+
         $('#preview').on('click', function (e) {
             e.preventDefault();
             $('#fotografia').trigger('click');

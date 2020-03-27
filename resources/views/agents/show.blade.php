@@ -30,7 +30,7 @@
 
         <div class="cards-navigation">
             <div class="title">
-                
+
                 <h6>@if ($agent->tipo=="Agente")
                     Ficha de Agente
                     @else
@@ -59,7 +59,7 @@
                 <div class="col p-2">
 
                     {{-- Informações Pessoais --}}
-                    <div><span class="text-secondary ">Nome:</span> {{$agent->nome}} {{$agent->apelido}}</div><br>
+                    <div><span class="text-secondary ">Nome:</span> {{$agent->nome}} {{$agent->apelido}}</div>
 
                     <div><span class="text-secondary ">Género: </span>
                     @if ($agent->genero == 'M')
@@ -69,16 +69,21 @@
                     @endif
                     </div><br>
 
-                    <div><span class="text-secondary">País:</span> {{$agent->pais}}</div><br>
-
                     <div><span class="text-secondary ">Data de nascimento: </span>
                         {{ date('d-M-y', strtotime($agent->dataNasc)) }}</div><br>
 
-                    <div><span class="text-secondary">Telefone (principal):</span> {{$agent->telefoneW}}</div><br>
+
+                    <div><span class="text-secondary">País:</span> {{$agent->pais}}</div>
+
+                    <div><span class="text-secondary">Morada:</span> {{$agent->morada}}</div><br>
+
+                    <div><span class="text-secondary">Telefone (principal):</span> {{$agent->telefoneW}}</div>
 
                     <div><span class="text-secondary">Telefone (alternativo):</span> {{$agent->telefone2}}</div><br>
 
-                    <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div>
+                    <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div><br>
+
+                    <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 
                     <hr>
 
