@@ -16,10 +16,6 @@
                     "width": "130px",
                     "targets": 4
                 },
-                {
-                    "width": "auto",
-                    "targets": 1
-                },
 
             ],
 
@@ -84,7 +80,7 @@
             e.preventDefault();
             $('#fotografia').trigger('click');
         });
-        
+
         $('#preview').on('click', function (e) {
             e.preventDefault();
             $('#fotografia').trigger('click');

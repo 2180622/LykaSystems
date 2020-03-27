@@ -16,10 +16,6 @@
                     "width": "130px",
                     "targets": 4
                 },
-                {
-                    "width": "auto",
-                    "targets": 1
-                },
 
             ],
 

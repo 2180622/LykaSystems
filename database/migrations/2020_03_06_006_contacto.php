@@ -23,7 +23,7 @@ class Contacto extends Migration
             $table->integer('telefone2')->nullable();
             $table->string('email',255)->nullable();
             $table->integer('fax')->nullable();
-            $table->text('observacao')->nullable();
+            $table->longText('observacao')->nullable();
             $table->boolean('favorito')->default(false);
             $table->timestamps();
         });
