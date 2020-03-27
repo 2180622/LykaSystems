@@ -211,7 +211,16 @@ class ClientController extends Controller
 
     public function destroy(Cliente $client)
     {
+        /* "Apaga" dos clientes */
         $client->delete();
+
+
+        /* "Apaga" dos utilizadores */
+        DB::table('user')
+        ->where('idCliente', $client->idCliente)
+        ->update(['deleted_at' => $client->deleted_at]);
+
+
         return redirect()->route('clients.index')->with('success', 'Estudante eliminado com sucesso');
     }
 }

@@ -30,7 +30,14 @@
 
         <div class="cards-navigation">
             <div class="title">
-                <h6>Ficha de agente</h6>
+                
+                <h6>@if ($agent->tipo=="Agente")
+                    Ficha de Agente
+                    @else
+                    Ficha de Subagente
+                    @endif
+                </h6>
+
             </div>
             <br>
 

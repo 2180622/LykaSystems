@@ -186,10 +186,9 @@ class AgenteController extends Controller
 
 
         /* "Apaga" dos utilizadores */
-        $t=time();
         DB::table('user')
         ->where('idAgente', $agent->idAgente)
-        ->update(['deleted_at' => $t]);
+        ->update(['deleted_at' => $agent->deleted_at]);
 
 
         return redirect()->route('agents.index')->with('success', 'Agente eliminado com sucesso');
