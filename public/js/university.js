@@ -19,18 +19,6 @@ $(document).ready(function () {
                 "targets": 0
             },
             {
-                "width": "auto",
-                "targets": 1
-            },
-            {
-                "width": "auto",
-                "targets": 2
-            },
-            {
-                "width": "auto",
-                "targets": 3
-            },
-            {
                 "width": "130px",
                 "targets": 4
             },
@@ -73,22 +61,40 @@ $(document).ready(function () {
     });
 
 
-    $('#search_btn').on('click', function (e) {
-        e.preventDefault();
-        $('#fotografia').trigger('click');
-    });
-
-    $('#preview').on('click', function (e) {
-        e.preventDefault();
-        $('#fotografia').trigger('click');
-    });
-
     /* FIM configs DATATABLES */
 
 
-    /* OPÇÃO DE APAGAR */
 
-    $(document).ready(function () {
+        /* OPÇÃO DE APAGAR */
+        var formToSubmit //Variavel para indicar o forumulário a submeter
+
+        $(".form_university_id").submit(function (e) {
+            formToSubmit = this;
+            return false;
+        });
+
+        //click sim na modal
+        $(".btn_submit").click(function (e) {
+            formToSubmit.submit();
+        });
+
+
+        /* VALIDAÇÃO DE INPUTS */
+
+        /* Apenas letras:  .lettersOnly();  */
+        $("#inputNome").lettersOnly();
+
+
+
+
+        /* Apenas numeros:  .numbersOnly();  */
+        $("#inputTelefone").numbersOnly();
+        $("#inputNIF").numbersOnly();
+        $("#inputIBAN").numbersOnly();
+
+
+
+/*     $(document).ready(function () {
         $('#eliminarUniversidade').on('show.bs.modal', function (e) {
             $("#eliminar").click(function () {
                 $(e.relatedTarget).parent().submit();
@@ -103,8 +109,34 @@ $(document).ready(function () {
         var modal = $(this);
         modal.find('.modal-body input').val(recipient);
     });
+ */
+
+
+
+
+            /* VALIDAÇÃO DO FORMULÁRIO */
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                  var forms = document.getElementsByClassName('needs-validation');
+                  // Loop over them and prevent submission
+                  var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                      if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                      }
+                      form.classList.add('was-validated');
+                    }, false);
+                  });
+                }, false);
+              })();
+
+
+
+
+
+
+
 });
-
-
-
-

@@ -11,12 +11,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Tem a certeza que pretende eliminar a universidade "<span style="font-weight: 500"
-                                                                             id="tituloUniversidade"></span>"?
-                </p>
+                <p>Tem a certeza que pretende eliminar esta universidade?</p>
             </div>
             <div class="modal-footer">
-                <button type="eliminar" class="top-button bg-danger"><i class="far fa-trash-alt mr-2"></i>Sim,
+                <button type="submit" class="top-button btn_submit bg-danger"><i class="far fa-trash-alt mr-2"></i>Sim,
                     eliminar universidade
                 </button>
                 <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
