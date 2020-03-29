@@ -109,7 +109,9 @@
         var formToSubmit //Variavel para indicar o forumulário a submeter
 
         $(".form_agent_id").submit(function (e) {
+            e.preventDefault();
             formToSubmit = this;
+            $("#agent_name").text($(this).attr("data"));
             return false;
         });
 
@@ -161,7 +163,7 @@
 
 
 
-          
+
     });
 
 

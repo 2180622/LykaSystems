@@ -136,7 +136,7 @@
                                 title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
                             <form method="POST" role="form" id="{{ $agent->idAgente }}"
-                                action="{{route('agents.destroy',$agent)}}" class="d-inline-block form_agent_id">
+                                action="{{route('agents.destroy',$agent)}}" data="{{ $agent->nome }} {{ $agent->apelido }}" class="d-inline-block form_agent_id">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn_delete" title="Eliminar agente" data-toggle="modal"

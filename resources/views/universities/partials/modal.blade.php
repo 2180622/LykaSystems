@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Tem a certeza que pretende eliminar "<span id="tituloUniversidade"></span>" ?</p>
+                <p>Tem a certeza que deseja eliminar "<span id="tituloUniversidade"></span>" ?</p>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="top-button btn_submit bg-danger"><i class="far fa-trash-alt mr-2"></i>Sim,

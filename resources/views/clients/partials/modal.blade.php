@@ -11,7 +11,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <span>Tem a certeza que deseja eliminar este estudante?<br><strong>Este estudante deixará de ter acesso à plataforma.</strong></span><br><br>
+                <span>Tem a certeza que deseja eliminar o estudante "<span id="student_name"></span>" ?<br>
+                <strong>Esta pessoa deixará de ter acesso à plataforma.</strong></span><br><br>
 
             </div>
             <div class="modal-footer">
