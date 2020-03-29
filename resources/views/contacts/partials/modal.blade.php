@@ -11,7 +11,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <span>Tem a certeza que deseja eliminar este contacto?</span><br><br>
+            <span>Tem a certeza que deseja eliminar " <span id="contact_name"></span> " dos contactos?</span><br><br>
         </div>
         <div class="modal-footer">
             <button type="submit" class="top-button btn_submit bg-danger"><i class="far fa-trash-alt mr-2"></i>Sim,
