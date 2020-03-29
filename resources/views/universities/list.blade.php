@@ -134,7 +134,7 @@
 
                                 <form method="POST" role="form" id="{{ $university->idUniversidade }}"
                                       action="{{route('universities.destroy',$university)}}"
-                                      class="d-inline-block form_university_id" value="{{ $university->nome }}">
+                                      class="d-inline-block form_university_id" data="{{ $university->nome }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn_delete" title="Eliminar Universidade"

@@ -69,8 +69,10 @@ $(document).ready(function () {
         var formToSubmit //Variavel para indicar o forumulário a submeter
 
         $(".form_university_id").submit(function (e) {
+            e.preventDefault();
             formToSubmit = this;
-            return false;
+            $("#tituloUniversidade").text($(this).attr("data"));
+             return false;
         });
 
         //click sim na modal
