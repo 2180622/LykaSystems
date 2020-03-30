@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Agente;
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Mail;
 use App\Mail\SendEmailConfirmation;
+
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateAgenteRequest;
 use App\Http\Requests\StoreAgenteRequest;
 use App\Http\Requests\StoreUserRequest;
@@ -26,10 +29,30 @@ class AgenteController extends Controller
      */
     public function index()
     {
-        $agents = Agente::all();
-        $totalagents = $agents->count();
 
-        return view('agents.list', compact('agents', 'totalagents'));
+
+/*         dd(Auth::user()->tipo); */
+
+        /* Se for um agente: mostra os sub agentes */
+        if(Auth::user()->tipo == "agente"){
+
+            $agents = Agente::
+            where('subagent_agentid', '=', Auth::user()->agente->idAgente)
+            ->get();
+            $totalagents = $agents->count();
+
+            return view('agents.list', compact('agents', 'totalagents'));
+
+
+       /* Se for um Admin: mostra só os agentes */
+        }else{
+            $agents = Agente::all();
+            $totalagents = $agents->count();
+
+            return view('agents.list', compact('agents', 'totalagents'));
+
+        }
+
     }
 
     /**
@@ -57,6 +80,7 @@ class AgenteController extends Controller
         $fields = $requestAgent->validated();
         $agent->fill($fields);
 
+
         /* obtem os dados para criar o utilizador */
         $user = new User;
         $fieldsUser = $requestUser->validated();
@@ -82,6 +106,18 @@ class AgenteController extends Controller
         $t=time();
         $agent->create_at == date("Y-m-d",$t);
 
+
+
+        /* Verifica se é agente ou admin a criar novo registo */
+        if(Auth::user()->tipo == "agente"){
+            /* se for agente */
+            $agent->tipo="Subagente";
+            $agent->subagent_agentid = Auth::user()->agente->idAgente;
+        }else{
+            /* se for admin */
+            $agent->tipo="Agente";
+        }
+
         $agent->save();
 
 
@@ -100,7 +136,7 @@ class AgenteController extends Controller
         $name = $agent->nome;
         Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
-        return redirect()->route('agents.index')->with('success', 'Agente criado com sucesso. Aguarda Ativação');
+        return redirect()->route('agents.index')->with('success', 'Registo criado com sucesso. Aguarda Ativação');
     }
 
     /**
