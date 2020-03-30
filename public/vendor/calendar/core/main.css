@@ -24,6 +24,10 @@ table .fc-content{
     font-weight: 800;
 }
 
+div .fc-close{
+    color: white;
+}
+
 .fc-event-container{
     color: #ffffff!important;
 }
