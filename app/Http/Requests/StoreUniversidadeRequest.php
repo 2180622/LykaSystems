@@ -28,7 +28,7 @@ class StoreUniversidadeRequest extends FormRequest
             "morada" => 'required|max:255',
             "telefone" => 'required',
             "email" => 'required',
-            "NIF" => 'required',
+            "NIF" => 'required|unique:universidade',
             "IBAN" => 'required',
             'obsContactos' => 'nullable',
             'obsCursos' => 'nullable',
@@ -44,6 +44,7 @@ class StoreUniversidadeRequest extends FormRequest
 
             'email.required' => 'O Endereço Eletrónico é obrigatório ser preenchido.',
             'NIF.required' => 'O NIF é obrigatório ser preenchido.',
+            'NIF.unique' => 'Este NIF já está em utilização.',
             'IBAN.required' => 'O IBAN é obrigatório ser preenchido.',
         ];
     }

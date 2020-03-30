@@ -22,14 +22,6 @@ class DashboardController extends Controller{
         $cliente = Cliente::all();
         $universidade = Universidade::all();
 
-        $agenteCount = count($agente);
-        $clienteCount = count($cliente);
-        $universidadeCount = count($universidade);
-        /**/
-        // Para utilizar este pedaço de codigo têm de ir para vendor/laravel/framework/src/illuminate/Notifications/DatabaseNotification.php
-        //      e mudar:    "protected $table = 'notification';"
-        //      para        "protected $table = 'Notificacao';"
-
         $AllNotifications = Notificacao::all();
 
         $this->NotController->getNotificacaoAniversario($AllNotifications);
@@ -37,7 +29,7 @@ class DashboardController extends Controller{
         $this->NotController->getNotificacaoFaseAcaba($AllNotifications);
         $this->NotController->getNotificacaoDocFalta($AllNotifications);
 
-        return view('index', compact('agenteCount', 'clienteCount', 'universidadeCount'));
+        return view('index', compact('agente', 'cliente', 'universidade'));
     }
 
     public function report(){

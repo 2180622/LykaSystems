@@ -8,7 +8,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-    <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 
 @endsection
 
@@ -134,12 +134,12 @@
 
                                 <form method="POST" role="form" id="{{ $university->idUniversidade }}"
                                       action="{{route('universities.destroy',$university)}}"
-                                      class="d-inline-block form_university_id">
+                                      class="d-inline-block form_university_id" data="{{ $university->nome }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn_delete" title="Eliminar Universidade"
+                                    <button type="submit" class="btn_delete" title="Eliminar Universidade"
                                             data-toggle="modal"
-                                            data-target="#eliminarUniversidade" data-title="{{$university->nome}}"><i class="fas fa-trash-alt"></i></button>
+                                            data-target="#eliminarUniversidade" data-title="{{$university->nome}}" ><i class="fas fa-trash-alt"></i></button>
                                 </form>
 
                             </td>

@@ -50,29 +50,15 @@ class ClientController extends Controller
     */
     public function store(StoreClientRequest $requestClient, StoreUserRequest $requestUser){
 
-        $user = new User;
-        $fieldsUser = $requestUser->validated();
-        $user->fill($fieldsUser);
-
-
+        /* obtem os dados para criar o cliente */
         $client = new Cliente;
         $fields = $requestClient->validated();
         $client->fill($fields);
 
-
-        /* Criação de utilizador */
-
-        $user->tipo = "cliente";
-        $user->status = 10;
-
-        $user->idCliente = $user->idUser;
-        $user->save();
-
-
-        $email = $user->email;
-        $id = $user->idUser;
-        $name = $client->nome;
-        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+        /* obtem os dados para criar o utilizador */
+        $user = new User;
+        $fieldsUser = $requestUser->validated();
+        $user->fill($fieldsUser);
 
 
 
@@ -95,6 +81,23 @@ class ClientController extends Controller
         $client->create_at == date("Y-m-d",$t);
 
         $client->save();
+
+
+
+        /* Criação de utilizador */
+
+        $user->tipo = "cliente";
+        $user->status = 10;
+        $user->idCliente = $client->idCliente;
+        $user->save();
+
+
+        /* Envia o e-mail para ativação */
+        $email = $user->email;
+        $id = $user->idUser;
+        $name = $client->nome;
+        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+
         return redirect()->route('clients.index')->with('success', 'Ficha de estudante criada com sucesso');
     }
 
@@ -190,7 +193,6 @@ class ClientController extends Controller
 
         $client->save();
 
-
          return redirect()->route('clients.index')->with('success', 'Dados do estudante modificados com sucesso');
 
     }
@@ -209,8 +211,16 @@ class ClientController extends Controller
 
     public function destroy(Cliente $client)
     {
-                //$client = client::findOrFail($request->modalclientid);
-                $client->delete();
-                return redirect()->route('clients.index')->with('success', 'Estudante eliminado com sucesso');
+        /* "Apaga" dos clientes */
+        $client->delete();
+
+
+        /* "Apaga" dos utilizadores */
+        DB::table('user')
+        ->where('idCliente', $client->idCliente)
+        ->update(['deleted_at' => $client->deleted_at]);
+
+
+        return redirect()->route('clients.index')->with('success', 'Estudante eliminado com sucesso');
     }
 }

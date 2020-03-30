@@ -31,8 +31,8 @@
             </div>
             <br>
 
-            <form method="POST" action="{{route('universities.update',$university)}}" class="form-group"
-                  enctype="multipart/form-data">
+            <form method="POST" action="{{route('universities.update',$university)}}" class="form-group needs-validation"
+                  enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
                 @include('universities.partials.add-edit')
@@ -44,5 +44,18 @@
             </form>
         </div>
     </div>
+
+@endsection
+
+
+
+{{-- Scripts --}}
+@section('scripts')
+
+    {{-- script contem: datatable configs, input configs, validações --}}
+    <script src="{{asset('/js/university.js')}}"></script>
+
+    {{-- script permite definir se um input recebe só numeros OU so letras --}}
+    <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 
 @endsection

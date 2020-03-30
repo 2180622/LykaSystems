@@ -16,10 +16,6 @@
                     "width": "130px",
                     "targets": 4
                 },
-                {
-                    "width": "auto",
-                    "targets": 1
-                },
 
             ],
 
@@ -64,10 +60,6 @@
         });
 
 
-        $('#search_btn').on('click', function (e) {
-            e.preventDefault();
-            $('#fotografia').trigger('click');
-        });
 
         /* FIM configs DATATABLES */
 
@@ -90,14 +82,19 @@
 
 
 
-        
-        $('#preview').on('click', function (e) {
+        //Preview da fotografia
+
+        $('#search_btn').on('click', function (e) {
             e.preventDefault();
             $('#fotografia').trigger('click');
         });
 
 
-        //Preview da fotografia
+        $('#preview').on('click', function (e) {
+            e.preventDefault();
+            $('#fotografia').trigger('click');
+        });
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -121,7 +118,9 @@
         var formToSubmit //Variavel para indicar o forumulário a submeter
 
         $(".form_client_id").submit(function (e) {
+            e.preventDefault();
             formToSubmit = this;
+            $("#student_name").text($(this).attr("data"));
             return false;
         });
 

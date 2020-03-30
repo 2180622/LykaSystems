@@ -8,7 +8,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-<link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
+<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 
 
 @endsection
@@ -123,7 +123,7 @@
                             @foreach ($contacts as $key => $contact)
                             <tr>
                                 <td>
-                                    <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
+                                    <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                         <a class="name_link" href="{{route('contacts.show',$contact)}}">
                                             @if($contact->fotografia)
                                                 <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}" width="100%" class="mx-auto"">
@@ -172,7 +172,7 @@
                                             class="fas fa-pencil-alt mr-2"></i></a>
 
                                             <form method="POST" role="form" id="{{ $contact->idContacto }}"
-                                                action="{{route('contacts.destroy',$contact)}}" class="d-inline-block form_client_id">
+                                                action="{{route('contacts.destroy',$contact)}}" data="{{ $contact->nome }}" class="d-inline-block form_client_id">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn_delete" title="Eliminar contacto" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-trash-alt"></i></button>

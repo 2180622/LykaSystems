@@ -8,7 +8,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-<link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
+<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 
 @endsection
 
@@ -96,7 +96,7 @@
                     @foreach ($clients as $client)
                     <tr>
                         <td class="">
-                            <div class="align-middle mx-auto shadow-sm rounded"
+                            <div class="align-middle mx-auto shadow-sm rounded bg-white"
                                 style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('clients.show',$client)}}">
                                     @if($client->fotografia)
@@ -132,7 +132,7 @@
                                 title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
                             <form method="POST" role="form" id="{{ $client->idCliente }}"
-                                action="{{route('clients.destroy',$client)}}" class="d-inline-block form_client_id">
+                                action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"

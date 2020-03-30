@@ -1,101 +1,161 @@
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    {{-- MENU: Informação pessoal --}}
-    <li class="nav-item">
-        <a class="nav-link active" id="pessoal-tab" data-toggle="tab" href="#pessoal" role="tab" aria-controls="contacts" aria-selected="true">Informação pessoal</a>
-    </li>
+<div class="row font-weight-bold" style="color:#6A74C9">
 
-    {{-- MENU: Contactos --}}
-    <li class="nav-item">
-        <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab" aria-controls="contacts" aria-selected="false">Contactos</a>
-    </li>
+    <div class="col">
 
-    {{-- MENU: Documentação/Moradas --}}
-    <li class="nav-item">
-        <a class="nav-link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab" aria-controls="adresses" aria-selected="false">Documentação/Morada</a>
-    </li>
-</ul>
-
-<div class="tab-content p-2 mt-3" id="myTabContent">
-
-    {{-- Conteudo: Informação pessoal --}}
-    <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
         <div class="row">
+            <div class="col">
+                {{-- INPUT tipo --}}
+                <label for="tipo">Tipo:</label><br>
+                <select id="tipo" name="tipo" class="form-control" required>
+                    <option {{old('tipo',$agent->tipo)=='Agente'?"selected":""}} value="Agente">Agente</option>
+                    <option {{old('tipo',$agent->tipo)=='Subagente'?"selected":""}} value="Subagente">Subagente</option>
+                </select>
+            </div>
+        </div>
+
+
+        <br>
+
+
+        <div class="row">
+
             <div class="col">
                 {{-- INPUT nome --}}
                 <label for="nome">Nome:</label><br>
-                <input type="text" class="form-control" name="nome" id="nome"><br>
+                <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$agent->nome)}}"
+                    placeholder="Insira o nome do agente" required>
+            </div>
 
+            <div class="col">
                 {{-- INPUT apelido --}}
                 <label for="apelido">Apelido:</label><br>
-                <input type="text" class="form-control" name="apelido" id="apelido"><br>
+                <input type="text" class="form-control" name="apelido" id="apelido"
+                    value="{{old('apelido',$agent->apelido)}}" placeholder="Insira o apelido do agente" required>
 
-                {{-- INPUT paisNaturalidade --}}
-                <label for="paisNaturalidade">Naturalidade:</label><br>
-                <select id="paisNaturalidade" name="pais" class="form-control">
-                    @include('clients.partials.countries');
-                </select><br>
+            </div>
 
+        </div>
+
+
+        <br>
+
+
+        <div class="row">
+
+            <div class="col">
+                {{-- INPUT GENERO --}}
+                <label for="genero">Género:</label><br>
+                <select id="genero" name="genero" class="form-control" required>
+                    <option {{old('genero',$agent->genero)=='F'?"selected":""}} value="F">Feminino</option>
+                    <option {{old('genero',$agent->genero)=='M'?"selected":""}} value="M">Masculino</option>
+                </select>
+            </div>
+
+            <div class="col">
                 {{-- INPUT dataNasc --}}
                 <label for="dataNasc">Data de nascimento:</label><br>
-                <input type="date" class="form-control" name="dataNasc" id="dataNasc" style="width:250px"><br>
+                <input type="date" class="form-control" name="dataNasc" id="dataNasc"
+                    value="{{old('dataNasc',$agent->dataNasc)}}" required>
             </div>
 
-            <div class="col col-4 text-center">
-                {{-- INPUT fotografia --}}
-                <div><label for="fotografia">Fotografia:</label></div>
-                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{asset('storage/default-photos/addImg.png')}}" style="width:80%">
-                <a href="#" class="top-button">Procurar ficheiro</a>
-            </div>
         </div>
-    </div>
 
 
-    {{-- Conteudo: Contactos --}}
-    <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
-        {{-- Contactos PESSOAIS --}}
-        <div class="row">
-            <div class="col">
-                <label for="telefone1">Telefone pessoal:</label><br>
-                <input type="text" class="form-control" name="telefoneW" id="telefone1" placeholder=""><br>
-            </div>
-            <div class="col">
-                <label for="telefone2">Telemóvel pessoal:</label><br>
-                <input type="text" class="form-control" name="telefone2" id="telefone2" placeholder=""><br>
-            </div>
-        </div>
+        <br>
+
 
         <div class="row">
+
             <div class="col">
-                <label for="email">E-mail pessoal:</label><br>
-                <input type="text" class="form-control" name="email" id="email" placeholder=""><br>
+                {{-- INPUT País --}}
+                <label for="pais">País:</label><br>
+                <input type="hidden" id="hidden_pais" value="{{old('pais',$agent->pais)}}">
+                <select id="pais" name="pais" class="form-control" required>
+                    @include('agents.partials.countries');
+                </select>
             </div>
+
+            <div class="col">
+                {{-- INPUT morada --}}
+                <label for="morada">Morada:</label><br>
+                <input type="text" class="form-control" name="morada" id="morada"
+                    value="{{old('morada',$agent->morada)}}" placeholder="Insira a morada do agente" required>
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+        <div class="row">
+
+            <div class="col">
+                {{-- INPUT telefoneW --}}
+                <label for="telefoneW">Telefone (principal):</label><br>
+                <input type="text" class="form-control" name="telefoneW" id="telefoneW"
+                    value="{{old('telefoneW',$agent->telefoneW)}}" placeholder="Insira o telefone do agente" required>
+            </div>
+
+            <div class="col">
+                {{-- INPUT telefone2 --}}
+                <label for="telefone2">Telefone (alternativo):</label><br>
+                <input type="text" class="form-control" name="telefone2" id="telefone2"
+                    value="{{old('telefone2',$agent->telefone2)}}" placeholder="Insira o telefone do agente" >
+            </div>
+
+        </div>
+
+        <br>
+
+
+        <div class="row">
+
+            <div class="col">
+                {{-- INPUT email --}}
+                <label for="email">E-mail:</label><br>
+                <input type="email" class="form-control" name="email" id="email" value="{{old('email',$agent->email)}}"
+                    placeholder="Insira o email do agente" required>
+            </div>
+
+            <div class="col">
+                {{-- INPUT NIF --}}
+                <label for="NIF">NIF:</label><br>
+                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$agent->NIF)}}"
+                    placeholder="Insira o nif do agente" required>
+            </div>
+
         </div>
 
     </div>
-    {{-- Conteudo: Moradas --}}
-    <div class="tab-pane fade" id="adresses" role="tabpanel" aria-labelledby="adresses-tab">
 
-        <div class="row mt-4">
-            <div class="col">
-                {{-- Morada de residência em Portugal --}}
-                <label for="moradaResidencia">Morada:</label><br>
-                <input type="text" class="form-control" name="morada" id="moradaResidencia" placeholder=""><br>
-            </div>
 
-            <div class="col">
-                {{-- Cidade de Origem  --}}
-                <label for="morada">Número de Identificação Fiscal:</label><br>
-                <input type="text" class="form-control" name="NIF" id="nif" placeholder=""><br>
-            </div>
+
+
+
+    <div class="col col-4 text-center">
+        {{-- INPUT fotografia --}}
+        <div>
+            <label for="fotografia">Fotografia:</label>
+            <input type='file' id="fotografia" name="fotografia" style="display:none" accept="image/*" />
+
         </div>
 
-
-        <div class="row mt-4">
-            <div class="col">
-                {{-- Morada de residência no pais de origem --}}
-                <label for="morada">Tipo de Agente:</label><br>
-                <input type="text" class="form-control" name="tipo" id="morada" placeholder=""><br>
-            </div>
-        </div>
+        <!-- Verifica se a imagem já existe-->
+        @if ($agent->fotografia!=null)
+        <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" id="preview"
+            class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px;"
+            alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+        @else
+        <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
+            class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px;"
+            alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+        @endif
+        <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
+                ficheiro</a></div>
     </div>
+
 </div>
+
+
+<br>

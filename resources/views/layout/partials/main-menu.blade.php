@@ -1,3 +1,5 @@
+@include('layout.partials.modal')
+
 <div class="menu-content">
     <!-- Lyka Name -->
     <div class="row pt-3 pb-3 logo">
@@ -147,9 +149,9 @@
         </div>
 
         <div class="user_opts shadow-sm align-self-center">
-            <a href="{{ route('logout') }}" title="Terminar sessão" class="user_btn"><i class="fas fa-power-off"></i></a>
-            @csrf
-            @method('POST')
+            <a href="#" title="Terminar sessão" class="user_btn" data-toggle="modal" data-target="#Modal"><i class="fas fa-power-off"></i></a>
+{{--             @csrf
+            @method('POST') --}}
         </div>
         <!-- -->
         @if (Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null)

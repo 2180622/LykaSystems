@@ -59,9 +59,7 @@
 
                     <div class="col">
                         {{-- INPUT GENERO --}}
-                        <label for="paisNaturalidade">Género:</label><br>
-                        <input type="hidden" id="hidden_paisNaturalidade"
-                            value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
+                        <label for="genero">Género:</label><br>
                         <select id="genero" name="genero" class="form-control" required>
                             <option value="" selected hidden></option>
                             <option {{old('genero',$client->genero)=='F'?"selected":""}} value="F">Feminino</option>
@@ -70,10 +68,11 @@
                     </div>
 
                     <div class="col">
+
                         {{-- INPUT paisNaturalidade --}}
                         <label for="paisNaturalidade">Naturalidade:</label><br>
                         <input type="hidden" id="hidden_paisNaturalidade"
-                            value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
+                        value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
                         <select id="paisNaturalidade" name="paisNaturalidade" class="form-control" required>
                             @include('clients.partials.countries');
                         </select>

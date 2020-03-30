@@ -1,27 +1,53 @@
 <?php
+
 namespace App\Http\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAgenteRequest extends FormRequest
 {
-    public function authorize(){
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
         return true;
     }
 
-
-    public function rules(){
-
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
         return [
           'nome' => 'required',
           'apelido' => 'required',
-          'email' => 'required',
+          'genero'=>'required',
+          'email' => 'required|unique:agente|unique:user',
           'dataNasc' => 'required',
+          'fotografia' => 'nullable',
           'morada' => 'required',
           'pais' => 'required',
-          'NIF' => 'required',
-          'tipo' => 'required|in:Agente,Subagente',
+          'NIF' => 'required|unique:agente',
           'telefoneW' => 'required',
           'telefone2' => 'nullable',
+          'tipo' => 'required|in:Agente,Subagente',
         ];
     }
+
+
+    public function messages()
+    {
+       return [
+       'email.unique'=>'Este e-mail já está registado. Insira um e-mail diferente',
+       ];
+    }
+
+
+
 }
+

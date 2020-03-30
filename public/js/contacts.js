@@ -63,7 +63,9 @@ $(document).ready(function () {
         var formToSubmit //Variavel para indicar o forumulário a submeter
 
         $(".form_client_id").submit(function (e) {
+            e.preventDefault();
             formToSubmit = this;
+            $("#contact_name").text($(this).attr("data"));
             return false;
         });
 
@@ -78,6 +80,11 @@ $(document).ready(function () {
 
 
         //Preview da fotografia
+
+        $('#search_btn').on('click', function (e) {
+            e.preventDefault();
+            $('#fotografia').trigger('click');
+        });
 
         $('#preview').on('click', function (e) {
             e.preventDefault();

@@ -57,4 +57,15 @@ class StoreClientRequest extends FormRequest
           'obsFinanceiras' => 'nullable',
         ];
     }
+
+
+    public function messages()
+    {
+       return [
+       'email.unique'=>'Este e-mail já está registado. Insira um e-mail diferente',
+       ];
+    }
+
+
+    
 }
