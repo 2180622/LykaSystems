@@ -30,7 +30,51 @@
         <p><b>Nota:</b> Ao adicionar um utilizador está a colocar esse mesmo utilizador como perfil de <b>administrador</b>.</p>
         <form method="POST" action="{{route('users.storeAdmin')}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
             @csrf
-            @include('users.partials.add-edit')
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" class="form-control" name="nome" required value="{{old('nome', $user->nome)}}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="inputFullname">Apelido:</label>
+                        <input type="text" class="form-control" name="apelido" required value="{{old('apelido', $user->apelido)}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="inputEmail">E-mail:</label>
+                        <input type="text" class="form-control" name="email" id="inputEmail" required value="{{old('email', $user->email)}}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="inputFullname">Data de Nascimento:</label>
+                        <input type="text" class="form-control" name="dataNasc" required value="{{old('dataNasc', $user->dataNasc)}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="inputFullname">Telefone Princial:</label>
+                        <input type="text" class="form-control" name="telefone1" required value="{{old('telefone1', $user->telefone1)}}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="inputFullname">Telefone Secundário (Opcional):</label>
+                        <input type="text" class="form-control" name="telefone2" value="{{old('telefone2', $user->telefone2)}}">
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group text-right">
                 <br>
                 <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar utilizador</button>
