@@ -134,13 +134,10 @@
 
             <div class="tab-content p-2 " id="myTabContent">
                 {{-- Conteudo: Produtos --}}
-                <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
+                <div class="tab-pane fade active show text-muted" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
                     @if($produtos)
 
-
-
-
-                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                    <table nowarp class="table table-borderless text-muted" id="dataTable" width="100%" row-border="0"
                     style="overflow:hidden;">
 
                     {{-- Cabeçalho da tabela --}}
