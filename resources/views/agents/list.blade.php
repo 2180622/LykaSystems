@@ -29,7 +29,15 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('agents.create')}}" class="top-button">Adicionar Agente</a>
+        <a href="{{route('agents.create')}}" class="top-button">
+            @if (Auth::user()->tipo == "agente")
+                {{-- se for agente --}}
+                Adicionar Sub agente
+            @else
+                {{-- se for admin --}}
+                Adicionar Agente
+            @endif
+            </a>
     </div>
 
     <br><br>
@@ -37,13 +45,20 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Listagem de Agentes</h6>
+            <h6>Listagem de @if (Auth::user()->tipo == "agente")
+                {{-- se for agente --}}
+                Sub agentes
+            @else
+                {{-- se for admin --}}
+                Agentes
+            @endif
+            </h6>
         </div>
         <br>
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Estão registados no sistema <strong>{{$totalagents}}</strong> agentes
+                Existem <strong>{{$totalagents}}</strong> registo(s) no sistema
             </div>
         </div>
 
