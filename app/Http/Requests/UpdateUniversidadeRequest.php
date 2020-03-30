@@ -41,7 +41,6 @@ class UpdateUniversidadeRequest extends FormRequest
         return [
             'nome.required' => 'O Nome da universidade é obrigatório ser preenchido.',
             'morada.required' => 'A Morada é obrigatória ser preenchida.',
-
             'email.required' => 'O Endereço Eletrónico é obrigatório ser preenchido.',
             'NIF.required' => 'O NIF é obrigatório ser preenchido.',
             'IBAN.required' => 'O IBAN é obrigatório ser preenchido.',
