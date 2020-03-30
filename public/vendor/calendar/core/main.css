@@ -15,6 +15,19 @@ body .fc {
 
 /* Colors
 --------------------------------------------------------------------------------------------------*/
+table .fc-content{
+    color: #ffffff;
+}
+
+.fc-unthemed .fc-popover .fc-header{
+    background: #6A74C9!important;
+    font-weight: 800;
+}
+
+.fc-event-container{
+    color: #ffffff!important;
+}
+
 .fc-highlight {
     /* when user is selecting cells */
     background: #ffffff;
@@ -578,7 +591,8 @@ TODO: more distinction between this file and common.css
 }
 
 .fc-unthemed td.fc-today {
-    background: #ffffff;
+    background: #ffffffff;
+    font-weight: 900;
 }
 
 .fc-unthemed .fc-disabled-day {
