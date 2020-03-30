@@ -24,10 +24,10 @@
     <br><br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Adicionar utilizador</h6>
+            <h6>Editar utilizador</h6>
         </div>
         <br>
-        <p><b>Nota:</b> Ao adicionar um utilizador está a colocar esse mesmo utilizador como perfil de <b>administrador</b>.</p>
+        <p>Está neste momento a editar o utilizador <b>{{$user->admin->nome.' '.$user->admin->apelido}}</b>.</p>
         <form method="POST" action="{{route('users.storeAdmin')}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="row">
@@ -77,7 +77,7 @@
 
             <div class="form-group text-right">
                 <br>
-                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar utilizador</button>
+                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Atualizar utilizador</button>
                 <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
             </div>
         </form>
