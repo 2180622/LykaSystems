@@ -20,7 +20,7 @@ class Fase extends Model
     }
 
     public function responsabilidade(){
-        return $this->hasMany("App\Responsabilidade","idFase","idFase");
+        return $this->belongsTo("App\Responsabilidade","idResponsabilidade","idResponsabilidade");
     }
 
     public function docTransacao(){

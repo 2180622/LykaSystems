@@ -64,7 +64,7 @@ class DataController extends Controller
         $agente = new Agente;
         $agente->nome = 'José';
         $agente->apelido = 'Fernandes';
-        $admin->genero = 'M';
+        $agente->genero = 'M';
         $agente->email = 'jose.fer@gmail.com';
         $agente->dataNasc = date('Y-m-d',strtotime('15-07-1990'));
         $agente->fotografia = null;
@@ -79,7 +79,7 @@ class DataController extends Controller
         $agente = new Agente;
         $agente->nome = 'Michaela';
         $agente->apelido = 'Silva';
-        $admin->genero = 'F';
+        $agente->genero = 'F';
         $agente->email = 'michaela@outlook.com';
         $agente->dataNasc = date('Y-m-d',strtotime('16-03-1993'));
         $agente->fotografia = null;
@@ -94,7 +94,7 @@ class DataController extends Controller
         $agente = new Agente;
         $agente->nome = 'João';
         $agente->apelido = 'Gama';
-        $admin->genero = 'M';
+        $agente->genero = 'M';
         $agente->email = 'gama.jonh@hotmail.com';
         $agente->dataNasc = date('Y-m-d',strtotime('15-07-1995'));
         $agente->fotografia = null;
@@ -118,7 +118,7 @@ class DataController extends Controller
         $cliente = new Cliente;
         $cliente->nome = 'Tiago';
         $cliente->apelido = 'Oliveira';
-        $admin->genero = 'M';
+        $cliente->genero = 'M';
         $cliente->email = 'tiaveira@gmail.com';
         $cliente->telefone1 = 913432423;
         $cliente->telefone2 = null;
@@ -152,7 +152,7 @@ class DataController extends Controller
         $cliente = new Cliente;
         $cliente->nome = 'Katherine';
         $cliente->apelido = 'Romaria';
-        $admin->genero = 'F';
+        $cliente->genero = 'F';
         $cliente->email = 'kathe@mail.ru';
         $cliente->telefone1 = 945345784;
         $cliente->telefone2 = null;
@@ -198,26 +198,24 @@ class DataController extends Controller
 
         $contacto = new Contacto;
         $contacto->nome = 'Pedro Costa';
-        $contacto->tipo = 'Fornecedor';
         $contacto->fotografia = null;
         $contacto->telefone1 = null;
         $contacto->telefone2 = null;
         $contacto->email = 'jonh@gmail.com';
         $contacto->fax = null;
         $contacto->observacao = null;
-        $favorito->favorito = true;
+        $contacto->favorito = true;
         $contacto->save();
 
         $contacto = new Contacto;
         $contacto->nome = 'Maria Pedro';
-        $contacto->tipo = 'Fornecedor';
         $contacto->fotografia = null;
         $contacto->telefone1 = 915642453;
         $contacto->telefone2 = null;
         $contacto->email = 'manie@hotmail.com';
         $contacto->fax = null;
         $contacto->observacao = null;
-        $favorito->favorito = false;
+        $contacto->favorito = false;
         $contacto->save();
 
         /*****************          Fornecedores          ******************/
@@ -383,6 +381,82 @@ class DataController extends Controller
         $produto->idUniversidade2 = null;
         $produto->save();
 
+        /***************          Responsabilidades          ***************/
+
+        $responsabilidade = new Responsabilidade;
+        $responsabilidade->descricao = 'resp1';
+        $responsabilidade->valorCliente = 10;
+        $responsabilidade->valorAgente = 0;
+        $responsabilidade->valorSubAgente = null;
+        $responsabilidade->valorUniversidade1 = 40;
+        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->verificacaoPagoCliente = true;
+        $responsabilidade->verificacaoPagoAgente = true;
+        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->save();
+
+        $responsabilidade = new Responsabilidade;
+        $responsabilidade->descricao = 'respo2';
+        $responsabilidade->valorCliente = 50;
+        $responsabilidade->valorAgente = 50;
+        $responsabilidade->valorSubAgente = null;
+        $responsabilidade->valorUniversidade1 = 120;
+        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->save();
+
+        $responsabilidade = new Responsabilidade;
+        $responsabilidade->descricao = 'resp3';
+        $responsabilidade->valorCliente = 10;
+        $responsabilidade->valorAgente = 0;
+        $responsabilidade->valorSubAgente = null;
+        $responsabilidade->valorUniversidade1 = 40;
+        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->verificacaoPagoCliente = true;
+        $responsabilidade->verificacaoPagoAgente = true;
+        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->save();
+
+        $responsabilidade = new Responsabilidade;
+        $responsabilidade->descricao = 'resp4';
+        $responsabilidade->valorCliente = 10;
+        $responsabilidade->valorAgente = 0;
+        $responsabilidade->valorSubAgente = null;
+        $responsabilidade->valorUniversidade1 = 40;
+        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->verificacaoPagoCliente = true;
+        $responsabilidade->verificacaoPagoAgente = true;
+        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->save();
+
+        /************          Pago Responsabilidades          *************/
+
+        /*$pago = new PagoResponsabilidade;
+        $pago->data = (new DateTime)->format('Y-m-d');
+        $pago->nomeAutor = 'Cliente';
+        $pago->imagem = '1_1_1_1.png';
+        $pago->idFase = 1;
+        $pago->idConta = 1;
+        $pago->save();
+
+        /*****************          Rel Forn Resp          *****************/
+
+        $relacao = new RelFornResp;
+        $relacao->valor = 80;
+        $relacao->idResponsabilidade = 2;
+        $relacao->idFornecedor = 1;
+        $relacao->save();
+
         /*********************          Fases          *********************/
 
         $fase = new Fase;
@@ -390,10 +464,9 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('16-03-2020 15:00'));
         $fase->valorFase = 50;
         $fase->verificacaoPago = false;
-        $fase->valorComissaoAgente = 0;
-        $fase->valorComSubAgente = null;
         $fase->idProduto = 1;
         $fase->idFaseStock = 1;
+        $fase->idResponsabilidade = 1;
         $fase->save();
 
         $fase = new Fase;
@@ -401,10 +474,9 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
         $fase->valorFase = 300;
         $fase->verificacaoPago = false;
-        $fase->valorComissaoAgente = 50;
-        $fase->valorComSubAgente = null;
         $fase->idProduto = 1;
         $fase->idFaseStock = 2;
+        $fase->idResponsabilidade = 2;
         $fase->save();
 
         $fase = new Fase;
@@ -412,10 +484,9 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $fase->valorFase = 1000;
         $fase->verificacaoPago = false;
-        $fase->valorComissaoAgente = 100;
-        $fase->valorComSubAgente = null;
         $fase->idProduto = 1;
         $fase->idFaseStock = 3;
+        $fase->idResponsabilidade = 3;
         $fase->save();
 
         $fase = new Fase;
@@ -423,18 +494,17 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('01-07-2021 18:30'));
         $fase->valorFase = 150;
         $fase->verificacaoPago = false;
-        $fase->valorComissaoAgente = 150;
-        $fase->valorComSubAgente = null;
         $fase->idProduto = 1;
         $fase->idFaseStock = 4;
+        $fase->idResponsabilidade = 4;
         $fase->save();
 
         /****************          Docs Academicos          ****************/
 
         $docacademico = new DocAcademico;
         $docacademico->nome = 'Tiago Oliveira';
-        $docacademico->tipo = 'Diploma';
-        $docacademico->imagem = 'docs/DocAcademico-3490587685-001-001-Diploma';
+        $docacademico->tipo = 'Certificado';
+        $docacademico->imagem = 'DocAcademico-001-001-Certificado';
         $docacademico->pais = 'Paris';
         $docacademico->nota = 16;
         $docacademico->pontuacao = '0/20';
@@ -469,37 +539,6 @@ class DataController extends Controller
         $doctransacao->idConta = '';
         $doctransacao->idFase = '';
         $doctransacao->save();*/
-
-        /************          Pago Responsabilidades          *************/
-
-        /*$pago = new PagoResponsabilidade;
-        $pago->data = '';
-        $pago->nomeAutor = '';
-        $pago->imagem = '';
-        $pago->idFase = '';
-        $pago->save();*/
-
-        /***************          Responsabilidades          ***************/
-
-        /*$responsabilidade = new Responsabilidade;
-        $responsabilidade->descricao = '';
-        $responsabilidade->valorCliente = '';
-        $responsabilidade->valorAgente = '';
-        $responsabilidade->valorSubAgente = '';
-        $responsabilidade->valorUniversidade1 = '';
-        $responsabilidade->valorUniversidade2 = '';
-        $responsabilidade->imagem = '';
-        $responsabilidade->idFase = '';
-        $responsabilidade->idConta = '';
-        $responsabilidade->save();*/
-
-        /*****************          Rel Forn Resp          *****************/
-
-        /*$relacao = new RelFornResp;
-        $relacao->valor = '';
-        $relacao->idResponsabilidade = '';
-        $relacao->idFornecedor = '';
-        $relacao->save();*/
 
     }
 }

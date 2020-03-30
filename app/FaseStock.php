@@ -19,4 +19,8 @@ class FaseStock extends Model
     public function produtoStock(){
         return $this->belongsTo("App\ProdutoStock","idProdutoStock","idProdutoStock")->withTrashed();
     }
+
+    public function docStock(){
+        return $this->hasMany("App\DocStock","idFaseStock","idFaseStock");
+    }
 }

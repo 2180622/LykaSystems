@@ -16,11 +16,7 @@ class ProdutoStock extends Model
         'descricao','tipo','anoAcademico'
         ];
 
-    public function produto(){
-        return $this->hasMany("App\Produto","idProdutoStock","idProdutoStock");
-    }
-
     public function faseStock(){
-        return $this->hasMany("App\faseStock","idProdutoStock","idProdutoStock");
+        return $this->hasMany("App\FaseStock","idProdutoStock","idProdutoStock");
     }
 }

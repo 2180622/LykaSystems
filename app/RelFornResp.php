@@ -21,4 +21,8 @@ class RelFornResp extends Model
     public function responsabilidade(){
         return $this->belongsTo("App\Responsabilidade","idResponsabilidade","idResponsabilidade");
     }
+
+    public function conta(){
+        return $this->belongsTo("App\Conta","idConta","idConta")->withTrashed();
+    }
 }

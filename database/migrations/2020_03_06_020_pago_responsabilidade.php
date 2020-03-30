@@ -23,6 +23,8 @@ class PagoResponsabilidade extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
+            $table->unsignedBigInteger('idConta');
+                $table->foreign('idConta')->references('idConta')->on('Conta');
         });
     }
 

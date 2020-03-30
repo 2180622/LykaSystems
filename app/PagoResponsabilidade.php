@@ -17,4 +17,8 @@ class PagoResponsabilidade extends Model
     public function fase(){
         return $this->belongsTo("App\Fase","idFase","idFase");
     }
+
+    public function conta(){
+        return $this->belongsTo("App\Conta","idConta","idConta");
+    }
 }

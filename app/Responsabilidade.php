@@ -15,12 +15,8 @@ class Responsabilidade extends Model
         'valorUniversidade1','valorUniversidade2','imagem','$idFase','$idConta'
         ];
 
-    public function conta(){
-        return $this->belongsTo("App\Conta","idConta","idConta")->withTrashed();
-    }
-
     public function fase(){
-        return $this->belongsTo("App\Fase","idFase","idFase");
+        return $this->belongsTo("App\Fase","idResponsabilidade","idResponsabilidade");
     }
 
     public function relacao(){
