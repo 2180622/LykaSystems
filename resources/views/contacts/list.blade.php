@@ -123,7 +123,7 @@
                             @foreach ($contacts as $key => $contact)
                             <tr>
                                 <td>
-                                    <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
+                                    <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                         <a class="name_link" href="{{route('contacts.show',$contact)}}">
                                             @if($contact->fotografia)
                                                 <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}" width="100%" class="mx-auto"">

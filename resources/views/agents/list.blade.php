@@ -97,7 +97,7 @@
                     @foreach ($agents as $agent)
                     <tr>
                         <td >
-                            <div class="align-middle mx-auto shadow-sm rounded"
+                            <div class="align-middle mx-auto shadow-sm rounded  bg-white"
                                 style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('agents.show',$agent)}}">
                                     @if($agent->fotografia)

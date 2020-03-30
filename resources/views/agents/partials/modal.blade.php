@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <span>Tem a certeza que deseja eliminar <span id="agent_name"></span>?<br>
+                <span>Tem a certeza que deseja eliminar " <span id="agent_name"></span> " ?<br>
                 <strong>Esta pessoa deixará de ter acesso à plataforma.</strong></span><br><br>
             </div>
             <div class="modal-footer">
