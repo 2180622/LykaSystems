@@ -830,6 +830,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center!important;
 }
 
 .fc-toolbar.fc-header-toolbar {
@@ -845,9 +846,14 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     margin-left: 0.75em;
 }
 
+button .fc-button.fc-button-primary{
+    margin-left: 0;
+}
+
 .fc-toolbar h2 {
     font-size: 1.75em;
     margin: 0;
+    padding-left: 150px;
 }
 
 /* View Structure
