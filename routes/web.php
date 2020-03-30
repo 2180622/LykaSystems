@@ -53,4 +53,4 @@ Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->nam
 
 
 /* Edgar Teste -> Eliminar no futuro */
-Route::get('/edgarteste', 'EdgarTesteController@index');
+Route::get('/data', 'EdgarTesteController@index');
