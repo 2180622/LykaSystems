@@ -45,36 +45,28 @@
         <div class="table-responsive " style="overflow:hidden">
             <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
                 {{-- Cabeçalho da tabela --}}
-                <thead>
-                    <tr>
-                        <th class="text-center align-content-center">Foto</th>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                        <th class="text-center">Opções</th>
-                    </tr>
-                </thead>
+                <br>
 
                 {{-- Corpo da tabela --}}
                 <tbody>
                     <tr>
-                        <td class="align-middle">Lorem</td>
-                        <td class="align-middle">lorem
-                            @email.com</td>
-
-                            {{-- OPÇÔES --}}
-                        <td class="text-center align-middle">
-                            <a href="#" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                            <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-
-                            <form method="POST" role="form" id="" action="#" class="d-inline-block form_university_id">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" class="btn_delete" title="Eliminar Utilizador" data-toggle="modal" data-target="#eliminarUtilizador"><i class="fas fa-trash-alt"></i></button>
-                            </form>
-
-                        </td>
+                        <td class="align-middle">John Doe</td>
+                        <td class="align-middle">125€</td>
+                        <td class="align-middle">Fase 01</td>
+                        <td class="align-middle">Pendente</td>
                     </tr>
-
+                    <tr>
+                        <td class="align-middle">Doe Adminer</td>
+                        <td class="align-middle" style="color:#FF3D00;">7.5€</td>
+                        <td class="align-middle">Fase 01</td>
+                        <td class="align-middle">Dívida</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">John Doe</td>
+                        <td class="align-middle">125€</td>
+                        <td class="align-middle">Fase 01</td>
+                        <td class="align-middle">Pendente</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
