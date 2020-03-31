@@ -63,7 +63,13 @@ class AgenteController extends Controller
     public function create()
     {
         $agent = new Agente;
-        return view('agents.add',compact('agent'));
+
+        /* apenas de agentes */
+        $listagents = Agente::
+        whereNull('subagent_agentid')
+        ->get();
+
+        return view('agents.add',compact('agent','listagents'));
     }
 
     /**

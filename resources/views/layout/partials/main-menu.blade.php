@@ -51,20 +51,14 @@
 
         <!-- Agentes  -->
 
-        @if ( Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" && Auth::user()->agente->subagent_agentid== null)
-        {{-- Se for admin OU agente, mostra a opção. SE for SUBAGENTE, não mostra --}}
+        @if ( Auth::user()->tipo == "admin")
+        {{-- Só o admin tem acesso à lista --}}
         <li class="menu-option">
             <a href="{{route('agents.index')}}">
                 <div class="menu-icon">
                     <i class="fas fa-user-tie mr-2"></i>
                 </div>
-                <span class="option-name {{Route::is('agents.*') ? 'active' : ''}}">
-                    @if (Auth::user()->tipo == "admin")
-                    Agentes
-                    @elseif(Auth::user()->tipo == "agente")
-                    Sub agentes
-                    @endif
-                </span>
+                <span class="option-name {{Route::is('agents.*') ? 'active' : ''}}">Agentes</span>
             </a>
         </li>
 
@@ -191,6 +185,7 @@
         {{-- SE FOR ADMIN --}}
         @if (Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null)
         <div class="mx-auto user_photo rounded-circle shadow">
+            <a href="#" title="Ver as minhas informações">
             {{-- Foto Utilizador --}}
             @if(Auth::user()->admin->fotografia != null)
             <img src="{{asset('/storage/admin-photos/'.Auth::user()->admin->fotografia)}}" style="width:100%">
@@ -199,6 +194,7 @@
             @else
             <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
             @endif
+            </a>
         </div>
 
         <div class="text-center mt-3">
@@ -211,14 +207,16 @@
         {{-- SE FOR AGENTE / SUBAGENTE --}}
         @elseif (Auth::user()->tipo == "agente" && Auth::user()->idAgente != null)
         <div class="mx-auto user_photo rounded-circle shadow">
-            {{-- Foto Utilizador --}}
-            @if(Auth::user()->agente->fotografia != null)
-            <img src="{{asset('/storage/agent-photos/'.Auth::user()->agente->fotografia)}}" style="width:100%">
-            @elseif (Auth::user()->agente->genero == "F")
-            <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
-            @else
-            <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
-            @endif
+            <a href="#" title="Ver as minhas informações">
+                {{-- Foto Utilizador --}}
+                @if(Auth::user()->agente->fotografia != null)
+                <img src="{{asset('/storage/agent-photos/'.Auth::user()->agente->fotografia)}}" style="width:100%">
+                @elseif (Auth::user()->agente->genero == "F")
+                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
+                @else
+                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
+                @endif
+            </a>
         </div>
 
         <div class="text-center mt-3">
@@ -231,6 +229,7 @@
         {{-- SE FOR CLIENTE --}}
         @elseif (Auth::user()->tipo == "cliente" && Auth::user()->idCliente != null)
         <div class="mx-auto user_photo rounded-circle shadow">
+            <a href="#" title="Ver as minhas informações">
             {{-- Foto Utilizador --}}
             @if(Auth::user()->cliente->fotografia != null)
             <img src="{{asset('/storage/client-photos/'.Auth::user()->cliente->fotografia)}}" style="width:100%">
@@ -239,6 +238,7 @@
             @else
             <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
             @endif
+            </a>
         </div>
 
         <div class="text-center mt-3">

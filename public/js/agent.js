@@ -141,6 +141,17 @@
 
 
 
+        $('#tipo').change(function() {
+            if ($("#tipo").val()=="Subagente"){
+                $("#subagent").prop( "disabled", true );
+                $("#subagent").val("NA");
+            }else{
+                $("#subagent").prop( "disabled", false );
+                $("#subagent").val("pickone");
+            }
+        });
+
+
 
         /* VALIDAÇÃO DO FORMULÁRIO */
         (function() {

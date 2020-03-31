@@ -2,15 +2,42 @@
 
     <div class="col">
 
+        <div class="row">
+
+            <div class="col">
+                {{-- INPUT Tipo de agente --}}
+                <label for="tipo">Tipo:</label><br>
+                <select id="tipo" name="tipo" class="form-control" required>
+                    <option {{old('genero',$agent->tipo)=='Agente'?"selected":""}} value="Agente">Agente</option>
+                    <option {{old('genero',$agent->tipo)=='Subagente'?"selected":""}} value="Subagente">Subagente</option>
+                </select>
+            </div>
+
+            <div class="col">
+                {{-- INPUT Subagente de...... --}}
+                <label for="subagent">Subagente de:</label><br>
+                <select id="subagent" name="subagent" class="form-control" required> {{-- disabled se o tipo escolhido for "subagente" --}}
+
+                    <option hidden value="pickone">(escolha o agente)</option>
+
+                    <option hidden value="NA">Não se aplica</option>
+
+                    @foreach($listagents as $agentx)
+                        @if ($agentx->idAgente != $agent->idAgente )
+                            <option value="{{$agentx->idAgente}}">{{$agentx->idAgente}} {{$agentx->nome}} {{$agentx->apelido}} ({{$agentx->pais}})</option>
+                        @endif
+                    @endforeach
+
+                </select>
+            </div>
+        </div>
+
+        <br>
 
         <div class="row">
 
             <div class="col">
 
-                {{-- INPUT tipo de agente --}}
-                <input type="hidden" name="tipo" value="{{old('tipo',$agent->tipo)}}" disabled>
-
-                
                 {{-- INPUT nome --}}
                 <label for="nome">Nome:</label><br>
                 <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$agent->nome)}}"
