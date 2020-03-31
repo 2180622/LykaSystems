@@ -6,6 +6,7 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
 <link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
+<link href="{{asset('css/agents.css')}}" rel="stylesheet">
 @endsection
 
 
@@ -33,10 +34,12 @@
     <div class="cards-navigation">
         <div class="title">
 
-            <h6>@if ($agent->tipo=="Agente")
-                Ficha de Agente
+            <h6>
+                @if ($agent->tipo=="Agente")
+                    Ficha de Agente
                 @else
-                Ficha de Subagente
+                    Ficha de Subagente<br>
+                    <span class="text-muted"><small>Adicionado por: <a class="agent_link" href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a></small></span>
                 @endif
             </h6>
 
@@ -106,12 +109,12 @@
                     <div class="mb-2 text-muted">@if ($agent->tipo=="Agente")
                         Lista de agentes:
                         @else
-                        Lista de Sub agentes:
+                        Lista de Subagentes:
                         @endif
                     </div>
 
                     @foreach ($listagents as $agent)
-                        <div class="mb-1"><i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$agent)}}">{{$agent->nome}} {{$agent->apelido}}</a></div>
+                        <div class="mb-1 text-muted"><i class="fas fa-user-tie mr-2"></i><a class="agent_link" href="{{route('agents.show',$agent)}}" >{{$agent->nome}} {{$agent->apelido}}</a></div>
                     @endforeach
                 @endif
 

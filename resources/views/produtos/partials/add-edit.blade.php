@@ -38,17 +38,17 @@
             <div class="col">
                 {{-- INPUT nome --}}
                 <label for="nome">Nome:</label><br>
-                <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$client->nome)}}"
+                <input type="text" class="form-control" name="nome" id=""
                     placeholder="Insira o nome do aluno" required><br>
 
                 {{-- INPUT apelido --}}
                 <label for="apelido">Apelido:</label><br>
                 <input type="text" class="form-control" name="apelido" id="apelido"
-                    value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" required><br>
+                 placeholder="Insira o apelido do aluno" required><br>
 
                 {{-- INPUT paisNaturalidade --}}
                 <label for="paisNaturalidade">Naturalidade:</label><br>
-                <input type="hidden" id="hidden_paisNaturalidade" value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
+                <input type="hidden" id="hidden_paisNaturalidade"
                 <select id="paisNaturalidade" name="paisNaturalidade" class="form-control" required>
                     @include('clients.partials.countries');
                 </select><br>
@@ -56,7 +56,7 @@
                 {{-- INPUT dataNasc --}}
                 <label for="dataNasc">Data de nascimento:</label><br>
                 <input type="date" class="form-control" name="dataNasc" id="dataNasc"
-                    value="{{old('dataNasc',$client->dataNasc)}}" style="width:250px" required><br>
+                 style="width:250px" required><br>
             </div>
 
             <div class="col col-4 text-center">

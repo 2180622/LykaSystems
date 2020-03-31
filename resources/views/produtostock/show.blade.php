@@ -8,8 +8,6 @@
 
 @endsection
 
-
-
 {{-- Page Content --}}
 @section('content')
 
@@ -40,45 +38,43 @@
 
                 <div class="col p-2">
 
-                    <div><span class="text-secondary ">Tipo:</span> {{$produto->tipo}}</div><br>
+                    <div><span class="text-secondary ">Tipo:</span> {{$produtoStocks->tipo}}</div><br>
 
-                    <div><span class="text-secondary">Descrição:</span> {{$produto->descricao}}</div><br>
+                    <div><span class="text-secondary">Descrição:</span> {{$produtoStocks->descricao}}</div><br>
 
-                    <div><span class="text-secondary ">Ano Académico: </span>{{$produto->anoAcademico}}</div><br>
-
-                    <div><span class="text-secondary">Valor:</span> {{$produto->valorTotal.'€'}}</div>
+                    <div><span class="text-secondary ">Ano Académico: </span>{{$produtoStocks->anoAcademico}}</div><br>
 
                 </div>
 
                 <div class="col">
-                    <div><span class="text-secondary">Cliente: 
+                    <div><span class="text-secondary">Cliente:
                         <a class="name_link" href="{{route('clients.show',$produto->cliente)}}">
                             {{$produto->cliente->nome.' '.$produto->cliente->apelido}}</span>
                         </a>
                     </div><br>
 
-                    <div><span class="text-secondary">Universidade: 
+                    <div><span class="text-secondary">Universidade:
                         <a class="name_link" href="{{route('universities.show',$produto->universidade1)}}">
                             {{$produto->universidade1->nome}}</span>
                         </a>
                     </div><br>
 
                     @if($produto->idUniversidade2)
-                        <div><span class="text-secondary">2ª Universidade: 
+                        <div><span class="text-secondary">2ª Universidade:
                             <a class="name_link" href="{{route('universities.show',$produto->universidade2)}}">
                                 {{$produto->universidade2->nome}}</span>
                             </a>
                         </div><br>
                     @endif
 
-                    <div><span class="text-secondary">Agente: 
+                    <div><span class="text-secondary">Agente:
                         <a class="name_link" href="{{route('agents.show',$produto->agente)}}">
                             {{$produto->agente->nome.' '.$produto->agente->apelido}}</span>
                         </a>
                     </div><br>
 
                     @if($produto->idSubAgente)
-                        <div><span class="text-secondary">Sub-Agente: 
+                        <div><span class="text-secondary">Sub-Agente:
                             <a class="name_link" href="{{route('agents.show',$produto->subAgente)}}">
                                 {{$produto->subAgente->nome.' '.$produto->subAgente->apelido}}</span>
                             </a>
@@ -212,7 +208,7 @@
                                     @endforeach
                                 @endif
                             </div>
-                            
+
                             <div class="col">
                                 @if($DocsPessoais->toArray())
                                     <div><span><b>Documentos Pessoais</b></span></div><br>
@@ -324,7 +320,7 @@
                                             $existe = true;
                                         @endphp
                                     @endforeach
-                                @else 
+                                @else
                                     <div><span class="text-secondary">Sem documentos de transação {{'<adicionar>'}}</span></div><br>
                                 @endif
                                 <div><span><b>Pagamentos responsabilidades</b></span></div><br>
@@ -341,7 +337,7 @@
                                             $existe = true;
                                         @endphp
                                     @endforeach
-                                @else 
+                                @else
                                     <div><span class="text-secondary">Sem pagamentos de responsabilidades {{'<adicionar>'}}</span></div><br>
                                 @endif
                             </div>

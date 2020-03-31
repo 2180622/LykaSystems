@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateAgenteRequest;
 use App\Http\Requests\StoreAgenteRequest;
 use App\Http\Requests\StoreUserRequest;
-
+use App\Http\Requests\UpdateUserRequest;
 
 
 
@@ -86,8 +86,6 @@ class AgenteController extends Controller
         $fieldsUser = $requestUser->validated();
         $user->fill($fieldsUser);
 
-
-
         /* Criação de Agente */
 
         if ($requestAgent->hasFile('fotografia')) {
@@ -120,8 +118,6 @@ class AgenteController extends Controller
 
         $agent->save();
 
-
-
         /* Criação de utilizador */
 
         $user->tipo = "agente";
@@ -148,12 +144,21 @@ class AgenteController extends Controller
     public function show(Agente $agent)
     {
 
-        /* Lista de sub agentes do $agente */
+        /* Lista de sub-agentes do $agente */
         $listagents = Agente::
         where('subagent_agentid', '=',$agent->idAgente)
         ->get();
 
-        return view('agents.show',compact("agent",'listagents'));
+        /* caso seja um sub-agente, obtem o agente que o adicionou */
+        if($agent->tipo=="Subagente"){
+            $mainAgent=Agente::
+            where('idAgente', '=',$agent->subagent_agentid)
+            ->first();
+        }else{
+            $mainAgent=null;
+        }
+
+        return view('agents.show',compact("agent",'listagents','mainAgent'));
 
     }
 
@@ -195,7 +200,6 @@ class AgenteController extends Controller
         $fields = $request->validated();
         $agent->fill($fields);
 
-
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
             $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
@@ -211,6 +215,13 @@ class AgenteController extends Controller
         $agent->updated_at == date("Y-m-d",$t);
 
         $agent->save();
+
+
+        /* update do user->email */
+        DB::table('user')
+        ->where('idAgente', $agent->idAgente)
+        ->update(['email' => $agent->email]);
+
 
          return redirect()->route('agents.index')->with('success', 'Dados do agente modificados com sucesso');
     }
