@@ -8,7 +8,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-    <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 
 @endsection
 
@@ -21,23 +21,25 @@
 <div class="container mt-2 ">
 
     {{-- Navegação --}}
-    <div class="float-left">
-        <a href="javascript:history.go(-1)" title="Voltar"><i
-                class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
-        <a href="javascript:window.history.forward();" title="Avançar"><i
-                class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+    <div class="float-left buttons">
+        <a href="javascript:history.go(-1)" title="Voltar">
+            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
+        </a>
+        <a href="javascript:window.history.forward();" title="Avançar">
+            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
+        </a>
     </div>
 
     <div class="float-right">
         <a href="{{route('agents.create')}}" class="top-button">
             @if (Auth::user()->tipo == "agente")
-                {{-- se for agente --}}
-                Adicionar Sub agente
+            {{-- se for agente --}}
+            Adicionar Sub agente
             @else
-                {{-- se for admin --}}
-                Adicionar Agente
+            {{-- se for admin --}}
+            Adicionar Agente
             @endif
-            </a>
+        </a>
     </div>
 
     <br><br>
@@ -48,10 +50,10 @@
             <h6>Listagem de @if (Auth::user()->tipo == "agente")
                 {{-- se for agente --}}
                 Sub agentes
-            @else
+                @else
                 {{-- se for admin --}}
                 Agentes
-            @endif
+                @endif
             </h6>
         </div>
         <br>
@@ -111,19 +113,19 @@
 
                     @foreach ($agents as $agent)
                     <tr>
-                        <td >
+                        <td>
                             <div class="align-middle mx-auto shadow-sm rounded  bg-white"
                                 style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('agents.show',$agent)}}">
                                     @if($agent->fotografia)
-                                        <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}"
+                                    <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}"
                                         width="100%" class="mx-auto">
                                     @elseif($agent->genero == 'F')
-                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
-                                        width="100%" class="mx-auto">
+                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
+                                        class="mx-auto">
                                     @else
-                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
-                                        width="100%" class="mx-auto">
+                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
+                                        class="mx-auto">
                                     @endif
                                 </a>
                             </div>
@@ -131,7 +133,8 @@
                         </td>
 
                         {{-- Nome e Apelido --}}
-                        <td class="align-middle"><a class="name_link" href="{{route('agents.show',$agent)}}">{{ $agent->nome }} {{ $agent->apelido }}</a></td>
+                        <td class="align-middle"><a class="name_link"
+                                href="{{route('agents.show',$agent)}}">{{ $agent->nome }} {{ $agent->apelido }}</a></td>
 
                         {{-- Tipo --}}
                         <td class="align-middle">{{ $agent->tipo }}</td>
@@ -151,7 +154,8 @@
                                 title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
                             <form method="POST" role="form" id="{{ $agent->idAgente }}"
-                                action="{{route('agents.destroy',$agent)}}" data="{{ $agent->nome }} {{ $agent->apelido }}" class="d-inline-block form_agent_id">
+                                action="{{route('agents.destroy',$agent)}}"
+                                data="{{ $agent->nome }} {{ $agent->apelido }}" class="d-inline-block form_agent_id">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn_delete" title="Eliminar agente" data-toggle="modal"
