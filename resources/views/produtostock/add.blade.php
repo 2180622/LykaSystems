@@ -26,16 +26,16 @@
     <br><br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Adicionar produto</h6>
+            <h6>Adicionar Produto de Stock</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('produtos.store')}}" class="form-group needs-validation pt-3" id="form_produto"
+        <form method="POST" action="{{route('produtostock.store')}}" class="form-group needs-validation pt-3" id="form_produto"
             enctype="multipart/form-data" novalidate>
             @csrf
-            @include('produtos.partials.add-edit')
+            @include('produtostock.partials.add-edit')
             <div class="form-group text-right">
                 <br><br>
-                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar produto</button>
+                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Produto de Stock</button>
                 <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
             </div>
         </form>
