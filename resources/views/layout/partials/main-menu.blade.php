@@ -76,7 +76,7 @@
 
         <!-- Pagamentos -->
         <li class="menu-option">
-            <a href="#">
+            <a href="{{route('payments.index')}}">
                 <div class="menu-icon">
                     <ion-icon name="wallet-outline" style="font-size:16pt; --ionicon-stroke-width: 50px; position: relative; top: 3px; right: 3px;"></ion-icon>
                 </div>
