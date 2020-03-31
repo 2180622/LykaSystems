@@ -21,11 +21,13 @@
 <div class="container mt-2 ">
 
     {{-- Navegação --}}
-    <div class="float-left">
-        <a href="javascript:history.go(-1)" title="Voltar"><i
-                class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
-        <a href="javascript:window.history.forward();" title="Avançar"><i
-                class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+    <div class="float-left buttons">
+        <a href="javascript:history.go(-1)" title="Voltar">
+            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
+        </a>
+        <a href="javascript:window.history.forward();" title="Avançar">
+            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
+        </a>
     </div>
 
     <div class="float-right">
@@ -61,11 +63,9 @@
             </div>
             <div class="col ">
                 <div class="input-group pl-0 float-right" style="width:250px">
-                    <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox"
-                        placeholder="Procurar" aria-label="Procurar">
+                    <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
                     <div class="input-group-append">
-                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey"
-                                aria-hidden="true"></i></span>
+                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
                     </div>
                 </div>
             </div>
@@ -76,8 +76,7 @@
         <div class="table-responsive " style="overflow:hidden">
 
 
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                style="overflow:hidden;">
+            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
 
                 {{-- Cabeçalho da tabela --}}
                 <thead>
@@ -96,19 +95,15 @@
                     @foreach ($clients as $client)
                     <tr>
                         <td class="">
-                            <div class="align-middle mx-auto shadow-sm rounded bg-white"
-                                style="overflow:hidden; width:50px; height:50px">
+                            <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('clients.show',$client)}}">
                                     @if($client->fotografia)
-                                        <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}"
-                                        width="100%" class="mx-auto">
-                                    @elseif($client->genero == 'F')
-                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
-                                        width="100%" class="mx-auto">
-                                    @else
-                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
-                                        width="100%" class="mx-auto">
-                                    @endif
+                                        <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" width="100%" class="mx-auto">
+                                        @elseif($client->genero == 'F')
+                                            <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
+                                            @else
+                                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                                            @endif
                                 </a>
                             </div>
 
@@ -126,17 +121,13 @@
 
                         {{-- OPÇÔES --}}
                         <td class="text-center align-middle">
-                            <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
-                                title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                            <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
-                                title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                            <a href="{{route('clients.show',$client)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                            <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
-                            <form method="POST" role="form" id="{{ $client->idCliente }}"
-                                action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
+                            <form method="POST" role="form" id="{{ $client->idCliente }}" action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
-                                    data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                             </form>
 
                         </td>
