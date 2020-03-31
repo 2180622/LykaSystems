@@ -64,8 +64,6 @@
             <div class="col p-2">
 
 
-                <br><br>LISTA DE SUB-AGENTES<br><br>
-
                 {{-- Informações Pessoais --}}
                 <div><span class="text-secondary ">Nome:</span> {{$agent->nome}} {{$agent->apelido}}</div>
 
@@ -101,6 +99,24 @@
                         {{ date('d-M-y', strtotime($agent->updated_at)) }}</small></div>
 
             </div>
+
+            <div class="col">
+
+                @if($agent->tipo=="Agente" && $listagents!=null)
+                    <div class="mb-2 text-muted">@if ($agent->tipo=="Agente")
+                        Lista de agentes:
+                        @else
+                        Lista de Sub agentes:
+                        @endif
+                    </div>
+
+                    @foreach ($listagents as $agent)
+                        <div class="mb-1"><i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$agent)}}">{{$agent->nome}} {{$agent->apelido}}</a></div>
+                    @endforeach
+                @endif
+
+            </div>
+
 
         </div>
 

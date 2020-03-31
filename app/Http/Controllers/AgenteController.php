@@ -147,7 +147,14 @@ class AgenteController extends Controller
      */
     public function show(Agente $agent)
     {
-        return view('agents.show',compact("agent"));
+
+        /* Lista de sub agentes do $agente */
+        $listagents = Agente::
+        where('subagent_agentid', '=',$agent->idAgente)
+        ->get();
+
+        return view('agents.show',compact("agent",'listagents'));
+
     }
 
 
