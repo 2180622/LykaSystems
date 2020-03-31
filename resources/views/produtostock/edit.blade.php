@@ -10,8 +10,6 @@
 
 {{-- Page Content --}}
 @section('content')
-
-
     <div class="container mt-2">
         {{-- Navegação --}}
         <div class="float-left">

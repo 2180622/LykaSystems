@@ -2,7 +2,7 @@
 
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de Estudantes')
+@section('title', 'Lista de Produtos Stock')
 
 
 {{-- Estilos de CSS --}}
@@ -47,6 +47,7 @@
             </div>
         </div>
 
+
         <div class="row mt-3 mb-4">
             <div class="col">
                 <span class="mr-2">Mostrar</span>
@@ -70,9 +71,9 @@
             </div>
         </div>
         <hr>
+        <div class="table-responsive " style="overflow:hidden">
+            <table nowarp class="table table-borderless" id="" width="100%" row-border="0" style="overflow:hidden;">
 
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                style="overflow:hidden;">
                 {{-- Cabeçalho da tabela --}}
                 <thead>
                     <tr>
@@ -82,9 +83,9 @@
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
+
                 {{-- Corpo da tabela --}}
                 <tbody>
-
                     @foreach ($produtoStocks as $produtoStock)
                     <tr>
                         {{-- Descrição --}}
@@ -95,7 +96,6 @@
 
                         {{-- Ano Académico --}}
                         <th class="align-middle">{{ $produtoStock->anoAcademico }}</th>
-
 
                         {{-- OPÇÔES --}}
                         <th class="text-center align-middle">
@@ -111,13 +111,13 @@
                                 <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
                                     data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                             </form>
-
                         </th>
                     </tr>
                     @endforeach
 
                 </tbody>
             </table>
+        </div>
 
 
 
