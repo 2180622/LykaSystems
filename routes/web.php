@@ -33,6 +33,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Agenda */
     Route::resource('/agends', 'AgendController');
 
+    /* Pagamentos */
+    Route::resource('/payments', 'PaymentController');
+
     /* Logout */
     Route::get('/logout', 'Auth\LoginController@logout');
 
