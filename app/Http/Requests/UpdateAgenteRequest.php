@@ -24,6 +24,7 @@ class UpdateAgenteRequest extends FormRequest
     public function rules()
     {
         return [
+            'subagent_agentid'=> 'nullable',
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',
@@ -35,7 +36,7 @@ class UpdateAgenteRequest extends FormRequest
             'NIF' => 'required',
             'telefoneW' => 'required',
             'telefone2' => 'nullable',
-            'tipo' => 'required|in:Agente,Subagente',
+            'tipo' => 'nullable',
         ];
     }
 

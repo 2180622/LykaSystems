@@ -42,15 +42,26 @@
             </a>
         </li>
 
-        <!-- Agentes  -->
-        <li class="menu-option">
-            <a href="{{route('agents.index')}}">
-                <div class="menu-icon">
-                    <i class="fas fa-user-tie mr-2"></i>
-                </div>
-                <span class="option-name {{Route::is('agents.*') ? 'active' : ''}}">Agentes</span>
-            </a>
-        </li>
+
+
+
+            <!-- Agentes  -->
+            <li class="menu-option">
+
+                    <a href="{{route('agents.index')}}">
+                        <div class="menu-icon">
+                            <i class="fas fa-user-tie mr-2"></i>
+                        </div>
+                        <span class="option-name {{Route::is('agents.*') ? 'active' : ''}}">
+                            @if (Auth::user()->tipo == "admin")
+                                Agentes
+                                @elseif(Auth::user()->tipo == "agente")
+                                Sub agentes
+                            @endif
+                        </span>
+                    </a>
+            </li>
+
 
         {{-- Produtos --}}
         <li class="menu-option">
@@ -163,57 +174,67 @@
             @method('POST') --}}
         </div>
         <!-- -->
+
+
+
+        {{-- SE FOR ADMIN --}}
         @if (Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null)
-        <div class="mx-auto user_photo rounded-circle shadow">
-            {{-- Foto Utilizador --}}
-            @if(Auth::user()->admin->fotografia != null)
-                <img src="{{asset('/storage/admin-photos/'.Auth::user()->admin->fotografia)}}" style="width:100%">
-                @elseif (Auth::user()->admin->genero == "F")
-                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
-                @else
-                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
-                @endif
-        </div>
+            <div class="mx-auto user_photo rounded-circle shadow">
+                {{-- Foto Utilizador --}}
+                @if(Auth::user()->admin->fotografia != null)
+                    <img src="{{asset('/storage/admin-photos/'.Auth::user()->admin->fotografia)}}" style="width:100%">
+                    @elseif (Auth::user()->admin->genero == "F")
+                    <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
+                    @else
+                    <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
+                    @endif
+            </div>
 
-        <div class="text-center mt-3">
-            {{-- Nome e Perfil --}}
-            <span class="font-weight-bold text-uppercase">{{Auth::user()->admin->nome}}</span><br>
-            <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>
-        </div>
+            <div class="text-center mt-3">
+                {{-- Nome e Perfil --}}
+                <span class="font-weight-bold text-uppercase">{{Auth::user()->admin->nome}}</span><br>
+                <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>
+            </div>
+
+
+        {{-- SE FOR AGENTE / SUBAGENTE --}}
         @elseif (Auth::user()->tipo == "agente" && Auth::user()->idAgente != null)
-        <div class="mx-auto user_photo rounded-circle shadow">
-            {{-- Foto Utilizador --}}
-            @if(Auth::user()->agente->fotografia != null)
-                <img src="{{asset('/storage/agent-photos/'.Auth::user()->agente->fotografia)}}" style="width:100%">
-                @elseif (Auth::user()->agente->genero == "F")
-                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
-                @else
-                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
-                @endif
-        </div>
+            <div class="mx-auto user_photo rounded-circle shadow">
+                {{-- Foto Utilizador --}}
+                @if(Auth::user()->agente->fotografia != null)
+                    <img src="{{asset('/storage/agent-photos/'.Auth::user()->agente->fotografia)}}" style="width:100%">
+                    @elseif (Auth::user()->agente->genero == "F")
+                    <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
+                    @else
+                    <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
+                    @endif
+            </div>
 
-        <div class="text-center mt-3">
-            {{-- Nome e Perfil --}}
-            <span class="font-weight-bold text-uppercase">{{Auth::user()->agente->nome}}</span><br>
-            <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>
-        </div>
+            <div class="text-center mt-3">
+                {{-- Nome e Perfil --}}
+                <span class="font-weight-bold text-uppercase">{{Auth::user()->agente->nome}}</span><br>
+                <span class="text-muted " style="font-size:14px">{{Auth::user()->agente->tipo}}</span>
+            </div>
+
+
+        {{-- SE FOR CLIENTE --}}
         @elseif (Auth::user()->tipo == "cliente" && Auth::user()->idCliente != null)
-        <div class="mx-auto user_photo rounded-circle shadow">
-            {{-- Foto Utilizador --}}
-            @if(Auth::user()->cliente->fotografia != null)
-                <img src="{{asset('/storage/client-photos/'.Auth::user()->cliente->fotografia)}}" style="width:100%">
-                @elseif (Auth::user()->cliente->genero == "F")
-                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
-                @else
-                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
-                @endif
-        </div>
+            <div class="mx-auto user_photo rounded-circle shadow">
+                {{-- Foto Utilizador --}}
+                @if(Auth::user()->cliente->fotografia != null)
+                    <img src="{{asset('/storage/client-photos/'.Auth::user()->cliente->fotografia)}}" style="width:100%">
+                    @elseif (Auth::user()->cliente->genero == "F")
+                    <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
+                    @else
+                    <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
+                    @endif
+            </div>
 
-        <div class="text-center mt-3">
-            {{-- Nome e Perfil --}}
-            <span class="font-weight-bold text-uppercase">{{Auth::user()->cliente->nome}}</span><br>
-            <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>
-        </div>
+            <div class="text-center mt-3">
+                {{-- Nome e Perfil --}}
+                <span class="font-weight-bold text-uppercase">{{Auth::user()->cliente->nome}}</span><br>
+                <span class="text-muted " style="font-size:14px">{{Auth::user()->tipo}}</span>
+            </div>
         @endif
 
     </div>

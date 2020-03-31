@@ -17,6 +17,7 @@ class Agente extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idAgente');
+            $table->integer('subagent_agentid')->nullable();
             $table->string('nome',255);
             $table->string('apelido',255);
             $table->enum('genero',['F','M']);

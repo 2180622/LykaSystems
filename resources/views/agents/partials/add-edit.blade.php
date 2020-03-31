@@ -2,24 +2,15 @@
 
     <div class="col">
 
-        <div class="row">
-            <div class="col">
-                {{-- INPUT tipo --}}
-                <label for="tipo">Tipo:</label><br>
-                <select id="tipo" name="tipo" class="form-control" required>
-                    <option {{old('tipo',$agent->tipo)=='Agente'?"selected":""}} value="Agente">Agente</option>
-                    <option {{old('tipo',$agent->tipo)=='Subagente'?"selected":""}} value="Subagente">Subagente</option>
-                </select>
-            </div>
-        </div>
-
-
-        <br>
-
 
         <div class="row">
 
             <div class="col">
+
+                {{-- INPUT tipo de agente --}}
+                <input type="hidden" name="tipo" value="{{old('tipo',$agent->tipo)}}" disabled>
+
+                
                 {{-- INPUT nome --}}
                 <label for="nome">Nome:</label><br>
                 <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$agent->nome)}}"

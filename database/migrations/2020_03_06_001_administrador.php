@@ -30,7 +30,7 @@ class Administrador extends Migration
         });
 
         $data = array(
-            array('idAdmin'=>'1', 'nome'=>'Administrador', 'apelido'=>'Administrador', 'email' => 'admin@test.com', 'dataNasc'=>'2000-01-01', 'telefone1'=>'912345678', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
+            array('idAdmin'=>'1', 'nome'=>'Administrador', 'apelido'=>'Administrador', 'genero' => 'M','email' => 'admin@test.com', 'dataNasc'=>'2000-01-01', 'telefone1'=>'912345678', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
         );
 
         DB::table('Administrador')->insert($data);

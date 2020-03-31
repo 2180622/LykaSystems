@@ -58,6 +58,9 @@
 
                 <div class="col p-2">
 
+                    
+                    <br><br>LISTA DE SUB-AGENTES<br><br>
+
                     {{-- Informações Pessoais --}}
                     <div><span class="text-secondary ">Nome:</span> {{$agent->nome}} {{$agent->apelido}}</div>
 
