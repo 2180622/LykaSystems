@@ -254,9 +254,18 @@ class AgenteController extends Controller
 
 
         /* Apaga subagentes se o seu agente for apagado */
-        DB::table('Agente')
+        $subagents =DB::table('Agente')
         ->where('subagent_agentid', $agent->idAgente)
-        ->update(['deleted_at' => $agent->deleted_at]);
+        ->get();
+
+        /* apaga a lista de subagentes do agente que esta a ser apagado */
+        if (!$subagents->isEmpty()) {
+            foreach ($subagents as $subagent) {
+                DB::table('Agente')
+                ->where('subagent_agentid', $agent->idAgente)
+                ->update(['deleted_at' => $agent->deleted_at]);
+            }
+        }
 
 
 
@@ -267,19 +276,15 @@ class AgenteController extends Controller
         ->update(['deleted_at' => $agent->deleted_at]);
 
 
-
         /* "Apaga" dos utilizadores os subagentes que tiveram o seu agente apagado */
 
-        /* Lista de todos os subagentes do agente que esta a ser apagado */
-        $subagentes = Agente::
-            where('subagent_agentid', '=', $agent->idAgente)
-            ->get();
-
         /* apaga a lista de subagentes do agente que esta a ser apagado */
-        foreach ($subagentes as $subagent) {
-            DB::table('User')
-            ->where('idAgente', $subagent->idAgente)
-            ->update(['deleted_at' => $agent->deleted_at]);
+        if (!$subagents->isEmpty()) {
+            foreach ($subagents as $subagent) {
+                DB::table('User')
+                ->where('idAgente', '=', $subagent->idAgente)
+                ->update(['deleted_at' => $agent->deleted_at]);
+            }
         }
 
 
