@@ -25,7 +25,7 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('clients.create')}}" class="top-button">Adicionar Estudante</a>
+        <a href="{{route('report')}}" class="top-button">reportar problema</a>
     </div>
 
     <br><br>
@@ -39,10 +39,13 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Estão registados no sistema <strong>GUASGD</strong> estudantes
+                @if (count($numberProducts) == 1)
+                Está registado <strong>{{count($numberProducts)}}</strong> pagamento pendente.
+                @else
+                Estão registados <strong>{{count($numberProducts)}}</strong> pagamentos pendentes.
+                @endif
             </div>
         </div>
-
 
         <div class="row mt-3 mb-4">
             <div class="col">
@@ -65,13 +68,8 @@
             </div>
         </div>
         <hr>
-
-
         <div class="table-responsive " style="overflow:hidden">
-
-
             <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
-
                 {{-- Cabeçalho da tabela --}}
                 <thead>
                     <tr>
@@ -82,37 +80,40 @@
                         <th>Estado</th>
                     </tr>
                 </thead>
-
                 {{-- Corpo da tabela --}}
                 <tbody>
+                    @if (!count($products))
+                    <h6>Não existem pagamentos a ser feitos.</h6>
+                    @else
+                    @foreach ($products as $product)
                     <tr>
-                        <td class="">
-                            <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
+                        <td>
+                            <div class="align-middle mx-auto rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="#">
-
+                                    @if($product->cliente->fotografia)
+                                        <img src="{{Storage::disk('public')->url('client-photos/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
+                                        @elseif($product->cliente->genero == 'F')
+                                            <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
+                                            @else
+                                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                                            @endif
                                 </a>
                             </div>
-
                         </td>
-
                         {{-- Nome e Apelido --}}
-                        <td class="align-middle"><a class="name_link" href="#">John Doe</a></td>
-
+                        <td class="align-middle"><a class="name_link" href="#">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
                         {{-- Descrição --}}
                         <td class="align-middle">Fase 01</td>
-
                         {{-- Valor --}}
-                        <td class="align-middle">125€</td>
-
+                        <td class="align-middle">{{$product->valorTotal}}€</td>
                         {{-- Estado --}}
                         <td class="align-middle">Pendente</td>
                     </tr>
+                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
-
-
-
     </div>
 </div>
 
