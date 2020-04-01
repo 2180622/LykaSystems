@@ -105,18 +105,18 @@
 
             <div class="col">
 
-                @if($agent->tipo=="Agente" && $listagents!=null)
-                    <div class="mb-2 text-muted">@if ($agent->tipo=="Agente")
-                        Lista de agentes:
-                        @else
-                        Lista de Subagentes:
-                        @endif
-                    </div>
+                    <div class="mb-2 text-muted">Lista de subagentes:</div>
 
-                    @foreach ($listagents as $agent)
-                        <div class="mb-1 text-muted"><i class="fas fa-user-tie mr-2"></i><a class="agent_link" href="{{route('agents.show',$agent)}}" >{{$agent->nome}} {{$agent->apelido}}</a></div>
-                    @endforeach
-                @endif
+                    @if($listagents==null)
+                        <div class="text-muted"><small>(sem registos)</small></div>
+                    @else
+                        @foreach ($listagents as $agent)
+                            <div class="mb-1 text-muted"><i class="fas fa-user-tie mr-2"></i><a class="agent_link" href="{{route('agents.show',$agent)}}" >{{$agent->nome}} {{$agent->apelido}}</a></div>
+                        @endforeach
+                    @endif
+
+
+
 
             </div>
 

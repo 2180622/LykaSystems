@@ -31,8 +31,6 @@ class AgenteController extends Controller
     {
 
 
-/*         dd(Auth::user()->tipo); */
-
         /* Se for um agente: mostra os sub agentes */
         if(Auth::user()->tipo == "agente"){
 
@@ -147,6 +145,12 @@ class AgenteController extends Controller
         where('subagent_agentid', '=',$agent->idAgente)
         ->get();
 
+        if ($listagents->isEmpty()) {
+            $listagents=null;
+        }
+
+
+
         /* caso seja um sub-agente, obtem o agente que o adicionou */
         if($agent->tipo=="Subagente"){
             $mainAgent=Agente::
@@ -249,11 +253,34 @@ class AgenteController extends Controller
         $agent->delete();
 
 
+        /* Apaga subagentes se o seu agente for apagado */
+        DB::table('Agente')
+        ->where('subagent_agentid', $agent->idAgente)
+        ->update(['deleted_at' => $agent->deleted_at]);
+
+
+
 
         /* "Apaga" dos utilizadores */
-        DB::table('user')
+        DB::table('User')
         ->where('idAgente', $agent->idAgente)
         ->update(['deleted_at' => $agent->deleted_at]);
+
+
+
+        /* "Apaga" dos utilizadores os subagentes que tiveram o seu agente apagado */
+
+        /* Lista de todos os subagentes do agente que esta a ser apagado */
+        $subagentes = Agente::
+            where('subagent_agentid', '=', $agent->idAgente)
+            ->get();
+
+        /* apaga a lista de subagentes do agente que esta a ser apagado */
+        foreach ($subagentes as $subagent) {
+            DB::table('User')
+            ->where('idAgente', $subagent->idAgente)
+            ->update(['deleted_at' => $agent->deleted_at]);
+        }
 
 
         return redirect()->route('agents.index')->with('success', 'Agente eliminado com sucesso');
