@@ -10,8 +10,10 @@
 
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 <link href="{{asset('css/agends.css')}}" rel="stylesheet" />
-<link href="{{asset('vendor/calendar/core/main.css')}}" rel='stylesheet' />
-<link href="{{asset('vendor/calendar/daygrid/main.css')}}" rel='stylesheet' />
+<link href="{{asset('vendor/fullcalendar/core/main.css')}}" rel='stylesheet' />
+<link href="{{asset('vendor/fullcalendar/daygrid/main.css')}}" rel='stylesheet' />
+<link href="{{asset('vendor/fullcalendar/list/main.css')}}" rel='stylesheet' />
+<link href="{{asset('vendor/fullcalendar/timegrid/main.css')}}" rel='stylesheet' />
 @endsection
 
 
@@ -53,10 +55,13 @@
 
 {{-- Utilização de scripts: --}}
 @section('scripts')
-<script src="{{asset('/vendor/calendar/core/locales/pt.js')}}"></script>
-<script src="{{asset('/vendor/calendar/core/main.js')}}"></script>
-<script src="{{asset('/vendor/calendar/core/locales-all.js')}}"></script>
-<script src="{{asset('/vendor/calendar/daygrid/main.js')}}"></script>
+<script src="{{asset('/vendor/fullcalendar/core/main.js')}}"></script>
+<script src="{{asset('/vendor/fullcalendar/rrule.js')}}"></script>
+<script src="{{asset('/vendor/fullcalendar/interaction/main.js')}}"></script>
+<script src="{{asset('/vendor/fullcalendar/daygrid/main.js')}}"></script>
+<script src="{{asset('/vendor/fullcalendar/timegrid/main.js')}}"></script>
+<script src="{{asset('/vendor/fullcalendar/list/main.js')}}"></script>
+<script src="{{asset('/vendor/fullcalendar/rrule/main.js')}}"></script>
 <script src="{{asset('/js/agends.js')}}"></script>
 
 @endsection
