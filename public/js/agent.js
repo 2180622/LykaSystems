@@ -65,6 +65,16 @@
         /* FIM configs DATATABLES */
 
 
+        /* Verificação inicial */
+        if ($("#tipo").val()=="Agente"){
+            $("#subagent_agentid").prop( "disabled", true );
+            $("#subagent_agentid").val(null);
+        }
+
+        if ( $("#aux_subagent_agentid").val()!=null){
+            $("#subagent_agentid").val($("#aux_subagent_agentid").val());
+        }
+
 
 
 
@@ -143,11 +153,12 @@
 
         $('#tipo').change(function() {
             if ($("#tipo").val()=="Subagente"){
-                $("#subagent").prop( "disabled", true );
-                $("#subagent").val("NA");
+                $("#subagent_agentid").prop( "disabled", false );
+                $("#subagent_agentid").val("pickone");
+
             }else{
-                $("#subagent").prop( "disabled", false );
-                $("#subagent").val("pickone");
+                $("#subagent_agentid").prop( "disabled", true );
+                $("#subagent_agentid").val(null);
             }
         });
 

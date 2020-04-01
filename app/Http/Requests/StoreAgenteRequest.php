@@ -24,19 +24,19 @@ class StoreAgenteRequest extends FormRequest
     public function rules()
     {
         return [
-          'subagent_agentid'=> 'nullable',
-          'nome' => 'required',
-          'apelido' => 'required',
-          'genero'=>'required',
-          'email' => 'required|unique:agente|unique:user',
-          'dataNasc' => 'required',
-          'fotografia' => 'nullable',
-          'morada' => 'required',
-          'pais' => 'required',
-          'NIF' => 'required|unique:agente',
-          'telefoneW' => 'required',
-          'telefone2' => 'nullable',
-          'tipo' => 'nullable',
+        'subagent_agentid'=> 'nullable',
+        'nome' => 'required',
+        'apelido' => 'required',
+        'email' => 'required|unique:agente|unique:user',
+        'dataNasc' => 'required',
+        'fotografia' => 'nullable',
+        'morada' => 'required',
+        'pais' => 'required',
+        'NIF' => 'required|unique:agente',
+        'telefoneW' => 'required',
+        'telefone2' => 'nullable',
+        'genero'=>'required',
+        'tipo' => 'required|in:Agente,Subagente',
         ];
     }
 

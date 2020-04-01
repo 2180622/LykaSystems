@@ -36,7 +36,7 @@ class UpdateAgenteRequest extends FormRequest
             'NIF' => 'required',
             'telefoneW' => 'required',
             'telefone2' => 'nullable',
-            'tipo' => 'nullable',
+            'tipo' => 'required|in:Agente,Subagente',
         ];
     }
 

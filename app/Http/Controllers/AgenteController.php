@@ -112,15 +112,7 @@ class AgenteController extends Controller
 
 
 
-        /* Verifica se é agente ou admin a criar novo registo */
-        if(Auth::user()->tipo == "agente"){
-            /* se for agente */
-            $agent->tipo="Subagente";
-            $agent->subagent_agentid = Auth::user()->agente->idAgente;
-        }else{
-            /* se for admin */
-            $agent->tipo="Agente";
-        }
+
 
         $agent->save();
 
@@ -191,7 +183,13 @@ class AgenteController extends Controller
      */
     public function edit(Agente $agent)
     {
-        return view('agents.edit', compact('agent'));
+
+        /* apenas de agentes */
+        $listagents = Agente::
+        whereNull('subagent_agentid')
+        ->get();
+
+        return view('agents.edit', compact('agent','listagents'));
     }
 
     /**
@@ -215,6 +213,13 @@ class AgenteController extends Controller
             Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
         }
+
+
+        // Caso se mude o de agente para subagente, garante que nenhum o agente não tem id de subagente
+        DB::table('agente')
+        ->where('idAgente', $agent->idAgente)
+        ->update(['subagent_agentid' => null]);
+
 
         // data em que foi modificado
         $t=time();
