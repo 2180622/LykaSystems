@@ -4398,7 +4398,7 @@ Docs & License: https://fullcalendar.io/
         var endMarker = framingRange.end;
         var instanceStarts = [];
         while (dayMarker < endMarker) {
-            var instanceStart 
+            var instanceStart
             // if everyday, or this particular day-of-week
             = void 0;
             // if everyday, or this particular day-of-week
@@ -4583,12 +4583,12 @@ Docs & License: https://fullcalendar.io/
             next: 'next',
             prevYear: 'prev year',
             nextYear: 'next year',
-            year: 'year',
-            today: 'today',
-            month: 'month',
-            week: 'week',
-            day: 'day',
-            list: 'list'
+            year: 'Ano',
+            today: 'Hoje',
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            list: 'Lista'
         },
         weekLabel: 'W',
         allDayText: 'all-day',

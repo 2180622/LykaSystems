@@ -31,8 +31,6 @@ class AgenteController extends Controller
     {
 
 
-/*         dd(Auth::user()->tipo); */
-
         /* Se for um agente: mostra os sub agentes */
         if(Auth::user()->tipo == "agente"){
 
@@ -112,15 +110,7 @@ class AgenteController extends Controller
 
 
 
-        /* Verifica se é agente ou admin a criar novo registo */
-        if(Auth::user()->tipo == "agente"){
-            /* se for agente */
-            $agent->tipo="Subagente";
-            $agent->subagent_agentid = Auth::user()->agente->idAgente;
-        }else{
-            /* se for admin */
-            $agent->tipo="Agente";
-        }
+
 
         $agent->save();
 
@@ -154,6 +144,12 @@ class AgenteController extends Controller
         $listagents = Agente::
         where('subagent_agentid', '=',$agent->idAgente)
         ->get();
+
+        if ($listagents->isEmpty()) {
+            $listagents=null;
+        }
+
+
 
         /* caso seja um sub-agente, obtem o agente que o adicionou */
         if($agent->tipo=="Subagente"){
@@ -191,7 +187,13 @@ class AgenteController extends Controller
      */
     public function edit(Agente $agent)
     {
-        return view('agents.edit', compact('agent'));
+
+        /* apenas de agentes */
+        $listagents = Agente::
+        whereNull('subagent_agentid')
+        ->get();
+
+        return view('agents.edit', compact('agent','listagents'));
     }
 
     /**
@@ -215,6 +217,13 @@ class AgenteController extends Controller
             Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
         }
+
+
+        // Caso se mude o de agente para subagente, garante que nenhum o agente não tem id de subagente
+        DB::table('agente')
+        ->where('idAgente', $agent->idAgente)
+        ->update(['subagent_agentid' => null]);
+
 
         // data em que foi modificado
         $t=time();
@@ -244,11 +253,34 @@ class AgenteController extends Controller
         $agent->delete();
 
 
+        /* Apaga subagentes se o seu agente for apagado */
+        DB::table('Agente')
+        ->where('subagent_agentid', $agent->idAgente)
+        ->update(['deleted_at' => $agent->deleted_at]);
+
+
+
 
         /* "Apaga" dos utilizadores */
-        DB::table('user')
+        DB::table('User')
         ->where('idAgente', $agent->idAgente)
         ->update(['deleted_at' => $agent->deleted_at]);
+
+
+
+        /* "Apaga" dos utilizadores os subagentes que tiveram o seu agente apagado */
+
+        /* Lista de todos os subagentes do agente que esta a ser apagado */
+        $subagentes = Agente::
+            where('subagent_agentid', '=', $agent->idAgente)
+            ->get();
+
+        /* apaga a lista de subagentes do agente que esta a ser apagado */
+        foreach ($subagentes as $subagent) {
+            DB::table('User')
+            ->where('idAgente', $subagent->idAgente)
+            ->update(['deleted_at' => $agent->deleted_at]);
+        }
 
 
         return redirect()->route('agents.index')->with('success', 'Agente eliminado com sucesso');
