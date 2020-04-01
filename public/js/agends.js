@@ -45,13 +45,5 @@ document.addEventListener('DOMContentLoaded', function () {
         optionEl.value = localeCode;
         optionEl.selected = localeCode === initialLocaleCode;
         optionEl.innerText = localeCode;
-        localeSelectorEl.appendChild(optionEl);
-    });
-
-    // when the selected option changes, dynamically change the calendar option
-    localeSelectorEl.addEventListener('change', function () {
-        if (this.value) {
-            calendar.setOption('locale', this.value);
-        }
     });
 });
