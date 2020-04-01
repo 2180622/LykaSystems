@@ -8,7 +8,7 @@
                {{-- INPUT Tipo de agente --}}
 
               <label for="tipo">Tipo:</label><br>
-                <select id="tipo" name="tipo" class="form-control" required>
+                <select id="tipo" name="tipo" class="form-control">
                     <option {{old('tipo',$agent->tipo)=='Agente'?"selected":""}} value="Agente">Agente</option>
                     <option {{old('tipo',$agent->tipo)=='Subagente'?"selected":""}} value="Subagente">Subagente</option>
                 </select>
@@ -33,6 +33,9 @@
                     @endforeach
 
                 </select>
+
+                <div class="invalid-feedback">Escolha um subagente</div>
+
             </div>
         </div>
 

@@ -151,7 +151,9 @@
 
 
 
+        /* mudança de tipo de agente */
         $('#tipo').change(function() {
+
             if ($("#tipo").val()=="Subagente"){
                 $("#subagent_agentid").prop( "disabled", false );
                 $("#subagent_agentid").val("pickone");
@@ -159,7 +161,15 @@
             }else{
                 $("#subagent_agentid").prop( "disabled", true );
                 $("#subagent_agentid").val(null);
+                $("#subagent_agentid").removeClass("is-invalid");
+                $("#subagent_agentid").addClass("invalid");
             }
+        });
+
+
+        $('#subagent_agentid').change(function() {
+            $("#subagent_agentid").removeClass("is-invalid");
+            $("#subagent_agentid").addClass("invalid");
         });
 
 
@@ -176,6 +186,14 @@
                   if (form.checkValidity() === false) {
                     event.preventDefault();
                     event.stopPropagation();
+
+                    /* Se for subagente é obrigatorio ter um agente */
+                    if ( $("#subagent_agentid").val()=="pickone" ){
+                        $("#subagent_agentid").addClass("is-invalid");
+                        $("#subagent_agentid").addClass(":invalid");
+                        return;
+                    }
+
                   }
                   form.classList.add('was-validated');
                 }, false);
