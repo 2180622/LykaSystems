@@ -35,18 +35,58 @@
             <h6>Secção de cobrança - <b>{{$product->cliente->nome.' '.$product->cliente->apelido}}</b></h6>
         </div>
         <br>
-        {{dd($responsabilidades)}}
-            <div class="payment-card shadow-sm row">
-                <p class="col-md-4">{{$fase->descricao}}</p>
-                <p class="col-md-5">{{$fase->valorFase}}€</p>
-                <p class="col-md-3">
-                    @if ($fase->verificacaoPago == 0)
-                    Pendente
-                    @else
-                    Pago
-                    @endif
-                </p>
+        <div class="payment-card shadow-sm">
+            <p>VALOR A PAGAR: <b>{{($fase->valorFase)}}€</b></p>
+            <br><br>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="valorPago">Valor pago</label>
+                    <br>
+                    <input type="text" name="valorPago">
+                </div>
+                <div class="col-md-4">
+                    <label for="tipoPagamento">Tipo de pagamento</label>
+                    <br>
+                    <input type="text" name="tipoPagamento">
+                </div>
+                <div class="col-md-4">
+                    <label for="dataPagamento">Data de pagamento</label>
+                    <br>
+                    <input type="text" name="dataPagamento">
+                </div>
             </div>
+            <br><br>
+            <div class="row">
+              <div class="col-md-4">
+                  <label for="valorUni">Valor a pagar a Universidade</label>
+                  <br>
+                  <input type="text" name="valorUni" placeholder="{{$responsabilidades[0]->valorUniversidade1}}€">
+              </div>
+              <div class="col-md-4">
+                  <label for="valorAgente">Valor a pagar ao Agente</label>
+                  <br>
+                  <input type="text" name="valorAgente" placeholder="{{$responsabilidades[0]->valorAgente}}€">
+              </div>
+              <div class="col-md-4">
+                  <label for="valorSubagente">Valor a pagar ao SubAgente</label>
+                  <br>
+                  <input type="text" name="valorSubagente" placeholder="{{$responsabilidades[0]->valorSubAgente}}€">
+              </div>
+            </div>
+            <br><br>
+            <div class="row">
+              <div class="col">
+                  <label for="valorSubagente">Observações</label>
+                  <br>
+                  <input type="text" name="valorSubagente">
+              </div>
+            </div>
+        </div>
+        <div class="form-group text-right">
+            <br>
+            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">confirmar pagamento</button>
+            <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
+        </div>
         <br>
     </div>
 </div>
