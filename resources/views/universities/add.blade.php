@@ -1,36 +1,39 @@
 @extends('layout.master')
 
-{{-- Page Title --}}
-@section('title', 'Adicionar universidade')
+{{-- Titulo da Página --}}
+@section('title', 'Adicionar Universidade')
 
-{{-- CSS Style Link --}}
+{{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('css/university.css')}}" rel="stylesheet">
 @endsection
 
-{{-- Page Content --}}
+{{-- Conteudo da Página --}}
 @section('content')
 
-{{-- Navegação --}}
-<div class="float-left buttons">
-    <a href="javascript:history.go(-1)" title="Voltar">
-        <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-    </a>
-    <a href="javascript:window.history.forward();" title="Avançar">
-        <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-    </a>
-</div>
-<div class="float-right">
-    <a href="#" class="top-button">reportar problema</a>
-</div>
-
-<br><br>
-<div class="cards-navigation">
-    <div class="title">
-        <h6>Adicionar universidade</h6>
+<div class="container mt-2">
+    {{-- Navegação --}}
+    <div class="float-left buttons">
+        <a href="javascript:history.go(-1)" title="Voltar">
+            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
+        </a>
+        <a href="javascript:window.history.forward();" title="Avançar">
+            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
+        </a>
     </div>
-    <br>
-    <form method="POST" action="{{route('universities.store')}}" class="form-group needs-validation pt-3"
+    <div class="float-right">
+        <a href="#" class="top-button">reportar problema</a>
+    </div>
+
+    <br><br>
+
+    <div class="cards-navigation">
+        <div class="title">
+            <h6>Adicionar Universidade</h6>
+        </div>
+        <br>
+
+        <form method="POST" action="{{route('universities.store')}}" class="form-group needs-validation pt-3"
         id="form_university" enctype="multipart/form-data" novalidate>
         @csrf
         @include('universities.partials.add-edit')
@@ -40,14 +43,12 @@
             <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
         </div>
     </form>
+
+    </div>
 </div>
-</div>
+
 
 @endsection
-
-
-
-
 
 
 
