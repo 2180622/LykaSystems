@@ -207,7 +207,7 @@
         {{-- SE FOR AGENTE / SUBAGENTE --}}
         @elseif (Auth::user()->tipo == "agente" && Auth::user()->idAgente != null)
         <div class="mx-auto user_photo rounded-circle shadow">
-            <a href="#" title="Ver as minhas informações">
+            <a href="{{route('agents.show', Auth::user()->agente )}}" title="Ver as minhas informações">
                 {{-- Foto Utilizador --}}
                 @if(Auth::user()->agente->fotografia != null)
                 <img src="{{asset('/storage/agent-photos/'.Auth::user()->agente->fotografia)}}" style="width:100%">

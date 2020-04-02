@@ -27,7 +27,7 @@
                     <option hidden value="pickone">(escolha o agente)</option>
 
                     @foreach($listagents as $agentx)
-                        @if ($agentx->idAgente != $agent->idAgente )
+                        @if ($agentx->idAgente != $agent->idAgente &&  $agentx->tipo != "Subagente" )
                             <option value="{{$agentx->idAgente}}">{{$agentx->nome}} {{$agentx->apelido}} ({{$agentx->pais}})</option>
                         @endif
                     @endforeach
