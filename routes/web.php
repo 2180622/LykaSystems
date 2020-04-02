@@ -41,7 +41,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
 
   /* Produtos */
-  Route::resource('/produtos', 'ProdutoController');
+  Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
+  Route::get('/produtos/print/{produto}', 'ProdutoController@print')->name('produtos.print');
+  Route::resource('/produtos', 'ProdutoController')->only(['print', 'destroy', 'update','show','edit','store']);
 });
 
 /* Email Confirmation */

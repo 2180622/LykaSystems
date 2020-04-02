@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
 use App\Produto;
+use App\ProdutoStock;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -22,14 +24,17 @@ class ProdutoController extends Controller
 
 
     /**
-    * Show the form for creating a new resource.
+    * Display the specified resource.
     *
+    * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function create()
+    public function create(Cliente $client)
     {
+        $cliente = $client;
         $produto = new Produto;
-        return view('produtos.add',compact('produto'));
+        $produtoStock = ProdutoStock::all();
+        return view('produtos.add',compact('produto','produtoStock','cliente'));
     }
 
 
