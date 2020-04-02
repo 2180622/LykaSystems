@@ -35,8 +35,7 @@
             <h6>Secção de cobrança - <b>{{$product->cliente->nome.' '.$product->cliente->apelido}}</b></h6>
         </div>
         <br>
-        @foreach ($fases as $fase)
-        <a href="/payments/{{$product->idProduto}}/{{$fase->idFase}}">
+        {{dd($responsabilidades)}}
             <div class="payment-card shadow-sm row">
                 <p class="col-md-4">{{$fase->descricao}}</p>
                 <p class="col-md-5">{{$fase->valorFase}}€</p>
@@ -48,9 +47,7 @@
                     @endif
                 </p>
             </div>
-        </a>
         <br>
-        @endforeach
     </div>
 </div>
 

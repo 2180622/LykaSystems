@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Fase;
 use App\Produto;
+use App\Responsabilidade;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -21,8 +22,9 @@ class PaymentController extends Controller
       return view('payments.show', compact('product', 'fases'));
     }
 
-    public function showfase()
+    public function showfase(Produto $product, Fase $fase, Responsabilidade $responsabilidades)
     {
-      //Mostrar o pagamento da fase em pormenor com a relação as responsabilidades
+      $responsabilidades = Responsabilidade::where('idResponsabilidade', '=', $fase->idResponsabilidade)->get();
+      return view('payments.showfase', compact('product', 'fase', 'responsabilidades'));
     }
 }
