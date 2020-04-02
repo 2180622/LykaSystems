@@ -710,10 +710,10 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     user-select: none;
     background-color: transparent;
     border: 1px solid transparent;
-    padding: 0.4em 0.65em;
+    padding: 0.2em 0.5em;
     font-size: 1em;
     line-height: 1.5;
-    border-radius: 0.25em;
+    border-radius: 0.2em;
 }
 
 .fc-button:hover {
@@ -758,8 +758,8 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 .fc-button-primary:not(:disabled):active,
 .fc-button-primary:not(:disabled).fc-button-active {
     color: #fff;
-    background-color: #1a252f;
-    border-color: #151e27;
+    background-color: #6c757d;
+    border-color: #6c757d;
 }
 
 .fc-button-primary:not(:disabled):active:focus,
@@ -857,7 +857,6 @@ button .fc-button.fc-button-primary{
 .fc-toolbar h2 {
     font-size: 1.75em;
     margin: 0;
-    padding-left: 150px;
 }
 
 /* View Structure
@@ -942,7 +941,7 @@ button .fc-button.fc-button-primary{
 
     .fc tbody .fc-row .fc-content-skeleton tbody tr:last-child td {
         /* only works in newer browsers */
-        padding-bottom: 1em;
+        padding-bottom: 0.5em;
         /* ...gives space within the skeleton. also ensures min height in a way */
     }
 

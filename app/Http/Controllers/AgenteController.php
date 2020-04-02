@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Agente;
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Mail;
 use App\Mail\SendEmailConfirmation;
+
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateAgenteRequest;
 use App\Http\Requests\StoreAgenteRequest;
 use App\Http\Requests\StoreUserRequest;
-
+use App\Http\Requests\UpdateUserRequest;
 
 
 
@@ -26,10 +29,28 @@ class AgenteController extends Controller
      */
     public function index()
     {
-        $agents = Agente::all();
-        $totalagents = $agents->count();
 
-        return view('agents.list', compact('agents', 'totalagents'));
+
+        /* Se for um agente: mostra os sub agentes */
+        if(Auth::user()->tipo == "agente"){
+
+            $agents = Agente::
+            where('subagent_agentid', '=', Auth::user()->agente->idAgente)
+            ->get();
+            $totalagents = $agents->count();
+
+            return view('agents.list', compact('agents', 'totalagents'));
+
+
+       /* Se for um Admin: mostra só os agentes */
+        }else{
+            $agents = Agente::all();
+            $totalagents = $agents->count();
+
+            return view('agents.list', compact('agents', 'totalagents'));
+
+        }
+
     }
 
     /**
@@ -40,7 +61,13 @@ class AgenteController extends Controller
     public function create()
     {
         $agent = new Agente;
-        return view('agents.add',compact('agent'));
+
+        /* apenas de agentes */
+        $listagents = Agente::
+        whereNull('subagent_agentid')
+        ->get();
+
+        return view('agents.add',compact('agent','listagents'));
     }
 
     /**
@@ -57,12 +84,11 @@ class AgenteController extends Controller
         $fields = $requestAgent->validated();
         $agent->fill($fields);
 
+
         /* obtem os dados para criar o utilizador */
         $user = new User;
         $fieldsUser = $requestUser->validated();
         $user->fill($fieldsUser);
-
-
 
         /* Criação de Agente */
 
@@ -82,9 +108,11 @@ class AgenteController extends Controller
         $t=time();
         $agent->create_at == date("Y-m-d",$t);
 
+
+
+
+
         $agent->save();
-
-
 
         /* Criação de utilizador */
 
@@ -100,7 +128,7 @@ class AgenteController extends Controller
         $name = $agent->nome;
         Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
-        return redirect()->route('agents.index')->with('success', 'Agente criado com sucesso. Aguarda Ativação');
+        return redirect()->route('agents.index')->with('success', 'Registo criado com sucesso. Aguarda Ativação');
     }
 
     /**
@@ -111,7 +139,29 @@ class AgenteController extends Controller
      */
     public function show(Agente $agent)
     {
-        return view('agents.show',compact("agent"));
+
+        /* Lista de sub-agentes do $agente */
+        $listagents = Agente::
+        where('subagent_agentid', '=',$agent->idAgente)
+        ->get();
+
+        if ($listagents->isEmpty()) {
+            $listagents=null;
+        }
+
+
+
+        /* caso seja um sub-agente, obtem o agente que o adicionou */
+        if($agent->tipo=="Subagente"){
+            $mainAgent=Agente::
+            where('idAgente', '=',$agent->subagent_agentid)
+            ->first();
+        }else{
+            $mainAgent=null;
+        }
+
+        return view('agents.show',compact("agent",'listagents','mainAgent'));
+
     }
 
 
@@ -137,7 +187,13 @@ class AgenteController extends Controller
      */
     public function edit(Agente $agent)
     {
-        return view('agents.edit', compact('agent'));
+
+        /* apenas de agentes */
+        $listagents = Agente::
+        whereNull('subagent_agentid')
+        ->get();
+
+        return view('agents.edit', compact('agent','listagents'));
     }
 
     /**
@@ -152,7 +208,6 @@ class AgenteController extends Controller
         $fields = $request->validated();
         $agent->fill($fields);
 
-
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
             $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
@@ -163,11 +218,25 @@ class AgenteController extends Controller
             $agent->fotografia = $profileImg;
         }
 
+
+        // Caso se mude o de agente para subagente, garante que nenhum o agente não tem id de subagente
+        DB::table('agente')
+        ->where('idAgente', $agent->idAgente)
+        ->update(['subagent_agentid' => null]);
+
+
         // data em que foi modificado
         $t=time();
         $agent->updated_at == date("Y-m-d",$t);
 
         $agent->save();
+
+
+        /* update do user->email */
+        DB::table('user')
+        ->where('idAgente', $agent->idAgente)
+        ->update(['email' => $agent->email]);
+
 
          return redirect()->route('agents.index')->with('success', 'Dados do agente modificados com sucesso');
     }
@@ -184,11 +253,39 @@ class AgenteController extends Controller
         $agent->delete();
 
 
+        /* Apaga subagentes se o seu agente for apagado */
+        $subagents =DB::table('Agente')
+        ->where('subagent_agentid', $agent->idAgente)
+        ->get();
+
+        /* apaga a lista de subagentes do agente que esta a ser apagado */
+        if (!$subagents->isEmpty()) {
+            foreach ($subagents as $subagent) {
+                DB::table('Agente')
+                ->where('subagent_agentid', $agent->idAgente)
+                ->update(['deleted_at' => $agent->deleted_at]);
+            }
+        }
+
+
+
 
         /* "Apaga" dos utilizadores */
-        DB::table('user')
+        DB::table('User')
         ->where('idAgente', $agent->idAgente)
         ->update(['deleted_at' => $agent->deleted_at]);
+
+
+        /* "Apaga" dos utilizadores os subagentes que tiveram o seu agente apagado */
+
+        /* apaga a lista de subagentes do agente que esta a ser apagado */
+        if (!$subagents->isEmpty()) {
+            foreach ($subagents as $subagent) {
+                DB::table('User')
+                ->where('idAgente', '=', $subagent->idAgente)
+                ->update(['deleted_at' => $agent->deleted_at]);
+            }
+        }
 
 
         return redirect()->route('agents.index')->with('success', 'Agente eliminado com sucesso');

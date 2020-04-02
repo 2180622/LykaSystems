@@ -7,13 +7,17 @@ Auth::routes();
 
 /* Route group protected with authentication */
 Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
+
+    /* Logout */
+    Route::get('/logout', 'Auth\LoginController@logout');
+
     /* Dashboard */
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     /* Report Problem */
     Route::get('/reportproblem', 'DashboardController@report')->name('report');
 
-    /* contacts */
+    /* Contacts */
     Route::resource('/contacts', 'ContactoController');
 
     /* Universidades */
@@ -33,8 +37,10 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Agenda */
     Route::resource('/agends', 'AgendController');
 
-    /* Logout */
-    Route::get('/logout', 'Auth\LoginController@logout');
+    /* Pagamentos */
+    Route::get('/payments', 'PaymentController@index')->name('payments.index');
+    Route::get('/payments/{product}', 'PaymentController@show')->name('payments.show');
+    Route::get('/payments/{product}/{fase}', 'PaymentController@showfase')->name('payments.showfase');
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
@@ -51,8 +57,5 @@ Route::get('/confirmation/{user}', 'AccountConfirmationController@mailconfirmati
 Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
 
 
-
-
-
 /* Edgar Teste -> Eliminar no futuro */
-Route::get('/data', 'EdgarTesteController@index');
+Route::get('/edgarteste', 'EdgarTesteController@index');

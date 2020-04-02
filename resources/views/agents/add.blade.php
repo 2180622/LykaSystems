@@ -13,9 +13,13 @@
 
 <div class="container mt-2">
     {{-- Navegação --}}
-    <div class="float-left">
-        <a href="javascript:history.go(-1)" title="Voltar"><i class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
-        <a href="javascript:window.history.forward();" title="Avançar"><i class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+    <div class="float-left buttons">
+        <a href="javascript:history.go(-1)" title="Voltar">
+            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
+        </a>
+        <a href="javascript:window.history.forward();" title="Avançar">
+            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
+        </a>
     </div>
     <div class="float-right">
         <a href="#" class="top-button">reportar problema</a>
@@ -27,13 +31,15 @@
             <h6>Adicionar agente</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('agents.store')}}" class="form-group needs-validation pt-3" id="form_agent" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('agents.store')}}" class="form-group needs-validation pt-3" id="form_agent"
+            enctype="multipart/form-data" novalidate>
             @csrf
             @include('agents.partials.add-edit')
             <div class="row mt-4">
                 <div class="col">
                     <div class="alert alert-primary " role="alert">
-                        <i class="fas fa-info-circle mr-1"></i><strong>Nota: </strong>O agente irá receber um e-mail para ativação da sua conta pessoal
+                        <i class="fas fa-info-circle mr-1"></i><strong>Nota: </strong>O agente irá receber um e-mail
+                        para ativação da sua conta pessoal
                     </div>
 
                 </div>

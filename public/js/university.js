@@ -88,7 +88,7 @@ $(document).ready(function () {
     /* VALIDAÇÃO DE INPUTS */
 
     /* Apenas letras:  .lettersOnly();  */
-    $("#inputNome").lettersOnly();
+/*     $("#inputNome").lettersOnly(); */
 
     /* Apenas numeros:  .numbersOnly();  */
     $("#inputTelefone").numbersOnly();
@@ -97,7 +97,7 @@ $(document).ready(function () {
 
 
 
-    
+
 
     /* VALIDAÇÃO DO FORMULÁRIO */
     (function () {

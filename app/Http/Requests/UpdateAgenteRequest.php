@@ -24,6 +24,7 @@ class UpdateAgenteRequest extends FormRequest
     public function rules()
     {
         return [
+            'subagent_agentid'=> 'nullable',
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',

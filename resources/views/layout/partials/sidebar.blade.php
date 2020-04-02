@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <div class="mt-5 mx-auto mb-4 pt-3 font-weight-bold" style="font-size:18px;">
+    <div class="mt-5 mx-auto mb-4 pt-3 font-weight-bold" style="font-size:18px; padding-left:5px;">
         Notificações
     </div>
     @if($Notificacoes)
