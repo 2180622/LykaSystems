@@ -69,7 +69,7 @@
         <li class="menu-option">
             <a href="{{route('produtostock.index')}}">
                 <div class="menu-icon">
-                    <i class="fas fa-user-tie mr-2"></i>
+                    <i class="fas fa-layer-group mr-2"></i>
                 </div>
                 <span class="option-name {{Route::is('produtostock.*') ? 'active' : ''}}">Produtos Stock</span>
             </a>

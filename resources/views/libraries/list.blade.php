@@ -21,15 +21,18 @@
     <div class="container mt-2 ">
 
         {{-- Navegação --}}
-        <div class="float-left">
-            <a href="javascript:history.go(-1)" title="Voltar"><i
-                    class="fas fa-arrow-left rounded-circle p-2 nav_btns mr-3"></i></a>
-            <a href="javascript:window.history.forward();" title="Avançar"><i
-                    class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
+        {{-- Navegação --}}
+        <div class="float-left buttons">
+            <a href="javascript:history.go(-1)" title="Voltar">
+                <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
+            </a>
+            <a href="javascript:window.history.forward();" title="Avançar">
+                <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
+            </a>
         </div>
 
         <div class="float-right">
-            <a href="#" class="top-button">Reportar Probema</a>
+            <a href="#" class="top-button">Reportar Problema</a>
         </div>
 
         <br><br>
