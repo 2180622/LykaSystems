@@ -4,25 +4,59 @@ namespace App\Http\Controllers;
 
 use App\Cliente;
 use App\User;
-use Mail;
-use App\Mail\SendEmailConfirmation;
+use App\Produto;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
+/* use Illuminate\Http\Request; */
 
 use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\StoreUserRequest;
 
+use Mail;
+use App\Mail\SendEmailConfirmation;
+
+
 class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Cliente::all();
-        $totalestudantes = $clients->count();
 
-        return view('clients.list', compact('clients', 'totalestudantes'));
+        /* Lista de clientes caso seja admin */
+        if (Auth::user()->tipo == "admin"){
+            $clients = Cliente::all();
+            $totalestudantes = $clients->count();
+
+            return view('clients.list', compact('clients', 'totalestudantes'));
+
+
+        /* Lista de clientes caso seja agente /  ++++++++FALTA: subagente */
+        }else{
+
+
+            /* Lista todos os produtos registados em nome do agente que está logado */
+
+            /* SELECT Cliente.idCliente,nome,apelido,genero,email,telefone1,telefone2,dataNasc,numCCid,numPassaport,dataValidPP,localEmissaoPP,paisNaturalidade,morada,cidade,moradaResidencia,passaportPaisEmi,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,obsPessoais,obsFinanceiras,obsAcademicas
+            FROM cliente JOIN produto ON Produto.idCliente=Cliente.idCliente where Produto.idAgente="7" GROUP BY cliente.idCliente ORDER BY cliente.idCliente asc */
+
+
+
+            $clients = DB::table('Cliente')
+            ->selectRaw("Cliente.idCliente,nome,apelido,genero,email,telefone1,telefone2,dataNasc,numCCid,numPassaport,dataValidPP,localEmissaoPP,paisNaturalidade,morada,cidade,moradaResidencia,passaportPaisEmi,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,obsPessoais,obsFinanceiras,obsAcademicas")
+            ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
+            ->where('Produto.idAgente', '=', Auth::user()->agente->idAgente)
+            ->groupBy('cliente.idCliente')
+            ->orderBy('cliente.idCliente','asc')
+            ->get();
+
+            dd($clients);
+
+        /* mostra a lista */
+        return view('clients.list', compact('clients'));
+        }
+
     }
 
 
@@ -117,9 +151,15 @@ class ClientController extends Controller
 
         if ($produtos->isEmpty()) {
             $produtos=null;
+        }else{
+
+            $totalprodutos=0;
+            foreach ($produtos as $produto) {
+                $totalprodutos=$totalprodutos+$produto->valorTotal;
+            }
         }
 
-        return view('clients.show',compact("client","produtos"));
+        return view('clients.show',compact("client","produtos","totalprodutos"));
     }
 
 
