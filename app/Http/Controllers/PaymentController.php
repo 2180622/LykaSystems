@@ -13,4 +13,9 @@ class PaymentController extends Controller
       $numberProducts = Produto::where('valorTotal', '!=', '0')->get();
       return view('payments.list', compact('products', 'numberProducts'));
     }
+
+    public function show(Produto $product)
+    {
+      return view('payments.show', compact('product'));
+    }
 }

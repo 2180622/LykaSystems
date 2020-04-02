@@ -89,21 +89,19 @@
                     <tr>
                         <td>
                             <div class="align-middle mx-auto rounded bg-white" style="overflow:hidden; width:50px; height:50px">
-                                <a class="name_link" href="#">
-                                    @if($product->cliente->fotografia)
-                                        <img src="{{Storage::disk('public')->url('client-photos/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
-                                        @elseif($product->cliente->genero == 'F')
-                                            <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                            @else
-                                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                            @endif
-                                </a>
+                                @if($product->cliente->fotografia)
+                                    <img src="{{Storage::disk('public')->url('client-photos/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
+                                    @elseif($product->cliente->genero == 'F')
+                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
+                                        @else
+                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                                        @endif
                             </div>
                         </td>
                         {{-- Nome e Apelido --}}
-                        <td class="align-middle"><a class="name_link" href="#">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
+                        <td class="align-middle"><a class="name_link" href="{{route('payments.show', $product)}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
                         {{-- Descrição --}}
-                        <td class="align-middle">Fase 01</td>
+                        <td class="align-middle">{{$product->descricao}}</td>
                         {{-- Valor --}}
                         <td class="align-middle">{{$product->valorTotal}}€</td>
                         {{-- Estado --}}
