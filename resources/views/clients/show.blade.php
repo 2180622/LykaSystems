@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-<link href="{{asset('css/datatables_general_style.css')}}" rel="stylesheet">
+<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
 
@@ -51,7 +51,7 @@
 
             </div>
 
-            <div class="col p-2">
+            <div class="col p-2" style="min-width:280px !important">
 
                 {{-- Informações Pessoais --}}
                 <div><span class="text-secondary ">Nome:</span> {{$client->nome}} {{$client->apelido}}</div><br>
@@ -75,7 +75,7 @@
 
             </div>
 
-            <div class="col">
+            <div class="col p-2" style="min-width:230px !important">
                 <div><span class="text-secondary">Estado financeiro: </span><span class="text-success">Regularizado</span></div><br>
 
                 <div><span class="text-secondary">Observações pessoais:</span><br>
@@ -89,7 +89,9 @@
                 <div class="text-muted"><small>Adicionado: {{ date('d-M-y', strtotime($client->created_at)) }}</small></div>
                 <div class="text-muted"><small>Ultima atualização: {{ date('d-M-y', strtotime($client->updated_at)) }}</small></div>
 
-
+                @if (Auth::user()->tipo == "admin")
+                    <div class="mt-4"><a href="#" class="top-button" ><i class="fas fa-plus mr-2"></i>Adicionar novo produto</a></div>
+                @endif
 
             </div>
 
@@ -132,8 +134,8 @@
         <div class="tab-content p-2 " id="myTabContent">
             {{-- Conteudo: Produtos --}}
             <div class="tab-pane fade active show text-muted" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                @if($produtos)
 
+                @if($produtos)
                 <table nowarp class="table table-borderless text-muted" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
 
                     {{-- Cabeçalho da tabela --}}

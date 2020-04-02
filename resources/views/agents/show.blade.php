@@ -64,7 +64,7 @@
 
             </div>
 
-            <div class="col p-2">
+            <div class="col p-2" style="min-width:280px !important">
 
 
                 {{-- Informações Pessoais --}}
@@ -103,7 +103,7 @@
 
             </div>
 
-            <div class="col">
+            <div class="col p-2" style="min-width:280px !important">
 
                     <div class="mb-2 text-muted">Lista de subagentes:</div>
 
