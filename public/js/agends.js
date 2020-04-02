@@ -6,7 +6,6 @@ var yyyy = dateToday.getFullYear();
 dateToday = mm + '/' + dd + '/' + yyyy;
 
 document.addEventListener('DOMContentLoaded', function () {
-    var initialLocaleCode = 'pt';
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -17,19 +16,13 @@ document.addEventListener('DOMContentLoaded', function () {
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
         dateToday,
-        locale: initialLocaleCode,
+        locale: 'pt',
         editable: true,
-        events: [
-            {
-                title: 'rrule event',
-                rrule: {
-                    dtstart: '2020-02-09T13:00:00',
-                    // until: '2020-02-01',
-                    freq: 'weekly'
-                },
-                duration: '02:00'
-            }
-        ],
+        navLinks: true,
+        eventLimit: true,
+        selectable: true,
+        events: routeEvents('routeEventAgend'),
+
         eventClick: function (arg) {
             if (confirm('delete event?')) {
                 arg.event.remove()
@@ -38,12 +31,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     calendar.render();
-
-    // build the locale selector's options
-    calendar.getAvailableLocaleCodes().forEach(function (localeCode) {
-        var optionEl = document.createElement('option');
-        optionEl.value = localeCode;
-        optionEl.selected = localeCode === initialLocaleCode;
-        optionEl.innerText = localeCode;
-    });
 });
+

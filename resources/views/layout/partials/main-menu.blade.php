@@ -65,7 +65,7 @@
         @endif
 
 
-        {{-- Produtos --}}
+        {{-- Produtos
         <li class="menu-option">
             <a href="{{route('produtostock.index')}}">
                 <div class="menu-icon">
@@ -73,7 +73,7 @@
                 </div>
                 <span class="option-name {{Route::is('produtostock.*') ? 'active' : ''}}">Produtos Stock</span>
             </a>
-        </li>
+        </li>--}}
         <br>
 
         <!-- Pagamentos -->
