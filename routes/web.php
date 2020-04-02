@@ -7,13 +7,17 @@ Auth::routes();
 
 /* Route group protected with authentication */
 Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
+
+    /* Logout */
+    Route::get('/logout', 'Auth\LoginController@logout');
+
     /* Dashboard */
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     /* Report Problem */
     Route::get('/reportproblem', 'DashboardController@report')->name('report');
 
-    /* contacts */
+    /* Contacts */
     Route::resource('/contacts', 'ContactoController');
 
     /* Universidades */
@@ -34,10 +38,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/agends', 'AgendController');
 
     /* Pagamentos */
-    Route::resource('/payments', 'PaymentController');
-
-    /* Logout */
-    Route::get('/logout', 'Auth\LoginController@logout');
+    Route::get('/payments', 'PaymentController@index')->name('payments.index');
+    Route::get('/payments/{product}', 'PaymentController@show')->name('payments.show');
+    // Route::get('/payments/{product}/{fase}', 'PaymentController@showfase')->name('payments.showfase');
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
@@ -45,6 +48,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* ProdutosStock */
     Route::resource('/produtostock', 'ProdutosstockController');
+
     /* Produtos */
     Route::resource('/produtos', 'ProdutoController');
 });
@@ -52,9 +56,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 /* Email Confirmation */
 Route::get('/confirmation/{user}', 'AccountConfirmationController@mailconfirmation')->name('confirmation.mail');
 Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
-
-
-
 
 
 /* Edgar Teste -> Eliminar no futuro */

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fase;
 use App\Produto;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,14 @@ class PaymentController extends Controller
       return view('payments.list', compact('products', 'numberProducts'));
     }
 
-    public function show(Produto $product)
+    public function show(Fase $fase, Produto $product)
     {
-      return view('payments.show', compact('product'));
+      $fases = Fase::where('idProduto', '=', $product->idProduto)->get();
+      return view('payments.show', compact('product', 'fases'));
+    }
+
+    public function showfase()
+    {
+      //Mostrar o pagamento da fase em pormenor com a relação as responsabilidades
     }
 }
