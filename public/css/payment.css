@@ -20,8 +20,10 @@ a:hover {
     text-decoration: none;
 }
 
-input {
+input, select, textarea{
+    width: 100%;
     border: none;
+    resize: none;
     padding: 5px 10px;
     border-radius: 5px;
     background-color: #EAEAEA;
