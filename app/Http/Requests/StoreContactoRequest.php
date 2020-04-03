@@ -31,7 +31,7 @@ class StoreContactoRequest extends FormRequest
             'email' => 'nullable',
             'fax' => 'nullable',
             'observacao' => 'nullable',
-            'favorito' => 'required|required|in:1,0',
+            'favorito' => 'required|in:1,0',
 
         ];
     }

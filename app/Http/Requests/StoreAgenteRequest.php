@@ -27,7 +27,7 @@ class StoreAgenteRequest extends FormRequest
         'subagent_agentid'=> 'nullable',
         'nome' => 'required',
         'apelido' => 'required',
-        'email' => 'required|unique:Agente|unique:user',
+        'email' => 'required|unique:Agente|unique:User',
         'dataNasc' => 'required',
         'fotografia' => 'nullable',
         'morada' => 'required',

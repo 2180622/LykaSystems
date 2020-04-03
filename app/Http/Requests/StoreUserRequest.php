@@ -13,7 +13,7 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-          'email' => 'required|unique:user',
+          'email' => 'required|unique:User',
           'password' => 'nullable',
         ];
     }
