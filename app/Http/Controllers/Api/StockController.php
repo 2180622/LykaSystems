@@ -13,14 +13,14 @@ class StockController extends Controller
 {
     public function produtos(){
         $produtos = ProdutoStock::all();
-        return $produtos;
+        return ['results' => $produtos];
     }
     public function fases($id){
         $fases = FaseStock::where('idProdutoStock','=',$id)->get();
-        return $fases;
+        return ['results' => $fases];
     }
     public function documentos($id){
         $documentos = DocStock::where('idFaseStock','=',$id)->get();
-        return $documentos;
+        return ['results' => $documentos];
     }
 }

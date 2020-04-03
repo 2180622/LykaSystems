@@ -1,7 +1,7 @@
 var clones = $('.clonar').clone();
 $('.fases').html('');
 function AtualizaProduto(Produtos){
-    var idproduto = new String;
+    var idproduto = new Array;
     $("select.toolbar-escolha#produto").each(function () {
         idproduto.push(this.value);
     });
