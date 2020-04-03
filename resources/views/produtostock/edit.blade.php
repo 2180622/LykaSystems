@@ -33,11 +33,11 @@
             <br>
 
 
-            <form method="POST" action="{{route('produtos.update',$client)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="POST" action="{{route('produtostock.update',$produtoStock)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
-                @include('produtos.partials.add-edit')
+                @include('produtostock.partials.add-edit')
                 <div class="form-group text-right">
                     <br><br>
                     <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>

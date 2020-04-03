@@ -19,9 +19,9 @@ class Universidade extends Migration
             $table->bigIncrements('idUniversidade');
             $table->string('nome',255);
             $table->string('morada',255);
-            $table->integer('telefone');
+            $table->string('telefone',255);
             $table->string('email',255);
-            $table->bigInteger('NIF');
+            $table->string('NIF',255);
                 $table->unique('NIF');
             $table->string('IBAN',255);
             $table->longText('obsContactos')->nullable();

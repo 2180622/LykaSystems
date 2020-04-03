@@ -45,7 +45,7 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Estão registados no sistema <strong>{{$totaluniversidades}}</strong> universidades
+                Existem <strong>{{$totaluniversidades}}</strong> registo(s) no sistema
             </div>
         </div>
 
@@ -90,9 +90,9 @@
                             {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
                         </th>
 
-                        <th>Nome Universidade</th>
+                        <th>Nome da universidade</th>
                         <th>E-mail</th>
-                        <th>Morada</th>
+                        {{-- <th>Morada</th> --}}
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -105,26 +105,22 @@
                         <td>
                             <div class="align-middle mx-auto shadow-sm rounded"
                                 style="overflow:hidden; width:50px; height:50px">
-                                @if($university->fotografia)
-                                <img src="{{Storage::disk('public')->url('client-photos/').$university->fotografia}}"
+                                <a class="name_link" href="{{route('universities.show',$university)}}">
+                                    <img src="{{Storage::disk('public')->url('default-photos/university.png')}}"
                                     width="100%" class="mx-auto">
-                                @else
-                                <img src="{{Storage::disk('public')->url('default-photos/university.png')}}"
-                                    width="100%" class="mx-auto">
-                                @endif
+                                </a>
                             </div>
-                            {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
-                            --}}
+
                         </td>
 
                         {{-- Nome --}}
-                        <td class="align-middle">{{ $university->nome }}</td>
+                        <td class="align-middle"><a class="name_link" href="{{route('universities.show',$university)}}">{{ $university->nome }}</td>
 
                         {{-- E-Mail --}}
                         <td class="align-middle">{{ $university->email }}</td>
 
                         {{-- Morada --}}
-                        <td class="align-middle">{{ $university->morada }}</td>
+                        {{-- <td class="align-middle">{{ $university->morada }}</td> --}}
 
 
                         {{-- OPÇÔES --}}

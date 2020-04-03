@@ -60,14 +60,23 @@ class AgenteController extends Controller
      */
     public function create()
     {
-        $agent = new Agente;
 
-        /* apenas de agentes */
-        $listagents = Agente::
-        whereNull('subagent_agentid')
-        ->get();
+        if (Auth::user()->tipo == "admin"){
+            $agent = new Agente;
 
-        return view('agents.add',compact('agent','listagents'));
+            /* lista dos agentes principais */
+            $listagents = Agente::
+            whereNull('subagent_agentid')
+            ->get();
+
+            return view('agents.add',compact('agent','listagents'));
+
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
+
+
     }
 
     /**
@@ -148,9 +157,7 @@ class AgenteController extends Controller
         if ($listagents->isEmpty()) {
             $listagents=null;
         }
-
-
-
+        
         /* caso seja um sub-agente, obtem o agente que o adicionou */
         if($agent->tipo=="Subagente"){
             $mainAgent=Agente::
@@ -188,13 +195,23 @@ class AgenteController extends Controller
     public function edit(Agente $agent)
     {
 
-        /* apenas de agentes */
-        $listagents = Agente::
-        whereNull('subagent_agentid')
-        ->get();
+        if (Auth::user()->tipo == "admin"){
+            /* lista dos agentes principais */
+            $listagents = Agente::
+            whereNull('subagent_agentid')
+            ->get();
 
-        return view('agents.edit', compact('agent','listagents'));
+            return view('agents.edit', compact('agent','listagents'));
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
+
     }
+
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -220,7 +237,7 @@ class AgenteController extends Controller
 
 
         // Caso se mude o de agente para subagente, garante que nenhum o agente não tem id de subagente
-        DB::table('agente')
+        DB::table('Agente')
         ->where('idAgente', $agent->idAgente)
         ->update(['subagent_agentid' => null]);
 
@@ -233,7 +250,7 @@ class AgenteController extends Controller
 
 
         /* update do user->email */
-        DB::table('user')
+        DB::table('User')
         ->where('idAgente', $agent->idAgente)
         ->update(['email' => $agent->email]);
 

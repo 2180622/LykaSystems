@@ -36,13 +36,13 @@ class Cliente extends Migration
             $table->string('moradaResidencia',255);
             $table->string('passaportPaisEmi',255);
             $table->string('nomePai',255)->nullable();
-            $table->integer('telefonePai')->nullable();
+            $table->string('telefonePai',255)->nullable();
             $table->string('emailPai',255)->nullable();
             $table->string('nomeMae',255)->nullable();
-            $table->integer('telefoneMae')->nullable();
+            $table->string('telefoneMae',255)->nullable();
             $table->string('emailMae',255)->nullable();
             $table->string('fotografia',255)->nullable()->default('default.png');
-            $table->bigInteger('NIF');
+            $table->string('NIF',255);
                 $table->unique('NIF');
             $table->string('IBAN',255);
             $table->integer('nivEstudoAtual');

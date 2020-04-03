@@ -99,8 +99,6 @@
                                 <div class="align-middle mx-auto shadow-sm rounded"
                                      style="overflow:hidden; width:50px; height:50px">
                                 </div>
-                                {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
-                                --}}
                             </td>
 
                             {{-- Nome e Apelido --}}

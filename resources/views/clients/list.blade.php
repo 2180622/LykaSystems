@@ -45,7 +45,7 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Estão registados no sistema <strong>{{$totalestudantes}}</strong> estudantes
+                Existem <strong>{{$totalestudantes}}</strong> registo(s) no sistema
             </div>
         </div>
 
@@ -83,7 +83,7 @@
                     <tr>
                         <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
-                        <th>Nº Identificação</th>
+                        {{-- <th>Nº Identificação</th> --}}
                         <th>Nº Passaporte</th>
                         <th class="text-center">Opções</th>
                     </tr>
@@ -113,7 +113,7 @@
                         <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
 
                         {{-- numCCid --}}
-                        <td class="align-middle">{{ $client->numCCid }}</td>
+                        {{-- <td class="align-middle">{{ $client->numCCid }}</td> --}}
 
                         {{-- numPassaport --}}
                         <td class="align-middle">{{ $client->numPassaport }}</td>

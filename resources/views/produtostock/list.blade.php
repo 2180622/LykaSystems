@@ -91,29 +91,27 @@
                     @foreach ($produtoStocks as $produtoStock)
                     <tr>
                         {{-- Descrição --}}
-                        <th class="align-middle"><a class="name_link" href="{{route('produtostock.show',$produtoStock)}}">{{ $produtoStock->descricao }}</a></th>
+                        <td class="align-middle"><a class="name_link" href="{{route('produtostock.show',$produtoStock)}}">{{ $produtoStock->descricao }}</a></td>
 
                         {{-- Tipo --}}
-                        <th class="align-middle">{{ $produtoStock->tipo }}</th>
+                        <td class="align-middle">{{ $produtoStock->tipo }}</td>
 
                         {{-- Ano Académico --}}
-                        <th class="align-middle">{{ $produtoStock->anoAcademico }}</th>
+                        <td class="align-middle">{{ $produtoStock->anoAcademico }}</td>
 
                         {{-- OPÇÔES --}}
-                        <th class="text-center align-middle">
-                            <a href="{{route('produtostock.show',$produtoStock)}}" class="btn_list_opt "
-                                title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                            <a href="{{route('produtostock.edit',$produtoStock)}}" class="btn_list_opt btn_list_opt_edit"
-                                title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                        <td class="text-center align-middle">
+                            <a href="{{route('produtostock.show',$produtoStock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                            <a href="{{route('produtostock.edit', $produtoStock)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
-                            <form method="POST" role="form" id="{{ $produtoStock->idProdutoStock }}"
+                            {{-- <form method="POST" role="form" id="{{ $produtoStock->idProdutoStock }}"
                                 action="{{route('produtostock.destroy',$produtoStock)}}" class="d-inline-block form_client_id">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
                                     data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                            </form>
-                        </th>
+                            </form> --}}
+                        </td>
                     </tr>
                     @endforeach
 
@@ -130,6 +128,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-<script src="{{asset('/js/clients.js')}}"></script>
+<script src="{{asset('/js/produtos_stock.js')}}"></script>
 
 @endsection
