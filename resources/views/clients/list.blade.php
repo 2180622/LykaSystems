@@ -45,7 +45,7 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Estão registados no sistema <strong>{{$totalestudantes}}</strong> estudantes
+                Existem <strong>{{$totalestudantes}}</strong> registo(s) no sistema
             </div>
         </div>
 
