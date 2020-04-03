@@ -248,7 +248,7 @@ class ClientController extends Controller
 
 
         /* "Apaga" dos utilizadores */
-        DB::table('user')
+        DB::table('User')
         ->where('idCliente', $client->idCliente)
         ->update(['deleted_at' => $client->deleted_at]);
 
