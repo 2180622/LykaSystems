@@ -25,7 +25,7 @@ class ProdutosstockController extends Controller
         $produtoStock = new ProdutoStock();
         $produtoStock->fill($fields);
 
-        $produtoStock-save();
+        $produtoStock->save();
         return redirect()->route('produtostock.index')->with('success', 'Produto Stock adicionado com sucesso');
     }
 }
