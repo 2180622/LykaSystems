@@ -220,7 +220,7 @@ class AgenteController extends Controller
 
 
         // Caso se mude o de agente para subagente, garante que nenhum o agente não tem id de subagente
-        DB::table('agente')
+        DB::table('Agente')
         ->where('idAgente', $agent->idAgente)
         ->update(['subagent_agentid' => null]);
 
@@ -233,7 +233,7 @@ class AgenteController extends Controller
 
 
         /* update do user->email */
-        DB::table('user')
+        DB::table('User')
         ->where('idAgente', $agent->idAgente)
         ->update(['email' => $agent->email]);
 

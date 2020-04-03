@@ -102,7 +102,7 @@
 
                 @if (Auth::user()->tipo == "admin")
                 <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i
-                            class="fas fa-plus mr-2"></i>Adicionar novo produto</a></div>
+                            class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
                 @endif
 
             </div>
@@ -147,76 +147,84 @@
 
 
 
-            <div class="tab-content p-2 " id="myTabContent">
-                {{-- Conteudo: Produtos --}}
-                <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                    <div class="float-right">
-                        <a href="{{route('produtos.create',$client)}}" class="top-button">Adicionar Produto</a>
-                    </div>
-                    @if($produtos)
 
-                        <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+        <div class="tab-content p-2 " id="myTabContent">
+            {{-- Conteudo: Produtos --}}
+            <div class="tab-pane fade active show text-muted" id="produtos" role="tabpanel"
+                aria-labelledby="produtos-tab">
 
-                            {{-- Cabeçalho da tabela --}}
-                            <thead>
-                                <tr>
-                                    <th>Tipo</th>
-                                    <th>Descrição</th>
-                                    <th>Ano Academico</th>
-                                    <th>Total</th>
-                                </tr>
+                @if($produtos)
+                    <table nowarp class="table table-borderless text-muted" id="dataTable" width="100%" row-border="0"
+                        style="overflow:hidden;">
+
+                        {{-- Cabeçalho da tabela --}}
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                                <th>Ano Academico</th>
+                                <th>Valor</th>
+                            </tr>
 
 
 
-                            </thead>
+                        </thead>
 
-                            {{-- Corpo da tabela --}}
-                            <tbody>
+                        {{-- Corpo da tabela --}}
+                        <tbody>
 
-                                @foreach ($produtos as $produto)
-                                <tr>
-                                    {{-- Tipo --}}
-                                    <td class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->tipo}}</a></td>
+                            @foreach ($produtos as $produto)
+                            <tr>
+                                {{-- Tipo --}}
+                                <td class="align-middle"><a class="name_link"
+                                        href="{{route('produtos.show',$produto)}}">{{$produto->tipo}}</a></td>
 
-                                    {{-- Descrição --}}
-                                    <td class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></td>
+                                {{-- Descrição --}}
+                                <td class="align-middle"><a class="name_link"
+                                        href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></td>
 
-                                    {{-- Ano Academico --}}
-                                    <td class="align-middle">{{$produto->anoAcademico}}</td>
+                                {{-- Ano Academico --}}
+                                <td class="align-middle">{{$produto->anoAcademico}}</td>
 
-                                    {{-- Total --}}
-                                    <td class="align-middle">{{$produto->valorTotal.'€'}}</td>
+                                {{-- Total --}}
+                                <td class="align-middle">{{$produto->valorTotal.'€'}}</td>
 
-                            {{-- Descrição --}}
-                            <td class="align-middle"><a class="name_link" href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></td>
 
-                                    {{-- OPÇÔES --}}
-                                {{--  <th class="text-center align-middle">
-                                        <a href="{{route('produtos.show',$produto)}}" class="btn_list_opt "
-                                            title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                        <a href="{{route('produtos.edit',$produto)}}" class="btn_list_opt btn_list_opt_edit"
-                                            title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                                {{-- OPÇÔES --}}
+                                {{-- <th class="text-center align-middle">
+                                    <a href="{{route('produtos.show',$produto)}}" class="btn_list_opt "
+                                title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="{{route('produtos.edit',$produto)}}" class="btn_list_opt btn_list_opt_edit"
+                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
-                                        <form method="POST" role="form" id="{{$produto->idProduto}}"
-                                            action="{{route('produtos.destroy',$produto)}}" class="d-inline-block form_produto_id">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn_delete" title="Eliminar produto" data-toggle="modal"
-                                                data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
+                                <form method="POST" role="form" id="{{$produto->idProduto}}"
+                                    action="{{route('produtos.destroy',$produto)}}" class="d-inline-block form_produto_id">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn_delete" title="Eliminar produto" data-toggle="modal"
+                                        data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                </form>
 
-                                    </th> --}}
-                                </tr>
-                                @endforeach
+                                </th> --}}
+                            </tr>
+                            @endforeach
 
-                            </tbody>
-                        </table>
-                    @else
-                        <div><span class="text-secondary">Sem Produtos</div>
-                    @endif
-                </div>
-                {{-- Conteudo: Documentação --}}
-                <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <div class="row border-dark p-2 pl-4 text-right">Total dos protudos: {{$totalprodutos}}€</div>
+
+                @else
+                    <div><span class="text-secondary">Sem Produtos</div>
+                @endif
+
+            </div>
+
+
+            {{-- Conteudo: Documentação --}}
+            <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
 
                 {{-- DADOS DE PASSAPORTE --}}
                 <div class="row">
@@ -349,6 +357,9 @@
 
                 <div class="row ">
                     <div class="col">
+
+                        <div><span class="text-secondary">IBAN:</span> {{$client->IBAN}}</div>
+                        <hr><br>
                         <div><span class="text-secondary">Estado financeiro: </span><span
                                 class="text-success">Regularizado</span></div><br>
 
@@ -361,8 +372,7 @@
                             @endif
 
                         </div><br>
-                        <hr>
-                        <div><span class="text-secondary">IBAN:</span> {{$client->IBAN}}</div><br>
+
 
 
 
@@ -373,8 +383,12 @@
 
 
 
-            </div>
         </div>
+
+
+
+
+
     </div>
 </div>
 
