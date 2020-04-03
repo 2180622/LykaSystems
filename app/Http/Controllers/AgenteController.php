@@ -157,7 +157,7 @@ class AgenteController extends Controller
         if ($listagents->isEmpty()) {
             $listagents=null;
         }
-        
+
         /* caso seja um sub-agente, obtem o agente que o adicionou */
         if($agent->tipo=="Subagente"){
             $mainAgent=Agente::
@@ -194,7 +194,6 @@ class AgenteController extends Controller
      */
     public function edit(Agente $agent)
     {
-
         if (Auth::user()->tipo == "admin"){
             /* lista dos agentes principais */
             $listagents = Agente::
@@ -206,7 +205,6 @@ class AgenteController extends Controller
             /* não tem permissões */
             abort (401);
         }
-
     }
 
 

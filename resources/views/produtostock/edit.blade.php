@@ -31,9 +31,9 @@
                 <h6>Editar informações</h6>
             </div>
             <br>
+            <p>Está neste momento a editar o produto stock <b>{{$produtoStock->descricao}}</b>.</p>
 
-
-            <form method="POST" action="{{route('produtostock.update',$produtoStock)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="POST" action="{{route('produtostock.store',$produtoStock)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")

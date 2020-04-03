@@ -31,6 +31,11 @@ class ProdutosstockController extends Controller
 
     public function edit(ProdutoStock $produtoStock)
     {
-        return view('produtostock.edit', compact('produtoStock'));
+        if (Auth::user()->tipo == "admin"){
+            return view('produtostock.edit', compact('produtoStock'));
+        }else{
+            /* não tem permissões */
+            abort (401);
+      }
     }
 }
