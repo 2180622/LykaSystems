@@ -32,11 +32,11 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Secção de cobrança - <b>{{$product->cliente->nome.' '.$product->cliente->apelido}}</b></h6>
+            <h6>Secção de cobrança - {{$product->cliente->nome.' '.$product->cliente->apelido}}</h6>
         </div>
         <br>
         <div class="payment-card shadow-sm">
-            <p>VALOR A PAGAR: <b>{{($fase->valorFase)}}€</b></p>
+            <p>VALOR A COBRAR:</p><p>&nbsp;{{($fase->valorFase)}}€</p>
             <br><br>
             <div class="row">
                 <div class="col-md-4">
