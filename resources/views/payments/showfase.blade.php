@@ -82,7 +82,7 @@
                 <div class="col">
                     <label for="valorSubagente">Observações</label>
                     <br>
-                    <input type="text" name="valorSubagente">
+                    <textarea name="obsersacoes" rows="5"></textarea>
                 </div>
             </div>
         </div>
