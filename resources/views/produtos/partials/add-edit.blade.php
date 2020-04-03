@@ -1,7 +1,7 @@
 <div class="tab-content p-2 mt-3" id="myTabContent">
 
     {{-- Conteudo: Informação pessoal --}}
-    <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
+    <div>
         <div class="row">
             <div class="col">
                 {{-- INPUT nome --}}
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col">
                 <label for="nome">Escolha o produto: </label>
-                <select class="toolbar-escolha" id="produto" onchange="AtualizaProduto({{$produtoStock}})" style="width: 80%;">
+                <select class="toolbar-escolha" id="produto" onchange="AtualizaProduto()" style="width: 80%;">
                     <option value="null"></option>
                     @foreach($produtoStock as $prodS)
                         @php
@@ -29,10 +29,10 @@
         </div>
     </div>
 
-    <div class="tab-pane fade" id="school" role="tabpanel" aria-labelledby="school-tab">
+    <div class="tab-pane fade show active" id="Fases" role="tabpanel" aria-labelledby="Fases-tab">
         <ul class="nav nav-tabs mt-5 mb-4 fases" id="myTab" role="tablist">
-            <li class="nav-item active clonar" style="width:25%">
-                <a class="nav-link" id="fases-tab" data-toggle="tab" href="#" role="tab"
+            <li class="nav-item clonar" style="width:25%">
+                <a class="nav-link active" id="fases-tab" data-toggle="tab" href="#" role="tab"
                     aria-controls="fase" aria-selected="false">Fase</a>
             </li>
         </ul>
@@ -45,27 +45,41 @@
     </div>
 </div>
 @section('scripts')
-    {{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
     <script>
         var clones = $('.clonar').clone();
-        $('.fases').html('');
-        function AtualizaProduto(Produtos){
-            var idproduto = new String;
+        //$('.fases').html('');
+        function AtualizaProduto(){
+            //$('.fases').html('');
+            var idproduto = new Array;
             $("select.toolbar-escolha#produto").each(function () {
                 idproduto.push(this.value);
             });
-            var filtros = null;
-            var i;
-            for (i = 0; i < Produtos.length; i++) {
-                filtros = filtros + filtroCB[i] + "_" + checkbox[i] + "__";
-                if(Produtos[i].idProduto == idproduto){
-                    var clone = clones.clone();
-                    $('#fases-tab', clone).attr('href','fase-'+Produtos[i].idProduto);
-                    $('#fases-tab', clone).attr('aria-controls','fase-'+Produtos[i].idProduto);
-                    $('#fases-tab', clone).attr('id','fase'+Produtos[i].idProduto+'-tab');
-                    $('.fases').append(clone);
-                }
+            if(idproduto){
+                AjaxProdutos(idproduto);
             }
+        }
+        function AjaxProdutos(idproduto){
+            var link = '/../api/stock/produtos'
+            $.ajax({
+                method:"GET",
+                url:link
+            })
+            .done(function(response){
+                var i;
+                for (i = 0; i < response.results.length; i++) {
+                    alert(response.results[i].idProduto)
+                    if(response.results[i].idProduto == idproduto){
+                        var clone = clones.clone();
+                        if(i==0){
+                            $('#fases-tab', clone).attr('class','nav-link');
+                        }
+                        $('#fases-tab', clone).attr('href','fase-'+response.results[i].idProduto);
+                        $('#fases-tab', clone).attr('aria-controls','fase-'+response.results[i].idProduto);
+                        $('#fases-tab', clone).attr('id','fase'+response.results[i].idProduto+'-tab');
+                        $('.fases').append(clone);
+                    }
+                }
+            })
         }
     </script>
 @endsection

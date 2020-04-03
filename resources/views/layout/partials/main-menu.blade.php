@@ -68,7 +68,7 @@
 
         {{-- Produtos--}}
         <li class="menu-option">
-            <a href="{{route('produtostock.index')}}">
+            <a href="{{--route('produtostock.index')--}}">
                 <div class="menu-icon">
                     <i class="fas fa-layer-group mr-2"></i>
                 </div>
