@@ -102,7 +102,7 @@
 
                 @if (Auth::user()->tipo == "admin")
                 <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i
-                            class="fas fa-plus mr-2"></i>Adicionar  produto</a></div>
+                            class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
                 @endif
 
             </div>

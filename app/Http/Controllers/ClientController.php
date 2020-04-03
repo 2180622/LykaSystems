@@ -29,12 +29,10 @@ class ClientController extends Controller
             $clients = Cliente::all();
             $totalestudantes = $clients->count();
 
-            return view('clients.list', compact('clients', 'totalestudantes'));
 
 
         /* Lista de clientes caso seja agente /  ++++++++FALTA: subagente */
         }else{
-
 
             /* Lista todos os produtos registados em nome do agente que está logado */
 
@@ -42,20 +40,21 @@ class ClientController extends Controller
             FROM cliente JOIN produto ON Produto.idCliente=Cliente.idCliente where Produto.idAgente="7" GROUP BY cliente.idCliente ORDER BY cliente.idCliente asc */
 
 
-
-            $clients = DB::table('Cliente')
-            ->selectRaw("Cliente.idCliente,nome,apelido,genero,email,telefone1,telefone2,dataNasc,numCCid,numPassaport,dataValidPP,localEmissaoPP,paisNaturalidade,morada,cidade,moradaResidencia,passaportPaisEmi,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,obsPessoais,obsFinanceiras,obsAcademicas")
+            $clients = Cliente::
+            selectRaw("Cliente.idCliente,nome,apelido,genero,email,telefone1,telefone2,dataNasc,numCCid,numPassaport,dataValidPP,localEmissaoPP,paisNaturalidade,morada,cidade,moradaResidencia,passaportPaisEmi,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,obsPessoais,obsFinanceiras,obsAcademicas")
             ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
             ->where('Produto.idAgente', '=', Auth::user()->agente->idAgente)
             ->groupBy('cliente.idCliente')
             ->orderBy('cliente.idCliente','asc')
             ->get();
 
-            dd($clients);
+            $totalestudantes = $clients->count();
+
+
+        }
 
         /* mostra a lista */
-        return view('clients.list', compact('clients'));
-        }
+        return view('clients.list', compact('clients','totalestudantes'));
 
     }
 
