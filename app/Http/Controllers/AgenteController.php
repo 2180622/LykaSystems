@@ -148,9 +148,7 @@ class AgenteController extends Controller
         if ($listagents->isEmpty()) {
             $listagents=null;
         }
-
-
-
+        
         /* caso seja um sub-agente, obtem o agente que o adicionou */
         if($agent->tipo=="Subagente"){
             $mainAgent=Agente::
