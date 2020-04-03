@@ -37,6 +37,7 @@
 
 
         <!-- Universidades  -->
+        @if (Auth()->user()->tipo == 'admin')
         <li class="menu-option">
             <a href="{{route('universities.index')}}">
                 <div class="menu-icon">
@@ -45,12 +46,12 @@
                 <span class="option-name {{Route::is('universities.*') ? 'active' : ''}}">Universidades</span>
             </a>
         </li>
+        @endif
 
 
 
 
         <!-- Agentes  -->
-
         @if ( Auth::user()->tipo == "admin")
         {{-- Só o admin tem acesso à lista --}}
         <li class="menu-option">

@@ -28,4 +28,9 @@ class ProdutosstockController extends Controller
         $produtoStock->save();
         return redirect()->route('produtostock.index')->with('success', 'Produto Stock adicionado com sucesso');
     }
+
+    public function edit(ProdutoStock $produtoStock)
+    {
+        return view('produtostock.edit', compact('produtoStock'));
+    }
 }
