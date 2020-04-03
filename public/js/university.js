@@ -4,6 +4,7 @@ $(document).ready(function () {
 
         "columnDefs": [{
                 "orderable": false,
+                "width": "60px",
                 "targets": 0
             },
             {
@@ -12,15 +13,8 @@ $(document).ready(function () {
             },
             {
                 "orderable": false,
-                "targets": 4
-            },
-            {
-                "width": "60px",
-                "targets": 0
-            },
-            {
                 "width": "130px",
-                "targets": 4
+                "targets": 3
             },
         ],
 

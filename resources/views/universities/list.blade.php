@@ -90,9 +90,9 @@
                             {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
                         </th>
 
-                        <th>Nome Universidade</th>
+                        <th>Nome da universidade</th>
                         <th>E-mail</th>
-                        <th>Morada</th>
+                        {{-- <th>Morada</th> --}}
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -106,13 +106,8 @@
                             <div class="align-middle mx-auto shadow-sm rounded"
                                 style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('universities.show',$university)}}">
-                                @if($university->fotografia)
-                                <img src="{{Storage::disk('public')->url('client-photos/').$university->fotografia}}"
+                                    <img src="{{Storage::disk('public')->url('default-photos/university.png')}}"
                                     width="100%" class="mx-auto">
-                                @else
-                                <img src="{{Storage::disk('public')->url('default-photos/university.png')}}"
-                                    width="100%" class="mx-auto">
-                                @endif
                                 </a>
                             </div>
 
@@ -125,7 +120,7 @@
                         <td class="align-middle">{{ $university->email }}</td>
 
                         {{-- Morada --}}
-                        <td class="align-middle">{{ $university->morada }}</td>
+                        {{-- <td class="align-middle">{{ $university->morada }}</td> --}}
 
 
                         {{-- OPÇÔES --}}

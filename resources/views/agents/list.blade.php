@@ -102,7 +102,7 @@
                         <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
                         <th>Tipo</th>
-                        <th>E-mail</th>
+                        {{-- <th>E-mail</th> --}}
                         <th>País</th>
                         <th class="text-center">Opções</th>
                     </tr>
@@ -140,7 +140,7 @@
                         <td class="align-middle">{{ $agent->tipo }}</td>
 
                         {{-- e-mail --}}
-                        <td class="align-middle">{{ $agent->email }}</td>
+                        {{-- <td class="align-middle">{{ $agent->email }}</td> --}}
 
                         {{-- País --}}
                         <td class="align-middle">{{ $agent->pais }}</td>
