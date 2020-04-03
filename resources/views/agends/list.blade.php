@@ -19,7 +19,7 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-
+    @include('agends.partials.modal')
     <!-- MODAL DE INFORMAÇÔES -->
 
     <div class="container mt-2 ">
@@ -63,6 +63,12 @@
     <script src="{{asset('/vendor/fullcalendar/timegrid/main.js')}}"></script>
     <script src="{{asset('/vendor/fullcalendar/list/main.js')}}"></script>
     <script src="{{asset('/vendor/fullcalendar/rrule/main.js')}}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <script src="{{asset('/js/eventAgend.js')}}"></script>
 

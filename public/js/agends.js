@@ -23,10 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
         selectable: true,
         events: routeEvents('routeEventAgend'),
 
+        eventDrop: function (element) {
+            let startDate = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
+            let endDate = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
+
+            let newEvent = {
+                id: element.event.id,
+                start: startDate,
+                end: endDate
+            };
+        },
+
         eventClick: function (arg) {
-            if (confirm('delete event?')) {
-                arg.event.remove()
-            }
+            $("modalCalendar").modal('show');
         }
     });
 

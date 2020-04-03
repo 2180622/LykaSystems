@@ -2,85 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/EventAgendController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/AgendaTableSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/eventAgend.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/agends/partials/modal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Agenda.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Agenda.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_06_013_agenda.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_06_013_agenda.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/agends.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/agends.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/af.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ar-dz.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ar-kw.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ar-ly.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ar-ma.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ar-sa.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ar-tn.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/az.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/bg.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/bs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ca.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/cs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/da.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/de.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/el.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/en-au.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/en-gb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/en-nz.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/es-us.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/es.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/et.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/eu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/fa.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/fi.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/fr-ca.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/fr-ch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/fr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/gl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/he.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/hi.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/hr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/hu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/id.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/is.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/it.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ja.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ka.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/kk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ko.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/lb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/lt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/lv.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/mk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ms.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/nb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/nl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/nn.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/pl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/pt-br.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ro.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ru.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/sk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/sl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/sq.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/sr-cyrl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/sr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/sv.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/th.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/tr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/ug.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/uk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/uz.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/vi.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/zh-cn.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/locales/zh-tw.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/fullcalendar/core/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/fullcalendar/core/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/eventAgend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/eventAgend.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/agends/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/agends/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/contacts/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/contacts/list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layout/partials/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/partials/main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +201,8 @@
       <workItem from="1585127467326" duration="2430000" />
       <workItem from="1585327935222" duration="650000" />
       <workItem from="1585561720106" duration="4996000" />
-      <workItem from="1585837224250" duration="13629000" />
+      <workItem from="1585837224250" duration="14230000" />
+      <workItem from="1585907374889" duration="7779000" />
     </task>
     <servers />
   </component>
