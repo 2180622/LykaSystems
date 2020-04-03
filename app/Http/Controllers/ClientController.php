@@ -27,18 +27,13 @@ class ClientController extends Controller
         /* Lista de clientes caso seja admin */
         if (Auth::user()->tipo == "admin"){
             $clients = Cliente::all();
-            $totalestudantes = $clients->count();
-
-
 
         /* Lista de clientes caso seja agente /  ++++++++FALTA: subagente */
         }else{
 
             /* Lista todos os produtos registados em nome do agente que está logado */
-
             /* SELECT Cliente.idCliente,nome,apelido,genero,email,telefone1,telefone2,dataNasc,numCCid,numPassaport,dataValidPP,localEmissaoPP,paisNaturalidade,morada,cidade,moradaResidencia,passaportPaisEmi,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,obsPessoais,obsFinanceiras,obsAcademicas
             FROM cliente JOIN produto ON Produto.idCliente=Cliente.idCliente where Produto.idAgente="7" GROUP BY cliente.idCliente ORDER BY cliente.idCliente asc */
-
 
             $clients = Cliente::
             selectRaw("Cliente.idCliente,nome,apelido,genero,email,telefone1,telefone2,dataNasc,numCCid,numPassaport,dataValidPP,localEmissaoPP,paisNaturalidade,morada,cidade,moradaResidencia,passaportPaisEmi,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,obsPessoais,obsFinanceiras,obsAcademicas")
@@ -48,12 +43,10 @@ class ClientController extends Controller
             ->orderBy('cliente.idCliente','asc')
             ->get();
 
-            $totalestudantes = $clients->count();
-
-
         }
 
         /* mostra a lista */
+        $totalestudantes = $clients->count();
         return view('clients.list', compact('clients','totalestudantes'));
 
     }
