@@ -172,12 +172,12 @@
             <div class="col">
                 <label for="telefone1">Telefone pessoal(1):</label><br>
                 <input type="text" class="form-control" name="telefone1" id="telefone1"
-                    value="{{old('telefone1',$client->telefone1)}}" required><br>
+                    value="{{old('telefone1',$client->telefone1)}}" maxlength="20" required><br>
             </div>
             <div class="col">
                 <label for="telefone2">Telefone pessoal(2):</label><br>
                 <input type="text" class="form-control" name="telefone2" id="telefone2"
-                    value="{{old('telefone2',$client->telefone2)}}"><br>
+                    value="{{old('telefone2',$client->telefone2)}}" maxlength="20"><br>
             </div>
         </div>
 
@@ -199,7 +199,7 @@
 
                 <label for="telefonePai">Telefone do pai:</label><br>
                 <input type="text" class="form-control" name="telefonePai" id="telefonePai"
-                    value="{{old('telefonePai',$client->telefonePai)}}"><br>
+                    value="{{old('telefonePai',$client->telefonePai)}}" maxlength="20"><br>
 
                 <label for="emailPai">E-mail do pai:</label><br>
                 <input type="email" class="form-control" name="emailPai" id="emailPai"
@@ -213,7 +213,7 @@
 
                 <label for="telefoneMae">Telefone da mãe:</label><br>
                 <input type="text" class="form-control" name="telefoneMae" id="telefoneMae"
-                    value="{{old('telefoneMae',$client->telefoneMae)}}"><br>
+                    value="{{old('telefoneMae',$client->telefoneMae)}}" maxlength="20"><br>
 
                 <label for="emailMae">E-mail da mãe:</label><br>
                 <input type="email" class="form-control" name="emailMae" id="emailMae"
@@ -271,12 +271,12 @@
             <div class="col">
                 <label for="numCCid">Número de cartão de cidadão:</label><br>
                 <input type="text" class="form-control" name="numCCid" id="numCCid"
-                    value="{{old('numCCid',$client->numCCid)}}" required><br>
+                    value="{{old('numCCid',$client->numCCid)}}" required maxlength="20"><br>
             </div>
             <div class="col">
                 <label for="NIF">Número de identificação fiscal:</label><br>
                 <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}"
-                    required><br>
+                    required maxlength="20"><br>
             </div>
         </div>
 
@@ -290,7 +290,7 @@
                 {{-- INUPUT numPassaport --}}
                 <label for="numPassaport">Número do passaporte:</label><br>
                 <input type="text" class="form-control" name="numPassaport" id="numPassaport"
-                    value="{{old('numPassaport',$client->numPassaport)}}" required><br>
+                    value="{{old('numPassaport',$client->numPassaport)}}" required maxlength="20"><br>
             </div>
             <div class="col">
                 {{-- INUPUT dataValidPP --}}
@@ -315,7 +315,7 @@
                 {{-- INUPUT dataValidPP --}}
                 <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                 <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                    value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" required><br>
+                    value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" required ><br>
             </div>
         </div>
 
@@ -325,7 +325,7 @@
             <div class="col">
                 <label for="IBAN" class="mr-2">IBAN: </label><br>
                 <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}"
-                    required><br>
+                maxlength="25" required ><br>
 
                 <label for="obsFinanceiras">Observações Financeiras:</label><br>
                 <textarea name="obsFinanceiras" id="obsFinanceiras" rows="5"
