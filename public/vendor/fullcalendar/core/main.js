@@ -4583,12 +4583,12 @@ Docs & License: https://fullcalendar.io/
             next: 'next',
             prevYear: 'prev year',
             nextYear: 'next year',
-            year: 'Ano',
-            today: 'Hoje',
-            month: 'Mês',
-            week: 'Semana',
-            day: 'Dia',
-            list: 'Lista'
+            year: 'year',
+            today: 'today',
+            month: 'month',
+            week: 'week',
+            day: 'day',
+            list: 'list'
         },
         weekLabel: 'W',
         allDayText: 'all-day',

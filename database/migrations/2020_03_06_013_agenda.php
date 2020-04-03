@@ -17,11 +17,14 @@ class Agenda extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idAgenda');
-            $table->text('descricao');
+            $table->string('titulo');
+            $table->text('descricao')->nullable();
             $table->boolean('visibilidade')->default(false);
             $table->dateTime('dataInicio');
             $table->dateTime('dataFim');
+            $table->string('cor', 7);
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('idUser');
                 $table->foreign('idUser')->references('idUser')->on('User');
 

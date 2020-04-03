@@ -6,7 +6,6 @@ var yyyy = dateToday.getFullYear();
 dateToday = mm + '/' + dd + '/' + yyyy;
 
 document.addEventListener('DOMContentLoaded', function () {
-    var initialLocaleCode = 'pt';
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -17,33 +16,29 @@ document.addEventListener('DOMContentLoaded', function () {
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
         dateToday,
-        locale: initialLocaleCode,
+        locale: 'pt',
         editable: true,
-        events: [
-            {
-                title: 'rrule event',
-                rrule: {
-                    dtstart: '2020-02-09T13:00:00',
-                    // until: '2020-02-01',
-                    freq: 'weekly'
-                },
-                duration: '02:00'
-            }
-        ],
+        navLinks: true,
+        eventLimit: true,
+        selectable: true,
+        events: routeEvents('routeEventAgend'),
+
+        eventDrop: function (element) {
+            let startDate = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
+            let endDate = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
+
+            let newEvent = {
+                id: element.event.id,
+                start: startDate,
+                end: endDate
+            };
+        },
+
         eventClick: function (arg) {
-            if (confirm('delete event?')) {
-                arg.event.remove()
-            }
+            $("modalCalendar").modal('show');
         }
     });
 
     calendar.render();
-
-    // build the locale selector's options
-    calendar.getAvailableLocaleCodes().forEach(function (localeCode) {
-        var optionEl = document.createElement('option');
-        optionEl.value = localeCode;
-        optionEl.selected = localeCode === initialLocaleCode;
-        optionEl.innerText = localeCode;
-    });
 });
+

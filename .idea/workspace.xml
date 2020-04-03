@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/agends/partials/modal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/agents/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/agents/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/produtostock/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/produtostock/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/produtostock/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/produtostock/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/produtostock/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/produtostock/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/produtostock/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/produtostock/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/agends.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/agends.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/eventAgend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/eventAgend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/agends/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/agends/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/contacts/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/contacts/list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/partials/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/partials/main-menu.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,16 +141,17 @@
     <property name="ts.external.directory.path" value="C:\Users\Micaela\AppData\Local\JetBrains\Toolbox\apps\PhpStorm\ch-0\193.5662.63\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\LykaSystems\resources\views\agends" />
+      <recent name="C:\laragon\www\LykaSystems\resources\views" />
+      <recent name="C:\laragon\www\LykaSystems\public" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\laragon\www\LykaSystems\resources\views\libraries\partials" />
       <recent name="C:\laragon\www\LykaSystems\resources\views\universities\partials" />
       <recent name="C:\laragon\www\LykaSystems\public\js" />
       <recent name="C:\laragon\www\LykaSystems\resources\views\layout" />
       <recent name="C:\laragon\www\LykaSystems\public\css" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\LykaSystems\resources\views" />
-      <recent name="C:\laragon\www\LykaSystems\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -199,7 +201,8 @@
       <workItem from="1585127467326" duration="2430000" />
       <workItem from="1585327935222" duration="650000" />
       <workItem from="1585561720106" duration="4996000" />
-      <workItem from="1585837224250" duration="860000" />
+      <workItem from="1585837224250" duration="14230000" />
+      <workItem from="1585907374889" duration="7779000" />
     </task>
     <servers />
   </component>
@@ -214,10 +217,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1584104420725" />
-    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1585133290558">
+    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1585851825501">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1585133290558" />
+    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1585851825501" />
     <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1584008583155">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
