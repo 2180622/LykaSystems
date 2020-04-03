@@ -67,7 +67,7 @@
 
         {{-- Produtos
         <li class="menu-option">
-            {{-- <a href="{{route('produtostock.index')}}"> --}}
+            <a href="{{route('produtostock.index')}}">
                 <div class="menu-icon">
                     <i class="fas fa-layer-group mr-2"></i>
                 </div>
@@ -157,7 +157,7 @@
                 <div class="menu-icon">
                     <i class="fas fa-users mr-2"></i>
                 </div>
-                <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Utilizadores</span>
+                <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Administradores</span>
             </a>
         </li>
         @endif

@@ -91,16 +91,16 @@
                     @foreach ($produtoStocks as $produtoStock)
                     <tr>
                         {{-- Descrição --}}
-                        <th class="align-middle"><a class="name_link" href="{{route('produtostock.show',$produtoStock)}}">{{ $produtoStock->descricao }}</a></th>
+                        <td class="align-middle"><a class="name_link" href="{{route('produtostock.show',$produtoStock)}}">{{ $produtoStock->descricao }}</a></td>
 
                         {{-- Tipo --}}
-                        <th class="align-middle">{{ $produtoStock->tipo }}</th>
+                        <td class="align-middle">{{ $produtoStock->tipo }}</td>
 
                         {{-- Ano Académico --}}
-                        <th class="align-middle">{{ $produtoStock->anoAcademico }}</th>
+                        <td class="align-middle">{{ $produtoStock->anoAcademico }}</td>
 
                         {{-- OPÇÔES --}}
-                        <th class="text-center align-middle">
+                        <td class="text-center align-middle">
                             <a href="{{route('produtostock.show',$produtoStock)}}" class="btn_list_opt "
                                 title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                             <a href="{{route('produtostock.edit',$produtoStock)}}" class="btn_list_opt btn_list_opt_edit"
@@ -113,7 +113,7 @@
                                 <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
                                     data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                        </th>
+                        </td>
                     </tr>
                     @endforeach
 

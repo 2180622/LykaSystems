@@ -19,3 +19,10 @@ a:hover {
     color: #747474;
     text-decoration: none;
 }
+
+input {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #EAEAEA;
+}

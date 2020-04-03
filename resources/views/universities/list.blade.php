@@ -45,7 +45,7 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Estão registados no sistema <strong>{{$totaluniversidades}}</strong> universidades
+                Existem <strong>{{$totaluniversidades}}</strong> registo(s) no sistema
             </div>
         </div>
 
@@ -105,6 +105,7 @@
                         <td>
                             <div class="align-middle mx-auto shadow-sm rounded"
                                 style="overflow:hidden; width:50px; height:50px">
+                                <a class="name_link" href="{{route('universities.show',$university)}}">
                                 @if($university->fotografia)
                                 <img src="{{Storage::disk('public')->url('client-photos/').$university->fotografia}}"
                                     width="100%" class="mx-auto">
@@ -112,13 +113,13 @@
                                 <img src="{{Storage::disk('public')->url('default-photos/university.png')}}"
                                     width="100%" class="mx-auto">
                                 @endif
+                                </a>
                             </div>
-                            {{-- <input class="table-check" type="checkbox" value="" id="check_{{ $client->idCliente }}">
-                            --}}
+
                         </td>
 
                         {{-- Nome --}}
-                        <td class="align-middle">{{ $university->nome }}</td>
+                        <td class="align-middle"><a class="name_link" href="{{route('universities.show',$university)}}">{{ $university->nome }}</td>
 
                         {{-- E-Mail --}}
                         <td class="align-middle">{{ $university->email }}</td>

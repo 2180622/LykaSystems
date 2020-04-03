@@ -28,7 +28,7 @@ class StoreUniversidadeRequest extends FormRequest
             "morada" => 'required|max:255',
             "telefone" => 'required',
             "email" => 'required',
-            "NIF" => 'required|unique:universidade',
+            "NIF" => 'required|unique:Universidade',
             "IBAN" => 'required',
             'obsContactos' => 'nullable',
             'obsCursos' => 'nullable',
