@@ -27,12 +27,12 @@ class StoreClientRequest extends FormRequest
           'nome' => 'required',
           'apelido' => 'required',
           'genero'=>'required',
-          'email' => 'required|unique:cliente',
+          'email' => 'required|unique:cliente|unique:Agente',
           'telefone1' => 'required',
           'telefone2' => 'nullable',
           'dataNasc' => 'required',
           'numCCid' => 'required|unique:cliente',
-          'numPassaport' => 'required|unique:cliente',
+          'numPassaport' => 'required|unique:Cliente',
           'dataValidPP' => 'required',
           'localEmissaoPP' => 'required',
           'paisNaturalidade' => 'required',
@@ -67,5 +67,5 @@ class StoreClientRequest extends FormRequest
     }
 
 
-    
+
 }
