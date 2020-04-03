@@ -46,12 +46,12 @@
                 {{-- INPUT nome --}}
                 <label for="nome">Nome:</label><br>
                 <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$client->nome)}}"
-                    placeholder="Insira o nome do aluno" required><br>
+                    placeholder="Insira o nome do aluno" maxlength="20" required><br>
 
                 {{-- INPUT apelido --}}
                 <label for="apelido">Apelido:</label><br>
                 <input type="text" class="form-control" name="apelido" id="apelido"
-                    value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" required>
+                    value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" maxlength="20" required>
                     <br>
 
 
@@ -141,7 +141,7 @@
                 {{-- INPUT nivEstudoAtual --}}
                 <label for="nomeInstituicaoOrigem">Nome da instituição de origem:</label><br>
                 <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem"
-                    value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}" required><br>
+                    value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}" required maxlength="50"><br>
             </div>
 
 
@@ -149,7 +149,7 @@
                 {{-- Cidade de Origem  --}}
                 <label for="morada">Cidade da Instituição de Origem:</label><br>
                 <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="cidadeInstituicaoOrigem"
-                    value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}" required><br>
+                    value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}" required maxlength="50"><br>
             </div>
 
         </div>
@@ -172,7 +172,7 @@
             <div class="col">
                 <label for="telefone1">Telefone pessoal(1):</label><br>
                 <input type="text" class="form-control" name="telefone1" id="telefone1"
-                    value="{{old('telefone1',$client->telefone1)}}" maxlength="20" required><br>
+                    value="{{old('telefone1',$client->telefone1)}}" maxlength="20" required maxlength="20"><br>
             </div>
             <div class="col">
                 <label for="telefone2">Telefone pessoal(2):</label><br>
@@ -185,7 +185,7 @@
             <div class="col">
                 <label for="email">E-mail pessoal:</label><br>
                 <input type="email" class="form-control" name="email" id="email" value="{{old('email',$client->email)}}"
-                    required><br>
+                    required maxlength="250"><br>
             </div>
         </div>
 
@@ -195,7 +195,7 @@
 
                 <label for="nomePai">Nome do pai:</label><br>
                 <input type="text" class="form-control" name="nomePai" id="nomePai"
-                    value="{{old('nomePai',$client->nomePai)}}"><br>
+                    value="{{old('nomePai',$client->nomePai)}}" maxlength="250"><br>
 
                 <label for="telefonePai">Telefone do pai:</label><br>
                 <input type="text" class="form-control" name="telefonePai" id="telefonePai"
@@ -203,13 +203,13 @@
 
                 <label for="emailPai">E-mail do pai:</label><br>
                 <input type="email" class="form-control" name="emailPai" id="emailPai"
-                    value="{{old('emailPai',$client->emailPai)}}"><br>
+                    value="{{old('emailPai',$client->emailPai)}}" maxlength="250"><br>
             </div>
 
             <div class="col">
                 <label for="nomeMae">Nome da mãe:</label><br>
                 <input type="text" class="form-control" name="nomeMae" id="nomeMae"
-                    value="{{old('nomeMae',$client->nomeMae)}}"><br>
+                    value="{{old('nomeMae',$client->nomeMae)}}" maxlength="250"><br>
 
                 <label for="telefoneMae">Telefone da mãe:</label><br>
                 <input type="text" class="form-control" name="telefoneMae" id="telefoneMae"
@@ -217,7 +217,7 @@
 
                 <label for="emailMae">E-mail da mãe:</label><br>
                 <input type="email" class="form-control" name="emailMae" id="emailMae"
-                    value="{{old('emailMae',$client->emailMae)}}"><br>
+                    value="{{old('emailMae',$client->emailMae)}}" maxlength="250"><br>
             </div>
 
         </div>
@@ -233,7 +233,7 @@
                 {{-- Morada de residência em Portugal --}}
                 <label for="moradaResidencia">Morada de residência em Portugal:</label><br>
                 <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia"
-                    value="{{old('moradaResidencia',$client->moradaResidencia)}}" required><br>
+                    value="{{old('moradaResidencia',$client->moradaResidencia)}}" maxlength="255" required><br>
             </div>
 
 
@@ -246,14 +246,14 @@
                 {{-- Morada de residência no pais de origem --}}
                 <label for="morada">Morada no pais de origem:</label><br>
                 <input type="text" class="form-control" name="morada" id="morada"
-                    value="{{old('morada',$client->morada)}}" required><br>
+                    value="{{old('morada',$client->morada)}}" maxlength="255" required><br>
             </div>
 
             <div class="col">
                 {{-- Cidade de Origem  --}}
                 <label for="cidade">Cidade de origem:</label><br>
                 <input type="text" class="form-control" name="cidade" id="cidade"
-                    value="{{old('cidade',$client->cidade)}}" required><br>
+                    value="{{old('cidade',$client->cidade)}}" maxlength="50" required><br>
             </div>
 
         </div>
@@ -315,7 +315,7 @@
                 {{-- INUPUT dataValidPP --}}
                 <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                 <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                    value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" required ><br>
+                    value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" maxlength="30" required ><br>
             </div>
         </div>
 
