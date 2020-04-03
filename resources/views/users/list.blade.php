@@ -21,7 +21,7 @@
     </a>
 </div>
     <div class="float-right">
-        <a href="{{route('users.create')}}" class="top-button">Adicionar Utilizador</a>
+        <a href="{{route('users.create')}}" class="top-button">Adicionar Administrador</a>
     </div>
 
     <br><br>
@@ -33,7 +33,7 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Estão registados no sistema <strong>{{$users->count()}}</strong> utilizadores
+                Estão registados no sistema <strong>{{$users->count()}}</strong> administradores
             </div>
         </div>
 
