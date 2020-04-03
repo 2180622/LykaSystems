@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Universidade;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Requests\StoreUniversidadeRequest;
 use App\Http\Requests\UpdateUniversidadeRequest;
 
@@ -12,10 +13,19 @@ class UniversityController extends Controller
 {
     public function index()
     {
-        $universities = Universidade::all();
-        $totaluniversidades = $universities->count();
+        if (Auth::user()->tipo == "admin"){
+            $universities = Universidade::all();
+            $totaluniversidades = $universities->count();
 
-        return view('universities.list', compact('universities', 'totaluniversidades'));
+            return view('universities.list', compact('universities', 'totaluniversidades'));
+
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
+
+
+
     }
 
     public function create()

@@ -61,8 +61,16 @@ class ClientController extends Controller
     */
     public function create()
     {
-        $client = new Cliente;
-        return view('clients.add',compact('client'));
+
+        if (Auth::user()->tipo == "admin"){
+            $client = new Cliente;
+            return view('clients.add',compact('client'));
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
+
+
     }
 
 
@@ -190,7 +198,13 @@ class ClientController extends Controller
     */
     public function edit(Cliente $client)
     {
-        return view('clients.edit', compact('client'));
+        if (Auth::user()->tipo == "admin"){
+            return view('clients.edit', compact('client'));
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
+
     }
 
 
