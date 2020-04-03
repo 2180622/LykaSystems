@@ -130,6 +130,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-<script src="{{asset('/js/clients.js')}}"></script>
+<script src="{{asset('/js/produtos_stock.js')}}"></script>
 
 @endsection

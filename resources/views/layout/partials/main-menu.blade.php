@@ -65,7 +65,7 @@
         @endif
 
 
-        {{-- Produtos --}}
+        {{-- Produtos--}}
         <li class="menu-option">
             <a href="{{route('produtostock.index')}}">
                 <div class="menu-icon">
