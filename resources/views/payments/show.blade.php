@@ -35,22 +35,58 @@
             <h6>Secção de cobrança - <b>{{$product->cliente->nome.' '.$product->cliente->apelido}}</b></h6>
         </div>
         <br>
-        @foreach ($fases as $fase)
-        <a href="/payments/{{$product->idProduto}}/{{$fase->idFase}}">
-            <div class="payment-card shadow-sm row">
-                <p class="col-md-4">{{$fase->descricao}}</p>
-                <p class="col-md-5">{{$fase->valorFase}}€</p>
-                <p class="col-md-3">
-                    @if ($fase->verificacaoPago == 0)
-                    Pendente
-                    @else
-                    Pago
-                    @endif
-                </p>
+        <div class="row mt-3 mb-4">
+            <div class="col">
+                <span class="mr-2">Mostrar</span>
+                <select class="custom-select" id="records_per_page" style="width:80px">
+                    <option selected>10</option>
+                    <option>25</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+                <span class="ml-2">por página</span>
             </div>
-        </a>
-        <br>
-        @endforeach
+            <div class="col ">
+                <div class="input-group pl-0 float-right" style="width:250px">
+                    <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
+                    <div class="input-group-append">
+                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="table-responsive " style="overflow:hidden">
+            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+                {{-- Cabeçalho da tabela --}}
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                {{-- Corpo da tabela --}}
+                <tbody>
+                    @foreach ($fases as $fase)
+                    <tr>
+                        {{-- Nome e Apelido --}}
+                        <td class="align-middle"><a class="name_link" href="/payments/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
+                        {{-- Descrição --}}
+                        <td class="align-middle">{{$fase->valorFase}}€</td>
+                        {{-- Estado --}}
+                        <td class="align-middle">
+                            @if ($fase->verificacaoPago == 0)
+                            Pendente
+                            @else
+                            Pago
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
