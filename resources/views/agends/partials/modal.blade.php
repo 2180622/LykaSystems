@@ -33,8 +33,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="top-button btn_submit bg-danger">Eliminar</button>
-                <button type="button" class="top-button">Guadar</button>
+                <button type="submit" class="top-button">Guadar</button>
+                <button type="submit" class="top-button btn_submit bg-danger">Eliminar</button>
             </div>
         </div>
     </div>
