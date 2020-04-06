@@ -27,7 +27,7 @@
     <br><br>
     <div class="cards-navigation">
         <div class="title">
-            <h6>Listagem de utilizadores</h6>
+            <h6>Listagem de administradores</h6>
         </div>
         <br>
 

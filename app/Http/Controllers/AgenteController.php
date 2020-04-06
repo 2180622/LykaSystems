@@ -183,9 +183,6 @@ class AgenteController extends Controller
         return view('agents.print',compact("agent"));
     }
 
-
-
-
     /**
      * Show the form for editing the specified resource.
      *
