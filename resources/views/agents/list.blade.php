@@ -31,15 +31,9 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('agents.create')}}" class="top-button">
-            @if (Auth::user()->tipo == "agente")
-            {{-- se for agente --}}
-            Adicionar Sub agente
-            @else
-            {{-- se for admin --}}
-            Adicionar Agente
-            @endif
-        </a>
+        @if (Auth::user()->tipo == "admin")
+            <a href="{{route('agents.create')}}" class="top-button">Adicionar Agente</a>
+        @endif
     </div>
 
     <br><br>

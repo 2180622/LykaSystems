@@ -27,4 +27,9 @@ class PaymentController extends Controller
       $responsabilidades = Responsabilidade::where('idResponsabilidade', '=', $fase->idResponsabilidade)->get();
       return view('payments.showfase', compact('product', 'fase', 'responsabilidades'));
     }
+
+    public function update(Responsabilidade $responsabilidade)
+    {
+      dd($responsabilidade);
+    }
 }
