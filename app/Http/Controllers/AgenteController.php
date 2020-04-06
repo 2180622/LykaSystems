@@ -30,26 +30,13 @@ class AgenteController extends Controller
     public function index()
     {
 
-
-        /* Se for um agente: mostra os sub agentes */
-        if(Auth::user()->tipo == "agente"){
-
-            $agents = Agente::
-            where('subagent_agentid', '=', Auth::user()->agente->idAgente)
-            ->get();
-            $totalagents = $agents->count();
-
-            return view('agents.list', compact('agents', 'totalagents'));
-
-
-       /* Se for um Admin: mostra só os agentes */
+        if (Auth::user()->tipo == "admin"){
+            return view('clients.edit', compact('client'));
         }else{
-            $agents = Agente::all();
-            $totalagents = $agents->count();
-
-            return view('agents.list', compact('agents', 'totalagents'));
-
+            /* não tem permissões */
+            abort (401);
         }
+       
 
     }
 
