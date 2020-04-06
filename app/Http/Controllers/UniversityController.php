@@ -13,23 +13,26 @@ class UniversityController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->tipo == "admin"){
-            $universities = Universidade::all();
-            $totaluniversidades = $universities->count();
+       /* Permissões */
+       if (Auth::user()->tipo != "admin" ){
+        abort (401);
+      }
 
-            return view('universities.list', compact('universities', 'totaluniversidades'));
+        $universities = Universidade::all();
+        $totaluniversidades = $universities->count();
 
-        }else{
-            /* não tem permissões */
-            abort (401);
-        }
-
+        return view('universities.list', compact('universities', 'totaluniversidades'));
 
 
     }
 
     public function create()
     {
+       /* Permissões */
+       if (Auth::user()->tipo != "admin" ){
+        abort (401);
+      }
+
         $university = new Universidade;
 
         return view('universities.add', compact('university'));
@@ -52,13 +55,27 @@ class UniversityController extends Controller
 
     public function show(Universidade $university)
     {
+       /* Permissões */
+       if (Auth::user()->tipo != "admin" ){
+        abort (401);
+      }
         return view('universities.show', compact('university'));
     }
 
+
+
+
     public function edit(Universidade $university)
     {
+       /* Permissões */
+       if (Auth::user()->tipo != "admin" ){
+        abort (401);
+      }
+
         return view('universities.edit', compact('university'));
     }
+
+
 
     public function update(UpdateUniversidadeRequest $request, Universidade $university)
     {
