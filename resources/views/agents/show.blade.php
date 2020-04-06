@@ -8,9 +8,6 @@
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 <link href="{{asset('css/agents.css')}}" rel="stylesheet">
 @endsection
-
-
-
 {{-- Page Content --}}
 @section('content')
 
@@ -47,8 +44,6 @@
 
         </div>
         <br>
-
-
 
         <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
             <div class="col p-0 text-center" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">

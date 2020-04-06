@@ -30,15 +30,19 @@ class AgenteController extends Controller
     public function index()
     {
 
-        if (Auth::user()->tipo == "admin"){
-            return view('clients.edit', compact('client'));
-        }else{
-            /* não tem permissões */
-            abort (401);
-        }
-       
+    /* Permissões */
+    if (Auth::user()->tipo != "admin" ){
+        abort (401);
+    }
+
+        $agents = Agente::all();
+        $totalagents = $agents->count();
+
+    return view('agents.list', compact('agents', 'totalagents'));
 
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -167,11 +171,12 @@ class AgenteController extends Controller
     */
     public function print(Agente $agent)
     {
+       /* Permissões */
+       if (Auth::user()->tipo != "admin" ){
+        abort (401);
+      }
         return view('agents.print',compact("agent"));
     }
-
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -268,7 +273,6 @@ class AgenteController extends Controller
                 ->update(['deleted_at' => $agent->deleted_at]);
             }
         }
-
 
 
 

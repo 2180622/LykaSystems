@@ -24,6 +24,12 @@ class ClientController extends Controller
     public function index()
     {
 
+        /* Permissões */
+        if (Auth::user()->tipo == "cliente" ){
+            abort (401);
+        }
+
+
         /* Lista de clientes caso seja admin */
         if (Auth::user()->tipo == "admin"){
             $clients = Cliente::all();
@@ -146,6 +152,12 @@ class ClientController extends Controller
     */
     public function show(Cliente $client)
     {
+
+       /* Permissões */
+        if (Auth::user()->tipo == "cliente" ){
+         abort (401);
+       }
+
         // Produtos adquiridos pelo cliente
         $produtos = $client->produto;
 
@@ -173,7 +185,11 @@ class ClientController extends Controller
     */
     public function print(Cliente $client)
     {
-
+       /* Permissões */
+       if (Auth::user()->tipo == "cliente" ){
+        abort (401);
+      }
+      
         // Produtos adquiridos pelo cliente
         $produtos = $client->produto;
 

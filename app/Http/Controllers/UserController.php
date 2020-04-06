@@ -54,9 +54,9 @@ class UserController extends Controller
     }
 
 
-    public function show(User $user)
+    public function show(User $user, Administrador $admin)
     {
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user', 'admin'));
     }
 
 
@@ -75,5 +75,10 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function print(User $user)
+    {
+        return view('user.print',compact("user"));
     }
 }
