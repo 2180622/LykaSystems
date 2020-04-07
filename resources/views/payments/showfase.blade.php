@@ -47,7 +47,7 @@
                 @method('put')
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorPago">Valor pago</label>
+                        <label for="valorPago">Valor cobrado</label>
                         <br>
                         <input type="text" name="valorPago">
                     </div>
@@ -55,9 +55,9 @@
                         <label for="paymentType">Tipos de pagamento</label>
                         <br>
                         <select name="paymentType">
-                            <option value="volvo">Multibanco</option>
-                            <option value="saab">Paypal</option>
-                            <option value="opel">Outro</option>
+                            <option>Multibanco</option>
+                            <option>Paypal</option>
+                            <option>Outro</option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -71,7 +71,10 @@
                     <div class="col-md-4">
                         <label for="valorUni">Valor a pagar a Universidade</label>
                         <br>
-                        <input type="text" name="valorUni" placeholder="{{$responsabilidades[0]->valorUniversidade1}}€">
+                        <select name="valorUni">
+                          <option value="">Pago</option>
+                          <option value="">Pendente</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label for="valorAgente">Valor a pagar ao Agente</label>

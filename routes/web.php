@@ -45,6 +45,10 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/payments/{product}/{fase}', 'PaymentController@showfase')->name('payments.showfase');
     Route::put('/payments/{responsabilidade}', 'PaymentController@update')->name('payments.update');
 
+    /* Cobranças */
+    Route::get('/charges', 'ChargesController@index')->name('charges.index');
+
+
     /* Utilizadores */
     Route::resource('/users', 'UserController');
     Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
