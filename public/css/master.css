@@ -66,6 +66,7 @@ html, body {
     height: 20px;
     padding: 5px;
     outline: none;
+    outline: none;
     margin-left: 10px;
     border-radius: 50%;
     color: gray !important;
@@ -321,6 +322,12 @@ html, body {
     position: relative;
     float: right;
 }
+
+.page-item.active .page-link {
+    background-color: #6A74C9;
+    border-color: #6A74C9;
+}
+
 
 /* Responsive */
 @media screen and (max-width: 950px) {

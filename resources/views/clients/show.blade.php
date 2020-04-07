@@ -112,31 +112,31 @@
         <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
 
             {{-- MENU: Produtos --}}
-            <li class="nav-item " style="width:20%">
+            <li class="nav-item " style="width:20%; min-width:110px">
                 <a class="nav-link active" id="produtos-tab" data-toggle="tab" href="#produtos" role="tab"
                     aria-controls="produto" aria-selected="false">Produtos</a>
             </li>
 
             {{-- MENU: Documentação --}}
-            <li class="nav-item text-center" style="width:20%">
+            <li class="nav-item text-center" style="width:20%; min-width:144px">
                 <a class="nav-link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
-                    aria-controls="documentation" aria-selected="false">Documentação</a>
+                    aria-controls="documentation" aria-selected="false">Documentação pessoal</a>
             </li>
 
-            {{-- MENU: Informação pessoal --}}
-            <li class="nav-item text-center" style="width:20%">
+            {{-- MENU: Informação académica --}}
+            <li class="nav-item text-center" style="width:20%; min-width:144px">
                 <a class="nav-link" id="academicos-tab" data-toggle="tab" href="#academicos" role="tab"
                     aria-controls="contacts" aria-selected="true">Dados académicos</a>
             </li>
 
             {{-- MENU: Contactos --}}
-            <li class="nav-item text-center" style="width:20%">
+            <li class="nav-item text-center" style="width:20%; min-width:110px">
                 <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
                     aria-controls="contacts" aria-selected="false">Contactos</a>
             </li>
 
             {{-- MENU: Moradas --}}
-            <li class="nav-item text-center" style="width:20%">
+            <li class="nav-item text-center" style="width:20%; min-width:114px">
                 <a class="nav-link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab"
                     aria-controls="adresses" aria-selected="false">Financeiro</a>
             </li>
@@ -229,7 +229,7 @@
                 {{-- DADOS DE PASSAPORTE --}}
                 <div class="row">
 
-                    <div class="col">
+                    <div class="col mr-3">
                         {{-- numPassaport --}}
                         <div><span class="text-secondary">Número do passaporte:</span> {{$client->numPassaport}}</div>
                         <br>
@@ -246,13 +246,33 @@
                         <div><span class="text-secondary">Local de emissão do passaporte:</span>
                             {{$client->localEmissaoPP}}</div><br>
 
-                    </div>
+                        <hr><br>
 
-                    {{-- CC IDENTIFICAÇÃO --}}
-                    <div class="col">
-                        <div><span class="text-secondary">Número de cartão de cidadão:</span> {{$client->numCCid}}</div>
+                        {{-- CC IDENTIFICAÇÃO --}}
+                        <div><span class="text-secondary">Número cartão cidadão:</span> {{$client->numCCid}}</div>
                         <br>
                         <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
+
+
+                    </div>
+
+
+                    <div class="col" style="min-width:225px">
+                        <div class="text-center text-secondary mb-2">Documentos pessoais</div>
+
+                        <ul class="card shadow-sm p-3" style="list-style-type:none;">
+
+                            {{-- @foreach ($files as $file) --}}
+                            <li class="m-3">
+                                <a href="#" class="btn_list_opt btn_list_opt_download">
+                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>Cédula pessoal
+                                <small class="text-muted"> (.pdf)</small>
+                            </li>
+
+                            {{-- @endforeach --}}
+
+                        </ul>
+
                     </div>
 
                 </div>
@@ -287,6 +307,36 @@
                             @endif
 
                         </div>
+
+                    </div>
+
+                    <div class="col" style="min-width:225px">
+                        <div class="text-center text-secondary mb-2">Documentos Académicos</div>
+
+                        <ul class="card shadow-sm p-3" style="list-style-type:none;">
+
+                            {{-- @foreach ($files as $file) --}}
+                            <li class="m-3">
+                                <a href="#" class="btn_list_opt btn_list_opt_download">
+                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>Exame de acesso
+                                <small class="text-muted"> (.pdf)</small>
+                            </li>
+
+                            <li class="m-3">
+                                <a href="#" class="btn_list_opt btn_list_opt_download">
+                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>Pauta de avaliação
+                                <small class="text-muted"> (.pdf)</small>
+                            </li>
+
+                            <li class="m-3">
+                                <a href="#" class="btn_list_opt btn_list_opt_download">
+                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>Carta de recomendação
+                                <small class="text-muted"> (.pdf)</small>
+                            </li>
+
+                            {{-- @endforeach --}}
+
+                        </ul>
 
                     </div>
 

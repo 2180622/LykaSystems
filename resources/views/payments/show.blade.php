@@ -63,6 +63,7 @@
                     <tr>
                         <th>Descrição</th>
                         <th>Valor</th>
+                        <th>Data de Vencimento</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
@@ -71,11 +72,15 @@
                     @foreach ($fases as $fase)
                     <tr>
                         {{-- Nome e Apelido --}}
-                        <td class="align-middle"><a class="name_link" href="/payments/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
+                        <td><a class="name_link" href="/payments/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
                         {{-- Descrição --}}
-                        <td class="align-middle">{{$fase->valorFase}}€</td>
+                        <td @if ($fase->verificacaoPago != 0)
+                          style = "color:#47bc00;"
+                        @endif>{{$fase->valorFase}}€</td>
+
+                        <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
                         {{-- Estado --}}
-                        <td class="align-middle">
+                        <td>
                             @if ($fase->verificacaoPago == 0)
                             Pendente
                             @else

@@ -32,65 +32,76 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Secção de cobrança - <b>{{$product->cliente->nome.' '.$product->cliente->apelido}}</b></h6>
+            <h6>Secção de cobrança - {{$product->cliente->nome.' '.$product->cliente->apelido}} ({{$fase->descricao}})</h6>
         </div>
         <br>
         <div class="payment-card shadow-sm">
-            <p>VALOR A PAGAR: <b>{{($fase->valorFase)}}€</b></p>
+            <p>VALOR A COBRAR:</p>
+            <p>&nbsp;{{($fase->valorFase)}}€</p>
             <br><br>
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="valorPago">Valor pago</label>
-                    <br>
-                    <input type="text" name="valorPago">
+            @php
+            $responsabilidade = $responsabilidades[0];
+            @endphp
+            <form action="{{route('payments.update', $responsabilidade)}}" method="post">
+                @csrf
+                @method('put')
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="valorPago">Valor cobrado</label>
+                        <br>
+                        <input type="text" name="valorPago">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="paymentType">Tipos de pagamento</label>
+                        <br>
+                        <select name="paymentType">
+                            <option>Multibanco</option>
+                            <option>Paypal</option>
+                            <option>Outro</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="dataPagamento">Data de pagamento</label>
+                        <br>
+                        <input type="text" name="dataPagamento">
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="paymentType">Tipos de pagamento</label>
-                    <br>
-                    <select name="paymentType">
-                        <option value="volvo">Multibanco</option>
-                        <option value="saab">Paypal</option>
-                        <option value="opel">Outro</option>
-                    </select>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="valorUni">Valor a pagar a Universidade</label>
+                        <br>
+                        <select name="valorUni">
+                          <option value="">Pago</option>
+                          <option value="">Pendente</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="valorAgente">Valor a pagar ao Agente</label>
+                        <br>
+                        <input type="text" name="valorAgente" placeholder="{{$responsabilidades[0]->valorAgente}}€">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="valorSubagente">Valor a pagar ao SubAgente</label>
+                        <br>
+                        <input type="text" name="valorSubagente" placeholder="{{$responsabilidades[0]->valorSubAgente}}€">
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="dataPagamento">Data de pagamento</label>
-                    <br>
-                    <input type="text" name="dataPagamento">
+                <br><br>
+                <div class="row">
+                    <div class="col">
+                        <label for="valorSubagente">Observações</label>
+                        <br>
+                        <textarea name="obsersacoes" rows="5"></textarea>
+                    </div>
                 </div>
-            </div>
-            <br><br>
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="valorUni">Valor a pagar a Universidade</label>
-                    <br>
-                    <input type="text" name="valorUni" placeholder="{{$responsabilidades[0]->valorUniversidade1}}€">
-                </div>
-                <div class="col-md-4">
-                    <label for="valorAgente">Valor a pagar ao Agente</label>
-                    <br>
-                    <input type="text" name="valorAgente" placeholder="{{$responsabilidades[0]->valorAgente}}€">
-                </div>
-                <div class="col-md-4">
-                    <label for="valorSubagente">Valor a pagar ao SubAgente</label>
-                    <br>
-                    <input type="text" name="valorSubagente" placeholder="{{$responsabilidades[0]->valorSubAgente}}€">
-                </div>
-            </div>
-            <br><br>
-            <div class="row">
-                <div class="col">
-                    <label for="valorSubagente">Observações</label>
-                    <br>
-                    <textarea name="obsersacoes" rows="5"></textarea>
-                </div>
-            </div>
         </div>
         <div class="form-group text-right">
             <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">confirmar pagamento</button>
+            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">confirmar cobrança</button>
             <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
         </div>
+        </form>
         <br>
     </div>
 </div>

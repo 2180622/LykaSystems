@@ -68,7 +68,7 @@
 
         {{-- Produtos--}}
         <li class="menu-option">
-            <a href="{{--route('produtostock.index')--}}">
+            <a href="{{route('produtostock.index')}}">
                 <div class="menu-icon">
                     <i class="fas fa-layer-group mr-2"></i>
                 </div>
@@ -86,6 +86,18 @@
                     </ion-icon>
                 </div>
                 <span class="option-name">Pagamentos</span>
+            </a>
+        </li>
+
+        <!-- Cobranças -->
+        <li class="menu-option">
+            <a href="{{route('charges.index')}}">
+                <div class="menu-icon">
+                    <ion-icon name="wallet-outline"
+                        style="font-size:16pt; --ionicon-stroke-width: 50px; position: relative; top: 3px; right: 3px;">
+                    </ion-icon>
+                </div>
+                <span class="option-name">Cobranças</span>
             </a>
         </li>
 
@@ -186,16 +198,16 @@
         {{-- SE FOR ADMIN --}}
         @if (Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null)
         <div class="mx-auto user_photo rounded-circle shadow">
-            <a href="#" title="Ver as minhas informações">
-            {{-- Foto Utilizador --}}
-            @if(Auth::user()->admin->fotografia != null)
-            <img src="{{asset('/storage/admin-photos/'.Auth::user()->admin->fotografia)}}" style="width:100%">
-            @elseif (Auth::user()->admin->genero == "F")
-            <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
-            @else
-            <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
-            @endif
-            </a>
+            {{-- <a href="#" title="Ver as minhas informações"> --}}
+                {{-- Foto Utilizador --}}
+                @if(Auth::user()->admin->fotografia != null)
+                <img src="{{asset('/storage/admin-photos/'.Auth::user()->admin->fotografia)}}" style="width:100%">
+                @elseif (Auth::user()->admin->genero == "F")
+                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
+                @else
+                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
+                @endif
+            {{-- </a> --}}
         </div>
 
         <div class="text-center mt-3">
@@ -231,14 +243,14 @@
         @elseif (Auth::user()->tipo == "cliente" && Auth::user()->idCliente != null)
         <div class="mx-auto user_photo rounded-circle shadow">
             <a href="#" title="Ver as minhas informações">
-            {{-- Foto Utilizador --}}
-            @if(Auth::user()->cliente->fotografia != null)
-            <img src="{{asset('/storage/client-photos/'.Auth::user()->cliente->fotografia)}}" style="width:100%">
-            @elseif (Auth::user()->cliente->genero == "F")
-            <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
-            @else
-            <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
-            @endif
+                {{-- Foto Utilizador --}}
+                @if(Auth::user()->cliente->fotografia != null)
+                <img src="{{asset('/storage/client-photos/'.Auth::user()->cliente->fotografia)}}" style="width:100%">
+                @elseif (Auth::user()->cliente->genero == "F")
+                <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
+                @else
+                <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
+                @endif
             </a>
         </div>
 

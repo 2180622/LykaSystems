@@ -1,12 +1,11 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de pagamentos')
+@section('title', 'Listagem de cobranças')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
-<link href="{{asset('/css/payment.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
@@ -33,16 +32,16 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Listagem de pagamentos</h6>
+            <h6>Listagem de cobranças</h6>
         </div>
         <br>
 
         <div class="row mt-3 mb-4">
             <div class="col">
                 @if (count($numberProducts) == 1)
-                Está registado <strong>{{count($numberProducts)}}</strong> pagamento pendente.
+                Está registado <strong>{{count($numberProducts)}}(uma)</strong> cobrança pendente.
                 @else
-                Estão registados <strong>{{count($numberProducts)}}</strong> pagamentos pendentes.
+                Estão registados <strong>{{count($numberProducts)}}</strong> cobranças pendentes.
                 @endif
             </div>
         </div>

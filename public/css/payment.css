@@ -20,11 +20,34 @@ a:hover {
     text-decoration: none;
 }
 
-input, select, textarea{
+input, textarea, select {
+    color: #747474;
+    font-weight: 600;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+label {
+    color: #747474;
+    font-weight: 700;
+}
+
+input, select, textarea {
     width: 100%;
     border: none;
     resize: none;
-    padding: 5px 10px;
+    padding: 7px 12px;
     border-radius: 5px;
     background-color: #EAEAEA;
+}
+
+.payment-card p:first-child {
+    color: #747474;
+    font-weight: 600;
+}
+
+.payment-card p:nth-child(2) {
+    color: #747474;
+    font-weight: 700;
 }

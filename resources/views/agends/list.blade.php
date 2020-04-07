@@ -34,9 +34,10 @@
             </a>
         </div>
 
-        <div class="float-right">
-            <a href="#" class="top-button">Novo Evento</a>
-        </div>
+        <button type="button" class="float-right top-button" data-toggle="modal" data-target="#modalCalendar">
+            Novo Evento
+        </button>
+
 
         <br><br>
 
