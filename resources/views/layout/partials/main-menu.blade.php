@@ -89,6 +89,18 @@
             </a>
         </li>
 
+        <!-- Cobranças -->
+        <li class="menu-option">
+            <a href="{{route('charges.index')}}">
+                <div class="menu-icon">
+                    <ion-icon name="wallet-outline"
+                        style="font-size:16pt; --ionicon-stroke-width: 50px; position: relative; top: 3px; right: 3px;">
+                    </ion-icon>
+                </div>
+                <span class="option-name">Cobranças</span>
+            </a>
+        </li>
+
         <!-- Listagens -->
         <li class="menu-option">
             <a href="#">
