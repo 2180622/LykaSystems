@@ -9,26 +9,40 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
-                        <label for="title">Titulo</label>
-                        <input type="text" class="form-control" id="title" name="title">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <i class="fas fa-pen mr-2" style="color: #6A74C9;"></i>
+                                <label for="title">Titulo</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                       placeholder="Insira o Titulo do evento.">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <i class="fas fa-palette mr-2" style="color: #6A74C9;"></i>
+                                <label for="color">Cor</label>
+                                <input type="color" class="form-control" id="color" name="color">
+                            </div>
+
+                        </div>
                     </div>
                     <div class="form-group">
+                        <i class="far fa-calendar-alt mr-2" style="color: #6A74C9;"></i>
                         <label for="startDate">Data/Hora Inicial</label>
                         <input type="date" class="form-control" id="startDate" name="startDate">
                     </div>
                     <div class="form-group">
+                        <i class="far fa-calendar-alt mr-2" style="color: #6A74C9;"></i>
                         <label for="endDate">Data/Hora Final</label>
                         <input type="date" class="form-control" id="endDate" name="endDate">
                     </div>
+
                     <div class="form-group">
-                        <label for="color">Cor do Evento</label>
-                        <input type="color" class="form-control" id="color" name="color">
-                    </div>
-                    <div class="form-group">
+                        <i class="fas fa-align-right mr-2" style="color: #6A74C9;"></i>
                         <label for="description">Descrição</label>
-                        <textarea type="text" class="form-control" id="description" rows="2" name="description">
-                       </textarea>
+                        <textarea class="form-control" name="resume" id="description" rows="2" style="resize: none"
+                                  maxlength="150" placeholder="Insira a Descrição do evento." fixed></textarea>
                     </div>
                 </form>
             </div>
