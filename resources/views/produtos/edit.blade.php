@@ -33,11 +33,154 @@
             <br>
 
 
-            <form method="POST" action="{{route('produtos.update',$client)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="POST" action="{{route('produtos.update',$produto)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
-                @include('produtos.partials.add-edit')
+                <div class="row">
+                    <div class="col">
+                        {{-- INPUT nome --}}
+                        <label for="nome">Cliente: 
+                            <a class="name_link" href="{{route('clients.show',$produto->cliente)}}">
+                                {{$produto->cliente->nome.' '.$produto->cliente->apelido}}
+                            </a>
+                        </label>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div><span><b>Produto</b></span></div><br>
+                
+                        <label for="tipo">Tipo:</label><br>
+                        <input type="text" class="form-control" name="tipo" id="tipo" 
+                        value="{{old('tipo',$produto->tipo)}}" placeholder="Tipo" maxlength="20" required disabled><br>
+                
+                        <label for="descricao">Descrição:</label><br>
+                        <input type="text" class="form-control" name="descricao" id="descricao" 
+                        value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" required disabled><br>
+                
+                        <label for="AnoAcademico">Ano académico:</label><br>
+                        <input type="text" class="form-control" name="AnoAcademico" id="AnoAcademico" 
+                        value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required disabled><br>
+                
+                        <label for="agente">Agente:</label><br>
+                        <select id="agente" name="agente" class="form-control" required>
+                            <option value="" selected hidden></option>
+                            @foreach($Agentes as $agente)
+                                <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
+                            @endforeach
+                        </select><br>
+                
+                        <label for="subagente">Sub-Agente:</label><br>
+                        <select id="subagente" name="subagente" class="form-control">
+                            <option value="" selected hidden></option>
+                            @foreach($SubAgentes as $subagente)
+                                <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
+                            @endforeach
+                        </select><br>
+                
+                        <label for="uni1">Universidade Principal:</label><br>
+                        <select id="uni1" name="uni1" class="form-control" required>
+                            <option value="" selected hidden></option>
+                            @foreach($Universidades as $uni)
+                                <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
+                            @endforeach
+                        </select><br>
+                
+                        <label for="uni2">Universidade Secundária:</label><br>
+                        <select id="uni2" name="uni2" class="form-control">
+                            <option value="" selected hidden></option>
+                            @foreach($Universidades as $uni)
+                                <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
+                            @endforeach
+                        </select><br>
+                
+                    </div>
+                </div>
+                <div class="tab-content p-2 mt-3" id="myTabContent">
+                    <ul class="nav nav-tabs mt-5 mb-4 fases" id="myTab" role="tablist">
+                        <li class="nav-item clonar" style="width:25%">
+                            @php
+                                $num=0;
+                            @endphp
+                            @foreach($fases as $fase)
+                                @php
+                                    $num++;
+                                @endphp
+                                @if($num == 1)
+                                    <a class="nav-link active" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
+                                    aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
+                                @else
+                                    <a class="nav-link" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
+                                    aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
+                                @endif
+                            @endforeach
+                        </li>
+                    </ul>
+                
+                    @php
+                        $num=0;
+                    @endphp
+                    @foreach($fases as $fase)
+                        @php
+                            $num++;
+                            $responsabilidade = $fase->responsabilidade;
+                            $relacoes = $responsabilidade->relacao;
+                        @endphp
+                        @if($num == 1)
+                            <div class="tab-pane fade show active" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
+                        @else
+                            <div class="tab-pane fade" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
+                        @endif
+                            <div class="row">
+                                <div class="col-md-12">
+                
+                                    <div><span><b>Fase {{$num}}</b></span></div><br>
+                
+                                    <label for="des-fase{{$num}}">Descrição:</label><br>
+                                    <input type="text" class="form-control" name="des-fase{{$num}}" id="des-fase{{$num}}" 
+                                    value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" required disabled><br>
+                
+                                    <label for="data-fase{{$num}}">Data de vencimento:</label><br>
+                                    <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
+                                    value="{{old('descricao',$fase->dataVencimento)}}" style="width:250px" required><br>
+                                    
+                                    <div><span><b>Responsabilidades</b></span></div><br>
+                
+                                    <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
+                                    <input type="text" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
+                                    value="{{old('descricao',$responsabilidade->valorCliente)}}" style="width:250px" required><br>
+                
+                                    <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
+                                    <input type="text" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
+                                    value="{{old('descricao',$responsabilidade->valorAgente)}}" style="width:250px" required><br>
+                
+                                    <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
+                                    <input type="text" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
+                                    value="{{old('descricao',$responsabilidade->valorSubAgente)}}" style="width:250px"><br>
+                
+                                    <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
+                                    <input type="text" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
+                                    value="{{old('descricao',$responsabilidade->valorUniversidade1)}}" style="width:250px" required><br>
+                
+                                    <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
+                                    <input type="text" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
+                                    value="{{old('descricao',$responsabilidade->valorUniversidade2)}}" style="width:250px"><br>
+                
+                                    @if($relacoes->toArray())
+                                        <div><span>Fornecedores:</span></div><br>
+                                        @foreach ($relacoes as $relacao)
+                                            <label for="resp-uni2-fase{{$num}}">Valor a pagar a {{$relacao->fornecedor->nome}}:</label><br>
+                                            <input type="text" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
+                                            value="{{old('descricao',$relacao->valor)}}" style="width:250px" required><br>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
                 <div class="form-group text-right">
                     <br><br>
                     <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>

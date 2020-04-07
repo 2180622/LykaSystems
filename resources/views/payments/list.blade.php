@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de Utilizadores')
+@section('title', 'Lista de pagamentos')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
