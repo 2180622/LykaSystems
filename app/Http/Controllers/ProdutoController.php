@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Agente;
 use App\Cliente;
 use App\Produto;
 use App\ProdutoStock;
+use App\Universidade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -35,7 +37,10 @@ class ProdutoController extends Controller
         $cliente = $client;
         $produto = new Produto;
         $produtoStock = ProdutoStock::all();
-        return view('produtos.add',compact('produto','produtoStock','cliente'));
+        $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
+        $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
+        $Universidades = Universidade::all();
+        return view('produtos.add',compact('produto','produtoStock','cliente','Agentes','SubAgentes','Universidades'));
     }
 
 
@@ -107,7 +112,12 @@ class ProdutoController extends Controller
     */
     public function edit(Produto $produto)
     {
-        return view('produtos.edit', compact('produto'));
+        $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
+        $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
+        $Universidades = Universidade::all();
+        $fases = $produto->fase;
+
+        return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases'));
     }
 
 

@@ -53,7 +53,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Produtos */
     Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
-    Route::get('/produtos/print/{produto}', 'ProdutoController@print')->name('produtos.print');
     Route::resource('/produtos', 'ProdutoController')->only(['print', 'destroy', 'update','show','edit','store']);
 });
 
@@ -62,4 +61,4 @@ Route::get('/confirmation/{user}', 'AccountConfirmationController@mailconfirmati
 Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
 
 /* Edgar Teste -> Eliminar no futuro */
-Route::get('/edgarteste', 'EdgarTesteController@index');
+Route::get('/data', 'EdgarTesteController@index');
