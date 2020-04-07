@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::put('/payments/{responsabilidade}', 'PaymentController@update')->name('payments.update');
 
     /* Cobranças */
-    Route::get('/charges', 'ChargesController@index')->name('charger.index');
+    Route::get('/charges', 'ChargesController@index')->name('charges.index');
 
 
     /* Utilizadores */
