@@ -149,6 +149,19 @@
                     placeholder="Insira o email" required maxlength="200">
             </div>
 
+        </div>
+
+
+
+        <div class="row">
+
+            <div class="col">
+                {{-- INPUT email --}}
+                <label for="email">E-mail:</label><br>
+                <input type="email" class="form-control" name="email" id="email" value="BD:wNUMERO DE CEDULA PESSOAL"
+                    placeholder="Insira o email" required maxlength="200">
+            </div>
+
             <div class="col">
                 {{-- INPUT NIF --}}
                 <label for="NIF">NIF:</label><br>
@@ -157,6 +170,8 @@
             </div>
 
         </div>
+
+
 
     </div>
 
