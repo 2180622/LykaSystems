@@ -59,6 +59,13 @@
                     src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
                 @endif
 
+                <br>
+
+                <div class="card rounded shadow-sm m-2 p-3">
+                    <i class="far fa-id-card" style="font-size:30px"></i>
+                    <a class="name_link" href="#">Ver documento de identificação</a>
+                </div>
+
             </div>
 
             <div class="col p-2" style="min-width:280px !important">

@@ -149,7 +149,7 @@
                     placeholder="Insira o email" required maxlength="200">
             </div>
 
-        </div>
+        </div><br>
 
 
 
@@ -157,21 +157,19 @@
 
             <div class="col">
                 {{-- INPUT email --}}
-                <label for="email">E-mail:</label><br>
-                <input type="email" class="form-control" name="email" id="email" value="BD:wNUMERO DE CEDULA PESSOAL"
-                    placeholder="Insira o email" required maxlength="200">
+                <label for="cedula">Numero de identificação:</label><br>
+                <input type="text" class="form-control" name="cedula" id="email" value="BD: NUMERO DE CEDULA PESSOAL"
+                    placeholder="Numero de identificação pessoal" required maxlength="50" required>
             </div>
 
             <div class="col">
                 {{-- INPUT NIF --}}
                 <label for="NIF">NIF:</label><br>
                 <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$agent->NIF)}}"
-                    placeholder="Insira o NIF" required maxlength="20">
+                    placeholder="Insira o NIF" maxlength="20">
             </div>
 
         </div>
-
-
 
     </div>
 
@@ -197,9 +195,31 @@
             class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px;"
             alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
         @endif
-        <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
+{{--         <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
                 ficheiro</a></div>
+ --}}
+
+
+        <div class=" mt-5">
+            <label for="fotografia">Documento de identificação:</label>
+            <input type='file' id="fotografia" name="fotografia" style="display:none" accept="image/*" />
+        </div>
+        <div class="card mx-auto p-3 rounded shadow-sm text-center " style="width:80%;min-width:118px;min-height:200px">
+{{--        @if ( SE A IMAGEM EXISTIR, apresntar imagem)
+            <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" class="m-2 p-1 rounded bg-white shadow-sm">
+            @else --}}
+            <i class="fas fa-plus-circle mt-5" style="font-size:70px" title="Clique para mudar o documento de identificação"></i>
+{{--        @endif --}}
+
+
+        </div>
+{{--         <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
+            ficheiro</a></div> --}}
+
+
     </div>
+
+
 
 </div>
 
