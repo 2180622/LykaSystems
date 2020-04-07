@@ -6,6 +6,7 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
 <link href="{{asset('css/clients.css')}}" rel="stylesheet">
+<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -39,10 +40,10 @@
             @csrf
             @method("PUT")
             @include('clients.partials.add-edit')
-            <div class="form-group text-right">
+            <div class="form-group text-right" style="min-width:285px">
                 <br><br>
                 <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
-                <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
+                <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
             </div>
         </form>
 

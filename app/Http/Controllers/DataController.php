@@ -108,10 +108,10 @@ class DataController extends Controller
 
         /******************          Bibliotecas          ******************/
 
-        $biblioteca = new Biblioteca;
+/*         $biblioteca = new Biblioteca;
         $biblioteca->nome = 'YII2-Intro';
         $biblioteca->imagem = 'docs/Biblioteca-0001_YII2-Intro';
-        $biblioteca->save();
+        $biblioteca->save(); */
 
         /*******************          Clientes          ********************/
 
@@ -356,7 +356,7 @@ class DataController extends Controller
         $user->save();
 
         /********************          Agendas          ********************/
-
+/*
         $agenda = new Agenda;
         $agenda->descricao = 'Teste';
         $agenda->visibilidade = false;
@@ -364,7 +364,7 @@ class DataController extends Controller
         $agenda->dataFim = date('Y-m-d H:i',strtotime('20-06-2020 18:25'));
         $agenda->idUser = 2;
         $agenda->save();
-
+ */
         /*******************          Produtos          ********************/
 
         $produto = new Produto;
