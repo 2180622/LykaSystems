@@ -29,6 +29,7 @@ class ProdutosstockController extends Controller
         $docFields = $requestDoc->validated();
 
         $produtoStock = new ProdutoStock();
+
         $produtoStock->fill($produtoFields);
 
         $faseStock = new FaseStock();
@@ -36,10 +37,7 @@ class ProdutosstockController extends Controller
         $faseStock->idProdutoStock = $produtoStock->idProdutoStock;
 
         $docStock = new DocStock();
-        // $docStock->fill($docFields);
-        $docStock->tipo = 'Pessoal';
-        $docStock->tipoPessoal = 'Passaport';
-        $docStock->tipoAcademico = null;
+        $docStock->fill($docFields);
         $docStock->idProdutoStock = $produtoStock->idProdutoStock;
 
         $produtoStock->save();
