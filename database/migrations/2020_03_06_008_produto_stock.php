@@ -18,7 +18,7 @@ class ProdutoStock extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idProdutoStock');
             $table->string('descricao',255);
-            $table->enum('tipo',['Licenciatura','Mestrado','Doutoramento','Curso de Verão','Estágio Profissional','Transferência de Curso','Curso Indiomas','Erasmus','Pré-Universitário']);
+            $table->enum('tipoProduto',['Licenciatura','Mestrado','Doutoramento','Curso de Verão','Estágio Profissional','Transferência de Curso','Curso Indiomas','Erasmus','Pré-Universitário']);
             $table->string('anoAcademico',255);
             $table->timestamps();
             $table->softDeletes();
