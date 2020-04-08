@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Cobranças */
     Route::get('/charges', 'ChargesController@index')->name('charges.index');
     Route::get('/charges/{product}', 'ChargesController@show')->name('charges.show');
-
+    Route::get('/charges/{product}/{fase}', 'ChargesController@showfase')->name('charges.showfase');
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
