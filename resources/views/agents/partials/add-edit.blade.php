@@ -205,7 +205,7 @@
             <input type='file' id="fotografia" name="fotografia" style="display:none" accept="image/*" />
         </div>
         <div class="card mx-auto p-3 rounded shadow-sm text-center " style="width:80%;min-width:118px;min-height:200px">
-{{--        @if ( SE A IMAGEM EXISTIR, apresntar imagem)
+{{--        @if ( SE A IMAGEM EXISTIR, apresentar imagem)
             <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" class="m-2 p-1 rounded bg-white shadow-sm">
             @else --}}
             <i class="fas fa-plus-circle mt-5" style="font-size:70px" title="Clique para mudar o documento de identificação"></i>

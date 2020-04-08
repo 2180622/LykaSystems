@@ -46,7 +46,7 @@
         <br>
 
         <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
-            <div class="col p-0 text-center" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
+            <div class="col p-0 text-center mr-2" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
 
                 @if($agent->fotografia)
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
@@ -95,6 +95,8 @@
                 <div><span class="text-secondary">Telefone (alternativo):</span> {{$agent->telefone2}}</div><br>
 
                 <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div><br>
+
+                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->NIF}}</div>
 
                 <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 
