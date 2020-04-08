@@ -98,7 +98,7 @@
                             </div>
                         </td>
                         {{-- Nome e Apelido --}}
-                        <td class="align-middle"><a class="name_link" href="{{route('payments.show', $product)}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
+                        <td class="align-middle"><a class="name_link" href="{{route('charges.show', $product)}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
                         {{-- Descrição --}}
                         <td class="align-middle">{{$product->descricao}}</td>
                         {{-- Valor --}}

@@ -15,4 +15,10 @@ class ChargesController extends Controller
       $numberProducts = Produto::where('valorTotal', '!=', '0')->get();
       return view('charges.list', compact('products', 'numberProducts'));
     }
+
+    public function show(Fase $fase, Produto $product)
+    {
+      $fases = Fase::where('idProduto', '=', $product->idProduto)->get();
+      return view('charges.show', compact('product', 'fases'));
+    }
 }
