@@ -72,7 +72,7 @@
                     @foreach ($fases as $fase)
                     <tr>
                         {{-- Nome e Apelido --}}
-                        <td><a class="name_link" href="/payments/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
+                        <td><a class="name_link" href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
                         {{-- Descrição --}}
                         <td @if ($fase->verificacaoPago != 0)
                           style = "color:#47bc00;"
