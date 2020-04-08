@@ -36,7 +36,10 @@ class ProdutosstockController extends Controller
         $faseStock->idProdutoStock = $produtoStock->idProdutoStock;
 
         $docStock = new DocStock();
-        $docStock->fill($docFields);
+        // $docStock->fill($docFields);
+        $docStock->tipo = 'Pessoal';
+        $docStock->tipoPessoal = 'Passaport';
+        $docStock->tipoAcademico = null;
         $docStock->idProdutoStock = $produtoStock->idProdutoStock;
 
         $produtoStock->save();

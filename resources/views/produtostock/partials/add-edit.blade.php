@@ -44,7 +44,7 @@
                 {{-- INPUT tipoPessoal DocStock --}}
                 <label for="tipopessoal">TipoPessoal:</label>
                 <select type="text" class="form-control" name="tipopessoaldoc" id="tipopessoaldoc"
-                 placeholder="Insira o tipo Pessoal de Documento Stock">
+                 placeholder="Insira o tipo Pessoal de Documento Stock" required>
                   <option value="Passaport">Passaporte</option>
                   <option value="Cartão Cidadão">Cartão de Cidadão</option>
                   <option value="Carta de Condução">Carta de Condução</option>
