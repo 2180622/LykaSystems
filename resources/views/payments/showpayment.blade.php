@@ -11,7 +11,6 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-
 <div class="container mt-2 ">
 
     {{-- Navegação --}}
@@ -39,7 +38,7 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{($fase->valorFase)}}€</p>
             <br><br>
-            <form action="#" method="post">
+            <form action="/payments/{{$product->idProduto}}/{{$fase->idFase}}" method="post">
                 @csrf
                 @method('put')
                 <div class="row">

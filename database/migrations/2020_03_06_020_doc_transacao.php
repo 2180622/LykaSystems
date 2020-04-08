@@ -21,6 +21,7 @@ class DocTransacao extends Migration
             $table->decimal('valorRecebido', 18, 2)->default(0);
             $table->date('dataOperacao');
             $table->date('dataRecebido')->nullable();
+            $table->enum('tipoPagamento', ['Multibanco', 'Paypal', 'Outro']);
             $table->boolean('verificacao')->default(false);
             $table->string('imagem',255);
             $table->timestamps();

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Fase;
+use App\Conta;
 use App\Produto;
-use App\Responsabilidade;
+use App\DocTransacao;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -25,5 +26,10 @@ class PaymentController extends Controller
     public function showpayment(Produto $product, Fase $fase)
     {
       return view('payments.showpayment', compact('product', 'fase'));
+    }
+
+    public function update(Produto $product, Fase $fase, DocTransacao $docTrasancao, Conta $conta)
+    {
+      // Relacionar o DocTransacao e a Conta com a fase em questão
     }
 }
