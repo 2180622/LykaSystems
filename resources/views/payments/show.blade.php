@@ -32,7 +32,7 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Secção de cobrança - <b>{{$product->cliente->nome.' '.$product->cliente->apelido}}</b></h6>
+            <h6>Secção de cobrança - {{$product->cliente->nome.' '.$product->cliente->apelido}}</h6>
         </div>
         <br>
         <div class="row mt-3 mb-4">
@@ -72,7 +72,7 @@
                     @foreach ($fases as $fase)
                     <tr>
                         {{-- Nome e Apelido --}}
-                        <td><a class="name_link" href="#">{{$fase->descricao}}</a></td>
+                        <td><a class="name_link" href="/payments/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
                         {{-- Descrição --}}
                         <td @if ($fase->verificacaoPago != 0)
                           style = "color:#47bc00;"
