@@ -230,7 +230,7 @@ class DataController extends Controller
 
         $produtostock = new ProdutoStock;
         $produtostock->descricao = 'Lic 4F fr';
-        $produtostock->tipo = 'Licenciatura';
+        $produtostock->tipoProduto = 'Licenciatura';
         $produtostock->anoAcademico = '2020/2021';
         $produtostock->save();
 
