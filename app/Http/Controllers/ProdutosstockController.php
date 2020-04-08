@@ -34,14 +34,16 @@ class ProdutosstockController extends Controller
 
         $faseStock = new FaseStock();
         $faseStock->fill($faseFields);
+
+        $produtoStock->save();
         $faseStock->idProdutoStock = $produtoStock->idProdutoStock;
 
         $docStock = new DocStock();
         $docStock->fill($docFields);
-        $docStock->idProdutoStock = $produtoStock->idProdutoStock;
 
-        $produtoStock->save();
         $faseStock->save();
+        $docStock->idFaseStock = $faseStock->idFaseStock;
+
         $docStock->save();
 
         return redirect()->route('produtostock.index')->with('success', 'Adicionado com sucesso');

@@ -11,7 +11,7 @@
 
                 {{-- INPUT Tipo --}}
                 <label for="apelido">Tipo de Produto stock:</label><br>
-                <select type="text" class="form-control" name="tipo" id="tipoprodstock"
+                <select type="text" class="form-control" name="tipoProduto" id="tipoprodstock"
                  placeholder="Insira o tipo de Produto Stock" required>
                    <option value="Licenciatura">Licenciatura</option>
                    <option value="Mestrado">Mestrado</option>
