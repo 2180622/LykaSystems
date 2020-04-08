@@ -21,4 +21,10 @@ class ChargesController extends Controller
       $fases = Fase::where('idProduto', '=', $product->idProduto)->get();
       return view('charges.show', compact('product', 'fases'));
     }
+
+    public function showfase(Produto $product, Fase $fase, Responsabilidade $responsabilidades)
+    {
+      $responsabilidades = Responsabilidade::where('idResponsabilidade', '=', $fase->idResponsabilidade)->get();
+      return view('charges.showfase', compact('product', 'fase', 'responsabilidades'));
+    }
 }
