@@ -42,8 +42,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Pagamentos */
     Route::get('/payments', 'PaymentController@index')->name('payments.index');
     Route::get('/payments/{product}', 'PaymentController@show')->name('payments.show');
-    Route::get('/payments/{product}/{fase}', 'PaymentController@showfase')->name('payments.showfase');
-    Route::put('/payments/{responsabilidade}', 'PaymentController@update')->name('payments.update');
 
     /* Cobranças */
     Route::get('/charges', 'ChargesController@index')->name('charges.index');
