@@ -109,7 +109,7 @@ class AgenteController extends Controller
         /* Documento de identificação */
         if ($requestAgent->hasFile('doc_img')) {
             $docfile = $requestAgent->file('doc_img');
-            $docImg = $agent->nome . '_DocID'.  '.' . $docfile->getClientOriginalExtension();
+            $docImg = $agent->nome . $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-docs/', $docfile, $docImg);
             $agent->doc_img = $docImg;
             $agent->save();
@@ -245,7 +245,7 @@ class AgenteController extends Controller
         /* Documento de identificação */
         if ($request->hasFile('doc_img')) {
             $docfile = $request->file('doc_img');
-            $docImg = $agent->nome . '_DocID'.  '.' . $docfile->getClientOriginalExtension();
+            $docImg = $agent->nome . $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
             if (!empty($agent->doc_img)) {
                 Storage::disk('public')->delete('agent-docs/' . $agent->doc_img);
             }
