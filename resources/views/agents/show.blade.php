@@ -61,6 +61,8 @@
 
                 <br>
 
+
+                @if (Auth::user()->tipo == "admin")
                 <div class="card rounded shadow-sm m-2 p-3">
                     @if ($agent->doc_img)
                         <i class="far fa-id-card" style="font-size:40px"></i>
@@ -71,9 +73,9 @@
                             <small class="text-danger mt-2"><strong>Sem documento de identificação</strong></small>
                         </a>
                     @endif
-
-
                 </div>
+                @endif
+
 
             </div>
 
