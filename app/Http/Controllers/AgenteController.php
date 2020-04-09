@@ -90,8 +90,10 @@ class AgenteController extends Controller
         $fieldsUser = $requestUser->validated();
         $user->fill($fieldsUser);
 
+
         /* Criação de Agente */
 
+        /* Fotografia do agente */
         if ($requestAgent->hasFile('fotografia')) {
             $photo = $requestAgent->file('fotografia');
             $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
@@ -99,20 +101,33 @@ class AgenteController extends Controller
             $agent->fotografia = $profileImg;
             $agent->save();
         }
-
         if ($requestAgent->fotografia==null){
             $agent->fotografia = null;
         }
+
+
+        /* Documento de identificação */
+        if ($requestAgent->hasFile('doc_img')) {
+            $docfile = $requestAgent->file('doc_img');
+            $docImg = $agent->nome . '_DocID'.  '.' . $docfile->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('agent-docs/', $docfile, $docImg);
+            $agent->doc_img = $docImg;
+            $agent->save();
+        }
+        if ($requestAgent->doc_img==null){
+            $agent->doc_img = null;
+        }
+
+
 
         // data em que foi criado
         $t=time();
         $agent->create_at == date("Y-m-d",$t);
 
-
-
-
-
         $agent->save();
+
+
+
 
         /* Criação de utilizador */
 
@@ -224,6 +239,20 @@ class AgenteController extends Controller
             Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
         }
+
+
+
+        /* Documento de identificação */
+        if ($request->hasFile('doc_img')) {
+            $docfile = $request->file('doc_img');
+            $docImg = $agent->nome . '_DocID'.  '.' . $docfile->getClientOriginalExtension();
+            if (!empty($agent->doc_img)) {
+                Storage::disk('public')->delete('agent-docs/' . $agent->doc_img);
+            }
+            Storage::disk('public')->putFileAs('agent-docs/', $docfile, $docImg);
+            $agent->doc_img = $docImg;
+        }
+
 
 
         // Caso se mude o de agente para subagente, garante que nenhum o agente não tem id de subagente

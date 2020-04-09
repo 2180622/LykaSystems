@@ -62,8 +62,17 @@
                 <br>
 
                 <div class="card rounded shadow-sm m-2 p-3">
-                    <i class="far fa-id-card" style="font-size:30px"></i>
-                    <a class="name_link" href="#">Ver documento de identificação</a>
+                    @if ($agent->doc_img)
+                        <i class="far fa-id-card" style="font-size:40px"></i>
+                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('agent-docs/').$agent->doc_img}}">Ver documento de identificação</a>
+                    @else
+                        <i class="far fa-id-card" style="font-size:40px"></i>
+                        <a href="{{route('agents.edit',$agent)}}" class="mt-2 agent_link">
+                            <small class="text-danger mt-2"><strong>Sem documento de identificação</strong></small>
+                        </a>
+                    @endif
+
+
                 </div>
 
             </div>
@@ -96,7 +105,7 @@
 
                 <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div><br>
 
-                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->NIF}}</div>
+                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->num_id}}</div>
 
                 <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 
