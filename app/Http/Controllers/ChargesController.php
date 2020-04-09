@@ -36,8 +36,15 @@ class ChargesController extends Controller
       $fields = $requestCharge->validated();
       $docTrasancao->fill($fields);
       $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
+      $docTrasancao->imagem = 'imagem';
       $docTrasancao->idConta = '1';
       $docTrasancao->idFase = $fase->idFase;
       $docTrasancao->save();
+
+      if ($docTrasancao->valorRecebido == $fase->valorFase) {
+        Fase::where('descricao', '=', $fase->descricao)->update(['verificacaoPago' => '1']);
+      }
+
+      return redirect()->route('charges.show', $product)->with('success', 'Estado da cobrança alterado com sucesso!');
     }
 }
