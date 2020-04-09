@@ -46,14 +46,14 @@
                 </select>
                 <span class="ml-2">por página</span>
             </div>
-            <div class="col ">
-                <div class="input-group pl-0 float-right" style="width:250px">
-                    <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
-                    <div class="input-group-append">
-                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
-                    </div>
-                </div>
-            </div>
+              <div class="col ">
+                  <div class="input-group pl-0 float-right" style="width:250px">
+                      <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
+                      <div class="input-group-append">
+                          <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+                      </div>
+                  </div>
+              </div>
         </div>
         <hr>
         <div class="table-responsive " style="overflow:hidden">
