@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Fase;
 use App\Produto;
+use App\DocTransacao;
 use App\Responsabilidade;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreChargeRequest;
 
 class ChargesController extends Controller
 {
@@ -22,9 +24,27 @@ class ChargesController extends Controller
       return view('charges.show', compact('product', 'fases'));
     }
 
-    public function showfase(Produto $product, Fase $fase, Responsabilidade $responsabilidades)
+    public function showcharge(Produto $product, Fase $fase)
     {
-      $responsabilidades = Responsabilidade::where('idResponsabilidade', '=', $fase->idResponsabilidade)->get();
-      return view('charges.showfase', compact('product', 'fase', 'responsabilidades'));
+      $docTrasancao = new DocTransacao;
+      return view('charges.showcharge', compact('product', 'fase', 'docTrasancao'));
+    }
+
+    public function store(StoreChargeRequest $requestCharge, Produto $product, Fase $fase)
+    {
+      $docTrasancao = new DocTransacao;
+      $fields = $requestCharge->validated();
+      $docTrasancao->fill($fields);
+      $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
+      $docTrasancao->imagem = 'imagem';
+      $docTrasancao->idConta = '1';
+      $docTrasancao->idFase = $fase->idFase;
+      $docTrasancao->save();
+
+      if ($docTrasancao->valorRecebido == $fase->valorFase) {
+        Fase::where('descricao', '=', $fase->descricao)->update(['verificacaoPago' => '1']);
+      }
+
+      return redirect()->route('charges.show', $product)->with('success', 'Estado da cobrança alterado com sucesso!');
     }
 }

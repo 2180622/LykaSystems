@@ -27,9 +27,4 @@ class PaymentController extends Controller
     {
       return view('payments.showpayment', compact('product', 'fase'));
     }
-
-    public function update(Produto $product, Fase $fase, DocTransacao $docTrasancao)
-    {
-      // Relacionar o DocTransacao com a conta e a fase em questão
-    }
 }

@@ -189,7 +189,7 @@ class ClientController extends Controller
        if (Auth::user()->tipo == "cliente" ){
         abort (401);
       }
-      
+
         // Produtos adquiridos pelo cliente
         $produtos = $client->produto;
 

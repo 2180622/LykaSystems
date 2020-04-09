@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de cobranças')
+@section('title', 'Pagamento')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
@@ -11,7 +11,6 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-
 <div class="container mt-2 ">
 
     {{-- Navegação --}}
@@ -39,58 +38,46 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{($fase->valorFase)}}€</p>
             <br><br>
-            @php
-            $responsabilidade = $responsabilidades[0];
-            @endphp
-            <form action="{{route('payments.update', $responsabilidade)}}" method="post">
+            <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post">
                 @csrf
-                @method('put')
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorPago">Valor cobrado</label>
+                        <label for="valorRecebido">Valor recebido</label>
                         <br>
-                        <input type="text" name="valorPago">
+                        <input type="text" name="valorRecebido" placeholder="00.00€">
                     </div>
                     <div class="col-md-4">
-                        <label for="paymentType">Tipos de pagamento</label>
+                        <label for="tipoPagamento">Tipo de pagamento</label>
                         <br>
-                        <select name="paymentType">
-                            <option>Multibanco</option>
-                            <option>Paypal</option>
-                            <option>Outro</option>
+                        <select name="tipoPagamento">
+                            <option value="Multibanco">Multibanco</option>
+                            <option value="Paypal">Paypal</option>
+                            <option value="Outro">Outro</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="dataPagamento">Data de pagamento</label>
+                        <label for="comprovativoPagamento">Comprovativo de pagamento</label>
                         <br>
-                        <input type="text" name="dataPagamento">
+                        <input type="text" name="comprovativoPagamento">
                     </div>
                 </div>
                 <br><br>
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorUni">Valor a pagar a Universidade</label>
+                        <label for="dataOperacao">Data de pagamento</label>
                         <br>
-                        <select name="valorUni">
-                          <option value="">Pago</option>
-                          <option value="">Pendente</option>
-                        </select>
+                        <input type="date" name="dataOperacao">
                     </div>
                     <div class="col-md-4">
-                        <label for="valorAgente">Valor a pagar ao Agente</label>
+                        <label for="dataRecebido">Data de receção</label>
                         <br>
-                        <input type="text" name="valorAgente" placeholder="{{$responsabilidades[0]->valorAgente}}€">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="valorSubagente">Valor a pagar ao SubAgente</label>
-                        <br>
-                        <input type="text" name="valorSubagente" placeholder="{{$responsabilidades[0]->valorSubAgente}}€">
+                        <input type="date" name="dataRecebido">
                     </div>
                 </div>
                 <br><br>
                 <div class="row">
                     <div class="col">
-                        <label for="valorSubagente">Observações</label>
+                        <label for="obsersacoes">Observações</label>
                         <br>
                         <textarea name="obsersacoes" rows="5"></textarea>
                     </div>

@@ -43,12 +43,12 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/payments', 'PaymentController@index')->name('payments.index');
     Route::get('/payments/{product}', 'PaymentController@show')->name('payments.show');
     Route::get('/payments/{product}/{fase}', 'PaymentController@showpayment');
-    Route::put('/payments/{product}/{fase}', 'PaymentController@update')->name('payments.update');
 
     /* Cobranças */
     Route::get('/charges', 'ChargesController@index')->name('charges.index');
     Route::get('/charges/{product}', 'ChargesController@show')->name('charges.show');
-    Route::get('/charges/{product}/{fase}', 'ChargesController@showfase')->name('charges.showfase');
+    Route::get('/charges/{product}/{fase}', 'ChargesController@showcharge')->name('charges.showcharge');
+    Route::post('/charges/{product}/{fase}', 'ChargesController@store')->name('charges.store');
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
