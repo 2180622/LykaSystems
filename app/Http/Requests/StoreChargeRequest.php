@@ -19,7 +19,7 @@ class StoreChargeRequest extends FormRequest
             'dataOperacao' => 'required',
             'dataRecebido' => 'required',
             'observacoes' => 'nullable',
-            'comprovativoPagamento' => 'nullable'
+            'comprovativoPagamento' => 'required'
         ];
     }
 }
