@@ -38,15 +38,17 @@ class ChargesController extends Controller
       $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
       $docTrasancao->idConta = '1';
       $docTrasancao->idFase = $fase->idFase;
-      $docTrasancao->save();
 
       if ($requestCharge->hasFile('comprovativoPagamento')) {
+          dd($fase);
           $comprovativoPagamento = $requestCharge->file('comprovativoPagamento');
           $comprovativo = $docTrasancao->descricao . '_Comprovativo'.  '.' . $comprovativoPagamento->getClientOriginalExtension();
           Storage::disk('public')->putFileAs('payment-proof/', $comprovativoPagamento, $comprovativo);
           $docTrasancao->comprovativoPagamento = $comprovativo;
           $docTrasancao->save();
       }
+
+      $docTrasancao->save();
 
       if ($docTrasancao->valorRecebido == $fase->valorFase) {
         Fase::where('descricao', '=', $fase->descricao)->update(['verificacaoPago' => '1']);
