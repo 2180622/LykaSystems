@@ -36,7 +36,26 @@ class AgendController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'titulo' => 'required',
+            'descrcicao' => 'required',
+            'dataInicio' => 'required',
+            'dataFim' => 'required',
+            'cor' => 'required',
+        ]);
+
+        $agenda = new Agenda;
+
+        $agenda->titulo = $request->input('title');
+        $agenda->descricao = $request->input('description');
+        $agenda->dataInicio = $request->input('startDate');
+        $agenda->dataFim = $request->input('endDate');
+        $agenda->cor = $request->input('color');
+
+        $agenda->save();
+
+        return redirect('/agends')->with('success', 'Evento Adicionado com Sucesso!');
+
     }
 
     /**
