@@ -12,7 +12,7 @@ class DocTransacao extends Model
 
     protected $fillable = [
         'descricao','valorRecebido','dataOperacao','dataRecebido','verificacao','tipoPagamento',
-        'imagem','$idConta','$idFase'
+        'comprovativoPagamento','$idConta','$idFase'
         ];
 
     public function fase(){
