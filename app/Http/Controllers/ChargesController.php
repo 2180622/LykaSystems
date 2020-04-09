@@ -22,9 +22,13 @@ class ChargesController extends Controller
       return view('charges.show', compact('product', 'fases'));
     }
 
-    public function showfase(Produto $product, Fase $fase, Responsabilidade $responsabilidades)
+    public function showcharge(Produto $product, Fase $fase)
     {
-      $responsabilidades = Responsabilidade::where('idResponsabilidade', '=', $fase->idResponsabilidade)->get();
-      return view('charges.showfase', compact('product', 'fase', 'responsabilidades'));
+      return view('charges.showcharge', compact('product', 'fase'));
+    }
+
+    public function update(Produto $product, Fase $fase, DocTransacao $docTrasancao)
+    {
+      // Relacionar o DocTransacao com a conta e a fase em questão
     }
 }
