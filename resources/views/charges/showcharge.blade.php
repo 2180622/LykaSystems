@@ -58,7 +58,7 @@
                     <div class="col-md-4">
                         <label for="comprovativoPagamento">Comprovativo de pagamento</label>
                         <br>
-                        <input type="text" name="comprovativoPagamento">
+                        <input type="file" name="comprovativoPagamento">
                     </div>
                 </div>
                 <br><br>
