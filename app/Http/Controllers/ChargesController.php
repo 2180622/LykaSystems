@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Fase;
 use App\Produto;
+use App\DocTransacao;
 use App\Responsabilidade;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreChargeRequest;
 
 class ChargesController extends Controller
 {
@@ -24,11 +26,18 @@ class ChargesController extends Controller
 
     public function showcharge(Produto $product, Fase $fase)
     {
-      return view('charges.showcharge', compact('product', 'fase'));
+      $docTrasancao = new DocTransacao;
+      return view('charges.showcharge', compact('product', 'fase', 'docTrasancao'));
     }
 
-    public function update(Produto $product, Fase $fase, DocTransacao $docTrasancao)
+    public function store(StoreChargeRequest $requestCharge, Produto $product, Fase $fase)
     {
-      // Relacionar o DocTransacao com a conta e a fase em questão
+      $docTrasancao = new DocTransacao;
+      $fields = $requestCharge->validated();
+      $docTrasancao->fill($fields);
+      $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
+      $docTrasancao->idConta = '1';
+      $docTrasancao->idFase = $fase->idFase;
+      $docTrasancao->save();
     }
 }

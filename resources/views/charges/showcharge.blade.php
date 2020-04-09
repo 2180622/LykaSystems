@@ -38,47 +38,46 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{($fase->valorFase)}}€</p>
             <br><br>
-            <form action="/payments/{{$product->idProduto}}/{{$fase->idFase}}" method="post">
+            <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post">
                 @csrf
-                @method('put')
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorPago">Valor recebido</label>
+                        <label for="valorRecebido">Valor recebido</label>
                         <br>
-                        <input type="text" name="valorPago" placeholder="00.00€">
+                        <input type="text" name="valorRecebido" placeholder="00.00€">
                     </div>
                     <div class="col-md-4">
-                        <label for="paymentType">Tipo de pagamento</label>
+                        <label for="tipoPagamento">Tipo de pagamento</label>
                         <br>
-                        <select name="paymentType">
-                            <option>Multibanco</option>
-                            <option>Paypal</option>
-                            <option>Outro</option>
+                        <select name="tipoPagamento">
+                            <option value="Multibanco">Multibanco</option>
+                            <option value="Paypal">Paypal</option>
+                            <option value="Outro">Outro</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="comprovativo">Comprovativo de pagamento</label>
+                        <label for="comprovativoPagamento">Comprovativo de pagamento</label>
                         <br>
-                        <input type="text" name="comprovativo">
+                        <input type="text" name="comprovativoPagamento">
                     </div>
                 </div>
                 <br><br>
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="dataPagamento">Data de pagamento</label>
+                        <label for="dataOperacao">Data de pagamento</label>
                         <br>
-                        <input type="date" name="dataPagamento">
+                        <input type="date" name="dataOperacao">
                     </div>
                     <div class="col-md-4">
-                        <label for="dataPagamento">Data de receção</label>
+                        <label for="dataRecebido">Data de receção</label>
                         <br>
-                        <input type="date" name="dataPagamento">
+                        <input type="date" name="dataRecebido">
                     </div>
                 </div>
                 <br><br>
                 <div class="row">
                     <div class="col">
-                        <label for="valorSubagente">Observações</label>
+                        <label for="obsersacoes">Observações</label>
                         <br>
                         <textarea name="obsersacoes" rows="5"></textarea>
                     </div>
