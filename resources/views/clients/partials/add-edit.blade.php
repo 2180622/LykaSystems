@@ -202,7 +202,7 @@
 
                     {{-- @foreach ($files as $file) --}}
                     <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 border p-1" title="Apagar documento"></i></a>
+                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2  p-1" title="Apagar documento"></i></a>
                         @if ($client->idCliente!=null)
                         <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
                                 title="Fazer download do ficheiro"></i></a>
@@ -211,7 +211,7 @@
                     </li>
 
                     <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 border p-1" title="Apagar documento"></i></a>
+                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2  p-1" title="Apagar documento"></i></a>
                         @if ($client->idCliente!=null)
                         <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
                                 title="Fazer download do ficheiro"></i></a>
@@ -220,7 +220,7 @@
                     </li>
 
                     <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 border p-1" title="Apagar documento"></i></a>
+                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2  p-1" title="Apagar documento"></i></a>
                         @if ($client->idCliente!=null)
                         <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
                                 title="Fazer download do ficheiro"></i></a>
@@ -229,7 +229,7 @@
                     </li>
 
                     <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 border p-1" title="Apagar documento"></i></a>
+                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2  p-1" title="Apagar documento"></i></a>
                         @if ($client->idCliente!=null)
                         <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
                                 title="Fazer download do ficheiro"></i></a>
@@ -291,7 +291,7 @@
 
                     {{-- @foreach ($files as $file) --}}
                     <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 border p-1" title="Apagar documento"></i></a>
+                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 p-1" title="Apagar documento"></i></a>
                         @if ($client->idCliente!=null)
                         <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
                                 title="Fazer download do ficheiro"></i></a>
@@ -300,7 +300,7 @@
                     </li>
 
                     <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 border p-1" title="Apagar documento"></i></a>
+                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 p-1" title="Apagar documento"></i></a>
                         @if ($client->idCliente!=null)
                         <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
                                 title="Fazer download do ficheiro"></i></a>
@@ -309,7 +309,7 @@
                     </li>
 
                     <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 border p-1" title="Apagar documento"></i></a>
+                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 p-1" title="Apagar documento"></i></a>
                         @if ($client->idCliente!=null)
                         <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
                                 title="Fazer download do ficheiro"></i></a>

@@ -16,8 +16,8 @@ class Agente extends Model
     protected $primaryKey = 'idAgente';
 
     protected $fillable = [
-        'subagent_agentid','nome','apelido','genero','email','dataNasc','fotografia','morada','pais',
-        'NIF','telefoneW','telefone2','tipo'
+        'subagent_agentid','nome','apelido','genero','email','dataNasc','fotografia','morada','pais','num_id',
+        'NIF','doc_img','telefoneW','telefone2','tipo'
         ];
 
     public function user(){

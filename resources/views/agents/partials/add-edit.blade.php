@@ -25,16 +25,16 @@
                     value="{{old('subagent_agentid',$agent->subagent_agentid)}}" disabled>
 
 
+                {{-- disabled se o tipo escolhido for "subagente" --}}
                 <select id="subagent_agentid" name="subagent_agentid" class="form-control" required>
-                    {{-- disabled se o tipo escolhido for "subagente" --}}
 
-                    <option hidden value="pickone">(escolha o agente)</option>
+                    <option hidden value="0">(escolha o agente)</option>
 
+                    {{-- Lista todos os agentes exepto o que esta a ser editado --}}
                     @foreach($listagents as $agentx)
-                    @if ($agentx->idAgente != $agent->idAgente && $agentx->tipo != "Subagente" )
-                    <option value="{{$agentx->idAgente}}">{{$agentx->nome}} {{$agentx->apelido}} ({{$agentx->pais}})
-                    </option>
-                    @endif
+                        @if ($agentx->idAgente != $agent->idAgente && $agentx->tipo != "Subagente" )
+                            <option value="{{$agentx->idAgente}}">{{$agentx->nome}} {{$agentx->apelido}} ({{$agentx->pais}})</option>
+                        @endif
                     @endforeach
 
                 </select>
@@ -149,7 +149,7 @@
                     placeholder="Insira o email" required maxlength="200">
             </div>
 
-        </div>
+        </div><br>
 
 
 
@@ -157,21 +157,20 @@
 
             <div class="col">
                 {{-- INPUT email --}}
-                <label for="email">E-mail:</label><br>
-                <input type="email" class="form-control" name="email" id="email" value="BD:wNUMERO DE CEDULA PESSOAL"
-                    placeholder="Insira o email" required maxlength="200">
+                <label for="num_id">Documento de identificação:</label><br>
+                <input type="text" class="form-control" name="num_id" id="num_id"
+                    value="{{old('num_id',$agent->num_id)}}" placeholder="Numero de identificação pessoal" required
+                    maxlength="50" required>
             </div>
 
             <div class="col">
                 {{-- INPUT NIF --}}
                 <label for="NIF">NIF:</label><br>
                 <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$agent->NIF)}}"
-                    placeholder="Insira o NIF" required maxlength="20">
+                    placeholder="Insira o NIF" maxlength="20">
             </div>
 
         </div>
-
-
 
     </div>
 
@@ -192,14 +191,47 @@
         <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" id="preview"
             class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px;"
             alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+
         @else
         <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
             class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px;"
             alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
         @endif
-        <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
+        <br><small class="text-muted">(clique para mudar)</small>
+        {{--         <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
                 ficheiro</a></div>
+ --}}
+
+
+        <div class=" mt-5">
+            <label for="doc_img">Documento de identificação:</label>
+            <input type='file' id="doc_img" name="doc_img" style="display:none" accept="application/pdf, image/*" />
+        </div>
+
+        <div class="card mx-auto p-4 rounded shadow-sm text-center " style="width:80%;min-width:118px;min-height:120px">
+
+            @if ( $agent->doc_img!=null)
+                <a href="{{Storage::disk('public')->url('agent-docs/').$agent->doc_img}}" title="Ver documento" id="doc_preview">
+                    <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                    <div id="name_id_file" class="text-muted">{{old('doc_img',$agent->doc_img)}}</div>
+                </a>
+            @else
+                <a style="display:none;cursor:pointer" title="Ver documento" id="doc_preview">
+                    <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                    <div id="name_id_file" class="text-muted">{{old('doc_img',$agent->doc_img)}}</div>
+                </a>
+                <i id="doc_preview_file" class="fas fa-plus-circle mt-2" style="font-size:60px;cursor:pointer" title="Clique adicionar o documento de identificação"></i>
+            @endif
+
+        </div>
+        <small class="text-muted">(clique para mudar)</small>
+        {{--         <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
+            ficheiro</a></div> --}}
+
+
     </div>
+
+
 
 </div>
 

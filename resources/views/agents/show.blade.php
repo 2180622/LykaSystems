@@ -46,7 +46,7 @@
         <br>
 
         <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
-            <div class="col p-0 text-center" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
+            <div class="col p-0 text-center mr-2" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
 
                 @if($agent->fotografia)
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
@@ -58,6 +58,24 @@
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
                     src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
                 @endif
+
+                <br>
+
+
+                @if (Auth::user()->tipo == "admin")
+                <div class="card rounded shadow-sm m-2 p-3">
+                    @if ($agent->doc_img)
+                        <i class="far fa-id-card" style="font-size:40px"></i>
+                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('agent-docs/').$agent->doc_img}}">Ver documento de identificação</a>
+                    @else
+                        <i class="far fa-id-card" style="font-size:40px"></i>
+                        <a href="{{route('agents.edit',$agent)}}" class="mt-2 agent_link">
+                            <small class="text-danger mt-2"><strong>Sem documento de identificação</strong></small>
+                        </a>
+                    @endif
+                </div>
+                @endif
+
 
             </div>
 
@@ -88,6 +106,8 @@
                 <div><span class="text-secondary">Telefone (alternativo):</span> {{$agent->telefone2}}</div><br>
 
                 <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div><br>
+
+                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->num_id}}</div>
 
                 <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 

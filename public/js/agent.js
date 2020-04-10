@@ -86,10 +86,10 @@
 
         //Preview da fotografia
 
-        $('#search_btn').on('click', function (e) {
+/*         $('#search_btn').on('click', function (e) {
             e.preventDefault();
             $('#fotografia').trigger('click');
-        });
+        }); */
 
         $('#preview').on('click', function (e) {
             e.preventDefault();
@@ -111,6 +111,47 @@
         $("#fotografia").change(function () {
             readURL(this);
         });
+
+
+
+
+
+        //Documento de identificação
+
+         $('#doc_preview_file').on('click', function (e) {
+            e.preventDefault();
+            $('#doc_img').trigger('click');
+        });
+
+        $('#doc_preview').on('click', function (e) {
+            e.preventDefault();
+            $('#doc_img').trigger('click');
+        });
+
+        function readDocURL(input) {
+            if (input.files && input.files[0]) {
+                var documento = new FileReader();
+
+                documento.onload = function (e) {
+                    $('#name_id_file').text( $('#doc_img').val() );
+                }
+
+                documento.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#doc_img").change(function () {
+            readDocURL(this);
+            $('#doc_preview_file').hide();
+            $('#doc_preview').show();
+
+        });
+
+
+
+
+
+
 
 
 

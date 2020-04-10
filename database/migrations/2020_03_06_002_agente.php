@@ -29,6 +29,13 @@ class Agente extends Migration
             $table->string('pais',255);
             $table->string('NIF',255);
                 $table->unique('NIF');
+
+            $table->string('num_id',255);
+                $table->unique('num_id');
+
+            $table->string('doc_img',255)->nullable();
+
+
             $table->string('telefoneW',255);
             $table->string('telefone2',255)->nullable();
             $table->enum('tipo',['Agente', 'Subagente']);

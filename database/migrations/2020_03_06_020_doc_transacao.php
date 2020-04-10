@@ -19,10 +19,12 @@ class DocTransacao extends Migration
             $table->bigIncrements('idDocTransacao');
             $table->string('descricao',255);
             $table->decimal('valorRecebido', 18, 2)->default(0);
+            $table->enum('tipoPagamento', ['Multibanco', 'Paypal', 'Outro']);
             $table->date('dataOperacao');
             $table->date('dataRecebido')->nullable();
+            $table->text('observacoes')->nullable();
+            $table->string('comprovativoPagamento',255)->nullable();
             $table->boolean('verificacao')->default(false);
-            $table->string('imagem',255);
             $table->timestamps();
             $table->unsignedBigInteger('idConta');
                 $table->foreign('idConta')->references('idConta')->on('Conta');

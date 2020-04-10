@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de Utilizadores')
+@section('title', 'Lista de pagamentos')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
@@ -32,7 +32,7 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Secção de cobrança - <b>{{$product->cliente->nome.' '.$product->cliente->apelido}}</b></h6>
+            <h6>Secção de cobrança - {{$product->cliente->nome.' '.$product->cliente->apelido}}</h6>
         </div>
         <br>
         <div class="row mt-3 mb-4">

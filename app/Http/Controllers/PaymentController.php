@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Fase;
+use App\Conta;
 use App\Produto;
-use App\Responsabilidade;
+use App\DocTransacao;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -22,14 +23,8 @@ class PaymentController extends Controller
       return view('payments.show', compact('product', 'fases'));
     }
 
-    public function showfase(Produto $product, Fase $fase, Responsabilidade $responsabilidades)
+    public function showpayment(Produto $product, Fase $fase)
     {
-      $responsabilidades = Responsabilidade::where('idResponsabilidade', '=', $fase->idResponsabilidade)->get();
-      return view('payments.showfase', compact('product', 'fase', 'responsabilidades'));
-    }
-
-    public function update(Responsabilidade $responsabilidade)
-    {
-      dd($responsabilidade);
+      return view('payments.showpayment', compact('product', 'fase'));
     }
 }

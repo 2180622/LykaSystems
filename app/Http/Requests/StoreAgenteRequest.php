@@ -6,21 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAgenteRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -32,7 +22,9 @@ class StoreAgenteRequest extends FormRequest
         'fotografia' => 'nullable',
         'morada' => 'required',
         'pais' => 'required',
+        'num_id'=> 'required|unique:Agente',
         'NIF' => 'required|unique:Agente',
+        'doc_img' => 'nullable',
         'telefoneW' => 'required',
         'telefone2' => 'nullable',
         'genero'=>'required',
@@ -51,4 +43,3 @@ class StoreAgenteRequest extends FormRequest
 
 
 }
-

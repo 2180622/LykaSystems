@@ -71,6 +71,7 @@ class DataController extends Controller
         $agente->morada = 'Rua dos Agentes, 1234 Amores';
         $agente->pais = 'Portugal';
         $agente->NIF = 123456789;
+        $agente->num_id = 123456789;
         $agente->telefoneW = 932354453;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
@@ -86,6 +87,7 @@ class DataController extends Controller
         $agente->morada = 'Bidoeira de Cima';
         $agente->pais = 'Portugal';
         $agente->NIF = 213455767;
+        $agente->num_id = 321654987;
         $agente->telefoneW = 932355555;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
@@ -101,6 +103,7 @@ class DataController extends Controller
         $agente->morada = 'Rua dos Agentes, 1274 Amores';
         $agente->pais = 'Portugal';
         $agente->NIF = 987654321;
+        $agente->num_id = 789456123;
         $agente->telefoneW = 963423423;
         $agente->telefone2 = null;
         $agente->tipo = 'Subagente';
@@ -230,7 +233,7 @@ class DataController extends Controller
 
         $produtostock = new ProdutoStock;
         $produtostock->descricao = 'Lic 4F fr';
-        $produtostock->tipo = 'Licenciatura';
+        $produtostock->tipoProduto = 'Licenciatura';
         $produtostock->anoAcademico = '2020/2021';
         $produtostock->save();
 
@@ -542,4 +545,3 @@ class DataController extends Controller
 
     }
 }
-
