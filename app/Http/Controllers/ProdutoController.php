@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Agente;
 use App\Cliente;
+use App\Fase;
+use App\Fornecedor;
 use App\Produto;
 use App\ProdutoStock;
+use App\Responsabilidade;
 use App\Universidade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -40,7 +43,15 @@ class ProdutoController extends Controller
         $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
         $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
         $Universidades = Universidade::all();
-        return view('produtos.add',compact('produto','produtoStock','cliente','Agentes','SubAgentes','Universidades'));
+        $Fases=null;
+        $Responsabilidades = null;
+
+        for($i=0;$i<20;$i++){
+            $Fases[] = new Fase;
+            $Responsabilidades[] = new Responsabilidade;
+        }
+
+        return view('produtos.add',compact('produto','produtoStock','cliente','Agentes','SubAgentes','Universidades','Fases','Responsabilidades'));
     }
 
 
@@ -112,12 +123,37 @@ class ProdutoController extends Controller
     */
     public function edit(Produto $produto)
     {
+        $Fornecedores = Fornecedor::all();
         $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
         $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
         $Universidades = Universidade::all();
         $fases = $produto->fase;
+        $responsabilidades = null;
+        $relacoes = null;
+        $i=0;
+        foreach($fases as $fase){
+            $resp = $fase->responsabilidade;
+            $responsabilidades[$i]['idFase'] = $fase->idFase;
+            $responsabilidades[$i]['idResponsabilidade'] = $resp->idResponsabilidade;
+            $responsabilidades[$i]['descricao'] = $fase->idFase;
+            $responsabilidades[$i]['valorCliente'] = $fase->idFase;
+            $responsabilidades[$i]['valorAgente'] = $fase->idFase;
+            $responsabilidades[$i]['valorSubAgente'] = $fase->idFase;
+            $responsabilidades[$i]['valorUniversidade1'] = $fase->idFase;
+            $responsabilidades[$i]['valorUniversidade2'] = $fase->idFase;
+            $rels = $resp->relacao;
+            $i2 = 0;
+            foreach($rels as $relacao){
+                $relacoes[$i][$i2]['idFase'] = $fase->idFase;
+                $relacoes[$i][$i2]['idResponsabilidade'] = $relacao->idResponsabilidade;
+                $relacoes[$i][$i2]['idFornecedor'] = $relacao->idFornecedor;
+                $relacoes[$i][$i2]['valor'] = $relacao->valor;
+                $i2++;
+            }
+            $i++;
+        }
 
-        return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases'));
+        return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','responsabilidades','Fornecedor'));
     }
 
 
