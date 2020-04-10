@@ -11,8 +11,8 @@ class DocTransacao extends Model
     protected $primaryKey = 'idDocTransacao';
 
     protected $fillable = [
-        'descricao','valorRecebido','dataOperacao','dataRecebido','verificacao','tipoPagamento',
-        'imagem','$idConta','$idFase'
+        'descricao','valorRecebido','dataOperacao','dataRecebido','verificacao','observacoes','tipoPagamento',
+        'comprovativoPagamento','$idConta','$idFase'
         ];
 
     public function fase(){

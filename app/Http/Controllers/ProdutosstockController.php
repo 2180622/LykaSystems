@@ -23,28 +23,28 @@ class ProdutosstockController extends Controller
         return view('produtostock.add', compact('ProdutoStock'));
     }
 
-    public function store(StoreProdutosstockRequest $requestProduto, StoreFasestockRequest $requestFase, StoreDocstockRequest $requestDoc){
+    public function store(StoreProdutosstockRequest $requestProduto){
         $produtoFields = $requestProduto->validated();
-        $faseFields = $requestFase->validated();
-        $docFields = $requestDoc->validated();
+        // $faseFields = $requestFase->validated();
+        // $docFields = $requestDoc->validated();
 
         $produtoStock = new ProdutoStock();
 
         $produtoStock->fill($produtoFields);
-
-        $faseStock = new FaseStock();
-        $faseStock->fill($faseFields);
+        //
+        // $faseStock = new FaseStock();
+        // $faseStock->fill($faseFields);
 
         $produtoStock->save();
-        $faseStock->idProdutoStock = $produtoStock->idProdutoStock;
-
-        $docStock = new DocStock();
-        $docStock->fill($docFields);
-
-        $faseStock->save();
-        $docStock->idFaseStock = $faseStock->idFaseStock;
-
-        $docStock->save();
+        // $faseStock->idProdutoStock = $produtoStock->idProdutoStock;
+        //
+        // $docStock = new DocStock();
+        // $docStock->fill($docFields);
+        //
+        // $faseStock->save();
+        // $docStock->idFaseStock = $faseStock->idFaseStock;
+        //
+        // $docStock->save();
 
         return redirect()->route('produtostock.index')->with('success', 'Adicionado com sucesso');
     }
@@ -57,5 +57,11 @@ class ProdutosstockController extends Controller
             /* não tem permissões */
             abort (401);
       }
+    }
+
+    public function show(FaseStock $faseStocks,ProdutoStock $produtoStock)
+    {
+        $faseStocks = FaseStock::where('idProdutoStock', '=', $produtoStock->idProdutoStock)->get();
+        return view('produtostock.show', compact('produtoStock', 'faseStocks'));
     }
 }

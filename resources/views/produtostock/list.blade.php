@@ -91,10 +91,10 @@
                     @foreach ($produtoStocks as $produtoStock)
                     <tr>
                         {{-- Descrição --}}
-                        <td class="align-middle"><a class="name_link" href="{{route('produtostock.show',$produtoStock)}}">{{ $produtoStock->descricao }}</a></td>
+                        <td class="align-middle"><a class="name_link" href="{{route('produtostock.show',$produtostock)}}">{{ $produtoStock->descricao }}</a></td>
 
                         {{-- Tipo --}}
-                        <td class="align-middle">{{ $produtoStock->tipo }}</td>
+                        <td class="align-middle">{{ $produtoStock->tipoProduto}}</td>
 
                         {{-- Ano Académico --}}
                         <td class="align-middle">{{ $produtoStock->anoAcademico }}</td>
