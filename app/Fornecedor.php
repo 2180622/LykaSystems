@@ -17,6 +17,6 @@ class Fornecedor extends Model
         ];
 
     public function relacao(){
-        return $this->hasMany("App\RelFormResp","idFornecedor","idFornecedor");
+        return $this->hasMany("App\RelFormResp","idFornecedor","idFornecedor")->withTrashed();
     }
 }

@@ -11,5 +11,13 @@ class contacto extends Model
     protected $primaryKey = 'idContacto';
 
     protected $fillable = [
-        'nome','fotografia','telefone1','telefone2','email','telefone2','fax','observacao','favorito'];
+        'nome','fotografia','telefone1','telefone2','email','fax','observacao',
+        'favorito','visibilidade','idUser','idUniversidade'
+    ];
+    public function user(){
+        return $this->belongsTo("App\User","idUser","idUser")->withTrashed();
+    }
+    public function universidade(){
+        return $this->belongsTo("App\Universidade","idUniversidade","idUniversidade")->withTrashed();
+    }
 }

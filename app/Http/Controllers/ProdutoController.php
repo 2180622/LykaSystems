@@ -13,8 +13,10 @@ use App\Universidade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateClienteRequest;
-use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateProdutoRequest;
+use App\Http\Requests\StoreProdutoRequest;
+use App\Http\Requests\UpdateFaseRequest;
+use App\Http\Requests\StoreFaseRequest;
 
 class ProdutoController extends Controller
 {
@@ -63,18 +65,44 @@ class ProdutoController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreClientRequest $request){
+    public function store(StoreProdutoRequest $request){
 
-        $fields = $request->validated();
+        $fields = $request->all();
         $produto = new Produto;
         $produto->fill($fields);
+        //dd($fields);
 
         // data em que foi criado
 
         $t=time();
         $produto->create_at == date("Y-m-d",$t);
 
-        $produto->save();
+        //$produto->save();
+
+        for($i=1;$i<=20;$i++){
+            $fase = new Fase;
+            $responsabilidade = new Responsabilidade;
+            //$responsabilidade->descricao = $fields['resp-cliente-fase'.$i];
+            $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
+            $responsabilidade->valorAgente = $fields['resp-agente-fase'.$i];
+            $responsabilidade->valorSubAgente = $fields['resp-subagente-fase'.$i];
+            $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$i];
+            $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$i];
+            $responsabilidade->verificacaoPagoCliente = false;
+            $responsabilidade->verificacaoPagoAgente = false;
+            $responsabilidade->verificacaoPagoSubAgente = false;
+            $responsabilidade->verificacaoPagoUni1 = false;
+            $responsabilidade->verificacaoPagoUni2 = false;
+            $responsabilidade->save();
+            
+            $fase->descricao = $fields['des-fase'.$i];
+            $fase->dataVencimento = date("Y-m-d",$fields['data-fase'.$i]);
+            $fase->valorFase = $fields['resp-agente-fase'.$i];
+            $fase->create_at == date("Y-m-d",$t);
+            //$Responsabilidades[] = new Responsabilidade;
+            dd($fase);
+        }
+
         return redirect()->route('produtos.index')->with('success', 'Produto criada com sucesso');
     }
 

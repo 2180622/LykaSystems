@@ -13,10 +13,10 @@ class ProdutoStock extends Model
     protected $primaryKey = 'idProdutoStock';
 
     protected $fillable = [
-        'descricao','tipo','anoAcademico'
+        'descricao','tipoProduto','anoAcademico'
         ];
 
     public function faseStock(){
-        return $this->hasMany("App\FaseStock","idProdutoStock","idProdutoStock");
+        return $this->hasMany("App\FaseStock","idProdutoStock","idProdutoStock")->withTrashed();
     }
 }

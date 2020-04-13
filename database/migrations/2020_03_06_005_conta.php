@@ -19,8 +19,8 @@ class Conta extends Migration
             $table->bigIncrements('idConta');
             $table->string('descricao',255);
             $table->string('local',255);
-            $table->bigInteger('numConta');
-                $table->unique('numConta');
+            $table->bigInteger('numConta')->unique();
+                //$table->unique('numConta');
             $table->string('IBAN',255);
             $table->string('instituicao',255);
             $table->integer('telefone');

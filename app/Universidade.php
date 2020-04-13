@@ -17,17 +17,22 @@ class Universidade extends Model
 
     public function user()
     {
-        return $this->belongsTo("App\User", "idUser", "idUser");
+        return $this->belongsTo("App\User", "idUser", "idUser")->withTrashed();
     }
 
     public function produto()
     {
-        return $this->hasMany("App\Produto", "idUniversidade1", "idUniversidade");
+        return $this->hasMany("App\Produto", "idUniversidade1", "idUniversidade")->withTrashed();
     }
 
     public function produto2()
     {
-        return $this->hasMany("App\Produto", "idUniversidade2", "idUniversidade");
+        return $this->hasMany("App\Produto", "idUniversidade2", "idUniversidade")->withTrashed();
+    }
+
+    public function contacto()
+    {
+        return $this->hasMany("App\Contacto", "idUniversidade", "idUniversidade");
     }
 
     use SoftDeletes;

@@ -18,7 +18,7 @@ class User extends Authenticatable
     protected $primaryKey = 'idUser';
 
     protected $fillable = [
-        'email','tipo','password',
+        'email','tipo','password','$idAdmin','$idAgente','$idCliente'
     ];
 
     public function admin(){
@@ -30,10 +30,10 @@ class User extends Authenticatable
     }
 
     public function cliente(){
-        return $this->belongsTo("App\Cliente","idCliente","idCliente");
+        return $this->belongsTo("App\Cliente","idCliente","idCliente")->withTrashed();
     }
 
-    public function notificacao(){
-        return $this->hasMany("App\Notificacao","idUser","idUser");
+    public function contacto(){
+        return $this->hasMany("App\Contacto","idUser","idUser");
     }
 }
