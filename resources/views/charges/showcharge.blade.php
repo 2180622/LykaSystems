@@ -42,7 +42,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="help-button" id="example" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo.">
+                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo.">
                             <span>
                                 ?
                             </span>
@@ -72,12 +72,12 @@
                     <div class="col-md-4">
                         <label for="dataOperacao">Data de pagamento</label>
                         <br>
-                        <input type="date" name="dataOperacao">
+                        <input type="date" name="dataOperacao" value="{{old('dataOperacao', $docTrasancao[0]->dataOperacao)}}">
                     </div>
                     <div class="col-md-4">
                         <label for="dataRecebido">Data de receção</label>
                         <br>
-                        <input type="date" name="dataRecebido">
+                        <input type="date" name="dataRecebido" value="{{old('dataRecebido', $docTrasancao[0]->dataRecebido)}}">
                     </div>
                 </div>
                 <br><br>
@@ -85,7 +85,7 @@
                     <div class="col">
                         <label for="observacoes">Observações</label>
                         <br>
-                        <textarea name="observacoes" rows="5"></textarea>
+                        <textarea name="observacoes" rows="5" value="{{old('observacoes', $docTrasancao[0]->observacoes)}}"></textarea>
                     </div>
                 </div>
         </div>
