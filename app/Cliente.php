@@ -28,14 +28,11 @@ class Cliente extends Model
         return $this->belongsTo("App\User","idUser","idUser")->withTrashed();
     }
 
-    public function docOficial(){
-        return $this->belongsTo("App\DocPessoal","idDocPessoal","idDocOficial");
-    }
-    public function docPassaport(){
-        return $this->belongsTo("App\DocPessoal","idDocPessoal","idDocPassaport");
+    public function docPessoal(){
+        return $this->hasMany("App\DocPessoal","idUser","idUser");
     }
     public function docAcademico(){
-        return $this->belongsTo("App\DocAcademico","idDocAcademico","idDocAcademico");
+        return $this->hasMany("App\DocAcademico","idUser","idUser");
     }
 
     public function produto(){
