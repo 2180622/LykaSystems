@@ -49,7 +49,7 @@
                         </div>
                         <label for="valorRecebido">Valor recebido</label>
                         <br>
-                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido">
+                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
                     </div>
                     <div class="col-md-4">
                         <label for="tipoPagamento">Tipo de pagamento</label>
