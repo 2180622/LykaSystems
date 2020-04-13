@@ -51,3 +51,44 @@ input, select, textarea {
     color: #747474;
     font-weight: 700;
 }
+
+.input-file-div {
+    width: 100%;
+    border: none;
+    resize: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    background-color: #EAEAEA;
+    color: #747474;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+input[type="date"], select {
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.help-button {
+    top: 1px;
+    width: 20px;
+    height: 20px;
+    float: right;
+    cursor: default;
+    position: relative;
+    border-radius: 50%;
+    background-color: #DFDFDF;
+}
+
+.help-button span {
+    top: -10%;
+    left: 32%;
+    color: white;
+    font-weight: 800;
+    font-size: 0.9rem;
+    position: relative;
+    transform: translate(-50%, -50%);
+}
