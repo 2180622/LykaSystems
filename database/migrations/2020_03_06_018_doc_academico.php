@@ -20,13 +20,13 @@ class DocAcademico extends Migration
             $table->string('nome',255);
             $table->enum('tipo',['Exame Universitário','Exame Nacional','Diploma','Certificado']);
             $table->string('imagem',255);
-            $table->string('pais',255);
-            $table->decimal('nota', 18, 2);
-            $table->string('pontuacao',255);
+            $table->text('info');
             $table->timestamps();
             $table->boolean('verificacao')->default(false);
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
+            $table->unsignedBigInteger('idUser')->nullable();
+                $table->foreign('idUser')->references('idUser')->on('User');
     });
     }
 

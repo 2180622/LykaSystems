@@ -16,11 +16,11 @@ class Conta extends Model
         'descricao','local','numConta','IBAN','instituicao','telefone','obsConta'
     ];
 
-    public function responsabilidade(){
-        return $this->hasMany("App\Responsabilidade","idConta","idConta");
+    public function pagoResponsabilidade(){
+        return $this->hasMany("App\PagoResponsabilidade","idPagoResp","idPagoResp")->withTrashed();
     }
 
     public function docTransacao(){
-        return $this->hasMany("App\DocTransacao","idConta","idConta");
+        return $this->hasMany("App\DocTransacao","idConta","idConta")->withTrashed();
     }
 }

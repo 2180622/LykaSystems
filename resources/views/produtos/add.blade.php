@@ -63,15 +63,15 @@
             
                             <label for="tipo">Tipo:</label><br>
                             <input type="text" class="form-control" name="tipo" id="tipo" 
-                            value="{{old('tipo',$produto->tipo)}}" placeholder="Tipo" maxlength="20" required disabled><br>
+                            value="{{old('tipo',$produto->tipo)}}" placeholder="Tipo" maxlength="20" required {{--disabled--}}><br>
             
                             <label for="descricao">Descrição:</label><br>
                             <input type="text" class="form-control" name="descricao" id="descricao" 
-                            value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" required disabled><br>
+                            value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" required {{--disabled--}}><br>
             
                             <label for="AnoAcademico">Ano académico:</label><br>
                             <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
-                            value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required disabled><br>
+                            value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required {{--disabled--}}><br>
             
                             <label for="agente">Agente:</label><br>
                             <select id="agente" name="agente" class="form-control" required>

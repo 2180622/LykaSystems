@@ -19,7 +19,7 @@ class Produto extends Model
         ];
 
     public function cliente(){
-        return $this->belongsTo("App\Cliente","idCliente","idCliente");
+        return $this->belongsTo("App\Cliente","idCliente","idCliente")->withTrashed();
     }
 
     public function agente(){
@@ -39,6 +39,6 @@ class Produto extends Model
     }
 
     public function fase(){
-        return $this->hasMany("App\Fase","idProduto","idProduto");
+        return $this->hasMany("App\Fase","idProduto","idProduto")->withTrashed();
     }
 }
