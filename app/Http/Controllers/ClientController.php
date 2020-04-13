@@ -143,10 +143,28 @@ class ClientController extends Controller
             $doc_id->save();
         }
         if ($requestClient->img_docOficial==null){
-            $imagem->img_docOficial = null;
+            $doc_id->imagem->img_docOficial = null;
         }
 
-        $doc_id->create_at == date("Y-m-d",$t);
+
+
+        /* Passaporte */
+        $passaporte= new DocPessoal;
+        $passaporte->tipo="Passaporte";
+        $passaporte->dataValidade= $requestClient->dataValidPP;
+
+        if ($requestClient->hasFile('img_Passaport')) {
+            $img_doc = $requestClient->file('img_Passaport');
+            $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $passaporte->imagem = $nome_img;
+            $passaporte->save();
+        }
+        if ($requestClient->img_Passaport==null){
+            $doc_id->imagem->img_Passaport = null;
+        }
+
+        $passaporte->create_at == date("Y-m-d",$t);
 
 
 

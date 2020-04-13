@@ -123,8 +123,8 @@
                     class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
                     alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
                 @endif
-                <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
-                        ficheiro</a></div>
+{{--                 <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
+                        ficheiro</a></div> --}}
             </div>
         </div>
 
@@ -164,9 +164,35 @@
                     maxlength="20"><br>
 
             </div>
-            <div class="col text-center">
-                INPUT PARA UPLOAD
+
+
+            {{-- INPUT IMG DOCUMENTO identificação --}}
+            <div class="col text-center" style="max-width:380px;min-width:298px;">
+                <div>
+                    <label for="img_docOficial">Documento de identificação:</label>
+                    <input type='file' id="img_docOficial" name="img_docOficial" style="display:none" accept="application/pdf, image/*" />
+                </div>
+
+                <div class="card mx-auto p-4 rounded shadow-sm text-center " style="width:80%;min-width:118px;min-height:120px">
+
+                    @if ( $client->img_docOficial!=null)
+                    <a href="{{Storage::disk('public')->url('client-documents/').$client->img_docOficial}}" title="Clique adicionar o documento de identificação" id="doc_id_preview">
+                        <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                        <div id="name_doc_id_file" class="text-muted">{{old('img_docOficial',$client->img_docOficial)}}</div>
+                    </a>
+                    @else
+                    <a style="display:none;cursor:pointer" title="Clique adicionar o documento de identificação" id="doc_id_preview">
+                        <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                        <div id="name_doc_id_file" class="text-muted">{{old('img_docOficial',$client->img_docOficial)}}kkkkk</div>
+                    </a>
+                    <i id="doc_id_preview_file" class="fas fa-plus-circle mt-2" style="font-size:60px;cursor:pointer" title="Clique adicionar o documento de identificação"></i>
+                    @endif
+
+                </div>
+                <small class="text-muted">(clique para mudar)</small>
+
             </div>
+
         </div>
 
 
@@ -184,7 +210,7 @@
                 {{-- INUPUT dataValidPP --}}
                 <label for="dataValidPP">Data de validade do passaporte:</label><br>
                 <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                    value="{{old('dataValidPP',$client->dataValidPP)}}" required><br>
+                    value="{{old('dataValidPP',$client->dataValidPP)}}" style="width:250px" required><br>
 
                 {{-- INUPUT passaportPaisEmi --}}
                 <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
@@ -199,9 +225,36 @@
                 <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
                     value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" maxlength="30" required><br>
             </div>
-            <div class="col text-center">
-                INPUT PARA UPLOAD
+
+
+            <div class="col text-center" style="max-width:380px;min-width:298px;">
+                {{-- INPUT IMG PASSAPORTE --}}
+                <div>
+                    <label for="img_Passaport">Passaporte:</label>
+                    <input type='file' id="img_Passaport" name="img_Passaport" style="display:none" accept="application/pdf, image/*" />
+                </div>
+
+                <div class="card mx-auto p-4 rounded shadow-sm text-center " style="width:80%;min-width:118px;min-height:120px">
+
+                    @if ( $client->img_Passaport!=null)
+                    <a href="{{Storage::disk('public')->url('client-documents/').$client->img_Passaport}}" title="Clique adicionar o passaporte" id="passport_preview">
+                        <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                        <div id="name_passaport_file" class="text-muted">{{old('img_Passaport',$agent->img_Passaport)}}</div>
+                    </a>
+                    @else
+                    <a style="display:none;cursor:pointer" title="Clique adicionar o passaporte" id="passport_preview">
+                        <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                        <div id="name_passaport_file" class="text-muted">{{old('img_Passaport',$client->img_Passaport)}}</div>
+                    </a>
+                    <i id="passport_preview_file" class="fas fa-plus-circle mt-2" style="font-size:60px;cursor:pointer" title="Clique adicionar o passaporte"></i>
+                    @endif
+
+                </div>
+                <small class="text-muted">(clique para mudar)</small>
+
             </div>
+
+
         </div>
 
 

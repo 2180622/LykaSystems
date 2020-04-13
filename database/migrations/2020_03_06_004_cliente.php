@@ -45,11 +45,11 @@ class Cliente extends Migration
             $table->integer('nivEstudoAtual');
             $table->string('nomeInstituicaoOrigem',255);
             $table->string('cidadeInstituicaoOrigem',255);
-            
+
             $table->string('num_docOficial',255)->unique();
-            $table->string('img_docOficial',255);
+            $table->string('img_docOficial',255)->nullable();
             $table->longText('info_docOficial');
-            $table->string('img_Passaport',255);
+            $table->string('img_Passaport',255)->nullable();
             $table->longText('info_Passaport');
             $table->string('img_docAcademico',255)->nullable();
             $table->longText('info_docAcademico')->nullable();
