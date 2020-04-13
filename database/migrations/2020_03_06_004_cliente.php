@@ -48,12 +48,12 @@ class Cliente extends Migration
 
             $table->string('num_doc',255)->unique();
                 //$table->unique('num_doc');
-            $table->unsignedBigInteger('idDocOficial');
+            /*$table->unsignedBigInteger('idDocOficial');
                 $table->foreign('idDocOficial')->references('idDocPessoal')->on('DocPessoal');
             $table->unsignedBigInteger('idDocPassaport');
                 $table->foreign('idDocPassaport')->references('idDocPessoal')->on('DocPessoal');
             $table->unsignedBigInteger('idDocAcademico')->nullable();
-                $table->foreign('idDocAcademico')->references('idDocAcademico')->on('DocAcademico');
+                $table->foreign('idDocAcademico')->references('idDocAcademico')->on('DocAcademico');*/
 
             $table->longText('obsPessoais')->nullable();
             $table->longText('obsFinanceiras')->nullable();

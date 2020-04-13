@@ -25,6 +25,8 @@ class DocPessoal extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('idFase')->nullable();
                 $table->foreign('idFase')->references('idFase')->on('Fase');
+            $table->unsignedBigInteger('idUser')->nullable();
+                $table->foreign('idUser')->references('idUser')->on('User');
         });
     }
 

@@ -25,6 +25,8 @@ class DocAcademico extends Migration
             $table->boolean('verificacao')->default(false);
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
+            $table->unsignedBigInteger('idUser')->nullable();
+                $table->foreign('idUser')->references('idUser')->on('User');
     });
     }
 
