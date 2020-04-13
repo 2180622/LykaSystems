@@ -154,6 +154,8 @@
         $("#numCCid").numbersOnly();
         $("#numPassaport").numbersOnly();
         $("#IBAN").numbersOnly();
+        $("#NIF").numbersOnly();
+
 
 
 

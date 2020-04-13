@@ -21,7 +21,6 @@
     <div class="container mt-2 ">
 
         {{-- Navegação --}}
-        {{-- Navegação --}}
         <div class="float-left buttons">
             <a href="javascript:history.go(-1)" title="Voltar">
                 <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
@@ -44,84 +43,43 @@
             </div>
             <br>
 
-            <div class="row mt-3 mb-4">
-                <div class="col">
-                    Estão registados no sistema <strong>{{--$totalestudantes--}}</strong> itens
-                </div>
-            </div>
-
-
-            <div class="row mt-3 mb-4">
-                <div class="col">
-                    <span class="mr-2">Mostrar</span>
-                    <select class="custom-select" id="records_per_page" style="width:80px">
-                        <option selected>10</option>
-                        <option>25</option>
-                        <option>50</option>
-                        <option>100</option>
-                    </select>
-                    <span class="ml-2">por página</span>
-                </div>
-                <div class="col ">
-                    <div class="input-group pl-0 float-right" style="width:250px">
-                        <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox"
-                               placeholder="Procurar" aria-label="Procurar">
-                        <div class="input-group-append">
-                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey"
-                                                                        aria-hidden="true"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-
 
             <div class="table-responsive " style="overflow:hidden">
 
 
-                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                       style="overflow:hidden;">
+                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
 
                     {{-- Cabeçalho da tabela --}}
                     <thead>
-                    <tr>
-                        <th>Nome do Documento</th>
-                        <th class="text-center">Opções</th>
-                    </tr>
+                        <tr>
+                            <th class="align-content-center ">Descrição</th>
+                            <th class="text-center align-content-center ">Criado em</th>
+                            <th class="text-center">Opções</th>
+                        </tr>
                     </thead>
 
                     {{-- Corpo da tabela --}}
                     <tbody>
 
-                    @foreach ($libraries as $library)
+                        {{-- @foreach ($files as file) --}}
                         <tr>
-                            <td>
-                                <div class="align-middle mx-auto shadow-sm rounded"
-                                     style="overflow:hidden; width:50px; height:50px">
-                                </div>
-                            </td>
+                        <td class="">{{-- {{$file->descricao}} --}}</td>
 
-                            {{-- Nome e Apelido --}}
-                            <td class="align-middle"><a class="name_link" href="{{route('libraries.show',$library)}}">{{ $library->nome }}</a></td>
+                        <td class="">{{-- {{$file->created_at}} --}}</td>
 
                             {{-- OPÇÔES --}}
                             <td class="text-center align-middle">
-                                <a href="#" class="btn_list_opt "
-                                   title="Ver ficha completa"><i class="fas fa-download mr-2"></i></a>
-                                <a href="{{route('libraries.edit',$library)}}" class="btn_list_opt btn_list_opt_edit"
-                                   title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                                <a href="#" class="btn_list_opt " title="Download"><i class="far fa-eye mr-2"></i></a>
 
-                                <form method="POST" role="form" id=""
-                                      action="{{route('libraries.destroy',$library)}}" class="d-inline-block form_client_id">
+                                <form method="POST" role="form" id="#########" action="#" data="ID_DO_FICHEIRO++++++" class="d-inline-block form_client_id">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn_delete" title="Eliminar Item" data-toggle="modal"
-                                            data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                    <button type="submit" class="btn_delete" title="Eliminar ficheiro" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                                 </form>
 
                             </td>
                         </tr>
-                    @endforeach
+                        {{-- @endforeach --}}
 
                     </tbody>
                 </table>
@@ -136,6 +94,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-    {{-- <script src="{{asset('/js/)}}"></script>--}}
+<script src="{{asset('/js/liraby.js')}}"></script>
 
 @endsection
