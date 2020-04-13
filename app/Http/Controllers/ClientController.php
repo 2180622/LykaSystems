@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use App\User;
 use App\Produto;
+use App\DocPessoal;
+use App\DocAcademico;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
@@ -121,6 +124,37 @@ class ClientController extends Controller
         $client->create_at == date("Y-m-d",$t);
 
         $client->save();
+
+
+
+
+        /* Criação de documentos Pessoais */
+
+        /* Documento de identificação */
+        $doc_id= new DocPessoal;
+        $doc_id->tipo="Cartão Cidadão";
+        $doc_id->dataValidade= $requestClient->dataValidade_docOficial;
+
+        if ($requestClient->hasFile('img_docOficial')) {
+            $img_doc = $requestClient->file('img_docOficial');
+            $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $doc_id->imagem = $nome_img;
+            $doc_id->save();
+        }
+        if ($requestClient->img_docOficial==null){
+            $imagem->img_docOficial = null;
+        }
+
+        $doc_id->create_at == date("Y-m-d",$t);
+
+
+
+
+        /* Criação de documentos ACADÉMICOS */
+        /* use App\DocAcademico; */
+
+
 
 
 

@@ -20,7 +20,7 @@ class DocPessoal extends Migration
             $table->enum('tipo',['Passaport','Cartão Cidadão','Carta Condução','Doc. Oficial']);
             $table->string('imagem',255);
             $table->text('info');
-            $table->date('dataValidade');
+            $table->date('dataValidade')->nullable();
             $table->boolean('verificacao')->default(false);
             $table->timestamps();
             $table->unsignedBigInteger('idFase')->nullable();

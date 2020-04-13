@@ -146,15 +146,21 @@
     <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
 
 
-        {{-- CARTÃO DE CIDADÃO --}}
+        {{-- num_docOficial --}}
         <div class="row">
             <div class="col">
-                <label for="numCCid">Número de cartão de cidadão:</label><br>
-                <input type="text" class="form-control" name="numCCid" id="numCCid"
-                    value="{{old('numCCid',$client->numCCid)}}" required maxlength="20">
+                <label for="num_docOficial">Número de documento de identificação pessoal:</label><br>
+                <input type="text" class="form-control" name="num_docOficial" id="num_docOficial"
+                    value="{{old('num_docOficial',$client->num_docOficial)}}" required maxlength="20">
                 <br>
+
+                <label for="dataValidade_docOficial">Data de validade:</label><br>
+                <input type="date" class="form-control" name="dataValidade_docOficial" id="dataValidade_docOficial"
+                value="" style="width:250px"><br>
+                <br>
+
                 <label for="NIF">Número de identificação fiscal:</label><br>
-                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}" required
+                <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}"
                     maxlength="20"><br>
 
             </div>

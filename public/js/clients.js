@@ -151,7 +151,7 @@
         $("#telefone2").numbersOnly();
         $("#telefonePai").numbersOnly();
         $("#telefoneMae").numbersOnly();
-        $("#numCCid").numbersOnly();
+        $("#num_docOficial").numbersOnly();
         $("#numPassaport").numbersOnly();
         $("#IBAN").numbersOnly();
         $("#NIF").numbersOnly();
@@ -212,7 +212,7 @@
 
 
                     /* valida Campos dos documentos */
-                    if ( ($("#numCCid").val()=="") || ($("#NIF").val()=="") || ($("#numPassaport").val()=="")  || ($("#dataValidPP").val()=="") || ($("#passaportPaisEmi").val()=="") || ($("#localEmissaoPP").val()=="") || ($("#IBAN").val()=="") ){
+                    if ( ($("#num_docOficial").val()=="")  || ($("#numPassaport").val()=="")  || ($("#dataValidPP").val()=="") || ($("#passaportPaisEmi").val()=="") || ($("#localEmissaoPP").val()=="") || ($("#IBAN").val()=="") ){
                         $("#warning_documentation").removeClass("warning_sign");
                     } else {
                         $("#warning_documentation").addClass("warning_sign");
