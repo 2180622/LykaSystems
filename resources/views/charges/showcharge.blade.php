@@ -38,7 +38,7 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{($fase->valorFase)}}€</p>
             <br><br>
-            <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post">
+            <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">

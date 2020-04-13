@@ -7,6 +7,7 @@ use App\Produto;
 use App\DocTransacao;
 use App\Responsabilidade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreChargeRequest;
 
 class ChargesController extends Controller
@@ -36,8 +37,11 @@ class ChargesController extends Controller
       $fields = $requestCharge->validated();
       $docTrasancao->fill($fields);
 
+      $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
+      $docTrasancao->idConta = '1';
+      $docTrasancao->idFase = $fase->idFase;
+
       if ($requestCharge->hasFile('comprovativoPagamento')) {
-          dd($fase);
           $fileproof = $requestCharge->file('comprovativoPagamento');
           $imgproof = $docTrasancao->descricao . '_comprovativo'. '.' . $fileproof->getClientOriginalExtension();
           Storage::disk('public')->putFileAs('payment-proof/', $fileproof, $imgproof);
@@ -45,11 +49,7 @@ class ChargesController extends Controller
           $docTrasancao->save();
       }
 
-      $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
-      $docTrasancao->idConta = '1';
-      $docTrasancao->idFase = $fase->idFase;
-
-      // $docTrasancao->save();
+      $docTrasancao->save();
 
       if ($docTrasancao->valorRecebido == $fase->valorFase) {
         Fase::where('descricao', '=', $fase->descricao)->update(['verificacaoPago' => '1']);
