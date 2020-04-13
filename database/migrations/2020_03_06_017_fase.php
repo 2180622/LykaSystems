@@ -28,7 +28,9 @@ class Fase extends Migration
                 $table->foreign('idFaseStock')->references('idFaseStock')->on('FaseStock');
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
-        });
+        
+            $table->softDeletes();
+            });
     }
 
     /**

@@ -17,8 +17,4 @@ class DocPessoal extends Model
     public function fase(){
         return $this->belongsTo("App\Fase","idFase","idFase")->withTrashed();
     }
-
-    public function user(){
-        return $this->belongsTo("App\User","idUser","idUser")->withTrashed();
-    }
 }
