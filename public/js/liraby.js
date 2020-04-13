@@ -3,9 +3,14 @@ $(document).ready(function () {
     var table = $('#dataTable').DataTable({
 
         "columnDefs": [{
-                "orderable": false,
+                "orderable": true,
                 "width": "auto",
                 "targets": 0
+            },
+            {
+                "orderable": true,
+                "width": "auto",
+                "targets": 1
             },
             {
                 "orderable": false,

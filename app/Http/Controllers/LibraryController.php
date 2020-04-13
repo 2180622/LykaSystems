@@ -14,8 +14,8 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        $libraries = Biblioteca::all();
-        return view('libraries.list', compact('libraries'));
+        $files = Biblioteca::all();
+        return view('libraries.list', compact('files'));
     }
 
     /**
@@ -25,7 +25,7 @@ class LibraryController extends Controller
      */
     public function create()
     {
-        //
+        return view('libraries.add'/* , compact('files') */);
     }
 
     /**

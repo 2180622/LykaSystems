@@ -31,7 +31,9 @@
         </div>
 
         <div class="float-right">
-            <a href="#" class="top-button">Reportar Problema</a>
+            @if (Auth::user()->tipo == "admin")
+                <a href="{{route('libraries.create')}}" class="top-button">Adicionar Ficheiro</a>
+            @endif
         </div>
 
         <br><br>
@@ -44,6 +46,29 @@
             <br>
 
 
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    <span class="mr-2">Mostrar</span>
+                    <select class="custom-select" id="records_per_page" style="width:80px">
+                        <option selected>10</option>
+                        <option>25</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    <span class="ml-2">por página</span>
+                </div>
+                <div class="col ">
+                    <div class="input-group pl-0 float-right" style="width:250px">
+                        <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
+                        <div class="input-group-append">
+                            <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            
             <div class="table-responsive " style="overflow:hidden">
 
 
@@ -53,7 +78,7 @@
                     <thead>
                         <tr>
                             <th class="align-content-center ">Descrição</th>
-                            <th class="text-center align-content-center ">Criado em</th>
+                            <th class="align-content-center ">Criado em</th>
                             <th class="text-center">Opções</th>
                         </tr>
                     </thead>
@@ -61,15 +86,14 @@
                     {{-- Corpo da tabela --}}
                     <tbody>
 
-                        {{-- @foreach ($files as file) --}}
-                        <tr>
-                        <td class="">{{-- {{$file->descricao}} --}}</td>
+                        @foreach ($files as $file)
+                        <td class=""><a href="#" class="name_link">{{$file->descricao}}</a></td>
 
-                        <td class="">{{-- {{$file->created_at}} --}}</td>
+                        <td class="">{{ date('d-M-y', strtotime($file->created_at)) }} </td>
 
                             {{-- OPÇÔES --}}
                             <td class="text-center align-middle">
-                                <a href="#" class="btn_list_opt " title="Download"><i class="far fa-eye mr-2"></i></a>
+                                 <a href="#" class="btn_list_opt " title="Download"><i class="far fa-eye mr-2"></i></a>
 
                                 <form method="POST" role="form" id="#########" action="#" data="ID_DO_FICHEIRO++++++" class="d-inline-block form_client_id">
                                     @csrf
@@ -79,7 +103,7 @@
 
                             </td>
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
 
                     </tbody>
                 </table>
