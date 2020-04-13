@@ -7,3 +7,7 @@ function sub(obj) {
     var fileName = file.split("\\");
     document.getElementById("addFileButton").innerHTML = fileName[fileName.length - 1];
 }
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

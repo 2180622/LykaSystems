@@ -71,3 +71,24 @@ input[type="date"], select {
 input[type="file"] {
     display: none;
 }
+
+.help-button {
+    top: 1px;
+    width: 20px;
+    height: 20px;
+    float: right;
+    cursor: default;
+    position: relative;
+    border-radius: 50%;
+    background-color: #DFDFDF;
+}
+
+.help-button span {
+    top: -10%;
+    left: 32%;
+    color: white;
+    font-weight: 800;
+    font-size: 0.9rem;
+    position: relative;
+    transform: translate(-50%, -50%);
+}

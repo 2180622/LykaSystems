@@ -27,7 +27,7 @@ class ChargesController extends Controller
 
     public function showcharge(Produto $product, Fase $fase)
     {
-      $docTrasancao = new DocTransacao;
+      $docTrasancao = DocTransacao::where('idFase', '=', $fase->idFase)->get();
       return view('charges.showcharge', compact('product', 'fase', 'docTrasancao'));
     }
 

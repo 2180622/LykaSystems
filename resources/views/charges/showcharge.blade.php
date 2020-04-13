@@ -42,9 +42,14 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
+                        <div class="help-button" id="example" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo.">
+                            <span>
+                                ?
+                            </span>
+                        </div>
                         <label for="valorRecebido">Valor recebido</label>
                         <br>
-                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" value="{{old('valorRecebido', $docTrasancao->valorRecebido)}}">
+                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" value="{{old('valorRecebido', $docTrasancao[0]->valorRecebido)}}€">
                     </div>
                     <div class="col-md-4">
                         <label for="tipoPagamento">Tipo de pagamento</label>
