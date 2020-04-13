@@ -11,10 +11,10 @@ class DocAcademico extends Model
     protected $primaryKey = 'idDocAcademico';
 
     protected $fillable = [
-        'nome','tipo','imagem','pais','nota','pontuacao','verificacao','$idFase'
+        'nome','tipo','imagem','info','verificacao','$idFase'
         ];
 
     public function fase(){
-        return $this->belongsTo("App\User","idFase","idFase");
+        return $this->belongsTo("App\User","idFase","idFase")->withTrashed();
     }
 }

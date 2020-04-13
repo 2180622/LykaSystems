@@ -25,6 +25,11 @@ class Contacto extends Migration
             $table->integer('fax')->nullable();
             $table->longText('observacao')->nullable();
             $table->boolean('favorito')->default(false);
+            $table->boolean('visibilidade')->default(false);
+            $table->unsignedBigInteger('idUser')->nullable();
+                $table->foreign('idUser')->references('idUser')->on('User');
+            $table->unsignedBigInteger('idUniversidade')->nullable();
+                $table->foreign('idUniversidade')->references('idUniversidade')->on('Universidade');
             $table->timestamps();
         });
     }

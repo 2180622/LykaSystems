@@ -328,7 +328,7 @@
                                     <div><span class="text-secondary">Sem documentos de transação {{'<adicionar>'}}</span></div><br>
                                 @endif
                                 <div><span><b>Pagamentos responsabilidades</b></span></div><br>
-                                @if($DocsRespons->toArray())
+                                @if($DocsRespons)
                                     @foreach($DocsRespons as $documento)
                                         <div><span class="text-secondary">{{$documento->tipoPessoal}}:</span>{{'<esta aqui>'}}</div><br>
                                         <div><span class="text-secondary"> - Nome autor: </span> {{$documento->nomeAutor.'€'}}</div><br>

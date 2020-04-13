@@ -125,8 +125,8 @@
                     @foreach($fases as $fase)
                         @php
                             $num++;
-                            $responsabilidade = $fase->responsabilidade;
-                            $relacoes = $responsabilidade->relacao;
+                            //$responsabilidade = $fase->responsabilidade;
+                            //$relacoes = $responsabilidade->relacao;
                         @endphp
                         @if($num == 1)
                             <div class="tab-pane fade show active" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
@@ -144,38 +144,44 @@
                 
                                     <label for="data-fase{{$num}}">Data de vencimento:</label><br>
                                     <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
-                                    value="{{old('descricao',$fase->dataVencimento)}}" style="width:250px" required><br>
+                                    value="{{old('dataVencimento',$fase->dataVencimento)}}" style="width:250px" required><br>
                                     
                                     <div><span><b>Responsabilidades</b></span></div><br>
-                
-                                    <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
-                                    <input type="text" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
-                                    value="{{old('descricao',$responsabilidade->valorCliente)}}" style="width:250px" required><br>
-                
-                                    <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
-                                    <input type="text" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
-                                    value="{{old('descricao',$responsabilidade->valorAgente)}}" style="width:250px" required><br>
-                
-                                    <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
-                                    <input type="text" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
-                                    value="{{old('descricao',$responsabilidade->valorSubAgente)}}" style="width:250px"><br>
-                
-                                    <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
-                                    <input type="text" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
-                                    value="{{old('descricao',$responsabilidade->valorUniversidade1)}}" style="width:250px" required><br>
-                
-                                    <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
-                                    <input type="text" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
-                                    value="{{old('descricao',$responsabilidade->valorUniversidade2)}}" style="width:250px"><br>
-                
-                                    @if($relacoes->toArray())
-                                        <div><span>Fornecedores:</span></div><br>
-                                        @foreach ($relacoes as $relacao)
-                                            <label for="resp-uni2-fase{{$num}}">Valor a pagar a {{$relacao->fornecedor->nome}}:</label><br>
+                                    @for ($i = 0; $i < count($responsabilidade); $i++)
+                                        @if($responsabilidade[$i]['idFase'] == $fase->idFase)
+                                            <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
+                                            <input type="text" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
+                                            value="{{old('valorCliente',$responsabilidade[$i]['valorCliente'])}}" style="width:250px" required><br>
+                        
+                                            <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
+                                            <input type="text" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
+                                            value="{{old('valorAgente',$responsabilidade->valorAgente)}}" style="width:250px" required><br>
+                        
+                                            <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
+                                            <input type="text" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
+                                            value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"><br>
+                        
+                                            <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
+                                            <input type="text" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
+                                            value="{{old('valorUniversidade1',$responsabilidade->valorUniversidade1)}}" style="width:250px" required><br>
+                        
+                                            <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
                                             <input type="text" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
-                                            value="{{old('descricao',$relacao->valor)}}" style="width:250px" required><br>
-                                        @endforeach
-                                    @endif
+                                            value="{{old('valorUniversidade2',$responsabilidade->valorUniversidade2)}}" style="width:250px"><br>
+                        
+                                            @if($relacoes)
+                                                <div><span>Fornecedores:</span></div><br>
+                                                @foreach ($relacoes as $relacao)
+                                                    @foreach($Fornecedore as $fornecedor)
+                                                        @if($fornecedor->idFornecedor == $relacao[])
+                                                            <label for="resp-uni2-fase{{$num}}">Valor a pagar a {{$relacao->fornecedor->nome}}:</label><br>
+                                                            <input type="text" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
+                                                            value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                                    @endforeach
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                    @endfor
                                 </div>
                             </div>
                         </div>

@@ -17,18 +17,16 @@ class DocPessoal extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocPessoal');
-            $table->string('nome',255);
-            $table->string('apelido',255);
             $table->enum('tipo',['Passaport','Cartão Cidadão','Carta Condução','Doc. Oficial']);
             $table->string('imagem',255);
-            $table->integer('numDoc');
+            $table->text('info');
             $table->date('dataValidade');
-            $table->string('pais',255);
-            $table->string('morada',255);
             $table->boolean('verificacao')->default(false);
             $table->timestamps();
-            $table->unsignedBigInteger('idFase');
+            $table->unsignedBigInteger('idFase')->nullable();
                 $table->foreign('idFase')->references('idFase')->on('Fase');
+            $table->unsignedBigInteger('idUser')->nullable();
+                $table->foreign('idUser')->references('idUser')->on('User');
         });
     }
 
