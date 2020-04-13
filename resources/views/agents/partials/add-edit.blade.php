@@ -156,10 +156,14 @@
         <div class="row">
 
             <div class="col">
-                {{-- INPUT email --}}
-                <label for="num_id">Documento de identificação:</label><br>
-                <input type="text" class="form-control" name="num_id" id="num_id"
-                    value="{{old('num_id',$agent->num_id)}}" placeholder="Numero de identificação pessoal" required
+                {{-- INFO_DOC CAMPO ESCONDIDO: NÃO UTILIZADO --}}
+                <input type="hidden" name="info_doc" name="info_doc" value="">
+
+
+                {{-- INPUT DOC ID --}}
+                <label for="num_doc">Documento de identificação:</label><br>
+                <input type="text" class="form-control" name="num_doc" id="num_doc"
+                    value="{{old('num_doc',$agent->num_doc)}}" placeholder="Numero de identificação pessoal" required
                     maxlength="50" required>
             </div>
 
@@ -204,21 +208,21 @@
 
 
         <div class=" mt-5">
-            <label for="doc_img">Documento de identificação:</label>
-            <input type='file' id="doc_img" name="doc_img" style="display:none" accept="application/pdf, image/*" />
+            <label for="img_doc">Documento de identificação:</label>
+            <input type='file' id="img_doc" name="img_doc" style="display:none" accept="application/pdf, image/*" />
         </div>
 
         <div class="card mx-auto p-4 rounded shadow-sm text-center " style="width:80%;min-width:118px;min-height:120px">
 
-            @if ( $agent->doc_img!=null)
-                <a href="{{Storage::disk('public')->url('agent-docs/').$agent->doc_img}}" title="Ver documento" id="doc_preview">
+            @if ( $agent->img_doc!=null)
+                <a href="{{Storage::disk('public')->url('agent-docs/').$agent->img_doc}}" title="Ver documento" id="doc_preview">
                     <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                    <div id="name_id_file" class="text-muted">{{old('doc_img',$agent->doc_img)}}</div>
+                    <div id="name_id_file" class="text-muted">{{old('img_doc',$agent->img_doc)}}</div>
                 </a>
             @else
                 <a style="display:none;cursor:pointer" title="Ver documento" id="doc_preview">
                     <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                    <div id="name_id_file" class="text-muted">{{old('doc_img',$agent->doc_img)}}</div>
+                    <div id="name_id_file" class="text-muted">{{old('img_doc',$agent->img_doc)}}</div>
                 </a>
                 <i id="doc_preview_file" class="fas fa-plus-circle mt-2" style="font-size:60px;cursor:pointer" title="Clique adicionar o documento de identificação"></i>
             @endif

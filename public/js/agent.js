@@ -120,12 +120,12 @@
 
          $('#doc_preview_file').on('click', function (e) {
             e.preventDefault();
-            $('#doc_img').trigger('click');
+            $('#img_doc').trigger('click');
         });
 
         $('#doc_preview').on('click', function (e) {
             e.preventDefault();
-            $('#doc_img').trigger('click');
+            $('#img_doc').trigger('click');
         });
 
         function readDocURL(input) {
@@ -133,14 +133,14 @@
                 var documento = new FileReader();
 
                 documento.onload = function (e) {
-                    $('#name_id_file').text( $('#doc_img').val() );
+                    $('#name_id_file').text( $('#img_doc').val() );
                 }
 
                 documento.readAsDataURL(input.files[0]);
             }
         }
 
-        $("#doc_img").change(function () {
+        $("#img_doc").change(function () {
             readDocURL(this);
             $('#doc_preview_file').hide();
             $('#doc_preview').show();

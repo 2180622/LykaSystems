@@ -145,9 +145,10 @@
     {{-- Conteudo: Documentação --}}
     <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
 
-        {{-- INUPUT IDENTIFICAÇÃO --}}
+
+        {{-- CARTÃO DE CIDADÃO --}}
         <div class="row">
-            <div class="col mr-3">
+            <div class="col">
                 <label for="numCCid">Número de cartão de cidadão:</label><br>
                 <input type="text" class="form-control" name="numCCid" id="numCCid"
                     value="{{old('numCCid',$client->numCCid)}}" required maxlength="20">
@@ -156,7 +157,19 @@
                 <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}" required
                     maxlength="20"><br>
 
-                {{-- INUPUTS DADOS DE PASSAPORTE --}}
+            </div>
+            <div class="col text-center">
+                INPUT PARA UPLOAD
+            </div>
+        </div>
+
+
+        <hr>
+
+
+        {{-- Passaporte --}}
+        <div class="row">
+            <div class="col">
                 {{-- INUPUT numPassaport --}}
                 <label for="numPassaport">Número do passaporte:</label><br>
                 <input type="text" class="form-control" name="numPassaport" id="numPassaport"
@@ -167,7 +180,7 @@
                 <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
                     value="{{old('dataValidPP',$client->dataValidPP)}}" required><br>
 
-                {{-- INUPUT numPassaport --}}
+                {{-- INUPUT passaportPaisEmi --}}
                 <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
                 <input type="hidden" id="hidden_passaportPaisEmi"
                     value="{{old('passaportPaisEmi',$client->passaportPaisEmi)}}">
@@ -175,10 +188,26 @@
                     @include('clients.partials.countries');
                 </select><br>
 
-                {{-- INUPUT dataValidPP --}}
+                {{-- INUPUT localEmissaoPP --}}
                 <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                 <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
                     value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" maxlength="30" required><br>
+            </div>
+            <div class="col text-center">
+                INPUT PARA UPLOAD
+            </div>
+        </div>
+
+
+
+
+        <hr><br>
+
+
+
+        <div class="row ">
+            <div class="col mr-3">
+
 
                 {{-- DADOS FINANCEIROS --}}
                 {{-- INUPUT IBAN --}}
@@ -192,56 +221,7 @@
                     class="form-control">{{old('obsFinanceiras',$client->obsFinanceiras)}}</textarea><br><br>
             </div>
 
-            <div class="col" style="min-width:225px">
-                <div class="text-center mb-2">Documentos pessoais</div>
 
-                <ul class="card shadow-sm p-3" style="list-style-type:none;">
-
-                    <li class="text-center align-middle align-self-center mx-auto mb-3 mt-2"><a href="#"
-                            class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar Ficheiro</a></li>
-
-                    {{-- @foreach ($files as $file) --}}
-                    <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2  p-1" title="Apagar documento"></i></a>
-                        @if ($client->idCliente!=null)
-                        <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
-                                title="Fazer download do ficheiro"></i></a>
-                        @endif
-                        Cédula pessoal<small class="text-muted"> (.pdf)</small>
-                    </li>
-
-                    <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2  p-1" title="Apagar documento"></i></a>
-                        @if ($client->idCliente!=null)
-                        <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
-                                title="Fazer download do ficheiro"></i></a>
-                        @endif
-                       Boletim de vacinas<small class="text-muted"> (.jpg)</small>
-                    </li>
-
-                    <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2  p-1" title="Apagar documento"></i></a>
-                        @if ($client->idCliente!=null)
-                        <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
-                                title="Fazer download do ficheiro"></i></a>
-                        @endif
-                        Carta de condução<small class="text-muted"> (.png)</small>
-                    </li>
-
-                    <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2  p-1" title="Apagar documento"></i></a>
-                        @if ($client->idCliente!=null)
-                        <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
-                                title="Fazer download do ficheiro"></i></a>
-                        @endif
-                        Atestado médico<small class="text-muted"> (.pdf)</small>
-                    </li>
-
-                    {{-- @endforeach --}}
-
-                </ul>
-
-            </div>
         </div>
 
 
@@ -281,46 +261,6 @@
 
             </div>
 
-            <div class="col" style="min-width:225px">
-                <div class="text-center mb-2">Documentos Académicos</div>
-
-                <ul class="card shadow-sm p-3" style="list-style-type:none;">
-
-                    <li class="text-center align-middle align-self-center mx-auto mb-3 mt-2"><a href="#"
-                            class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar Ficheiro</a></li>
-
-                    {{-- @foreach ($files as $file) --}}
-                    <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 p-1" title="Apagar documento"></i></a>
-                        @if ($client->idCliente!=null)
-                        <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
-                                title="Fazer download do ficheiro"></i></a>
-                        @endif
-                        Exame de acesso<small class="text-muted"> (.pdf)</small>
-                    </li>
-
-                    <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 p-1" title="Apagar documento"></i></a>
-                        @if ($client->idCliente!=null)
-                        <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
-                                title="Fazer download do ficheiro"></i></a>
-                        @endif
-                        Pauta de avaliação<small class="text-muted"> (.jpg)</small>
-                    </li>
-
-                    <li class="m-3">
-                        <a href="#" class="btn_delete"><i class="fas fa-times mr-2 p-1" title="Apagar documento"></i></a>
-                        @if ($client->idCliente!=null)
-                        <a href="#" class="btn_list_opt btn_list_opt_download"><i class="fas fa-download mr-2"
-                                title="Fazer download do ficheiro"></i></a>
-                        @endif
-                        Carta de recomendação<small class="text-muted"> (.png)</small>
-                    </li>
-
-                    {{-- @endforeach --}}
-
-                </ul>
-            </div>
 
         </div>
     </div>

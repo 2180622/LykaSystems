@@ -127,9 +127,9 @@
 
             <div class="col text-center">
 
-                @if ($agent->doc_img)
+                @if ($agent->img_doc)
                     <div><span class="text-secondary font-weight-bold">Documento de identificação:</div><br>
-                    <img src="{{Storage::disk('public')->url('agent-docs/').$agent->doc_img}}" width="70%"/>
+                    <img src="{{Storage::disk('public')->url('agent-docs/').$agent->img_doc}}" width="70%"/>
                 @endif
 
             </div>

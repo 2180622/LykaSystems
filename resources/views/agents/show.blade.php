@@ -64,9 +64,9 @@
 
                 @if (Auth::user()->tipo == "admin")
                 <div class="card rounded shadow-sm m-2 p-3">
-                    @if ($agent->doc_img)
+                    @if ($agent->img_doc)
                         <i class="far fa-id-card" style="font-size:40px"></i>
-                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('agent-docs/').$agent->doc_img}}">Ver documento de identificação</a>
+                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('agent-docs/').$agent->img_doc}}">Ver documento de identificação</a>
                     @else
                         <i class="far fa-id-card" style="font-size:40px"></i>
                         <a href="{{route('agents.edit',$agent)}}" class="mt-2 agent_link">
