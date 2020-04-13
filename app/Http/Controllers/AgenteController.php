@@ -85,6 +85,7 @@ class AgenteController extends Controller
         $agent->fill($fields);
 
 
+
         /* obtem os dados para criar o utilizador */
         $user = new User;
         $fieldsUser = $requestUser->validated();
@@ -92,6 +93,7 @@ class AgenteController extends Controller
 
 
         /* Criação de Agente */
+        /* $agent->idAgenteAssociado= $requestAgent->idAgenteAssociado; */
 
         /* Fotografia do agente */
         if ($requestAgent->hasFile('fotografia')) {
@@ -160,12 +162,13 @@ class AgenteController extends Controller
         where('idAgenteAssociado', '=',$agent->idAgente)
         ->get();
 
+
         if ($listagents->isEmpty()) {
             $listagents=null;
         }
 
-        /* caso seja um sub-agente, obtem o agente que o adicionou */
-        if($agent->tipo=="Subagente"){
+/*       caso seja um sub-agente, obtem o agente que o adicionou */
+         if($agent->tipo=="Subagente"){
             $mainAgent=Agente::
             where('idAgente', '=',$agent->idAgenteAssociado)
             ->first();
@@ -173,7 +176,7 @@ class AgenteController extends Controller
             $mainAgent=null;
         }
 
-        return view('agents.show',compact("agent",'listagents','mainAgent'));
+        return view('agents.show',compact("agent" ,'listagents','mainAgent'));
 
     }
 

@@ -124,7 +124,7 @@
 
                     <div class="mb-2 text-muted">Lista de subagentes:</div>
 
-                    @if($listagents==null)
+                     @if($listagents==null)
                         <div class="text-muted"><small>(sem registos)</small></div>
                     @else
                         @foreach ($listagents as $agent)
