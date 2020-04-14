@@ -70,14 +70,29 @@
                 {{-- Corpo da tabela --}}
                 <tbody>
                     @foreach ($fases as $fase)
-                      {{dd($valorTotal)}}
+
+
+
+
+
                     <tr>
                         {{-- Nome e Apelido --}}
                         <td><a class="name_link" href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
                         {{-- Descrição --}}
-                        <td @if ($fase->verificacaoPago != 0)
-                        style = "color:#47bc00;"
-                        @endif>{{$fase->valorFase}}€</td>
+                        <td>
+
+                          <?php
+                            foreach ($proofPayments as $proofPayment) {
+                            if ($fase->verificacaoPago == 0 && $proofPayment->valorRecebido != null && $proofPayment->idFase == $fase->idFase) {
+                              $valorTotal = $fase->valorFase - $proofPayment->valorRecebido;
+                            }else {
+                              echo $fase->valorFase;
+                            }
+                          }
+                            ?>
+
+
+                        </td>
 
                             <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
                             {{-- Estado --}}

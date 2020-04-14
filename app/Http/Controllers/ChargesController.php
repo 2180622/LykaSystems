@@ -25,14 +25,9 @@ class ChargesController extends Controller
 
       // Em caso de verificacaoPago != 0 -> valorFase - valorRecebido
 
-      foreach ($fases as $fase) {
-        $proofPayment = DocTransacao::where('idFase', '=', $fase->idFase)->get();
-        if ($fase->verificacaoPago == 0 && $proofPayment[0]->valorRecebido != null) {
-          $valorTotal = $fase->valorFase - $proofPayment[0]->valorRecebido;
-        }
-      }
+      $proofPayments = DocTransacao::all();
 
-      return view('charges.show', compact('product', 'fases', 'valorTotal'));
+      return view('charges.show', compact('product', 'fases', 'proofPayments'));
     }
 
     public function showcharge(Produto $product, Fase $fase)
