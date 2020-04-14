@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Page Title --}}
-@section('title', 'Ficha de produto')
+@section('title', 'FaseStock')
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
@@ -24,7 +24,7 @@
         <br><br>
         <div class="cards-navigation">
             <div class="title">
-                <h6>Ficha de Produto - {{ $produtostock->descricao }}</h6>
+                <h6>Ficha de Fase - {{ $fasestock->descricao }}</h6>
             </div>
             <br>
             <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
@@ -53,32 +53,44 @@
                     {{-- Cabeçalho da tabela --}}
                     <thead>
                         <tr>
-                            <th>Número de Fases</th>
-                            <th>Descrição</th>
+                            <th>Número de Documentos</th>
+                            <th>Tipo</th>
+                            <th>Documento</th>
                         </tr>
                     </thead>
                     {{-- Corpo da tabela --}}
                     <tbody>
-                        @foreach ($faseStocks as $faseStock)
+                        @foreach ($docStocks as $docStock)
                         <tr>
-                            {{-- Número de fases --}}
-                            <td><a class="name_link" href="/fasestock/{{$docStock->idFaseStock}}">{{$nrfases++}}</a></td>
-                            {{-- Descrição --}}
-                            <td>{{$faseStock->descricao}}</td>
+                            {{-- Número de Documentos --}}
+                            <td><a class="name_link" href="/fasestock/{{$fasestock->idFaseStock}}/{{$docStock->idDocStock}}">{{$nrDocs++}}</a></td>
+                            {{-- Tipo --}}
+                            <td>{{$docStock->tipo}}</td>
+                            {{-- Documento --}}
+                            @if ($docStock->tipoPessoal == null)
+                              <td>{{$docStock->tipoAcademico}}</td>
+                            @else
+                              <td>{{$docStock->tipoPessoal}}</td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>
 
-                    <form class="form-group needs-validation pt-3" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase"
+                    <form class="form-group needs-validation pt-3" action="{{route('documentostock.store', $fasestock)}}" method="post" id="form_documentos"
                       enctype="multipart/form-data" novalidate>
                       @csrf
                       <div class="tab-content p-2 mt-3" id="myTabContent">
                           <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
                               <div class="row">
                                   <div class="col">
-                                      {{-- INPUT descricao fasestock --}}
-                                      <label for="">Descrição (FaseStock):</label><br>
-                                      <input type="text" class="form-control" name="descricao" id="descricaofase"required><br>
+                                      {{-- INPUT tipo --}}
+                                      <label for="">Tipo (DocumentoStock):</label><br>
+                                      <input type="text" class="form-control" name="tipo" id="tipoDoc"required><br>
+                                      {{-- INPUT Documento --}}
+                                      <label for="">Documento Academico</label>
+                                      <input type="text" class="form-control" name="tipoAcademico" value=""><br><br>
+                                      <label for="">Documento Pessoal</label>
+                                      <input type="text" class="form-control" name="tipoPessoal" value="">
                                   </div>
                                 </div>
                             </div>
