@@ -46,14 +46,14 @@
                 </select>
                 <span class="ml-2">por página</span>
             </div>
-              <div class="col ">
-                  <div class="input-group pl-0 float-right" style="width:250px">
-                      <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
-                      <div class="input-group-append">
-                          <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
-                      </div>
-                  </div>
-              </div>
+            <div class="col ">
+                <div class="input-group pl-0 float-right" style="width:250px">
+                    <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
+                    <div class="input-group-append">
+                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+            </div>
         </div>
         <hr>
         <div class="table-responsive " style="overflow:hidden">
@@ -70,23 +70,39 @@
                 {{-- Corpo da tabela --}}
                 <tbody>
                     @foreach ($fases as $fase)
+
+
+
+
+
                     <tr>
                         {{-- Nome e Apelido --}}
                         <td><a class="name_link" href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
                         {{-- Descrição --}}
-                        <td @if ($fase->verificacaoPago != 0)
-                          style = "color:#47bc00;"
-                        @endif>{{$fase->valorFase}}€</td>
-
-                        <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
-                        {{-- Estado --}}
                         <td>
-                            @if ($fase->verificacaoPago == 0)
-                            Pendente
-                            @else
-                            Pago
-                            @endif
+
+                          <?php
+                            foreach ($proofPayments as $proofPayment) {
+                            if ($fase->verificacaoPago == 0 && $proofPayment->valorRecebido != null && $proofPayment->idFase == $fase->idFase) {
+                              $valorTotal = $fase->valorFase - $proofPayment->valorRecebido;
+                            }else {
+                              echo $fase->valorFase;
+                            }
+                          }
+                            ?>
+
+
                         </td>
+
+                            <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
+                            {{-- Estado --}}
+                            <td>
+                                @if ($fase->verificacaoPago == 0)
+                                Pendente
+                                @else
+                                Pago
+                                @endif
+                            </td>
                     </tr>
                     @endforeach
                 </tbody>
