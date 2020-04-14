@@ -125,12 +125,13 @@
             $('#img_docOficial').trigger('click');
         });
 
-        function readDocURL(input) {
+
+        function readDocImgURL(input) {
             if (input.files && input.files[0]) {
                 var iddocumento = new FileReader();
-
                 iddocumento.onload = function (e) {
-                    $('#name_doc_id_file').text( $('#img_docOficial').val() );
+                    iddocumento.fileName = img_docOficial.name;
+                    $('#name_doc_id_file').text( input.files[0].name );
                 }
 
                 iddocumento.readAsDataURL(input.files[0]);
@@ -138,7 +139,7 @@
         }
 
         $("#img_docOficial").change(function () {
-            readDocURL(this);
+            readDocImgURL(this);
             $('#doc_id_preview_file').hide();
             $('#doc_id_preview').show();
 
@@ -160,12 +161,12 @@
             $('#img_Passaport').trigger('click');
         });
 
-        function readDocURL(input) {
+        function readPassaportURL(input) {
             if (input.files && input.files[0]) {
                 var passaporte = new FileReader();
 
                 passaporte.onload = function (e) {
-                    $('#name_passaport_file').text( $('#img_Passaport').val() );
+                    $('#name_passaport_file').text( input.files[0].name );
                 }
 
                 passaporte.readAsDataURL(input.files[0]);
@@ -173,7 +174,7 @@
         }
 
         $("#img_Passaport").change(function () {
-            readDocURL(this);
+            readPassaportURL(this);
             $('#passport_preview_file').hide();
             $('#passport_preview').show();
 
@@ -296,6 +297,7 @@
 
 
                   }
+                  window.scrollTo(0, 0);
                   form.classList.add('was-validated');
                 }, false);
               });

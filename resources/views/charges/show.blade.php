@@ -70,24 +70,33 @@
                 {{-- Corpo da tabela --}}
                 <tbody>
                     @foreach ($fases as $fase)
-                      {{dd($valorTotal)}}
                     <tr>
                         {{-- Nome e Apelido --}}
                         <td><a class="name_link" href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
                         {{-- Descrição --}}
-                        <td @if ($fase->verificacaoPago != 0)
-                        style = "color:#47bc00;"
-                        @endif>{{$fase->valorFase}}€</td>
+                        <td>
+                          @if (count($fase->DocTransacao))
+                            @foreach ($fase->DocTransacao as $paymentProof)
+                              @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
+                              {{$valorTotal = $fase->valorFase - $paymentProof->valorRecebido}}
+                              @else
+                                {{$fase->valorFase}}
+                              @endif
+                            @endforeach
+                          @else
+                            {{$fase->valorFase}}
+                          @endif
+                        </td>
 
-                            <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
-                            {{-- Estado --}}
-                            <td>
-                                @if ($fase->verificacaoPago == 0)
-                                Pendente
-                                @else
-                                Pago
-                                @endif
-                            </td>
+                        <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
+                        {{-- Estado --}}
+                        <td>
+                            @if ($fase->verificacaoPago == 0)
+                            Pendente
+                            @else
+                            Pago
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
