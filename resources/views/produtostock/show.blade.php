@@ -22,12 +22,12 @@
             </a>
         </div>
         <div class="float-right">
-            {{-- <a href="{{route('produtos.edit',$produtoStocks)}}" class="top-button mr-2">Adicionar Fase Stock</a> --}}
+            <a href="{{route('fasestock.create')}}" class="top-button mr-2">Adicionar Fase Stock</a>
         </div>
         <br><br>
         <div class="cards-navigation">
             <div class="title">
-                <h6>Ficha de Produto - {{ $produtoStock->descricao }}</h6>
+                <h6>Ficha de Produto - {{ $produtostock->descricao }}</h6>
             </div>
             <br>
             <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
@@ -63,11 +63,9 @@
                     {{-- Corpo da tabela --}}
                     <tbody>
                         @foreach ($faseStocks as $faseStock)
-                          {{$nrfases = 0}}
-                          {{$nrfases++}}
                         <tr>
                             {{-- Número de fases --}}
-                            <td><a class="name_link" href="/produtostock/{{$produtoStock->idProdutoStock}}/{{$faseStock->idFaseStock}}">{{$nrfases}}</a></td>
+                            <td><a class="name_link" href="/produtostock/{{$produtostock->idProdutoStock}}/{{$faseStock->idFaseStock}}">{{$nrfases++}}</a></td>
                             {{-- Descrição --}}
                             <td>{{$faseStock->descricao}}</td>
                         </tr>

@@ -125,12 +125,13 @@
             $('#img_docOficial').trigger('click');
         });
 
+
         function readDocImgURL(input) {
             if (input.files && input.files[0]) {
-                let iddocumento = new FileReader();
-
-                 iddocumento.onload = function (e) {
-                    $('#name_doc_id_file').text( $('#img_docOficial').val() );
+                var iddocumento = new FileReader();
+                iddocumento.onload = function (e) {
+                    iddocumento.fileName = img_docOficial.name;
+                    $('#name_doc_id_file').text( input.files[0].name );
                 }
 
                 iddocumento.readAsDataURL(input.files[0]);
@@ -165,7 +166,7 @@
                 var passaporte = new FileReader();
 
                 passaporte.onload = function (e) {
-                    $('#name_passaport_file').text( $('#img_Passaport').val() );
+                    $('#name_passaport_file').text( input.files[0].name );
                 }
 
                 passaporte.readAsDataURL(input.files[0]);
@@ -296,6 +297,7 @@
 
 
                   }
+                  window.scrollTo(0, 0);
                   form.classList.add('was-validated');
                 }, false);
               });

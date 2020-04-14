@@ -142,6 +142,11 @@ class ClientController extends Controller
             Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
             $doc_id->imagem = $nome_img;
             $doc_id->save();
+
+            /* salva o documento na tabela dos clientes */
+            $client->img_docOficial=$nome_img;
+            $client->save();
+
         }
         if ($requestClient->img_docOficial==null){
             $doc_id->imagem->img_docOficial = null;
@@ -164,6 +169,11 @@ class ClientController extends Controller
             Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
             $passaporte->imagem = $nome_img;
             $passaporte->save();
+
+            /* salva o documento na tabela dos clientes */
+            $client->img_Passaport=$nome_img;
+            $client->save();
+
         }
         if ($requestClient->img_Passaport==null){
             $doc_id->imagem->img_Passaport = null;
@@ -183,17 +193,17 @@ class ClientController extends Controller
 
         /* Criação de utilizador */
 
-/*         $user->tipo = "cliente";
+         $user->tipo = "cliente";
         $user->status = 10;
         $user->idCliente = $client->idCliente;
-        $user->save(); */
+        $user->save();
 
 
         /* Envia o e-mail para ativação */
-/*         $email = $user->email;
+         $email = $user->email;
         $id = $user->idUser;
         $name = $client->nome;
-        Mail::to($email)->send(new SendEmailConfirmation($id, $name)); */
+        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
         return redirect()->route('clients.index')->with('success', 'Ficha de estudante criada com sucesso');
     }
@@ -272,7 +282,16 @@ class ClientController extends Controller
     public function edit(Cliente $client)
     {
         if (Auth::user()->tipo == "admin"){
-            return view('clients.edit', compact('client'));
+
+            $docs_pessoais=DocPessoal::
+            where('idAgente', '=',$client->idCliente)
+            ->get();
+
+
+            /* $docs_academicos= */
+
+
+            return view('clients.edit', compact('client','docs_pessoais'));
         }else{
             /* não tem permissões */
             abort (401);
