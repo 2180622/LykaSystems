@@ -48,9 +48,9 @@ class Cliente extends Migration
 
             $table->string('num_docOficial',255)->unique();
             $table->string('img_docOficial',255)->nullable();
-            $table->longText('info_docOficial');
+            $table->longText('info_docOficial')->nullable();
             $table->string('img_Passaport',255)->nullable();
-            $table->longText('info_Passaport');
+            $table->longText('info_Passaport')->nullable();
             $table->string('img_docAcademico',255)->nullable();
             $table->longText('info_docAcademico')->nullable();
 

@@ -133,7 +133,7 @@
                 var documento = new FileReader();
 
                 documento.onload = function (e) {
-                    $('#name_id_file').text( $('#img_doc').val() );
+                    $('#name_id_file').text( input.files[0].name );
                 }
 
                 documento.readAsDataURL(input.files[0]);

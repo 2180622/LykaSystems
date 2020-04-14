@@ -60,18 +60,25 @@
     <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
         <div class="row">
             <div class="col">
-                {{-- INPUT nome --}}
-                <label for="nome">Nome:</label><br>
-                <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$client->nome)}}"
-                    placeholder="Insira o nome do aluno" maxlength="20" required><br>
 
-                {{-- INPUT apelido --}}
-                <label for="apelido">Apelido:</label><br>
-                <input type="text" class="form-control" name="apelido" id="apelido"
-                    value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno" maxlength="20"
-                    required>
+                <div class="row">
+                    <div class="col">
+                        {{-- INPUT nome --}}
+                        <label for="nome">Nome:</label><br>
+                        <input type="text" class="form-control" name="nome" id="nome"
+                            value="{{old('nome',$client->nome)}}" placeholder="Insira o nome do aluno" maxlength="20"
+                            required>
+                    </div>
+                    <div class="col">
+                        {{-- INPUT apelido --}}
+                        <label for="apelido">Apelido:</label><br>
+                        <input type="text" class="form-control" name="apelido" id="apelido"
+                            value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno"
+                            maxlength="20" required>
+                    </div>
+                </div>
+
                 <br>
-
 
                 <div class="row mb-4">
 
@@ -195,7 +202,7 @@
                         id="doc_id_preview">
                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                         <div id="name_doc_id_file" class="text-muted">
-                            {{old('img_docOficial',$client->img_docOficial)}}kkkkk</div>
+                            {{old('img_docOficial',$client->img_docOficial)}}</div>
                     </a>
                     <i id="doc_id_preview_file" class="fas fa-plus-circle mt-2" style="font-size:60px;cursor:pointer"
                         title="Clique adicionar o documento de identificação"></i>
@@ -270,7 +277,7 @@
                     <a href="{{Storage::disk('public')->url('client-documents/').$client->img_Passaport}}"
                         title="Clique adicionar o passaporte" id="passport_preview">
                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                        <div id="name_passaport_file" class="text-muted">{{old('img_Passaport',$agent->img_Passaport)}}
+                        <div id="name_passaport_file" class="text-muted">{{old('img_Passaport',$client->img_Passaport)}}
                         </div>
                     </a>
                     @else
