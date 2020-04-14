@@ -237,7 +237,7 @@ class AgenteController extends Controller
             $photo = $request->file('fotografia');
             $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             if (!empty($agent->fotografia)) {
-                Storage::disk('public')->delete('agennt-photos/' . $agent->fotografia);
+                Storage::disk('public')->delete('agent-photos/' . $agent->fotografia);
             }
             Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
             $agent->fotografia = $profileImg;

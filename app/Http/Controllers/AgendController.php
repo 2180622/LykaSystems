@@ -15,6 +15,21 @@ class AgendController extends Controller
     public function index()
     {
         $agends = Agenda::all();
+        /*$agend = [];
+
+        foreach ($agends as $agendEvent) {
+            $agend[] = \Calendar::agend(
+                $agendEvent->titulo,
+                false,
+                new \DateTime($agendEvent->dataInicio),
+                new \DateTime($agendEvent->dataFim),
+                $agendEvent->id,
+                [
+                    'cor' => $agendEvent->color,
+                ]
+            );
+        }*/
+
         return view('agends.list', compact('agends'));
     }
 
@@ -38,7 +53,7 @@ class AgendController extends Controller
     {
         $this->validate($request, [
             'titulo' => 'required',
-            'descrcicao' => 'required',
+            'descricao' => 'required',
             'dataInicio' => 'required',
             'dataFim' => 'required',
             'cor' => 'required',
@@ -46,16 +61,15 @@ class AgendController extends Controller
 
         $agenda = new Agenda;
 
-        $agenda->titulo = $request->input('title');
-        $agenda->descricao = $request->input('description');
-        $agenda->dataInicio = $request->input('startDate');
-        $agenda->dataFim = $request->input('endDate');
-        $agenda->cor = $request->input('color');
+        $agenda->title = $request->input('titulo');
+        $agenda->description = $request->input('descricao');
+        $agenda->startDate = $request->input('dataInicio');
+        $agenda->endDate = $request->input('dataFim');
+        $agenda->color = $request->input('cor');
 
         $agenda->save();
 
-        return redirect('/agends')->with('success', 'Evento Adicionado com Sucesso!');
-
+        return redirect()->route('agends.index')->with('success', 'Evento Adicionado com Sucesso!');
     }
 
     /**

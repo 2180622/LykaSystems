@@ -9,6 +9,7 @@
             </div>
             <div class="modal-body">
                 <form action="/agends" method="POST">
+                    {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -52,7 +53,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="top-button">Guadar</button>
+                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Guadar</button>
                 <button type="button" class="top-button btn_submit bg-danger">Eliminar</button>
             </div>
         </div>
