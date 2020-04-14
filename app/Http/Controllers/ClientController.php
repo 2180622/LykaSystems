@@ -6,7 +6,6 @@ use App\Cliente;
 use App\User;
 use App\Produto;
 use App\DocPessoal;
-use App\DocAcademico;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -165,7 +164,7 @@ class ClientController extends Controller
 
         if ($requestClient->hasFile('img_Passaport')) {
             $img_doc = $requestClient->file('img_Passaport');
-            $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            $nome_img = $client->idCliente . '_PP.' . $img_doc->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
             $passaporte->imagem = $nome_img;
             $passaporte->save();
@@ -181,13 +180,6 @@ class ClientController extends Controller
 
         $passaporte->create_at == date("Y-m-d",$t);
         $passaporte->save();
-
-
-
-        /* Criação de documentos ACADÉMICOS */
-        /* use App\DocAcademico; */
-
-
 
 
 
@@ -283,15 +275,7 @@ class ClientController extends Controller
     {
         if (Auth::user()->tipo == "admin"){
 
-            $docs_pessoais=DocPessoal::
-            where('idAgente', '=',$client->idCliente)
-            ->get();
-
-
-            /* $docs_academicos= */
-
-
-            return view('clients.edit', compact('client','docs_pessoais'));
+            return view('clients.edit', compact('client'));
         }else{
             /* não tem permissões */
             abort (401);
@@ -315,6 +299,7 @@ class ClientController extends Controller
         $client->fill($fields);
 
 
+        /* Fotografia do cliente */
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
@@ -324,6 +309,28 @@ class ClientController extends Controller
             Storage::disk('public')->putFileAs('client-photos/', $photo, $profileImg);
             $client->fotografia = $profileImg;
         }
+
+
+        /* Documento de identificação */
+        if ($request->hasFile('img_docOficial')) {
+            $img_doc = $request->file('img_docOficial');
+            $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $client->img_docOficial=$nome_img;
+            $client->save();
+        }
+
+
+        /* Passaporte */
+        if ($request->hasFile('img_Passaport')) {
+            $img_doc = $request->file('img_Passaport');
+            $nome_img = $client->idCliente . '_PP.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $client->img_Passaport=$nome_img;
+            $client->save();
+        }
+
+
 
         // data em que foi modificado
         $t=time();
