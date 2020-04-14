@@ -81,28 +81,25 @@
                         {{-- Descrição --}}
                         <td>
 
-                          <?php
-                            foreach ($proofPayments as $proofPayment) {
-                            if ($fase->verificacaoPago == 0 && $proofPayment->valorRecebido != null && $proofPayment->idFase == $fase->idFase) {
-                              $valorTotal = $fase->valorFase - $proofPayment->valorRecebido;
-                            }else {
-                              echo $fase->valorFase;
-                            }
-                          }
-                            ?>
-
+                            @foreach ($proofPayments as $proofPayment)
+                              @if ($fase->verificacaoPago == 0 && $proofPayment->valorRecebido != null && $proofPayment->idFase == $fase->idFase)
+                              {{$valorTotal = $fase->valorFase - $proofPayment->valorRecebido}}
+                              @else
+                              {{$fase->valorFase}}
+                              @endif
+                            @endforeach
 
                         </td>
 
-                            <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
-                            {{-- Estado --}}
-                            <td>
-                                @if ($fase->verificacaoPago == 0)
-                                Pendente
-                                @else
-                                Pago
-                                @endif
-                            </td>
+                        <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
+                        {{-- Estado --}}
+                        <td>
+                            @if ($fase->verificacaoPago == 0)
+                            Pendente
+                            @else
+                            Pago
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
