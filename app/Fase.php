@@ -25,7 +25,7 @@ class Fase extends Model
     }
 
     public function docTransacao(){
-        return $this->hasMany("App\DocTransacao","idFase","idFase")->withTrashed();
+        return $this->hasMany("App\DocTransacao","idFase","idFase");
     }
 
     public function docAcademico(){
