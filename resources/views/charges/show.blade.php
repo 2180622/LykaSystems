@@ -74,17 +74,29 @@
                         {{-- Nome e Apelido --}}
                         <td><a class="name_link" href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
                         {{-- Descrição --}}
-                        <td>
+                        <td
+                        @if (count($fase->DocTransacao))
+                        @foreach ($fase->DocTransacao as $paymentProof)
+                          @if ($fase->valorFase > $paymentProof->valorRecebido)
+                            style="color:#FF3D00;"
+                          @elseif ($fase->valorFase == $paymentProof->valorRecebido)
+                            style="color:#47BC00;"
+                          @else
+                            style="color:blue;"
+                          @endif
+                        @endforeach
+                      @endif
+                        >
                           @if (count($fase->DocTransacao))
                             @foreach ($fase->DocTransacao as $paymentProof)
                               @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
-                              {{$valorTotal = $fase->valorFase - $paymentProof->valorRecebido}}
+                              {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, '.', '')}}€
                               @else
-                                {{$fase->valorFase}}
+                                {{$fase->valorFase}}€
                               @endif
                             @endforeach
                           @else
-                            {{$fase->valorFase}}
+                            {{$fase->valorFase}}€
                           @endif
                         </td>
 
