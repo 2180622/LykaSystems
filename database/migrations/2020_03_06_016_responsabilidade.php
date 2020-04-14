@@ -17,7 +17,6 @@ class Responsabilidade extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idResponsabilidade');
-            $table->string('descricao',255);
             $table->decimal('valorCliente', 18, 2);
             $table->decimal('valorAgente', 18, 2);
             $table->decimal('valorSubAgente', 18, 2)->nullable();
@@ -29,6 +28,7 @@ class Responsabilidade extends Migration
             $table->boolean('verificacaoPagoUni1')->default(false);
             $table->boolean('verificacaoPagoUni2')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

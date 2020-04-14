@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use App\User;
 use App\Produto;
+use App\DocPessoal;
+use App\DocAcademico;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
@@ -90,6 +93,8 @@ class ClientController extends Controller
     */
     public function store(StoreClientRequest $requestClient, StoreUserRequest $requestUser){
 
+        $t=time(); /* obtem data atual */
+
         /* obtem os dados para criar o cliente */
         $client = new Cliente;
         $fields = $requestClient->validated();
@@ -103,7 +108,6 @@ class ClientController extends Controller
 
 
         /* Criação de cliente */
-
         if ($requestClient->hasFile('fotografia')) {
             $photo = $requestClient->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
@@ -117,23 +121,86 @@ class ClientController extends Controller
         }
 
         // data em que foi criado
-        $t=time();
-        $client->create_at == date("Y-m-d",$t);
 
+        $client->create_at == date("Y-m-d",$t);
         $client->save();
+
+
+
+
+        /* Criação de documentos Pessoais */
+
+        /* Documento de identificação */
+        $doc_id= new DocPessoal;
+        $doc_id->tipo="Cartão Cidadão";
+        $doc_id->info= $requestClient->num_docOficial;
+        $doc_id->dataValidade= $requestClient->dataValidade_docOficial;
+
+        if ($requestClient->hasFile('img_docOficial')) {
+            $img_doc = $requestClient->file('img_docOficial');
+            $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $doc_id->imagem = $nome_img;
+            $doc_id->save();
+
+            /* salva o documento na tabela dos clientes */
+            $client->img_docOficial=$nome_img;
+            $client->save();
+
+        }
+        if ($requestClient->img_docOficial==null){
+            $doc_id->imagem->img_docOficial = null;
+        }
+
+        $doc_id->create_at == date("Y-m-d",$t);
+        $doc_id->save();
+
+
+
+        /* Passaporte */
+        $passaporte= new DocPessoal;
+        $passaporte->tipo="Passaporte";
+        $passaporte->info= $requestClient->numPassaport;
+        $passaporte->dataValidade= $requestClient->dataValidPP;
+
+        if ($requestClient->hasFile('img_Passaport')) {
+            $img_doc = $requestClient->file('img_Passaport');
+            $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $passaporte->imagem = $nome_img;
+            $passaporte->save();
+
+            /* salva o documento na tabela dos clientes */
+            $client->img_Passaport=$nome_img;
+            $client->save();
+
+        }
+        if ($requestClient->img_Passaport==null){
+            $doc_id->imagem->img_Passaport = null;
+        }
+
+        $passaporte->create_at == date("Y-m-d",$t);
+        $passaporte->save();
+
+
+
+        /* Criação de documentos ACADÉMICOS */
+        /* use App\DocAcademico; */
+
+
 
 
 
         /* Criação de utilizador */
 
-        $user->tipo = "cliente";
+         $user->tipo = "cliente";
         $user->status = 10;
         $user->idCliente = $client->idCliente;
         $user->save();
 
 
         /* Envia o e-mail para ativação */
-        $email = $user->email;
+         $email = $user->email;
         $id = $user->idUser;
         $name = $client->nome;
         Mail::to($email)->send(new SendEmailConfirmation($id, $name));
@@ -215,7 +282,16 @@ class ClientController extends Controller
     public function edit(Cliente $client)
     {
         if (Auth::user()->tipo == "admin"){
-            return view('clients.edit', compact('client'));
+
+            $docs_pessoais=DocPessoal::
+            where('idAgente', '=',$client->idCliente)
+            ->get();
+
+
+            /* $docs_academicos= */
+
+
+            return view('clients.edit', compact('client','docs_pessoais'));
         }else{
             /* não tem permissões */
             abort (401);

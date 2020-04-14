@@ -11,12 +11,12 @@ class DocTransacao extends Model
     protected $primaryKey = 'idDocTransacao';
 
     protected $fillable = [
-        'descricao','valorRecebido','dataOperacao','dataRecebido','verificacao','tipoPagamento',
+        'descricao','valorRecebido','dataOperacao','dataRecebido','verificacao','observacoes','tipoPagamento',
         'comprovativoPagamento','$idConta','$idFase'
         ];
 
     public function fase(){
-        return $this->belongsTo("App\Fase","idFase","idFase");
+        return $this->belongsTo("App\Fase","idFase","idFase")->withTrashed();
     }
 
     public function conta(){

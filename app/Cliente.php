@@ -15,19 +15,21 @@ class Cliente extends Model
     protected $primaryKey = 'idCliente';
 
     protected $fillable = [
-        'nome','apelido','genero','email','telefone1','telefone2','dataNasc','numCCid',
-        'numPassaport','dataValidPP','localEmissaoPP','paisNaturalidade','morada',
-        'cidade','moradaResidencia','passaportPaisEmi','nomePai','telefonePai',
+        'nome','apelido','genero','email','telefone1','telefone2','dataNasc',
+        'paisNaturalidade','morada',
+        'cidade','moradaResidencia','nomePai','telefonePai',
         'emailPai','nomeMae','telefoneMae','emailMae','fotografia','NIF','IBAN',
         'nivEstudoAtual','nomeInstituicaoOrigem','cidadeInstituicaoOrigem',
-        'obsPessoais','obsFinanceiras','obsAcademicas'
+        'obsPessoais','obsFinanceiras','obsAcademicas','num_docOficial','img_docOficial','info_docOficial',
+        'img_Passaport','info_Passaport','img_docAcademico','info_docAcademico'
         ];
+        // info_passaport contem: passaportPaisEmi, localEmissaoPP, dataValidPP
 
     public function user(){
-        return $this->belongsTo("App\User","idUser","idUser");
+        return $this->belongsTo("App\User","idUser","idUser")->withTrashed();
     }
 
     public function produto(){
-        return $this->hasMany("App\Produto","idCliente","idCliente");
+        return $this->hasMany("App\Produto","idCliente","idCliente")->withTrashed();
     }
 }

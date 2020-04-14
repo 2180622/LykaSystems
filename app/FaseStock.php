@@ -21,6 +21,9 @@ class FaseStock extends Model
     }
 
     public function docStock(){
-        return $this->hasMany("App\DocStock","idFaseStock","idFaseStock");
+        return $this->hasMany("App\DocStock","idFaseStock","idFaseStock")->withTrashed();
+    }
+    public function fase(){
+        return $this->hasMany("App\Fase","idFaseStock","idFaseStock")->withTrashed();
     }
 }

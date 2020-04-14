@@ -3,15 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RelFornResp extends Model
 {
+    use SoftDeletes;
     protected $table = 'RelFornResp';
 
     protected $primaryKey = 'idRelacao';
 
     protected $fillable = [
-        'valor','$idResponsabilidade','$idFornecedor'
+        'valor','verificacaoPago','$idResponsabilidade','$idFornecedor','$idConta'
         ];
 
     public function fornecedor(){
@@ -19,7 +21,7 @@ class RelFornResp extends Model
     }
 
     public function responsabilidade(){
-        return $this->belongsTo("App\Responsabilidade","idResponsabilidade","idResponsabilidade");
+        return $this->belongsTo("App\Responsabilidade","idResponsabilidade","idResponsabilidade")->withTrashed();
     }
 
     public function conta(){

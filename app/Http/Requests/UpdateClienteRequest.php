@@ -23,6 +23,7 @@ class UpdateClienteRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'nome' => 'required',
             'apelido' => 'required',
@@ -31,10 +32,6 @@ class UpdateClienteRequest extends FormRequest
             'telefone1' => 'required',
             'telefone2' => 'nullable',
             'dataNasc' => 'required',
-            'numCCid' => 'required',
-            'numPassaport' => 'required',
-            'dataValidPP' => 'required',
-            'localEmissaoPP' => 'required',
             'paisNaturalidade' => 'required',
             'morada' => 'required',
             'cidade' => 'required',
@@ -52,9 +49,32 @@ class UpdateClienteRequest extends FormRequest
             'nivEstudoAtual' => 'required',
             'nomeInstituicaoOrigem' => 'required',
             'cidadeInstituicaoOrigem' => 'required',
+
+            'num_docOficial'=> 'required',
+            'dataValidade_docOficial'=> 'nullable',
+            'img_docOficial'=> 'nullable',
+            'info_docOficial'=> 'nullable',
+
+            'img_Passaport'=> 'nullable',
+            'info_Passaport'=> 'nullable',
+
+            'img_docAcademico'=> 'nullable',
+            'info_docAcademico'=> 'nullable',
+
             'obsPessoais' => 'nullable',
-            'obsAcademicas' => 'nullable',
             'obsFinanceiras' => 'nullable',
+            'obsAcademicas' => 'nullable',
+
         ];
     }
 }
+
+
+
+
+
+
+/* 'numCCid' => 'required',
+'numPassaport' => 'required',
+'dataValidPP' => 'required',
+'localEmissaoPP' => 'required', */

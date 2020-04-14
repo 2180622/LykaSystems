@@ -23,6 +23,8 @@ Route::namespace('Api')->name('api.')->group(function(){
 
         Route::get('/produtos', 'StockController@produtos')->name('produtos');
 
+        Route::get('/produto/{id}', 'StockController@produto')->name('produto');
+
         Route::get('produto/{id}/fases', 'StockController@fases')->name('fases');
 
         Route::get('fase/{id}/documentos', 'StockController@documentos')->name('documentos');

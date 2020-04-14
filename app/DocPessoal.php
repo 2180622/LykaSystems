@@ -11,11 +11,10 @@ class DocPessoal extends Model
     protected $primaryKey = 'idDocPessoal';
 
     protected $fillable = [
-        'nome','apelido','tipo','imagem','numDoc','dataValidade','pais',
-        'morada','verificacao','$idFase'
+        'tipo','imagem','info','dataValidade','verificacao','$idFase'
         ];
 
     public function fase(){
-        return $this->belongsTo("App\Fase","idFase","idFase");
+        return $this->belongsTo("App\Fase","idFase","idFase")->withTrashed();
     }
 }

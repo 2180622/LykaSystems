@@ -24,21 +24,22 @@ class UpdateAgenteRequest extends FormRequest
     public function rules()
     {
         return [
-            'subagent_agentid'=> 'nullable',
+            'idAgenteAssociado'=> 'nullable',
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',
+            'tipo' => 'required|in:Agente,Subagente',
             'email' => 'required',
             'dataNasc' => 'required',
             'fotografia' => 'nullable',
             'morada' => 'required',
             'pais' => 'required',
-            'num_id'=> 'required',
             'NIF' => 'required',
-            'doc_img' => 'nullable',
+            'num_doc'=> 'required',
+            'img_doc' => 'nullable',
+            'info_doc' => 'nullable',
             'telefoneW' => 'required',
             'telefone2' => 'nullable',
-            'tipo' => 'required|in:Agente,Subagente',
         ];
     }
 

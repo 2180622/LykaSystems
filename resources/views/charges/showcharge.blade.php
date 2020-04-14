@@ -38,13 +38,18 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{($fase->valorFase)}}€</p>
             <br><br>
-            <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post">
+            <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post" enctype="multipart/form-data" name="chargeForm">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
+                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo e deve ter o seguinte formato: 10,00 ou 10.000">
+                            <span>
+                                ?
+                            </span>
+                        </div>
                         <label for="valorRecebido">Valor recebido</label>
                         <br>
-                        <input type="text" name="valorRecebido" placeholder="00.00€">
+                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
                     </div>
                     <div class="col-md-4">
                         <label for="tipoPagamento">Tipo de pagamento</label>
@@ -58,7 +63,8 @@
                     <div class="col-md-4">
                         <label for="comprovativoPagamento">Comprovativo de pagamento</label>
                         <br>
-                        <input type="file" name="comprovativoPagamento">
+                        <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
+                        <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
                     </div>
                 </div>
                 <br><br>
@@ -77,9 +83,9 @@
                 <br><br>
                 <div class="row">
                     <div class="col">
-                        <label for="obsersacoes">Observações</label>
+                        <label for="observacoes">Observações</label>
                         <br>
-                        <textarea name="obsersacoes" rows="5"></textarea>
+                        <textarea name="observacoes" rows="5"></textarea>
                     </div>
                 </div>
         </div>
@@ -92,5 +98,9 @@
         <br>
     </div>
 </div>
+
+@section('scripts')
+<script src="{{asset('/js/charges.js')}}"></script>
+@endsection
 
 @endsection

@@ -39,9 +39,9 @@
         <div class="row mt-3 mb-4">
             <div class="col">
                 @if (count($numberProducts) == 1)
-                Está registado <strong>{{count($numberProducts)}}(uma)</strong> cobrança pendente.
+                Está registada <strong>{{count($numberProducts)}}(uma)</strong> cobrança pendente.
                 @else
-                Estão registados <strong>{{count($numberProducts)}}</strong> cobranças pendentes.
+                Estão registadas <strong>{{count($numberProducts)}}</strong> cobranças pendentes.
                 @endif
             </div>
         </div>

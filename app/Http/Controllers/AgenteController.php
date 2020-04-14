@@ -57,7 +57,7 @@ class AgenteController extends Controller
 
             /* lista dos agentes principais */
             $listagents = Agente::
-            whereNull('subagent_agentid')
+            whereNull('idAgenteAssociado')
             ->get();
 
             return view('agents.add',compact('agent','listagents'));
@@ -85,6 +85,7 @@ class AgenteController extends Controller
         $agent->fill($fields);
 
 
+
         /* obtem os dados para criar o utilizador */
         $user = new User;
         $fieldsUser = $requestUser->validated();
@@ -92,6 +93,7 @@ class AgenteController extends Controller
 
 
         /* Criação de Agente */
+        /* $agent->idAgenteAssociado= $requestAgent->idAgenteAssociado; */
 
         /* Fotografia do agente */
         if ($requestAgent->hasFile('fotografia')) {
@@ -107,15 +109,15 @@ class AgenteController extends Controller
 
 
         /* Documento de identificação */
-        if ($requestAgent->hasFile('doc_img')) {
-            $docfile = $requestAgent->file('doc_img');
+        if ($requestAgent->hasFile('img_doc')) {
+            $docfile = $requestAgent->file('img_doc');
             $docImg = $agent->nome . $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-docs/', $docfile, $docImg);
-            $agent->doc_img = $docImg;
+            $agent->img_doc = $docImg;
             $agent->save();
         }
-        if ($requestAgent->doc_img==null){
-            $agent->doc_img = null;
+        if ($requestAgent->img_doc==null){
+            $agent->img_doc = null;
         }
 
 
@@ -157,23 +159,24 @@ class AgenteController extends Controller
 
         /* Lista de sub-agentes do $agente */
         $listagents = Agente::
-        where('subagent_agentid', '=',$agent->idAgente)
+        where('idAgenteAssociado', '=',$agent->idAgente)
         ->get();
+
 
         if ($listagents->isEmpty()) {
             $listagents=null;
         }
 
-        /* caso seja um sub-agente, obtem o agente que o adicionou */
-        if($agent->tipo=="Subagente"){
+/*       caso seja um sub-agente, obtem o agente que o adicionou */
+         if($agent->tipo=="Subagente"){
             $mainAgent=Agente::
-            where('idAgente', '=',$agent->subagent_agentid)
+            where('idAgente', '=',$agent->idAgenteAssociado)
             ->first();
         }else{
             $mainAgent=null;
         }
 
-        return view('agents.show',compact("agent",'listagents','mainAgent'));
+        return view('agents.show',compact("agent" ,'listagents','mainAgent'));
 
     }
 
@@ -204,7 +207,7 @@ class AgenteController extends Controller
         if (Auth::user()->tipo == "admin"){
             /* lista dos agentes principais */
             $listagents = Agente::
-            whereNull('subagent_agentid')
+            whereNull('idAgenteAssociado')
             ->get();
 
             return view('agents.edit', compact('agent','listagents'));
@@ -243,14 +246,14 @@ class AgenteController extends Controller
 
 
         /* Documento de identificação */
-        if ($request->hasFile('doc_img')) {
-            $docfile = $request->file('doc_img');
+        if ($request->hasFile('img_doc')) {
+            $docfile = $request->file('img_doc');
             $docImg = $agent->nome . $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
-            if (!empty($agent->doc_img)) {
-                Storage::disk('public')->delete('agent-docs/' . $agent->doc_img);
+            if (!empty($agent->img_doc)) {
+                Storage::disk('public')->delete('agent-docs/' . $agent->img_doc);
             }
             Storage::disk('public')->putFileAs('agent-docs/', $docfile, $docImg);
-            $agent->doc_img = $docImg;
+            $agent->img_doc = $docImg;
         }
 
 
@@ -258,7 +261,7 @@ class AgenteController extends Controller
         // Caso se mude o de agente para subagente, garante que nenhum o agente não tem id de subagente
         DB::table('Agente')
         ->where('idAgente', $agent->idAgente)
-        ->update(['subagent_agentid' => null]);
+        ->update(['idAgenteAssociado' => null]);
 
 
         // data em que foi modificado
@@ -291,14 +294,14 @@ class AgenteController extends Controller
 
         /* Apaga subagentes se o seu agente for apagado */
         $subagents =DB::table('Agente')
-        ->where('subagent_agentid', $agent->idAgente)
+        ->where('idAgenteAssociado', $agent->idAgente)
         ->get();
 
         /* apaga a lista de subagentes do agente que esta a ser apagado */
         if (!$subagents->isEmpty()) {
             foreach ($subagents as $subagent) {
                 DB::table('Agente')
-                ->where('subagent_agentid', $agent->idAgente)
+                ->where('idAgenteAssociado', $agent->idAgente)
                 ->update(['deleted_at' => $agent->deleted_at]);
             }
         }

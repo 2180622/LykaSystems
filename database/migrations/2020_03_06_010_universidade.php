@@ -21,8 +21,8 @@ class Universidade extends Migration
             $table->string('morada',255);
             $table->string('telefone',255);
             $table->string('email',255);
-            $table->string('NIF',255);
-                $table->unique('NIF');
+            $table->string('NIF',255)->unique();
+                //$table->unique('NIF');
             $table->string('IBAN',255);
             $table->longText('obsContactos')->nullable();
             $table->longText('obsCursos')->nullable();

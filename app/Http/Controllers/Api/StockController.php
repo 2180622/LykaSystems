@@ -15,6 +15,11 @@ class StockController extends Controller
         $produtos = ProdutoStock::all();
         return ['results' => $produtos];
     }
+    public function produto($id){
+        $produto = ProdutoStock::where('idProdutoStock','=',$id)->get();
+        $fases = FaseStock::where('idProdutoStock','=',$id)->get();
+        return ['produto' => $produto, 'fases' => $fases];
+    }
     public function fases($id){
         $fases = FaseStock::where('idProdutoStock','=',$id)->get();
         return ['results' => $fases];
