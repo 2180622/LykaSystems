@@ -47,7 +47,7 @@
             </div>
             <br>
 
-            <div id='calendar' data-route-event-agend="{{ route ('routeEventAgend') }}"></div>
+            <div id='calendar'></div>
 
 
         </div>

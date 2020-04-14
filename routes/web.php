@@ -36,7 +36,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Agenda */
     Route::resource('/agends', 'AgendController');
-    Route::get('/EventAgend', 'EventAgendController@EventoAgenda')->name('routeEventAgend');
 
 
     /* Pagamentos */

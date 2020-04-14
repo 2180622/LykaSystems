@@ -70,25 +70,22 @@
                 {{-- Corpo da tabela --}}
                 <tbody>
                     @foreach ($fases as $fase)
-
-
-
-
-
                     <tr>
                         {{-- Nome e Apelido --}}
                         <td><a class="name_link" href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
                         {{-- Descrição --}}
                         <td>
-
-                            @foreach ($proofPayments as $proofPayment)
-                              @if ($fase->verificacaoPago == 0 && $proofPayment->valorRecebido != null && $proofPayment->idFase == $fase->idFase)
-                              {{$valorTotal = $fase->valorFase - $proofPayment->valorRecebido}}
+                          @if (count($fase->DocTransacao))
+                            @foreach ($fase->DocTransacao as $paymentProof)
+                              @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
+                              {{$valorTotal = $fase->valorFase - $paymentProof->valorRecebido}}
                               @else
-                              {{$fase->valorFase}}
+                                {{$fase->valorFase}}
                               @endif
                             @endforeach
-
+                          @else
+                            {{$fase->valorFase}}
+                          @endif
                         </td>
 
                         <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>

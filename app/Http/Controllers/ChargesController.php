@@ -19,15 +19,15 @@ class ChargesController extends Controller
       return view('charges.list', compact('products', 'numberProducts'));
     }
 
-    public function show(DocTransacao $proofPayments, Fase $fase, Produto $product)
+    public function show(DocTransacao $docTrasancao, Fase $fase, Produto $product)
     {
       $fases = Fase::where('idProduto', '=', $product->idProduto)->get();
 
       // Em caso de verificacaoPago != 0 -> valorFase - valorRecebido
 
-      $proofPayments = DocTransacao::all();
+      $docTrasancao = DocTransacao::all();
 
-      return view('charges.show', compact('product', 'fases', 'proofPayments'));
+      return view('charges.show', compact('product', 'fases', 'docTrasancao'));
     }
 
     public function showcharge(Produto $product, Fase $fase)
