@@ -3,10 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProdutoStock;
 use App\FaseStock;
-use App\DocStock;
 use App\Http\Requests\StoreProdutosstockRequest;
-use App\Http\Requests\StoreFasestockRequest;
-use App\Http\Requests\StoreDocstockRequest;
 
 class ProdutosstockController extends Controller
 {
@@ -46,7 +43,7 @@ class ProdutosstockController extends Controller
         //
         // $docStock->save();
 
-        return redirect()->route('produtostock.index')->with('success', 'Adicionado com sucesso');
+        return redirect()->route('produtostock.index')->with('success', 'Produto stock adicionado com sucesso');
     }
 
     public function edit(ProdutoStock $produtoStock)
@@ -59,9 +56,10 @@ class ProdutosstockController extends Controller
       }
     }
 
-    public function show(FaseStock $faseStocks,ProdutoStock $produtoStock)
+    public function show(FaseStock $faseStocks,ProdutoStock $produtostock)
     {
-        $faseStocks = FaseStock::where('idProdutoStock', '=', $produtoStock->idProdutoStock)->get();
-        return view('produtostock.show', compact('produtoStock', 'faseStocks'));
+        $nrfases = 1;
+        $faseStocks = FaseStock::where('idProdutoStock', '=', $produtostock->idProdutoStock)->get();
+        return view('produtostock.show', compact('produtostock', 'faseStocks', 'nrfases'));
     }
 }
