@@ -17,6 +17,10 @@ class Agente extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idAgente');
+
+            $table->unsignedBigInteger('idAgenteAssociado')->nullable();
+                $table->foreign('idAgenteAssociado')->references('idAgente')->on('Agente');
+
             $table->string('nome',255);
             $table->string('apelido',255);
             $table->enum('genero',['F','M']);
@@ -32,14 +36,12 @@ class Agente extends Migration
 
             $table->string('num_doc',255)->unique();
                 //$table->unique('num_id');
-            $table->string('img_doc',255);
-            $table->longText('info_doc');
+            $table->string('img_doc',255)->nullable();
+            $table->longText('info_doc')->nullable();
 
             $table->string('telefoneW',255);
             $table->string('telefone2',255)->nullable();
 
-            $table->unsignedBigInteger('idAgenteAssociado')->nullable();
-                $table->foreign('idAgenteAssociado')->references('idAgente')->on('Agente');
             $table->timestamps();
             $table->softDeletes();
         });

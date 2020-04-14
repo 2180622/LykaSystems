@@ -19,10 +19,20 @@ class ChargesController extends Controller
       return view('charges.list', compact('products', 'numberProducts'));
     }
 
-    public function show(Fase $fase, Produto $product)
+    public function show(DocTransacao $proofPayments, Fase $fase, Produto $product)
     {
       $fases = Fase::where('idProduto', '=', $product->idProduto)->get();
-      return view('charges.show', compact('product', 'fases'));
+
+      // Em caso de verificacaoPago != 0 -> valorFase - valorRecebido
+
+      foreach ($fases as $fase) {
+        $proofPayment = DocTransacao::where('idFase', '=', $fase->idFase)->get();
+        if ($fase->verificacaoPago == 0 && $proofPayment[0]->valorRecebido != null) {
+          $valorTotal = $fase->valorFase - $proofPayment[0]->valorRecebido;
+        }
+      }
+
+      return view('charges.show', compact('product', 'fases', 'valorTotal'));
     }
 
     public function showcharge(Produto $product, Fase $fase)

@@ -82,12 +82,11 @@
 
 
 
-        //Preview da fotografia
-
-        $('#search_btn').on('click', function (e) {
+        //Preview da fotografia++++++++++++++++++
+/*         $('#search_btn').on('click', function (e) {
             e.preventDefault();
             $('#fotografia').trigger('click');
-        });
+        }); */
 
 
         $('#preview').on('click', function (e) {
@@ -110,6 +109,81 @@
         $("#fotografia").change(function () {
             readURL(this);
         });
+
+
+
+
+        //Preview do DOCUMENTO DE IDENTIFICAÇÃO+++++++++++++++
+
+        $('#doc_id_preview_file').on('click', function (e) {
+            e.preventDefault();
+            $('#img_docOficial').trigger('click');
+        });
+
+        $('#doc_id_preview').on('click', function (e) {
+            e.preventDefault();
+            $('#img_docOficial').trigger('click');
+        });
+
+        function readDocURL(input) {
+            if (input.files && input.files[0]) {
+                var iddocumento = new FileReader();
+
+                iddocumento.onload = function (e) {
+                    $('#name_doc_id_file').text( $('#img_docOficial').val() );
+                }
+
+                iddocumento.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#img_docOficial").change(function () {
+            readDocURL(this);
+            $('#doc_id_preview_file').hide();
+            $('#doc_id_preview').show();
+
+        });
+
+
+
+
+
+        //Preview do PASSAPORTE +++++++++++++++
+
+        $('#passport_preview_file').on('click', function (e) {
+            e.preventDefault();
+            $('#img_Passaport').trigger('click');
+        });
+
+        $('#passport_preview').on('click', function (e) {
+            e.preventDefault();
+            $('#img_Passaport').trigger('click');
+        });
+
+        function readDocURL(input) {
+            if (input.files && input.files[0]) {
+                var passaporte = new FileReader();
+
+                passaporte.onload = function (e) {
+                    $('#name_passaport_file').text( $('#img_Passaport').val() );
+                }
+
+                passaporte.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#img_Passaport").change(function () {
+            readDocURL(this);
+            $('#passport_preview_file').hide();
+            $('#passport_preview').show();
+
+        });
+
+
+
+
+
+
 
 
 
@@ -151,9 +225,11 @@
         $("#telefone2").numbersOnly();
         $("#telefonePai").numbersOnly();
         $("#telefoneMae").numbersOnly();
-        $("#numCCid").numbersOnly();
+        $("#num_docOficial").numbersOnly();
         $("#numPassaport").numbersOnly();
         $("#IBAN").numbersOnly();
+        $("#NIF").numbersOnly();
+
 
 
 
@@ -210,7 +286,7 @@
 
 
                     /* valida Campos dos documentos */
-                    if ( ($("#numCCid").val()=="") || ($("#NIF").val()=="") || ($("#numPassaport").val()=="")  || ($("#dataValidPP").val()=="") || ($("#passaportPaisEmi").val()=="") || ($("#localEmissaoPP").val()=="") || ($("#IBAN").val()=="") ){
+                    if ( ($("#num_docOficial").val()=="")  || ($("#numPassaport").val()=="")  || ($("#dataValidPP").val()=="") || ($("#passaportPaisEmi").val()=="") || ($("#localEmissaoPP").val()=="") || ($("#IBAN").val()=="") ){
                         $("#warning_documentation").removeClass("warning_sign");
                     } else {
                         $("#warning_documentation").addClass("warning_sign");

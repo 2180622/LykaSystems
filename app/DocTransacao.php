@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocTransacao extends Model
 {
-    use SoftDeletes;
     protected $table = 'DocTransacao';
 
     protected $primaryKey = 'idDocTransacao';

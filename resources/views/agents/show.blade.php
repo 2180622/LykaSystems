@@ -64,9 +64,9 @@
 
                 @if (Auth::user()->tipo == "admin")
                 <div class="card rounded shadow-sm m-2 p-3">
-                    @if ($agent->doc_img)
+                    @if ($agent->img_doc)
                         <i class="far fa-id-card" style="font-size:40px"></i>
-                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('agent-docs/').$agent->doc_img}}">Ver documento de identificação</a>
+                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('agent-docs/').$agent->img_doc}}">Ver documento de identificação</a>
                     @else
                         <i class="far fa-id-card" style="font-size:40px"></i>
                         <a href="{{route('agents.edit',$agent)}}" class="mt-2 agent_link">
@@ -107,7 +107,7 @@
 
                 <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div><br>
 
-                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->num_id}}</div>
+                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->num_doc}}</div>
 
                 <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 
@@ -120,22 +120,21 @@
 
             </div>
 
-            <div class="col p-2" style="min-width:280px !important">
 
-                    <div class="mb-2 text-muted">Lista de subagentes:</div>
+            @if ( Auth::user()->tipo == "admin" || Auth::user()->agente->tipo == "Agente"  )
+                <div class="col p-2" style="min-width:280px !important">
 
-                    @if($listagents==null)
-                        <div class="text-muted"><small>(sem registos)</small></div>
-                    @else
-                        @foreach ($listagents as $agent)
-                            <div class="mb-1 text-muted"><i class="fas fa-user-tie mr-2"></i><a class="agent_link" href="{{route('agents.show',$agent)}}" >{{$agent->nome}} {{$agent->apelido}}</a></div>
-                        @endforeach
-                    @endif
+                        <div class="mb-2 text-muted">Lista de subagentes:</div>
 
-
-
-
-            </div>
+                        @if($listagents==null)
+                            <div class="text-muted"><small>(sem registos)</small></div>
+                        @else
+                            @foreach ($listagents as $agent)
+                                <div class="mb-1 text-muted"><i class="fas fa-user-tie mr-2"></i><a class="agent_link" href="{{route('agents.show',$agent)}}" >{{$agent->nome}} {{$agent->apelido}}</a></div>
+                            @endforeach
+                        @endif
+                </div>
+            @endif
 
 
         </div>

@@ -16,23 +16,17 @@ class Cliente extends Model
 
     protected $fillable = [
         'nome','apelido','genero','email','telefone1','telefone2','dataNasc',
-        'dataValidPP','localEmissaoPP','paisNaturalidade','morada',
-        'cidade','moradaResidencia','passaportPaisEmi','nomePai','telefonePai',
+        'paisNaturalidade','morada',
+        'cidade','moradaResidencia','nomePai','telefonePai',
         'emailPai','nomeMae','telefoneMae','emailMae','fotografia','NIF','IBAN',
         'nivEstudoAtual','nomeInstituicaoOrigem','cidadeInstituicaoOrigem',
-        'obsPessoais','obsFinanceiras','obsAcademicas','num_doc','$idDocOficial',
-        '$idDocPassaport','$idDocAcademico'
+        'obsPessoais','obsFinanceiras','obsAcademicas','num_docOficial','img_docOficial','info_docOficial',
+        'img_Passaport','info_Passaport','img_docAcademico','info_docAcademico'
         ];
+        // info_passaport contem: passaportPaisEmi, localEmissaoPP, dataValidPP
 
     public function user(){
         return $this->belongsTo("App\User","idUser","idUser")->withTrashed();
-    }
-
-    public function docPessoal(){
-        return $this->hasMany("App\DocPessoal","idUser","idUser");
-    }
-    public function docAcademico(){
-        return $this->hasMany("App\DocAcademico","idUser","idUser");
     }
 
     public function produto(){

@@ -42,14 +42,14 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo.">
+                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo e deve ter o seguinte formato: 10,00 ou 10.000">
                             <span>
                                 ?
                             </span>
                         </div>
                         <label for="valorRecebido">Valor recebido</label>
                         <br>
-                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" value="{{old('valorRecebido', $docTrasancao[0]->valorRecebido)}}€">
+                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
                     </div>
                     <div class="col-md-4">
                         <label for="tipoPagamento">Tipo de pagamento</label>
@@ -72,12 +72,12 @@
                     <div class="col-md-4">
                         <label for="dataOperacao">Data de pagamento</label>
                         <br>
-                        <input type="date" name="dataOperacao" value="{{old('dataOperacao', $docTrasancao[0]->dataOperacao)}}">
+                        <input type="date" name="dataOperacao">
                     </div>
                     <div class="col-md-4">
                         <label for="dataRecebido">Data de receção</label>
                         <br>
-                        <input type="date" name="dataRecebido" value="{{old('dataRecebido', $docTrasancao[0]->dataRecebido)}}">
+                        <input type="date" name="dataRecebido">
                     </div>
                 </div>
                 <br><br>
@@ -85,7 +85,7 @@
                     <div class="col">
                         <label for="observacoes">Observações</label>
                         <br>
-                        <textarea name="observacoes" rows="5" value="{{old('observacoes', $docTrasancao[0]->observacoes)}}"></textarea>
+                        <textarea name="observacoes" rows="5"></textarea>
                     </div>
                 </div>
         </div>

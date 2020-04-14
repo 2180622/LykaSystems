@@ -21,7 +21,7 @@
 
 
     <style>
-        div{
+        div {
             font-size: 13pt;
             line-height: 20pt;
         }
@@ -59,18 +59,19 @@
                 {{-- Informações Pessoais --}}
                 <div class="row">
                     <div class="col">
-                        <div><span class="text-secondary font-weight-bold">Nome:</span> {{$agent->nome}} {{$agent->apelido}}</div>
+                        <div><span class="text-secondary font-weight-bold">Nome:</span> {{$agent->nome}}
+                            {{$agent->apelido}}</div>
 
                         <div><span class="text-secondary font-weight-bold">Género:</span>
                             @if ($agent->genero == 'M')
                             Masculino
-                        @else
+                            @else
                             Feminino
-                        @endif
+                            @endif
                         </div>
 
                         <div><span class="text-secondary font-weight-bold">Data de nascimento:
-                        </span>{{ date('d-M-y', strtotime($agent->dataNasc)) }}</div><br>
+                            </span>{{ date('d-M-y', strtotime($agent->dataNasc)) }}</div><br>
 
 
 
@@ -96,20 +97,24 @@
 
                 <div><span class="text-secondary font-weight-bold">NIF:</span> {{$agent->NIF}} {{$agent->NIF}}</div><br>
 
-                <div><span class="text-secondary font-weight-bold">Adicionado em: </span>{{ date('d-M-y', strtotime($agent->created_at)) }}</div><br>
+                <div><span class="text-secondary font-weight-bold">Adicionado em:
+                    </span>{{ date('d-M-y', strtotime($agent->created_at)) }}</div><br>
 
             </div>
 
             {{-- Fotografia --}}
             <div class="col col-3">
 
-            @if($agent->fotografia)
-                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" style="width:90%">
-            @elseif($agent->genero == 'F')
-                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
-            @else
-                <img class="m-2 p-1 rounded bg-white shadow-sm" src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
-            @endif
+                @if($agent->fotografia)
+                <img class="m-2 p-1 rounded bg-white shadow-sm"
+                    src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" style="width:90%">
+                @elseif($agent->genero == 'F')
+                <img class="m-2 p-1 rounded bg-white shadow-sm"
+                    src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
+                @else
+                <img class="m-2 p-1 rounded bg-white shadow-sm"
+                    src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
+                @endif
 
             </div>
 
@@ -118,16 +123,16 @@
         <br>
         <hr style="border:1px solid lightgray"><br>
 
-        <div class="row">
+        <div class="row text-center">
 
-            <div class="col">
-                
+            <div class="col text-center">
+
+                @if ($agent->img_doc)
+                    <div><span class="text-secondary font-weight-bold">Documento de identificação:</div><br>
+                    <img src="{{Storage::disk('public')->url('agent-docs/').$agent->img_doc}}" width="70%"/>
+                @endif
+
             </div>
-
-            <div class="col">
-
-            </div>
-
         </div>
 
     </div>

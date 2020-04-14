@@ -71,7 +71,10 @@ class DataController extends Controller
         $agente->morada = 'Rua dos Agentes, 1234 Amores';
         $agente->pais = 'Portugal';
         $agente->NIF = 123456789;
-        $agente->num_id = 123456789;
+        $agente->num_doc = 123456789;
+        $agente->img_doc = 'default-photos/M.jpg';
+        $agente->info_doc = '{"campo1":"NIF","valor1":123456789,
+            "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefoneW = 932354453;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
@@ -86,8 +89,11 @@ class DataController extends Controller
         $agente->fotografia = null;
         $agente->morada = 'Bidoeira de Cima';
         $agente->pais = 'Portugal';
-        $agente->NIF = 213455767;
-        $agente->num_id = 321654987;
+        $agente->NIF = '213455767';
+        $agente->num_doc = 321654987;
+        $agente->img_doc = 'default-photos/F.jpg';
+        $agente->info_doc = '{"campo1":"NIF","valor1":321654987,
+            "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefoneW = 932355555;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
@@ -102,8 +108,11 @@ class DataController extends Controller
         $agente->fotografia = null;
         $agente->morada = 'Rua dos Agentes, 1274 Amores';
         $agente->pais = 'Portugal';
-        $agente->NIF = 987654321;
-        $agente->num_id = 789456123;
+        $agente->NIF = '987654321';
+        $agente->num_doc = 789456123;
+        $agente->img_doc = 'default-photos/M.jpg';
+        $agente->info_doc = '{"campo1":"NIF","valor1":789456123,
+            "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefoneW = 963423423;
         $agente->telefone2 = null;
         $agente->tipo = 'Subagente';
@@ -126,15 +135,10 @@ class DataController extends Controller
         $cliente->telefone1 = 913432423;
         $cliente->telefone2 = null;
         $cliente->dataNasc = date('Y-m-d',strtotime('27-01-1995'));
-        $cliente->numCCid = '9845776436ZZ8';
-        $cliente->numPassaport = '9453574976496';
-        $cliente->dataValidPP = date('Y-m-d',strtotime('25-03-2022'));
-        $cliente->localEmissaoPP = 'Paris';
         $cliente->paisNaturalidade = 'França';
         $cliente->morada = 'Rua francesa';
         $cliente->cidade = 'Paris';
         $cliente->moradaResidencia = 'Paris';
-        $cliente->passaportPaisEmi = 'França';
         $cliente->nomePai = 'João Oliveira';
         $cliente->telefonePai = 914535342;
         $cliente->emailPai = 'oliveira.joao@gmail.com';
@@ -147,6 +151,16 @@ class DataController extends Controller
         $cliente->nivEstudoAtual = 4;
         $cliente->nomeInstituicaoOrigem = 'Instituto Frances';
         $cliente->cidadeInstituicaoOrigem = 'Paris';
+        $cliente->num_docOficial = '9845776436ZZ8';
+        $cliente->img_docOficial = 'default-photos/M.jpg';
+        $cliente->info_docOficial = '{"campo1":"NIF","valor1":9845776436ZZ8,
+            "campo2":"Data Validade","valor2":"25/03/2022"}';
+        $cliente->img_Passaport = 'default-photos/M.jpg';
+        $cliente->info_Passaport = '{"campo1":"Numero Passaport","valor1":9453574976496,
+            "campo2":"Data Validade","valor2":"25/03/2022"}';
+        $cliente->img_docAcademico = 'default-photos/M.jpg';
+        $cliente->info_docAcademico = '{"campo1":"Tipo","valor1":"Certificado",
+            "campo2":"Nota Final","valor2":16}';
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
@@ -160,15 +174,10 @@ class DataController extends Controller
         $cliente->telefone1 = 945345784;
         $cliente->telefone2 = null;
         $cliente->dataNasc = date('Y-m-d',strtotime('02-05-1998'));
-        $cliente->numCCid = '4397654378ZO4';
-        $cliente->numPassaport = '435444543545';
-        $cliente->dataValidPP = date('Y-m-d',strtotime('05-06-2025'));
-        $cliente->localEmissaoPP = 'Russia';
         $cliente->paisNaturalidade = 'Russia';
         $cliente->morada = 'Rua Russia';
         $cliente->cidade = 'Cidade Russa';
         $cliente->moradaResidencia = 'Russia';
-        $cliente->passaportPaisEmi = 'Russia';
         $cliente->nomePai = 'Arthem Romaria';
         $cliente->telefonePai = 932452343;
         $cliente->emailPai = 'arthem@mail.ru';
@@ -181,6 +190,16 @@ class DataController extends Controller
         $cliente->nivEstudoAtual = 5;
         $cliente->nomeInstituicaoOrigem = 'Instituto Russo';
         $cliente->cidadeInstituicaoOrigem = 'Cidade Russa';
+        $cliente->cidadeInstituicaoOrigem = 'Paris';
+        $cliente->num_docOficial = '61436534643DS4';
+        $cliente->img_docOficial = 'default-photos/F.jpg';
+        $cliente->info_docOficial = '{"campo1":"NIF","valor1":61436534643DS4,
+            "campo2":"Data Validade","valor2":"25/03/2022"}';
+        $cliente->img_Passaport = 'default-photos/F.jpg';
+        $cliente->info_Passaport = '{"campo1":"Numero Passaport","valor1":2354134352464,
+            "campo2":"Data Validade","valor2":"25/03/2022"}';
+        $cliente->img_docAcademico = null;
+        $cliente->info_docAcademico = null;
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
@@ -387,7 +406,6 @@ class DataController extends Controller
         /***************          Responsabilidades          ***************/
 
         $responsabilidade = new Responsabilidade;
-        $responsabilidade->descricao = 'resp1';
         $responsabilidade->valorCliente = 10;
         $responsabilidade->valorAgente = 0;
         $responsabilidade->valorSubAgente = null;
@@ -401,7 +419,6 @@ class DataController extends Controller
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
-        $responsabilidade->descricao = 'respo2';
         $responsabilidade->valorCliente = 50;
         $responsabilidade->valorAgente = 50;
         $responsabilidade->valorSubAgente = null;
@@ -415,7 +432,6 @@ class DataController extends Controller
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
-        $responsabilidade->descricao = 'resp3';
         $responsabilidade->valorCliente = 10;
         $responsabilidade->valorAgente = 0;
         $responsabilidade->valorSubAgente = null;
@@ -429,7 +445,6 @@ class DataController extends Controller
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
-        $responsabilidade->descricao = 'resp4';
         $responsabilidade->valorCliente = 10;
         $responsabilidade->valorAgente = 0;
         $responsabilidade->valorSubAgente = null;
@@ -503,7 +518,7 @@ class DataController extends Controller
         $fase->save();
 
         /****************          Docs Academicos          ****************/
-
+/*
         $docacademico = new DocAcademico;
         $docacademico->nome = 'Tiago Oliveira';
         $docacademico->tipo = 'Certificado';
