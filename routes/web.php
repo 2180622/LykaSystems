@@ -60,6 +60,11 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Fase Stock */
     Route::resource('/fasestock', 'FasestockController');
+    Route::post('/produtostock/{produtostock}', 'FasestockController@store')->name('fasestock.store');
+    Route::get('/fasestock/{fasestock}', 'FasestockController@show')->name('fasestock.show');
+
+    /* Documentos Stock*/
+    Route::resource('/documentostock', 'DocumentostockController');
 
     /* Produtos */
     Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
