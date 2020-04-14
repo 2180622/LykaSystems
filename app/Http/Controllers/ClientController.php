@@ -93,6 +93,8 @@ class ClientController extends Controller
     */
     public function store(StoreClientRequest $requestClient, StoreUserRequest $requestUser){
 
+        $t=time(); /* obtem data atual */
+
         /* obtem os dados para criar o cliente */
         $client = new Cliente;
         $fields = $requestClient->validated();
@@ -106,7 +108,6 @@ class ClientController extends Controller
 
 
         /* Criação de cliente */
-
         if ($requestClient->hasFile('fotografia')) {
             $photo = $requestClient->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
@@ -120,9 +121,8 @@ class ClientController extends Controller
         }
 
         // data em que foi criado
-        $t=time();
-        $client->create_at == date("Y-m-d",$t);
 
+        $client->create_at == date("Y-m-d",$t);
         $client->save();
 
 
@@ -133,6 +133,7 @@ class ClientController extends Controller
         /* Documento de identificação */
         $doc_id= new DocPessoal;
         $doc_id->tipo="Cartão Cidadão";
+        $doc_id->info= $requestClient->num_docOficial;
         $doc_id->dataValidade= $requestClient->dataValidade_docOficial;
 
         if ($requestClient->hasFile('img_docOficial')) {
@@ -146,11 +147,15 @@ class ClientController extends Controller
             $doc_id->imagem->img_docOficial = null;
         }
 
+        $doc_id->create_at == date("Y-m-d",$t);
+        $doc_id->save();
+
 
 
         /* Passaporte */
         $passaporte= new DocPessoal;
         $passaporte->tipo="Passaporte";
+        $passaporte->info= $requestClient->numPassaport;
         $passaporte->dataValidade= $requestClient->dataValidPP;
 
         if ($requestClient->hasFile('img_Passaport')) {
@@ -165,7 +170,7 @@ class ClientController extends Controller
         }
 
         $passaporte->create_at == date("Y-m-d",$t);
-
+        $passaporte->save();
 
 
 
@@ -178,17 +183,17 @@ class ClientController extends Controller
 
         /* Criação de utilizador */
 
-        $user->tipo = "cliente";
+/*         $user->tipo = "cliente";
         $user->status = 10;
         $user->idCliente = $client->idCliente;
-        $user->save();
+        $user->save(); */
 
 
         /* Envia o e-mail para ativação */
-        $email = $user->email;
+/*         $email = $user->email;
         $id = $user->idUser;
         $name = $client->nome;
-        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+        Mail::to($email)->send(new SendEmailConfirmation($id, $name)); */
 
         return redirect()->route('clients.index')->with('success', 'Ficha de estudante criada com sucesso');
     }
