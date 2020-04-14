@@ -60,23 +60,23 @@
                     </thead>
                     {{-- Corpo da tabela --}}
                     <tbody>
-                        @foreach ($DocStocks as $DocStock)
+                        @foreach ($docStocks as $docStock)
                         <tr>
                             {{-- Número de Documentos --}}
-                            <td><a class="name_link" href="/fasestock/{{$fasestock->idFaseStock}}/{{$DocStock->idDocStock}}">{{$nrDocs++}}</a></td>
+                            <td><a class="name_link" href="/fasestock/{{$fasestock->idFaseStock}}/{{$docStock->idDocStock}}">{{$nrDocs++}}</a></td>
                             {{-- Tipo --}}
-                            <td>{{$DocStock->tipo}}</td>
+                            <td>{{$docStock->tipo}}</td>
                             {{-- Documento --}}
-                            @if ($DocStock->tipoPessoal == null)
-                              <td>{{$DocStock->tipoAcademico}}</td>
+                            @if ($docStock->tipoPessoal == null)
+                              <td>{{$docStock->tipoAcademico}}</td>
                             @else
-                              <td>{{$DocStock->tipoPessoal}}</td>
+                              <td>{{$docStock->tipoPessoal}}</td>
                             @endif
                         </tr>
                         @endforeach
                     </tbody>
 
-                    <form class="form-group needs-validation pt-3" action="{{route('docstock.store', $fasestock)}}" method="post" id="form_documentos"
+                    <form class="form-group needs-validation pt-3" action="{{route('documentostock.store', $fasestock)}}" method="post" id="form_documentos"
                       enctype="multipart/form-data" novalidate>
                       @csrf
                       <div class="tab-content p-2 mt-3" id="myTabContent">

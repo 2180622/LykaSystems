@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FaseStock;
 use App\ProdutoStock;
+use App\DocStock;
 use App\Http\Requests\StoreFasestockRequest;
 
 class FasestockController extends Controller
@@ -29,7 +30,7 @@ class FasestockController extends Controller
 
     public function show(DocStock $documentoStocks, FaseStock $fasestock){
         $nrDocs = 1;
-        $docStocks = DocStock::where('idProdutoFase', '=', $fasestock->idFaseStock)->get();
-        return view('produtostock.show', compact('fasestock', 'docStocks', 'nrDocs'));
+        $docStocks = DocStock::where('idFaseStock', '=', $fasestock->idFaseStock)->get();
+        return view('fasestock.show', compact('fasestock', 'docStocks', 'nrDocs'));
     }
 }
