@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/charges/{product}', 'ChargesController@show')->name('charges.show');
     Route::get('/charges/{product}/{fase}', 'ChargesController@showcharge')->name('charges.showcharge');
     Route::post('/charges/{product}/{fase}', 'ChargesController@store')->name('charges.store');
+    Route::get('/charges/{product}/{fase}/{paymentProof}/edit', 'ChargesController@edit')->name('charges.edit');
+    Route::put('/charges/{product}/{paymentProof}', 'ChargesController@update')->name('charges.update');
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
