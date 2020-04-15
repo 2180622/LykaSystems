@@ -45,40 +45,55 @@
                             <ion-icon name="cube" id="cube-icon"></ion-icon>
                         </div>
                     </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-4">
+                    <div class="col-md-3 text-truncate align-self-center ml-4">
                         <p>{{$fase->descricao}}</p>
                     </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-5">
-                        <p @if (count($fase->DocTransacao))
-                        @foreach ($fase->DocTransacao as $paymentProof)
-                        @if ($fase->valorFase > $paymentProof->valorRecebido)
-                        style="color:#FF3D00;"
-                        @elseif ($fase->valorFase == $paymentProof->valorRecebido)
-                        style="color:#47BC00;"
-                        @else
-                        style="color:blue;"
-                        @endif
-                        @endforeach
-                        @endif
-                        >
+                    <div class="col-md-2 text-truncate align-self-center">
+                        <p
                         @if (count($fase->DocTransacao))
-                        @foreach ($fase->DocTransacao as $paymentProof)
-                        @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
-                        {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, '.', '')}}€
-                        @else
-                        {{$fase->valorFase}}€
-                        @endif
-                        @endforeach
-                        @else
-                        {{$fase->valorFase}}€
+                          @foreach ($fase->DocTransacao as $paymentProof)
+                            @if ($fase->valorFase > $paymentProof->valorRecebido)
+                              style="color:#FF3D00;"
+                              @elseif ($fase->valorFase == $paymentProof->valorRecebido)
+                                style="color:#47BC00;"
+                              @else
+                                style="color:blue;"
+                            @endif
+                            @endforeach
+                          @endif
+                          >
+                          @if (count($fase->DocTransacao))
+                            @foreach ($fase->DocTransacao as $paymentProof)
+                              @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
+                                {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, '.', '')}}€
+                              @else
+                                {{$fase->valorFase}}€
+                              @endif
+                            @endforeach
+                          @else
+                          {{$fase->valorFase}}€
                         @endif
                         </p>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-5">
+                    <div class="col-md-2 text-truncate align-self-center ml-auto">
                         <p><?=date('d/m/Y', strtotime($fase->dataVencimento))?></p>
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p>Pendente</p>
+                        <p>
+                          @if (count($fase->DocTransacao))
+                          @foreach ($fase->DocTransacao as $paymentProof)
+                            @if ($fase->valorFase > $paymentProof->valorRecebido)
+                              Dívida
+                            @elseif ($fase->valorFase < $paymentProof->valorRecebido)
+                              Crédito
+                            @else
+                              Pago
+                            @endif
+                          @endforeach
+                          @else
+                            Pendente
+                          @endif
+                        </p>
                     </div>
                 </div>
             </a>

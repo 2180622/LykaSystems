@@ -55,6 +55,7 @@
                         <label for="tipoPagamento">Tipo de pagamento</label>
                         <br>
                         <select name="tipoPagamento">
+                            <option selected disabled hidden class="text-truncate">Escolher tipo pagamento</option>
                             <option value="Multibanco">Multibanco</option>
                             <option value="Paypal">Paypal</option>
                             <option value="Outro">Outro</option>
@@ -69,6 +70,21 @@
                 </div>
                 <br><br>
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Associar a cobrança à conta bancária pelo qual o pagamento foi recebido.">
+                            <span>
+                                ?
+                            </span>
+                        </div>
+                        <label for="conta">Associar conta bancária</label>
+                        <br>
+                        <select name="conta">
+                            @foreach ($contas as $conta)
+                            <option value="{{$conta->instituicao}}">{{$conta->descricao}}</option>
+                            @endforeach
+                            <option selected disabled hidden>Escolher conta bancária</option>
+                        </select>
+                    </div>
                     <div class="col-md-4">
                         <label for="dataOperacao">Data de pagamento</label>
                         <br>
