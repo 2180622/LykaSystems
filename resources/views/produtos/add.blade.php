@@ -29,7 +29,7 @@
             <h6>Adicionar produto</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('produtos.store',$cliente)}}" class="form-group needs-validation pt-3" id="form_produto"
+        <form method="POST" action="{{route('produtos.store')}}" class="form-group needs-validation pt-3" id="form_produto"
             enctype="multipart/form-data" novalidate>
             @csrf<div class="tab-content p-2 mt-3" id="myTabContent">
 
@@ -42,6 +42,9 @@
                                 <a class="name_link" href="{{route('clients.show',$cliente)}}">
                                     {{$cliente->nome.' '.$cliente->apelido}}
                                 </a>
+                                <input type="text" class="form-control" name="idCliente" id="idCliente" 
+                                value="{{$cliente->idCliente}}"  maxlength="20" 
+                                style="display:none;" readonly><br>
                             </label>
                         </div>
                     </div>
@@ -66,11 +69,11 @@
             
                             <label for="tipo">Tipo:</label><br>
                             <input type="text" class="form-control" name="tipo" id="tipo" 
-                            value="{{old('tipo',$produto->tipo)}}" placeholder="Tipo" maxlength="20" required><br>
+                            value="{{old('tipo',$produto->tipo)}}" placeholder="Tipo" maxlength="20" readonly><br>
             
                             <label for="descricao">Descrição:</label><br>
                             <input type="text" class="form-control" name="descricao" id="descricao" 
-                            value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" required><br>
+                            value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" readonly><br>
             
                             <label for="AnoAcademico">Ano académico:</label><br>
                             <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
@@ -154,11 +157,15 @@
                     
                                     <label for="descricao-fase{{$num}}">Descrição:</label><br>
                                     <input type="text" class="form-control" name="descricao-fase{{$num}}" id="descricao-fase{{$num}}" 
-                                    value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" disabled><br>
+                                    value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
                     
                                     <label for="data-fase{{$num}}">Data de vencimento:</label><br>
                                     <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
                                     value="{{old('dataVencimento',$fase->dataVencimento)}}" style="width:250px"><br>
+
+                                    <input type="text" class="form-control" name="fase-idStock{{$num}}" id="fase-idStock{{$num}}" 
+                                    value="{{old('idFaseStock',$fase->idFaseStock)}}"  maxlength="20" 
+                                    style="display:none;" readonly><br>
                                 </div>
                                 <div class="col mr-3">
                                     <div><span><b>Responsabilidades</b></span></div><br>
@@ -205,6 +212,13 @@
 
 {{-- Scripts --}}
 @section('scripts')
+
+    {{-- script contem: datatable configs, input configs, validações --}}
+    <script src="{{asset('/js/produtos.js')}}"></script>
+
+    {{-- script permite definir se um input recebe só numeros OU so letras --}}
+    <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
+
     <script>
         $("#formulario-produto").css("display", "none");
         $("#formulario-fases").css("display", "none");
@@ -216,24 +230,6 @@
                 $("#formulario-fases").css("display", "none");
             }
         }
-        /*function AjaxProdutos2(idproduto){
-            var link = '/../api/stock/produto/'+idproduto;
-            $.ajax({
-                type: 'GET',
-                url: link,
-                success: function (response) {
-                    alert(response.produto[0].idProdutoStock);
-                    var your_html = "";
-                    $.each(obj['getstamps'], function (key, val) {
-                    your_html += "<p>My Value :" +  val + ") </p>"
-                    });
-                    $("#data").append(you_html);
-                },
-                error: function() { 
-                    console.log(response);
-                }
-            });
-        }/**/
         function AjaxProdutos(idproduto){
             var link = '/../api/stock/produto/'+idproduto;
             $.ajax({
@@ -244,14 +240,15 @@
                 if(response.produto != null){
                     $("#formulario-produto").css("display", "block");
                     $("#formulario-fases").css("display", "block");
-                    $('#tipo').attr('value', response.produto[0].tipo);
+                    $('#tipo').attr('value', response.produto[0].tipoProduto);
                     $('#descricao').attr('value', response.produto[0].descricao);
                     $('#anoAcademico').attr('value', response.produto[0].anoAcademico);
                     if(response.fases != null){
                         var num = 0;
                         for (var i = 0; i < response.fases.length; i++) {
                             num++;
-                            $('#des-fase'+num).attr('value', response.fases[i].descricao);
+                            $('#descricao-fase'+num).attr('value', response.fases[i].descricao);
+                            $('#fase-idStock'+num).attr('value', response.fases[i].idFaseStock);
                         }
                         if(num > 20){
                             num++;
@@ -265,11 +262,5 @@
             })
         }
     </script>
-
-    {{-- script contem: datatable configs, input configs, validações --}}
-    <script src="{{asset('/js/produtos.js')}}"></script>
-
-    {{-- script permite definir se um input recebe só numeros OU so letras --}}
-    <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 
 @endsection

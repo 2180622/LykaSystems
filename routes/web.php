@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/charges/{product}', 'ChargesController@show')->name('charges.show');
     Route::get('/charges/{product}/{fase}', 'ChargesController@showcharge')->name('charges.showcharge');
     Route::post('/charges/{product}/{fase}', 'ChargesController@store')->name('charges.store');
+    Route::get('/charges/{product}/{fase}/{paymentProof}/edit', 'ChargesController@edit')->name('charges.edit');
+    Route::put('/charges/{product}/{paymentProof}', 'ChargesController@update')->name('charges.update');
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
@@ -69,8 +71,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Produtos */
     Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
     Route::get('/produtos/print/{produto}', 'ProdutoController@print')->name('produtos.print');
-    Route::get('/produtos/store/{cliente}', 'ProdutoController@store')->name('produtos.store');
-    Route::resource('/produtos', 'ProdutoController')->only(['destroy', 'update','show','edit']);
+    //Route::post('/produtos/store/{cliente}', 'ProdutoController@store')->name('produtos.store');
+    Route::resource('/produtos', 'ProdutoController')->only(['destroy', 'update','show','edit','store']);
 });
 
 /* Email Confirmation */
