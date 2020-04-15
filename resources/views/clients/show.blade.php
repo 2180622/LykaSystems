@@ -110,9 +110,11 @@
                     <div>
                         <span class="text-secondary">Agente(s) associados:</span><br>
 
-                        @foreach ($produtos as $produto)
-                            {{$produto->idAgente}},{{$produto->idSubAgente}}
-                        @endforeach
+                        @if ($produtos )
+                            @foreach ($produtos as $produto)
+                                {{$produto->idAgente}},{{$produto->idSubAgente}}
+                            @endforeach
+                        @endif
 
 
                     </div>
