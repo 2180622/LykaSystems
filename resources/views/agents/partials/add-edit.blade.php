@@ -21,12 +21,12 @@
                 <label for="subagent">Subagente de:</label><br>
 
                 {{-- campo auxiliar: id do agente --}}
-                <input type="hidden" id="aux_subagent_agentid"
-                    value="{{old('subagent_agentid',$agent->subagent_agentid)}}" disabled>
+                <input type="hidden" id="aux_idAgenteAssociado"
+                    value="{{old('idAgenteAssociado',$agent->idAgenteAssociado)}}" disabled>
 
 
                 {{-- disabled se o tipo escolhido for "subagente" --}}
-                <select id="subagent_agentid" name="subagent_agentid" class="form-control" required>
+                <select id="idAgenteAssociado" name="idAgenteAssociado" class="form-control" required>
 
                     <option hidden value="0">(escolha o agente)</option>
 

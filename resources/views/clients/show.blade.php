@@ -249,7 +249,7 @@
                         <hr><br>
 
                         {{-- CC IDENTIFICAÇÃO --}}
-                        <div><span class="text-secondary">Número cartão cidadão:</span> {{$client->numCCid}}</div>
+                        <div><span class="text-secondary">Número de identificação pessoal:</span> {{$client->num_docOficial}}</div>
                         <br>
                         <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
 
@@ -262,14 +262,23 @@
 
                         <ul class="card shadow-sm p-3" style="list-style-type:none;">
 
-                            {{-- @foreach ($files as $file) --}}
+                            {{-- Verifica se existe imagem para cartão de documento de id pessoal --}}
+                            @if ($client->img_docOficial)
                             <li class="m-3">
-                                <a href="#" class="btn_list_opt btn_list_opt_download">
-                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>Cédula pessoal
-                                <small class="text-muted"> (.pdf)</small>
+                                <a href="{{Storage::disk('public')->url('client-documents/'.$client->img_docOficial)}}" class="btn_list_opt btn_list_opt_download">
+                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>
+                                <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->img_docOficial)}}">Documento de identificação pessoal</a>
                             </li>
+                            @endif
 
-                            {{-- @endforeach --}}
+                            {{-- Verifica se existe imagem para passaporte --}}
+                            @if ($client->img_Passaport)
+                            <li class="m-3">
+                                <a href="{{Storage::disk('public')->url('client-documents/'.$client->img_Passaport)}}" class="btn_list_opt btn_list_opt_download">
+                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>
+                                    <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->img_Passaport)}}">Passaporte</a>
+                            </li>
+                            @endif
 
                         </ul>
 

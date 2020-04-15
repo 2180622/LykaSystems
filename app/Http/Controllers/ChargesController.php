@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Fase;
+use App\Conta;
 use App\Produto;
 use App\DocTransacao;
 use App\Responsabilidade;
@@ -19,23 +20,28 @@ class ChargesController extends Controller
       return view('charges.list', compact('products', 'numberProducts'));
     }
 
-    public function show(Fase $fase, Produto $product)
+    public function show(DocTransacao $docTrasancao, Fase $fase, Produto $product)
     {
-      $fases = Fase::where('idProduto', '=', $product->idProduto)->get();
-      return view('charges.show', compact('product', 'fases'));
+      $docTrasancao = DocTransacao::all();
+      $fases = Fase::where('idProduto', '=', $product->idProduto)->orderBy('dataVencimento', 'ASC')->get();
+      return view('charges.show', compact('product', 'fases', 'docTrasancao'));
     }
 
-    public function showcharge(Produto $product, Fase $fase)
+    public function showcharge(Conta $contas, Produto $product, Fase $fase)
     {
+      $contas = Conta::all();
       $docTrasancao = DocTransacao::where('idFase', '=', $fase->idFase)->get();
-      return view('charges.showcharge', compact('product', 'fase', 'docTrasancao'));
+      return view('charges.showcharge', compact('product', 'fase', 'docTrasancao', 'contas'));
     }
 
-    public function store(StoreChargeRequest $requestCharge, Produto $product, Fase $fase)
+    public function store(StoreChargeRequest $requestCharge, Fase $fase)
     {
       $docTrasancao = new DocTransacao;
       $fields = $requestCharge->validated();
       $docTrasancao->fill($fields);
+
+      $test = $input['conta'];
+      dd($test);
 
       $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
       $docTrasancao->idConta = '1';
@@ -49,7 +55,7 @@ class ChargesController extends Controller
           $docTrasancao->save();
       }
 
-      $docTrasancao->save();
+      // $docTrasancao->save();
 
       if ($docTrasancao->valorRecebido == $fase->valorFase) {
         Fase::where('descricao', '=', $fase->descricao)->update(['verificacaoPago' => '1']);

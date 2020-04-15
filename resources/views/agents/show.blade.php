@@ -107,7 +107,7 @@
 
                 <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div><br>
 
-                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->num_id}}</div>
+                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->num_doc}}</div>
 
                 <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 
@@ -120,22 +120,21 @@
 
             </div>
 
-            <div class="col p-2" style="min-width:280px !important">
 
-                    <div class="mb-2 text-muted">Lista de subagentes:</div>
+            @if ( Auth::user()->tipo == "admin" || Auth::user()->agente->tipo == "Agente"  )
+                <div class="col p-2" style="min-width:280px !important">
 
-                    @if($listagents==null)
-                        <div class="text-muted"><small>(sem registos)</small></div>
-                    @else
-                        @foreach ($listagents as $agent)
-                            <div class="mb-1 text-muted"><i class="fas fa-user-tie mr-2"></i><a class="agent_link" href="{{route('agents.show',$agent)}}" >{{$agent->nome}} {{$agent->apelido}}</a></div>
-                        @endforeach
-                    @endif
+                        <div class="mb-2 text-muted">Lista de subagentes:</div>
 
-
-
-
-            </div>
+                        @if($listagents==null)
+                            <div class="text-muted"><small>(sem registos)</small></div>
+                        @else
+                            @foreach ($listagents as $agent)
+                                <div class="mb-1 text-muted"><i class="fas fa-user-tie mr-2"></i><a class="agent_link" href="{{route('agents.show',$agent)}}" >{{$agent->nome}} {{$agent->apelido}}</a></div>
+                            @endforeach
+                        @endif
+                </div>
+            @endif
 
 
         </div>

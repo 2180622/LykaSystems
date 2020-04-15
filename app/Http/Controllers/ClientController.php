@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use App\User;
 use App\Produto;
+use App\DocPessoal;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
@@ -90,6 +92,8 @@ class ClientController extends Controller
     */
     public function store(StoreClientRequest $requestClient, StoreUserRequest $requestUser){
 
+        $t=time(); /* obtem data atual */
+
         /* obtem os dados para criar o cliente */
         $client = new Cliente;
         $fields = $requestClient->validated();
@@ -103,7 +107,6 @@ class ClientController extends Controller
 
 
         /* Criação de cliente */
-
         if ($requestClient->hasFile('fotografia')) {
             $photo = $requestClient->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
@@ -117,31 +120,85 @@ class ClientController extends Controller
         }
 
         // data em que foi criado
-        $t=time();
-        $client->create_at == date("Y-m-d",$t);
 
+        $client->create_at == date("Y-m-d",$t);
         $client->save();
+
+
+
+
+        /* Criação de documentos Pessoais */
+
+        /* Documento de identificação */
+        $doc_id= new DocPessoal;
+        $doc_id->tipo="Cartão Cidadão";
+        $doc_id->info= $requestClient->num_docOficial;
+        $doc_id->dataValidade= $requestClient->dataValidade_docOficial;
+
+        if ($requestClient->hasFile('img_docOficial')) {
+            $img_doc = $requestClient->file('img_docOficial');
+            $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $doc_id->imagem = $nome_img;
+            $doc_id->save();
+
+            /* salva o documento na tabela dos clientes */
+            $client->img_docOficial=$nome_img;
+            $client->save();
+
+        }
+        if ($requestClient->img_docOficial==null){
+            $doc_id->imagem->img_docOficial = null;
+        }
+
+        $doc_id->create_at == date("Y-m-d",$t);
+        $doc_id->save();
+
+
+
+        /* Passaporte */
+        $passaporte= new DocPessoal;
+        $passaporte->tipo="Passaporte";
+        $passaporte->info= $requestClient->numPassaport;
+        $passaporte->dataValidade= $requestClient->dataValidPP;
+
+        if ($requestClient->hasFile('img_Passaport')) {
+            $img_doc = $requestClient->file('img_Passaport');
+            $nome_img = $client->idCliente . '_PP.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $passaporte->imagem = $nome_img;
+            $passaporte->save();
+
+            /* salva o documento na tabela dos clientes */
+            $client->img_Passaport=$nome_img;
+            $client->save();
+
+        }
+        if ($requestClient->img_Passaport==null){
+            $doc_id->imagem->img_Passaport = null;
+        }
+
+        $passaporte->create_at == date("Y-m-d",$t);
+        $passaporte->save();
 
 
 
         /* Criação de utilizador */
 
-        $user->tipo = "cliente";
+         $user->tipo = "cliente";
         $user->status = 10;
         $user->idCliente = $client->idCliente;
         $user->save();
 
 
         /* Envia o e-mail para ativação */
-        $email = $user->email;
+         $email = $user->email;
         $id = $user->idUser;
         $name = $client->nome;
         Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
-        return redirect()->route('clients.index')->with('success', 'Ficha de estudante criada com sucesso');
+        return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }
-
-
 
 
     /**
@@ -215,6 +272,7 @@ class ClientController extends Controller
     public function edit(Cliente $client)
     {
         if (Auth::user()->tipo == "admin"){
+
             return view('clients.edit', compact('client'));
         }else{
             /* não tem permissões */
@@ -239,6 +297,7 @@ class ClientController extends Controller
         $client->fill($fields);
 
 
+        /* Fotografia do cliente */
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
@@ -249,13 +308,35 @@ class ClientController extends Controller
             $client->fotografia = $profileImg;
         }
 
+
+        /* Documento de identificação */
+        if ($request->hasFile('img_docOficial')) {
+            $img_doc = $request->file('img_docOficial');
+            $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $client->img_docOficial=$nome_img;
+            $client->save();
+        }
+
+
+        /* Passaporte */
+        if ($request->hasFile('img_Passaport')) {
+            $img_doc = $request->file('img_Passaport');
+            $nome_img = $client->idCliente . '_PP.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/', $img_doc, $nome_img);
+            $client->img_Passaport=$nome_img;
+            $client->save();
+        }
+
+
+
         // data em que foi modificado
         $t=time();
         $client->updated_at == date("Y-m-d",$t);
 
         $client->save();
 
-         return redirect()->route('clients.index')->with('success', 'Dados do estudante modificados com sucesso');
+         return redirect()->route('clients.show',$client)->with('success', 'Dados do estudante modificados com sucesso');
 
     }
 

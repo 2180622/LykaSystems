@@ -67,12 +67,12 @@
 
         /* Verificação inicial */
         if ($("#tipo").val()=="Agente"){
-            $("#subagent_agentid").prop( "disabled", true );
-            $("#subagent_agentid").val(null);
+            $("#idAgenteAssociado").prop( "disabled", true );
+            $("#idAgenteAssociado").val(null);
         }
 
-        if ( $("#aux_subagent_agentid").val()!=null){
-            $("#subagent_agentid").val($("#aux_subagent_agentid").val());
+        if ( $("#aux_idAgenteAssociado").val()!=null){
+            $("#idAgenteAssociado").val($("#aux_idAgenteAssociado").val());
         }
 
 
@@ -133,7 +133,7 @@
                 var documento = new FileReader();
 
                 documento.onload = function (e) {
-                    $('#name_id_file').text( $('#img_doc').val() );
+                    $('#name_id_file').text( input.files[0].name );
                 }
 
                 documento.readAsDataURL(input.files[0]);
@@ -196,21 +196,21 @@
         $('#tipo').change(function() {
 
             if ($("#tipo").val()=="Subagente"){
-                $("#subagent_agentid").prop( "disabled", false );
-                $("#subagent_agentid").val("pickone");
+                $("#idAgenteAssociado").prop( "disabled", false );
+                $("#idAgenteAssociado").val("pickone");
 
             }else{
-                $("#subagent_agentid").prop( "disabled", true );
-                $("#subagent_agentid").val(null);
-                $("#subagent_agentid").removeClass("is-invalid");
-                $("#subagent_agentid").addClass("invalid");
+                $("#idAgenteAssociado").prop( "disabled", true );
+                $("#idAgenteAssociado").val(null);
+                $("#idAgenteAssociado").removeClass("is-invalid");
+                $("#idAgenteAssociado").addClass("invalid");
             }
         });
 
 
-        $('#subagent_agentid').change(function() {
-            $("#subagent_agentid").removeClass("is-invalid");
-            $("#subagent_agentid").addClass("invalid");
+        $('#idAgenteAssociado').change(function() {
+            $("#idAgenteAssociado").removeClass("is-invalid");
+            $("#idAgenteAssociado").addClass("invalid");
         });
 
 
@@ -229,9 +229,9 @@
                     event.stopPropagation();
 
                     /* Se for subagente é obrigatorio ter um agente */
-                    if ( $("#subagent_agentid").val()=="pickone" ){
-                        $("#subagent_agentid").addClass("is-invalid");
-                        $("#subagent_agentid").addClass(":invalid");
+                    if ( $("#idAgenteAssociado").val()=="pickone" ){
+                        $("#idAgenteAssociado").addClass("is-invalid");
+                        $("#idAgenteAssociado").addClass(":invalid");
                         return;
                     }
 

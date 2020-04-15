@@ -36,7 +36,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Agenda */
     Route::resource('/agends', 'AgendController');
-    Route::get('/EventAgend', 'EventAgendController@EventoAgenda')->name('routeEventAgend');
 
 
     /* Pagamentos */
@@ -48,15 +47,23 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/charges', 'ChargesController@index')->name('charges.index');
     Route::get('/charges/{product}', 'ChargesController@show')->name('charges.show');
     Route::get('/charges/{product}/{fase}', 'ChargesController@showcharge')->name('charges.showcharge');
-    Route::post('/charges/{product}/{fase}', 'ChargesController@store')->name('charges.store');
+    Route::post('/charges/{fase}', 'ChargesController@store')->name('charges.store');
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
     Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
 
-    /* ProdutosStock*/
+    /* Produto Stock*/
     Route::resource('/produtostock', 'ProdutosstockController');
-    Route::get('/produtostock/{produtoStock}', 'ProdutosstockController@show')->name('produtostock.show');
+    Route::get('/produtostock/{fasestock}', 'ProdutosstockController@show')->name('produtostock.show');
+
+    /* Fase Stock */
+    Route::resource('/fasestock', 'FasestockController');
+    Route::post('/produtostock/{produtostock}', 'FasestockController@store')->name('fasestock.store');
+    Route::get('/fasestock/{docstock}', 'FasestockController@show')->name('fasestock.show');
+
+    /* Documentos Stock*/
+    Route::resource('/documentostock', 'DocumentostockController');
 
     /* Produtos */
     Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
