@@ -39,19 +39,6 @@
     </li>
 
 
-
-
-
-    {{-- MENU: Adicionar produto --}}
-    @if ($client->idCliente==null)
-    <li class="nav-item">
-        <a class="nav-link" id="addproduct-tab" data-toggle="tab" href="#addproduct" role="tab"
-            aria-controls="addproduct" aria-selected="false"><i
-                class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_addproduct"
-                title="Existem campos obrigatórios por preencher"></i>Produto</a>
-    </li>
-    @endif
-
 </ul>
 
 <div class="tab-content p-2 mt-3" id="myTabContent">
@@ -227,13 +214,13 @@
                         {{-- INUPUT numPassaport --}}
                         <label for="numPassaport">Número do passaporte:</label><br>
                         <input type="text" class="form-control" name="numPassaport" id="numPassaport"
-                            value="{{old('numPassaport',$client->numPassaport)}}" required maxlength="20">
+                            value="{{$infosPassaport->numPassaport ?? null }}" required maxlength="20">
                     </div>
                     <div class="col">
                         {{-- INUPUT dataValidPP --}}
                         <label for="dataValidPP">Data de validade do passaporte:</label><br>
                         <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                            value="{{old('dataValidPP',$client->dataValidPP)}}" required>
+                            value="{{$infosPassaport->dataValidPP ?? null }}" required>
                     </div>
                 </div>
 
@@ -244,7 +231,7 @@
                         {{-- INUPUT passaportPaisEmi --}}
                         <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
                         <input type="hidden" id="hidden_passaportPaisEmi"
-                            value="{{old('passaportPaisEmi',$client->passaportPaisEmi)}}">
+                            value="{{$infosPassaport->passaportPaisEmi ?? null }}">
                         <select id="passaportPaisEmi" name="passaportPaisEmi" class="form-control" required>
                             @include('clients.partials.countries');
                         </select>
@@ -253,7 +240,7 @@
                         {{-- INUPUT localEmissaoPP --}}
                         <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                         <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                            value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" maxlength="30" required>
+                            value="{{$infosPassaport->localEmissaoPP ?? null }}" maxlength="30" required>
                     </div>
                 </div>
 
@@ -461,16 +448,6 @@
 
     </div>
 
-
-
-
-
-    {{-- Conteudo: Adicionar Produto --}}
-    @if ($client->idCliente==null)
-    <div class="tab-pane fade" id="addproduct" role="tabpanel" aria-labelledby="addproduct-tab">
-        Formulário para adicionar produto
-    </div>
-    @endif
 
 
 </div>

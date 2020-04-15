@@ -107,7 +107,7 @@
 
                 <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div><br>
 
-                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->num_doc}}</div>
+                <div><span class="text-secondary">Número de identificação pessoal:</span> {{$agent->num_doc}}</div>
 
                 <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 

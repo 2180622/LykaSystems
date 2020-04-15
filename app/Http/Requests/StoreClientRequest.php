@@ -45,7 +45,10 @@ class StoreClientRequest extends FormRequest
             'info_docOficial'=> 'nullable',
 
             'img_Passaport'=> 'nullable',
-            'info_Passaport'=> 'nullable',
+            'numPassaport'=> 'nullable',
+            'dataValidPP'=> 'nullable',
+            'passaportPaisEmi'=> 'nullable',
+            'localEmissaoPP'=> 'nullable',
 
             'img_docAcademico'=> 'nullable',
             'info_docAcademico'=> 'nullable',
