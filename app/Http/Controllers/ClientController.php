@@ -130,7 +130,7 @@ class ClientController extends Controller
 
         // data em que foi criado
 
-        $client->info_docOficial = $requestClient->info_docOficial;
+        $client->info_docOficial = $requestClient->dataValidade_docOficial;
         $client->create_at == date("Y-m-d",$t);
         $client->save();
 
@@ -392,7 +392,7 @@ class ClientController extends Controller
             $client->save();
         }
 
-
+        $client->info_docOficial = $request->dataValidade_docOficial;
 
         // data em que foi modificado
         $t=time();
