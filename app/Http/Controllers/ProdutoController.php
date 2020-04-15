@@ -65,42 +65,51 @@ class ProdutoController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreProdutoRequest $request){
+    public function store(StoreProdutoRequest $request, Cliente $cliente){
 
         $fields = $request->all();
         $produto = new Produto;
-        $produto->fill($fields);
+        $produto->tipo = $fields['tipo'];
+        $produto->descricao = $fields['descricao'];
+        $produto->anoAcademico = $fields['anoAcademico'];
+        $produto->idCliente = $cliente->idCliente;
+        $produto->idAgente = $fields['agente'];
+        $produto->idSubAgente = $fields['subagente'];
+        $produto->idUniversidade1 = $fields['uni1'];
+        $produto->idUniversidade2 = $fields['uni2'];
+        $produto->valorTotal = 0;
+        $produto->valorTotalAgente = 0;
+        $produto->valorTotalSubAgente = 0;
         //dd($fields);
-
-        // data em que foi criado
 
         $t=time();
         $produto->create_at == date("Y-m-d",$t);
-
-        //$produto->save();
-
+        
+        $produto->save();
         for($i=1;$i<=20;$i++){
-            $fase = new Fase;
-            $responsabilidade = new Responsabilidade;
-            //$responsabilidade->descricao = $fields['resp-cliente-fase'.$i];
-            $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
-            $responsabilidade->valorAgente = $fields['resp-agente-fase'.$i];
-            $responsabilidade->valorSubAgente = $fields['resp-subagente-fase'.$i];
-            $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$i];
-            $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$i];
-            $responsabilidade->verificacaoPagoCliente = false;
-            $responsabilidade->verificacaoPagoAgente = false;
-            $responsabilidade->verificacaoPagoSubAgente = false;
-            $responsabilidade->verificacaoPagoUni1 = false;
-            $responsabilidade->verificacaoPagoUni2 = false;
-            $responsabilidade->save();
-            
-            $fase->descricao = $fields['des-fase'.$i];
-            $fase->dataVencimento = date("Y-m-d",$fields['data-fase'.$i]);
-            $fase->valorFase = $fields['resp-agente-fase'.$i];
-            $fase->create_at == date("Y-m-d",$t);
-            //$Responsabilidades[] = new Responsabilidade;
-            dd($fase);
+            if($fields['resp-cliente-fase'.$i]!=null&&$fields['resp-agente-fase'.$i]!=null&&$fields['resp-uni1-fase'.$i]!=null){
+                $fase = new Fase;
+                $responsabilidade = new Responsabilidade;
+                $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
+                $responsabilidade->valorAgente = $fields['resp-agente-fase'.$i];
+                $responsabilidade->valorSubAgente = $fields['resp-subagente-fase'.$i];
+                $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$i];
+                $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$i];
+                $responsabilidade->verificacaoPagoCliente = false;
+                $responsabilidade->verificacaoPagoAgente = false;
+                $responsabilidade->verificacaoPagoSubAgente = false;
+                $responsabilidade->verificacaoPagoUni1 = false;
+                $responsabilidade->verificacaoPagoUni2 = false;
+                $responsabilidade->save();
+                
+                $fase->descricao = $fields['des-fase'.$i];
+                $fase->dataVencimento = date("Y-m-d",$fields['data-fase'.$i]);
+                $fase->valorFase = $fields['resp-agente-fase'.$i];
+                $fase->create_at == date("Y-m-d",$t);
+                $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
+                $fase->idProduto = $produto->idProduto;
+                $fase->save();
+            }
         }
 
         return redirect()->route('produtos.index')->with('success', 'Produto criada com sucesso');
