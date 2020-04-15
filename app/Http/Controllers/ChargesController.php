@@ -23,7 +23,10 @@ class ChargesController extends Controller
     public function show(DocTransacao $docTrasancao, Fase $fase, Produto $product)
     {
       $docTrasancao = DocTransacao::all();
-      $fases = Fase::where('idProduto', '=', $product->idProduto)->orderBy('dataVencimento', 'ASC')->get();
+      $fases = Fase::where('idProduto', '=', $product->idProduto)
+      ->orderBy('dataVencimento', 'ASC')
+      ->orderBy('verificacaoPago', 'ASC')
+      ->get();
       return view('charges.show', compact('product', 'fases', 'docTrasancao'));
     }
 
@@ -34,17 +37,16 @@ class ChargesController extends Controller
       return view('charges.showcharge', compact('product', 'fase', 'docTrasancao', 'contas'));
     }
 
-    public function store(StoreChargeRequest $requestCharge, Fase $fase)
+    public function store(Request $request, StoreChargeRequest $requestCharge, Produto $product, Fase $fase)
     {
       $docTrasancao = new DocTransacao;
       $fields = $requestCharge->validated();
       $docTrasancao->fill($fields);
 
-      $test = $input['conta'];
-      dd($test);
+      $idConta = $request->input('conta');
+      $docTrasancao->idConta = $idConta;
 
       $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
-      $docTrasancao->idConta = '1';
       $docTrasancao->idFase = $fase->idFase;
 
       if ($requestCharge->hasFile('comprovativoPagamento')) {
@@ -55,7 +57,7 @@ class ChargesController extends Controller
           $docTrasancao->save();
       }
 
-      // $docTrasancao->save();
+      $docTrasancao->save();
 
       if ($docTrasancao->valorRecebido == $fase->valorFase) {
         Fase::where('descricao', '=', $fase->descricao)->update(['verificacaoPago' => '1']);

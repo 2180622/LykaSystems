@@ -80,7 +80,7 @@
                         <br>
                         <select name="conta">
                             @foreach ($contas as $conta)
-                            <option value="{{$conta->instituicao}}">{{$conta->descricao}}</option>
+                            <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
                             @endforeach
                             <option selected disabled hidden>Escolher conta bancária</option>
                         </select>
