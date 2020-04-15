@@ -208,13 +208,34 @@ class DataController extends Controller
         /********************          Contas          *********************/
 
         $conta = new Conta;
-        $conta->descricao = 'Paypal';
-        $conta->local = 'Internet';
-        $conta->numConta = 4345789280523807;
+        $conta->descricao = 'CGD Leiria';
+        $conta->local = 'Leiria';
+        $conta->numConta = rand(999999, 9999999999);
         $conta->IBAN = '8843H ERUE4 G9Y34 G9HG3 EG8U9';
-        $conta->instituicao = 'QUALQUER COISA';
-        $conta->telefone = 244453765;
+        $conta->instituicao = 'CGD';
+        $conta->telefone = 912345678;
         $conta->obsConta = null;
+        $conta->save();
+
+        $conta = new Conta;
+        $conta->descricao = 'Banco Bic Leiria';
+        $conta->local = 'Leiria';
+        $conta->numConta = rand(999999, 9999999999);
+        $conta->IBAN = 'G9Y34 AS25D GD5V4 ERUE4 EG8U9';
+        $conta->instituicao = 'Bic';
+        $conta->telefone = 912365498;
+        $conta->obsConta = null;
+        $conta->save();
+
+        $conta = new Conta;
+        $conta->descricao = 'Paypal Estudar Portugal';
+        $conta->local = 'Internet';
+        $conta->numConta = rand(999999, 9999999999);
+        $conta->IBAN = 'EG8U9 PRUE4 G9Y34 O9HG3 EA8U1';
+        $conta->instituicao = 'Paypal';
+        $conta->telefone = 912784563;
+        $conta->obsConta = null;
+        $conta->save();
 
         /*******************          Contactos          *******************/
 
@@ -482,6 +503,7 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('16-03-2020 15:00'));
         $fase->valorFase = 50;
         $fase->verificacaoPago = false;
+        $fase->icon = 'cube';
         $fase->idProduto = 1;
         $fase->idFaseStock = 1;
         $fase->idResponsabilidade = 1;
@@ -492,6 +514,7 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
         $fase->valorFase = 300;
         $fase->verificacaoPago = false;
+        $fase->icon = 'layers';
         $fase->idProduto = 1;
         $fase->idFaseStock = 2;
         $fase->idResponsabilidade = 2;
@@ -502,6 +525,7 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $fase->valorFase = 1000;
         $fase->verificacaoPago = false;
+        $fase->icon = 'school';
         $fase->idProduto = 1;
         $fase->idFaseStock = 3;
         $fase->idResponsabilidade = 3;
@@ -512,6 +536,7 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('01-07-2021 18:30'));
         $fase->valorFase = 150;
         $fase->verificacaoPago = false;
+        $fase->icon = 'pie-chart';
         $fase->idProduto = 1;
         $fase->idFaseStock = 4;
         $fase->idResponsabilidade = 4;
