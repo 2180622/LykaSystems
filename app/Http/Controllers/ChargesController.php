@@ -25,8 +25,8 @@ class ChargesController extends Controller
     {
       $docTrasancao = DocTransacao::all();
       $fases = Fase::where('idProduto', '=', $product->idProduto)
-      ->orderBy('dataVencimento', 'ASC')
       ->orderBy('verificacaoPago', 'ASC')
+      ->orderBy('dataVencimento', 'ASC')
       ->get();
       return view('charges.show', compact('product', 'fases', 'docTrasancao'));
     }
