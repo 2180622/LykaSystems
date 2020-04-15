@@ -45,43 +45,43 @@
                             <ion-icon name="cube" id="cube-icon"></ion-icon>
                         </div>
                     </div>
-                    <div class="col-md-2 text-truncate align-self-center">
+                    <div class="col-md-2 text-truncate align-self-center ml-3">
                         <p>{{$fase->descricao}}</p>
                     </div>
                     <div class="col-md-2 text-truncate align-self-center">
-                        <p
-                        @if (count($fase->DocTransacao))
-                          @foreach ($fase->DocTransacao as $paymentProof)
-                            @if ($fase->valorFase > $paymentProof->valorRecebido)
-                              style="color:#FF3D00;"
-                              @elseif ($fase->valorFase == $paymentProof->valorRecebido)
-                                style="color:#47BC00;"
-                              @else
-                                style="color:blue;"
-                            @endif
-                          @endforeach
+                        <p @if (count($fase->DocTransacao))
+                        @foreach ($fase->DocTransacao as $paymentProof)
+                        @if ($fase->valorFase > $paymentProof->valorRecebido)
+                        style="color:#FF3D00;"
+                        @elseif ($fase->valorFase == $paymentProof->valorRecebido)
+                        style="color:#47BC00;"
+                        @else
+                        style="color:blue;"
+                        @endif
+                        @endforeach
                         @endif
                         >
                         @if (count($fase->DocTransacao))
-                          @foreach ($fase->DocTransacao as $paymentProof)
-                            @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
-                            {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, '.', '')}}€
-                            @else
-                              {{$fase->valorFase}}€
-                            @endif
-                          @endforeach
+                        @foreach ($fase->DocTransacao as $paymentProof)
+                        @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
+                        {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, '.', '')}}€
                         @else
-                          {{$fase->valorFase}}€
+                        {{$fase->valorFase}}€
+                        @endif
+                        @endforeach
+                        @else
+                        {{$fase->valorFase}}€
                         @endif
                         </p>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center">
+                    <div class="col-md-2 text-truncate align-self-center">
                         <p><?=date('d/m/Y', strtotime($fase->dataVencimento))?></p>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center">
-                        <p>
-                          Pendente
-                        </p>
+                    <div class="col-md-2 text-truncate align-self-center">
+                        <p>Pendente</p>
+                    </div>
+                    <div class="col-md-1 align-self-center option-button">
+                        <p>test</p>
                     </div>
                 </div>
             </a>
@@ -90,6 +90,6 @@
     </div>
 </div>
 @section('scripts')
-  <script src="{{asset('/js/charges.js')}}"></script>
+<script src="{{asset('/js/charges.js')}}"></script>
 @endsection
 @endsection
