@@ -101,7 +101,7 @@
 
                 <div><span class="text-secondary">Morada:</span> {{$agent->morada}}</div><br>
 
-                <div><span class="text-secondary">Telefone (principal):</span> {{$agent->telefoneW}}</div>
+                <div><span class="text-secondary">Telefone (principal):</span> {{$agent->telefone1}}</div>
 
                 <div><span class="text-secondary">Telefone (alternativo):</span> {{$agent->telefone2}}</div><br>
 

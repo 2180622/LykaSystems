@@ -38,7 +38,7 @@ class UpdateAgenteRequest extends FormRequest
             'num_doc'=> 'required',
             'img_doc' => 'nullable',
             'info_doc' => 'nullable',
-            'telefoneW' => 'required',
+            'telefone1' => 'required',
             'telefone2' => 'nullable',
         ];
     }

@@ -17,6 +17,7 @@ class DocAcademico extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocAcademico');
+            $table->string('idCliente',255)->nullable();
             $table->string('nome',255);
             $table->enum('tipo',['Exame Universitário','Exame Nacional','Diploma','Certificado']);
             $table->string('imagem',255);
