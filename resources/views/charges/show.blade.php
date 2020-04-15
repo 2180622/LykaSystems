@@ -38,50 +38,74 @@
 
         @foreach ($fases as $fase)
         <div class="container">
-            <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            <ion-icon name="cube" id="cube-icon"></ion-icon>
+            @if (count($fase->DocTransacao))
+              @foreach ($fase->DocTransacao as $paymentProof)
+                @if ($paymentProof->valorRecebido != null)
+                  <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}/{{$paymentProof->idDocTransacao}}/edit">
+                @else
+                  <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
+                @endif
+              @endforeach
+            @else
+              <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
+            @endif
+                        <div class="row charge-div">
+                            <div class="col-md-1 align-self-center">
+                                <div class="white-circle">
+                                    <ion-icon name="cube" id="cube-icon"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-truncate align-self-center ml-4">
+                                <p>{{$fase->descricao}}</p>
+                            </div>
+                            <div class="col-md-2 text-truncate align-self-center">
+                                <p @if (count($fase->DocTransacao))
+                                @foreach ($fase->DocTransacao as $paymentProof)
+                                @if ($fase->valorFase > $paymentProof->valorRecebido)
+                                style="color:#FF3D00;"
+                                @elseif ($fase->valorFase == $paymentProof->valorRecebido)
+                                style="color:#47BC00;"
+                                @else
+                                style="color:#FF3D00;"
+                                @endif
+                                @endforeach
+                                @endif
+                                >
+                                @if (count($fase->DocTransacao))
+                                  @foreach ($fase->DocTransacao as $paymentProof)
+                                    @if ($paymentProof->valorRecebido != null)
+                                      {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, ',', '')}}€
+                                    @else
+                                      {{number_format((float)$fase->valorFase, 2, ',', '')}}€
+                                    @endif
+                                  @endforeach
+                                @else
+                                  {{number_format((float)$fase->valorFase, 2, ',', '')}}€
+                                @endif
+                                </p>
+                            </div>
+                            <div class="col-md-2 text-truncate align-self-center ml-auto">
+                                <p><?=date('d/m/Y', strtotime($fase->dataVencimento))?></p>
+                            </div>
+                            <div class="col-md-2 text-truncate align-self-center ml-auto">
+                                <p>
+                                    @if (count($fase->DocTransacao))
+                                    @foreach ($fase->DocTransacao as $paymentProof)
+                                    @if ($fase->valorFase > $paymentProof->valorRecebido)
+                                    Dívida
+                                    @elseif ($fase->valorFase < $paymentProof->valorRecebido)
+                                        Crédito
+                                        @else
+                                        Pago
+                                        @endif
+                                        @endforeach
+                                        @else
+                                        Pendente
+                                        @endif
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-4">
-                        <p>{{$fase->descricao}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-5">
-                        <p @if (count($fase->DocTransacao))
-                        @foreach ($fase->DocTransacao as $paymentProof)
-                        @if ($fase->valorFase > $paymentProof->valorRecebido)
-                        style="color:#FF3D00;"
-                        @elseif ($fase->valorFase == $paymentProof->valorRecebido)
-                        style="color:#47BC00;"
-                        @else
-                        style="color:blue;"
-                        @endif
-                        @endforeach
-                        @endif
-                        >
-                        @if (count($fase->DocTransacao))
-                        @foreach ($fase->DocTransacao as $paymentProof)
-                        @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
-                        {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, '.', '')}}€
-                        @else
-                        {{$fase->valorFase}}€
-                        @endif
-                        @endforeach
-                        @else
-                        {{$fase->valorFase}}€
-                        @endif
-                        </p>
-                    </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-5">
-                        <p><?=date('d/m/Y', strtotime($fase->dataVencimento))?></p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p>Pendente</p>
-                    </div>
-                </div>
-            </a>
+                    </a>
         </div>
         @endforeach
     </div>
