@@ -130,6 +130,7 @@ class ClientController extends Controller
 
         // data em que foi criado
 
+        $client->info_docOficial = $requestClient->info_docOficial;
         $client->create_at == date("Y-m-d",$t);
         $client->save();
 

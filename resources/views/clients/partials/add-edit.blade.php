@@ -152,7 +152,7 @@
                     <div class="col">
                         <label for="dataValidade_docOficial">Data de validade:</label><br>
                         <input type="date" class="form-control" name="dataValidade_docOficial"
-                            id="dataValidade_docOficial" value="">
+                            id="dataValidade_docOficial" value="{{old('info_docOficial',$client->info_docOficial)}}">
                     </div>
                 </div>
 

@@ -38,10 +38,10 @@ class Cliente extends Migration
             $table->string('nomeMae',255)->nullable();
             $table->string('telefoneMae',255)->nullable();
             $table->string('emailMae',255)->nullable();
-            $table->string('fotografia',255)->nullable()->default('default.png');
-            $table->string('NIF',255)->unique();
+            $table->string('fotografia',255)->nullable()->default(null);
+            $table->string('NIF',255)->unique()->default(null);
                 //$table->unique('NIF');
-            $table->string('IBAN',255);
+            $table->string('IBAN',255)->nullable();
             $table->integer('nivEstudoAtual');
             $table->string('nomeInstituicaoOrigem',255);
             $table->string('cidadeInstituicaoOrigem',255);

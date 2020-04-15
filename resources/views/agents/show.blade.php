@@ -124,7 +124,7 @@
             @if ( Auth::user()->tipo == "admin" || Auth::user()->agente->tipo == "Agente"  )
                 <div class="col p-2" style="min-width:280px !important">
 
-                        <div class="mb-2 text-muted">Lista de subagentes:</div>
+                        <div class="mb-2 text-muted">Subagentes:</div>
 
                         @if($listagents==null)
                             <div class="text-muted"><small>(sem registos)</small></div>
