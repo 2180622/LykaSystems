@@ -197,10 +197,8 @@ class ClientController extends Controller
         $name = $client->nome;
         Mail::to($email)->send(new SendEmailConfirmation($id, $name));
 
-        return redirect()->route('clients.index')->with('success', 'Ficha de estudante criada com sucesso');
+        return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }
-
-
 
 
     /**
@@ -338,7 +336,7 @@ class ClientController extends Controller
 
         $client->save();
 
-         return redirect()->route('clients.index')->with('success', 'Dados do estudante modificados com sucesso');
+         return redirect()->route('clients.show',$client)->with('success', 'Dados do estudante modificados com sucesso');
 
     }
 
