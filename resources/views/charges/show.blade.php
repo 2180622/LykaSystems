@@ -45,10 +45,10 @@
                             <ion-icon name="cube" id="cube-icon"></ion-icon>
                         </div>
                     </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-3">
+                    <div class="col-md-2 text-truncate align-self-center ml-4">
                         <p>{{$fase->descricao}}</p>
                     </div>
-                    <div class="col-md-2 text-truncate align-self-center">
+                    <div class="col-md-2 text-truncate align-self-center ml-5">
                         <p @if (count($fase->DocTransacao))
                         @foreach ($fase->DocTransacao as $paymentProof)
                         @if ($fase->valorFase > $paymentProof->valorRecebido)
@@ -74,14 +74,11 @@
                         @endif
                         </p>
                     </div>
-                    <div class="col-md-2 text-truncate align-self-center">
+                    <div class="col-md-3 text-truncate align-self-center ml-5">
                         <p><?=date('d/m/Y', strtotime($fase->dataVencimento))?></p>
                     </div>
-                    <div class="col-md-2 text-truncate align-self-center">
+                    <div class="col-md-2 text-truncate align-self-center ml-auto">
                         <p>Pendente</p>
-                    </div>
-                    <div class="col-md-1 align-self-center option-button">
-                        <p>test</p>
                     </div>
                 </div>
             </a>
