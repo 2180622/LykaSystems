@@ -249,6 +249,7 @@
                             num++;
                             $('#descricao-fase'+num).attr('value', response.fases[i].descricao);
                             $('#fase-idStock'+num).attr('value', response.fases[i].idFaseStock);
+                            $("#data-fase"+num).attr("required", true);
                         }
                         if(num > 20){
                             num++;

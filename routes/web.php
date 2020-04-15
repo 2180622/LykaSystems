@@ -7,7 +7,6 @@ Auth::routes();
 
 /* Route group protected with authentication */
 Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
-
     /* Logout */
     Route::get('/logout', 'Auth\LoginController@logout');
 
@@ -71,7 +70,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Produtos */
     Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
     Route::get('/produtos/print/{produto}', 'ProdutoController@print')->name('produtos.print');
-    //Route::post('/produtos/store/{cliente}', 'ProdutoController@store')->name('produtos.store');
     Route::resource('/produtos', 'ProdutoController')->only(['destroy', 'update','show','edit','store']);
 });
 
