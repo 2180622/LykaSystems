@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Guadar</button>
-                    <button type="button" class="top-button btn_submit bg-danger">Eliminar</button>
+                    <button type="reset" class="top-button btn_submit bg-danger">Cancelar</button>
                 </div>
             </form>
         </div>
