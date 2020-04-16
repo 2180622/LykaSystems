@@ -27,7 +27,7 @@ class ReportProblemMail extends Mailable
     public function build()
     {
       return $this->from($this->email, $this->name)
-          ->subject('Lyka Systems | Relatório de Erro - '.$this->name)
+          ->subject('Lyka Systems | Relatório de erro - '.$this->name)
           ->markdown('mails.report')
           ->with([
               'name' => $this->name,

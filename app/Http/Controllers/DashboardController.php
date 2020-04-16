@@ -47,6 +47,6 @@ class DashboardController extends Controller{
       $text = $request->input('relatorio');
 
       Mail::to('lykasystems@mail.com')->send(new ReportProblemMail($name, $email, $phone, $text));
-      return redirect()->route('report')->with('success', 'Relatório enviado com sucesso.');
+      return redirect()->route('report')->with('success', 'Relatório enviado com sucesso. Obrigado!');
     }
 }

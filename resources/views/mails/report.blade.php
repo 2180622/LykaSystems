@@ -15,7 +15,7 @@ De seguida pode encontrar o relatório a descrever o problema que o utilizador e
 {{$text}}
 @endcomponent
 
-Apenas lembramos que o utilizador espera uma mensagem em retorno.
+Apenas lembramos que o utilizador espera uma mensagem em retorno com uma solução futura ou presente.
 
 Obrigado,
 
