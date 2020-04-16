@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use Mail;
 use App\Agente;
-use App\Notificacao;
 use App\Cliente;
+use App\Notificacao;
 use App\Universidade;
 use Illuminate\Http\Request;
+use App\Mail\ReportProblemMail;
 
 class DashboardController extends Controller{
 
@@ -35,5 +37,16 @@ class DashboardController extends Controller{
     public function report()
     {
         return view('report');
+    }
+
+    public function reportmail(Request $request)
+    {
+      $name = $request->input('nomeCompleto');
+      $email = $request->input('email');
+      $phone = $request->input('telemovel');
+      $text = $request->input('relatorio');
+
+      Mail::to('lykasystems@mail.com')->send(new ReportProblemMail($name, $email, $phone, $text));
+      return redirect()->route('report')->with('success', 'Relatório enviado com sucesso.');
     }
 }
