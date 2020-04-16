@@ -15,6 +15,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Report Problem */
     Route::get('/reportproblem', 'DashboardController@report')->name('report');
+    Route::get('/reportproblem/sendmail', 'DashboardController@reportmail')->name('report.send');
 
     /* Contacts */
     Route::resource('/contacts', 'ContactoController');

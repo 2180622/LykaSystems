@@ -87,8 +87,8 @@
                     <tr>
                         <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
-                        {{-- <th>Nº Identificação</th> --}}
-                        <th>Nº Passaporte</th>
+                        <th>N.Identificação</th>
+{{--                         <th>Naturalidade</th> --}}
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -102,7 +102,7 @@
                             <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('clients.show',$client)}}">
                                     @if($client->fotografia)
-                                        <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" width="100%" class="mx-auto">
+                                        <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}" width="100%" class="mx-auto">
                                         @elseif($client->genero == 'F')
                                             <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
                                             @else
@@ -117,10 +117,10 @@
                         <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
 
                         {{-- numCCid --}}
-                        {{-- <td class="align-middle">{{ $client->numCCid }}</td> --}}
+                         <td class="align-middle">{{ $client->num_docOficial }}</td>
 
-                        {{-- numPassaport --}}
-                        <td class="align-middle">{{ $client->numPassaport }}</td>
+                        {{-- paisNaturalidade --}}
+{{--                         <td class="align-middle">{{ $client->paisNaturalidade }}</td> --}}
 
 
                         {{-- OPÇÔES --}}

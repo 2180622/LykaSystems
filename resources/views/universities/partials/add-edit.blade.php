@@ -58,6 +58,5 @@
         <label for="inputObsContactos" style="font-weight: 700!important;">Observações de Contactos</label>
         <textarea name="obsContactos" id="inputObsContactos" rows="4"
             class="form-control">{{old('obsContactos',$university->obsContactos)}}</textarea>
-        <br>
     </div>
 </div>

@@ -40,20 +40,23 @@
     <div class="cards-navigation">
         <div class="title">
             <h6>Reportar um problema</h6>
-            <br>
-            <p>Para reportar um problema basta preencher o formulário abaixo disponível que será enviado para um administrador.</p>
+            <div class="alert alert-warning alert-dismissible fade show shadow-sm mt-4" role="alert">
+                <strong>Olá {{$user->nome.' '.$user->apelido}}!</strong>
+                <p class="mt-3 mb-2">Para reportar um problema basta preencher o formulário abaixo disponível que será enviado para um administrador.</p>
+                <p>O administrador irá ler o seu problema e responder-lhe-á o mais depressa possível com uma solução.</p>
+                <hr>
+                <strong>Obrigado pela atenção.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
         <br>
         <div class="report-card shadow-sm">
-            <form action="#" method="post" enctype="multipart/form-data" name="chargeForm">
+            <form action="{{route('report.send')}}" method="get" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Some relevant help.">
-                            <span>
-                                ?
-                            </span>
-                        </div>
                         <label for="nomeCompleto">Nome completo</label>
                         <br>
                         <input type="text" name="nomeCompleto" placeholder="Inserir nome completo" autocomplete="off" value="{{$user->nome.' '.$user->apelido}}">
@@ -75,9 +78,14 @@
                 <br><br>
                 <div class="row">
                     <div class="col">
-                        <label for="observacoes">Observações</label>
+                        <div class="help-button" id="tooltipReport" data-toggle="tooltip" data-placement="top" title="Nesta seccção tente ser o mais específico possível, em relação ao problema que está a enfrentar.">
+                            <span>
+                                ?
+                            </span>
+                        </div>
+                        <label for="relatorio">Relatório do problema</label>
                         <br>
-                        <textarea name="observacoes" rows="5"></textarea>
+                        <textarea name="relatorio" rows="5" placeholder="Inserir um relatório acerca problema"></textarea>
                     </div>
                 </div>
         </div>

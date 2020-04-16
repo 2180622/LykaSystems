@@ -25,10 +25,6 @@
 
     @yield('styleLinks')
 
-
-
-
-
     {{-- NOTIFICAÇÔES PARA TODAS AS PÁGINAS --}}
 
     @php

@@ -49,7 +49,7 @@ class UniversityController extends Controller
         $t = time();
         $university->create_at == date("Y-m-d", $t);
         $university->save();
-        return redirect()->route('universities.index')->with('success', 'Universidade Adicionada com Sucesso!');
+        return redirect()->route('universities.show',$university)->with('success', 'Universidade Adicionada com Sucesso!');
 
     }
 

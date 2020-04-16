@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use Mail;
 use App\Agente;
-use App\Notificacao;
 use App\Cliente;
+use App\Notificacao;
 use App\Universidade;
 use Illuminate\Http\Request;
+use App\Mail\ReportProblemMail;
 
 class DashboardController extends Controller{
 
@@ -18,9 +20,9 @@ class DashboardController extends Controller{
     }
 
     public function index(){
-        $agente = Agente::all();
-        $cliente = Cliente::all();
-        $universidade = Universidade::all();
+        $agentes = Agente::all();
+        $clientes = Cliente::all();
+        $universidades = Universidade::all();
 
         $AllNotifications = Notificacao::all();
 
@@ -29,11 +31,22 @@ class DashboardController extends Controller{
         $this->NotController->getNotificacaoFaseAcaba($AllNotifications);
         $this->NotController->getNotificacaoDocFalta($AllNotifications);
 
-        return view('index', compact('agente', 'cliente', 'universidade'));
+        return view('index', compact('agentes', 'clientes', 'universidades'));
     }
 
     public function report()
     {
         return view('report');
+    }
+
+    public function reportmail(Request $request)
+    {
+      $name = $request->input('nomeCompleto');
+      $email = $request->input('email');
+      $phone = $request->input('telemovel');
+      $text = $request->input('relatorio');
+
+      Mail::to('lykasystems@mail.com')->send(new ReportProblemMail($name, $email, $phone, $text));
+      return redirect()->route('report')->with('success', 'Relatório enviado com sucesso. Obrigado!');
     }
 }

@@ -38,9 +38,9 @@
         @csrf
         @include('universities.partials.add-edit')
         <div class="form-group text-right">
-            <br><br>
+            <br>
             <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar universidade</button>
-            <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
+            <a href="{{route('universities.index')}}" class="top-button">Cancelar</a>
         </div>
     </form>
 

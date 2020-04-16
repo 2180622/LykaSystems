@@ -24,13 +24,13 @@
             <div class="col-md-4">
                 <a href="{{route('clients.index')}}">
                     <div class="card-navigation">
-                        <div class="help-button">
+                        <div class="help-button" id="tooltipClient" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de clientes registados no sistema.">
                             <span>
                                 ?
                             </span>
                         </div>
                         <div class="info">
-                            <p class="number">{{count($cliente)}}</p>
+                            <p class="number">{{count($clientes)}}</p>
                             <p class="word">clientes</p>
                         </div>
                     </div>
@@ -39,13 +39,13 @@
             <div class="col-md-4">
                 <a href="{{route('universities.index')}}">
                     <div class="card-navigation">
-                        <div class="help-button">
+                        <div class="help-button" id="tooltipUni" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de universidades registadas no sistema.">
                             <span>
                                 ?
                             </span>
                         </div>
                         <div class="info">
-                            <p class="number">{{count($universidade)}}</p>
+                            <p class="number">{{count($universidades)}}</p>
                             <p class="word">universidades</p>
                         </div>
                     </div>
@@ -54,13 +54,13 @@
             <div class="col-md-4">
                 <a href="{{route('agents.index')}}">
                     <div class="card-navigation">
-                        <div class="help-button">
+                        <div class="help-button" id="tooltipAgent" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de agentes registados no sistema.">
                             <span>
                                 ?
                             </span>
                         </div>
                         <div class="info">
-                            <p class="number">{{count($agente)}}</p>
+                            <p class="number">{{count($agentes)}}</p>
                             <p class="word">agentes</p>
                         </div>
                     </div>
@@ -97,5 +97,9 @@
 
 {{-- Scripts --}}
 @section('scripts')
-{{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
+<script type="text/javascript">
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @endsection

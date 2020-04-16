@@ -97,6 +97,7 @@ html, body {
     margin-right: auto;
     border-radius: 11px;
     background-color: white;
+    transition: 0.3s ease-in-out;
     box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
 }
 
@@ -106,6 +107,7 @@ html, body {
     width: 20px;
     height: 20px;
     float: right;
+    cursor: default;
     position: relative;
     border-radius: 50%;
     background-color: #DFDFDF;
