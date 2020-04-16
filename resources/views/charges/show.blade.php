@@ -84,7 +84,14 @@
                                 </p>
                             </div>
                             <div class="col-md-2 text-truncate align-self-center ml-auto">
-                                <p><?=date('d/m/Y', strtotime($fase->dataVencimento))?></p>
+                              <?php
+                                $currentdate = date_create(date('d-m-Y'));
+                                $paymentdate = date_create(date('d-m-Y', strtotime($fase->dataVencimento)));
+                                $datediff = (date_diff($currentdate,$paymentdate))->days;
+                              ?>
+                                <p @if ($datediff <= 7 && $fase->verificacaoPago == 0) style="color:#FF3D00;" @endif>
+                                  <?=date('d/m/Y', strtotime($fase->dataVencimento))?>
+                                </p>
                             </div>
                             <div class="col-md-2 text-truncate align-self-center ml-auto">
                                 <p>
