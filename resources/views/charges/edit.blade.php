@@ -84,15 +84,15 @@
                         <br>
                         <select name="conta">
                             @if ($paymentProof->idConta == null)
-                              @foreach ($contas as $conta)
-                              <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
-                              @endforeach
-                                <option selected disabled hidden>Escolher conta bancária</option>
+                            @foreach ($contas as $conta)
+                            <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
+                            @endforeach
+                            <option selected disabled hidden>Escolher conta bancária</option>
                             @else
-                              @foreach ($contas as $conta)
-                                <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
-                              @endforeach
-                                <option selected value="{{$paymentProof->conta->idConta}}">{{old('conta', $paymentProof->conta->descricao)}}</option>
+                            @foreach ($contas as $conta)
+                            <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
+                            @endforeach
+                            <option selected value="{{$paymentProof->conta->idConta}}">{{old('conta', $paymentProof->conta->descricao)}}</option>
                             @endif
                         </select>
                     </div>
