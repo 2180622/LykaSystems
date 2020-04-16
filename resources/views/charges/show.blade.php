@@ -35,24 +35,23 @@
             <h6>Secção de cobrança - {{$product->cliente->nome.' '.$product->cliente->apelido}}</h6>
         </div>
         <br>
-
         @foreach ($fases as $fase)
         <div class="container">
             @if (count($fase->DocTransacao))
-              @foreach ($fase->DocTransacao as $paymentProof)
-                @if ($paymentProof->valorRecebido != null)
-                  <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}/{{$paymentProof->idDocTransacao}}/edit">
+            @foreach ($fase->DocTransacao as $paymentProof)
+            @if ($paymentProof->valorRecebido != null)
+            <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}/{{$paymentProof->idDocTransacao}}/edit">
                 @else
-                  <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
-                @endif
-              @endforeach
-            @else
-              <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
-            @endif
+                <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
+                    @endif
+                    @endforeach
+                    @else
+                    <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
+                        @endif
                         <div class="row charge-div">
                             <div class="col-md-1 align-self-center">
                                 <div class="white-circle">
-                                    <ion-icon name="cube" id="cube-icon"></ion-icon>
+                                    <ion-icon name="{{$fase->icon}}" id="icon"></ion-icon>
                                 </div>
                             </div>
                             <div class="col-md-3 text-truncate align-self-center ml-4">
@@ -73,7 +72,7 @@
                                 >
                                 @if (count($fase->DocTransacao))
                                   @foreach ($fase->DocTransacao as $paymentProof)
-                                    @if ($paymentProof->valorRecebido != null)
+                                    @if ($paymentProof->valorRecebido != null && $fase->verificacaoPago == 0)
                                       {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, ',', '')}}€
                                     @else
                                       {{number_format((float)$fase->valorFase, 2, ',', '')}}€
@@ -85,7 +84,14 @@
                                 </p>
                             </div>
                             <div class="col-md-2 text-truncate align-self-center ml-auto">
-                                <p><?=date('d/m/Y', strtotime($fase->dataVencimento))?></p>
+                              <?php
+                                $currentdate = date_create(date('d-m-Y'));
+                                $paymentdate = date_create(date('d-m-Y', strtotime($fase->dataVencimento)));
+                                $datediff = (date_diff($currentdate,$paymentdate))->days;
+                              ?>
+                                <p @if ($datediff <= 7 && $fase->verificacaoPago == 0) style="color:#FF3D00;" @endif>
+                                  <?=date('d/m/Y', strtotime($fase->dataVencimento))?>
+                                </p>
                             </div>
                             <div class="col-md-2 text-truncate align-self-center ml-auto">
                                 <p>

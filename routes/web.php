@@ -7,7 +7,6 @@ Auth::routes();
 
 /* Route group protected with authentication */
 Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
-
     /* Logout */
     Route::get('/logout', 'Auth\LoginController@logout');
 
@@ -36,6 +35,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Agenda */
     Route::resource('/agends', 'AgendController');
+    Route::post('/agends/create', 'AgendController@store')->name('agend.store');
 
 
     /* Pagamentos */

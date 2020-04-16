@@ -36,12 +36,22 @@
     <br><br>
 
     <div class="cards-navigation">
-        <div class="title">
-            <h6>Ficha de estudante</h6>
+
+        <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h6>Ficha de estudante</h6>
+                </div>
+            </div>
+            <div class="col text-right">
+                <div class="text-muted"><small>Adicionado em: {{ date('d-M-y', strtotime($client->created_at)) }}</small></div>
+
+                <div class="text-muted"><small>Ultima atualização:
+                        {{ date('d-M-y', strtotime($client->updated_at)) }}</small></div>
+            </div>
         </div>
+
         <br>
-
-
 
         <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
             <div class="col p-0 text-center" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
@@ -95,14 +105,21 @@
                     @endif
                 </div><br>
 
-                <div class="text-muted"><small>Adicionado: {{ date('d-M-y', strtotime($client->created_at)) }}</small>
-                </div>
-                <div class="text-muted"><small>Ultima atualização:
-                        {{ date('d-M-y', strtotime($client->updated_at)) }}</small></div>
-
                 @if (Auth::user()->tipo == "admin")
-                <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i
-                            class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
+
+                    <div>
+                        @if ($produtos )
+                        <span class="text-secondary">Agente(s) associados:</span><br>
+                            @foreach ($produtos as $produto)
+                                {{$produto->idAgente}},{{$produto->idSubAgente}}
+                            @endforeach
+                        @endif
+                    </div>
+
+                    <br>
+
+                    <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
+
                 @endif
 
             </div>
@@ -231,25 +248,26 @@
 
                     <div class="col mr-3">
                         {{-- numPassaport --}}
-                        <div><span class="text-secondary">Número do passaporte:</span> {{$client->numPassaport}}</div>
+                        <div><span class="text-secondary">Número do passaporte:</span> {{$infosPassaport->numPassaport}}</div>
                         <br>
 
                         {{-- dataValidPP --}}
                         <div><span class="text-secondary">Data de validade do passaporte:</span>
-                            {{$client->dataValidPP}}</div><br>
+                            {{$infosPassaport->dataValidPP}}</div><br>
 
                         {{-- passaportPaisEmi --}}
                         <div><span class="text-secondary">Pais emissor do passaporte:</span>
-                            {{$client->passaportPaisEmi}}</div><br>
+                            {{$infosPassaport->passaportPaisEmi}}</div><br>
 
                         {{-- localEmissaoPP --}}
                         <div><span class="text-secondary">Local de emissão do passaporte:</span>
-                            {{$client->localEmissaoPP}}</div><br>
+                            {{$infosPassaport->localEmissaoPP}}</div><br>
 
                         <hr><br>
-
                         {{-- CC IDENTIFICAÇÃO --}}
                         <div><span class="text-secondary">Número de identificação pessoal:</span> {{$client->num_docOficial}}</div>
+                        <br>
+                        <div><span class="text-secondary">Data de validade:</span> {{$client->info_docOficial}}</div>
                         <br>
                         <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
 
@@ -258,25 +276,23 @@
 
 
                     <div class="col" style="min-width:225px">
-                        <div class="text-center text-secondary mb-2">Documentos pessoais</div>
+                        <div class="text-secondary mb-2">Documentos pessoais:</div>
 
-                        <ul class="card shadow-sm p-3" style="list-style-type:none;">
+                        <ul style="list-style-type:none;margin:0px;padding:0">
 
                             {{-- Verifica se existe imagem para cartão de documento de id pessoal --}}
                             @if ($client->img_docOficial)
-                            <li class="m-3">
-                                <a href="{{Storage::disk('public')->url('client-documents/'.$client->img_docOficial)}}" class="btn_list_opt btn_list_opt_download">
-                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>
+                            <li class="my-3">
+                                <i class="far fa-address-card mr-2"></i>
                                 <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->img_docOficial)}}">Documento de identificação pessoal</a>
                             </li>
                             @endif
 
                             {{-- Verifica se existe imagem para passaporte --}}
                             @if ($client->img_Passaport)
-                            <li class="m-3">
-                                <a href="{{Storage::disk('public')->url('client-documents/'.$client->img_Passaport)}}" class="btn_list_opt btn_list_opt_download">
-                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>
-                                    <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->img_Passaport)}}">Passaporte</a>
+                            <li class="my-3">
+                                <i class="far fa-address-card mr-2"></i>
+                                <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->img_Passaport)}}">Passaporte</a>
                             </li>
                             @endif
 
@@ -307,7 +323,7 @@
                         <div><span class="text-secondary">Local da instituição:</span>
                             {{$client->cidadeInstituicaoOrigem}}</div><br>
 
-                        <div><span class="text-secondary">Observações académicas:</span><br>
+                        <div><span class="text-secondary">Observações académicas:</span>
 
                             @if ($client->obsAcademicas==null)
                             <span class="text-muted"><small>(sem dados para mostrar)</small></span>
@@ -320,30 +336,15 @@
                     </div>
 
                     <div class="col" style="min-width:225px">
-                        <div class="text-center text-secondary mb-2">Documentos Académicos</div>
+                        <div class="text-secondary mb-2">Documentos académicos:</div>
 
-                        <ul class="card shadow-sm p-3" style="list-style-type:none;">
+                        <ul style="list-style-type:none;margin:0px;padding:0">
 
-                            {{-- @foreach ($files as $file) --}}
-                            <li class="m-3">
-                                <a href="#" class="btn_list_opt btn_list_opt_download">
-                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>Exame de acesso
-                                <small class="text-muted"> (.pdf)</small>
+                            {{-- EXEMPLOOOOO --}}
+                            <li class="my-3">
+                                <i class="fas fa-file-alt mr-2"></i>
+                                <a class="name_link" target="_blank" href="#">Exame Final</a>
                             </li>
-
-                            <li class="m-3">
-                                <a href="#" class="btn_list_opt btn_list_opt_download">
-                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>Pauta de avaliação
-                                <small class="text-muted"> (.pdf)</small>
-                            </li>
-
-                            <li class="m-3">
-                                <a href="#" class="btn_list_opt btn_list_opt_download">
-                                    <i class="fas fa-download mr-2" title="Fazer download do ficheiro"></i></a>Carta de recomendação
-                                <small class="text-muted"> (.pdf)</small>
-                            </li>
-
-                            {{-- @endforeach --}}
 
                         </ul>
 
@@ -392,7 +393,7 @@
                 {{-- Contactos dos PAIS --}}
                 <div class="row mt-4">
                     <div class="col ">
-                        <div><span class="text-secondary">Nome do pai:</span>{{$client->nomePai}}</div><br>
+                        <div><span class="text-secondary">Nome do pai:</span> {{$client->nomePai}}</div><br>
                         <div><span class="text-secondary">Telefone do pai:</span> {{$client->telefonePai}}</div><br>
                         <div><span class="text-secondary">E-mail do pai:</span> {{$client->emailPai}}</div><br>
                     </div>

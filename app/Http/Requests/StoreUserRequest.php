@@ -21,7 +21,8 @@ class StoreUserRequest extends FormRequest
     public function messages()
     {
        return [
-       'email.required' => 'O e-mail deve ser preenchido corretamente.'
+       'email.required' => 'O e-mail deve ser preenchido corretamente.',
+       'email.unique' => 'Este e-mail ja se encontra registado.',
        ];
     }
 }

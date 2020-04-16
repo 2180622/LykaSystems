@@ -25,8 +25,8 @@ class ChargesController extends Controller
     {
       $docTrasancao = DocTransacao::all();
       $fases = Fase::where('idProduto', '=', $product->idProduto)
-      ->orderBy('dataVencimento', 'ASC')
       ->orderBy('verificacaoPago', 'ASC')
+      ->orderBy('dataVencimento', 'ASC')
       ->get();
       return view('charges.show', compact('product', 'fases', 'docTrasancao'));
     }
@@ -53,15 +53,15 @@ class ChargesController extends Controller
       $docTrasancao->descricao = 'Cobrança da '.$fase->descricao;
       $docTrasancao->idFase = $fase->idFase;
 
+      $docTrasancao->save();
+
       if ($requestCharge->hasFile('comprovativoPagamento')) {
           $fileproof = $requestCharge->file('comprovativoPagamento');
-          $imgproof = strtolower($docTrasancao->descricao) . '_comprovativo_'. $docTrasancao->idDocTransacao .'.' . $fileproof->getClientOriginalExtension();
+          $imgproof = strtolower($docTrasancao->descricao).'_comprovativo_'.$docTrasancao->idDocTransacao.'.' . $fileproof->getClientOriginalExtension();
           Storage::disk('public')->putFileAs('payment-proof/', $fileproof, $imgproof);
           $docTrasancao->comprovativoPagamento = $imgproof;
           $docTrasancao->save();
       }
-
-      $docTrasancao->save();
 
       if ($docTrasancao->valorRecebido >= $fase->valorFase) {
         Fase::where('descricao', '=', $fase->descricao)->update(['verificacaoPago' => '1']);

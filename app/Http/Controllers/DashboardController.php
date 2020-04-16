@@ -32,7 +32,8 @@ class DashboardController extends Controller{
         return view('index', compact('agente', 'cliente', 'universidade'));
     }
 
-    public function report(){
+    public function report()
+    {
         return view('report');
     }
 }

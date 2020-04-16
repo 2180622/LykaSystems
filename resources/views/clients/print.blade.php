@@ -113,19 +113,19 @@
                 <h5><i class="fas fa-passport mr-2"></i>Passaporte</h5><br>
                 {{--  numPassaport --}}
                 <div><span class="text-secondary font-weight-bold">Número do passaporte:</span>
-                    {{$client->numPassaport}}</div>
+                    {{$infosPassaport->numPassaport}}</div>
 
                 {{--  dataValidPP --}}
                 <div><span class="text-secondary font-weight-bold">Data de validade do passaporte:</span>
-                    {{$client->dataValidPP}}</div>
+                    {{$infosPassaport->dataValidPP}}</div>
 
                 {{--  passaportPaisEmi --}}
                 <div><span class="text-secondary font-weight-bold">Pais emissor do passaporte:</span>
-                    {{$client->passaportPaisEmi}}</div>
+                    {{$infosPassaport->passaportPaisEmi}}</div>
 
                 {{--  localEmissaoPP --}}
                 <div><span class="text-secondary font-weight-bold">Local de emissão do passaporte:</span>
-                    {{$client->localEmissaoPP}}</div><br>
+                    {{$infosPassaport->localEmissaoPP}}</div><br>
             </div>
 
             <div class="col p-3 ">

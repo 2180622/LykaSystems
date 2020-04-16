@@ -1,11 +1,11 @@
-.payment-card {
+.report-card {
     width: 100%;
     padding: 20px 20px;
     border-radius: 10px;
     background-color: white;
 }
 
-.payment-card p {
+.report-card p {
     font-weight: 600;
     margin: 0 !important;
     display: inline-block;
@@ -42,12 +42,12 @@ input, select, textarea {
     background-color: #EAEAEA;
 }
 
-.payment-card p:first-child {
+.report-card p:first-child {
     color: #747474;
     font-weight: 600;
 }
 
-.payment-card p:nth-child(2) {
+.report-card p:nth-child(2) {
     color: #747474;
     font-weight: 700;
 }
@@ -89,39 +89,6 @@ input[type="file"] {
     color: white;
     font-weight: 800;
     font-size: 0.9rem;
-    position: relative;
-    transform: translate(-50%, -50%);
-}
-
-/* Charges List (Fases) */
-p {
-    font-weight: 700;
-    margin-bottom: 0;
-}
-
-.charge-div {
-    margin-top: 20px;
-    padding: 12px 10px;
-    transition: 0.1s ease-in-out;
-}
-
-.charge-div:hover {
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .1);
-}
-
-.white-circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-}
-
-.white-circle #icon {
-    top: 50%;
-    left: 50%;
-    font-size: 1.3rem;
     position: relative;
     transform: translate(-50%, -50%);
 }
