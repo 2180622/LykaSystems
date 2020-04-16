@@ -108,16 +108,15 @@
                 @if (Auth::user()->tipo == "admin")
 
                     <div>
-                        <span class="text-secondary">Agente(s) associados:</span><br>
-
                         @if ($produtos )
+                        <span class="text-secondary">Agente(s) associados:</span><br>
                             @foreach ($produtos as $produto)
                                 {{$produto->idAgente}},{{$produto->idSubAgente}}
                             @endforeach
                         @endif
-
-
                     </div>
+
+                    <br>
 
                     <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
 
@@ -268,6 +267,8 @@
                         {{-- CC IDENTIFICAÇÃO --}}
                         <div><span class="text-secondary">Número de identificação pessoal:</span> {{$client->num_docOficial}}</div>
                         <br>
+                        <div><span class="text-secondary">Data de validade:</span> {{$client->info_docOficial}}</div>
+                        <br>
                         <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
 
 
@@ -392,7 +393,7 @@
                 {{-- Contactos dos PAIS --}}
                 <div class="row mt-4">
                     <div class="col ">
-                        <div><span class="text-secondary">Nome do pai:</span>{{$client->nomePai}}</div><br>
+                        <div><span class="text-secondary">Nome do pai:</span> {{$client->nomePai}}</div><br>
                         <div><span class="text-secondary">Telefone do pai:</span> {{$client->telefonePai}}</div><br>
                         <div><span class="text-secondary">E-mail do pai:</span> {{$client->emailPai}}</div><br>
                     </div>
