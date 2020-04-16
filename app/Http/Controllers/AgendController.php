@@ -61,11 +61,13 @@ class AgendController extends Controller
 
         $agenda = new Agenda;
 
-        $agenda->title = $request->input('titulo');
-        $agenda->description = $request->input('descricao');
-        $agenda->startDate = $request->input('dataInicio');
-        $agenda->endDate = $request->input('dataFim');
-        $agenda->color = $request->input('cor');
+        $agenda->idUser = auth()->user()->idUser;
+
+        $agenda->titulo = $request->input('titulo');
+        $agenda->descricao = $request->input('descricao');
+        $agenda->dataInicio = $request->input('dataInicio');
+        $agenda->dataFim = $request->input('dataFim');
+        $agenda->cor = $request->input('cor');
 
         $agenda->save();
 
