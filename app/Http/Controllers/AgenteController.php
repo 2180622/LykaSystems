@@ -92,41 +92,36 @@ class AgenteController extends Controller
         $user->fill($fieldsUser);
 
 
-        /* Criação de Agente */
-        /* $agent->idAgenteAssociado= $requestAgent->idAgenteAssociado; */
+        /* Criação de SubAgente */
+        $agent->idAgenteAssociado= $requestAgent->idAgenteAssociado;
+
+        // data em que foi criado
+        $t=time();
+        $agent->create_at == date("Y-m-d",$t);
+        $agent->save();
 
         /* Fotografia do agente */
         if ($requestAgent->hasFile('fotografia')) {
             $photo = $requestAgent->file('fotografia');
             $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
+            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
             $agent->save();
         }
-        if ($requestAgent->fotografia==null){
-            $agent->fotografia = null;
-        }
+
 
 
         /* Documento de identificação */
         if ($requestAgent->hasFile('img_doc')) {
             $docfile = $requestAgent->file('img_doc');
             $docImg = $agent->nome . $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-docs/', $docfile, $docImg);
+            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $docfile, $docImg);
             $agent->img_doc = $docImg;
             $agent->save();
         }
-        if ($requestAgent->img_doc==null){
-            $agent->img_doc = null;
-        }
 
 
 
-        // data em que foi criado
-        $t=time();
-        $agent->create_at == date("Y-m-d",$t);
-
-        $agent->save();
 
 
 
@@ -162,10 +157,10 @@ class AgenteController extends Controller
         where('idAgenteAssociado', '=',$agent->idAgente)
         ->get();
 
-
         if ($listagents->isEmpty()) {
             $listagents=null;
         }
+
 
 /*       caso seja um sub-agente, obtem o agente que o adicionou */
          if($agent->tipo=="Subagente"){
@@ -236,10 +231,7 @@ class AgenteController extends Controller
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
             $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            if (!empty($agent->fotografia)) {
-                Storage::disk('public')->delete('agent-photos/' . $agent->fotografia);
-            }
-            Storage::disk('public')->putFileAs('agent-photos/', $photo, $profileImg);
+            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
         }
 
@@ -249,16 +241,13 @@ class AgenteController extends Controller
         if ($request->hasFile('img_doc')) {
             $docfile = $request->file('img_doc');
             $docImg = $agent->nome . $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
-            if (!empty($agent->img_doc)) {
-                Storage::disk('public')->delete('agent-docs/' . $agent->img_doc);
-            }
-            Storage::disk('public')->putFileAs('agent-docs/', $docfile, $docImg);
+            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $docfile, $docImg);
             $agent->img_doc = $docImg;
         }
 
 
 
-        // Caso se mude o de agente para subagente, garante que nenhum o agente não tem id de subagente
+        // Caso se mude o  agente para subagente, garante que nenhum o agente não tem id de subagente ????????????????????????
         DB::table('Agente')
         ->where('idAgente', $agent->idAgente)
         ->update(['idAgenteAssociado' => null]);

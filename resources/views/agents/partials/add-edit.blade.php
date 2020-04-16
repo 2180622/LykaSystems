@@ -192,7 +192,7 @@
 
         <!-- Verifica se a imagem já existe-->
         @if ($agent->fotografia!=null)
-        <img src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" id="preview"
+        <img src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.$agent->nome.'/').$agent->fotografia}}" id="preview"
             class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px;"
             alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
 
@@ -215,12 +215,12 @@
         <div class="card mx-auto p-4 rounded shadow-sm text-center " style="width:80%;min-width:118px;min-height:120px">
 
             @if ( $agent->img_doc!=null)
-                <a href="{{Storage::disk('public')->url('agent-docs/').$agent->img_doc}}" title="Ver documento" id="doc_preview">
+                <a href="#" title="Ver documento" id="doc_preview" class="name_link">
                     <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                     <div id="name_id_file" class="text-muted">{{old('img_doc',$agent->img_doc)}}</div>
                 </a>
             @else
-                <a style="display:none;cursor:pointer" title="Ver documento" id="doc_preview">
+                <a style="display:none;cursor:pointer" title="Ver documento" id="doc_preview" class="name_link">
                     <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                     <div id="name_id_file" class="text-muted">{{old('img_doc',$agent->img_doc)}}</div>
                 </a>
