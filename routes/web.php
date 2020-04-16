@@ -7,7 +7,6 @@ Auth::routes();
 
 /* Route group protected with authentication */
 Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
-
     /* Logout */
     Route::get('/logout', 'Auth\LoginController@logout');
 
