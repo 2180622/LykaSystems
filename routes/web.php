@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Documentos Stock*/
     Route::resource('/documentostock', 'DocumentostockController');
+    Route::post('/fasestock/{fasestock}', 'DocumentostockController@store')->name('documentostock.store');
 
     /* Produtos */
     Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
