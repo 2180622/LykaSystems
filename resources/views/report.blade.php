@@ -40,8 +40,16 @@
     <div class="cards-navigation">
         <div class="title">
             <h6>Reportar um problema</h6>
-            <br>
-            <p>Para reportar um problema basta preencher o formulário abaixo disponível que será enviado para um administrador.</p>
+            <div class="alert alert-warning alert-dismissible fade show shadow-sm mt-4" role="alert">
+                <strong>Olá {{$user->nome.' '.$user->apelido}}!</strong>
+                <p class="mt-3 mb-2">Para reportar um problema basta preencher o formulário abaixo disponível que será enviado para um administrador.</p>
+                <p>O administrador irá ler o seu problema e responder-lhe-á o mais depressa possível com uma solução.</p>
+                <hr>
+                <strong>Obrigado pela atenção.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
         <br>
         <div class="report-card shadow-sm">
