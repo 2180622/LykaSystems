@@ -103,7 +103,7 @@ class AgenteController extends Controller
         /* Fotografia do agente */
         if ($requestAgent->hasFile('fotografia')) {
             $photo = $requestAgent->file('fotografia');
-            $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            $profileImg = $agent->nome . $agent->idCliente .'.'. $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
             $agent->save();
@@ -230,11 +230,10 @@ class AgenteController extends Controller
 
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
-            $profileImg = $agent->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            $profileImg = $agent->nome . $agent->idCliente .'.'. $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
         }
-
 
 
         /* Documento de identificação */
@@ -246,18 +245,18 @@ class AgenteController extends Controller
         }
 
 
-
-        // Caso se mude o  agente para subagente, garante que nenhum o agente não tem id de subagente ????????????????????????
-        DB::table('Agente')
-        ->where('idAgente', $agent->idAgente)
-        ->update(['idAgenteAssociado' => null]);
-
-
         // data em que foi modificado
         $t=time();
         $agent->updated_at == date("Y-m-d",$t);
-
         $agent->save();
+
+
+        // Caso se mude o  agente para subagente, garante que nenhum agente não tem id de subagente
+        if($request->idAgenteAssociado == null){
+        DB::table('Agente')
+        ->where('idAgente', $agent->idAgente)
+        ->update(['idAgenteAssociado' => null]);
+        }
 
 
         /* update do user->email */
