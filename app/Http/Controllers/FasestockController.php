@@ -20,7 +20,7 @@ class FasestockController extends Controller
         $faseStock = new FaseStock();
         $faseStock->fill($faseFields);
         $idProdutoStock = $produtostock->idProdutoStock;
-        // dd($idProdutoStock);
+        
         $faseStock->idProdutoStock = $idProdutoStock;
 
         $faseStock->save();

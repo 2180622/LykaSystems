@@ -62,7 +62,7 @@
                         @foreach ($faseStocks as $faseStock)
                         <tr>
                             {{-- Número de fases --}}
-                            <td><a class="name_link" href="/fasestock/{{$docStock->idFaseStock}}">{{$nrfases++}}</a></td>
+                            <td><a class="name_link" href="/fasestock/{{$faseStock->idFaseStock}}">{{$nrfases++}}</a></td>
                             {{-- Descrição --}}
                             <td>{{$faseStock->descricao}}</td>
                         </tr>

@@ -41,7 +41,7 @@
         <div class="title">
             <h6>Reportar um problema</h6>
             <br>
-            <p>Para reportar um problema basta preencher o formulário abaixo disponível.</p>
+            <p>Para reportar um problema basta preencher o formulário abaixo disponível que será enviado para um administrador.</p>
         </div>
         <br>
         <div class="report-card shadow-sm">
@@ -69,7 +69,7 @@
                     <div class="col-md-6">
                         <label for="telemovel">Número de telemóvel</label>
                         <br>
-                        <input type="text" name="telemovel" placeholder="Inserir número de telemóvel">
+                        <input type="text" name="telemovel" placeholder="Inserir número de telemóvel" value="{{$user->telefone1}}">
                     </div>
                 </div>
                 <br><br>
@@ -83,7 +83,7 @@
         </div>
         <div class="form-group text-right">
             <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">confirmar cobrança</button>
+            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Enviar relatório</button>
             <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
         </div>
         </form>
