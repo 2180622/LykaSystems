@@ -186,7 +186,7 @@
 
 
         /* Apenas numeros:  .numbersOnly();  */
-        $("#telefoneW").numbersOnly();
+        $("#telefone1").numbersOnly();
         $("#telefone2").numbersOnly();
         $("#NIF").numbersOnly();
 

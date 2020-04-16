@@ -11,7 +11,7 @@ class DocPessoal extends Model
     protected $primaryKey = 'idDocPessoal';
 
     protected $fillable = [
-        'tipo','imagem','info','dataValidade','verificacao','$idFase'
+        'idCliente','tipo','imagem','info','dataValidade','verificacao','$idFase'
         ];
 
     public function fase(){

@@ -85,19 +85,33 @@
                                   <div class="col">
                                       {{-- INPUT tipo --}}
                                       <label for="">Tipo (DocumentoStock):</label><br>
-                                      <input type="text" class="form-control" name="tipo" id="tipoDoc"required><br>
+                                      <select type="text" class="form-control" name="tipo" id="tipodocstock" required>
+                                         <option value="Pessoal">Pessoal</option>
+                                         <option value="Academico">Academico</option>
+                                      </select><br>
                                       {{-- INPUT Documento --}}
                                       <label for="">Documento Academico</label>
-                                      <input type="text" class="form-control" name="tipoAcademico" value=""><br><br>
+                                      <select class="form-control" name="tipoAcademico" id="tipoadacemico" >
+                                        <option value="Exame Universitário">Exame Universitário</option>
+                                        <option value="Exame Nacional">Exame Nacional</option>
+                                        <option value="Diploma">Diploma</option>
+                                        <option value="Certificado">Certificado</option>
+                                      </select><br><br>
+
                                       <label for="">Documento Pessoal</label>
-                                      <input type="text" class="form-control" name="tipoPessoal" value="">
+                                      <select class="form-control" name="tipoPessoal" id="tipopessoal" >
+                                        <option value="Passaport">Passaport</option>
+                                        <option value="Cartão Cidadão">Cartão de Cidadão</option>
+                                        <option value="Carta Condução">Carta de Condução</option>
+                                        <option value="Doc. Oficial">Documento Oficial</option>
+                                      </select><br>
                                   </div>
                                 </div>
                             </div>
                       </div>
                       <div class="form-group text-right">
                           <br><br>
-                          <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Fase Stock</button>
+                          <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Documento Stock</button>
                       </div>
                     </form>
                 </table>

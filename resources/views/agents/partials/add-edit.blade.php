@@ -121,10 +121,10 @@
         <div class="row">
 
             <div class="col">
-                {{-- INPUT telefoneW --}}
-                <label for="telefoneW">Telefone (principal):</label><br>
-                <input type="text" class="form-control" name="telefoneW" id="telefoneW"
-                    value="{{old('telefoneW',$agent->telefoneW)}}" placeholder="Insira o telefone" maxlength="20"
+                {{-- INPUT telefone1 --}}
+                <label for="telefone1">Telefone (principal):</label><br>
+                <input type="text" class="form-control" name="telefone1" id="telefone1"
+                    value="{{old('telefone1',$agent->telefone1)}}" placeholder="Insira o telefone" maxlength="20"
                     required>
             </div>
 

@@ -10,6 +10,10 @@
             <form action="/agends/create" method="POST">
                 @csrf
                 <div class="modal-body">
+                    <div class="calendar">
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -53,7 +57,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Guadar</button>
-                    <button type="reset" class="top-button btn_submit bg-danger">Cancelar</button>
+                    <button type="button" class="top-button btn_submit bg-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>

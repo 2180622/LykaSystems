@@ -96,7 +96,7 @@
                 {{-- INPUT dataNasc --}}
                 <label for="dataNasc">Data de nascimento:</label><br>
                 <input type="date" class="form-control" name="dataNasc" id="dataNasc"
-                    value="{{old('dataNasc',$client->dataNasc)}}" style="width:250px" required><br>
+                    value="{{old('dataNasc',$client->dataNasc)}}" style="width:40%" required><br>
             </div>
 
             <div class="col col-4 text-center">
@@ -341,6 +341,11 @@
                     class="form-control">{{old('obsAcademicas',$client->obsAcademicas)}}</textarea>
 
 
+            </div>
+
+            <div class="col">
+                <div class="text-center">Documentos académicos</div><br>
+                <div class="text-muted text-center"><small>++++ (lista de ficheiros) ++++</small></div>
             </div>
 
 

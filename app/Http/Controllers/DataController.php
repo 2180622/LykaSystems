@@ -75,7 +75,7 @@ class DataController extends Controller
         $agente->img_doc = 'default-photos/M.jpg';
         $agente->info_doc = '{"campo1":"NIF","valor1":123456789,
             "campo2":"Data Validade","valor2":"09/12/2025"}';
-        $agente->telefoneW = 932354453;
+        $agente->telefone1 = 932354453;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
         $agente->save();
@@ -94,7 +94,7 @@ class DataController extends Controller
         $agente->img_doc = 'default-photos/F.jpg';
         $agente->info_doc = '{"campo1":"NIF","valor1":321654987,
             "campo2":"Data Validade","valor2":"09/12/2025"}';
-        $agente->telefoneW = 932355555;
+        $agente->telefone1 = 932355555;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
         $agente->save();
@@ -113,7 +113,7 @@ class DataController extends Controller
         $agente->img_doc = 'default-photos/M.jpg';
         $agente->info_doc = '{"campo1":"NIF","valor1":789456123,
             "campo2":"Data Validade","valor2":"09/12/2025"}';
-        $agente->telefoneW = 963423423;
+        $agente->telefone1 = 963423423;
         $agente->telefone2 = null;
         $agente->tipo = 'Subagente';
         $agente->save();
