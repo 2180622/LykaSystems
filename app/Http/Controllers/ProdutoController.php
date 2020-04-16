@@ -41,6 +41,7 @@ class ProdutoController extends Controller
     {
         $cliente = $client;
         $produto = new Produto;
+        $produto->idCLiente = $cliente->idCliente;
         $produtoStock = ProdutoStock::all();
         $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
         $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
@@ -50,7 +51,13 @@ class ProdutoController extends Controller
 
         for($i=0;$i<20;$i++){
             $Fases[] = new Fase;
-            $Responsabilidades[] = new Responsabilidade;
+            $responsabilidade = new Responsabilidade;
+            $responsabilidade->valorCliente = 0;
+            $responsabilidade->valorAgente = 0;
+            $responsabilidade->valorSubAgente = 0;
+            $responsabilidade->valorUniversidade1 = 0;
+            $responsabilidade->valorUniversidade2 = 0;
+            $Responsabilidades[] = $responsabilidade;
         }
 
         return view('produtos.add',compact('produto','produtoStock','cliente','Agentes','SubAgentes','Universidades','Fases','Responsabilidades'));
@@ -68,42 +75,77 @@ class ProdutoController extends Controller
     public function store(StoreProdutoRequest $request){
 
         $fields = $request->all();
-        $produto = new Produto;
-        $produto->fill($fields);
         //dd($fields);
-
-        // data em que foi criado
+        $produto = new Produto;
+        $produto->tipo = $fields['tipo'];
+        $produto->descricao = $fields['descricao'];
+        $produto->anoAcademico = $fields['anoAcademico'];
+        $produto->idCliente = $fields['idCliente'];
+        $produto->idAgente = $fields['agente'];
+        $produto->idSubAgente = $fields['subagente'];
+        $produto->idUniversidade1 = $fields['uni1'];
+        $produto->idUniversidade2 = $fields['uni2'];
+        $produto->valorTotal = 0;
+        $produto->valorTotalAgente = 0;
+        $produto->valorTotalSubAgente = null;
 
         $t=time();
         $produto->create_at == date("Y-m-d",$t);
-
-        //$produto->save();
+        
+        $produto->save();
+        $valorProduto = 0;
+        $valorTAgente = 0;
+        $valorTSubAgente = 0;
 
         for($i=1;$i<=20;$i++){
-            $fase = new Fase;
-            $responsabilidade = new Responsabilidade;
-            //$responsabilidade->descricao = $fields['resp-cliente-fase'.$i];
-            $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
-            $responsabilidade->valorAgente = $fields['resp-agente-fase'.$i];
-            $responsabilidade->valorSubAgente = $fields['resp-subagente-fase'.$i];
-            $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$i];
-            $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$i];
-            $responsabilidade->verificacaoPagoCliente = false;
-            $responsabilidade->verificacaoPagoAgente = false;
-            $responsabilidade->verificacaoPagoSubAgente = false;
-            $responsabilidade->verificacaoPagoUni1 = false;
-            $responsabilidade->verificacaoPagoUni2 = false;
-            $responsabilidade->save();
-            
-            $fase->descricao = $fields['des-fase'.$i];
-            $fase->dataVencimento = date("Y-m-d",$fields['data-fase'.$i]);
-            $fase->valorFase = $fields['resp-agente-fase'.$i];
-            $fase->create_at == date("Y-m-d",$t);
-            //$Responsabilidades[] = new Responsabilidade;
-            dd($fase);
+            if($fields['descricao-fase'.$i]!=null){
+                $fase = new Fase;
+                $responsabilidade = new Responsabilidade;
+                $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
+                $responsabilidade->valorAgente = $fields['resp-agente-fase'.$i];
+                if($produto->idSubAgente){
+                    $responsabilidade->valorSubAgente = $fields['resp-subagente-fase'.$i];
+                }else{
+                    $responsabilidade->valorSubAgente = null;
+                }
+                $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$i];
+                if($produto->idUniversidade2){
+                    $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$i];
+                }else{
+                    $responsabilidade->valorUniversidade2 = null;
+                }
+                $responsabilidade->verificacaoPagoCliente = false;
+                $responsabilidade->verificacaoPagoAgente = false;
+                $responsabilidade->verificacaoPagoSubAgente = false;
+                $responsabilidade->verificacaoPagoUni1 = false;
+                $responsabilidade->verificacaoPagoUni2 = false;
+                $responsabilidade->save();
+                
+
+                $fase->descricao = $fields['descricao-fase'.$i];
+                $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$i]));
+                $fase->idFaseStock = $fields['fase-idStock'.$i];
+                $fase->valorFase = $responsabilidade->valorCliente + $responsabilidade->valorAgente + 
+                    $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 +$responsabilidade->valorUniversidade2;
+                $fase->create_at == date("Y-m-d",$t);
+                $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
+                $fase->idProduto = $produto->idProduto;
+                $fase->save();
+
+
+                $valorProduto = $valorProduto + $fase->valorFase;
+                $valorTAgente = $valorTAgente + $responsabilidade->valorAgente;
+                $valorTSubAgente = $valorTSubAgente + $responsabilidade->valorSubAgente;
+            }
         }
 
-        return redirect()->route('produtos.index')->with('success', 'Produto criada com sucesso');
+        $produto->valorTotal = $valorProduto;
+        $produto->valorTotalAgente = $valorTAgente;
+        if($produto->idSubAgente){
+            $produto->valorTotalSubAgente = $valorTSubAgente;
+        }
+
+        return redirect()->route('produto.show',$produto)->with('success', 'Produto criada com sucesso');
     }
 
 

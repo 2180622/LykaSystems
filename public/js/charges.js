@@ -8,6 +8,6 @@ function sub(obj) {
     document.getElementById("addFileButton").innerHTML = fileName[fileName.length - 1];
 }
 
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
 })

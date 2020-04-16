@@ -121,10 +121,10 @@
         <div class="row">
 
             <div class="col">
-                {{-- INPUT telefoneW --}}
-                <label for="telefoneW">Telefone (principal):</label><br>
-                <input type="text" class="form-control" name="telefoneW" id="telefoneW"
-                    value="{{old('telefoneW',$agent->telefoneW)}}" placeholder="Insira o telefone" maxlength="20"
+                {{-- INPUT telefone1 --}}
+                <label for="telefone1">Telefone (principal):</label><br>
+                <input type="text" class="form-control" name="telefone1" id="telefone1"
+                    value="{{old('telefone1',$agent->telefone1)}}" placeholder="Insira o telefone" maxlength="20"
                     required>
             </div>
 
@@ -161,7 +161,7 @@
 
 
                 {{-- INPUT DOC ID --}}
-                <label for="num_doc">Documento de identificação:</label><br>
+                <label for="num_doc">Número de identificação pessoal:</label><br>
                 <input type="text" class="form-control" name="num_doc" id="num_doc"
                     value="{{old('num_doc',$agent->num_doc)}}" placeholder="Numero de identificação pessoal" required
                     maxlength="50" required>

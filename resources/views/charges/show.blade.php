@@ -35,86 +35,88 @@
             <h6>Secção de cobrança - {{$product->cliente->nome.' '.$product->cliente->apelido}}</h6>
         </div>
         <br>
-        <div class="row mt-3 mb-4">
-            <div class="col">
-                <span class="mr-2">Mostrar</span>
-                <select class="custom-select" id="records_per_page" style="width:80px">
-                    <option selected>10</option>
-                    <option>25</option>
-                    <option>50</option>
-                    <option>100</option>
-                </select>
-                <span class="ml-2">por página</span>
-            </div>
-            <div class="col ">
-                <div class="input-group pl-0 float-right" style="width:250px">
-                    <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
-                    <div class="input-group-append">
-                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="table-responsive " style="overflow:hidden">
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
-                {{-- Cabeçalho da tabela --}}
-                <thead>
-                    <tr>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Data de Vencimento</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                {{-- Corpo da tabela --}}
-                <tbody>
-                    @foreach ($fases as $fase)
-                    <tr>
-                        {{-- Nome e Apelido --}}
-                        <td><a class="name_link" href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">{{$fase->descricao}}</a></td>
-                        {{-- Descrição --}}
-                        <td
-                        @if (count($fase->DocTransacao))
-                        @foreach ($fase->DocTransacao as $paymentProof)
-                          @if ($fase->valorFase > $paymentProof->valorRecebido)
-                            style="color:#FF3D00;"
-                          @elseif ($fase->valorFase == $paymentProof->valorRecebido)
-                            style="color:#47BC00;"
-                          @else
-                            style="color:blue;"
-                          @endif
-                        @endforeach
-                      @endif
-                        >
-                          @if (count($fase->DocTransacao))
-                            @foreach ($fase->DocTransacao as $paymentProof)
-                              @if ($fase->verificacaoPago == 0 && $paymentProof->valorRecebido != null)
-                              {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, '.', '')}}€
-                              @else
-                                {{$fase->valorFase}}€
-                              @endif
-                            @endforeach
-                          @else
-                            {{$fase->valorFase}}€
-                          @endif
-                        </td>
-
-                        <td><?=date('d/m/Y', strtotime($fase->dataVencimento))?></td>
-                        {{-- Estado --}}
-                        <td>
-                            @if ($fase->verificacaoPago == 0)
-                            Pendente
-                            @else
-                            Pago
-                            @endif
-                        </td>
-                    </tr>
+        @foreach ($fases as $fase)
+        <div class="container">
+            @if (count($fase->DocTransacao))
+            @foreach ($fase->DocTransacao as $paymentProof)
+            @if ($paymentProof->valorRecebido != null)
+            <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}/{{$paymentProof->idDocTransacao}}/edit">
+                @else
+                <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
+                    @endif
                     @endforeach
-                </tbody>
-            </table>
+                    @else
+                    <a href="/charges/{{$product->idProduto}}/{{$fase->idFase}}">
+                        @endif
+                        <div class="row charge-div">
+                            <div class="col-md-1 align-self-center">
+                                <div class="white-circle">
+                                    <ion-icon name="{{$fase->icon}}" id="icon"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-truncate align-self-center ml-4">
+                                <p>{{$fase->descricao}}</p>
+                            </div>
+                            <div class="col-md-2 text-truncate align-self-center">
+                                <p @if (count($fase->DocTransacao))
+                                @foreach ($fase->DocTransacao as $paymentProof)
+                                @if ($fase->valorFase > $paymentProof->valorRecebido)
+                                style="color:#FF3D00;"
+                                @elseif ($fase->valorFase == $paymentProof->valorRecebido)
+                                style="color:#47BC00;"
+                                @else
+                                style="color:#FF3D00;"
+                                @endif
+                                @endforeach
+                                @endif
+                                >
+                                @if (count($fase->DocTransacao))
+                                  @foreach ($fase->DocTransacao as $paymentProof)
+                                    @if ($paymentProof->valorRecebido != null && $fase->verificacaoPago == 0)
+                                      {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, ',', '')}}€
+                                    @else
+                                      {{number_format((float)$fase->valorFase, 2, ',', '')}}€
+                                    @endif
+                                  @endforeach
+                                @else
+                                  {{number_format((float)$fase->valorFase, 2, ',', '')}}€
+                                @endif
+                                </p>
+                            </div>
+                            <div class="col-md-2 text-truncate align-self-center ml-auto">
+                              <?php
+                                $currentdate = date_create(date('d-m-Y'));
+                                $paymentdate = date_create(date('d-m-Y', strtotime($fase->dataVencimento)));
+                                $datediff = (date_diff($currentdate,$paymentdate))->days;
+                              ?>
+                                <p @if ($datediff <= 7 && $fase->verificacaoPago == 0) style="color:#FF3D00;" @endif>
+                                  <?=date('d/m/Y', strtotime($fase->dataVencimento))?>
+                                </p>
+                            </div>
+                            <div class="col-md-2 text-truncate align-self-center ml-auto">
+                                <p>
+                                    @if (count($fase->DocTransacao))
+                                    @foreach ($fase->DocTransacao as $paymentProof)
+                                    @if ($fase->valorFase > $paymentProof->valorRecebido)
+                                    Dívida
+                                    @elseif ($fase->valorFase < $paymentProof->valorRecebido)
+                                        Crédito
+                                        @else
+                                        Pago
+                                        @endif
+                                        @endforeach
+                                        @else
+                                        Pendente
+                                        @endif
+                                </p>
+                            </div>
+                        </div>
+                    </a>
         </div>
+        @endforeach
     </div>
 </div>
-
+@section('scripts')
+<script src="{{asset('/js/charges.js')}}"></script>
+@endsection
 @endsection

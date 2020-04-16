@@ -21,27 +21,26 @@ class Cliente extends Migration
             $table->string('apelido',255);
             $table->enum('genero',['F','M']);
             $table->string('email',255)->unique();
-                //$table->unique('email');
+
             $table->string('telefone1',255);
             $table->string('telefone2',255)->nullable();
             $table->date('dataNasc');
-            //$table->date('dataValidPP');
-            //$table->string('localEmissaoPP',255);
+
             $table->string('paisNaturalidade',255);
             $table->string('morada',255);
             $table->string('cidade',255);
             $table->string('moradaResidencia',255);
-            //$table->string('passaportPaisEmi',255);
+
             $table->string('nomePai',255)->nullable();
             $table->string('telefonePai',255)->nullable();
             $table->string('emailPai',255)->nullable();
             $table->string('nomeMae',255)->nullable();
             $table->string('telefoneMae',255)->nullable();
             $table->string('emailMae',255)->nullable();
-            $table->string('fotografia',255)->nullable()->default('default.png');
-            $table->string('NIF',255)->unique();
-                //$table->unique('NIF');
-            $table->string('IBAN',255);
+            $table->string('fotografia',255)->nullable()->default(null);
+            $table->string('NIF',255)->unique()->default(null);
+
+            $table->string('IBAN',255)->nullable();
             $table->integer('nivEstudoAtual');
             $table->string('nomeInstituicaoOrigem',255);
             $table->string('cidadeInstituicaoOrigem',255);

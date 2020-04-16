@@ -95,6 +95,8 @@
 
                 <div><span class="text-secondary font-weight-bold">E-mail:</span> {{$agent->email}}</div><br>
 
+                <div><span class="text-secondary font-weight-bold">Número de identificação pessoal:</span> {{$agent->NIF}} {{$agent->num_doc}}</div>
+
                 <div><span class="text-secondary font-weight-bold">NIF:</span> {{$agent->NIF}} {{$agent->NIF}}</div><br>
 
                 <div><span class="text-secondary font-weight-bold">Adicionado em:
@@ -120,7 +122,7 @@
 
         </div>
 
-        <br>
+{{--         <br>
         <hr style="border:1px solid lightgray"><br>
 
         <div class="row text-center">
@@ -129,11 +131,12 @@
 
                 @if ($agent->img_doc)
                     <div><span class="text-secondary font-weight-bold">Documento de identificação:</div><br>
-                    <img src="{{Storage::disk('public')->url('agent-docs/').$agent->img_doc}}" width="70%"/>
+                        <embed src="{{Storage::disk('public')->url('agent-docs/').$agent->img_doc}}#toolbar=0" width="70%" height="900px">
+
                 @endif
 
             </div>
-        </div>
+        </div> --}}
 
     </div>
 

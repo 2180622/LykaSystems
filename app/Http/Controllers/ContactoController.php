@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contacto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateContactoRequest;
 use App\Http\Requests\StoreContactoRequest;
@@ -18,7 +19,12 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        $contacts = Contacto::all();
+
+
+        $contacts = Contacto::
+        where('Contacto.idUser', '=', Auth::user()->idUser)
+        ->get();
+
         $totalcontacts = $contacts->count();
 
         return view('contacts.list', compact('contacts', 'totalcontacts'));
@@ -52,12 +58,9 @@ class ContactoController extends Controller
             $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
             $contact->fotografia = $profileImg;
-            $contact->save();
         }
 
-        if ($request->fotografia==null){
-            $contact->fotografia = null;
-        }
+        $contact->idUser = Auth::user()->idUser;
 
         // data em que foi criado
         $t=time();
@@ -75,6 +78,9 @@ class ContactoController extends Controller
      */
     public function show(contacto $contact)
     {
+
+
+
         return view('contacts.show',compact("contact"));
     }
 

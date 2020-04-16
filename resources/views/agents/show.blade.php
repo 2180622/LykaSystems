@@ -101,13 +101,13 @@
 
                 <div><span class="text-secondary">Morada:</span> {{$agent->morada}}</div><br>
 
-                <div><span class="text-secondary">Telefone (principal):</span> {{$agent->telefoneW}}</div>
+                <div><span class="text-secondary">Telefone (principal):</span> {{$agent->telefone1}}</div>
 
                 <div><span class="text-secondary">Telefone (alternativo):</span> {{$agent->telefone2}}</div><br>
 
                 <div><span class="text-secondary">E-mail:</span> {{$agent->email}}</div><br>
 
-                <div><span class="text-secondary">N. Documento Identificação:</span> {{$agent->num_doc}}</div>
+                <div><span class="text-secondary">Número de identificação pessoal:</span> {{$agent->num_doc}}</div>
 
                 <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 
@@ -124,7 +124,7 @@
             @if ( Auth::user()->tipo == "admin" || Auth::user()->agente->tipo == "Agente"  )
                 <div class="col p-2" style="min-width:280px !important">
 
-                        <div class="mb-2 text-muted">Lista de subagentes:</div>
+                        <div class="mb-2 text-muted">Subagentes:</div>
 
                         @if($listagents==null)
                             <div class="text-muted"><small>(sem registos)</small></div>

@@ -11,7 +11,7 @@ class DocAcademico extends Model
     protected $primaryKey = 'idDocAcademico';
 
     protected $fillable = [
-        'nome','tipo','imagem','info','verificacao','$idFase'
+        'idCliente','nome','tipo','imagem','info','verificacao','$idFase'
         ];
 
     public function fase(){

@@ -39,19 +39,6 @@
     </li>
 
 
-
-
-
-    {{-- MENU: Adicionar produto --}}
-    @if ($client->idCliente==null)
-    <li class="nav-item">
-        <a class="nav-link" id="addproduct-tab" data-toggle="tab" href="#addproduct" role="tab"
-            aria-controls="addproduct" aria-selected="false"><i
-                class="fas fa-exclamation-circle text-danger warning_sign mr-2" id="warning_addproduct"
-                title="Existem campos obrigatórios por preencher"></i>Produto</a>
-    </li>
-    @endif
-
 </ul>
 
 <div class="tab-content p-2 mt-3" id="myTabContent">
@@ -109,7 +96,7 @@
                 {{-- INPUT dataNasc --}}
                 <label for="dataNasc">Data de nascimento:</label><br>
                 <input type="date" class="form-control" name="dataNasc" id="dataNasc"
-                    value="{{old('dataNasc',$client->dataNasc)}}" style="width:250px" required><br>
+                    value="{{old('dataNasc',$client->dataNasc)}}" style="width:40%" required><br>
             </div>
 
             <div class="col col-4 text-center">
@@ -130,8 +117,7 @@
                     class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
                     alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
                 @endif
-                {{--                 <div class="mt-3" style="min-width:139px"><a href="#" id="search_btn" class="top-button">Procurar
-                        ficheiro</a></div> --}}
+                <br><small class="text-muted">(clique para mudar)</small>
             </div>
         </div>
 
@@ -166,7 +152,7 @@
                     <div class="col">
                         <label for="dataValidade_docOficial">Data de validade:</label><br>
                         <input type="date" class="form-control" name="dataValidade_docOficial"
-                            id="dataValidade_docOficial" value="">
+                            id="dataValidade_docOficial" value="{{old('info_docOficial',$client->info_docOficial)}}">
                     </div>
                 </div>
 
@@ -228,13 +214,13 @@
                         {{-- INUPUT numPassaport --}}
                         <label for="numPassaport">Número do passaporte:</label><br>
                         <input type="text" class="form-control" name="numPassaport" id="numPassaport"
-                            value="{{old('numPassaport',$client->numPassaport)}}" required maxlength="20">
+                            value="{{$infosPassaport->numPassaport ?? null }}" required maxlength="20">
                     </div>
                     <div class="col">
                         {{-- INUPUT dataValidPP --}}
                         <label for="dataValidPP">Data de validade do passaporte:</label><br>
                         <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                            value="{{old('dataValidPP',$client->dataValidPP)}}" required>
+                            value="{{$infosPassaport->dataValidPP ?? null }}" required>
                     </div>
                 </div>
 
@@ -245,7 +231,7 @@
                         {{-- INUPUT passaportPaisEmi --}}
                         <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
                         <input type="hidden" id="hidden_passaportPaisEmi"
-                            value="{{old('passaportPaisEmi',$client->passaportPaisEmi)}}">
+                            value="{{$infosPassaport->passaportPaisEmi ?? null }}">
                         <select id="passaportPaisEmi" name="passaportPaisEmi" class="form-control" required>
                             @include('clients.partials.countries');
                         </select>
@@ -254,7 +240,7 @@
                         {{-- INUPUT localEmissaoPP --}}
                         <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                         <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                            value="{{old('localEmissaoPP',$client->localEmissaoPP)}}" maxlength="30" required>
+                            value="{{$infosPassaport->localEmissaoPP ?? null }}" maxlength="30" required>
                     </div>
                 </div>
 
@@ -355,6 +341,11 @@
                     class="form-control">{{old('obsAcademicas',$client->obsAcademicas)}}</textarea>
 
 
+            </div>
+
+            <div class="col">
+                <div class="text-center">Documentos académicos</div><br>
+                <div class="text-muted text-center"><small>++++ (lista de ficheiros) ++++</small></div>
             </div>
 
 
@@ -462,16 +453,6 @@
 
     </div>
 
-
-
-
-
-    {{-- Conteudo: Adicionar Produto --}}
-    @if ($client->idCliente==null)
-    <div class="tab-pane fade" id="addproduct" role="tabpanel" aria-labelledby="addproduct-tab">
-        Formulário para adicionar produto
-    </div>
-    @endif
 
 
 </div>
