@@ -36,7 +36,7 @@
         <br>
         <div class="payment-card shadow-sm">
             <p>VALOR A COBRAR:</p>
-            <p>&nbsp;{{($fase->valorFase)}}€</p>
+            <p>&nbsp;{{number_format((float)$fase->valorFase, 2, ',', '')}}€</p>
             <br><br>
             <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post" enctype="multipart/form-data" name="chargeForm">
                 @csrf
