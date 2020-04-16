@@ -86,7 +86,7 @@
 
 
 
-                <div><span class="text-secondary font-weight-bold">Telefone:</span> {{$agent->telefoneW}}
+                <div><span class="text-secondary font-weight-bold">Telefone:</span> {{$agent->telefone1}}
                     @if ($agent->telefone2!=null)
                     / {{$agent->telefone2}}
                     @endif
@@ -109,7 +109,7 @@
 
                 @if($agent->fotografia)
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('agent-photos/').$agent->fotografia}}" style="width:90%">
+                    src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.$agent->nome.'/').$agent->fotografia}}" style="width:90%">
                 @elseif($agent->genero == 'F')
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
                     src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">

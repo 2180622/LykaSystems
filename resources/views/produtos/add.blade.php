@@ -170,23 +170,23 @@
                                 <div class="col mr-3">
                                     <div><span><b>Responsabilidades</b></span></div><br>
                                     <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
-                                    <input type="number" min="0" placeholder="0.00" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
-                                    value="{{old('valorCliente',$Responsabilidades[$num-1]->valorCliente)}}" style="width:250px"><br>
+                                    <input type="number" min="0" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
+                                    value="{{old('valorCliente',$Responsabilidades[$num-1]->valorCliente)}}" style="width:250px" required><br>
                     
                                     <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
-                                    <input type="number" min="0" placeholder="0.00" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
-                                    value="{{old('valorAgente',$Responsabilidades[$num-1]->valorAgente)}}" style="width:250px"><br>
+                                    <input type="number" min="0" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
+                                    value="{{old('valorAgente',$Responsabilidades[$num-1]->valorAgente)}}" style="width:250px" required><br>
                     
                                     <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
-                                    <input type="number" min="0" placeholder="0.00" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
+                                    <input type="number" min="0" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
                                     value="{{old('valorSubAgente',$Responsabilidades[$num-1]->valorSubAgente)}}" style="width:250px"><br>
                     
                                     <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
-                                    <input type="number" min="0" placeholder="0.00" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
-                                    value="{{old('valorUniversidade1',$Responsabilidades[$num-1]->valorUniversidade1)}}" style="width:250px"><br>
+                                    <input type="number" min="0" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
+                                    value="{{old('valorUniversidade1',$Responsabilidades[$num-1]->valorUniversidade1)}}" style="width:250px" required><br>
                     
                                     <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
-                                    <input type="number" min="0" placeholder="0.00" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
+                                    <input type="number" min="0" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
                                     value="{{old('valorUniversidade2',$Responsabilidades[$num-1]->valorUniversidade2)}}" style="width:250px"><br>
                                 </div>
 

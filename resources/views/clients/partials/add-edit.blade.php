@@ -109,9 +109,10 @@
 
                 <!-- Verifica se a imagem já existe-->
                 @if ($client->fotografia!=null)
-                <img src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" id="preview"
-                    class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
-                    alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+                <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}"
+                    id="preview" class="m-2 p-1 rounded bg-white shadow-sm"
+                    style="width:80%;cursor:pointer;min-width:118px" alt="Imagem de apresentação"
+                    title="Clique para mudar a imagem de apresentação" />
                 @else
                 <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
                     class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
@@ -130,8 +131,6 @@
             </div>
         </div>
     </div>
-
-
 
 
 
@@ -177,15 +176,15 @@
                     style="width:80%;min-width:118px;min-height:120px">
 
                     @if ( $client->img_docOficial!=null)
-                    <a href="{{Storage::disk('public')->url('client-documents/').$client->img_docOficial}}"
-                        title="Clique adicionar o documento de identificação" id="doc_id_preview">
+                    <a href="#" title="Clique adicionar o documento de identificação" id="doc_id_preview"
+                        class="name_link">
                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                         <div id="name_doc_id_file" class="text-muted">{{old('img_docOficial',$client->img_docOficial)}}
                         </div>
                     </a>
                     @else
                     <a style="display:none;cursor:pointer" title="Clique adicionar o documento de identificação"
-                        id="doc_id_preview">
+                        id="doc_id_preview" class="name_link">
                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                         <div id="name_doc_id_file" class="text-muted">
                             {{old('img_docOficial',$client->img_docOficial)}}</div>
@@ -260,14 +259,14 @@
                     style="width:80%;min-width:118px;min-height:120px">
 
                     @if ( $client->img_Passaport!=null)
-                    <a href="{{Storage::disk('public')->url('client-documents/').$client->img_Passaport}}"
-                        title="Clique adicionar o passaporte" id="passport_preview">
+                    <a href="#" title="Clique adicionar o passaporte" id="passport_preview" class="name_link">
                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                         <div id="name_passaport_file" class="text-muted">{{old('img_Passaport',$client->img_Passaport)}}
                         </div>
                     </a>
                     @else
-                    <a style="display:none;cursor:pointer" title="Clique adicionar o passaporte" id="passport_preview">
+                    <a style="display:none;cursor:pointer" class="name_link" title="Clique adicionar o passaporte"
+                        id="passport_preview">
                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                         <div id="name_passaport_file" class="text-muted">{{old('img_Passaport',$client->img_Passaport)}}
                         </div>
