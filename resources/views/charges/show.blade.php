@@ -51,7 +51,7 @@
                         <div class="row charge-div">
                             <div class="col-md-1 align-self-center">
                                 <div class="white-circle">
-                                    <ion-icon name="cube" id="cube-icon"></ion-icon>
+                                    <ion-icon name="{{$fase->icon}}" id="icon"></ion-icon>
                                 </div>
                             </div>
                             <div class="col-md-3 text-truncate align-self-center ml-4">
@@ -71,15 +71,15 @@
                                 @endif
                                 >
                                 @if (count($fase->DocTransacao))
-                                @foreach ($fase->DocTransacao as $paymentProof)
-                                @if ($paymentProof->valorRecebido != null)
-                                {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, ',', '')}}€
+                                  @foreach ($fase->DocTransacao as $paymentProof)
+                                    @if ($paymentProof->valorRecebido != null && $fase->verificacaoPago == 0)
+                                      {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, ',', '')}}€
+                                    @else
+                                      {{number_format((float)$fase->valorFase, 2, ',', '')}}€
+                                    @endif
+                                  @endforeach
                                 @else
-                                {{number_format((float)$fase->valorFase, 2, ',', '')}}€
-                                @endif
-                                @endforeach
-                                @else
-                                {{number_format((float)$fase->valorFase, 2, ',', '')}}€
+                                  {{number_format((float)$fase->valorFase, 2, ',', '')}}€
                                 @endif
                                 </p>
                             </div>
@@ -89,18 +89,18 @@
                             <div class="col-md-2 text-truncate align-self-center ml-auto">
                                 <p>
                                     @if (count($fase->DocTransacao))
-                                      @foreach ($fase->DocTransacao as $paymentProof)
-                                        @if ($fase->valorFase > $paymentProof->valorRecebido)
-                                          Dívida
-                                          @elseif ($fase->valorFase < $paymentProof->valorRecebido)
-                                            Crédito
-                                          @else
-                                            Pago
+                                    @foreach ($fase->DocTransacao as $paymentProof)
+                                    @if ($fase->valorFase > $paymentProof->valorRecebido)
+                                    Dívida
+                                    @elseif ($fase->valorFase < $paymentProof->valorRecebido)
+                                        Crédito
+                                        @else
+                                        Pago
                                         @endif
-                                      @endforeach
-                                      @else
+                                        @endforeach
+                                        @else
                                         Pendente
-                                    @endif
+                                        @endif
                                 </p>
                             </div>
                         </div>

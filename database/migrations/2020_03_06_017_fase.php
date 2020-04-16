@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class Fase extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('Fase', function (Blueprint $table) {
@@ -19,16 +14,16 @@ class Fase extends Migration
             $table->bigIncrements('idFase');
             $table->string('descricao',255);
             $table->dateTime('dataVencimento');
-            $table->timestamps();
             $table->decimal('valorFase', 18, 2);
             $table->boolean('verificacaoPago')->default(false);
+            $table->string('icon', 100)->nullable();
             $table->unsignedBigInteger('idProduto');
                 $table->foreign('idProduto')->references('idProduto')->on('Produto');
             $table->unsignedBigInteger('idFaseStock');
                 $table->foreign('idFaseStock')->references('idFaseStock')->on('FaseStock');
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
-        
+            $table->timestamps();
             $table->softDeletes();
             });
     }

@@ -477,11 +477,14 @@ class DataController extends Controller
 
         /*********************          Fases          *********************/
 
+        $icons = array('cube', 'layers', 'copy', 'book');
+
         $fase = new Fase;
         $fase->descricao = 'Inscrição';
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('16-03-2020 15:00'));
         $fase->valorFase = 50;
         $fase->verificacaoPago = false;
+        $fase->icon = $icons[array_rand($icons)];
         $fase->idProduto = 1;
         $fase->idFaseStock = 1;
         $fase->idResponsabilidade = 1;
@@ -492,6 +495,7 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
         $fase->valorFase = 300;
         $fase->verificacaoPago = false;
+        $fase->icon = $icons[array_rand($icons)];
         $fase->idProduto = 1;
         $fase->idFaseStock = 2;
         $fase->idResponsabilidade = 2;
@@ -502,6 +506,7 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $fase->valorFase = 1000;
         $fase->verificacaoPago = false;
+        $fase->icon = $icons[array_rand($icons)];
         $fase->idProduto = 1;
         $fase->idFaseStock = 3;
         $fase->idResponsabilidade = 3;
@@ -512,6 +517,7 @@ class DataController extends Controller
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('01-07-2021 18:30'));
         $fase->valorFase = 150;
         $fase->verificacaoPago = false;
+        $fase->icon = $icons[array_rand($icons)];
         $fase->idProduto = 1;
         $fase->idFaseStock = 4;
         $fase->idResponsabilidade = 4;
