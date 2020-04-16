@@ -14,7 +14,7 @@
     <div class="float-right">
         <a href="{{route('report')}}" class="top-button">reportar problema</a>
     </div>
-    <br>
+    <br><br>
     <div class="cards-navigation">
         <div class="title">
             <h6>Navegação rápida</h6>

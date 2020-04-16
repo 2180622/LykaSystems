@@ -56,23 +56,34 @@
             <form action="{{route('report.send')}}" method="get" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-md-12">
-                        <label for="nomeCompleto">Nome completo</label>
+                    <div class="col-md-6">
+                        <label for="nomeCompleto">Nome completo*</label>
                         <br>
-                        <input type="text" name="nomeCompleto" placeholder="Inserir nome completo" autocomplete="off" value="{{$user->nome.' '.$user->apelido}}">
+                        <input type="text" name="nomeCompleto" placeholder="Inserir nome completo" autocomplete="off" value="{{$user->nome.' '.$user->apelido}}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email">Endereço eletrónico*</label>
+                        <br>
+                        <input type="text" name="email" placeholder="Inserir endereço eletrónico" value="{{$user->email}}" required>
                     </div>
                 </div>
                 <br><br>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="email">Endereço eletrónico</label>
-                        <br>
-                        <input type="text" name="email" placeholder="Inserir endereço eletrónico" value="{{$user->email}}">
-                    </div>
-                    <div class="col-md-6">
                         <label for="telemovel">Número de telemóvel</label>
                         <br>
                         <input type="text" name="telemovel" placeholder="Inserir número de telemóvel" value="{{$user->telefone1}}">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="help-button" id="tooltipScreenshot" data-toggle="tooltip" data-placement="top" title="Para ajudar melhor a compreender o problema, pode inserir uma captura de ecrã que ilustre o erro que está a visualizar.">
+                            <span>
+                                ?
+                            </span>
+                        </div>
+                        <label for="screenshot">Captura de ecrã</label>
+                        <br>
+                        <input type="file" name="screenshot" id="upfile" onchange="sub(this)">
+                        <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
                     </div>
                 </div>
                 <br><br>
@@ -83,9 +94,9 @@
                                 ?
                             </span>
                         </div>
-                        <label for="relatorio">Relatório do problema</label>
+                        <label for="relatorio">Relatório do problema*</label>
                         <br>
-                        <textarea name="relatorio" rows="5" placeholder="Inserir um relatório acerca problema"></textarea>
+                        <textarea name="relatorio" rows="5" placeholder="Inserir um relatório acerca problema" required></textarea>
                     </div>
                 </div>
         </div>
@@ -99,6 +110,16 @@
 </div>
 @section('scripts')
 <script type="text/javascript">
+    function getFile() {
+        document.getElementById("upfile").click();
+    }
+
+    function sub(obj) {
+        var file = obj.value;
+        var fileName = file.split("\\");
+        document.getElementById("addFileButton").innerHTML = fileName[fileName.length - 1];
+    }
+
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
