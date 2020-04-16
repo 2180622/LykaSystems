@@ -75,7 +75,7 @@ class ProdutoController extends Controller
     public function store(StoreProdutoRequest $request){
 
         $fields = $request->all();
-        //dd($fields);
+
         $produto = new Produto;
         $produto->tipo = $fields['tipo'];
         $produto->descricao = $fields['descricao'];
@@ -85,9 +85,6 @@ class ProdutoController extends Controller
         $produto->idSubAgente = $fields['subagente'];
         $produto->idUniversidade1 = $fields['uni1'];
         $produto->idUniversidade2 = $fields['uni2'];
-        $produto->valorTotal = 0;
-        $produto->valorTotalAgente = 0;
-        $produto->valorTotalSubAgente = null;
 
         $t=time();
         $produto->create_at == date("Y-m-d",$t);
@@ -144,8 +141,9 @@ class ProdutoController extends Controller
         if($produto->idSubAgente){
             $produto->valorTotalSubAgente = $valorTSubAgente;
         }
+        $produto->save();
 
-        return redirect()->route('produto.show',$produto)->with('success', 'Produto criada com sucesso');
+        return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto criada com sucesso');
     }
 
 
