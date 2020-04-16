@@ -1,4 +1,7 @@
-
+/* Navigation Cards (DASHBOARD) */
+.card-navigation:hover {
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .2);
+}
 
 /* Report Navigation Style */
 .report {

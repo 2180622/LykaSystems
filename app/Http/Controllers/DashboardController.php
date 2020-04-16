@@ -20,9 +20,9 @@ class DashboardController extends Controller{
     }
 
     public function index(){
-        $agente = Agente::all();
-        $cliente = Cliente::all();
-        $universidade = Universidade::all();
+        $agentes = Agente::all();
+        $clientes = Cliente::all();
+        $universidades = Universidade::all();
 
         $AllNotifications = Notificacao::all();
 
@@ -31,7 +31,7 @@ class DashboardController extends Controller{
         $this->NotController->getNotificacaoFaseAcaba($AllNotifications);
         $this->NotController->getNotificacaoDocFalta($AllNotifications);
 
-        return view('index', compact('agente', 'cliente', 'universidade'));
+        return view('index', compact('agentes', 'clientes', 'universidades'));
     }
 
     public function report()
