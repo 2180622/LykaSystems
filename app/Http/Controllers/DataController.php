@@ -209,31 +209,25 @@ class DataController extends Controller
 
         $conta = new Conta;
         $conta->descricao = 'CGD Leiria';
-        $conta->local = 'Leiria';
+        $conta->instituicao = 'Caixa Geral de Depósitos';
+        $conta->titular = 'Estudar Portugal';
+        $conta->morada = 'Praça Goa Damäo e Diu, 2400 - 147 Leiria';
         $conta->numConta = rand(999999, 9999999999);
         $conta->IBAN = '8843H ERUE4 G9Y34 G9HG3 EG8U9';
-        $conta->instituicao = 'CGD';
-        $conta->telefone = 912345678;
+        $conta->SWIFT = 'DS26E HD23D ASD55 62DS6 FWW23';
+        $conta->contacto = 244032452;
         $conta->obsConta = null;
         $conta->save();
 
         $conta = new Conta;
-        $conta->descricao = 'Banco Bic Leiria';
-        $conta->local = 'Leiria';
+        $conta->descricao = 'EuroBic Leiria';
+        $conta->instituicao = 'EuroBic';
+        $conta->titular = 'Estudar Portugal';
+        $conta->morada = 'R. 25 de Abril 168, 2415-602 Leiria';
         $conta->numConta = rand(999999, 9999999999);
-        $conta->IBAN = 'G9Y34 AS25D GD5V4 ERUE4 EG8U9';
-        $conta->instituicao = 'Bic';
-        $conta->telefone = 912365498;
-        $conta->obsConta = null;
-        $conta->save();
-
-        $conta = new Conta;
-        $conta->descricao = 'Paypal Estudar Portugal';
-        $conta->local = 'Internet';
-        $conta->numConta = rand(999999, 9999999999);
-        $conta->IBAN = 'EG8U9 PRUE4 G9Y34 O9HG3 EA8U1';
-        $conta->instituicao = 'Paypal';
-        $conta->telefone = 912784563;
+        $conta->IBAN = '99DAS DAS25 23DSD 56KJI PO12L';
+        $conta->SWIFT = 'TR23R 89DSA GH1H2 KM22N T12G1';
+        $conta->contacto = 'eurobic@mail.com';
         $conta->obsConta = null;
         $conta->save();
 

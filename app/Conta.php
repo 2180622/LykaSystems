@@ -13,7 +13,7 @@ class Conta extends Model
     protected $primaryKey = 'idConta';
 
     protected $fillable = [
-        'descricao','local','numConta','IBAN','instituicao','telefone','obsConta'
+        'descricao', 'instituicao', 'titular', 'morada', 'numConta', 'IBAN', 'SWIFT', 'contacto', 'obsConta'
     ];
 
     public function pagoResponsabilidade(){
