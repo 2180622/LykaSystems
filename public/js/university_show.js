@@ -9,12 +9,8 @@ $(document).ready(function () {
             },
             {
                 "orderable": false,
-                "targets": 2
-            },
-            {
-                "orderable": false,
                 "width": "130px",
-                "targets": 5
+                "targets": 4
             },
         ],
 
@@ -60,7 +56,7 @@ $(document).ready(function () {
 
 
     /* OPÇÃO DE APAGAR */
-    var formToSubmit //Variavel para indicar o forumulário a submeter
+/*     var formToSubmit //Variavel para indicar o forumulário a submeter
 
     $(".form_university_id").submit(function (e) {
         e.preventDefault();
@@ -74,23 +70,7 @@ $(document).ready(function () {
         formToSubmit.submit();
     });
 
-
-
-
-
-
-    /* VALIDAÇÃO DE INPUTS */
-
-    /* Apenas letras:  .lettersOnly();  */
-/*     $("#inputNome").lettersOnly(); */
-
-    /* Apenas numeros:  .numbersOnly();  */
-    $("#inputTelefone").numbersOnly();
-    $("#inputNIF").numbersOnly();
-    $("#inputIBAN").numbersOnly();
-
-
-
+ */
 
 
 });
