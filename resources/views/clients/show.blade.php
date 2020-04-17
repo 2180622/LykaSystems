@@ -248,20 +248,20 @@
 
                     <div class="col mr-3">
                         {{-- numPassaport --}}
-                        <div><span class="text-secondary">Número do passaporte:</span> {{$infosPassaport->numPassaport}}</div>
+                        <div><span class="text-secondary">Número do passaporte:</span> {{--$infosPassaport->numPassaport--}}</div>
                         <br>
 
                         {{-- dataValidPP --}}
                         <div><span class="text-secondary">Data de validade do passaporte:</span>
-                            {{$infosPassaport->dataValidPP}}</div><br>
+                            {{--$infosPassaport->dataValidPP--}}</div><br>
 
                         {{-- passaportPaisEmi --}}
                         <div><span class="text-secondary">Pais emissor do passaporte:</span>
-                            {{$infosPassaport->passaportPaisEmi}}</div><br>
+                            {{--$infosPassaport->passaportPaisEmi--}}</div><br>
 
                         {{-- localEmissaoPP --}}
                         <div><span class="text-secondary">Local de emissão do passaporte:</span>
-                            {{$infosPassaport->localEmissaoPP}}</div><br>
+                            {{--$infosPassaport->localEmissaoPP--}}</div><br>
 
                         <hr><br>
                         {{-- CC IDENTIFICAÇÃO --}}

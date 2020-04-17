@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateProdutoRequest;
 use App\Http\Requests\StoreProdutoRequest;
-use App\Http\Requests\UpdateFaseRequest;
-use App\Http\Requests\StoreFaseRequest;
 
 class ProdutoController extends Controller
 {
@@ -196,32 +194,8 @@ class ProdutoController extends Controller
         $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
         $Universidades = Universidade::all();
         $fases = $produto->fase;
-        $responsabilidades = null;
-        $relacoes = null;
-        $i=0;
-        foreach($fases as $fase){
-            $resp = $fase->responsabilidade;
-            $responsabilidades[$i]['idFase'] = $fase->idFase;
-            $responsabilidades[$i]['idResponsabilidade'] = $resp->idResponsabilidade;
-            $responsabilidades[$i]['descricao'] = $fase->idFase;
-            $responsabilidades[$i]['valorCliente'] = $fase->idFase;
-            $responsabilidades[$i]['valorAgente'] = $fase->idFase;
-            $responsabilidades[$i]['valorSubAgente'] = $fase->idFase;
-            $responsabilidades[$i]['valorUniversidade1'] = $fase->idFase;
-            $responsabilidades[$i]['valorUniversidade2'] = $fase->idFase;
-            $rels = $resp->relacao;
-            $i2 = 0;
-            foreach($rels as $relacao){
-                $relacoes[$i][$i2]['idFase'] = $fase->idFase;
-                $relacoes[$i][$i2]['idResponsabilidade'] = $relacao->idResponsabilidade;
-                $relacoes[$i][$i2]['idFornecedor'] = $relacao->idFornecedor;
-                $relacoes[$i][$i2]['valor'] = $relacao->valor;
-                $i2++;
-            }
-            $i++;
-        }
 
-        return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','responsabilidades','Fornecedor'));
+        return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores'));
     }
 
 
@@ -234,19 +208,80 @@ class ProdutoController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function update(UpdateClienteRequest $request, Produto $produto)
+    public function update(UpdateProdutoRequest $request, Produto $produto)
     {
-        $fields = $request->validated();
-        $produto->fill($fields);
+        $fases = $produto->fase;
+        $fields = $request->all();
+        //dd($fields);
+        $produto->tipo = $fields['tipo'];
+        $produto->descricao = $fields['descricao'];
+        $produto->anoAcademico = $fields['anoAcademico'];
+        $produto->idAgente = $fields['agente'];
+        $produto->idSubAgente = $fields['subagente'];
+        $produto->idUniversidade1 = $fields['uni1'];
+        $produto->idUniversidade2 = $fields['uni2'];
 
         // data em que foi modificado
         $t=time();
         $produto->updated_at == date("Y-m-d",$t);
+        
+        $produto->save();
+        $valorProduto = 0;
+        $valorTAgente = 0;
+        $valorTSubAgente = 0;
 
+        foreach($fases as $fase){
+            $responsabilidade = $fase->responsabilidade;
+            if($responsabilidade->valorCliente != $fields['resp-cliente-fase'.$fase->idFase]){
+                $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$fase->idFase];
+                $responsabilidade->verificacaoPagoCliente = false;
+            }
+
+            if($responsabilidade->valorAgente != $fields['resp-agente-fase'.$fase->idFase]){
+                $responsabilidade->valorAgente = $fields['resp-agente-fase'.$fase->idFase];
+                $responsabilidade->verificacaoPagoAgente = false;
+            }
+
+            if($produto->idSubAgente && $responsabilidade->valorSubAgente != $fields['resp-subagente-fase'.$fase->idFase]){
+                $responsabilidade->valorSubAgente = $fields['resp-subagente-fase'.$fase->idFase];
+                $responsabilidade->verificacaoPagoSubAgente = false;
+            }
+
+            if($responsabilidade->valorUniversidade1 != $fields['resp-uni1-fase'.$fase->idFase]){
+                $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$fase->idFase];
+                $responsabilidade->verificacaoPagoUni1 = false;
+            }
+
+            if($produto->idUniversidade2 && $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$fase->idFase]){
+                $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$fase->idFase];
+                $responsabilidade->verificacaoPagoUni2 = false;
+            }
+            $responsabilidade->save();
+            
+
+            $fase->descricao = $fields['descricao-fase'.$fase->idFase];
+            $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$fase->idFase]));
+            $fase->valorFase = $responsabilidade->valorCliente + $responsabilidade->valorAgente + 
+                $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 +$responsabilidade->valorUniversidade2;
+            $fase->create_at == date("Y-m-d",$t);
+            $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
+            $fase->idProduto = $produto->idProduto;
+            $fase->save();
+
+
+            $valorProduto = $valorProduto + $fase->valorFase;
+            $valorTAgente = $valorTAgente + $responsabilidade->valorAgente;
+            $valorTSubAgente = $valorTSubAgente + $responsabilidade->valorSubAgente;
+        }
+
+        $produto->valorTotal = $valorProduto;
+        $produto->valorTotalAgente = $valorTAgente;
+        if($produto->idSubAgente){
+            $produto->valorTotalSubAgente = $valorTSubAgente;
+        }
         $produto->save();
 
-
-         return redirect()->route('produtos.index')->with('success', 'Dados do produto modificados com sucesso');
+         return redirect()->route('clients.show',$produto->cliente)->with('success', 'Dados do produto modificados com sucesso');
 
     }
 

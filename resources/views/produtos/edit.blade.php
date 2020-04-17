@@ -33,7 +33,7 @@
             <br>
 
 
-            <form method="POST" action="{{route('produtos.update',$produto)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="POST" action="{{route('produtos.update',$produto)}}" class="form-group needs-validation pt-3" id="form_produto"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
@@ -60,15 +60,19 @@
                         <input type="text" class="form-control" name="descricao" id="descricao" 
                         value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" readonly><br>
                 
-                        <label for="AnoAcademico">Ano académico:</label><br>
-                        <input type="text" class="form-control" name="AnoAcademico" id="AnoAcademico" 
+                        <label for="anoAcademico">Ano académico:</label><br>
+                        <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
                         value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required><br>
                 
                         <label for="agente">Agente:</label><br>
                         <select id="agente" name="agente" class="form-control" required>
                             <option value="" selected hidden></option>
                             @foreach($Agentes as $agente)
-                                <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
+                                @if($agente->idAgente == $produto->idAgente)
+                                    <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}" selected>{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
+                                @else
+                                    <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
+                                @endif
                             @endforeach
                         </select><br>
                 
@@ -76,7 +80,11 @@
                         <select id="subagente" name="subagente" class="form-control">
                             <option value="" selected hidden></option>
                             @foreach($SubAgentes as $subagente)
-                                <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
+                                @if($subagente->idAgente == $produto->idSubAgente)
+                                    <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}" selected>{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
+                                @else
+                                    <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
+                                @endif
                             @endforeach
                         </select><br>
                 
@@ -84,7 +92,11 @@
                         <select id="uni1" name="uni1" class="form-control" required>
                             <option value="" selected hidden></option>
                             @foreach($Universidades as $uni)
-                                <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
+                                @if($uni->idUniversidade == $produto->idUniversidade1)
+                                    <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}" selected>{{$uni->nome.' -> '.$uni->email}}</option>
+                                @else
+                                    <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
+                                @endif
                             @endforeach
                         </select><br>
                 
@@ -92,31 +104,37 @@
                         <select id="uni2" name="uni2" class="form-control">
                             <option value="" selected hidden></option>
                             @foreach($Universidades as $uni)
-                                <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
+                                @if($uni->idUniversidade == $produto->idUniversidade2)
+                                    <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}" selected>{{$uni->nome.' -> '.$uni->email}}</option>
+                                @else
+                                    <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
+                                @endif
                             @endforeach
-                        </select><br>
+                        </select>
                 
                     </div>
                 </div>
                 <div class="tab-content p-2 mt-3" id="myTabContent">
                     <ul class="nav nav-tabs mt-5 mb-4 fases" id="myTab" role="tablist">
-                        <li class="nav-item clonar" style="width:25%">
+                        @php
+                            $num=0;
+                        @endphp
+                        @foreach($fases as $fase)
                             @php
-                                $num=0;
+                                $num++;
                             @endphp
-                            @foreach($fases as $fase)
-                                @php
-                                    $num++;
-                                @endphp
-                                @if($num == 1)
+                            @if($num == 1)
+                                <li class="nav-item" style="width:25%">
                                     <a class="nav-link active" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
                                     aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
-                                @else
+                                </li>
+                            @else
+                                <li class="nav-item" style="width:25%">
                                     <a class="nav-link" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
                                     aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
-                                @endif
-                            @endforeach
-                        </li>
+                                </li>
+                            @endif
+                        @endforeach
                     </ul>
                 
                     @php
@@ -129,42 +147,42 @@
                             $relacoes = $responsabilidade->relacao;
                         @endphp
                         @if($num == 1)
-                            <div class="tab-pane fade show active" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
+                            <div class="tab-pane fade show active" id="fase{{$fase->idFase}}" role="tabpanel" aria-labelledby="fase{{$fase->idFase}}-tab">
                         @else
-                            <div class="tab-pane fade" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
+                            <div class="tab-pane fade" id="fase{{$fase->idFase}}" role="tabpanel" aria-labelledby="fase{{$fase->idFase}}-tab">
                         @endif
                             <div class="row">
                                 <div class="col-md-12">
                 
                                     <div><span><b>Fase {{$num}}</b></span></div><br>
                 
-                                    <label for="descricao-fase{{$num}}">Descrição:</label><br>
-                                    <input type="text" class="form-control" name="descricao-fase{{$num}}" id="descricao-fase{{$num}}" 
+                                    <label for="descricao-fase{{$fase->idFase}}">Descrição:</label><br>
+                                    <input type="text" class="form-control" name="descricao-fase{{$fase->idFase}}" id="descricao-fase{{$fase->idFase}}" 
                                     value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
                 
-                                    <label for="data-fase{{$num}}">Data de vencimento:</label><br>
-                                    <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
-                                    value="{{old('dataVencimento',$fase->dataVencimento)}}" style="width:250px" required><br>
+                                    <label for="data-fase{{$fase->idFase}}">Data de vencimento:</label><br>
+                                    <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
+                                    value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
                                     
                                     <div><span><b>Responsabilidades</b></span></div><br>
-                                    <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
-                                    <input type="number" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
+                                    <label for="resp-cliente-fase{{$fase->idFase}}">Valor a pagar ao cliente:</label><br>
+                                    <input type="number" class="form-control" name="resp-cliente-fase{{$fase->idFase}}" id="resp-cliente-fase{{$fase->idFase}}"
                                     value="{{old('valorCliente',$responsabilidade->valorCliente)}}" style="width:250px" required><br>
                 
-                                    <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
-                                    <input type="number" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
+                                    <label for="resp-agente-fase{{$fase->idFase}}">Valor a pagar ao agente:</label><br>
+                                    <input type="number" class="form-control" name="resp-agente-fase{{$fase->idFase}}" id="resp-agente-fase{{$fase->idFase}}"
                                     value="{{old('valorAgente',$responsabilidade->valorAgente)}}" style="width:250px" required><br>
                 
-                                    <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
-                                    <input type="number" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
+                                    <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
+                                    <input type="number" class="form-control" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
                                     value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"><br>
                 
-                                    <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
-                                    <input type="number" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
+                                    <label for="resp-uni1-fase{{$fase->idFase}}">Valor a pagar á universidade principal:</label><br>
+                                    <input type="number" class="form-control" name="resp-uni1-fase{{$fase->idFase}}" id="resp-uni1-fase{{$fase->idFase}}"
                                     value="{{old('valorUniversidade1',$responsabilidade->valorUniversidade1)}}" style="width:250px" required><br>
                 
-                                    <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
-                                    <input type="number" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
+                                    <label for="resp-uni2-fase{{$fase->idFase}}">Valor a pagar á universidade secundária:</label><br>
+                                    <input type="number" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
                                     value="{{old('valorUniversidade2',$responsabilidade->valorUniversidade2)}}" style="width:250px"><br>
                 
                                     @if($relacoes->toArray())
@@ -172,9 +190,10 @@
                                         @foreach ($relacoes as $relacao)
                                             @foreach($Fornecedores as $fornecedor)
                                                 @if($fornecedor->idFornecedor == $relacao->idFornecedor)
-                                                    <label for="resp-uni2-fase{{$num}}">Valor a pagar a {{$relacao->fornecedor->nome}}:</label><br>
-                                                    <input type="text" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
-                                                    value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                                    <label for="resp-uni2-fase{{$fase->idFase}}">Valor a pagar a {{$relacao->fornecedor->nome}}:</label><br>
+                                                    <input type="text" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
+                                                    value="{{old('valor',$relacao->valor)}}" style="width:250px"><br>
+                                                @endif
                                             @endforeach
                                         @endforeach
                                     @endif

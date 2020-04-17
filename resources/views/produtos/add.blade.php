@@ -114,88 +114,89 @@
                         </div>
                     </div>
                 </div>
-                
                 <div id="formulario-fases">
-                    <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
+                    <div class="tab-content p-2 mt-3" id="myTabContent">
+                        <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
+                            @php
+                                $num = 0;
+                            @endphp
+                            @foreach($Fases as $fase)
+                                @php
+                                    $num++;
+                                @endphp
+                                @if($num == 1)
+                                    <li class="nav-item" id="fase{{$num}}-li" style="width:25%; min-width:110px">
+                                        <a class="nav-link active" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
+                                            aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item" id="fase{{$num}}-li" style="width:25%; min-width:144px">
+                                        <a class="nav-link" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
+                                            aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+
                         @php
                             $num = 0;
                         @endphp
-                        @foreach($Fases as $fase)
+                            @foreach ($Fases as $fase)
                             @php
                                 $num++;
                             @endphp
-                            @if($num == 1)
-                                <li class="nav-item" id="fase{{$num}}-li" style="width:25%; min-width:110px">
-                                    <a class="nav-link active" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
-                                        aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
-                                </li>
-                            @else
-                                <li class="nav-item" id="fase{{$num}}-li" style="width:25%; min-width:144px">
-                                    <a class="nav-link" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
-                                        aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
-                                </li>
+                            @if($num==1)
+                                <div class="tab-pane fade active show" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
+                            @else 
+                                <div class="tab-pane fade" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
                             @endif
-                        @endforeach
-                    </ul>
+                                <div class="row">
+                                    <div class="col-md-12">
+                        
+                                        <div><span><b>Fase {{$num}}</b></span></div><br>
+                        
+                                        <label for="descricao-fase{{$num}}">Descrição:</label><br>
+                                        <input type="text" class="form-control" name="descricao-fase{{$num}}" id="descricao-fase{{$num}}" 
+                                        value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
+                        
+                                        <label for="data-fase{{$num}}">Data de vencimento:</label><br>
+                                        <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
+                                        value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px"><br>
 
-                    @php
-                        $num = 0;
-                    @endphp
-                        @foreach ($Fases as $fase)
-                        @php
-                            $num++;
-                        @endphp
-                        @if($num==1)
-                            <div class="tab-pane fade active show" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
-                        @else 
-                            <div class="tab-pane fade" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
-                        @endif
-                            <div class="row">
-                                <div class="col-md-12">
-                    
-                                    <div><span><b>Fase {{$num}}</b></span></div><br>
-                    
-                                    <label for="descricao-fase{{$num}}">Descrição:</label><br>
-                                    <input type="text" class="form-control" name="descricao-fase{{$num}}" id="descricao-fase{{$num}}" 
-                                    value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
-                    
-                                    <label for="data-fase{{$num}}">Data de vencimento:</label><br>
-                                    <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
-                                    value="{{old('dataVencimento',$fase->dataVencimento)}}" style="width:250px"><br>
+                                        <input type="text" class="form-control" name="fase-idStock{{$num}}" id="fase-idStock{{$num}}" 
+                                        value="{{old('idFaseStock',$fase->idFaseStock)}}"  maxlength="20" 
+                                        style="display:none;" readonly><br>
+                                    </div>
+                                    <div class="col mr-3">
+                                        <div><span><b>Responsabilidades</b></span></div><br>
+                                        <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
+                                        <input type="number" min="0" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
+                                        value="{{old('valorCliente',$Responsabilidades[$num-1]->valorCliente)}}" style="width:250px" required><br>
+                        
+                                        <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
+                                        <input type="number" min="0" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
+                                        value="{{old('valorAgente',$Responsabilidades[$num-1]->valorAgente)}}" style="width:250px" required><br>
+                        
+                                        <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
+                                        <input type="number" min="0" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
+                                        value="{{old('valorSubAgente',$Responsabilidades[$num-1]->valorSubAgente)}}" style="width:250px"><br>
+                        
+                                        <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
+                                        <input type="number" min="0" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
+                                        value="{{old('valorUniversidade1',$Responsabilidades[$num-1]->valorUniversidade1)}}" style="width:250px" required><br>
+                        
+                                        <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
+                                        <input type="number" min="0" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
+                                        value="{{old('valorUniversidade2',$Responsabilidades[$num-1]->valorUniversidade2)}}" style="width:250px"><br>
+                                    </div>
 
-                                    <input type="text" class="form-control" name="fase-idStock{{$num}}" id="fase-idStock{{$num}}" 
-                                    value="{{old('idFaseStock',$fase->idFaseStock)}}"  maxlength="20" 
-                                    style="display:none;" readonly><br>
-                                </div>
-                                <div class="col mr-3">
-                                    <div><span><b>Responsabilidades</b></span></div><br>
-                                    <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
-                                    <input type="number" min="0" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
-                                    value="{{old('valorCliente',$Responsabilidades[$num-1]->valorCliente)}}" style="width:250px" required><br>
-                    
-                                    <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
-                                    <input type="number" min="0" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
-                                    value="{{old('valorAgente',$Responsabilidades[$num-1]->valorAgente)}}" style="width:250px" required><br>
-                    
-                                    <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
-                                    <input type="number" min="0" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
-                                    value="{{old('valorSubAgente',$Responsabilidades[$num-1]->valorSubAgente)}}" style="width:250px"><br>
-                    
-                                    <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
-                                    <input type="number" min="0" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
-                                    value="{{old('valorUniversidade1',$Responsabilidades[$num-1]->valorUniversidade1)}}" style="width:250px" required><br>
-                    
-                                    <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
-                                    <input type="number" min="0" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
-                                    value="{{old('valorUniversidade2',$Responsabilidades[$num-1]->valorUniversidade2)}}" style="width:250px"><br>
-                                </div>
-
-                                <div class="col" style="min-width:225px">
-                                    <div><span><b>Fornecedores</b></span></div><br>
+                                    <div class="col" style="min-width:225px">
+                                        <div><span><b>Fornecedores</b></span></div><br>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="form-group text-right">
