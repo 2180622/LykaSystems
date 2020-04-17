@@ -45,7 +45,7 @@
                 <p class="mt-3 mb-2">Para reportar um problema basta preencher o formulário abaixo disponível que será enviado para um administrador.</p>
                 <p>O administrador irá ler o seu problema e responder-lhe-á o mais depressa possível com uma solução.</p>
                 <hr>
-                <strong>Obrigado pela atenção.</strong>
+                <strong>Obrigado pela sua atenção.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -53,16 +53,16 @@
         </div>
         <br>
         <div class="report-card shadow-sm">
-            <form action="{{route('report.send')}}" method="get" enctype="multipart/form-data">
+            <form action="{{route('report.send')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="nomeCompleto">Nome completo*</label>
+                        <label for="nome">Nome completo *</label>
                         <br>
-                        <input type="text" name="nomeCompleto" placeholder="Inserir nome completo" autocomplete="off" value="{{$user->nome.' '.$user->apelido}}" required>
+                        <input type="text" name="nome" placeholder="Inserir nome completo" autocomplete="off" value="{{$user->nome.' '.$user->apelido}}" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="email">Endereço eletrónico*</label>
+                        <label for="email">Endereço eletrónico *</label>
                         <br>
                         <input type="text" name="email" placeholder="Inserir endereço eletrónico" value="{{$user->email}}" required>
                     </div>
@@ -94,7 +94,7 @@
                                 ?
                             </span>
                         </div>
-                        <label for="relatorio">Relatório do problema*</label>
+                        <label for="relatorio">Relatório do problema *</label>
                         <br>
                         <textarea name="relatorio" rows="5" placeholder="Inserir um relatório acerca problema" required></textarea>
                     </div>

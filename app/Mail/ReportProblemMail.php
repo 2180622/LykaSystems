@@ -13,27 +13,42 @@ class ReportProblemMail extends Mailable
 
     public $name;
     public $email;
-    public $phone;
     public $text;
+    public $phone;
+    public $screenshot;
 
-    public function __construct(string $name, string $email, string $phone, string $text)
+    public function __construct(string $name, string $email, string $text, string $phone, string $screenshot)
     {
       $this->name = $name;
       $this->email = $email;
-      $this->phone = $phone;
       $this->text = $text;
+      $this->phone = $phone;
+      $this->screenshot = $screenshot;
     }
 
     public function build()
     {
-      return $this->from($this->email, $this->name)
-          ->subject('Lyka Systems | Relatório de erro - '.$this->name)
-          ->markdown('mails.report')
-          ->with([
-              'name' => $this->name,
-              'email' => $this->email,
-              'phone' => $this->phone,
-              'text' => $this->text
-          ]);
+      if ($this->screenshot != null) {
+        return $this->from($this->email, $this->name)
+            ->subject('Lyka Systems | Relatório de erro - '.$this->name)
+            ->attachFromStorage('report-errors/'.$this->screenshot, 'captura_erro.png')
+            ->markdown('mails.report')
+            ->with([
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'text' => $this->text
+            ]);
+      }else {
+        return $this->from($this->email, $this->name)
+            ->subject('Lyka Systems | Relatório de erro - '.$this->name)
+            ->markdown('mails.report')
+            ->with([
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'text' => $this->text
+            ]);
+      }
     }
 }
