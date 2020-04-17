@@ -47,4 +47,10 @@ class ContaController extends Controller
       $contum->save();
       return redirect()->route('conta.index')->with('success', 'Conta bancária editada com sucesso.');
     }
+
+    public function destroy(Conta $contum)
+    {
+      $contum->delete();
+      return redirect()->route('conta.index')->with('success', 'Conta bancária eliminada com sucesso');
+    }
 }
