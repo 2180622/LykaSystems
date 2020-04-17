@@ -29,7 +29,7 @@
         <li class="menu-option">
             <a href="{{route('clients.index')}}">
                 <div class="menu-icon">
-                    <ion-icon name="person-circle-outline" style="font-size: 16pt;  --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 3px;"></ion-icon>
+                    <ion-icon name="person-circle-outline" style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 3px;"></ion-icon>
                 </div>
                 <span class="option-name {{Route::is('clients.*') ? 'active' : ''}} option-name">Estudantes</span>
             </a>
@@ -116,7 +116,7 @@
         <li class="menu-option">
             <a data-toggle="collapse" href="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
                 <div class="menu-icon">
-                    <i class="fas fa-chart-line mr-2"></i>
+                    <i class="fas fa-chart-pie"></i>
                 </div>
                 <span class="option-name <?php if (Route::is('payments.*') || Route::is('charges.*') || Route::is('conta.*')) { echo 'active'; } ?>">Finanças</span>
             </a>
@@ -141,7 +141,7 @@
             <!-- Relatório de contas -->
             <li class="menu-option">
                 <a href="#">
-                    <span class="option-name">Relatório de contas</span>
+                    <span class="option-name">Relatório e contas</span>
                 </a>
             </li>
 
