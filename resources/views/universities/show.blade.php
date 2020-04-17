@@ -30,11 +30,22 @@
     <br><br>
 
     <div class="cards-navigation">
-        <div class="title">
 
-            <h6>Ficha de Universidade</h6>
+        <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h6>Ficha de Universidade</h6>
+                </div>
+            </div>
+            <div class="col text-right">
+                <div class="text-muted"><small>Adicionado em: {{ date('d-M-y', strtotime($university->created_at)) }}</small></div>
 
+                <div class="text-muted"><small>Ultima atualização:
+                        {{ date('d-M-y', strtotime($university->updated_at)) }}</small></div>
+            </div>
         </div>
+
+
         <br>
 
 
@@ -69,12 +80,7 @@
 
                 <div><span class="text-secondary">Observação dos Candidaturas:</span> {{$university->obsCandidaturas}}</div><br>
 
-                <hr>
 
-                <div class="text-muted"><small>Adicionado: {{ date('d-M-y', strtotime($university->created_at)) }}</small>
-                </div>
-                <div class="text-muted"><small>Ultima atualização:
-                        {{ date('d-M-y', strtotime($university->updated_at)) }}</small></div>
 
             </div>
 

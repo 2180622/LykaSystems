@@ -87,8 +87,8 @@
                     <tr>
                         <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
-                        <th>N.Identificação</th>
-{{--                         <th>Naturalidade</th> --}}
+                        <th>E-mail</th>
+                        <th>Naturalidade</th>
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -117,10 +117,10 @@
                         <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
 
                         {{-- numCCid --}}
-                         <td class="align-middle">{{ $client->num_docOficial }}</td>
+                         <td class="align-middle">{{ $client->email }}</td>
 
                         {{-- paisNaturalidade --}}
-{{--                         <td class="align-middle">{{ $client->paisNaturalidade }}</td> --}}
+                         <td class="align-middle">{{ $client->paisNaturalidade }}</td>
 
 
                         {{-- OPÇÔES --}}

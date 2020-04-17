@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Agente;
 use App\User;
+use App\Produto;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
@@ -163,13 +164,14 @@ class AgenteController extends Controller
 
 
 /*       caso seja um sub-agente, obtem o agente que o adicionou */
-         if($agent->tipo=="Subagente"){
+        if($agent->tipo=="Subagente"){
             $mainAgent=Agente::
             where('idAgente', '=',$agent->idAgenteAssociado)
             ->first();
         }else{
             $mainAgent=null;
         }
+
 
         return view('agents.show',compact("agent" ,'listagents','mainAgent'));
 
