@@ -146,9 +146,11 @@ html, body {
     text-transform: uppercase;
 }
 
-.collapse {
-    border-radius: 15px;
-    background-color: rgba(230, 230, 230, 1);
+.menu-option-collapse {
+    padding-top: 12px;
+    padding-left: 48px;
+    padding-bottom: 8px;
+    display: inline-block;
 }
 
 /* Main Menu Style */
@@ -329,7 +331,6 @@ html, body {
     background-color: #6A74C9;
     border-color: #6A74C9;
 }
-
 
 /* Responsive */
 @media screen and (max-width: 950px) {

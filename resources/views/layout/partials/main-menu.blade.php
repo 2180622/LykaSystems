@@ -9,6 +9,7 @@
     </div>
     <!-- Menu Options -->
     <ul class="menu-list">
+
         <!-- Dashboard -->
         <li class="menu-option">
             <a href="{{route('dashboard')}}">
@@ -19,7 +20,6 @@
                 <span class="{{Route::is('dashboard') ? 'active' : ''}} option-name" style="bottom:2px;">Dashboard</span>
             </a>
         </li>
-
         <br>
 
         <!-- Estudantes  -->
@@ -31,7 +31,6 @@
                 <span class="option-name {{Route::is('clients.*') ? 'active' : ''}} option-name">Estudantes</span>
             </a>
         </li>
-
 
         <!-- Universidades  -->
         @if (Auth()->user()->tipo == 'admin')
@@ -47,7 +46,6 @@
 
         <!-- Agentes  -->
         @if ( Auth::user()->tipo == "admin")
-        {{-- Só o admin tem acesso à lista --}}
         <li class="menu-option">
             <a href="{{route('agents.index')}}">
                 <div class="menu-icon">
@@ -57,9 +55,7 @@
             </a>
         </li>
         @endif
-
         <br>
-
 
         {{-- Diversos Collapse --}}
         <li class="menu-option">
@@ -103,7 +99,7 @@
             </li>
         </div>
 
-
+        @if (Auth()->user()->tipo == "admin")
         {{-- Financeiro Collapse --}}
         <li class="menu-option">
             <a data-toggle="collapse" href="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
@@ -114,49 +110,37 @@
             </a>
         </li>
 
+
         <div class="collapse" id="collapseFinance">
             <!-- Pagamentos -->
-            <li class="menu-option">
+            <li class="menu-option-collapse">
                 <a href="{{route('payments.index')}}">
-                    <div class="menu-icon">
-                        <ion-icon name="cash-outline" style="font-size:16pt; --ionicon-stroke-width: 40px; position: relative; top: 3px; right: 3px;">
-                        </ion-icon>
-                    </div>
                     <span class="option-name {{Route::is('payments.*') ? 'active' : ''}}">Pagamentos</span>
                 </a>
             </li>
 
             <!-- Cobranças -->
-            <li class="menu-option">
+            <li class="menu-option-collapse">
                 <a href="{{route('charges.index')}}">
-                    <div class="menu-icon">
-                        <ion-icon name="wallet-outline" style="font-size:16pt; --ionicon-stroke-width: 40px; position: relative; top: 3px; right: 3px;">
-                        </ion-icon>
-                    </div>
                     <span class="option-name {{Route::is('charges.*') ? 'active' : ''}}">Cobranças</span>
                 </a>
             </li>
 
             <!-- Relatório de contas -->
-            <li class="menu-option">
+            <li class="menu-option-collapse">
                 <a href="#">
-                    <div class="menu-icon">
-                        <i class="fas fa-chart-line mr-2"></i>
-                    </div>
                     <span class="option-name">Relatório de contas</span>
                 </a>
             </li>
 
             <!-- Conta bancária -->
-            <li class="menu-option">
+            <li class="menu-option-collapse">
                 <a href="{{route('conta.index')}}">
-                    <div class="menu-icon">
-                        <i class="fas fa-chart-line mr-2"></i>
-                    </div>
                     <span class="option-name">Conta bancária</span>
                 </a>
             </li>
         </div>
+        @endif
 
         {{-- Produtos--}}
         <li class="menu-option">
@@ -192,25 +176,19 @@
     </ul>
 
 
+    {{-- Informação do utilizador + Terminar Sessão --}}
     <div class="text-center mb-4">
-
-
         <div class="opts_btn shadow-sm align-self-center">
             <a href="#" title="Definições" class="user_btn"><i class="fas fa-cog"></i></a>
         </div>
 
         <div class="user_opts shadow-sm align-self-center">
             <a href="#" title="Terminar sessão" class="user_btn" data-toggle="modal" data-target="#Modal"><i class="fas fa-power-off"></i></a>
-            {{-- @csrf
-            @method('POST') --}}
         </div>
-        <!-- -->
-
 
         {{-- SE FOR ADMIN --}}
         @if (Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null)
         <div class="mx-auto user_photo rounded-circle shadow">
-            {{-- <a href="#" title="Ver as minhas informações"> --}}
             {{-- Foto Utilizador --}}
             @if(Auth::user()->admin->fotografia != null)
                 <img src="{{asset('/storage/admin-photos/'.Auth::user()->admin->fotografia)}}" style="width:100%">
@@ -219,7 +197,6 @@
                 @else
                 <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
                 @endif
-                {{-- </a> --}}
         </div>
 
         <div class="text-center mt-3">
