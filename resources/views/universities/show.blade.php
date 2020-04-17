@@ -6,6 +6,7 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
 <link href="{{asset('css/university.css')}}" rel="stylesheet">
+<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
 
@@ -74,29 +75,174 @@
 
                 <div><span class="text-secondary">IBAN:</span> {{$university->IBAN}}</div><br>
 
+            </div>
+
+            <div class="col p-2">
                 <div><span class="text-secondary">Observação dos Contactos:</span> {{$university->obsContactos}}</div><br>
 
                 <div><span class="text-secondary">Observação dos Cursos:</span> {{$university->obsCursos}}</div><br>
 
                 <div><span class="text-secondary">Observação dos Candidaturas:</span> {{$university->obsCandidaturas}}</div><br>
 
-
-
+                <br>
+                <a href="#" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar evento</a>
             </div>
+        </div>
+
+    </div>
 
 
 
+
+
+
+    <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
+
+        {{-- MENU: Eventos --}}
+        <li class="nav-item " style="width:20%; min-width:110px">
+            <a class="nav-link active" id="eventos-tab" data-toggle="tab" href="#eventos" role="tab"
+                aria-controls="evento" aria-selected="false">Eventos</a>
+        </li>
+
+        {{-- MENU: Estudantes associados --}}
+        <li class="nav-item text-center" style="width:20%; min-width:144px">
+            <a class="nav-link" id="estudantes-tab" data-toggle="tab" href="#estudantes" role="tab"
+                aria-controls="estudante" aria-selected="false">Estudantes associados</a>
+        </li>
+
+
+    </ul>
+
+
+
+    <div class="tab-content p-2 " id="myTabContent">
+
+        {{-- Conteudo: Eventos --}}
+        <div class="tab-pane fade active show text-muted" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    <span class="mr-2">Mostrar</span>
+                    <select class="custom-select" id="records_per_page" style="width:80px">
+                        <option selected>10</option>
+                        <option>25</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    <span class="ml-2">por página</span>
+                </div>
+                <div class="col ">
+                    <div class="input-group pl-0 float-right" style="width:250px">
+                        <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox"
+                            placeholder="Procurar" aria-label="Procurar">
+                        <div class="input-group-append">
+                            <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+
+            <div class="table-responsive " style="overflow:hidden">
+
+
+                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                    style="overflow:hidden;">
+
+                    {{-- Cabeçalho da tabela --}}
+                    <thead>
+                        <tr>
+                            <th style="width:10px">{{-- COR DO EVENTO --}}</th>
+                            <th>Título</th>
+                            <th>Início</th>
+                            <th>Fim</th>
+                            <th class="text-center">Opções</th>
+                        </tr>
+                    </thead>
+
+                    {{-- Corpo da tabela --}}
+                    <tbody>
+
+                        {{-- @foreach ($universities as $university) --}}
+                        <tr>
+                            <td style="width:10px"><span class="p-1 shadow-sm" style="background-color:#00FF00"></span></td>
+
+                            {{-- Título --}}
+                            <td ><a class="name_link" href="#">Titulo do evento</td>
+
+                            {{-- Ínicio --}}
+                            <td class="align-middle">01/01/2020</td>
+
+                            {{-- Fim --}}
+                            <td class="align-middle">30/01/2020</td>
+
+
+                            {{-- OPÇÔES --}}
+                            <td class="text-center align-middle">
+                                <a href="#" class="btn_list_opt "
+                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="#" class="btn_list_opt btn_list_opt_edit"
+                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                                <form method="POST" role="form" id="#"
+                                    action="#"
+                                    class="d-inline-block form_university_id" data="#">
+                                    @csrf
+                                   {{--  @method('DELETE') --}}
+                                    <button type="submit" class="btn_delete" title="Eliminar Evento"
+                                        data-toggle="modal" data-target="#eliminarUniversidade"
+                                        data-title="#"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+
+                            </td>
+                        </tr>
+                        {{-- @endforeach --}}
+
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 
+
+
+        {{-- Conteudo: Lista de estudantes --}}
+        <div class="tab-pane fade show text-muted" id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
+            Lista de estudantes
+        </div>
+
+
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 @endsection
 
 {{-- Scripts --}}
 @section('scripts')
-{{-- <script src="{{asset('/js/agent.js')}}"></script> --}}
+    <script src="{{asset('/js/university_show.js')}}"></script>
 @endsection
 
 
