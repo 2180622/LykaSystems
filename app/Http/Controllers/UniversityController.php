@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Agenda;
 use App\Universidade;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,7 +50,7 @@ class UniversityController extends Controller
         $t = time();
         $university->create_at == date("Y-m-d", $t);
         $university->save();
-        return redirect()->route('universities.index')->with('success', 'Universidade Adicionada com Sucesso!');
+        return redirect()->route('universities.show',$university)->with('success', 'Universidade Adicionada com Sucesso!');
 
     }
 
@@ -59,7 +60,13 @@ class UniversityController extends Controller
        if (Auth::user()->tipo != "admin" ){
         abort (401);
       }
-        return view('universities.show', compact('university'));
+
+
+        $eventos = Agenda::
+        where('idUniversidade', $university->idUniversidade)
+        ->get();
+
+        return view('universities.show', compact('university','eventos'));
     }
 
 

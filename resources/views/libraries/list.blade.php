@@ -68,7 +68,7 @@
             </div>
             <hr>
 
-            
+
             <div class="table-responsive " style="overflow:hidden">
 
 
@@ -93,13 +93,18 @@
 
                             {{-- OPÇÔES --}}
                             <td class="text-center align-middle">
+
+                                {{-- Ver ficheiro --}}
                                  <a href="#" class="btn_list_opt " title="Download"><i class="far fa-eye mr-2"></i></a>
 
-                                <form method="POST" role="form" id="#########" action="#" data="ID_DO_FICHEIRO++++++" class="d-inline-block form_client_id">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn_delete" title="Eliminar ficheiro" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                </form>
+                                 {{-- Admins: Apagar ficheiro --}}
+                                 @if (Auth::user()->tipo == "admin")
+                                    <form method="POST" role="form" id="#########" action="#" data="ID_DO_FICHEIRO++++++" class="d-inline-block form_client_id">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn_delete" title="Eliminar ficheiro" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                @endif
 
                             </td>
                         </tr>

@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class Conta extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('Conta', function (Blueprint $table) {
@@ -18,22 +13,19 @@ class Conta extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idConta');
             $table->string('descricao',255);
-            $table->string('local',255);
-            $table->bigInteger('numConta')->unique();
-            $table->string('IBAN',255);
             $table->string('instituicao',255);
-            $table->integer('telefone');
+            $table->string('titular',255);
+            $table->string('morada',255);
+            $table->bigInteger('numConta')->unique();
+            $table->string('IBAN',255)->nullable()->unique();
+            $table->string('SWIFT',255)->nullable()->unique();
+            $table->string('contacto')->nullable();
             $table->longText('obsConta')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('Conta');

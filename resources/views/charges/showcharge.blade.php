@@ -5,7 +5,6 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
 <link href="{{asset('/css/payment.css')}}" rel="stylesheet">
 @endsection
 
@@ -36,7 +35,7 @@
         <br>
         <div class="payment-card shadow-sm">
             <p>VALOR A COBRAR:</p>
-            <p>&nbsp;{{($fase->valorFase)}}€</p>
+            <p>&nbsp;{{number_format((float)$fase->valorFase, 2, ',', '')}}€</p>
             <br><br>
             <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post" enctype="multipart/form-data" name="chargeForm">
                 @csrf
@@ -61,7 +60,7 @@
                             <option value="Outro">Outro</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" oncontextmenu="return showContextMenu();">
                         <label for="comprovativoPagamento">Comprovativo de pagamento</label>
                         <br>
                         <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
@@ -113,6 +112,14 @@
         </form>
         <br>
     </div>
+</div>
+
+<div class="context-menu" id="contextMenu">
+  <ul>
+    <li>blah</li>
+    <li>blah</li>
+    <li>blah</li>
+  </ul>
 </div>
 
 @section('scripts')

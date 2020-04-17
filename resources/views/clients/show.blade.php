@@ -58,7 +58,7 @@
 
                 @if($client->fotografia)
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('client-photos/').$client->fotografia}}" style="width:90%">
+                    src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}" style="width:90%">
                 @elseif($client->genero == 'F')
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
                     src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
@@ -284,7 +284,7 @@
                             @if ($client->img_docOficial)
                             <li class="my-3">
                                 <i class="far fa-address-card mr-2"></i>
-                                <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->img_docOficial)}}">Documento de identificação pessoal</a>
+                                <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/'.$client->img_docOficial)}}">Documento de identificação pessoal</a>
                             </li>
                             @endif
 
@@ -292,7 +292,7 @@
                             @if ($client->img_Passaport)
                             <li class="my-3">
                                 <i class="far fa-address-card mr-2"></i>
-                                <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->img_Passaport)}}">Passaporte</a>
+                                <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/'.$client->img_Passaport)}}">Passaporte</a>
                             </li>
                             @endif
 
@@ -339,12 +339,20 @@
                         <div class="text-secondary mb-2">Documentos académicos:</div>
 
                         <ul style="list-style-type:none;margin:0px;padding:0">
+                            @if($docsAcademicos)
 
-                            {{-- EXEMPLOOOOO --}}
-                            <li class="my-3">
-                                <i class="fas fa-file-alt mr-2"></i>
-                                <a class="name_link" target="_blank" href="#">Exame Final</a>
-                            </li>
+                            @foreach($docsAcademicos as $docAcademico)
+                                <li class="my-3">
+                                    <i class="fas fa-file-alt mr-2"></i>
+                                    <a href="" class="name_link" target="_blank" href="#">{{$docAcademico->tipo}}</a>
+                                </li>
+                            @endforeach
+
+                            @else
+                            <li class="text-muted"><small>Sem documentos</small></li>
+                            @endif
+
+
 
                         </ul>
 

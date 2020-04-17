@@ -1,11 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
+use Mail;
 use App\Agente;
-use App\Notificacao;
 use App\Cliente;
+use App\Notificacao;
 use App\Universidade;
+use App\RelatorioProblema;
 use Illuminate\Http\Request;
+use App\Mail\ReportProblemMail;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller{
 
@@ -18,9 +22,9 @@ class DashboardController extends Controller{
     }
 
     public function index(){
-        $agente = Agente::all();
-        $cliente = Cliente::all();
-        $universidade = Universidade::all();
+        $agentes = Agente::all();
+        $clientes = Cliente::all();
+        $universidades = Universidade::all();
 
         $AllNotifications = Notificacao::all();
 
@@ -29,11 +33,6 @@ class DashboardController extends Controller{
         $this->NotController->getNotificacaoFaseAcaba($AllNotifications);
         $this->NotController->getNotificacaoDocFalta($AllNotifications);
 
-        return view('index', compact('agente', 'cliente', 'universidade'));
-    }
-
-    public function report()
-    {
-        return view('report');
+        return view('dashboard.index', compact('agentes', 'clientes', 'universidades'));
     }
 }

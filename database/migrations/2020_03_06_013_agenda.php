@@ -17,6 +17,7 @@ class Agenda extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idAgenda');
+            $table->string('idUniversidade')->nullable();
             $table->string('titulo');
             $table->text('descricao')->nullable();
             $table->boolean('visibilidade')->default(false);

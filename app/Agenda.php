@@ -14,7 +14,7 @@ class Agenda extends Model
     protected $primaryKey = 'idAgenda';
 
     protected $fillable = [
-        'titulo', 'descricao', 'cor', 'visibilidade','dataInicio','dataFim','$idUser'
+        'idUniversidade','titulo', 'descricao', 'cor', 'visibilidade','dataInicio','dataFim','$idUser'
     ];
 
     public function user(){

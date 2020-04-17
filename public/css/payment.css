@@ -125,3 +125,13 @@ p {
     position: relative;
     transform: translate(-50%, -50%);
 }
+
+/* Context Menu */
+#contextMenu {
+    background-color: red;
+    display: inline-block;
+    display: none;
+    width: 150px;
+    height: auto;
+    position: absolute;
+}
