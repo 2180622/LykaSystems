@@ -20,7 +20,10 @@
                 <span class="{{Route::is('dashboard') ? 'active' : ''}} option-name" style="bottom:2px;">Dashboard</span>
             </a>
         </li>
-        <br>
+
+        <li class="menu-option-title mt-4 mb-1">
+            recursos humanos
+        </li>
 
         <!-- Estudantes  -->
         <li class="menu-option">
@@ -57,23 +60,38 @@
         @endif
         <br>
 
+        <li class="menu-option-title mt-2 mb-2">
+            ferramentas administrativas
+        </li>
+
         {{-- Diversos Collapse --}}
         <li class="menu-option">
             <a data-toggle="collapse" href="#collapseDiv" aria-expanded="false" aria-controls="collapseDiv">
                 <div class="menu-icon">
                     <i class="fas fa-tools mr-2"></i>
                 </div>
-                <span class="option-name">Diversos <i class="fas fa-caret-down"></i></span>
+                <span class="option-name <?php if (Route::is('libraries.*') || Route::is('contacts.*') || Route::is('agends.*') || Route::is('produtostock.*')) { echo 'active'; } ?>">Diversos</span>
             </a>
         </li>
 
         <div class="collapse" id="collapseDiv">
+            {{-- Produtos--}}
+            <li class="menu-option">
+                <a href="{{route('produtostock.index')}}">
+                    <span class="option-name {{Route::is('produtostock.*') ? 'active' : ''}}">Produtos Stock</span>
+                </a>
+            </li>
+
+            <!-- Listagens -->
+            <li class="menu-option">
+                <a href="#">
+                    <span class="option-name">Listagens</span>
+                </a>
+            </li>
+
             <!-- Biblioteca -->
             <li class="menu-option">
                 <a href="{{route('libraries.index')}}">
-                    <div class="menu-icon">
-                        <i class="far fa-folder mr-2"></i>
-                    </div>
                     <span class="option-name {{Route::is('libraries.*') ? 'active' : ''}}">Biblioteca</span>
                 </a>
             </li>
@@ -81,9 +99,6 @@
             <!-- Lista telefónica -->
             <li class="menu-option">
                 <a href="{{route('contacts.index')}}">
-                    <div class="menu-icon">
-                        <i class="fas fa-phone-alt mr-2"></i>
-                    </div>
                     <span class="option-name {{Route::is('contacts.*') ? 'active' : ''}}">Lista telefónica</span>
                 </a>
             </li>
@@ -91,9 +106,6 @@
             <!-- Agenda -->
             <li class="menu-option">
                 <a href="{{route('agends.index')}}">
-                    <div class="menu-icon">
-                        <i class="far fa-calendar-alt mr-2"></i>
-                    </div>
                     <span class="option-name {{Route::is('agends.*') ? 'active' : ''}}">Agenda</span>
                 </a>
             </li>
@@ -106,61 +118,41 @@
                 <div class="menu-icon">
                     <i class="fas fa-chart-line mr-2"></i>
                 </div>
-                <span class="option-name">Finanças</span>
+                <span class="option-name <?php if (Route::is('payments.*') || Route::is('charges.*') || Route::is('conta.*')) { echo 'active'; } ?>">Finanças</span>
             </a>
         </li>
 
 
         <div class="collapse" id="collapseFinance">
             <!-- Pagamentos -->
-            <li class="menu-option-collapse">
+            <li class="menu-option">
                 <a href="{{route('payments.index')}}">
                     <span class="option-name {{Route::is('payments.*') ? 'active' : ''}}">Pagamentos</span>
                 </a>
             </li>
 
             <!-- Cobranças -->
-            <li class="menu-option-collapse">
+            <li class="menu-option">
                 <a href="{{route('charges.index')}}">
                     <span class="option-name {{Route::is('charges.*') ? 'active' : ''}}">Cobranças</span>
                 </a>
             </li>
 
             <!-- Relatório de contas -->
-            <li class="menu-option-collapse">
+            <li class="menu-option">
                 <a href="#">
                     <span class="option-name">Relatório de contas</span>
                 </a>
             </li>
 
             <!-- Conta bancária -->
-            <li class="menu-option-collapse">
+            <li class="menu-option">
                 <a href="{{route('conta.index')}}">
-                    <span class="option-name">Conta bancária</span>
+                    <span class="option-name {{Route::is('conta.*') ? 'active' : ''}}">Conta bancária</span>
                 </a>
             </li>
         </div>
         @endif
-
-        {{-- Produtos--}}
-        <li class="menu-option">
-            <a href="{{route('produtostock.index')}}">
-                <div class="menu-icon">
-                    <i class="fas fa-layer-group mr-2"></i>
-                </div>
-                <span class="option-name {{Route::is('produtostock.*') ? 'active' : ''}}">Produtos Stock</span>
-            </a>
-        </li>
-
-        <!-- Listagens -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="fas fa-stream mr-2"></i>
-                </div>
-                <span class="option-name">Listagens</span>
-            </a>
-        </li>
 
         <!-- Utilizadores -->
         @if (Auth()->user()->tipo == 'admin')
