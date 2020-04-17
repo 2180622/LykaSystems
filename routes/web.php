@@ -73,6 +73,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
     Route::get('/produtos/print/{produto}', 'ProdutoController@print')->name('produtos.print');
     Route::resource('/produtos', 'ProdutoController')->only(['destroy', 'update','show','edit','store']);
+
+    /* Conta */
+    Route::resource('/conta', 'ContaController');
 });
 
 /* Email Confirmation */

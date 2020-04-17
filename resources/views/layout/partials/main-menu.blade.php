@@ -45,9 +45,6 @@
         </li>
         @endif
 
-
-
-
         <!-- Agentes  -->
         @if ( Auth::user()->tipo == "admin")
         {{-- Só o admin tem acesso à lista --}}
@@ -106,6 +103,7 @@
             </li>
         </div>
 
+
         {{-- Financeiro Collapse --}}
         <li class="menu-option">
             <a data-toggle="collapse" href="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
@@ -146,6 +144,16 @@
                         <i class="fas fa-chart-line mr-2"></i>
                     </div>
                     <span class="option-name">Relatório de contas</span>
+                </a>
+            </li>
+
+            <!-- Conta bancária -->
+            <li class="menu-option">
+                <a href="{{route('conta.index')}}">
+                    <div class="menu-icon">
+                        <i class="fas fa-chart-line mr-2"></i>
+                    </div>
+                    <span class="option-name">Conta bancária</span>
                 </a>
             </li>
         </div>
