@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ExtraFunctionsController extends Controller
 {
+  /* Reportar Problema -> Vista Principal */
   public function report()
   {
       return view('report');
   }
 
+  /* Reportar Problema -> Envio de Mail + Store na base de dados */
   public function reportmail(Request $request)
   {
     $fields = $request->validate(
@@ -50,6 +52,6 @@ class ExtraFunctionsController extends Controller
       Mail::to('lykasystems@mail.com')->send(new ReportProblemMail($name, $email, $phone, $text, $errorfile));
     }
 
-    return redirect()->route('report')->with('success', 'Relatório enviado com sucesso. Obrigado!');
+    return redirect()->route('report')->with('success', 'Relatório enviado com sucesso. Obrigado pela sua contribuição!');
   }
 }

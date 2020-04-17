@@ -30,7 +30,7 @@ class ReportProblemMail extends Mailable
     {
       if ($this->errorfile != null) {
         return $this->from($this->email, $this->name)
-            ->subject('Lyka Systems | Relatório de erro - '.$this->name)
+            ->subject('Lyka Systems | Relatório de Erro - '.$this->name)
             ->attach($this->errorfile->getRealPath(), [
                     'as' => 'captura.'.$this->errorfile->getClientOriginalExtension(),
                     'mime' => $this->errorfile->getMimeType(),

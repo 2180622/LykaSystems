@@ -9,6 +9,7 @@
     </div>
     <!-- Menu Options -->
     <ul class="menu-list">
+
         <!-- Dashboard -->
         <li class="menu-option">
             <a href="{{route('dashboard')}}">
@@ -20,18 +21,19 @@
             </a>
         </li>
 
-        <br>
+        <li class="menu-option-title mt-4 mb-1">
+            recursos humanos
+        </li>
 
         <!-- Estudantes  -->
         <li class="menu-option">
             <a href="{{route('clients.index')}}">
                 <div class="menu-icon">
-                    <ion-icon name="person-circle-outline" style="font-size: 16pt;  --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 3px;"></ion-icon>
+                    <ion-icon name="person-circle-outline" style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 3px;"></ion-icon>
                 </div>
                 <span class="option-name {{Route::is('clients.*') ? 'active' : ''}} option-name">Estudantes</span>
             </a>
         </li>
-
 
         <!-- Universidades  -->
         @if (Auth()->user()->tipo == 'admin')
@@ -47,7 +49,6 @@
 
         <!-- Agentes  -->
         @if ( Auth::user()->tipo == "admin")
-        {{-- Só o admin tem acesso à lista --}}
         <li class="menu-option">
             <a href="{{route('agents.index')}}">
                 <div class="menu-icon">
@@ -57,9 +58,11 @@
             </a>
         </li>
         @endif
-
         <br>
 
+        <li class="menu-option-title mt-2 mb-2">
+            ferramentas administrativas
+        </li>
 
         {{-- Diversos Collapse --}}
         <li class="menu-option">
@@ -67,17 +70,28 @@
                 <div class="menu-icon">
                     <i class="fas fa-tools mr-2"></i>
                 </div>
-                <span class="option-name">Diversos <i class="fas fa-caret-down"></i></span>
+                <span class="option-name <?php if (Route::is('libraries.*') || Route::is('contacts.*') || Route::is('agends.*') || Route::is('produtostock.*')) { echo 'active'; } ?>">Diversos</span>
             </a>
         </li>
 
         <div class="collapse" id="collapseDiv">
+            {{-- Produtos--}}
+            <li class="menu-option">
+                <a href="{{route('produtostock.index')}}">
+                    <span class="option-name {{Route::is('produtostock.*') ? 'active' : ''}}">Produtos Stock</span>
+                </a>
+            </li>
+
+            <!-- Listagens -->
+            <li class="menu-option">
+                <a href="#">
+                    <span class="option-name">Listagens</span>
+                </a>
+            </li>
+
             <!-- Biblioteca -->
             <li class="menu-option">
                 <a href="{{route('libraries.index')}}">
-                    <div class="menu-icon">
-                        <i class="far fa-folder mr-2"></i>
-                    </div>
                     <span class="option-name {{Route::is('libraries.*') ? 'active' : ''}}">Biblioteca</span>
                 </a>
             </li>
@@ -85,9 +99,6 @@
             <!-- Lista telefónica -->
             <li class="menu-option">
                 <a href="{{route('contacts.index')}}">
-                    <div class="menu-icon">
-                        <i class="fas fa-phone-alt mr-2"></i>
-                    </div>
                     <span class="option-name {{Route::is('contacts.*') ? 'active' : ''}}">Lista telefónica</span>
                 </a>
             </li>
@@ -95,33 +106,27 @@
             <!-- Agenda -->
             <li class="menu-option">
                 <a href="{{route('agends.index')}}">
-                    <div class="menu-icon">
-                        <i class="far fa-calendar-alt mr-2"></i>
-                    </div>
                     <span class="option-name {{Route::is('agends.*') ? 'active' : ''}}">Agenda</span>
                 </a>
             </li>
         </div>
 
-
+        @if (Auth()->user()->tipo == "admin")
         {{-- Financeiro Collapse --}}
         <li class="menu-option">
             <a data-toggle="collapse" href="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
                 <div class="menu-icon">
-                    <i class="fas fa-chart-line mr-2"></i>
+                    <i class="fas fa-chart-pie"></i>
                 </div>
-                <span class="option-name">Finanças</span>
+                <span class="option-name <?php if (Route::is('payments.*') || Route::is('charges.*') || Route::is('conta.*')) { echo 'active'; } ?>">Finanças</span>
             </a>
         </li>
+
 
         <div class="collapse" id="collapseFinance">
             <!-- Pagamentos -->
             <li class="menu-option">
                 <a href="{{route('payments.index')}}">
-                    <div class="menu-icon">
-                        <ion-icon name="cash-outline" style="font-size:16pt; --ionicon-stroke-width: 40px; position: relative; top: 3px; right: 3px;">
-                        </ion-icon>
-                    </div>
                     <span class="option-name {{Route::is('payments.*') ? 'active' : ''}}">Pagamentos</span>
                 </a>
             </li>
@@ -129,10 +134,6 @@
             <!-- Cobranças -->
             <li class="menu-option">
                 <a href="{{route('charges.index')}}">
-                    <div class="menu-icon">
-                        <ion-icon name="wallet-outline" style="font-size:16pt; --ionicon-stroke-width: 40px; position: relative; top: 3px; right: 3px;">
-                        </ion-icon>
-                    </div>
                     <span class="option-name {{Route::is('charges.*') ? 'active' : ''}}">Cobranças</span>
                 </a>
             </li>
@@ -140,43 +141,18 @@
             <!-- Relatório de contas -->
             <li class="menu-option">
                 <a href="#">
-                    <div class="menu-icon">
-                        <i class="fas fa-chart-line mr-2"></i>
-                    </div>
-                    <span class="option-name">Relatório de contas</span>
+                    <span class="option-name">Relatório e contas</span>
                 </a>
             </li>
 
             <!-- Conta bancária -->
             <li class="menu-option">
                 <a href="{{route('conta.index')}}">
-                    <div class="menu-icon">
-                        <i class="fas fa-chart-line mr-2"></i>
-                    </div>
-                    <span class="option-name">Conta bancária</span>
+                    <span class="option-name {{Route::is('conta.*') ? 'active' : ''}}">Conta bancária</span>
                 </a>
             </li>
         </div>
-
-        {{-- Produtos--}}
-        <li class="menu-option">
-            <a href="{{route('produtostock.index')}}">
-                <div class="menu-icon">
-                    <i class="fas fa-layer-group mr-2"></i>
-                </div>
-                <span class="option-name {{Route::is('produtostock.*') ? 'active' : ''}}">Produtos Stock</span>
-            </a>
-        </li>
-
-        <!-- Listagens -->
-        <li class="menu-option">
-            <a href="#">
-                <div class="menu-icon">
-                    <i class="fas fa-stream mr-2"></i>
-                </div>
-                <span class="option-name">Listagens</span>
-            </a>
-        </li>
+        @endif
 
         <!-- Utilizadores -->
         @if (Auth()->user()->tipo == 'admin')
@@ -192,25 +168,19 @@
     </ul>
 
 
+    {{-- Informação do utilizador + Terminar Sessão --}}
     <div class="text-center mb-4">
-
-
         <div class="opts_btn shadow-sm align-self-center">
             <a href="#" title="Definições" class="user_btn"><i class="fas fa-cog"></i></a>
         </div>
 
         <div class="user_opts shadow-sm align-self-center">
             <a href="#" title="Terminar sessão" class="user_btn" data-toggle="modal" data-target="#Modal"><i class="fas fa-power-off"></i></a>
-            {{-- @csrf
-            @method('POST') --}}
         </div>
-        <!-- -->
-
 
         {{-- SE FOR ADMIN --}}
         @if (Auth::user()->tipo == "admin" && Auth::user()->idAdmin != null)
         <div class="mx-auto user_photo rounded-circle shadow">
-            {{-- <a href="#" title="Ver as minhas informações"> --}}
             {{-- Foto Utilizador --}}
             @if(Auth::user()->admin->fotografia != null)
                 <img src="{{asset('/storage/admin-photos/'.Auth::user()->admin->fotografia)}}" style="width:100%">
@@ -219,7 +189,6 @@
                 @else
                 <img src="{{asset('/storage/default-photos/M.jpg')}}" style="width:100%">
                 @endif
-                {{-- </a> --}}
         </div>
 
         <div class="text-center mt-3">
