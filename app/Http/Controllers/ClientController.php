@@ -220,6 +220,7 @@ class ClientController extends Controller
             $produtos=null;
         }else{
 
+            /* Soma do valor total dos produtos */
             $totalprodutos=0;
             foreach ($produtos as $produto) {
                 $totalprodutos=$totalprodutos+$produto->valorTotal;
@@ -234,6 +235,7 @@ class ClientController extends Controller
         Subagente associado
 
  */
+
 
         /* Lê os dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
         $infosPassaport =new stdClass();

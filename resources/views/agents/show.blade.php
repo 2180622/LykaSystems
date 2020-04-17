@@ -31,18 +31,30 @@
     <br><br>
 
     <div class="cards-navigation">
-        <div class="title">
 
-            <h6>
-                @if ($agent->tipo=="Agente")
-                    Ficha de Agente
-                @else
-                    Ficha de Subagente<br>
-                    <span class="text-muted"><small>Subagente de: <a class="agent_link" href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a></small></span>
-                @endif
-            </h6>
 
+        <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h6>
+                        @if ($agent->tipo=="Agente")
+                            Ficha de Agente
+                        @else
+                            Ficha de Subagente<br>
+                            <span class="text-muted"><small>Subagente de: <a class="agent_link" href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a></small></span>
+                        @endif
+                    </h6>
+                </div>
+            </div>
+            <div class="col text-right">
+                <div class="text-muted"><small>Adicionado em: {{ date('d-M-y', strtotime($agent->created_at)) }}</small></div>
+
+                <div class="text-muted"><small>Ultima atualização:
+                        {{ date('d-M-y', strtotime($agent->updated_at)) }}</small></div>
+            </div>
         </div>
+
+
         <br>
 
         <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
@@ -111,13 +123,6 @@
 
                 <div><span class="text-secondary">NIF:</span> {{$agent->NIF}}</div>
 
-                <hr>
-
-                <div class="text-muted"><small>Adicionado: {{ date('d-M-y', strtotime($agent->created_at)) }}</small>
-                </div>
-                <div class="text-muted"><small>Ultima atualização:
-                        {{ date('d-M-y', strtotime($agent->updated_at)) }}</small></div>
-
             </div>
 
 
@@ -141,6 +146,9 @@
 
 
     </div>
+
+<br><br>
+
 </div>
 
 @endsection
