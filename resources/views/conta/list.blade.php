@@ -1,20 +1,17 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Lista de contas bancárias')
+@section('title', 'Listagem de contas bancárias')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteúdo da Página --}}
 @section('content')
-{{-- @include('conta.partials.modal') --}}
-<!-- MODAL DE INFORMAÇÔES -->
 
 <div class="container mt-2 ">
-
     {{-- Navegação --}}
     <div class="float-left buttons">
         <a href="javascript:history.go(-1)" title="Voltar">
@@ -31,16 +28,19 @@
 
     <br><br>
 
-
     <div class="cards-navigation">
         <div class="title">
-            <h6>Listagem de contas bancárias</h6>
+            <h6>de contas bancárias</h6>
         </div>
         <br>
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Existem <strong>{{count($contums)}}</strong> registo(s) no sistema
+                @if (count($contums) == 1)
+                  Existe <strong>{{count($contums)}}</strong> conta registada no sistema.
+                @else
+                  Existem <strong>{{count($contums)}}</strong> contas registadas no sistema.
+                @endif
             </div>
         </div>
 
