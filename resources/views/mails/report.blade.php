@@ -1,5 +1,3 @@
-{{$slot = 'Lyka Systems'}}
-
 @component('mail::message')
 Saudações!
 
@@ -11,7 +9,6 @@ Endereço eletrónico: **{{$email}}**
 @if ($phone != null)
   Telemóvel: **{{$phone}}**
 @endif
-
 
 De seguida pode encontrar o relatório a descrever o problema que o utilizador está a enfrentar.
 
