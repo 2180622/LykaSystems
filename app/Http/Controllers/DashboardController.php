@@ -33,6 +33,6 @@ class DashboardController extends Controller{
         $this->NotController->getNotificacaoFaseAcaba($AllNotifications);
         $this->NotController->getNotificacaoDocFalta($AllNotifications);
 
-        return view('index', compact('agentes', 'clientes', 'universidades'));
+        return view('dashboard.index', compact('agentes', 'clientes', 'universidades'));
     }
 }
