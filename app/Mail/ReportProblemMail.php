@@ -31,7 +31,10 @@ class ReportProblemMail extends Mailable
       if ($this->screenshot != null) {
         return $this->from($this->email, $this->name)
             ->subject('Lyka Systems | Relatório de erro - '.$this->name)
-            ->attachFromStorage('report-errors/'.$this->screenshot, 'captura_erro.png')
+            ->attachFromStorage($this->screenshot->getRealPath(), [
+                    'as' => $this->screenshot->getClientOriginalExtension(),
+                    'mime' => $this->screenshot->getMimeType(),
+            ])
             ->markdown('mails.report')
             ->with([
                 'name' => $this->name,

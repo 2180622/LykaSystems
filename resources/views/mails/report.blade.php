@@ -1,3 +1,5 @@
+{{$slot = 'Lyka Systems'}}
+
 @component('mail::message')
 Saudações!
 
