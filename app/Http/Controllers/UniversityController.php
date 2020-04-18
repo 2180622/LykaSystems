@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Agenda;
 use App\Universidade;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,7 +60,13 @@ class UniversityController extends Controller
        if (Auth::user()->tipo != "admin" ){
         abort (401);
       }
-        return view('universities.show', compact('university'));
+
+
+        $eventos = Agenda::
+        where('idUniversidade', $university->idUniversidade)
+        ->get();
+
+        return view('universities.show', compact('university','eventos'));
     }
 
 

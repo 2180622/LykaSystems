@@ -5,7 +5,6 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-<link href="{{asset('css/university.css')}}" rel="stylesheet">
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
@@ -67,22 +66,16 @@
 
                 <div><span class="text-secondary ">Morada:</span> {{$university->morada}}</div><br>
 
-                <div><span class="text-secondary ">E-mail:</span> {{$university->email}}</div><br>
-
-                <div><span class="text-secondary">Telefone :</span> {{$university->telefone}}</div><br>
-
                 <div><span class="text-secondary">NIF:</span> {{$university->NIF}}</div><br>
 
                 <div><span class="text-secondary">IBAN:</span> {{$university->IBAN}}</div><br>
 
             </div>
 
-            <div class="col p-2">
-                <div><span class="text-secondary">Observação dos Contactos:</span> {{$university->obsContactos}}</div><br>
+            <div class="col p-2" style="min-width: 200px">
+                <div><span class="text-secondary ">E-mail:</span> {{$university->email}}</div><br>
 
-                <div><span class="text-secondary">Observação dos Cursos:</span> {{$university->obsCursos}}</div><br>
-
-                <div><span class="text-secondary">Observação dos Candidaturas:</span> {{$university->obsCandidaturas}}</div><br>
+                <div><span class="text-secondary">Telefone :</span> {{$university->telefone}}</div><br>
 
                 <br>
                 <a href="#" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar evento</a>
@@ -107,9 +100,20 @@
         {{-- MENU: Estudantes associados --}}
         <li class="nav-item text-center" style="width:20%; min-width:144px">
             <a class="nav-link" id="estudantes-tab" data-toggle="tab" href="#estudantes" role="tab"
-                aria-controls="estudante" aria-selected="false">Estudantes associados</a>
+                aria-controls="estudante" aria-selected="false">Estudantes</a>
         </li>
 
+        {{-- MENU: Contactos --}}
+        <li class="nav-item text-center" style="width:20%; min-width:144px">
+            <a class="nav-link" id="contactos-tab" data-toggle="tab" href="#contactos" role="tab"
+                aria-controls="contacto" aria-selected="false">Contactos</a>
+        </li>
+
+        {{-- MENU: Observações --}}
+        <li class="nav-item text-center" style="width:20%; min-width:144px">
+            <a class="nav-link" id="obsevacoes-tab" data-toggle="tab" href="#obsevacoes" role="tab"
+                aria-controls="obsevacao" aria-selected="false">Observações</a>
+        </li>
 
     </ul>
 
@@ -164,40 +168,42 @@
                     {{-- Corpo da tabela --}}
                     <tbody>
 
-                        {{-- @foreach ($universities as $university) --}}
-                        <tr>
-                            <td style="width:10px"><span class="p-1 shadow-sm" style="background-color:#00FF00"></span></td>
+                        @if($eventos)
+                            @foreach ($eventos as $evento)
+                            <tr>
+                                <td style="width:10px"><span class="p-1 shadow-sm" style="background-color:#00FF00"></span></td>
 
-                            {{-- Título --}}
-                            <td ><a class="name_link" href="#">Titulo do evento</td>
+                                {{-- Título --}}
+                                <td ><a class="name_link" href="#">Titulo do evento</td>
 
-                            {{-- Ínicio --}}
-                            <td class="align-middle">01/01/2020</td>
+                                {{-- Ínicio --}}
+                                <td class="align-middle">01/01/2020</td>
 
-                            {{-- Fim --}}
-                            <td class="align-middle">30/01/2020</td>
+                                {{-- Fim --}}
+                                <td class="align-middle">30/01/2020</td>
 
 
-                            {{-- OPÇÔES --}}
-                            <td class="text-center align-middle">
-                                <a href="#" class="btn_list_opt "
-                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                <a href="#" class="btn_list_opt btn_list_opt_edit"
-                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                                {{-- OPÇÔES --}}
+                                <td class="text-center align-middle">
+                                    <a href="#" class="btn_list_opt "
+                                        title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                    <a href="#" class="btn_list_opt btn_list_opt_edit"
+                                        title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
-                                <form method="POST" role="form" id="#"
-                                    action="#"
-                                    class="d-inline-block form_university_id" data="#">
-                                    @csrf
-                                   {{--  @method('DELETE') --}}
-                                    <button type="submit" class="btn_delete" title="Eliminar Evento"
-                                        data-toggle="modal" data-target="#eliminarUniversidade"
-                                        data-title="#"><i class="fas fa-trash-alt"></i></button>
-                                </form>
+                                    <form method="POST" role="form" id="#"
+                                        action="#"
+                                        class="d-inline-block form_university_id" data="#">
+                                        @csrf
+                                    {{--  @method('DELETE') --}}
+                                        <button type="submit" class="btn_delete" title="Eliminar Evento"
+                                            data-toggle="modal" data-target="#eliminarUniversidade"
+                                            data-title="#"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
 
-                            </td>
-                        </tr>
-                        {{-- @endforeach --}}
+                                </td>
+                            </tr>
+                        @endforeach
+                        @endif
 
                     </tbody>
                 </table>
@@ -205,14 +211,37 @@
         </div>
 
 
-
-
-        {{-- Conteudo: Lista de estudantes --}}
+        {{-- Conteudo: Contactos --}}
         <div class="tab-pane fade show text-muted" id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
             Lista de estudantes
         </div>
 
 
+
+        {{-- Conteudo: Contactos --}}
+        <div class="tab-pane fade show text-muted" id="contactos" role="tabpanel" aria-labelledby="Contactos-tab">
+            Lista de contactos
+        </div>
+
+        {{-- Conteudo: Observações --}}
+        <div class="tab-pane fade show text-muted" id="obsevacoes" role="tabpanel" aria-labelledby="obsevacoes-tab">
+            <div>
+                <span class="text-secondary">Observação dos Contactos:</span> {{$university->obsContactos}}
+            </div>
+
+            <br>
+
+            <div>
+                <span class="text-secondary">Observação dos Cursos:</span> {{$university->obsCursos}}
+            </div>
+
+            <br>
+
+            <div>
+                <span class="text-secondary">Observação dos Candidaturas:</span> {{$university->obsCandidaturas}}
+            </div>
+
+        </div>
 
     </div>
 
