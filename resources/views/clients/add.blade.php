@@ -47,9 +47,7 @@
                     <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
                 </div>
             </div>
-            <div class="form-group text-right">
 
-            </div>
         </form>
     </div>
 </div>

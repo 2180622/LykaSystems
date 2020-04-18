@@ -176,21 +176,21 @@
                     style="width:80%;min-width:118px;min-height:120px">
 
                     @if ( $client->img_docOficial!=null)
-                    <a href="#" title="Clique adicionar o documento de identificação" id="doc_id_preview"
+                    <a href="#" title="Clique para adicionar o documento de identificação" id="doc_id_preview"
                         class="name_link">
                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                         <div id="name_doc_id_file" class="text-muted">{{old('img_docOficial',$client->img_docOficial)}}
                         </div>
                     </a>
                     @else
-                    <a style="display:none;cursor:pointer" title="Clique adicionar o documento de identificação"
+                    <a style="display:none;cursor:pointer" title="Clique para adicionar o documento de identificação"
                         id="doc_id_preview" class="name_link">
                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                         <div id="name_doc_id_file" class="text-muted">
                             {{old('img_docOficial',$client->img_docOficial)}}</div>
                     </a>
                     <i id="doc_id_preview_file" class="fas fa-plus-circle mt-2" style="font-size:60px;cursor:pointer"
-                        title="Clique adicionar o documento de identificação"></i>
+                        title="Clique para adicionar o documento de identificação"></i>
                     @endif
 
                 </div>

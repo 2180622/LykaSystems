@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="color:#6A74C9">
     {{-- INPUT nome --}}
     <div class="form-group cards-navigation col-lg-12 col-md-6">
         <label for="inputNome" style="font-weight: 700!important;">Nome da Universidade</label>
