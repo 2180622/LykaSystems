@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Agente;
+use App\Produto;
 use App\User;
 use App\DocAcademico;
 use App\DocPessoal;
@@ -227,14 +229,35 @@ class ClientController extends Controller
             }
         }
 
-/*
+  /*       array('column1', 'column2', 'column3') */
 
-        Agente associado
+        /* Agentes associados */
+        $agents = Agente::
+        whereIn('idAgente', function ($query) use ($client) {
+            $query->select('idAgente')
+            ->from('Produto')
+            ->where('idCliente', $client->idCliente)
+            ->distinct('idAgente');
+        })->get();
+
+        if ($agents->isEmpty()) {
+            $agents=null;
+        }
+
+        /* Subagentes associados */
+        $subagents = Agente::
+        whereIn('idAgente', function ($query) use ($client) {
+            $query->select('idSubAgente')
+            ->from('Produto')
+            ->where('idCliente', $client->idCliente)
+            ->distinct('idSubAgente');
+        })->get();
+
+        if ($subagents->isEmpty()) {
+            $subagents=null;
+        }
 
 
-        Subagente associado
-
- */
 
 
         /* Lê os dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
@@ -257,7 +280,7 @@ class ClientController extends Controller
         ->get();
 
 
-        return view('clients.show',compact("client","produtos","totalprodutos","infosPassaport",'docsAcademicos'));
+        return view('clients.show',compact("client","agents","subagents","produtos","totalprodutos","infosPassaport",'docsAcademicos'));
     }
 
 
