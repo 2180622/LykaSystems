@@ -11,8 +11,8 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-
 <div class="container mt-2 ">
+  @php use \App\Http\Controllers\ExtraFunctionsController; @endphp
 
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -40,13 +40,13 @@
             @if (count($fase->DocTransacao))
             @foreach ($fase->DocTransacao as $paymentProof)
             @if ($paymentProof->valorRecebido != null)
-            <a href="{{route('charges.edit', [strtolower(mb_convert_encoding($product->descricao, 'ASCII')), strtolower(mb_convert_encoding($fase->descricao, 'ASCII')), strtolower(mb_convert_encoding($paymentProof->descricao, 'ASCII'))])}}">
+            <a href="{{route('charges.edit', [ExtraFunctionsController::post_slug($product->descricao), ExtraFunctionsController::post_slug($fase->descricao), ExtraFunctionsController::post_slug($paymentProof->descricao)])}}">
                 @else
-                <a href="{{route('charges.showcharge', [strtolower($product->descricao), strtolower($fase->descricao)])}}">
+                <a href="{{route('charges.showcharge', [ExtraFunctionsController::post_slug($product->descricao), ExtraFunctionsController::post_slug($fase->descricao)])}}">
                     @endif
                     @endforeach
                     @else
-                    <a href="{{route('charges.showcharge', [strtolower($product->descricao), strtolower($fase->descricao)])}}">
+                    <a href="{{route('charges.showcharge', [ExtraFunctionsController::post_slug($product->descricao), ExtraFunctionsController::post_slug($fase->descricao)])}}">
                         @endif
                         <div class="row charge-div">
                             <div class="col-md-1 align-self-center">
