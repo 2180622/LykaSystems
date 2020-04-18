@@ -45,13 +45,17 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/payments/{product}/{fase}', 'PaymentController@showpayment');
 
     /* Cobranças */
-    Route::get('/charges', 'ChargesController@index')->name('charges.index');
-    Route::get('/charges/{product}', 'ChargesController@show')->name('charges.show');
-    Route::get('/charges/{product}/{fase}', 'ChargesController@showcharge')->name('charges.showcharge');
-    Route::post('/charges/{product}/{fase}', 'ChargesController@store')->name('charges.store');
-    Route::get('/charges/{product}/{fase}/{paymentProof}/edit', 'ChargesController@edit')->name('charges.edit');
-    Route::put('/charges/{product}/{paymentProof}', 'ChargesController@update')->name('charges.update');
-    Route::get('/charges/{paymentProof}/download', 'ChargesController@download')->name('charges.download');
+    Route::get('/cobranças', 'ChargesController@index')->name('charges.index');
+      // Visualizar cobranças
+      Route::get('/cobranças/{product:descricao}', 'ChargesController@show')->name('charges.show');
+      Route::get('/cobranças/{product:descricao}/{fase:descricao}', 'ChargesController@showcharge')->name('charges.showcharge');
+      // Adicionar cobrança
+      Route::post('/cobranças/{product}/{fase}', 'ChargesController@store')->name('charges.store');
+      // Editar cobrança
+      Route::get('/cobranças/{product:descricao}/{fase:descricao}/{paymentProof:descricao}/editar', 'ChargesController@edit')->name('charges.edit');
+      Route::put('/cobranças/{product}/{paymentProof}', 'ChargesController@update')->name('charges.update');
+      // Transferir comprovativo de pagamento
+      Route::get('/cobranças/download/{paymentProof}', 'ChargesController@download')->name('charges.download');
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
