@@ -12,6 +12,7 @@
 
 {{-- Page Content --}}
 @section('content')
+@include('universities.partials.add-event')
 
 <div class="container mt-2">
     {{-- Navegação --}}
@@ -81,7 +82,8 @@
                 <div><span class="text-secondary">Telefone :</span> {{$university->telefone}}</div><br>
 
                 <br>
-                <a href="#" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar evento</a>
+                <a href="#" class="top-button" data-toggle="modal" data-target="#modalCalendar"><i class="fas fa-plus mr-2"></i>Adicionar evento</a>
+
             </div>
         </div>
 
@@ -150,17 +152,17 @@
 
                             @foreach ($eventos as $evento)
                             <tr>
-                                <td style="width:10px"><span class="p-1 shadow-sm" style="background-color:#00FF00"></span>
+                                <td style="width:10px"><span class="p-1 shadow-sm" style="background-color:{{$evento->cor}}"></span>
                                 </td>
 
                                 {{-- Título --}}
-                                <td><a class="name_link" href="#">Titulo do evento</td>
+                                <td><a class="name_link" href="#">{{$evento->titulo}}</td>
 
                                 {{-- Ínicio --}}
-                                <td class="align-middle">01/01/2020</td>
+                                <td class="align-middle">{{ date('d-M-y', strtotime($evento->dataInicio)) }}</td>
 
                                 {{-- Fim --}}
-                                <td class="align-middle">30/01/2020</td>
+                                <td class="align-middle">{{ date('d-M-y', strtotime($evento->dataFim)) }}</td>
 
 
                                 {{-- OPÇÔES --}}
