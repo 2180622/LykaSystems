@@ -31,6 +31,7 @@
         </div>
 
         <div class="float-right">
+            <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
             @if (Auth::user()->tipo == "admin")
                 <a href="{{route('libraries.create')}}" class="top-button">Adicionar Ficheiro</a>
             @endif

@@ -52,6 +52,7 @@ class AgendController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'idUniversidade'=> 'nullable',
             'titulo' => 'required',
             'descricao' => 'required',
             'dataInicio' => 'required',
@@ -62,6 +63,7 @@ class AgendController extends Controller
         $agenda = new Agenda;
 
         $agenda->idUser = auth()->user()->idUser;
+        $agenda->idUniversidade = $request->idUniversidade;
 
         $agenda->titulo = $request->input('titulo');
         $agenda->descricao = $request->input('descricao');
@@ -71,7 +73,8 @@ class AgendController extends Controller
 
         $agenda->save();
 
-        return redirect()->route('agends.index')->with('success', 'Evento Adicionado com Sucesso!');
+        return redirect()->back()->with('success', 'Evento Adicionado com Sucesso!');
+        /* return redirect()->route('agends.index')->with('success', 'Evento Adicionado com Sucesso!'); */
     }
 
     /**

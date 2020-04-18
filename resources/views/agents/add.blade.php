@@ -45,7 +45,7 @@
                 </div>
                 <div class="col col-4 text-right pt-2" style="min-width:285px">
                     <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar agente</button>
-                    <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
+                    <a href="{{route('agents.index')}}" class="cancel-button">Cancelar</a>
                 </div>
             </div>
             <div class="form-group text-right">

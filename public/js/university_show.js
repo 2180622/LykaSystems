@@ -4,15 +4,17 @@ $(document).ready(function () {
 
         "columnDefs": [{
                 "orderable": false,
-                "width": "10px",
+                "width": "60px",
                 "targets": 0
             },
             {
                 "orderable": false,
                 "width": "130px",
-                "targets": 4
+                "targets": 3
             },
+
         ],
+
 
         "language": {
             "lengthMenu": "Mostrar _MENU_ por página",
@@ -35,13 +37,16 @@ $(document).ready(function () {
         /* "bLengthChange": false, */
         /* "bFilter": false, */
 
+
     });
+
 
     $(".dataTables_filter").hide(); // Esconde o input search por defeito
     $("#customSearchBox").on('keyup', function () {
         $(".dataTables_filter input").val($("#customSearchBox").val())
         table.search($(".dataTables_filter input").val()).draw();
     });
+
 
 
     $('.dataTables_length').hide(); // Esconde o select "rows per page" por defeito
@@ -51,7 +56,12 @@ $(document).ready(function () {
     });
 
 
+
     /* FIM configs DATATABLES */
+
+
+
+
 
 
 
