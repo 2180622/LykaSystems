@@ -38,7 +38,7 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{number_format((float) $fase->valorFase,2 ,',' ,'')}}€</p>
             <br><br>
-            <form action="/charges/{{$product->idProduto}}/{{$paymentProof->idDocTransacao}}" method="post" enctype="multipart/form-data" name="chargeForm">
+            <form action="{{route('charges.update', [$product, $paymentProof])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="row">
@@ -131,7 +131,7 @@
         <a href="#">Editar</a>
     </div>
     <div class="custom-cm-item">
-        <a href="{{'charges.download', $paymentProof}}">Transferir</a>
+        <a href="{{route('charges.download', $paymentProof)}}">Transferir</a>
     </div>
     <div class="custom-cm-item">
         <a href="#" onclick="removeFile();">Remover</a>

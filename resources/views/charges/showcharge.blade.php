@@ -37,7 +37,7 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{number_format((float)$fase->valorFase, 2, ',', '')}}€</p>
             <br><br>
-            <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post" enctype="multipart/form-data" name="chargeForm">
+            <form action="{{route('charges.store', [$product, $fase])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">

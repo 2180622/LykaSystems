@@ -105,9 +105,8 @@ class ChargesController extends Controller
       return redirect()->route('charges.show', $product)->with('success', 'Estado da cobrança editado com sucesso!');
     }
 
-    public function download(DocTransacao $paymentProof)
+    public function test(DocTransacao $paymentProof)
     {
-      $file = $paymentProof->comprovativoPagamento;
-      return Storage::download('payment-proof/'.$file);
+      dd($paymentProof);
     }
 }

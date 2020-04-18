@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Agenda;
+use App\Cliente;
+use App\Produto;
 use App\Universidade;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,12 +63,32 @@ class UniversityController extends Controller
         abort (401);
       }
 
-
+        /* Obtem os eventos da universidade */
         $eventos = Agenda::
         where('idUniversidade', $university->idUniversidade)
         ->get();
 
-        return view('universities.show', compact('university','eventos'));
+        if ($eventos->isEmpty()) {
+            $eventos=null;
+        }
+
+
+        /* Obtem os clientes da que estão na universidade */
+        $clients = Cliente::where('idCliente', function ($query) use ($university){
+            $query->select('idCliente')
+            ->from(with(new Produto)->getTable())
+            ->where('idUniversidade1', $university->idUniversidade)
+            ->orwhere('idUniversidade2', $university->idUniversidade)
+            ->distinct('idCliente');
+        })->get();
+
+        if ($clients->isEmpty()) {
+            $clients=null;
+        }
+
+
+
+        return view('universities.show', compact('university','eventos','clients'));
     }
 
 

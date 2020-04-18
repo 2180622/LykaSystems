@@ -31,7 +31,7 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Editar informações</h6>
+            <h6>Editar informações do Estudante</h6>
         </div>
         <br>
 

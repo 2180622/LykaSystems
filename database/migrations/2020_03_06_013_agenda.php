@@ -17,7 +17,13 @@ class Agenda extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idAgenda');
-            $table->string('idUniversidade')->nullable();
+
+            $table->unsignedBigInteger('idUser');
+                $table->foreign('idUser')->references('idUser')->on('User');
+
+            $table->unsignedBigInteger('idUniversidade')->nullable();
+                $table->foreign('idUniversidade')->references('idUniversidade')->on('Universidade');
+
             $table->string('titulo');
             $table->text('descricao')->nullable();
             $table->boolean('visibilidade')->default(false);
@@ -26,8 +32,7 @@ class Agenda extends Migration
             $table->string('cor', 7);
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger('idUser');
-                $table->foreign('idUser')->references('idUser')->on('User');
+
 
         });
     }

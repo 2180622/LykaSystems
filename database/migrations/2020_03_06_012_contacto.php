@@ -18,6 +18,10 @@ class Contacto extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idContacto');
             $table->unsignedBigInteger('idUser')->nullable();
+            
+            $table->unsignedBigInteger('idUniversidade')->nullable();
+                $table->foreign('idUniversidade')->references('idUniversidade')->on('Universidade');
+
             $table->foreign('idUser')->references('idUser')->on('User');
             $table->string('nome',255);
             $table->string('fotografia',255)->nullable();
@@ -28,8 +32,7 @@ class Contacto extends Migration
             $table->longText('observacao')->nullable();
             $table->boolean('favorito')->default(false);
             $table->boolean('visibilidade')->default(false);
-            $table->unsignedBigInteger('idUniversidade')->nullable();
-                $table->foreign('idUniversidade')->references('idUniversidade')->on('Universidade');
+
             $table->timestamps();
         });
     }
