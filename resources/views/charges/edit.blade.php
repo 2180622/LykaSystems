@@ -6,7 +6,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
-<link href="{{asset('/css/payment.css')}}" rel="stylesheet">
+<link href="{{asset('/css/charges.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
@@ -61,7 +61,7 @@
                                     <option value="Outro" @if ($paymentProof->tipoPagamento == "Outro") selected @endif>Outro</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" oncontextmenu="return showContextMenu();">
                         <label for="comprovativoPagamento">Comprovativo de pagamento</label>
                         <br>
                         <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
@@ -124,6 +124,20 @@
         </form>
         <br>
     </div>
+</div>
+
+<div class="custom-cm" id="contextMenu">
+    <div class="custom-cm-item">
+        <a href="#">Editar</a>
+    </div>
+    <div class="custom-cm-item">
+        <a href="{{'charges.download', $paymentProof}}">Transferir</a>
+    </div>
+    <div class="custom-cm-item">
+        <a href="#" onclick="removeFile();">Remover</a>
+    </div>
+    <div class="custom-cm-divider"></div>
+    <div class="custom-cm-item">Cancelar</div>
 </div>
 
 @section('scripts')
