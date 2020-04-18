@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Agenda */
     Route::resource('/agends', 'AgendController');
     Route::post('/agends/create', 'AgendController@store')->name('agend.store');
+    Route::get('/test/agends/events', 'AgendController@events');
 
 
     /* Pagamentos */

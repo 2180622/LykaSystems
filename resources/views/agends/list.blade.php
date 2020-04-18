@@ -45,6 +45,7 @@
             <div class="title">
                 <h6>Agenda</h6>
             </div>
+
             <br>
 
             <div id='calendar'></div>
@@ -69,9 +70,57 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <script src="{{asset('/js/eventAgend.js')}}"></script>
 
-    <script src="{{asset('/js/agends.js')}}"></script>
+    <script>
+        var dateToday = new Date();
+        var dd = String(dateToday.getDate()).padStart(2, '0');
+        var mm = String(dateToday.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = dateToday.getFullYear();
+
+        dateToday = mm + '/' + dd + '/' + yyyy;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['interaction', 'dayGrid', 'timeGrid', 'list', 'rrule'],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                dateToday,
+                locale: 'pt',
+                editable: true,
+                navLinks: true,
+                eventLimit: true,
+                selectable: true,
+                events: [
+                        @foreach($agends as $agend)
+                    {
+                        title: '{{ $agend->titulo }}',
+                        start: '{{ $agend->dataInicio }}',
+                        end: '{{ $agend->dataFim }}',
+                        color: '{{ $agend->cor }}',
+                    },
+                    @endforeach
+                ],
+                extraParams: function () {
+                    return {
+                        cachebuster: new Date().valueOf()
+                    };
+                },
+                eventClick: function (arg) {
+                    $("modalCalendar").modal('show');
+                }
+            });
+
+            calendar.render();
+        });
+    </script>
+
 @endsection
