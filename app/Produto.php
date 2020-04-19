@@ -2,11 +2,14 @@
 
 namespace App;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Produto extends Model
 {
+    use HasSlug;
     use SoftDeletes;
     protected $table = 'Produto';
 
@@ -40,5 +43,17 @@ class Produto extends Model
 
     public function fase(){
         return $this->hasMany("App\Fase","idProduto","idProduto")->withTrashed();
+    }
+
+    public function getSlugOptions() : SlugOptions
+    {
+      return SlugOptions::create()
+          ->generateSlugsFrom('descricao')
+          ->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

@@ -12,8 +12,6 @@
 {{-- Conteudo da Página --}}
 @section('content')
 <div class="container mt-2 ">
-  @php use \App\Http\Controllers\ExtraFunctionsController; @endphp
-
     {{-- Navegação --}}
     <div class="float-left buttons">
         <a href="javascript:history.go(-1)" title="Voltar">
@@ -40,13 +38,13 @@
             @if (count($fase->DocTransacao))
             @foreach ($fase->DocTransacao as $paymentProof)
             @if ($paymentProof->valorRecebido != null)
-            <a href="{{route('charges.edit', [ExtraFunctionsController::post_slug($product->descricao), ExtraFunctionsController::post_slug($fase->descricao), ExtraFunctionsController::post_slug($paymentProof->descricao)])}}">
+            <a href="{{route('charges.edit', [$product, $fase, $paymentProof])}}">
                 @else
-                <a href="{{route('charges.showcharge', [ExtraFunctionsController::post_slug($product->descricao), ExtraFunctionsController::post_slug($fase->descricao)])}}">
+                <a href="{{route('charges.showcharge', [$product, $fase])}}">
                     @endif
                     @endforeach
                     @else
-                    <a href="{{route('charges.showcharge', [ExtraFunctionsController::post_slug($product->descricao), ExtraFunctionsController::post_slug($fase->descricao)])}}">
+                    <a href="{{route('charges.showcharge', [$product, $fase])}}">
                         @endif
                         <div class="row charge-div">
                             <div class="col-md-1 align-self-center">

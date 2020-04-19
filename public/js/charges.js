@@ -25,7 +25,7 @@ var contextMenu = document.getElementById("contextMenu");
 
 function showContextMenu() {
     contextMenu.style.display = "inline-block";
-    contextMenu.style.left = event.clientX - '250' + 'px';
+    contextMenu.style.left = event.clientX - '260' + 'px';
     contextMenu.style.top = event.clientY + 'px';
     return false;
 }

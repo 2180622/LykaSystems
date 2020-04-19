@@ -31,7 +31,7 @@ class ChargesController extends Controller
       return view('charges.show', compact('product', 'fases', 'docTrasancao'));
     }
 
-    public function showcharge(Conta $contas, Produto $product, Fase $fase)
+    public function showcharge(Produto $product, Fase $fase, Conta $contas)
     {
       $contas = Conta::all();
       $docTrasancao = DocTransacao::where('idFase', '=', $fase->idFase)->get();

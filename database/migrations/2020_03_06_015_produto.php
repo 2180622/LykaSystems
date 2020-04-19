@@ -35,10 +35,11 @@ class Produto extends Migration
 
             $table->unsignedBigInteger('idUniversidade1');
                 $table->foreign('idUniversidade1')->references('idUniversidade')->on('Universidade');
-                
+
             $table->unsignedBigInteger('idUniversidade2')->nullable();
                 $table->foreign('idUniversidade2')->references('idUniversidade')->on('Universidade');
             $table->softDeletes();
+            $table->string('slug')->nullable();
         });
     }
 

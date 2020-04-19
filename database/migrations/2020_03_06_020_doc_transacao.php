@@ -30,6 +30,7 @@ class DocTransacao extends Migration
                 $table->foreign('idConta')->references('idConta')->on('Conta');
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
+            $table->string('slug')->nullable();
         });
     }
 
