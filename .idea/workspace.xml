@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AgendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AgendController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/agends/partials/modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/agends/partials/modal.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,22 +132,23 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mexico-eportugal" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Users\Micaela\AppData\Local\JetBrains\Toolbox\apps\PhpStorm\ch-0\193.5662.63\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\LykaSystems\public" />
       <recent name="C:\laragon\www\LykaSystems\resources\views\libraries\partials" />
       <recent name="C:\laragon\www\LykaSystems\resources\views\universities\partials" />
       <recent name="C:\laragon\www\LykaSystems\public\js" />
       <recent name="C:\laragon\www\LykaSystems\resources\views\layout" />
-      <recent name="C:\laragon\www\LykaSystems\public\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\LykaSystems\resources\views\agends" />
-      <recent name="C:\laragon\www\LykaSystems\resources\views" />
+      <recent name="C:\laragon\www\LykaSystems\resources\views\agends\partials" />
       <recent name="C:\laragon\www\LykaSystems\public" />
+      <recent name="C:\laragon\www\LykaSystems\resources\views" />
     </key>
   </component>
   <component name="RunManager">
@@ -208,7 +210,11 @@
       <workItem from="1586441546133" duration="829000" />
       <workItem from="1586942448486" duration="2368000" />
       <workItem from="1586963084735" duration="5113000" />
-      <workItem from="1587045557100" duration="1557000" />
+      <workItem from="1587045557100" duration="2420000" />
+      <workItem from="1587049188073" duration="3141000" />
+      <workItem from="1587120683715" duration="599000" />
+      <workItem from="1587216318087" duration="4267000" />
+      <workItem from="1587224166898" duration="10714000" />
     </task>
     <servers />
   </component>

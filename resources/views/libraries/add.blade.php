@@ -23,7 +23,7 @@
         </a>
     </div>
     <div class="float-right">
-        <a href="#" class="top-button">reportar problema</a>
+        <a href="{{route('report')}}" class="top-button">reportar problema</a>
     </div>
 
     <br><br>
@@ -32,10 +32,14 @@
             <h6>Adicionar ficheiro</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="#" class="form-group needs-validation pt-3" id="form_library" enctype="multipart/form-data" novalidate>
             @csrf
             @include('libraries.partials.addfile')
-
+            <br>
+            <div class="text-right">
+                <button type="submit" class="top-button mr-2" name="submit"></i>Adicionar ficheiro</button>
+                <a href="{{route('libraries.index')}}" class="cancel-button">Cancelar</a>
+            </div>
         </form>
     </div>
 </div>

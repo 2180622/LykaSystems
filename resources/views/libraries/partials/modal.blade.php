@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Eliminar Item</h5>
+                <h5 class="modal-title">Eliminar ficheiro</h5>
 
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -11,12 +11,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <span>Tem a certeza que deseja eliminar este Item?</span><br><br>
+                <span>Tem a certeza que deseja eliminar este ficheiro?</span><br><br>
 
             </div>
             <div class="modal-footer">
                 <button type="submit" class="top-button btn_submit bg-danger"><i class="far fa-trash-alt mr-2"></i>Sim,
-                    eliminar Item
+                    eliminar ficheiro
                 </button>
                 <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
             </div>

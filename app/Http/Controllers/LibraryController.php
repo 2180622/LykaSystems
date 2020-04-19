@@ -25,7 +25,8 @@ class LibraryController extends Controller
      */
     public function create()
     {
-        return view('libraries.add'/* , compact('files') */);
+        $library = new Biblioteca;
+        return view('libraries.add' , compact('library'));
     }
 
     /**

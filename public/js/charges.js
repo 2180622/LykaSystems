@@ -9,6 +9,11 @@ function sub(obj) {
     document.getElementById("addFileButton").innerHTML = fileName[fileName.length - 1];
 }
 
+function removeFile() {
+    document.getElementById("upfile").value = "";
+    document.getElementById("addFileButton").innerHTML = 'Adicionar um ficheiro';
+}
+
 // Tooltip
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
@@ -20,7 +25,7 @@ var contextMenu = document.getElementById("contextMenu");
 
 function showContextMenu() {
     contextMenu.style.display = "inline-block";
-    contextMenu.style.left = event.clientX + 'px';
+    contextMenu.style.left = event.clientX - '260' + 'px';
     contextMenu.style.top = event.clientY + 'px';
     return false;
 }

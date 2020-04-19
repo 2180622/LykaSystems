@@ -30,7 +30,11 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Editar informações</h6>
+            <h6>@if ($agent->tipo=="Agente")
+                Editar informações do Agente
+            @else
+                Editar informações do Subagente<br>
+            @endif</h6>
         </div>
         <br>
 
@@ -43,7 +47,7 @@
             <div class="form-group text-right" style="min-width:285px">
                 <br><br>
                 <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
-                <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
+                <a href="{{route('agents.index')}}" class="cancel-button">Cancelar</a>
             </div>
         </form>
 

@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 
 class DocTransacao extends Model
 {
+    use HasSlug;
     protected $table = 'DocTransacao';
 
     protected $primaryKey = 'idDocTransacao';
@@ -21,5 +24,17 @@ class DocTransacao extends Model
 
     public function conta(){
         return $this->belongsTo("App\Conta","idConta","idConta")->withTrashed();
+    }
+
+    public function getSlugOptions() : SlugOptions
+    {
+      return SlugOptions::create()
+          ->generateSlugsFrom('descricao')
+          ->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

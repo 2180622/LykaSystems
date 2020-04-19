@@ -25,6 +25,7 @@ class Fase extends Migration
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->timestamps();
             $table->softDeletes();
+            $table->string('slug')->nullable();
             });
     }
 

@@ -24,7 +24,7 @@
         </a>
     </div>
     <div class="float-right">
-
+        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
         @if (Auth::user()->tipo == "admin")
             <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
         @endif
@@ -108,15 +108,20 @@
                 @if (Auth::user()->tipo == "admin")
 
                     <div>
-                        @if ($produtos )
-                        <span class="text-secondary">Agente(s) associados:</span><br>
-                            @foreach ($produtos as $produto)
-                                {{$produto->idAgente}},{{$produto->idSubAgente}}
+                        @if ($agents!=null )
+                        <div class="text-secondary mb-2">Agente(s) associados:</div>
+                            @foreach ($agents as $agent)
+                            <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a><br>
                             @endforeach
+
+                            @if ($subagents!=null )
+                            @foreach ($subagents as $subagent)
+                            <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$subagent)}}" class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
+                            @endforeach
+                            @endif
                         @endif
                     </div>
 
-                    <br>
 
                     <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
 

@@ -29,7 +29,7 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Editar informações</h6>
+            <h6>Editar informações da Universidade</h6>
         </div>
         <br>
 

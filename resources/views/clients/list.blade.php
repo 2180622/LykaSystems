@@ -31,7 +31,7 @@
     </div>
 
     <div class="float-right">
-
+        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
         @if (Auth::user()->tipo == "admin")
             <a href="{{route('clients.create')}}" class="top-button">Adicionar Estudante</a>
         @endif
@@ -98,7 +98,7 @@
 
                     @foreach ($clients as $client)
                     <tr>
-                        <td class="">
+                        <td >
                             <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('clients.show',$client)}}">
                                     @if($client->fotografia)
@@ -116,7 +116,7 @@
                         {{-- Nome e Apelido --}}
                         <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
 
-                        {{-- numCCid --}}
+                        {{-- email --}}
                          <td class="align-middle">{{ $client->email }}</td>
 
                         {{-- paisNaturalidade --}}

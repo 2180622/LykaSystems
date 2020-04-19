@@ -5,7 +5,7 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/payment.css')}}" rel="stylesheet">
+<link href="{{asset('/css/charges.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
@@ -37,7 +37,7 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{number_format((float)$fase->valorFase, 2, ',', '')}}€</p>
             <br><br>
-            <form action="/charges/{{$product->idProduto}}/{{$fase->idFase}}" method="post" enctype="multipart/form-data" name="chargeForm">
+            <form action="{{route('charges.store', [$product, $fase])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
@@ -114,12 +114,18 @@
     </div>
 </div>
 
-<div class="context-menu" id="contextMenu">
-  <ul>
-    <li>blah</li>
-    <li>blah</li>
-    <li>blah</li>
-  </ul>
+<div class="custom-cm" id="contextMenu">
+    <div class="custom-cm-item">
+        <a href="#">Editar</a>
+    </div>
+    <div class="custom-cm-item">
+        <a href="#">Transferir</a>
+    </div>
+    <div class="custom-cm-item">
+        <a href="#" onclick="removeFile();">Remover</a>
+    </div>
+    <div class="custom-cm-divider"></div>
+    <div class="custom-cm-item">Cancelar</div>
 </div>
 
 @section('scripts')

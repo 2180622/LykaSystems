@@ -14,6 +14,18 @@
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
                     </div>
 
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div class="form-group">
+                                {{-- Id da Universidade --}}
+                                <div class="card rounded text-center p-3"><strong><span class="text-muted">{{$university->nome}}</span></strong></div>
+                                <input type="hidden" name="idUniversidade" value="{{$university->idUniversidade}}">
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -27,7 +39,7 @@
                             <div class="form-group">
                                 <i class="fas fa-palette mr-2" style="color: #6A74C9;"></i>
                                 <label for="color">Cor</label>
-                                <input type="color" class="form-control" id="color" name="cor" value="#6A74C9">
+                                <input type="color" class="form-control" id="color" name="cor">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -48,8 +60,9 @@
                             <div class="form-group">
                                 <i class="fas fa-align-right mr-2" style="color: #6A74C9;"></i>
                                 <label for="description">Descrição</label>
-                                <input type="text" class="form-control" id="description" name="descricao"
-                                       placeholder="Insira a Descrição do evento.">
+                                <textarea class="form-control" name="descricao" id="description" rows="2"
+                                          style="resize: none"
+                                          maxlength="150" placeholder="Insira a Descrição do evento." fixed></textarea>
                             </div>
                         </div>
                     </div>
