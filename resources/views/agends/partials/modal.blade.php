@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <i class="fas fa-palette mr-2" style="color: #6A74C9;"></i>
                                 <label for="color">Cor</label>
-                                <input type="color" class="form-control" id="color" name="cor">
+                                <input type="color" class="form-control" id="color" name="cor" value="#6A74C9">
                             </div>
                         </div>
                         <div class="col-md-12">
