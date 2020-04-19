@@ -299,8 +299,13 @@ class ProdutoController extends Controller
 
     public function destroy(Produto $produto)
     {
-                //$client = client::findOrFail($request->modalclientid);
                 $produto->delete();
-                return redirect()->route('produtos.index')->with('success', 'Produto eliminado com sucesso');
+                $fases = $produto->fase;
+                foreach($fases as $fase){
+                    $responsabilidade = $fase->responsabilidade;
+                    $responsabilidade->delete();
+                    $fase->delete();
+                }
+                return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto eliminado com sucesso');
     }
 }

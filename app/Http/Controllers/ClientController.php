@@ -252,9 +252,7 @@ class ClientController extends Controller
 
 
         /* Documentos académicos */
-        $docsAcademicos = DocAcademico::
-        where('idCliente', $client->idCliente)
-        ->get();
+        $docsAcademicos = $client->docAcademico;
 
 
         return view('clients.show',compact("client","produtos","totalprodutos","infosPassaport",'docsAcademicos'));
