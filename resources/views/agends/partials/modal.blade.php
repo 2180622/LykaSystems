@@ -48,9 +48,8 @@
                             <div class="form-group">
                                 <i class="fas fa-align-right mr-2" style="color: #6A74C9;"></i>
                                 <label for="description">Descrição</label>
-                                <textarea class="form-control" name="descricao" id="description" rows="2"
-                                          style="resize: none"
-                                          maxlength="150" placeholder="Insira a Descrição do evento." fixed></textarea>
+                                <input type="text" class="form-control" id="description" name="descricao"
+                                       placeholder="Insira a Descrição do evento.">
                             </div>
                         </div>
                     </div>
