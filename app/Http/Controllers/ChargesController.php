@@ -16,6 +16,7 @@ class ChargesController extends Controller
 {
     public function index()
     {
+      // $fases = Fase::all();
       $products = Produto::all();
       $numberProducts = Produto::where('valorTotal', '!=', '0')->get();
       return view('charges.list', compact('products', 'numberProducts'));
