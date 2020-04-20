@@ -62,7 +62,7 @@
                         </select>
                     </div>
                     <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Se pretender mais opções, clique com o botão direito do seu rato sobre o a secção do comprovativo de pagamento.">
+                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Se pretender mais opções, clique com o botão direito do seu rato sobre a secção do comprovativo de pagamento.">
                             <span>
                                 ?
                             </span>

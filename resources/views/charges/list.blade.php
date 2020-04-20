@@ -29,7 +29,6 @@
 
     <br><br>
 
-
     <div class="cards-navigation">
         <div class="title">
             <h6>Listagem de cobranças</h6>
@@ -69,7 +68,6 @@
         <hr>
         <div class="table-responsive " style="overflow:hidden">
             <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
-                {{-- Cabeçalho da tabela --}}
                 <thead>
                     <tr>
                         <th class="text-center align-content-center">Foto</th>
@@ -79,12 +77,20 @@
                         <th>Estado</th>
                     </tr>
                 </thead>
-                {{-- Corpo da tabela --}}
                 <tbody>
                     @if (!count($products))
                     <h6>Não existem pagamentos a ser feitos.</h6>
                     @else
                     @foreach ($products as $product)
+                    @foreach ($product->fase as $fase)
+                      @php
+                        if(count($fase->DocTransacao)){
+                          foreach ($fase->DocTransacao as $document) {
+                            $valorPago = $document->valorRecebido;
+                          }
+                        }
+                      @endphp
+                    @endforeach
                     <tr>
                         <td>
                             <div class="align-middle mx-auto rounded bg-white" style="overflow:hidden; width:50px; height:50px">
@@ -97,13 +103,9 @@
                                         @endif
                             </div>
                         </td>
-                        {{-- Nome e Apelido --}}
                         <td class="align-middle"><a class="name_link" href="{{route('charges.show', $product)}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
-                        {{-- Descrição --}}
                         <td class="align-middle">{{$product->descricao}}</td>
-                        {{-- Valor --}}
-                        <td class="align-middle">{{$product->valorTotal}}€</td>
-                        {{-- Estado --}}
+                        <td class="align-middle">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</td>
                         <td class="align-middle">Pendente</td>
                     </tr>
                     @endforeach
