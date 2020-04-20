@@ -33,3 +33,8 @@ function showContextMenu() {
 function hideContextMenu() {
     contextMenu.style.display = "none";
 }
+
+
+$(document).ready(function() {
+    $('#tableLyka').DataTable();
+} );

@@ -6,7 +6,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
-<link href="{{asset('/css/payment.css')}}" rel="stylesheet">
+<link href="{{asset('/css/charges.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}

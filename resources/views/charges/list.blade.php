@@ -5,7 +5,7 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/charges.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="row mt-3 mb-4">
+        {{-- <div class="row mt-3 mb-4">
             <div class="col">
                 <span class="mr-2">Mostrar</span>
                 <select class="custom-select" id="records_per_page" style="width:80px">
@@ -64,10 +64,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <hr>
-        <div class="table-responsive " style="overflow:hidden">
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+        </div> --}}
+
+        {{-- <div class="table-responsive " style="overflow:hidden">
+            <table nowarp id="dataTable" class="ui celled table" style="width:100%" style="overflow:hidden;">
                 <thead>
                     <tr>
                         <th class="text-center align-content-center">Foto</th>
@@ -96,24 +96,58 @@
                             <div class="align-middle mx-auto rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                 @if($product->cliente->fotografia)
                                     <img src="{{Storage::disk('public')->url('client-photos/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
-                                    @elseif($product->cliente->genero == 'F')
-                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                        @else
-                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                        @endif
-                            </div>
-                        </td>
-                        <td class="align-middle"><a class="name_link" href="{{route('charges.show', $product)}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
-                        <td class="align-middle">{{$product->descricao}}</td>
-                        <td class="align-middle">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</td>
-                        <td class="align-middle">Pendente</td>
-                    </tr>
-                    @endforeach
-                    @endif
-                </tbody>
-            </table>
-        </div>
+        @elseif($product->cliente->genero == 'F')
+            <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
+            @else
+            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+            @endif
     </div>
+    </td>
+    <td class="align-middle"><a class="name_link" href="{{route('charges.show', $product)}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
+    <td class="align-middle">{{$product->descricao}}</td>
+    <td class="align-middle">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</td>
+    <td class="align-middle">Pendente</td>
+    </tr>
+    @endforeach
+    @endif
+    </tbody>
+    </table>
+</div> --}}
+
+<table id="tableLyka" class="table table-striped table-hover table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Valor Total</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($products as $product)
+        <tr>
+            <td>{{$product->cliente->nome.' '.$product->cliente->apelido}}</td>
+            <td>{{$product->descricao}}</td>
+            <td>{{number_format((float)$product->valorTotal, 2, ',', '')}}€</td>
+            <td>Pendente</td>
+        </tr>
+        @endforeach
+        <tr>
+            <td>Daniel Nunes</td>
+            <td>Douturamento</td>
+            <td>1000,00€</td>
+            <td>Pago</td>
+        </tr>
+        <tr>
+            <td>Alex Matos</td>
+            <td>TeSP DWM</td>
+            <td>2250,00€</td>
+            <td>Pendente</td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
 </div>
 
 @endsection
