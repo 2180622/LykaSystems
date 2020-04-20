@@ -11,7 +11,7 @@ class contacto extends Model
     protected $primaryKey = 'idContacto';
 
     protected $fillable = [
-        'nome','fotografia','telefone1','telefone2','email','fax','observacao',
+        'idUniversidade','nome','fotografia','telefone1','telefone2','email','fax','observacao',
         'favorito','visibilidade','idUser','idUniversidade'
     ];
     public function user(){

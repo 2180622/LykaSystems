@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Agenda;
 use App\Cliente;
+use App\Contacto;
 use App\Produto;
 use App\Universidade;
 use Illuminate\Support\Facades\Auth;
@@ -88,7 +89,17 @@ class UniversityController extends Controller
 
 
 
-        return view('universities.show', compact('university','eventos','clients'));
+        /* Contactos da universidade */
+        $contacts = Contacto::
+        where('idUniversidade', '=', $university->idUniversidade)
+        ->get();
+        if ($contacts->isEmpty()) {
+            $contacts=null;
+        }
+
+
+
+        return view('universities.show', compact('university','eventos','clients','contacts'));
     }
 
 

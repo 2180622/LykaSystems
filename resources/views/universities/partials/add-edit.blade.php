@@ -3,7 +3,8 @@
     {{-- MENU: Infos Universidade --}}
     <li class="nav-item " style="width:20%; min-width:110px">
         <a class="nav-link active" id="eventos-tab" data-toggle="tab" href="#infos" role="tab"
-            aria-controls="infos" aria-selected="false">Informações</a>
+            aria-controls="infos" aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2"
+            id="warning_infos" title="Existem campos obrigatórios por preencher"></i>Informações</a>
     </li>
 
     {{-- MENU: OSERVAÇÕES --}}
@@ -11,13 +12,6 @@
         <a class="nav-link" id="observacoes-tab" data-toggle="tab" href="#observacoes" role="tab"
             aria-controls="observacoes" aria-selected="false">Observações</a>
     </li>
-
-    {{-- MENU: Contactos --}}
-    <li class="nav-item text-center" style="width:20%; min-width:144px">
-        <a class="nav-link" id="contactos-tab" data-toggle="tab" href="#contactos" role="tab"
-            aria-controls="contactos" aria-selected="false">Contactos</a>
-    </li>
-
 
 </ul>
 
@@ -30,14 +24,14 @@
             <div class="form-group cards-navigation col-lg-12 col-md-6">
                 <label for="inputNome" style="font-weight: 700!important;">Nome da Universidade:</label>
                 <input required type="text" class="form-control" name="nome" id="inputNome"
-                    placeholder="Insira o nome da Universidade" value="{{old('nome',$university->nome)}}" maxlength="150"/>
+                    placeholder="Insira o nome da Universidade" value="{{old('nome',$university->nome)}}" maxlength="250"/>
                 <h6 class="pull-right text-right small mt-2" id="count-numbers-nome"></h6>
             </div>
             {{-- INPUT morada --}}
             <div class="form-group cards-navigation col-lg-12 col-md-6">
                 <label for="inputMorada" style="font-weight: 700!important;">Morada:</label>
-                <input required type="text" class="form-control" name="morada" id="inputMorada"
-                    placeholder="Insira a morada da universidade" value="{{old('morada',$university->morada)}}" maxlength="150" />
+                <input type="text" class="form-control" name="morada" id="inputMorada"
+                    placeholder="Insira a morada da universidade" value="{{old('morada',$university->morada)}}" maxlength="250" />
                 <h6 class="pull-right text-right small mt-2" id="count-numbers-morada"></h6>
             </div>
             {{-- INPUT email --}}
@@ -50,7 +44,7 @@
             {{-- INPUT telefone --}}
             <div class="form-group cards-navigation col-lg-6 col-md-6">
                 <label for="inputTelefone" style="font-weight: 700!important;">Telefone:</label>
-                <input required type="text" class="form-control" name="telefone" id="inputTelefone"
+                <input type="text" class="form-control" name="telefone" id="inputTelefone"
                     value="{{old('telefone',$university->telefone)}}" maxlength="20" />
                 <h6 class="pull-right text-right small mt-2" id="count-numbers-telefone"></h6>
             </div>
@@ -64,7 +58,7 @@
             {{-- INPUT IBAN --}}
             <div class="form-group cards-navigation col-lg-6 col-md-6">
                 <label for="inputIBAN" style="font-weight: 700!important;">IBAN:</label>
-                <input required type="text" class="form-control" name="IBAN" id="inputIBAN"
+                <input type="text" class="form-control" name="IBAN" id="inputIBAN"
                     value="{{old('IBAN',$university->IBAN)}}" maxlength="25"/>
                 <h6 class="pull-right text-right small mt-2" id="count-numbers-iban"></h6>
             </div>
@@ -97,13 +91,6 @@
             </div>
         </div>
     </div>
-
-
-    {{-- Conteudo: Contactos --}}
-    <div class="tab-pane fade show text-muted" id="contactos" role="tabpanel" aria-labelledby="contactos-tab">
-
-    </div>
-
 
 
 </div>

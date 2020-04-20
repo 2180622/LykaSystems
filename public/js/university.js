@@ -105,6 +105,14 @@ $(document).ready(function () {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
+
+
+                        /* valida Campos da informação pessoal */
+                    if ( ($("#inputNome").val()=="") || ($("#inputNIF").val()=="") ){
+                        $("#warning_infos").removeClass("warning_sign");
+                    } else {
+                        $("#warning_infos").addClass("warning_sign");
+                    }
                     }
                     form.classList.add('was-validated');
                 }, false);

@@ -24,6 +24,7 @@ class UpdateContactoRequest extends FormRequest
     public function rules()
     {
         return [
+            'idUniversidade	'=> 'nullable',
             'fotografia'=> 'nullable',
             'nome' => 'required',
             'telefone1' => 'nullable',
@@ -31,7 +32,7 @@ class UpdateContactoRequest extends FormRequest
             'email' => 'nullable',
             'fax' => 'nullable',
             'observacao' => 'nullable',
-            'favorito' => 'required|required|in:1,0',
+            'favorito' => 'required|in:1,0',
         ];
     }
 }

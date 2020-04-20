@@ -1,3 +1,23 @@
+
+{{-- SE FOR PARA CRIAR UM CONTACTO PARA A UNIVERISADE --}}
+
+@if  ( isset($university) )
+    <div class="row mb-3" style="color:#6A74C9">
+        <div class="col" >
+            <i class="fas fa-university mr-1" style="color:#000000"></i>
+            <strong>
+                <span style="color:#000000">Associado à universidade:<span style="color:#6A74C9"> {{$university ?? '' ?? '' ?? ''->nome}}</span></span>
+                <input type="hidden" id="idUniversidade" name="idUniversidade" value="{{$university ?? '' ?? '' ?? ''->idUniversidade}}">
+            </strong>
+        </div>
+
+    </div>
+    <hr>
+@endif
+
+
+
+
 <div class="row mb-4" style="font-weight:bold;color:#6A74C9">
 
     {{-- Inputs --}}
@@ -27,11 +47,16 @@
         <label for="email">E-mail:</label><br>
         <input type="email" class="form-control" name="email" id="email" value="{{old('email',$contact->email)}}"><br>
 
-        <i class="fas fa-star text-warning mr-2"></i><label for="favorito">Marcar como "favorito": </label>
-            <select id="favorito" name="favorito" class="custom-select ml-2" style="width:120px">
-            <option {{old('favorito',$contact->favorito)=='0'?"selected":""}} value="0" selected>Não</option>
-            <option {{old('favorito',$contact->favorito)=='1'?"selected":""}} value="1">Sim</option>
-        </select>
+        @if  ( !isset($university) )
+            <i class="fas fa-star text-warning mr-2"></i><label for="favorito">Marcar como "favorito": </label>
+                <select id="favorito" name="favorito" class="custom-select ml-2" style="width:120px">
+                <option {{old('favorito',$contact->favorito)=='0'?"selected":""}} value="0" selected>Não</option>
+                <option {{old('favorito',$contact->favorito)=='1'?"selected":""}} value="1">Sim</option>
+            </select>
+        @else
+            <input type="hidden" id="favorito" name="favorito" value="0">
+        @endif
+
     </div>
 
 

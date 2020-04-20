@@ -32,8 +32,6 @@
             <div class="title">
                 <h6>Editar informações</h6>
             </div>
-            <br>
-
 
             <form method="POST" action="{{route('contacts.update',$contact)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>

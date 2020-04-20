@@ -24,15 +24,17 @@ class UpdateUniversidadeRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required',
-            'morada' => 'required',
-            'telefone' => 'required',
-            'email' => 'required',
+            'nome' => 'required|max:255',
+            'morada' => 'nullable|max:255',
+            'telefone' => 'nullable',
+            'email' => 'required|max:255',
             'NIF' => 'required',
-            'IBAN' => 'required',
+            'IBAN' => 'nullable',
+            'contactos' => 'nullable',
             'obsContactos' => 'nullable',
             'obsCursos' => 'nullable',
             'obsCandidaturas' => 'nullable',
+
         ];
     }
 
@@ -43,7 +45,6 @@ class UpdateUniversidadeRequest extends FormRequest
             'morada.required' => 'A Morada é obrigatória ser preenchida.',
             'email.required' => 'O Endereço Eletrónico é obrigatório ser preenchido.',
             'NIF.required' => 'O NIF é obrigatório ser preenchido.',
-            'IBAN.required' => 'O IBAN é obrigatório ser preenchido.',
         ];
     }
 }

@@ -82,7 +82,8 @@
                 <div><span class="text-secondary">Telefone :</span> {{$university->telefone}}</div><br>
 
                 <br>
-                <a href="#" class="top-button" data-toggle="modal" data-target="#modalCalendar"><i class="fas fa-plus mr-2"></i>Adicionar evento</a>
+                <a href="#" class="top-button" data-toggle="modal" data-target="#modalCalendar"><i class="fas fa-plus mr-2"></i>Adicionar evento</a><br><br>
+                <a href="{{route('contacts.create',$university)}}" class="top-button" ><i class="fas fa-plus mr-2"></i>Adicionar contacto</a>
 
             </div>
         </div>
@@ -199,8 +200,20 @@
 
         {{-- Conteudo: Contactos --}}
         <div class="tab-pane fade show text-muted" id="contactos" role="tabpanel" aria-labelledby="Contactos-tab">
-            Lista de contactos
+
+            @if ($contacts)
+                @foreach ($contacts as $contact)
+                    {{$contact->nome}}
+                @endforeach
+            @else
+                <small class="text-muted">(Sem contactos registados)</small>
+            @endif
         </div>
+
+
+
+
+
 
         {{-- Conteudo: Observações --}}
         <div class="tab-pane fade show text-muted" id="obsevacoes" role="tabpanel" aria-labelledby="obsevacoes-tab">

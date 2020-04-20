@@ -24,6 +24,7 @@ class StoreContactoRequest extends FormRequest
     public function rules()
     {
         return [
+            'idUniversidade	'=> 'nullable',
             'fotografia'=> 'nullable',
             'nome' => 'required',
             'telefone1' => 'nullable',

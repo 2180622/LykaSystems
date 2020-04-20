@@ -23,7 +23,6 @@ class Cliente extends Model
         'obsPessoais','obsFinanceiras','obsAcademicas','num_docOficial','img_docOficial','info_docOficial',
         'img_Passaport','info_Passaport','img_docAcademico','info_docAcademico'
         ];
-        // info_passaport contem: passaportPaisEmi, localEmissaoPP, dataValidPP
 
     public function user(){
         return $this->belongsTo("App\User","idUser","idUser")->withTrashed();
