@@ -36,4 +36,38 @@ class User extends Authenticatable
     public function contacto(){
         return $this->hasMany("App\Contacto","idUser","idUser");
     }
+
+    public function getNotifications(){
+        $notifications = null;
+        $todasDatas = null;
+        $allNotifications = $this->unreadNotifications;
+        if($allNotifications){
+            foreach($allNotifications as $notification){
+                if($todasDatas){
+                    $repete = false;
+                    foreach($todasDatas as $data){
+                        if($notification->data['dataComeco'] == $data){
+                            $repete = true;
+                        }
+                    }
+                    if(!$repete){
+                        $todasDatas[] = $notification->data['dataComeco'];
+                    }
+                }else{
+                    $todasDatas[] = $notification->data['dataComeco'];
+                }
+            }
+            if($todasDatas){
+                rsort($todasDatas);
+                foreach($todasDatas as $data){
+                    foreach($allNotifications as $notification){
+                        if($notification->data['dataComeco'] == $data){
+                            $notifications[] = $notification;
+                        }
+                    }
+                }
+            }
+        }
+        return $notifications;
+    }
 }
