@@ -6,42 +6,40 @@ table {
     float: right;
 }
 
-.table-borderless td,
-.table-borderless th {
+.table td,
+.table th {
     border: 0;
     color: gray;
     font-weight: bold;
 }
 
-.table-borderless tbody td:first-child {
+.table tbody td:first-child {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
 
-
-.table-borderless tbody td:last-child {
+.table tbody td:last-child {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
 
+.table tbody tr {
+    transition: 0.2s ease-in-out;
+}
 
-
-.table-borderless tbody tr:hover {
-    border-radius: 20%;
+.table tbody tr:hover {
+    border-radius: 20% !important;
     background-color: white;
 }
 
-
-
-.name_link{
+.name_link {
     color: gray;
 }
 
-.name_link:hover{
+.name_link:hover {
     color: #6A74C9;
     text-decoration: none;
 }
-
 
 .btn_list_opt {
     color: gray;
@@ -49,18 +47,15 @@ table {
 
 .btn_list_opt:hover {
     color: #6A74C9;
-
 }
 
 .btn_list_opt_edit:hover {
     color: #eac300;
 }
 
-
 .btn_list_opt_download:hover {
     color: #1a9b00;
 }
-
 
 .btn_delete {
     color: gray;
@@ -68,9 +63,7 @@ table {
     background: none;
     box-shadow: none;
     border-radius: 0px;
-
 }
-
 
 .btn_delete:hover {
     color: red;

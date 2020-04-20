@@ -5,6 +5,7 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
+  <link href="{{asset('/css/charges.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteúdo da Página --}}
@@ -32,8 +33,7 @@
             <h6>Listagem de contas bancárias</h6>
         </div>
         <br>
-
-        <div class="row mt-3 mb-4">
+        <div class="row mt-2">
             <div class="col">
                 @if (count($contums) == 1)
                 Existe <strong>{{count($contums)}}</strong> conta registada no sistema.
@@ -42,32 +42,33 @@
                 @endif
             </div>
         </div>
-
-        <table id="tableLyka" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Descrição</th>
-                    <th>Instituição</th>
-                    <th>Contacto</th>
-                    <th>Opções</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($contums as $contum)
-                <tr>
-                    <td><a href="{{route('conta.show', $contum)}}">{{$contum->descricao}}</a></td>
-                    <td>{{$contum->instituicao}}</td>
-                    <td>{{$contum->contacto}}</td>
-                    <td class="text-center">
-                        <a href="{{route('conta.show', $contum)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                        <a href="{{route('conta.edit', $contum)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-                        <button class="btn_delete" data-toggle="modal" data-target="#deleteModal" data-name="{{$contum->descricao}}" data-id="{{$contum->idConta}}"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-
+        <br>
+        <div class="container">
+            @foreach ($contums as $contum)
+            <a href="{{route('conta.show', $contum)}}">
+                <div class="row charge-div">
+                    <div class="col-md-1 align-self-center">
+                        <div class="white-circle">
+                            <ion-icon name="cube" id="icon"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-truncate align-self-center ml-4">
+                        <p class="text-truncate" title="{{$contum->descricao}}">{{$contum->descricao}}</p>
+                    </div>
+                    <div class="col-md-2 align-self-center">
+                        <p class="text-truncate" title="{{$contum->instituicao}}">{{$contum->instituicao}}</p>
+                    </div>
+                    <div class="col-md-2 text-truncate align-self-center ml-auto">
+                        <p class="text-truncate" title="{{$contum->contacto}}">{{$contum->contacto}}</p>
+                    </div>
+                    <div class="col-md-2 text-truncate align-self-center ml-auto">
+                        {{-- <a href="{{route('conta.edit', $contum)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a> --}}
+                        {{-- <button class="btn_delete" data-toggle="modal" data-target="#deleteModal" data-name="{{$contum->descricao}}" data-id="{{$contum->idConta}}"><i class="fas fa-trash-alt"></i></button> --}}
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
     </div>
 </div>
 
