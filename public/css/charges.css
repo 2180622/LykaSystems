@@ -145,6 +145,12 @@ p {
     padding: 8px 15px;
 }
 
+.custom-cm-item p,
+.custom-cm-item a {
+    color: #747474;
+    font-weight: 600;
+}
+
 .custom-cm-item:hover {
     background-color: #f8f8f8;
 }
@@ -152,4 +158,9 @@ p {
 .custom-cm-divider {
     margin: 10px 0;
     border-bottom: 1px solid #eeeeee;
+}
+
+.text-truncate {
+    overflow: -moz-hidden-unscrollable !important;
+    overflow: hidden;
 }

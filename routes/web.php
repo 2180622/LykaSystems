@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Cobranças */
     Route::get('/cobrancas', 'ChargesController@index')->name('charges.index');
+      // Transferir comprovativo de pagamento
+      Route::get('/cobrancas/{document}/download', 'ChargesController@download')->name('charges.download');
       // Visualizar cobranças
       Route::get('/cobrancas/{product}', 'ChargesController@show')->name('charges.show');
       Route::get('/cobrancas/{product}/{fase}', 'ChargesController@showcharge')->name('charges.showcharge');
@@ -55,8 +57,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       // Editar cobrança
       Route::get('/cobrancas/{product}/{fase}/{document}/editar', 'ChargesController@edit')->name('charges.edit');
       Route::put('/cobrancas/{product}/{document}', 'ChargesController@update')->name('charges.update');
-      // Transferir comprovativo de pagamento
-      Route::get('/cobrancas/{document}/download', 'ChargesController@download')->name('charges.download');
 
 
     /* Utilizadores */

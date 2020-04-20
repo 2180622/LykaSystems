@@ -62,12 +62,12 @@
                         </select>
                     </div>
                     <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                      <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Associar a cobrança à conta bancária pelo qual o pagamento foi recebido.">
-                          <span>
-                              ?
-                          </span>
-                      </div>
-                        <label for="comprovativoPagamento" class="text-truncate" style="width:85%;">Comprovativo de pagamento</label>
+                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Se pretender mais opções, clique com o botão direito do seu rato sobre o a secção do comprovativo de pagamento.">
+                            <span>
+                                ?
+                            </span>
+                        </div>
+                        <label for="comprovativoPagamento" class="text-truncate" style="width:90%;">Comprovativo de pagamento</label>
                         <br>
                         <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
                         @if ($document->comprovativoPagamento != null)
@@ -133,13 +133,13 @@
 
 <div class="custom-cm" id="contextMenu">
     <div class="custom-cm-item">
-        <a href="#">Editar</a>
+        <p onclick="getFile()">Editar</p>
     </div>
     <div class="custom-cm-item">
         <a href="{{route('charges.download', $document)}}">Transferir</a>
     </div>
     <div class="custom-cm-item">
-        <a href="#" onclick="removeFile();">Remover</a>
+        <p onclick="removeFile()">Remover</p>
     </div>
     <div class="custom-cm-divider"></div>
     <div class="custom-cm-item">Cancelar</div>
