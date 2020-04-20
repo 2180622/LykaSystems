@@ -39,8 +39,9 @@ class NotificationController extends Controller
             $dataNasc = new DateTime($Cliente->dataNasc);
             $Assunto = 'PARABÉNS '.Auth()->user()->cliente->nome.' '.Auth()->user()->cliente->apelido;
         }
-        $diff = $dataNasc->diff(new DateTime());
-        if($diff->d >= 0 && $diff->d <= 20 && $diff->m == 0){
+        $DataHoje = new DateTime();
+        $diff = (date_diff($dataNasc,$DataHoje))->format("%R%a");
+        if($diff >= 0 && $diff <= 20){
             $Descricao = 'Hoje um ciclo de sua vida se finaliza e outro recomeça. Faça deste novo recomeço uma nova oportunidade para fazer tudo o que sempre sonhou! \nParabéns!';
             $date = (new DateTime())->add(new DateInterval('P'.$diff->d.'D'));
             $code = Auth()->user()->idUser.'_aniversario_'.$date->format('d-m-Y');
@@ -54,7 +55,7 @@ class NotificationController extends Controller
                 }
             }
             if(!$existe){
-                $Notdate = (new DateTime())->add(new DateInterval('P'.$diff->d.'D'));
+                $Notdate = (new DateTime())->add(new DateInterval('P'.$diff.'D'));
                 Auth()->user()->notify(new Aniversario($code,false,$Notdate->format('Y-m-d'),'Aniversario',null,null,$Assunto,$Descricao));
             }
         }
@@ -97,9 +98,11 @@ class NotificationController extends Controller
                     $produto = $fase->produto;
                     $cliente = $produto->cliente;
                     $codecli = $codecli.'_'.$cliente->idCliente;
-                    $diff = (new DateTime($fase->dataVencimento))->diff(new DateTime());
+                    $dataVenc = (new DateTime($fase->dataVencimento));
+                    $DataHoje = new DateTime();
+                    $diff = (date_diff($dataVenc,$DataHoje))->format("%R%a");
                     $Descricao = $Descricao.'\n - '.$cliente->nome.' '.$cliente->apelido.' -> '.(new DateTime($fase->dataVencimento))->format('d/m/Y');
-                    if($diff->d <= 0){
+                    if($diff <= 0){
                         $urgencia = true;
                     }
                 }
@@ -169,9 +172,11 @@ class NotificationController extends Controller
                 $Descricao = null;
                 $existe = false;
                 $urgencia = false;
-                $diff = (new DateTime($Fase->dataVencimento))->diff(new DateTime());
+                $dataVenc = (new DateTime($Fase->dataVencimento));
+                $DataHoje = new DateTime();
+                $diff = (date_diff($dataVenc,$DataHoje))->format("%R%a");
                 $DataLimite = (new DateTime($Fase->dataVencimento));
-                if($diff->d <= 0){
+                if($diff <= 0){
                     $urgencia = true;
                     $DataLimite = new DateTime($Fase->dataVencimento);
                 }
