@@ -36,9 +36,9 @@
         @foreach ($fases as $fase)
         <div class="container">
             @if (count($fase->DocTransacao))
-            @foreach ($fase->DocTransacao as $paymentProof)
-            @if ($paymentProof->valorRecebido != null)
-            <a href="{{route('charges.edit', [$product, $fase, $paymentProof])}}">
+            @foreach ($fase->DocTransacao as $document)
+            @if ($document->valorRecebido != null)
+            <a href="{{route('charges.edit', [$product, $fase, $document])}}">
                 @else
                 <a href="{{route('charges.showcharge', [$product, $fase])}}">
                     @endif
@@ -57,10 +57,10 @@
                             </div>
                             <div class="col-md-2 text-truncate align-self-center">
                                 <p @if (count($fase->DocTransacao))
-                                @foreach ($fase->DocTransacao as $paymentProof)
-                                @if ($fase->valorFase > $paymentProof->valorRecebido)
+                                @foreach ($fase->DocTransacao as $document)
+                                @if ($fase->valorFase > $document->valorRecebido)
                                 style="color:#FF3D00;"
-                                @elseif ($fase->valorFase == $paymentProof->valorRecebido)
+                              @elseif ($fase->valorFase == $document->valorRecebido)
                                 style="color:#47BC00;"
                                 @else
                                 style="color:#FF3D00;"
@@ -69,9 +69,9 @@
                                 @endif
                                 >
                                 @if (count($fase->DocTransacao))
-                                @foreach ($fase->DocTransacao as $paymentProof)
-                                @if ($paymentProof->valorRecebido != null && $fase->verificacaoPago == 0)
-                                {{number_format((float) $valorTotal = $paymentProof->valorRecebido - $fase->valorFase, 2, ',', '')}}€
+                                @foreach ($fase->DocTransacao as $document)
+                                @if ($document->valorRecebido != null && $fase->verificacaoPago == 0)
+                                {{number_format((float) $valorTotal = $document->valorRecebido - $fase->valorFase, 2, ',', '')}}€
                                 @else
                                 {{number_format((float)$fase->valorFase, 2, ',', '')}}€
                                 @endif
@@ -94,10 +94,10 @@
                             <div class="col-md-2 text-truncate align-self-center ml-auto">
                                 <p>
                                     @if (count($fase->DocTransacao))
-                                    @foreach ($fase->DocTransacao as $paymentProof)
-                                    @if ($fase->valorFase > $paymentProof->valorRecebido)
+                                    @foreach ($fase->DocTransacao as $document)
+                                    @if ($fase->valorFase > $document->valorRecebido)
                                     Dívida
-                                    @elseif ($fase->valorFase < $paymentProof->valorRecebido)
+                                  @elseif ($fase->valorFase < $document->valorRecebido)
                                         Crédito
                                         @else
                                         Pago

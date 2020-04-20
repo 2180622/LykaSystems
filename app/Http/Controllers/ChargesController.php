@@ -70,43 +70,44 @@ class ChargesController extends Controller
       return redirect()->route('charges.show', $product)->with('success', 'Estado da cobrança alterado com sucesso!');
     }
 
-    public function edit(Produto $product, Fase $fase, DocTransacao $paymentProof, Conta $contas)
+    public function edit(Produto $product, Fase $fase, DocTransacao $document, Conta $contas)
     {
       $contas = Conta::all();
-      return view('charges.edit', compact('product', 'fase', 'paymentProof', 'contas'));
+      return view('charges.edit', compact('product', 'fase', 'document', 'contas'));
     }
 
-    public function update(UpdateChargeRequest $requestCharge, Produto $product, DocTransacao $paymentProof)
+    public function update(UpdateChargeRequest $requestCharge, Produto $product, DocTransacao $document)
     {
       $fields = $requestCharge->validated();
-      $paymentProof->fill($fields);
+      $document->fill($fields);
 
-      $value = number_format((float) $paymentProof->valorRecebido,2 ,'.' ,'');
-      $paymentProof->valorRecebido = $value;
+      $value = number_format((float) $document->valorRecebido,2 ,'.' ,'');
+      $document->valorRecebido = $value;
 
       if ($requestCharge->hasFile('comprovativoPagamento')) {
           $fileproof = $requestCharge->file('comprovativoPagamento');
-          $imgproof = strtolower($paymentProof->descricao) . '_comprovativo_'. $paymentProof->idDocTransacao .'.' . $fileproof->getClientOriginalExtension();
-          if (!empty($paymentProof->comprovativoPagamento)) {
-              Storage::disk('public')->delete('payment-proof/' . $paymentProof->comprovativoPagamento);
+          $imgproof = strtolower($document->descricao) . '_comprovativo_'. $document->idDocTransacao .'.' . $fileproof->getClientOriginalExtension();
+          if (!empty($document->comprovativoPagamento)) {
+              Storage::disk('public')->delete('payment-proof/' . $document->comprovativoPagamento);
           }
           Storage::disk('public')->putFileAs('payment-proof/', $fileproof, $imgproof);
-          $paymentProof->comprovativoPagamento = $imgproof;
+          $document->comprovativoPagamento = $imgproof;
       }
 
-      $paymentProof->save();
+      $document->save();
 
-      if ($paymentProof->valorRecebido >= $paymentProof->fase->valorFase) {
-        Fase::where('descricao', '=', $paymentProof->fase->descricao)->update(['verificacaoPago' => '1']);
+      if ($document->valorRecebido >= $document->fase->valorFase) {
+        Fase::where('descricao', '=', $document->fase->descricao)->update(['verificacaoPago' => '1']);
       }else {
-        Fase::where('descricao', '=', $paymentProof->fase->descricao)->update(['verificacaoPago' => '0']);
+        Fase::where('descricao', '=', $document->fase->descricao)->update(['verificacaoPago' => '0']);
       }
 
       return redirect()->route('charges.show', $product)->with('success', 'Estado da cobrança editado com sucesso!');
     }
 
-    public function test(DocTransacao $paymentProof)
+    public function download(DocTransacao $document)
     {
-      dd($paymentProof);
+      dd($document);
+      return Storage::download('payment-proof/'.$document->comprovativoPagamento);
     }
 }

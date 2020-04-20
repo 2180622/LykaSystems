@@ -53,10 +53,11 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       // Adicionar cobrança
       Route::post('/cobrancas/{product}/{fase}', 'ChargesController@store')->name('charges.store');
       // Editar cobrança
-      Route::get('/cobrancas/{product}/{fase}/{paymentProof}/editar', 'ChargesController@edit')->name('charges.edit');
-      Route::put('/cobrancas/{product}/{paymentProof}', 'ChargesController@update')->name('charges.update');
+      Route::get('/cobrancas/{product}/{fase}/{document}/editar', 'ChargesController@edit')->name('charges.edit');
+      Route::put('/cobrancas/{product}/{document}', 'ChargesController@update')->name('charges.update');
       // Transferir comprovativo de pagamento
-      Route::get('/cobrancas/download/{paymentProof}', 'ChargesController@download')->name('charges.download');
+      Route::get('/cobrancas/{document}/download', 'ChargesController@download')->name('charges.download');
+
 
     /* Utilizadores */
     Route::resource('/users', 'UserController');
