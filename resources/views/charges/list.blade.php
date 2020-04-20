@@ -6,6 +6,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('/css/charges.css')}}" rel="stylesheet">
+<link href="{{asset('/css/tables.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
@@ -53,44 +54,33 @@
                 @endif
             </div>
         </div>
-
         <br>
-
-        <div class="container">
-            @foreach ($products as $product)
-            <a href="{{route('charges.show', $product)}}">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            @if($product->cliente->fotografia)
-                                <img src="{{Storage::disk('public')->url('agent-documents/'.$product->cliente->idCliente.$product->cliente->nome.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
-                                @elseif($product->cliente->genero == 'F')
-                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                    @else
-                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                    @endif
-                        </div>
-                    </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p>{{$product->cliente->nome.' '.$product->cliente->apelido}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center">
-                        <p>{{$product->descricao}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p>{{number_format((float)$product->valorTotal, 2, ',', '')}}€</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p>Pendente</p>
-                    </div>
-                </div>
-            </a>
-            @endforeach
-        </div>
+        <table class="table table-striped table-bordered display shadow-sm" id="table" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Valor total</th>
+                    <th class="text-truncate">Valor recebido</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                <tr data-href="{{route('charges.show', $product)}}">
+                    <td class="text-truncate">{{$product->cliente->nome.' '.$product->cliente->apelido}}</td>
+                    <td class="text-truncate">{{$product->descricao}}</td>
+                    <td class="text-truncate">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</td>
+                    <td class="text-truncate">50,00€</td>
+                    <td class="text-truncate">Pendente</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 
 @section('scripts')
-<script src="{{asset('/js/charges.js')}}"></script>
+<script src="{{asset('/js/tables.js')}}"></script>
 @endsection
 @endsection
