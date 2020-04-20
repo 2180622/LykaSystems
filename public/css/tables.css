@@ -4,15 +4,11 @@
 
 table, thead, tr, th, td {
     border: 2px solid #dee2e6 !important;
+    color: #747474 !important;
 }
 
 table td {
-    color: #747474 !important;
     font-weight: 600;
-}
-
-table thead tr th:first-child {
-    width: 150px !important;
 }
 
 *[data-href] {

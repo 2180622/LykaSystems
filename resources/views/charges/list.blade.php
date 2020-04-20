@@ -55,10 +55,10 @@
             </div>
         </div>
         <br>
-        <table class="table table-striped table-bordered display shadow-sm" id="table" style="width:100%">
+        <table class="table table-striped table-bordered display" id="table" style="width:100%">
             <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th style="width: 150px !important;">Nome</th>
                     <th>Descrição</th>
                     <th>Valor total</th>
                     <th class="text-truncate">Valor recebido</th>
