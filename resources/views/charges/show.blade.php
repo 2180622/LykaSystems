@@ -5,7 +5,7 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+{{-- <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet"> --}}
 <link href="{{asset('/css/charges.css')}}" rel="stylesheet">
 @endsection
 
@@ -29,8 +29,18 @@
     <br><br>
 
     <div class="cards-navigation">
-        <div class="title">
-            <h6>Secção de cobrança - {{$product->cliente->nome.' '.$product->cliente->apelido}}</h6>
+        <div class="title row">
+            <div class="col-md-6">
+                <h6>Secção de cobrança - {{$product->cliente->nome.' '.$product->cliente->apelido}}</h6>
+            </div>
+            <div class="col-md-6" style="bottom:5px; height:32px;">
+                <div class="input-group pl-0 float-right search-section" style="width:250px">
+                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
+                    <div class="search-button input-group-append">
+                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
         @foreach ($fases as $fase)
@@ -60,7 +70,7 @@
                                 @foreach ($fase->DocTransacao as $document)
                                 @if ($fase->valorFase > $document->valorRecebido)
                                 style="color:#FF3D00;"
-                              @elseif ($fase->valorFase == $document->valorRecebido)
+                                @elseif ($fase->valorFase == $document->valorRecebido)
                                 style="color:#47BC00;"
                                 @else
                                 style="color:#FF3D00;"
@@ -97,7 +107,7 @@
                                     @foreach ($fase->DocTransacao as $document)
                                     @if ($fase->valorFase > $document->valorRecebido)
                                     Dívida
-                                  @elseif ($fase->valorFase < $document->valorRecebido)
+                                    @elseif ($fase->valorFase < $document->valorRecebido)
                                         Crédito
                                         @else
                                         Pago

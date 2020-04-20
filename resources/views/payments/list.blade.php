@@ -30,15 +30,23 @@
 
     <br><br>
 
-
     <div class="cards-navigation">
-        <div class="title">
-            <h6>Listagem de pagamentos</h6>
+        <div class="title row">
+            <div class="col-md-6">
+                <h6>Listagem de pagamentos</h6>
+            </div>
+            <div class="col-md-6" style="bottom:5px; height:32px;">
+                <div class="input-group pl-0 float-right search-section" style="width:250px">
+                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
+                    <div class="search-button input-group-append">
+                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
-
-        <div class="row mt-3 mb-4">
-            <div class="col">
+        <div class="row mt-2 mb-4">
+            <div class="col-md-6">
                 @if (count($numberProducts) == 1)
                 Está registado <strong>{{count($numberProducts)}}</strong> pagamento pendente.
                 @else
@@ -47,46 +55,23 @@
             </div>
         </div>
 
-        <div class="row mt-3 mb-4">
-            <div class="col">
-                <span class="mr-2">Mostrar</span>
-                <select class="custom-select" id="records_per_page" style="width:80px">
-                    <option selected>10</option>
-                    <option>25</option>
-                    <option>50</option>
-                    <option>100</option>
-                </select>
-                <span class="ml-2">por página</span>
-            </div>
-            <div class="col ">
-                <div class="input-group pl-0 float-right" style="width:250px">
-                    <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
-                    <div class="input-group-append">
-                        <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
         <div class="table-responsive " style="overflow:hidden">
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
-                {{-- Cabeçalho da tabela --}}
+            <table nowarp class="table" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
                 <thead>
                     <tr>
-                        <th class="text-center align-content-center">Foto</th>
+                        <th>Foto</th>
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Valor</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
-                {{-- Corpo da tabela --}}
                 <tbody>
                     @if (!count($products))
                     <h6>Não existem pagamentos a ser feitos.</h6>
                     @else
                     @foreach ($products as $product)
-                    <tr>
+                    <tr data-href="{{route('payments.show', $product)}}">
                         <td>
                             <div class="align-middle mx-auto rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                 @if($product->cliente->fotografia)
@@ -98,13 +83,9 @@
                                         @endif
                             </div>
                         </td>
-                        {{-- Nome e Apelido --}}
-                        <td class="align-middle"><a class="name_link" href="{{route('payments.show', $product)}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</a></td>
-                        {{-- Descrição --}}
+                        <td class="align-middle">{{$product->cliente->nome.' '.$product->cliente->apelido}}</td>
                         <td class="align-middle">{{$product->descricao}}</td>
-                        {{-- Valor --}}
                         <td class="align-middle">{{$product->valorTotal}}€</td>
-                        {{-- Estado --}}
                         <td class="align-middle">Pendente</td>
                     </tr>
                     @endforeach
@@ -115,4 +96,7 @@
     </div>
 </div>
 
+@section('scripts')
+<script src="{{asset('/js/payments.js')}}"></script>
+@endsection
 @endsection

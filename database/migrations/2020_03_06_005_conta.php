@@ -23,6 +23,7 @@ class Conta extends Migration
             $table->longText('obsConta')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->string('slug')->nullable();
         });
     }
 

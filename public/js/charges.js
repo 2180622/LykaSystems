@@ -33,10 +33,3 @@ function showContextMenu() {
 function hideContextMenu() {
     contextMenu.style.display = "none";
 }
-
-$(document).ready(function() {
-    $('*[data-href]').click(function() {
-        window.location = $(this).data('href');
-        return false;
-    });
-});
