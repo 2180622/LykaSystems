@@ -34,7 +34,9 @@ function hideContextMenu() {
     contextMenu.style.display = "none";
 }
 
-
 $(document).ready(function() {
-    $('#tableLyka').DataTable();
-} );
+    $('*[data-href]').click(function() {
+        window.location = $(this).data('href');
+        return false;
+    });
+});

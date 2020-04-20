@@ -114,33 +114,51 @@
     </table>
 </div> --}}
 
-<table id="tableLyka" class="table table-striped table-hover table-bordered" style="width:100%">
+<table id="tableLyka" class="table table-striped table-hover table-bordered shadow-sm" style="width:100%">
     <thead>
         <tr>
             <th>Nome</th>
             <th>Descrição</th>
-            <th>Valor Total</th>
+            <th>Valor total</th>
+            <th>Valor pago</th>
             <th>Estado</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($products as $product)
-        <tr>
+        <tr data-href="{{route('charges.show', $product)}}">
             <td>{{$product->cliente->nome.' '.$product->cliente->apelido}}</td>
             <td>{{$product->descricao}}</td>
             <td>{{number_format((float)$product->valorTotal, 2, ',', '')}}€</td>
+            <td>50,00€</td>
             <td>Pendente</td>
         </tr>
         @endforeach
-        <tr>
+        <tr data-href="{{route('charges.show', $product)}}">
             <td>Daniel Nunes</td>
             <td>Douturamento</td>
             <td>1000,00€</td>
+            <td>1000,00€</td>
             <td>Pago</td>
         </tr>
-        <tr>
+        <tr data-href="{{route('charges.show', $product)}}">
             <td>Alex Matos</td>
             <td>TeSP DWM</td>
+            <td>2250,00€</td>
+            <td>1000,00€</td>
+            <td>Pendente</td>
+        </tr>
+        <tr data-href="{{route('charges.show', $product)}}">
+            <td>Alex Matos</td>
+            <td>TeSP DWM</td>
+            <td>1000,00€</td>
+            <td>2250,00€</td>
+            <td>Pendente</td>
+        </tr>
+        <tr data-href="{{route('charges.show', $product)}}">
+            <td>Alex Matos</td>
+            <td>TeSP DWM</td>
+            <td>1000,00€</td>
             <td>2250,00€</td>
             <td>Pendente</td>
         </tr>
@@ -150,4 +168,7 @@
 </div>
 </div>
 
+@section('scripts')
+<script src="{{asset('/js/charges.js')}}"></script>
+@endsection
 @endsection

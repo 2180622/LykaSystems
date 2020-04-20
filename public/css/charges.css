@@ -164,3 +164,23 @@ p {
     overflow: -moz-hidden-unscrollable !important;
     overflow: hidden;
 }
+
+/* Table Style */
+table tr[data-href] {
+    cursor: pointer;
+}
+
+table tr[data-href] {
+    color: #747474;
+    font-weight: 700;
+}
+
+table tr[data-href]:hover {
+    color: #747474;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, .075) !important;
+}
+
+table {
+    border: 2px solid #dee2e6 !important;
+}
