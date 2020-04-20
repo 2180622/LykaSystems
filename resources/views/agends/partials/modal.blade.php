@@ -7,11 +7,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/agends/create" method="POST">
+            <form action="/agends/create" method="POST" class="form-group needs-validation pt-3"
+                  enctype="multipart/form-data" id="formEvent" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="calendar">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+                        <script
+                            src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
                     </div>
 
                     <div class="row">
@@ -56,7 +58,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Guadar</button>
-                    <button type="button" class="top-button btn_submit bg-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="top-button btn_submit bg-danger deleteEvent" style="display: none">Eliminar</button>
+                    <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>

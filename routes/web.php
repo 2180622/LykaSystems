@@ -18,7 +18,22 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::post('/reportproblem/sendmail', 'ExtraFunctionsController@reportmail')->name('report.send');
 
     /* Contacts */
-    Route::resource('/contacts', 'ContactoController');
+    /* Route::resource('/contacts', 'ContactoController'); */
+/*     Route::get('/contacts', 'ContactoController@index')->name('contacts.index'); */
+/*
+    Route::post('/contacts/{contact}', 'ContactoController@store')->name('contacts.store');
+    Route::get('/contacts/{contact}', 'ContactoController@edit')->name('contacts.edit');
+    Route::put('/contacts/{contact}', 'ContactoController@update')->name('contacts.update');
+    Route::delete('/contacts/{contact}', 'ContactoController@destroy')->name('contacts.destroy'); */
+
+    Route::get('/contacts/new/{university?}', 'ContactoController@create')->name('contacts.create');
+    Route::resource('/contacts', 'ContactoController')->only(['index','destroy', 'update','show','edit','store']);
+
+
+
+/*     Route::resource('/contacts', 'ContactoController', ['except' => ['create']]); */
+
+
 
     /* Universidades */
     Route::resource('/universities', 'UniversityController');

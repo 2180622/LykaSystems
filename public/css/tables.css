@@ -1,0 +1,16 @@
+#table_paginate {
+    float: right;
+}
+
+table, thead, tr, th, td {
+    border: 2px solid #dee2e6 !important;
+    color: #747474 !important;
+}
+
+table td {
+    font-weight: 600;
+}
+
+*[data-href] {
+    cursor: pointer;
+}

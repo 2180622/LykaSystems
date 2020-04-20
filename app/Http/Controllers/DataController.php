@@ -215,7 +215,7 @@ class DataController extends Controller
         $conta->numConta = rand(999999, 9999999999);
         $conta->IBAN = '8843H ERUE4 G9Y34 G9HG3 EG8U9';
         $conta->SWIFT = 'DS26E HD23D ASD55 62DS6 FWW23';
-        $conta->contacto = 244032452;
+        $conta->contacto = '244 032 985';
         $conta->obsConta = null;
         $conta->save();
 
@@ -227,7 +227,7 @@ class DataController extends Controller
         $conta->numConta = rand(999999, 9999999999);
         $conta->IBAN = '99DAS DAS25 23DSD 56KJI PO12L';
         $conta->SWIFT = 'TR23R 89DSA GH1H2 KM22N T12G1';
-        $conta->contacto = 'eurobic@mail.com';
+        $conta->contacto = '244 023 034';
         $conta->obsConta = null;
         $conta->save();
 

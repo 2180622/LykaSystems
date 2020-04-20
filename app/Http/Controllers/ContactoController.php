@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contacto;
+use App\Universidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -35,10 +36,11 @@ class ContactoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Universidade $university=null)
     {
         $contact = new Contacto;
-        return view('contacts.add',compact('contact'));
+
+        return view('contacts.add',compact('contact','university'));
     }
 
     /**
@@ -66,8 +68,22 @@ class ContactoController extends Controller
         $t=time();
         $contact->create_at == date("Y-m-d",$t);
 
+
+        if($request->idUniversidade!=null){
+            $contact->idUser = null;
+            $contact->idUniversidade=$request->idUniversidade;
+        }
+
         $contact->save();
-        return redirect()->route('contacts.index')->with('success', 'Novo contacto criado com sucesso');
+
+        if($request->idUniversidade!=null){
+            return redirect()->route('universities.show',$request->idUniversidade)->with('success', 'Novo contacto criado com sucesso');
+
+        }else{
+            return redirect()->route('contacts.show',$contact)->with('success', 'Novo contacto criado com sucesso');
+        }
+
+
     }
 
     /**
@@ -78,8 +94,6 @@ class ContactoController extends Controller
      */
     public function show(contacto $contact)
     {
-
-
 
         return view('contacts.show',compact("contact"));
     }

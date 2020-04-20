@@ -18,11 +18,12 @@ class Universidade extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idUniversidade');
             $table->string('nome',255);
-            $table->string('morada',255);
-            $table->string('telefone',255);
+            $table->string('morada',255)->nullable();
+            $table->string('telefone',255)->nullable();
             $table->string('email',255);
             $table->string('NIF',255)->unique();
-            $table->string('IBAN',255);
+            $table->string('IBAN',255)->nullable();
+            $table->json('contactos')->nullable();
             $table->longText('obsContactos')->nullable();
             $table->longText('obsCursos')->nullable();
             $table->longText('obsCandidaturas')->nullable();

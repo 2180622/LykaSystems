@@ -6,6 +6,7 @@ use App\Cliente;
 use App\Agente;
 use App\Produto;
 use App\User;
+use Illuminate\Support\Arr;
 use App\DocAcademico;
 use App\DocPessoal;
 
@@ -108,12 +109,12 @@ class ClientController extends Controller
         $user->fill($fieldsUser);
 
 
-        /* Dados do passaporte JSON: numPassaport dataValidP1235P passaportPaisEmi localEmissaoPP */
-        $passaportInfo =new stdClass();
-        $passaportInfo->numPassaport = $requestClient->numPassaport;
-        $passaportInfo->dataValidPP = $requestClient->dataValidPP;
-        $passaportInfo->passaportPaisEmi = $requestClient->passaportPaisEmi;
-        $passaportInfo->localEmissaoPP = $requestClient->localEmissaoPP;
+        /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
+        $passaportInfo =[];
+        Arr::set($passaportInfo, 'numPassaport', $requestClient->numPassaport);
+        Arr::set($passaportInfo, 'dataValidPP', $requestClient->dataValidPP);
+        Arr::set($passaportInfo, 'passaportPaisEmi', $requestClient->passaportPaisEmi);
+        Arr::set($passaportInfo, 'localEmissaoPP', $requestClient->localEmissaoPP);
         $passaportInfoJSON = json_encode($passaportInfo);
         $client->info_Passaport = $passaportInfoJSON;
 
@@ -160,10 +161,13 @@ class ClientController extends Controller
 
         /* Passaporte */
         $passaporte= new DocPessoal;
+
         $passaporte->idCliente = $client->idCliente;
         $passaporte->tipo="Passaporte";
         $passaporte->info= $passaportInfoJSON;
         $passaporte->dataValidade= $requestClient->dataValidPP;
+
+
 
         if ($requestClient->hasFile('img_Passaport')) {
             $img_doc = $requestClient->file('img_Passaport');
@@ -261,15 +265,16 @@ class ClientController extends Controller
 
 
         /* Lê os dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
-        $infosPassaport =new stdClass();
+/*         $infosPassaport = new stdClass(); */
 
         if($client->info_Passaport){
             $infosPassaport= json_decode($client->info_Passaport);
         }else{
-            $infosPassaport->numPassaport=null;
-            $infosPassaport->dataValidPP=null;
-            $infosPassaport->passaportPaisEmi=null;
-            $infosPassaport->localEmissaoPP=null;
+            $passaportInfo =[];
+            Arr::set($passaportInfo, 'numPassaport',null);
+            Arr::set($passaportInfo, 'dataValidPP', null);
+            Arr::set($passaportInfo, 'passaportPaisEmi', null);
+            Arr::set($passaportInfo, 'localEmissaoPP', null);
         }
 
 
@@ -306,22 +311,20 @@ class ClientController extends Controller
 
 
         /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
-        $infosPassaport =new stdClass();
+/*         $infosPassaport =new stdClass(); */
 
         if($client->info_Passaport){
             $infosPassaport= json_decode($client->info_Passaport);
         }else{
-            $infosPassaport->numPassaport=null;
-            $infosPassaport->dataValidPP=null;
-            $infosPassaport->passaportPaisEmi=null;
-            $infosPassaport->localEmissaoPP=null;
+            $passaportInfo =[];
+            Arr::set($passaportInfo, 'numPassaport',null);
+            Arr::set($passaportInfo, 'dataValidPP', null);
+            Arr::set($passaportInfo, 'passaportPaisEmi', null);
+            Arr::set($passaportInfo, 'localEmissaoPP', null);
         }
 
         return view('clients.print',compact("client","produtos","infosPassaport"));
     }
-
-
-
 
 
 
@@ -337,15 +340,16 @@ class ClientController extends Controller
         if (Auth::user()->tipo == "admin"){
 
         /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
-        $infosPassaport =new stdClass();
+/*         $infosPassaport =new stdClass(); */
 
         if($client->info_Passaport){
             $infosPassaport= json_decode($client->info_Passaport);
         }else{
-            $infosPassaport->numPassaport=null;
-            $infosPassaport->dataValidPP=null;
-            $infosPassaport->passaportPaisEmi=null;
-            $infosPassaport->localEmissaoPP=null;
+            $passaportInfo =[];
+            Arr::set($passaportInfo, 'numPassaport',null);
+            Arr::set($passaportInfo, 'dataValidPP', null);
+            Arr::set($passaportInfo, 'passaportPaisEmi', null);
+            Arr::set($passaportInfo, 'localEmissaoPP', null);
         }
 
             return view('clients.edit', compact('client','infosPassaport'));
@@ -372,8 +376,6 @@ class ClientController extends Controller
         $client->fill($fields);
 
 
-
-
         /* Fotografia do cliente */
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
@@ -395,11 +397,12 @@ class ClientController extends Controller
 
 
         /* Passaporte */
-        $passaportInfo =new stdClass();
-        $passaportInfo->numPassaport = $request->numPassaport;
-        $passaportInfo->dataValidPP = $request->dataValidPP;
-        $passaportInfo->passaportPaisEmi = $request->passaportPaisEmi;
-        $passaportInfo->localEmissaoPP = $request->localEmissaoPP;
+        /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
+        $passaportInfo =[];
+        Arr::set($passaportInfo, 'numPassaport', $request->numPassaport);
+        Arr::set($passaportInfo, 'dataValidPP', $request->dataValidPP);
+        Arr::set($passaportInfo, 'passaportPaisEmi', $request->passaportPaisEmi);
+        Arr::set($passaportInfo, 'localEmissaoPP', $request->localEmissaoPP);
         $passaportInfoJSON = json_encode($passaportInfo);
         $client->info_Passaport = $passaportInfoJSON;
 

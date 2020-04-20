@@ -135,3 +135,51 @@ p {
     height: auto;
     position: absolute;
 }
+
+/* Table style */
+#customSearchBox {
+    right: 0;
+    width: 90%;
+    height: 32px;
+    border: none;
+    color: #BBBBBB;
+    font-weight: 800;
+    font-size: 0.6rem;
+    padding: 8px 15px;
+    position: absolute;
+    border-radius: 30px;
+    display: inline-block;
+    background-color: white;
+    text-transform: uppercase;
+}
+
+#customSearchBox::placeholder {
+    font-weight: 800;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 8px 15px;
+    color: #BBBBBB;
+}
+
+#customSearchBox:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.search-section .search-button {
+    position: absolute !important;
+    right: 0;
+    left: auto;
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+}
+
+.search-section .search-button .search-icon {
+    font-size: 0.9rem;
+}
+
+*[data-href] {
+    cursor: pointer;
+}
