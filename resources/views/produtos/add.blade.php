@@ -190,8 +190,26 @@
                                         value="{{old('valorUniversidade2',$Responsabilidades[$num-1]->valorUniversidade2)}}" style="width:250px"><br>
                                     </div>
 
-                                    <div class="col" style="min-width:225px">
+                                    <div class="col list-fornecedores" style="min-width:225px">
                                         <div><span><b>Fornecedores</b></span></div><br>
+                                        <span class="numF" style="display: none;">1</span>
+                                        <div class="fornecedor">
+                                            <div id="clonar">
+                                                <label class="label1" for="fornecedor-fase{{$num}}">Fornecedor 1:</label><br>
+                                                <select id="fornecedor-fase{{$num}}" name="fornecedor-fase{{$num}}" class="form-control" required>
+                                                    <option value="" selected hidden></option>
+                                                    @foreach($Fornecedores as $fornecedor)
+                                                        <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
+                                                    @endforeach
+                                                </select><br>
+                                                <label class="label2" for="valor-fornecedor-fase{{$num}}">Valor a pagar:</label><br>
+                                                <input type="number" min="0" class="form-control" name="valor-fornecedor-fase{{$num}}" id="valor-fornecedor-fase{{$num}}"
+                                                value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button type="button" onclick="addFornecedor({{$num}},$(this).closest('.list-fornecedores'))" class="top-button">Adicionar fornecedor</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -221,8 +239,27 @@
     <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 
     <script>
+        var clones = $('#clonar').clone();
+        $('.fornecedor').html('');
         $("#formulario-produto").css("display", "none");
         $("#formulario-fases").css("display", "none");
+
+
+        function addFornecedor(num, closest){
+	        var numF = parseInt(closest.find('.numF').first().text());
+			var clone = clones.clone();
+	        closest.find('.numF').first().text(numF+1);
+			$('.label1', clone).text("Fornecedor "+numF+":");
+			$('.label1', clone).attr('for','fornecedor'+numF+'-fase'+num);
+			$('select', clone).attr('id','fornecedor'+numF+'-fase'+num);
+			$('select', clone).attr('name','fornecedor'+numF+'-fase'+num);
+			$('.label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+num);
+			$('input', clone).attr('id','valor-fornecedor'+numF+'-fase'+num);
+			$('input', clone).attr('name','valor-fornecedor'+numF+'-fase'+num);
+	        closest.find('.fornecedor').first().append(clone);
+        }
+
+
         function AtualizaProduto(idproduto){
             if(idproduto>0){
                 AjaxProdutos(idproduto[0]);
@@ -231,6 +268,8 @@
                 $("#formulario-fases").css("display", "none");
             }
         }
+
+
         function AjaxProdutos(idproduto){
             var link = '/../api/stock/produto/'+idproduto;
             $.ajax({
@@ -252,11 +291,11 @@
                             $('#fase-idStock'+num).attr('value', response.fases[i].idFaseStock);
                             $("#data-fase"+num).attr("required", true);
                         }
-                        if(num > 20){
+                        if(num < 20){
                             num++;
                             for(var i=num;i<=20;i++){
-                                $("#fase"+num).css("display", "none");
-                                $("#fase"+num+"-li").css("display", "none");
+                                $("#fase"+i).css("display", "none");
+                                $("#fase"+i+"-li").css("display", "none");
                             }
                         }
                     }
