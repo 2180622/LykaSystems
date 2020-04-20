@@ -148,7 +148,7 @@
                     resetForm("#formEvent");
                     console.log(element);
                     $("#modalCalendar").modal('show');
-                    $("#modalCalendar #titleModal").text('Adicionar Novo Evento');
+                    $("#modalCalendar #titleModal").text('Novo Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'none');
 
                     let start = element.start;
@@ -157,7 +157,7 @@
                     let end = element.end;
                     $("#modalCalendar input[name='dataFim']").val(end);
 
-                    $("#modalCalendar input[name='cor']").val(color);
+                    $("#modalCalendar input[name='cor']").val("#6A74C9");
 
                     calendar.unselect();
                 },

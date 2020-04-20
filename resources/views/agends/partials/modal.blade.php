@@ -58,7 +58,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Guadar</button>
-                    <button type="button" class="top-button btn_submit bg-danger deleteEvent">Eliminar</button>
+                    <button type="button" class="top-button btn_submit bg-danger deleteEvent" style="display: none">Eliminar</button>
                     <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
