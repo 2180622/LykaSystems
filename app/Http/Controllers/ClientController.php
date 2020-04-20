@@ -108,7 +108,7 @@ class ClientController extends Controller
         $user->fill($fieldsUser);
 
 
-        /* Dados do passaporte JSON: numPassaport dataValidP1235P passaportPaisEmi localEmissaoPP */
+        /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
         $passaportInfo =new stdClass();
         $passaportInfo->numPassaport = $requestClient->numPassaport;
         $passaportInfo->dataValidPP = $requestClient->dataValidPP;
@@ -261,7 +261,7 @@ class ClientController extends Controller
 
 
         /* Lê os dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
-        $infosPassaport =new stdClass();
+/*         $infosPassaport = new stdClass(); */
 
         if($client->info_Passaport){
             $infosPassaport= json_decode($client->info_Passaport);
@@ -306,7 +306,7 @@ class ClientController extends Controller
 
 
         /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
-        $infosPassaport =new stdClass();
+/*         $infosPassaport =new stdClass(); */
 
         if($client->info_Passaport){
             $infosPassaport= json_decode($client->info_Passaport);
@@ -337,7 +337,7 @@ class ClientController extends Controller
         if (Auth::user()->tipo == "admin"){
 
         /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
-        $infosPassaport =new stdClass();
+/*         $infosPassaport =new stdClass(); */
 
         if($client->info_Passaport){
             $infosPassaport= json_decode($client->info_Passaport);
