@@ -73,7 +73,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
-    <script src="{{asset('/js/eventAgend.js')}}"></script>
+    <script src="{{asset('/js/agends.js')}}"></script>
 
     <script>
         var dateToday = new Date();
@@ -106,6 +106,8 @@
                         start: '{{ $agend->dataInicio }}',
                         end: '{{ $agend->dataFim }}',
                         color: '{{ $agend->cor }}',
+                        description: '{{ $agend->descricao }}',
+                        editable: true,
                     },
                     @endforeach
                 ],
@@ -114,9 +116,51 @@
                         cachebuster: new Date().valueOf()
                     };
                 },
-                eventClick: function (arg) {
-                    $("modalCalendar").modal('show');
-                }
+
+                eventClick: function (event) {
+
+                    resetForm("#formEvent");
+
+                    $("#modalCalendar").modal('show');
+                    $("#modalCalendar #titleModal").text('Alterar Evento');
+                    $("#modalCalendar button.deleteEvent").css('display', 'flex');
+
+                    let id = element.event.id;
+                    $("#modalCalendar input[name='id']").val(id);
+
+                    let title = element.event.title;
+                    $("#modalCalendar input[name='titulo']").val(title);
+
+                    let start = element.event.start;
+                    $("#modalCalendar input[name='dataInicio']").val(start);
+
+                    let end = element.event.end;
+                    $("#modalCalendar input[name='dataFim']").val(end);
+
+                    let color = element.event.backgroundColor;
+                    $("#modalCalendar input[name='cor']").val(color);
+
+                    let description = element.event.extendedProps.description;
+                    $("#modalCalendar input[name='descricao']").val(description);
+                },
+                select: function (element) {
+
+                    resetForm("#formEvent");
+                    console.log(element);
+                    $("#modalCalendar").modal('show');
+                    $("#modalCalendar #titleModal").text('Novo Evento');
+                    $("#modalCalendar button.deleteEvent").css('display', 'none');
+
+                    let start = element.start;
+                    $("#modalCalendar input[name='dataInicio']").val(start);
+
+                    let end = element.end;
+                    $("#modalCalendar input[name='dataFim']").val(end);
+
+                    $("#modalCalendar input[name='cor']").val("#6A74C9");
+
+                    calendar.unselect();
+                },
             });
 
             calendar.render();
