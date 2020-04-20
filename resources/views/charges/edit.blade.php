@@ -38,7 +38,7 @@
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{number_format((float) $fase->valorFase,2 ,',' ,'')}}€</p>
             <br><br>
-            <form action="{{route('charges.update', [$product, $paymentProof])}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('charges.update', [$product, $document])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="row">
@@ -50,23 +50,28 @@
                         </div>
                         <label for="valorRecebido">Valor recebido</label>
                         <br>
-                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off" value="{{old('valorRecebido', number_format((float)$paymentProof->valorRecebido, 2, ',', ''))}}">
+                        <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off" value="{{old('valorRecebido', number_format((float)$document->valorRecebido, 2, ',', ''))}}">
                     </div>
                     <div class="col-md-4">
                         <label for="tipoPagamento">Tipo de pagamento</label>
                         <br>
                         <select name="tipoPagamento">
-                            <option value="Multibanco" @if ($paymentProof->tipoPagamento == "Multibanco") selected @endif>Multibanco</option>
-                                <option value="Paypal" @if ($paymentProof->tipoPagamento == "Paypal") selected @endif>Paypal</option>
-                                    <option value="Outro" @if ($paymentProof->tipoPagamento == "Outro") selected @endif>Outro</option>
+                            <option value="Multibanco" @if ($document->tipoPagamento == "Multibanco") selected @endif>Multibanco</option>
+                                <option value="Paypal" @if ($document->tipoPagamento == "Paypal") selected @endif>Paypal</option>
+                                    <option value="Outro" @if ($document->tipoPagamento == "Outro") selected @endif>Outro</option>
                         </select>
                     </div>
                     <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                        <label for="comprovativoPagamento">Comprovativo de pagamento</label>
+                        <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Se pretender mais opções, clique com o botão direito do seu rato sobre o a secção do comprovativo de pagamento.">
+                            <span>
+                                ?
+                            </span>
+                        </div>
+                        <label for="comprovativoPagamento" class="text-truncate" style="width:90%;">Comprovativo de pagamento</label>
                         <br>
                         <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
-                        @if ($paymentProof->comprovativoPagamento != null)
-                        <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()" title="{{$paymentProof->comprovativoPagamento}}">{{$paymentProof->comprovativoPagamento}}</div>
+                        @if ($document->comprovativoPagamento != null)
+                        <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()" title="{{$document->comprovativoPagamento}}">{{$document->comprovativoPagamento}}</div>
                         @else
                         <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
                         @endif
@@ -83,7 +88,7 @@
                         <label for="conta">Associar conta bancária</label>
                         <br>
                         <select name="conta">
-                            @if ($paymentProof->idConta == null)
+                            @if ($document->idConta == null)
                             @foreach ($contas as $conta)
                             <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
                             @endforeach
@@ -92,19 +97,19 @@
                             @foreach ($contas as $conta)
                             <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
                             @endforeach
-                            <option selected value="{{$paymentProof->conta->idConta}}">{{old('conta', $paymentProof->conta->descricao)}}</option>
+                            <option selected value="{{$document->conta->idConta}}">{{old('conta', $document->conta->descricao)}}</option>
                             @endif
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="dataOperacao">Data de pagamento</label>
                         <br>
-                        <input type="date" name="dataOperacao" value="{{old('dataOperacao', $paymentProof->dataOperacao)}}">
+                        <input type="date" name="dataOperacao" value="{{old('dataOperacao', $document->dataOperacao)}}">
                     </div>
                     <div class="col-md-4">
                         <label for="dataRecebido">Data de receção</label>
                         <br>
-                        <input type="date" name="dataRecebido" value="{{old('dataRecebido', $paymentProof->dataRecebido)}}">
+                        <input type="date" name="dataRecebido" value="{{old('dataRecebido', $document->dataRecebido)}}">
                     </div>
                 </div>
                 <br><br>
@@ -112,7 +117,7 @@
                     <div class="col">
                         <label for="observacoes">Observações</label>
                         <br>
-                        <textarea name="observacoes" rows="5">{{$paymentProof->observacoes}}</textarea>
+                        <textarea name="observacoes" rows="5">{{$document->observacoes}}</textarea>
                     </div>
                 </div>
         </div>
@@ -128,13 +133,13 @@
 
 <div class="custom-cm" id="contextMenu">
     <div class="custom-cm-item">
-        <a href="#">Editar</a>
+        <p onclick="getFile()">Editar</p>
     </div>
     <div class="custom-cm-item">
-        <a href="{{route('charges.download', $paymentProof)}}">Transferir</a>
+        <a href="{{route('charges.download', $document)}}">Transferir</a>
     </div>
     <div class="custom-cm-item">
-        <a href="#" onclick="removeFile();">Remover</a>
+        <p onclick="removeFile()">Remover</p>
     </div>
     <div class="custom-cm-divider"></div>
     <div class="custom-cm-item">Cancelar</div>
