@@ -87,7 +87,6 @@
                         if(count($fase->DocTransacao)){
                           foreach ($fase->DocTransacao as $document) {
                             $valorPago = $document->valorRecebido;
-                            // dd($valorPago);
                           }
                         }
                       @endphp
