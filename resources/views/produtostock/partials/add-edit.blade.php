@@ -8,58 +8,27 @@
             <label for="apelido">Tipo de Produto stock:</label><br>
             <select type="text" class="form-control" name="tipoProduto" id="tipoprodstock"
              placeholder="Insira o tipo de Produto Stock" required>
-               <option value="Licenciatura">Licenciatura</option>
-               <option value="Mestrado">Mestrado</option>
-               <option value="Doutoramento">Doutoramento</option>
-               <option value="Curso de Verão">Curso de Verão</option>
-               <option value="Estágio Profissional">Estágio Profissional</option>
-               <option value="Transferência de Curso">Transferência de Curso</option>
-               <option value="Curso Indiomas">Curso Indiomas</option>
-               <option value="Erasmus">Erasmus</option>
-               <option value="Pré-Universitário">Pré-Universitário</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Licenciatura'?"selected":""}} value="Licenciatura">Licenciatura</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Mestrado'?"selected":""}} value="Mestrado">Mestrado</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Doutoramento'?"selected":""}} value="Doutoramento">Doutoramento</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Curso de Verão'?"selected":""}} value="Curso de Verão">Curso de Verão</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Estágio Profissional'?"selected":""}} value="Estágio Profissional">Estágio Profissional</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Transferência de Curso'?"selected":""}} value="Transferência de Curso">Transferência de Curso</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Curso Indiomas'?"selected":""}} value="Curso Indiomas">Curso Indiomas</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Erasmus'?"selected":""}} value="Erasmus">Erasmus</option>
+               <option {{old('tipoProduto',$produtostock->tipoProduto)=='Pré-Universitário'?"selected":""}} value="Pré-Universitário">Pré-Universitário</option>
              </select>
              <br>
 
                 {{-- INPUT anoAcademico --}}
                 <label for="dataNasc">Ano Académico:</label><br>
                 <input type="text" class="form-control" name="anoAcademico" id="anoAcademico"
-                  placeholder="Ex: 2020/2021" required><br>
+                  value="{{old('anoAcademico',$produtostock->anoAcademico)}}" required><br>
 
                {{-- INPUT Descrição --}}
                <label for="nome">Descrição (ProdutoStock):</label><br>
-               <input type="text" class="form-control" name="descricao" id="descricao" required><br>
-
-                {{-- INPUT descricao fasestock --}}
-                {{-- <label for="">Descrição (FaseStock):</label><br>
-                <input type="text" class="form-control" name="descricao" id="descricaofase"required><br> --}}
-
-                {{-- INPUT tipo DocStock --}}
-                {{-- <label for="">Tipo (DocStock):</label><br>
-                <select type="text" class="form-control" name="tipo" id="tipodoc"
-                 placeholder="Insira o tipo de Documento Stock" required>
-                   <option value="Pessoal">Pessoal</option>
-                   <option value="Academico">Académico</option>
-                </select>
-                <br> --}}
-                {{-- INPUT tipoPessoal DocStock --}}
-                {{-- <label for="">TipoPessoal:</label>
-                <select type="text" class="form-control" name="tipoPessoal" id="tipopessoaldoc"
-                 placeholder="Insira o tipo Pessoal de Documento Stock" required>
-                  <option value="Passaport">Passaporte</option>
-                  <option value="Cartão Cidadão">Cartão de Cidadão</option>
-                  <option value="Carta Condução">Carta de Condução</option>
-                  <option value="Doc. Oficial">Documento Oficial</option>
-                </select><br> --}}
-
-                {{-- INPUT tipoAcademico DocStock --}}
-                {{-- <label for="">TipoAcademico:</label>
-                <select type="text" class="form-control" name="tipoAcademico" id="tipoacademicodoc"
-                 placeholder="Insira o tipo Académico de Documento Stock">
-                  <option value="Exame Universitário">Exame Universitário</option>
-                  <option value="Exame Nacional">Exame Nacional</option>
-                  <option value="Diploma">Diploma</option>
-                  <option value="Certificado">Certificado</option>
-                </select><br> --}}
+               <input type="text" class="form-control" name="descricao" id="descricao"
+               value="{{old('descricao',$produtostock->descricao)}}" required><br>
             </div>
           </div>
       </div>

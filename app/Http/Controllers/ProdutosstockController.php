@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\ProdutoStock;
 use App\FaseStock;
 use App\Http\Requests\StoreProdutosstockRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProdutosstockController extends Controller
 {
@@ -15,45 +16,43 @@ class ProdutosstockController extends Controller
     }
 
     public function create(){
-        $produtoStock = new ProdutoStock();
+        $produtostock = new ProdutoStock();
 
-        return view('produtostock.add', compact('ProdutoStock'));
+        return view('produtostock.add', compact('produtostock'));
     }
 
     public function store(StoreProdutosstockRequest $requestProduto){
         $produtoFields = $requestProduto->validated();
-        // $faseFields = $requestFase->validated();
-        // $docFields = $requestDoc->validated();
 
         $produtoStock = new ProdutoStock();
-
         $produtoStock->fill($produtoFields);
-        //
-        // $faseStock = new FaseStock();
-        // $faseStock->fill($faseFields);
 
         $produtoStock->save();
-        // $faseStock->idProdutoStock = $produtoStock->idProdutoStock;
-        //
-        // $docStock = new DocStock();
-        // $docStock->fill($docFields);
-        //
-        // $faseStock->save();
-        // $docStock->idFaseStock = $faseStock->idFaseStock;
-        //
-        // $docStock->save();
 
         return redirect()->route('produtostock.index')->with('success', 'Produto stock adicionado com sucesso');
     }
 
-    public function edit(ProdutoStock $produtoStock)
+    public function edit(ProdutoStock $produtostock)
     {
         if (Auth::user()->tipo == "admin"){
-            return view('produtostock.edit', compact('produtoStock'));
+            return view('produtostock.edit', compact('produtostock'));
         }else{
             /* não tem permissões */
             abort (401);
       }
+    }
+
+    public function update(StoreProdutosstockRequest $request, ProdutoStock $produtostock)
+    {
+        $fields = $request->validated();
+        $produtostock->fill($fields);
+
+        // data em que foi modificado
+        $t=time();
+        $produtostock->updated_at == date("Y-m-d",$t);
+        $produtostock->save();
+
+        return redirect()->route('produtostock.index')->with('success', 'Dados do produto de stock modificados com sucesso');
     }
 
     public function show(FaseStock $faseStocks,ProdutoStock $produtostock)
