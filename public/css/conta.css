@@ -212,3 +212,7 @@ p {
     overflow: -moz-hidden-unscrollable !important;
     overflow: hidden;
 }
+
+.modal-content{
+  border: none !important;
+}
