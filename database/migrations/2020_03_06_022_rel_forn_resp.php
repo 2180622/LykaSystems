@@ -24,7 +24,6 @@ class RelFornResp extends Migration
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->unsignedBigInteger('idFornecedor');
                 $table->foreign('idFornecedor')->references('idFornecedor')->on('Fornecedor');
-            $table->softDeletes();
         });
     }
 

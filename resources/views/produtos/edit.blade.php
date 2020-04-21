@@ -143,6 +143,7 @@
                     @foreach($fases as $fase)
                         @php
                             $num++;
+                            $numF = 0;
                             $responsabilidade = $fase->responsabilidade;
                             $relacoes = $responsabilidade->relacao;
                         @endphp
@@ -186,16 +187,52 @@
                                     value="{{old('valorUniversidade2',$responsabilidade->valorUniversidade2)}}" style="width:250px"><br>
                 
                                     @if($relacoes->toArray())
-                                        <div><span>Fornecedores:</span></div><br>
-                                        @foreach ($relacoes as $relacao)
-                                            @foreach($Fornecedores as $fornecedor)
-                                                @if($fornecedor->idFornecedor == $relacao->idFornecedor)
-                                                    <label for="resp-uni2-fase{{$fase->idFase}}">Valor a pagar a {{$relacao->fornecedor->nome}}:</label><br>
-                                                    <input type="text" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
-                                                    value="{{old('valor',$relacao->valor)}}" style="width:250px"><br>
-                                                @endif
-                                            @endforeach
-                                        @endforeach
+
+                                        <div class="col list-fornecedores" style="min-width:225px">
+                                            <div><span><b>Fornecedores</b></span></div><br>
+                                            <span class="numF" style="display: none;">{{count($relacoes->array())+1}}</span>
+                                            <div class="fornecedor">
+                                                <div class="clones" id="clonar">
+                                                    <label class="label1" for="fornecedor-fase{{$fase->idFase}}">Fornecedor 0:</label><br>
+                                                    <select id="fornecedor-fase{{$fase->idFase}}" name="fornecedor-fase{{$fase->idFase}}" class="form-control" required>
+                                                        <option value="" selected hidden></option>
+                                                        @foreach($Fornecedores as $fornecedor)
+                                                            <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
+                                                        @endforeach
+                                                    </select><br>
+                                                    <label class="label2" for="valor-fornecedor-fase{{$fase->idFase}}">Valor a pagar:</label><br>
+                                                    <input type="number" min="0" class="form-control" name="valor-fornecedor-fase{{$fase->idFase}}" id="valor-fornecedor-fase{{$fase->idFase}}"
+                                                    value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                                </div>
+                                                @foreach ($relacoes as $relacao)
+                                                    @php
+                                                        $numF++;
+                                                    @endphp
+                                                    <div id="div-relacao{{$relacao->idRelacao}}">
+                                                        <label class="label1" for="fornecedor{{$numF}}-fase{{$fase->idFase}}">Fornecedor {{$numF}}:</label><br>
+                                                        <select id="fornecedor{{$numF}}-fase{{$fase->idFase}}" name="fornecedor{{$numF}}-fase{{$fase->idFase}}" class="form-control" required>
+                                                            <option value="" selected hidden></option>
+                                                            @foreach($Fornecedores as $fornecedor)
+                                                                <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
+                                                            @endforeach
+                                                        </select><br>
+                                                        <label class="label2" for="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}">Valor a pagar:</label><br>
+                                                        <input type="number" min="0" class="form-control" name="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}" id="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}"
+                                                        value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                                        @foreach($Fornecedores as $fornecedor)
+                                                            @if($fornecedor->idFornecedor == $relacao->idFornecedor)
+                                                                <label for="resp-uni2-fase{{$fase->idFase}}">Valor a pagar a {{$relacao->fornecedor->nome}}:</label><br>
+                                                                <input type="text" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
+                                                                value="{{old('valor',$relacao->valor)}}" style="width:250px"><br>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <div>
+                                                <button type="button" onclick="addFornecedor({{$fase->idFase}},$(this).closest('.list-fornecedores'))" class="top-button">Adicionar fornecedor</button>
+                                            </div>
+                                        </div>
                                     @endif
                                 </div>
                             </div>
@@ -226,5 +263,27 @@
 
     {{-- script permite definir se um input recebe só numeros OU so letras --}}
     <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
+
+    <script>
+        var clones = $('#clonar').clone();
+        $(".clones").remove();
+        $("#formulario-produto").css("display", "none");
+        $("#formulario-fases").css("display", "none");
+
+
+        function addFornecedor(num, closest){
+	        var numF = parseInt(closest.find('.numF').first().text());
+			var clone = clones.clone();
+	        closest.find('.numF').first().text(numF+1);
+			$('.label1', clone).text("Fornecedor "+numF+":");
+			$('.label1', clone).attr('for','fornecedor'+numF+'-fase'+num);
+			$('select', clone).attr('id','fornecedor'+numF+'-fase'+num);
+			$('select', clone).attr('name','fornecedor'+numF+'-fase'+num);
+			$('.label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+num);
+			$('input', clone).attr('id','valor-fornecedor'+numF+'-fase'+num);
+			$('input', clone).attr('name','valor-fornecedor'+numF+'-fase'+num);
+	        closest.find('.fornecedor').first().append(clone);
+        }
+    </script>
 
 @endsection

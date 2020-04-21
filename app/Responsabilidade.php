@@ -23,6 +23,6 @@ class Responsabilidade extends Model
     }
 
     public function relacao(){
-        return $this->hasMany("App\RelFornResp","idResponsabilidade","idResponsabilidade")->withTrashed();
+        return $this->hasMany("App\RelFornResp","idResponsabilidade","idResponsabilidade");
     }
 }
