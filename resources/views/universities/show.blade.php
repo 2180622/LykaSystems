@@ -68,9 +68,9 @@
 
 
                 {{-- Informações da universidade --}}
-                <div><span class="text-secondary ">Nome da Universidade:</span> {{$university->nome}}</div><br>
+                <div><span class="text-secondary ">Nome da Universidade:<br></span>{{$university->nome}}</div><br>
 
-                <div><span class="text-secondary ">Morada:</span> {{$university->morada}}</div><br>
+                <div><span class="text-secondary ">Morada:</span><br>{{$university->morada}}</div><br>
 
                 <div><span class="text-secondary">NIF:</span> {{$university->NIF}}</div><br>
 
@@ -131,7 +131,7 @@
 
 
 
-    
+
 
     <div class="tab-content p-2 " id="myTabContent">
 

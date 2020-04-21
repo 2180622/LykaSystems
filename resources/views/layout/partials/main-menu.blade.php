@@ -89,6 +89,13 @@
                 </a>
             </li>
 
+            <!-- Fornecedores -->
+            <li class="menu-option">
+                <a href="{{route('provider.index')}}">
+                    <span class="option-name {{Route::is('fornecedores.*') ? 'active' : ''}}">Fornecedores</span>
+                </a>
+            </li>
+
             <!-- Biblioteca -->
             <li class="menu-option">
                 <a href="{{route('libraries.index')}}">

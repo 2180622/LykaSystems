@@ -1,11 +1,11 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Listagem de contas bancárias')
+@section('title', 'Listagem de fornecedores')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/conta.css')}}" rel="stylesheet">
+<link href="{{asset('/css/providers.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteúdo da Página --}}
@@ -23,53 +23,56 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('conta.create')}}" class="top-button">Adicionar conta bancária</a>
+        <a href="{{route('provider.create')}}" class="top-button">Adicionar fornecedor</a>
     </div>
 
     <br><br>
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Listagem de contas bancárias</h6>
+            <h6>Listagem de fornecedores</h6>
         </div>
         <br>
         <div class="row mt-2">
             <div class="col">
-                @if (count($contums) == 1)
-                Existe <strong>{{count($contums)}}</strong> conta registada no sistema.
+                @if (count($providers) == 1)
+                Existe <strong>{{count($providers)}}</strong> fornecedor registado no sistema.
                 @else
-                Existem <strong>{{count($contums)}}</strong> contas registadas no sistema.
+                Existem <strong>{{count($providers)}}</strong> fornecedores registados no sistema.
                 @endif
             </div>
         </div>
         <br>
         <div class="container">
-            @foreach ($contums as $contum)
-            <a href="{{route('conta.show', $contum)}}" oncontextmenu="return showContextMenu();">
+            @foreach ($providers as $provider)
+            <a href="{{route('provider.show', $provider)}}" oncontextmenu="return showContextMenu();">
                 <div class="row charge-div">
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">
                             <ion-icon name="cube" id="icon"></ion-icon>
                         </div>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$contum->descricao}}">{{$contum->descricao}}</p>
+                    <div class="col-md-1 text-truncate align-self-center ml-4">
+                        <p class="text-truncate" title="{{$provider->nome}}">{{$provider->nome}}</p>
                     </div>
-                    <div class="col-md-4 align-self-center">
-                        <p class="text-truncate" title="{{$contum->instituicao}}">{{$contum->instituicao}}</p>
+                    <div class="col-md-2 align-self-center ml-5">
+                        <p class="text-truncate" title="{{$provider->descricao}}">{{$provider->descricao}}</p>
+                    </div>
+                    <div class="col-md-3 text-truncate align-self-center ml-5">
+                        <p class="text-truncate" title="{{$provider->morada}}">{{$provider->morada}}</p>
                     </div>
                     <div class="col-md-3 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate" title="{{$contum->contacto}}">{{$contum->contacto}}</p>
+                        <p class="text-truncate" title="{{$provider->contacto}}">{{$provider->contacto}}</p>
                     </div>
                 </div>
             </a>
 
             <div class="custom-cm" id="contextMenu">
                 <div class="custom-cm-item">
-                    <a href="{{route('conta.edit', $contum)}}">Editar</a>
+                    <a href="{{route('provider.edit', $provider)}}">Editar</a>
                 </div>
                 <div class="custom-cm-item">
-                    <p data-toggle="modal" data-target="#deleteModal" data-name="{{$contum->descricao}}" data-id="{{$contum->idConta}}">Remover</p>
+                    <p data-toggle="modal" data-target="#deleteModal" data-name="{{$provider->nome}}" data-id="{{$provider->idConta}}">Remover</p>
                 </div>
                 <div class="custom-cm-divider"></div>
                 <div class="custom-cm-item">Cancelar</div>
@@ -116,7 +119,7 @@
         var modal = $(this);
         modal.find('#text').text('Pretende eliminar a conta bancária ' + name + '?');
         modal.find('#conta_delete_id').val(button.data('id'));
-        modal.find("form").attr('action', '/conta/' + button.data('id'));
+        modal.find("form").attr('action', '/fornecedor/' + button.data('id'));
     });
 
     // Context Menu

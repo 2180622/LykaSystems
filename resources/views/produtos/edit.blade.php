@@ -148,9 +148,9 @@
                             $relacoes = $responsabilidade->relacao;
                         @endphp
                         @if($num == 1)
-                            <div class="tab-pane fade show active" id="fase{{$fase->idFase}}" role="tabpanel" aria-labelledby="fase{{$fase->idFase}}-tab">
+                            <div class="tab-pane fade show active" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
                         @else
-                            <div class="tab-pane fade" id="fase{{$fase->idFase}}" role="tabpanel" aria-labelledby="fase{{$fase->idFase}}-tab">
+                            <div class="tab-pane fade" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
                         @endif
                             <div class="row">
                                 <div class="col-md-12">
@@ -165,6 +165,8 @@
                                     <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
                                     value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
                                     
+                                </div>
+                                <div class="col mr-3">
                                     <div><span><b>Responsabilidades</b></span></div><br>
                                     <label for="resp-cliente-fase{{$fase->idFase}}">Valor a pagar ao cliente:</label><br>
                                     <input type="number" class="form-control" name="resp-cliente-fase{{$fase->idFase}}" id="resp-cliente-fase{{$fase->idFase}}"
@@ -185,55 +187,51 @@
                                     <label for="resp-uni2-fase{{$fase->idFase}}">Valor a pagar á universidade secundária:</label><br>
                                     <input type="number" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
                                     value="{{old('valorUniversidade2',$responsabilidade->valorUniversidade2)}}" style="width:250px"><br>
-                
-                                    @if($relacoes->toArray())
+                                </div>
 
-                                        <div class="col list-fornecedores" style="min-width:225px">
-                                            <div><span><b>Fornecedores</b></span></div><br>
-                                            <span class="numF" style="display: none;">{{count($relacoes->array())+1}}</span>
-                                            <div class="fornecedor">
-                                                <div class="clones" id="clonar">
-                                                    <label class="label1" for="fornecedor-fase{{$fase->idFase}}">Fornecedor 0:</label><br>
-                                                    <select id="fornecedor-fase{{$fase->idFase}}" name="fornecedor-fase{{$fase->idFase}}" class="form-control" required>
+                                <div class="col list-fornecedores" style="min-width:225px">
+                                    <div><span><b>Fornecedores</b></span></div><br>
+                                    <span class="numF" style="display: none;">{{count($relacoes->toArray())+1}}</span>
+                                    <div class="fornecedor">
+                                        <div class="clones" id="clonar">
+                                            <label class="label1" for="fornecedor-fase{{$fase->idFase}}">Fornecedor 0:</label><br>
+                                            <select id="fornecedor-fase{{$fase->idFase}}" name="fornecedor-fase{{$fase->idFase}}" class="form-control" required>
+                                                <option value="" selected hidden></option>
+                                                @foreach($Fornecedores as $fornecedor)
+                                                    <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
+                                                @endforeach
+                                            </select><br>
+                                            <label class="label2" for="valor-fornecedor-fase{{$fase->idFase}}">Valor a pagar:</label><br>
+                                            <input type="number" min="0" class="form-control" name="valor-fornecedor-fase{{$fase->idFase}}" id="valor-fornecedor-fase{{$fase->idFase}}"
+                                            value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                        </div>
+                                        @if($relacoes->toArray())
+                                            @foreach ($relacoes as $relacao)
+                                                @php
+                                                    $numF++;
+                                                @endphp
+                                                <div id="div-relacao{{$relacao->idRelacao}}">
+                                                    <label class="label1" for="fornecedor{{$numF}}-fase{{$fase->idFase}}">Fornecedor {{$numF}}:</label><br>
+                                                    <select id="fornecedor{{$numF}}-fase{{$fase->idFase}}" name="fornecedor{{$numF}}-fase{{$fase->idFase}}" class="form-control" required>
                                                         <option value="" selected hidden></option>
                                                         @foreach($Fornecedores as $fornecedor)
+                                                            @if($relacao->ifFornecedor == $fornecedor->ifFornecedor)
+                                                            <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}" selected>{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
+                                                            @else
                                                             <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
-                                                        @endforeach
-                                                    </select><br>
-                                                    <label class="label2" for="valor-fornecedor-fase{{$fase->idFase}}">Valor a pagar:</label><br>
-                                                    <input type="number" min="0" class="form-control" name="valor-fornecedor-fase{{$fase->idFase}}" id="valor-fornecedor-fase{{$fase->idFase}}"
-                                                    value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
-                                                </div>
-                                                @foreach ($relacoes as $relacao)
-                                                    @php
-                                                        $numF++;
-                                                    @endphp
-                                                    <div id="div-relacao{{$relacao->idRelacao}}">
-                                                        <label class="label1" for="fornecedor{{$numF}}-fase{{$fase->idFase}}">Fornecedor {{$numF}}:</label><br>
-                                                        <select id="fornecedor{{$numF}}-fase{{$fase->idFase}}" name="fornecedor{{$numF}}-fase{{$fase->idFase}}" class="form-control" required>
-                                                            <option value="" selected hidden></option>
-                                                            @foreach($Fornecedores as $fornecedor)
-                                                                <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
-                                                            @endforeach
-                                                        </select><br>
-                                                        <label class="label2" for="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}">Valor a pagar:</label><br>
-                                                        <input type="number" min="0" class="form-control" name="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}" id="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}"
-                                                        value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
-                                                        @foreach($Fornecedores as $fornecedor)
-                                                            @if($fornecedor->idFornecedor == $relacao->idFornecedor)
-                                                                <label for="resp-uni2-fase{{$fase->idFase}}">Valor a pagar a {{$relacao->fornecedor->nome}}:</label><br>
-                                                                <input type="text" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
-                                                                value="{{old('valor',$relacao->valor)}}" style="width:250px"><br>
                                                             @endif
                                                         @endforeach
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                            <div>
-                                                <button type="button" onclick="addFornecedor({{$fase->idFase}},$(this).closest('.list-fornecedores'))" class="top-button">Adicionar fornecedor</button>
-                                            </div>
-                                        </div>
-                                    @endif
+                                                    </select><br>
+                                                    <label class="label2" for="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}">Valor a pagar:</label><br>
+                                                    <input type="number" min="0" class="form-control" name="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}" id="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}"
+                                                    value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <button type="button" onclick="addFornecedor({{$fase->idFase}},$(this).closest('.list-fornecedores'))" class="top-button">Adicionar fornecedor</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

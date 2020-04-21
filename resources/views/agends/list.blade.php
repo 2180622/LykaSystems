@@ -118,7 +118,6 @@
                 },
 
                 eventClick: function (event) {
-
                     resetForm("#formEvent");
 
                     $("#modalCalendar").modal('show');
@@ -141,8 +140,9 @@
                     $("#modalCalendar input[name='cor']").val(color);
 
                     let description = element.event.extendedProps.description;
-                    $("#modalCalendar input[name='descricao']").val(description);
+                    $("#modalCalendar texterea[name='descricao']").val(description);
                 },
+
                 select: function (element) {
 
                     resetForm("#formEvent");

@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class Fornecedor extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('Fornecedor', function (Blueprint $table) {
@@ -19,17 +14,15 @@ class Fornecedor extends Migration
             $table->bigIncrements('idFornecedor');
             $table->string('nome',255);
             $table->string('morada',255);
+            $table->string('contacto');
             $table->text('descricao');
+            $table->text('observacoes')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('Fornecedor');
