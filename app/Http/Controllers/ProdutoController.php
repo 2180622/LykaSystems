@@ -255,6 +255,8 @@ class ProdutoController extends Controller
 
         foreach($fases as $fase){
             $responsabilidade = $fase->responsabilidade;
+            $relacoes = $responsabilidade->relacao;
+            $valorRelacoes = 0;
             if($responsabilidade->valorCliente != $fields['resp-cliente-fase'.$fase->idFase]){
                 $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$fase->idFase];
                 $responsabilidade->verificacaoPagoCliente = false;
@@ -280,17 +282,61 @@ class ProdutoController extends Controller
                 $responsabilidade->verificacaoPagoUni2 = false;
             }
             $responsabilidade->save();
+
+            if($relacoes->toArray()){
+                foreach($relacoes as $relacao){
+                    $existe = false;
+                    for($i=0;$i<=1000;$i++){
+                        if(array_key_exists("fornecedor".$numF."-fase".$i, $fields)){
+                            if($fields["fornecedor".$numF."-fase".$i]==$relacao->idFornecedor){
+                                $existe = true;
+                            }
+                        }else{
+                            break;
+                        }
+                    }
+                    if(!$existe){
+                        $relacao->delete();
+                    }
+                }
+            }
+
+            for($i=0;$i<=1000;$i++){
+                if(array_key_exists("fornecedor".$numF."-fase".$i, $fields)){
+                    if($fields["fornecedor".$numF."-fase".$i]){
+                        $existe = false;
+                        if($relacoes->toArray()){
+                            foreach($relacoes as $relacao){
+                                if($fields["fornecedor".$numF."-fase".$i]==$relacao->idFornecedor){
+                                    $existe = true;
+                                }
+                            }
+                        }
+                        if(!$existe){
+                            $relacao = new RelFornResp;
+                            $relacao->idFornecedor = $fields["fornecedor".$numF."-fase".$i];
+                            $relacao->idResponsabilidade = $responsabilidade->idResponsabilidade;
+                            $relacao->valor = $fields["valor-fornecedor".$numF."-fase".$i];
+                            $relacao->create_at == date("Y-m-d",$t);
+                            $relacao->save();
+
+                            $valorRelacoes = $valorRelacoes + $relacao->valor;
+                        }
+                    }
+                }else{
+                    break;
+                }
+            }
             
 
             $fase->descricao = $fields['descricao-fase'.$fase->idFase];
             $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$fase->idFase]));
-            $fase->valorFase = $responsabilidade->valorCliente + $responsabilidade->valorAgente + 
+            $fase->valorFase = $valorRelacoes + $responsabilidade->valorCliente + $responsabilidade->valorAgente + 
                 $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 +$responsabilidade->valorUniversidade2;
             $fase->create_at == date("Y-m-d",$t);
             $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $fase->idProduto = $produto->idProduto;
             $fase->save();
-
 
             $valorProduto = $valorProduto + $fase->valorFase;
             $valorTAgente = $valorTAgente + $responsabilidade->valorAgente;
