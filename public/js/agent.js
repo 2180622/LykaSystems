@@ -36,7 +36,7 @@
                 "infoFiltered": ""
             },
 
-            "order": [1, 'desc'],
+            "order": [2, 'asc'],
 
             /* "bLengthChange": false, */
             /* "bFilter": false, */

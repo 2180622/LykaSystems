@@ -112,7 +112,7 @@
 
                 <div><span class="text-secondary">País:</span> {{$agent->pais}}</div>
 
-                <div><span class="text-secondary">Morada:</span> {{$agent->morada}}</div><br>
+                <div><span class="text-secondary">Morada:</span><br>{{$agent->morada}}</div><br>
 
                 <div><span class="text-secondary">Telefone (principal):</span> {{$agent->telefone1}}</div>
 
