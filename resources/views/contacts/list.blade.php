@@ -17,6 +17,7 @@
 {{-- Conteudo da Página --}}
 @section('content')
 @include('contacts.partials.modal')
+
 <!-- MODAL DE INFORMAÇÔES -->
 
 <div class="container mt-2 ">
@@ -32,6 +33,7 @@
     </div>
 
     <div class="float-right">
+        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
         <a href="{{route('contacts.create')}}" class="top-button">Adicionar Contacto</a>
     </div>
 
@@ -114,7 +116,7 @@
 
                                 <th>Nome</th>
                                 <th>E-mail</th>
-                                <th>Telefone(1)</th>
+                                <th>Telefone</th>
                                 <th class="text-center">Opções</th>
                             </tr>
                         </thead>
@@ -174,7 +176,7 @@
                                             class="fas fa-pencil-alt mr-2"></i></a>
 
                                             <form method="POST" role="form" id="{{ $contact->idContacto }}"
-                                                action="{{route('contacts.destroy',$contact)}}" data="{{ $contact->nome }}" class="d-inline-block form_client_id">
+                                                action="{{route('contacts.destroy',$contact)}}" data="{{ $contact->nome }}" class="d-inline-block form_contact_id">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn_delete" title="Eliminar contacto" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-trash-alt"></i></button>
@@ -189,18 +191,6 @@
 
                 </div>
             </div>
-
-
-
-
-
-            {{-- FORNECEDORES --}}
-{{--             <div class="tab-pane fade show" id="fornecedores" role="tabpanel" aria-labelledby="fornecedores-tab">
-                FORNECEDORES
-            </div>
- --}}
-
-
 
 
             {{-- FAVORITOS --}}

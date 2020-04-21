@@ -418,6 +418,20 @@ class DataController extends Controller
         $produto->idUniversidade2 = null;
         $produto->save();
 
+        $produto = new Produto;
+        $produto->descricao = 'Mestrado';
+        $produto->tipo = 'Mestrado';
+        $produto->anoAcademico = 5;
+        $produto->valorTotal = 1900;
+        $produto->valorTotalAgente = 300;
+        $produto->valorTotalSubAgente = null;
+        $produto->idAgente = 1;
+        $produto->idSubAgente = null;
+        $produto->idCliente = 2;
+        $produto->idUniversidade1 = 1;
+        $produto->idUniversidade2 = null;
+        $produto->save();
+
         /***************          Responsabilidades          ***************/
 
         $responsabilidade = new Responsabilidade;
@@ -532,6 +546,53 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'pie-chart';
         $fase->idProduto = 1;
+        $fase->idFaseStock = 4;
+        $fase->idResponsabilidade = 4;
+        $fase->save();
+
+
+
+
+        $fase = new Fase;
+        $fase->descricao = 'Inscrição';
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('16-03-2020 15:00'));
+        $fase->valorFase = 50;
+        $fase->verificacaoPago = false;
+        $fase->icon = 'cube';
+        $fase->idProduto = 2;
+        $fase->idFaseStock = 1;
+        $fase->idResponsabilidade = 1;
+        $fase->save();
+
+        $fase = new Fase;
+        $fase->descricao = 'Matricula';
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
+        $fase->valorFase = 300;
+        $fase->verificacaoPago = false;
+        $fase->icon = 'layers';
+        $fase->idProduto = 2;
+        $fase->idFaseStock = 2;
+        $fase->idResponsabilidade = 2;
+        $fase->save();
+
+        $fase = new Fase;
+        $fase->descricao = 'Propinas';
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $fase->valorFase = 1000;
+        $fase->verificacaoPago = false;
+        $fase->icon = 'school';
+        $fase->idProduto = 2;
+        $fase->idFaseStock = 3;
+        $fase->idResponsabilidade = 3;
+        $fase->save();
+
+        $fase = new Fase;
+        $fase->descricao = 'Final';
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('01-07-2021 18:30'));
+        $fase->valorFase = 150;
+        $fase->verificacaoPago = false;
+        $fase->icon = 'pie-chart';
+        $fase->idProduto = 2;
         $fase->idFaseStock = 4;
         $fase->idResponsabilidade = 4;
         $fase->save();
