@@ -43,7 +43,7 @@ class NotificationController extends Controller
         $diff = (date_diff($dataNasc,$DataHoje))->format("%R%a");
         if($diff >= 0 && $diff <= 20){
             $Descricao = 'Hoje um ciclo de sua vida se finaliza e outro recomeça. Faça deste novo recomeço uma nova oportunidade para fazer tudo o que sempre sonhou! \nParabéns!';
-            $date = (new DateTime())->add(new DateInterval('P'.$diff->d.'D'));
+            $date = (new DateTime())->add(new DateInterval('P'.$diff.'D'));
             $code = Auth()->user()->idUser.'_aniversario_'.$date->format('d-m-Y');
             $existe=false;
             if($AllNotifications){
