@@ -28,4 +28,9 @@ class ProviderController extends Controller
       $provider->save();
       return redirect()->route('provider.index')->with('success', 'Novo fornecedor criado com sucesso.');
     }
+
+    public function show(Fornecedor $provider)
+    {
+      return view('providers.show', compact('provider'));
+    }
 }
