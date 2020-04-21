@@ -66,8 +66,27 @@ class ChargesController extends Controller
           $docTrasancao->save();
       }
 
-      if ($docTrasancao->valorRecebido >= $fase->valorFase) {
-        Fase::where('descricao', '=', $fase->descricao)->update(['verificacaoPago' => '1']);
+      switch ($docTrasancao->valorRecebido) {
+        case $docTrasancao->valorRecebido == $fase->valorFase:
+          Fase::where('idFase', '=', $fase->idFase)
+          ->update([
+            'verificacaoPago' => '1',
+            'estado' => 'Pago'
+          ]);
+          break;
+
+        case $docTrasancao->valorRecebido > $fase->valorFase:
+          Fase::where('idFase', '=', $fase->idFase)
+          ->update([
+            'verificacaoPago' => '1',
+            'estado' => 'Crédito'
+          ]);
+          break;
+
+        case $docTrasancao->valorRecebido < $fase->valorFase:
+          Fase::where('idFase', '=', $fase->idFase)
+          ->update(['estado' => 'Dívida']);
+          break;
       }
 
       return redirect()->route('charges.show', $product)->with('success', 'Estado da cobrança alterado com sucesso!');

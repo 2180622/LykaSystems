@@ -79,7 +79,7 @@
                                 >
                                 @if (count($fase->DocTransacao))
                                 @foreach ($fase->DocTransacao as $document)
-                                @if ($document->valorRecebido != null && $fase->verificacaoPago == 0)
+                                @if ($document->valorRecebido != null && $fase->estado != 'Pago' && $fase->estado != 'Pendente')
                                 {{number_format((float) $valorTotal = $document->valorRecebido - $fase->valorFase, 2, ',', '')}}€
                                 @else
                                 {{number_format((float)$fase->valorFase, 2, ',', '')}}€
@@ -102,19 +102,25 @@
                             </div>
                             <div class="col-md-2 text-truncate align-self-center ml-auto">
                                 <p>
-                                    @if (count($fase->DocTransacao))
-                                    @foreach ($fase->DocTransacao as $document)
-                                    @if ($fase->valorFase > $document->valorRecebido)
-                                    Dívida
-                                    @elseif ($fase->valorFase < $document->valorRecebido)
-                                        Crédito
-                                        @else
-                                        Pago
-                                        @endif
-                                        @endforeach
-                                        @else
-                                        Pendente
-                                        @endif
+                                  @php
+                                    switch ($fase->estado) {
+                                      case 'Pendente':
+                                      printf('Pendente');
+                                      break;
+
+                                      case 'Pago':
+                                      printf('Pago');
+                                      break;
+
+                                      case 'Dívida':
+                                      printf('Dívida');
+                                      break;
+
+                                      case 'Crédito':
+                                      printf('Crédito');
+                                      break;
+                                    }
+                                  @endphp
                                 </p>
                             </div>
                         </div>
