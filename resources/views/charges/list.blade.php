@@ -87,6 +87,7 @@
         </div>
         <br>
         <div class="container">
+            @if (count($products))
             @foreach ($products as $product)
             <a href="{{route('charges.show', $product)}}">
                 <div class="row charge-div">
@@ -109,17 +110,32 @@
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
                         <?php
-                          $valor = 0;
+                          $valorPago = 0;
                           foreach ($product->fase as $fase) {
                             if (count($fase->DocTransacao)) {
                               foreach ($fase->DocTransacao as $document) {
-                                $valor = $valor + $document->valorRecebido;
+                                $valorPago = $valorPago + $document->valorRecebido;
                               }
                             }
                           }
+
+                          $valorDivida = 0;
+                          foreach ($product->fase as $fase) {
+                            if (count($fase->DocTransacao)) {
+                              foreach ($fase->DocTransacao as $document) {
+                                if ($document->valorRecebido < $fase->valorFase) {
+                                  $valorDivida = $valorDivida + ($fase->valorFase - $document->valorRecebido);
+                                }
+                              }
+                            }
+                          }
+
                       ?>
-                        @if ($valor != 0)
-                        <p class="text-truncate" style="color:#47BC00;">{{number_format((float)$valor, 2, ',', '')}}€</p>
+                        @if ($valorPago != 0)
+                        <p class="text-truncate" style="color:#47BC00;">{{number_format((float)$valorPago, 2, ',', '')}}€</p>
+                        @endif
+                        @if ($valorDivida != 0)
+                        <p class="text-truncate" style="color:#FF3D00;">{{number_format((float)$valorDivida, 2, ',', '')}}€</p>
                         @endif
                         <p class="text-truncate">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</p>
                     </div>
@@ -149,6 +165,7 @@
                 </div>
             </a>
             @endforeach
+            @endif
         </div>
     </div>
 </div>
