@@ -33,11 +33,11 @@
             <br>
             <p>Está neste momento a editar o produto stock <b>{{$produtostock->descricao}}</b>.</p>
 
-            <form method="POST" action="{{route('produtostock.update',$produtostock)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="POST" action="{{route('fasestock.update',$fasestock)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
-                @include('produtostock.partials.add-edit')
+                @include('fasestock.partials.add-edit')
                 <div class="form-group text-right">
                     <br><br>
                     <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>

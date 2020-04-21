@@ -63,6 +63,7 @@
                     </div>
                 </div>
             </a>
+
             <div class="custom-cm" id="contextMenu">
                 <div class="custom-cm-item">
                     <a href="{{route('conta.edit', $contum)}}">Editar</a>
@@ -73,11 +74,11 @@
                 <div class="custom-cm-divider"></div>
                 <div class="custom-cm-item">Cancelar</div>
             </div>
+
             @endforeach
         </div>
     </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
@@ -94,26 +95,17 @@
                     @csrf
                     @method('DELETE')
                     <p id="text"></p>
+                    <br>
+                    <p style="font-weight:500;">Ao clicar "Sim, eliminar conta", irá eliminar a conta para definitivamente e perder todos os dados associados.</p>
                     <input type="hidden" id="conta_delete_id" name="id">
+                  </div>
                     <div class="modal-footer">
                         <button class="top-button btn_submit bg-danger" type="submit"><i class="far fa-trash-alt mr-2"></i>Sim, eliminar conta</button>
                         <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
-            </div>
         </div>
     </div>
-</div>
-
-<div class="custom-cm" id="contextMenu">
-    <div class="custom-cm-item">
-        <p onclick="getFile()">Editar</p>
-    </div>
-    <div class="custom-cm-item">
-        <p onclick="removeFile()">Remover</p>
-    </div>
-    <div class="custom-cm-divider"></div>
-    <div class="custom-cm-item">Cancelar</div>
 </div>
 
 @section('scripts')
