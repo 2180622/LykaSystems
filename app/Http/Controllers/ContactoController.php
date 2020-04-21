@@ -92,10 +92,10 @@ class ContactoController extends Controller
      * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function show(contacto $contact)
+    public function show(contacto $contact, Universidade $university=null)
     {
 
-        return view('contacts.show',compact("contact"));
+        return view('contacts.show',compact('contact','university'));
     }
 
     /**
@@ -104,9 +104,9 @@ class ContactoController extends Controller
      * @param  \App\contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function edit(contacto $contact)
+    public function edit(contacto $contact, Universidade $university=null)
     {
-        return view('contacts.edit', compact('contact'));
+        return view('contacts.edit', compact('contact','university'));
     }
 
     /**
@@ -138,8 +138,14 @@ class ContactoController extends Controller
 
         $contact->save();
 
+        if($request->idUniversidade!=null){
+            return redirect()->route('universities.show',$request->idUniversidade)->with('success', 'Novo contacto criado com sucesso');
 
-         return redirect()->route('contacts.index')->with('success', 'Dados do contcto modificados com sucesso');
+        }else{
+            return redirect()->route('contacts.index',$contact)->with('success', 'Novo contacto criado com sucesso');
+        }
+
+
     }
 
     /**
@@ -151,6 +157,6 @@ class ContactoController extends Controller
     public function destroy(contacto $contact)
     {
         $contact->delete();
-        return redirect()->route('contacts.index')->with('success', 'Contacto eliminado com sucesso');
+        return back()->with('success', 'Contacto eliminado com sucesso');
     }
 }
