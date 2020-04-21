@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ea50824c-a77c-4bcf-b859-2fc48e391a13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AgendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AgendController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/agends.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/agends.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/agends/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/agends/list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/agends/partials/modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/agends/partials/modal.blade.php" afterDir="false" />
     </list>
@@ -216,6 +218,8 @@
       <workItem from="1587216318087" duration="4267000" />
       <workItem from="1587224166898" duration="10714000" />
       <workItem from="1587387118492" duration="9147000" />
+      <workItem from="1587465989381" duration="1386000" />
+      <workItem from="1587480941987" duration="2259000" />
     </task>
     <servers />
   </component>

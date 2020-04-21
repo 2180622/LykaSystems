@@ -6,7 +6,8 @@
             <div class="col">
                 {{-- INPUT descricao fasestock --}}
                 <label for="">Descrição (FaseStock):</label><br>
-                <input type="text" class="form-control" name="descricao" id="descricaofase"required><br>
+                <input type="text" class="form-control" name="descricao"
+                    value="{{old('descricao',$fasestock->descricao)}}" id="descricaofase"required><br>
             </div>
           </div>
       </div>

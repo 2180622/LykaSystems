@@ -85,14 +85,18 @@
                     <input type="text" name="contacto" placeholder="Inserir um contacto da instituição" autocomplete="off" value="{{$contum->contacto}}" disabled>
                 </div>
             </div>
+            @if ($contum->obsConta == null)
+            <br>
+            @else
             <br><br>
             <div class="row">
                 <div class="col">
                     <label for="obsConta">Observações da conta</label>
                     <br>
-                    <textarea name="obsConta" rows="5" placeholder="@if($contum->obsConta == null) Nada a apresentar. @else {{$contum->obsConta}} @endif" disabled></textarea>
+                    <textarea name="obsConta" rows="5" placeholder="{{$contum->obsConta}}" disabled></textarea>
                 </div>
             </div>
+            @endif
         </div>
         <br>
     </div>

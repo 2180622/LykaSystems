@@ -100,6 +100,19 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Conta */
     Route::resource('/conta', 'ContaController');
+
+    /* Fonecedores */
+    Route::resource('/fornecedores', 'ProviderController')->parameters([
+      'fornecedores' => 'provider'
+    ])->names([
+      'index' => 'provider.index',
+      'store' => 'provider.store',
+      'create' => 'provider.create',
+      'show' => 'provider.show',
+      'update' => 'provider.update',
+      'destroy' => 'provider.destroy',
+      'edit' => 'provider.edit',
+    ]);
 });
 
 /* Email Confirmation */

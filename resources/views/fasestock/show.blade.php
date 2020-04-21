@@ -56,22 +56,36 @@
                             <th>Número de Documentos</th>
                             <th>Tipo</th>
                             <th>Documento</th>
+                            <th class="text-center">Opções</th>
                         </tr>
                     </thead>
                     {{-- Corpo da tabela --}}
                     <tbody>
-                        @foreach ($docStocks as $docStock)
+                        @foreach ($docstocks as $docstock)
                         <tr>
                             {{-- Número de Documentos --}}
-                            <td><a class="name_link" href="/fasestock/{{$fasestock->idFaseStock}}/{{$docStock->idDocStock}}">{{$nrDocs++}}</a></td>
+                            <td><a class="name_link" href="/documentostock/{{$docstock->idDocStock}}">{{$nrDocs++}}</a></td>
                             {{-- Tipo --}}
-                            <td>{{$docStock->tipo}}</td>
+                            <td>{{$docstock->tipo}}</td>
                             {{-- Documento --}}
-                            @if ($docStock->tipoPessoal == null)
-                              <td>{{$docStock->tipoAcademico}}</td>
+                            @if ($docstock->tipoPessoal == null)
+                              <td>{{$docstock->tipoAcademico}}</td>
                             @else
-                              <td>{{$docStock->tipoPessoal}}</td>
+                              <td>{{$docstock->tipoPessoal}}</td>
                             @endif
+                            {{-- OPÇÔES --}}
+                            <td class="text-center align-middle">
+                                <a href="{{route('fasestock.show',$fasestock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="{{route('documentostock.edit', $docstock)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                                <form method="POST" role="form" id="{{ $docstock->idDocStock }}"
+                                    action="{{route('documentostock.destroy',$docstock)}}" class="d-inline-block form_client_id">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
+                                        data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -95,7 +109,6 @@
                                       <div class="" id="tipoacademico">
                                         <label for="">Documento Academico</label>
                                         <select class="form-control" name="tipoAcademico">
-                                          <option value=NULL>...</option>
                                           <option value="Exame Universitário">Exame Universitário</option>
                                           <option value="Exame Nacional">Exame Nacional</option>
                                           <option value="Diploma">Diploma</option>
@@ -106,7 +119,6 @@
                                       <div class="" id="tipopessoal">
                                         <label for="">Documento Pessoal</label>
                                         <select class="form-control" name="tipoPessoal">
-                                          <option value=NULL>...</option>
                                           <option value="Passaport">Passaport</option>
                                           <option value="Cartão Cidadão">Cartão de Cidadão</option>
                                           <option value="Carta Condução">Carta de Condução</option>

@@ -117,8 +117,11 @@ class AgendController extends Controller
      * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Agenda $agenda)
+    public function destroy($id)
     {
-        //
+        $agenda = Agenda::find($id);
+        $agenda->delete();
+
+        return redirect('agends')->with('success', 'Evento Eliminado');
     }
 }

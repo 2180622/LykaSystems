@@ -258,9 +258,10 @@ class DataController extends Controller
         /*****************          Fornecedores          ******************/
 
         $fornecedor = new Fornecedor;
-        $fornecedor->nome = 'Taxi';
-        $fornecedor->morada = 'Leiria';
-        $fornecedor->descricao = 'Taxista???';
+        $fornecedor->nome = 'Táxi';
+        $fornecedor->morada = 'Rua Leiria, Leiria';
+        $fornecedor->descricao = 'Taxista Dinis';
+        $fornecedor->contacto = '244 025 968';
         $fornecedor->save();
 
         /****************          Produtos Stock          *****************/
