@@ -93,12 +93,12 @@
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">
                             @if($product->cliente->fotografia)
-                              <img src="{{Storage::disk('public')->url('client-documents/'.$product->cliente->idCliente.$product->cliente->nome.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
-                            @elseif($product->cliente->genero == 'F')
-                              <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                            @else
-                              <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                            @endif
+                                <img src="{{Storage::disk('public')->url('client-documents/'.$product->cliente->idCliente.$product->cliente->nome.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
+                                @elseif($product->cliente->genero == 'F')
+                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
+                                    @else
+                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                                    @endif
                         </div>
                     </div>
                     <div class="col-md-3 text-truncate align-self-center ml-4">
@@ -109,17 +109,17 @@
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
                         <?php
+                          $valor = 0;
                           foreach ($product->fase as $fase) {
-                            $valor = 0;
                             if (count($fase->DocTransacao)) {
                               foreach ($fase->DocTransacao as $document) {
-                                $valor = $document->valorRecebido;
+                                $valor = $valor + $document->valorRecebido;
                               }
                             }
                           }
                       ?>
                         @if ($valor != 0)
-                          <p class="text-truncate" style="color:#47BC00;">{{number_format((float)$valor, 2, ',', '')}}€</p>
+                        <p class="text-truncate" style="color:#47BC00;">{{number_format((float)$valor, 2, ',', '')}}€</p>
                         @endif
                         <p class="text-truncate">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</p>
                     </div>
