@@ -62,7 +62,7 @@ $(document).ready(function () {
         /* OPÇÃO DE APAGAR */
         var formToSubmit //Variavel para indicar o forumulário a submeter
 
-        $(".form_client_id").submit(function (e) {
+        $(".form_contact_id").submit(function (e) {
             e.preventDefault();
             formToSubmit = this;
             $("#contact_name").text($(this).attr("data"));

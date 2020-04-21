@@ -1,18 +1,19 @@
-
 {{-- SE FOR PARA CRIAR UM CONTACTO PARA A UNIVERISADE --}}
 
-@if  ( isset($university) )
-    <div class="row mb-3" style="color:#6A74C9">
-        <div class="col" >
-            <i class="fas fa-university mr-1" style="color:#000000"></i>
-            <strong>
-                <span style="color:#000000">Associado à universidade:<span style="color:#6A74C9"> {{$university ?? '' ?? '' ?? ''->nome}}</span></span>
-                <input type="hidden" id="idUniversidade" name="idUniversidade" value="{{$university ?? '' ?? '' ?? ''->idUniversidade}}">
-            </strong>
-        </div>
+@if ( isset($university) )
+<div class="row mb-4" style="color:#6A74C9">
+    <div class="col p-3 mx-2 border bg-light rounded ">
+        <i class="fas fa-university mr-1" style="color:#000000"></i>
+
+            <span style="color:#000000">Associado à universidade:
+                <strong><span style="color:#6A74C9">{{$university->nome}}</span></strong>
+            </span>
+            <input type="hidden" id="idUniversidade" name="idUniversidade" value="{{$university ->idUniversidade}}">
 
     </div>
-    <hr>
+
+</div>
+
 @endif
 
 
@@ -23,8 +24,7 @@
     {{-- Inputs --}}
     <div class="col">
         <label for="nome">Nome:</label><br>
-        <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$contact->nome)}}"
-            required>
+        <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$contact->nome)}}" required>
         <div class="invalid-feedback">O nome é necessário</div>
         <br>
 
@@ -32,30 +32,34 @@
             <div class="col mr-2">
                 <label for="telefone1">Telefone (principal):</label><br>
                 <input type="text" class="form-control" name="telefone1" id="telefone1"
-                    value="{{old('telefone1',$contact->telefone1)}}" >
+                    value="{{old('telefone1',$contact->telefone1)}}">
             </div>
             <div class="col">
                 <label for="telefone2">Telefone (alternativo):</label><br>
                 <input type="text" class="form-control" name="telefone2" id="telefone2"
-                    value="{{old('telefone2',$contact->telefone2)}}" >
+                    value="{{old('telefone2',$contact->telefone2)}}">
             </div>
         </div>
 
-        <label for="fax">Fax:</label><br>
-        <input type="text" class="form-control" name="fax" id="fax" value="{{old('fax',$contact->fax)}}" ><br>
+        <div class="row">
+            <div class="col mr-2">
+                <label for="email">E-mail:</label><br>
+                <input type="email" class="form-control" name="email" id="email" value="{{old('email',$contact->email)}}">
+            </div>
+            <div class="col ">
+                <label for="fax">Fax:</label><br>
+                <input type="text" class="form-control" name="fax" id="fax" value="{{old('fax',$contact->fax)}}">
+            </div>
+        </div>
 
-        <label for="email">E-mail:</label><br>
-        <input type="email" class="form-control" name="email" id="email" value="{{old('email',$contact->email)}}"><br>
+        <br><br>
 
-        @if  ( !isset($university) )
-            <i class="fas fa-star text-warning mr-2"></i><label for="favorito">Marcar como "favorito": </label>
-                <select id="favorito" name="favorito" class="custom-select ml-2" style="width:120px">
-                <option {{old('favorito',$contact->favorito)=='0'?"selected":""}} value="0" selected>Não</option>
-                <option {{old('favorito',$contact->favorito)=='1'?"selected":""}} value="1">Sim</option>
-            </select>
-        @else
-            <input type="hidden" id="favorito" name="favorito" value="0">
-        @endif
+        <i class="fas fa-star text-warning mr-2"></i><label for="favorito">Marcar como "favorito": </label>
+        <select id="favorito" name="favorito" class="custom-select ml-2" style="width:120px">
+            <option {{old('favorito',$contact->favorito)=='0'?"selected":""}} value="0" selected>Não</option>
+            <option {{old('favorito',$contact->favorito)=='1'?"selected":""}} value="1">Sim</option>
+        </select>
+
 
     </div>
 
@@ -66,7 +70,7 @@
 
         <div>
             <label for="fotografia">Fotografia:</label>
-            <input type='file' id="fotografia" name="fotografia" style="display:none" accept="image/*"/>
+            <input type='file' id="fotografia" name="fotografia" style="display:none" accept="image/*" />
 
         </div>
 
@@ -89,10 +93,10 @@
 </div>
 
 
-<div class="row"  style="font-weight:bold;color:#6A74C9">
+<div class="row" style="font-weight:bold;color:#6A74C9">
     <div class="col">
-    <label for="observacao">Observações:</label><br>
-    <textarea name="observacao" id="observacao" rows="5"
-        class="form-control">{{old('observacao',$contact->observacao)}}</textarea>
+        <label for="observacao">Observações:</label><br>
+        <textarea name="observacao" id="observacao" rows="5"
+            class="form-control">{{old('observacao',$contact->observacao)}}</textarea>
     </div>
 </div>

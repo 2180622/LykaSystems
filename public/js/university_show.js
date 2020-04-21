@@ -32,7 +32,7 @@ $(document).ready(function () {
             "infoFiltered": ""
         },
 
-        "order": [1, 'desc'],
+        "order": [2, 'asc'],
 
         /* "bLengthChange": false, */
         /* "bFilter": false, */
@@ -66,12 +66,12 @@ $(document).ready(function () {
 
 
     /* OPÇÃO DE APAGAR */
-/*     var formToSubmit //Variavel para indicar o forumulário a submeter
+    var formToSubmit //Variavel para indicar o forumulário a submeter
 
-    $(".form_university_id").submit(function (e) {
+    $(".form_contact_id").submit(function (e) {
         e.preventDefault();
         formToSubmit = this;
-        $("#tituloUniversidade").text($(this).attr("data"));
+        $("#contact_name").text($(this).attr("data"));
         return false;
     });
 
@@ -80,7 +80,7 @@ $(document).ready(function () {
         formToSubmit.submit();
     });
 
- */
+
 
 
 });

@@ -406,6 +406,14 @@ class ClientController extends Controller
         $passaportInfoJSON = json_encode($passaportInfo);
         $client->info_Passaport = $passaportInfoJSON;
 
+        /* ATUALIZA PASSAPORTE NA TABELA DE DOCS PESSOAIS */
+        DB::table('DocPessoal')
+        ->where('idCliente', $client->idCliente)
+        ->where('tipo', "Passaporte")
+        ->update(['info' => $passaportInfoJSON ]);
+
+
+
         /* Imagem do passaporte */
         if ($request->hasFile('img_Passaport')) {
             $img_doc = $request->file('img_Passaport');

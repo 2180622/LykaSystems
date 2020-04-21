@@ -13,6 +13,8 @@
 {{-- Page Content --}}
 @section('content')
 
+
+
     <div class="container mt-2">
       {{-- Navegação --}}
     <div class="float-left buttons">
@@ -24,7 +26,8 @@
         </a>
     </div>
         <div class="float-right">
-            <a href="{{route('contacts.edit',$contact)}}" class="top-button mr-2">Editar informação</a>
+            <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
+            <a href="{{route('contacts.edit',[$contact,$university])}}" class="top-button mr-2">Editar informação</a>
         </div>
 
         <br><br>
@@ -56,6 +59,21 @@
                 </div>
 
                 <div class="col p-2">
+
+                    {{-- SE O CONTACTOS ESTIVER ASSOCIASDO À UNIVERISADE --}}
+                    @if ( isset($university) )
+                    <div class="row mb-3 mr-2">
+                        <div class="col p-3 mx-2 border bg-light rounded ">
+                            <i class="fas fa-university mr-1"></i>
+                                <span class="text-muted">Associado à universidade:<span style="color:#6A74C9">
+                                        {{$university->nome}}</span></span>
+                                <input type="hidden" id="idUniversidade" name="idUniversidade" value="{{$university ->idUniversidade}}">
+                        </div>
+
+                    </div>
+
+                    @endif
+
 
                     <div class="row">
                         <div class="col">
