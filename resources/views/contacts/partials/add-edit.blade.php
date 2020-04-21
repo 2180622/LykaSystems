@@ -41,12 +41,18 @@
             </div>
         </div>
 
-        <label for="fax">Fax:</label><br>
-        <input type="text" class="form-control" name="fax" id="fax" value="{{old('fax',$contact->fax)}}"><br>
+        <div class="row">
+            <div class="col mr-2">
+                <label for="email">E-mail:</label><br>
+                <input type="email" class="form-control" name="email" id="email" value="{{old('email',$contact->email)}}">
+            </div>
+            <div class="col ">
+                <label for="fax">Fax:</label><br>
+                <input type="text" class="form-control" name="fax" id="fax" value="{{old('fax',$contact->fax)}}">
+            </div>
+        </div>
 
-        <label for="email">E-mail:</label><br>
-        <input type="email" class="form-control" name="email" id="email" value="{{old('email',$contact->email)}}"><br>
-
+        <br><br>
 
         <i class="fas fa-star text-warning mr-2"></i><label for="favorito">Marcar como "favorito": </label>
         <select id="favorito" name="favorito" class="custom-select ml-2" style="width:120px">
