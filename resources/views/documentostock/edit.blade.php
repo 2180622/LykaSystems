@@ -31,13 +31,19 @@
                 <h6>Editar informações</h6>
             </div>
             <br>
-            <p>Está neste momento a editar a fase stock - <b>{{$fasestock->descricao}}</b>.</p>
+            <p>Está neste momento a editar o Documento Stock - <b>{{$docstock->tipo}}
+              @if ($docstock->tipoPessoal == null)
+                <td>{{$docstock->tipoAcademico}}</td>
+              @else
+                <td>{{$docstock->tipoPessoal}}</td>
+              @endif
+            </b>.</p>
 
-            <form method="POST" action="{{route('fasestock.update',$fasestock)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="POST" action="{{route('documentostock.update',$docstock)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
-                @include('fasestock.partials.add-edit')
+                @include('documentostock.partials.add-edit')
                 <div class="form-group text-right">
                     <br><br>
                     <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>

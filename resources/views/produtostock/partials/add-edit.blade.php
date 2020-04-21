@@ -28,7 +28,7 @@
                {{-- INPUT Descrição --}}
                <label for="nome">Descrição (ProdutoStock):</label><br>
                <input type="text" class="form-control" name="descricao" id="descricao"
-               value="{{old('descricao',$produtostock->descricao)}}" required><br>
+                  value="{{old('descricao',$produtostock->descricao)}}" required><br>
             </div>
           </div>
       </div>

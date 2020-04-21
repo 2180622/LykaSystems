@@ -61,4 +61,10 @@ class ProdutosstockController extends Controller
         $faseStocks = FaseStock::where('idProdutoStock', '=', $produtostock->idProdutoStock)->get();
         return view('produtostock.show', compact('produtostock', 'faseStocks', 'nrfases'));
     }
+
+    public function destroy(ProdutoStock $produtostock){
+        $produtostock->delete();
+        
+        return redirect()->route('produtostock.index')->with('success', 'Produto stock eliminado com sucesso');
+    }
 }

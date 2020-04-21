@@ -55,6 +55,7 @@
                         <tr>
                             <th>Número de Fases</th>
                             <th>Descrição</th>
+                            <th class="text-center">Opções</th>
                         </tr>
                     </thead>
                     {{-- Corpo da tabela --}}
@@ -65,6 +66,19 @@
                             <td><a class="name_link" href="/fasestock/{{$faseStock->idFaseStock}}">{{$nrfases++}}</a></td>
                             {{-- Descrição --}}
                             <td>{{$faseStock->descricao}}</td>
+                            {{-- OPÇÔES --}}
+                            <td class="text-center align-middle">
+                                <a href="{{route('fasestock.show',$faseStock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="{{route('fasestock.edit', $faseStock)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                                <form method="POST" role="form" id="{{ $faseStock->idFaseStock }}"
+                                    action="{{route('fasestock.destroy',$faseStock)}}" class="d-inline-block form_client_id">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
+                                        data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
