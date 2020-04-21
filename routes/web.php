@@ -27,7 +27,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::delete('/contacts/{contact}', 'ContactoController@destroy')->name('contacts.destroy'); */
 
     Route::get('/contacts/new/{university?}', 'ContactoController@create')->name('contacts.create');
-    Route::resource('/contacts', 'ContactoController')->only(['index','destroy', 'update','show','edit','store']);
+    Route::get('/contacts/show/{contact}/{university?}', 'ContactoController@show')->name('contacts.show');
+    Route::get('/contacts/edit/{contact}/{university?}', 'ContactoController@edit')->name('contacts.edit');
+    Route::resource('/contacts', 'ContactoController')->only(['index','destroy', 'update','store']);
 
 
 
