@@ -5,7 +5,7 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-  <link href="{{asset('/css/charges.css')}}" rel="stylesheet">
+<link href="{{asset('/css/conta.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteúdo da Página --}}
@@ -45,7 +45,7 @@
         <br>
         <div class="container">
             @foreach ($contums as $contum)
-            <a href="{{route('conta.show', $contum)}}">
+            <a href="{{route('conta.show', $contum)}}" oncontextmenu="return showContextMenu();">
                 <div class="row charge-div">
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">
@@ -55,18 +55,24 @@
                     <div class="col-md-3 text-truncate align-self-center ml-4">
                         <p class="text-truncate" title="{{$contum->descricao}}">{{$contum->descricao}}</p>
                     </div>
-                    <div class="col-md-2 align-self-center">
+                    <div class="col-md-4 align-self-center">
                         <p class="text-truncate" title="{{$contum->instituicao}}">{{$contum->instituicao}}</p>
                     </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
+                    <div class="col-md-3 text-truncate align-self-center ml-auto">
                         <p class="text-truncate" title="{{$contum->contacto}}">{{$contum->contacto}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        {{-- <a href="{{route('conta.edit', $contum)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a> --}}
-                        {{-- <button class="btn_delete" data-toggle="modal" data-target="#deleteModal" data-name="{{$contum->descricao}}" data-id="{{$contum->idConta}}"><i class="fas fa-trash-alt"></i></button> --}}
                     </div>
                 </div>
             </a>
+            <div class="custom-cm" id="contextMenu">
+                <div class="custom-cm-item">
+                    <a href="{{route('conta.edit', $contum)}}">Editar</a>
+                </div>
+                <div class="custom-cm-item">
+                    <p data-toggle="modal" data-target="#deleteModal" data-name="{{$contum->descricao}}" data-id="{{$contum->idConta}}">Remover</p>
+                </div>
+                <div class="custom-cm-divider"></div>
+                <div class="custom-cm-item">Cancelar</div>
+            </div>
             @endforeach
         </div>
     </div>
@@ -99,6 +105,17 @@
     </div>
 </div>
 
+<div class="custom-cm" id="contextMenu">
+    <div class="custom-cm-item">
+        <p onclick="getFile()">Editar</p>
+    </div>
+    <div class="custom-cm-item">
+        <p onclick="removeFile()">Remover</p>
+    </div>
+    <div class="custom-cm-divider"></div>
+    <div class="custom-cm-item">Cancelar</div>
+</div>
+
 @section('scripts')
 <script type="text/javascript">
     $('#deleteModal').on('show.bs.modal', function(event) {
@@ -108,7 +125,22 @@
         modal.find('#text').text('Pretende eliminar a conta bancária ' + name + '?');
         modal.find('#conta_delete_id').val(button.data('id'));
         modal.find("form").attr('action', '/conta/' + button.data('id'));
-    })
+    });
+
+    // Context Menu
+    window.onclick = hideContextMenu;
+    var contextMenu = document.getElementById("contextMenu");
+
+    function showContextMenu() {
+        contextMenu.style.display = "inline-block";
+        contextMenu.style.left = event.clientX - '260' + 'px';
+        contextMenu.style.top = event.clientY + 'px';
+        return false;
+    }
+
+    function hideContextMenu() {
+        contextMenu.style.display = "none";
+    }
 </script>
 @endsection
 
