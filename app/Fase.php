@@ -16,7 +16,7 @@ class Fase extends Model
     protected $primaryKey = 'idFase';
 
     protected $fillable = [
-        'descricao','dataVencimento','valorFase','verificacaoPago','$idProduto','$idFaseStock','$idResponsabilidade'
+        'descricao', 'dataVencimento', 'valorFase', 'verificacaoPago', 'icon', 'estado', '$idProduto', '$idFaseStock', '$idResponsabilidade'
         ];
 
     public function produto(){

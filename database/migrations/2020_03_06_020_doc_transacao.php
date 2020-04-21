@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class DocTransacao extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('DocTransacao', function (Blueprint $table) {
@@ -25,20 +20,15 @@ class DocTransacao extends Migration
             $table->text('observacoes')->nullable();
             $table->string('comprovativoPagamento',255)->nullable();
             $table->boolean('verificacao')->default(false);
-            $table->timestamps();
+            $table->string('slug')->nullable();
             $table->unsignedBigInteger('idConta');
                 $table->foreign('idConta')->references('idConta')->on('Conta');
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
-            $table->string('slug')->nullable();
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('DocTransacao');

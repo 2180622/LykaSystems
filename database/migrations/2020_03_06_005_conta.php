@@ -21,9 +21,9 @@ class Conta extends Migration
             $table->string('SWIFT',255)->nullable()->unique();
             $table->string('contacto')->nullable();
             $table->longText('obsConta')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('slug')->nullable();
         });
     }
 
