@@ -17,14 +17,15 @@ class Fase extends Migration
             $table->decimal('valorFase', 18, 2);
             $table->boolean('verificacaoPago')->default(false);
             $table->string('icon', 100)->nullable();
+            $table->enum('estado', ['Pendente', 'Pago', 'Dívida', 'Crédito'])->default('Pendente');
+            $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('idProduto');
                 $table->foreign('idProduto')->references('idProduto')->on('Produto');
             $table->unsignedBigInteger('idFaseStock');
                 $table->foreign('idFaseStock')->references('idFaseStock')->on('FaseStock');
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
-            $table->timestamps();
-            $table->softDeletes();
             $table->string('slug')->nullable();
             });
     }

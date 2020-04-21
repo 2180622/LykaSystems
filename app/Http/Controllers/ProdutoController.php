@@ -10,6 +10,7 @@ use App\Produto;
 use App\ProdutoStock;
 use App\Responsabilidade;
 use App\Universidade;
+use App\RelFornResp;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -44,8 +45,11 @@ class ProdutoController extends Controller
         $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
         $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
         $Universidades = Universidade::all();
+        $Fornecedores = Fornecedor::all();
         $Fases=null;
         $Responsabilidades = null;
+        $relacao = new RelFornResp;
+        $relacao->valor=0;
 
         for($i=0;$i<20;$i++){
             $Fases[] = new Fase;
@@ -58,7 +62,7 @@ class ProdutoController extends Controller
             $Responsabilidades[] = $responsabilidade;
         }
 
-        return view('produtos.add',compact('produto','produtoStock','cliente','Agentes','SubAgentes','Universidades','Fases','Responsabilidades'));
+        return view('produtos.add',compact('produto','produtoStock','cliente','Agentes','SubAgentes','Universidades','Fases','Responsabilidades','Fornecedores','relacao'));
     }
 
 
@@ -83,6 +87,8 @@ class ProdutoController extends Controller
         $produto->idSubAgente = $fields['subagente'];
         $produto->idUniversidade1 = $fields['uni1'];
         $produto->idUniversidade2 = $fields['uni2'];
+        $produto->valorTotal = 0;
+        $produto->valorTotalAgente = 0;
 
         $t=time();
         $produto->create_at == date("Y-m-d",$t);
@@ -96,6 +102,7 @@ class ProdutoController extends Controller
             if($fields['descricao-fase'.$i]!=null){
                 $fase = new Fase;
                 $responsabilidade = new Responsabilidade;
+                $valorRelacoes = 0;
                 $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
                 $responsabilidade->valorAgente = $fields['resp-agente-fase'.$i];
                 if($produto->idSubAgente){
@@ -116,11 +123,27 @@ class ProdutoController extends Controller
                 $responsabilidade->verificacaoPagoUni2 = false;
                 $responsabilidade->save();
                 
+                for($numF=1;$numF<=500;$numF++){
+                    if(array_key_exists("fornecedor".$numF."-fase".$i, $fields)){
+                        if($fields["fornecedor".$numF."-fase".$i]){
+                            $relacao = new RelFornResp;
+                            $relacao->idFornecedor = $fields["fornecedor".$numF."-fase".$i];
+                            $relacao->idResponsabilidade = $responsabilidade->idResponsabilidade;
+                            $relacao->valor = $fields["valor-fornecedor".$numF."-fase".$i];
+                            $relacao->create_at == date("Y-m-d",$t);
+                            $relacao->save();
+
+                            $valorRelacoes = $valorRelacoes + $relacao->valor;
+                        }
+                    }else{
+                        break;
+                    }
+                }
 
                 $fase->descricao = $fields['descricao-fase'.$i];
                 $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$i]));
                 $fase->idFaseStock = $fields['fase-idStock'.$i];
-                $fase->valorFase = $responsabilidade->valorCliente + $responsabilidade->valorAgente + 
+                $fase->valorFase = $valorRelacoes + $responsabilidade->valorCliente + $responsabilidade->valorAgente + 
                     $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 +$responsabilidade->valorUniversidade2;
                 $fase->create_at == date("Y-m-d",$t);
                 $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
