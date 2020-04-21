@@ -23,6 +23,7 @@ class Produto extends Migration
             $table->decimal('valorTotal', 18, 2);
             $table->decimal('valorTotalAgente', 18, 2);
             $table->decimal('valorTotalSubAgente', 18, 2)->nullable();
+            $table->enum('estado', ['Pendente', 'Pago', 'Dívida', 'Crédito'])->default('Pendente');
             $table->timestamps();
             $table->unsignedBigInteger('idAgente');
                 $table->foreign('idAgente')->references('idAgente')->on('Agente');

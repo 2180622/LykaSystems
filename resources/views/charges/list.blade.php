@@ -47,39 +47,39 @@
         <div class="row cards-group mt-3">
             <div class="col-md-4">
                 <div class="card-navigation">
-                    <div class="help-button" id="tooltipClient" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de clientes registados no sistema.">
+                    <div class="help-button" id="tooltipClient" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de fases pendentes registados no sistema.">
                         <span>
                             ?
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number">98</p>
+                        <p class="number">{{count($fasesPendentes)}}</p>
                         <p class="word">fases pendentes</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card-navigation">
-                    <div class="help-button" id="tooltipUni" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de universidades registadas no sistema.">
+                    <div class="help-button" id="tooltipUni" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de fases pagas registadas no sistema.">
                         <span>
                             ?
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number" style="color:#47BC00;">52</p>
+                        <p class="number" style="color:#47BC00;">{{count($fasesPagas)}}</p>
                         <p class="word">fases pagas</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card-navigation">
-                    <div class="help-button" id="tooltipAgent" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de agentes registados no sistema.">
+                    <div class="help-button" id="tooltipAgent" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número de fases em dívida registados no sistema.">
                         <span>
                             ?
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number" style="color:#FF3D00;">25</p>
+                        <p class="number" style="color:#FF3D00;">{{count($fasesDivida)}}</p>
                         <p class="word">fases em dívida</p>
                     </div>
                 </div>
@@ -92,13 +92,13 @@
                 <div class="row charge-div">
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">
-                          @if($product->cliente->fotografia)
-                              <img src="{{Storage::disk('public')->url('client-documents/'.$product->cliente->idCliente.$product->cliente->nome.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
-                              @elseif($product->cliente->genero == 'F')
-                                  <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                  @else
-                                  <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                  @endif
+                            @if($product->cliente->fotografia)
+                                <img src="{{Storage::disk('public')->url('client-documents/'.$product->cliente->idCliente.$product->cliente->nome.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
+                                @elseif($product->cliente->genero == 'F')
+                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
+                                    @else
+                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                                    @endif
                         </div>
                     </div>
                     <div class="col-md-3 text-truncate align-self-center ml-4">
@@ -111,7 +111,27 @@
                         <p class="text-truncate">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</p>
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate">Pendente</p>
+                        <p class="text-truncate">
+                            @php
+                            switch ($product->estado) {
+                              case 'Pendente':
+                              printf('Pendente');
+                              break;
+
+                              case 'Pago':
+                              printf('Pago');
+                              break;
+
+                              case 'Dívida':
+                              printf('Dívida');
+                              break;
+
+                              case 'Crédito':
+                              printf('Crédito');
+                              break;
+                            }
+                            @endphp
+                        </p>
                     </div>
                 </div>
             </a>

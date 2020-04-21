@@ -16,10 +16,12 @@ class ChargesController extends Controller
 {
     public function index()
     {
-      // $fases = Fase::all();
       $products = Produto::all();
+      $fasesPendentes = Fase::where('estado', '=', 'Pendente')->get();
+      $fasesPagas = Fase::where('estado', '=', 'Pago')->get();
+      $fasesDivida = Fase::where('estado', '=', 'Dívida')->get();
       $numberProducts = Produto::where('valorTotal', '!=', '0')->get();
-      return view('charges.list', compact('products', 'numberProducts'));
+      return view('charges.list', compact('products', 'numberProducts', 'fasesPendentes', 'fasesPagas', 'fasesDivida'));
     }
 
     public function show(DocTransacao $docTrasancao, Fase $fase, Produto $product)
