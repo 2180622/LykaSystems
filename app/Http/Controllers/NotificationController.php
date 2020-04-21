@@ -102,7 +102,7 @@ class NotificationController extends Controller
                     $DataHoje = new DateTime();
                     $diff = (date_diff($dataVenc,$DataHoje))->format("%R%a");
                     $Descricao = $Descricao.'\n - '.$cliente->nome.' '.$cliente->apelido.' -> '.(new DateTime($fase->dataVencimento))->format('d/m/Y');
-                    if($diff <= 0){
+                    if($diff >= 0){
                         $urgencia = true;
                     }
                 }

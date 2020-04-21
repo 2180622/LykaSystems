@@ -216,9 +216,10 @@ class ProdutoController extends Controller
         $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
         $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
         $Universidades = Universidade::all();
+        $relacao = new RelFornResp;
         $fases = $produto->fase;
 
-        return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores'));
+        return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores','relacao'));
     }
 
 
@@ -286,9 +287,11 @@ class ProdutoController extends Controller
             if($relacoes->toArray()){
                 foreach($relacoes as $relacao){
                     $existe = false;
-                    for($i=0;$i<=1000;$i++){
-                        if(array_key_exists("fornecedor".$numF."-fase".$i, $fields)){
-                            if($fields["fornecedor".$numF."-fase".$i]==$relacao->idFornecedor){
+                    for($i=1;$i<=10000;$i++){
+                        if(array_key_exists("fornecedor".$i."-fase".$fase->idFase, $fields)){
+                            if($fields["fornecedor".$i."-fase".$fase->idFase]==$relacao->idFornecedor){
+                                $relacao->valor = $fields["valor-fornecedor".$i."-fase".$fase->idFase];
+                                $relacao->save();
                                 $existe = true;
                             }
                         }else{
@@ -301,22 +304,22 @@ class ProdutoController extends Controller
                 }
             }
 
-            for($i=0;$i<=1000;$i++){
-                if(array_key_exists("fornecedor".$numF."-fase".$i, $fields)){
-                    if($fields["fornecedor".$numF."-fase".$i]){
+            for($i=1;$i<=10000;$i++){
+                if(array_key_exists("fornecedor".$i."-fase".$fase->idFase, $fields)){
+                    if($fields["fornecedor".$i."-fase".$fase->idFase]){
                         $existe = false;
                         if($relacoes->toArray()){
                             foreach($relacoes as $relacao){
-                                if($fields["fornecedor".$numF."-fase".$i]==$relacao->idFornecedor){
+                                if($fields["fornecedor".$i."-fase".$fase->idFase]==$relacao->idFornecedor){
                                     $existe = true;
                                 }
                             }
                         }
                         if(!$existe){
                             $relacao = new RelFornResp;
-                            $relacao->idFornecedor = $fields["fornecedor".$numF."-fase".$i];
+                            $relacao->idFornecedor = $fields["fornecedor".$i."-fase".$fase->idFase];
                             $relacao->idResponsabilidade = $responsabilidade->idResponsabilidade;
-                            $relacao->valor = $fields["valor-fornecedor".$numF."-fase".$i];
+                            $relacao->valor = $fields["valor-fornecedor".$i."-fase".$fase->idFase];
                             $relacao->create_at == date("Y-m-d",$t);
                             $relacao->save();
 

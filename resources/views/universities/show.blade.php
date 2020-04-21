@@ -113,21 +113,25 @@
                 aria-controls="estudante" aria-selected="false">Estudantes</a>
         </li>
 
-        {{-- MENU: Observações --}}
-        <li class="nav-item text-center" style="width:20%; min-width:144px">
-            <a class="nav-link" id="obsevacoes-tab" data-toggle="tab" href="#obsevacoes" role="tab"
-                aria-controls="obsevacao" aria-selected="false">Observações</a>
-        </li>
-
         {{-- MENU: Contactos --}}
         <li class="nav-item text-center" style="width:20%; min-width:144px">
             <a class="nav-link" id="contactos-tab" data-toggle="tab" href="#contactos" role="tab"
                 aria-controls="contacto" aria-selected="false">Contactos</a>
         </li>
 
+        {{-- MENU: Observações --}}
+        <li class="nav-item text-center" style="width:20%; min-width:144px">
+            <a class="nav-link" id="obsevacoes-tab" data-toggle="tab" href="#obsevacoes" role="tab"
+                aria-controls="obsevacao" aria-selected="false">Observações</a>
+        </li>
+
     </ul>
 
 
+
+
+
+    
 
     <div class="tab-content p-2 " id="myTabContent">
 
@@ -199,6 +203,12 @@
             @endif
 
         </div>
+
+
+
+
+
+
 
 
 
@@ -288,6 +298,116 @@
 
 
 
+
+
+
+
+
+        {{-- Conteudo: LISTA DE ESTUDANTES --}}
+        <div class="tab-pane fade show text-muted" id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
+
+            @if($clients!=null)
+                <div class="row mt-3 mb-4">
+                    <div class="col">
+                        <span class="mr-2">Mostrar</span>
+                        <select class="custom-select" id="records_per_page" style="width:80px">
+                            <option selected>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                        <span class="ml-2">por página</span>
+                    </div>
+                    <div class="col ">
+                        <div class="input-group pl-0 float-right" style="width:250px">
+                            <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox"
+                                placeholder="Procurar" aria-label="Procurar">
+                            <div class="input-group-append">
+                                <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey"
+                                        aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+
+                <div class="table-responsive " style="overflow:hidden">
+
+
+                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                        style="overflow:hidden;">
+
+                        {{-- Cabeçalho da tabela --}}
+                        <thead>
+                            <tr>
+                                <th class="text-center align-content-center ">Foto</th>
+                                <th>Nome</th>
+                                <th>Naturalidade</th>
+                                <th class="text-center">Opções</th>
+                            </tr>
+                        </thead>
+
+                        {{-- Corpo da tabela --}}
+                        <tbody>
+
+                            @foreach ($clients as $client)
+                            <tr>
+                                <td>
+                                    <div class="align-middle mx-auto shadow-sm rounded bg-white"
+                                        style="overflow:hidden; width:50px; height:50px">
+                                        <a class="name_link" href="{{route('clients.show',$client)}}">
+                                            @if($client->fotografia)
+                                            <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}"
+                                                width="100%" class="mx-auto">
+                                            @elseif($client->genero == 'F')
+                                            <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
+                                                class="mx-auto">
+                                            @else
+                                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
+                                                class="mx-auto">
+                                            @endif
+                                        </a>
+                                    </div>
+
+                                </td>
+
+                                {{-- Nome e Apelido --}}
+                                <td class="align-middle"><a class="name_link"
+                                        href="{{route('clients.show',$client)}}">{{ $client->nome }}
+                                        {{ $client->apelido }}</a></td>
+
+                                {{-- paisNaturalidade --}}
+                                <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+
+                                {{-- OPÇÔES --}}
+                                <td class="text-center align-middle">
+                                    <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
+                                        title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                    <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
+                                        title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                                </td>
+                            </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                    <small class="text-muted">(Ainda sem estudantes associados)</small>
+            @endif
+
+        </div>
+
+
+
+
+
+
+
+
+
         {{-- Conteudo: Observações --}}
         <div class="tab-pane fade show text-muted" id="obsevacoes" role="tabpanel" aria-labelledby="obsevacoes-tab">
             <div>
@@ -308,113 +428,6 @@
 
         </div>
 
-
-
-
-
-
-
-
-
-        {{-- Conteudo: LISTA DE ESTUDANTES --}}
-        <div class="tab-pane fade show text-muted" id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
-
-            @if($clients!=null)
-            <div class="row mt-3 mb-4">
-                <div class="col">
-                    <span class="mr-2">Mostrar</span>
-                    <select class="custom-select" id="records_per_page" style="width:80px">
-                        <option selected>10</option>
-                        <option>25</option>
-                        <option>50</option>
-                        <option>100</option>
-                    </select>
-                    <span class="ml-2">por página</span>
-                </div>
-                <div class="col ">
-                    <div class="input-group pl-0 float-right" style="width:250px">
-                        <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox"
-                            placeholder="Procurar" aria-label="Procurar">
-                        <div class="input-group-append">
-                            <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey"
-                                    aria-hidden="true"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-
-
-            <div class="table-responsive " style="overflow:hidden">
-
-
-                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                    style="overflow:hidden;">
-
-                    {{-- Cabeçalho da tabela --}}
-                    <thead>
-                        <tr>
-                            <th class="text-center align-content-center ">Foto</th>
-                            <th>Nome</th>
-                            <th>Naturalidade</th>
-                            <th class="text-center">Opções</th>
-                        </tr>
-                    </thead>
-
-                    {{-- Corpo da tabela --}}
-                    <tbody>
-
-                        @foreach ($clients as $client)
-                        <tr>
-                            <td>
-                                <div class="align-middle mx-auto shadow-sm rounded bg-white"
-                                    style="overflow:hidden; width:50px; height:50px">
-                                    <a class="name_link" href="{{route('clients.show',$client)}}">
-                                        @if($client->fotografia)
-                                        <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}"
-                                            width="100%" class="mx-auto">
-                                        @elseif($client->genero == 'F')
-                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
-                                            class="mx-auto">
-                                        @else
-                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
-                                            class="mx-auto">
-                                        @endif
-                                    </a>
-                                </div>
-
-                            </td>
-
-                            {{-- Nome e Apelido --}}
-                            <td class="align-middle"><a class="name_link"
-                                    href="{{route('clients.show',$client)}}">{{ $client->nome }}
-                                    {{ $client->apelido }}</a></td>
-
-                            {{-- paisNaturalidade --}}
-                            <td class="align-middle">{{ $client->paisNaturalidade }}</td>
-
-                            {{-- OPÇÔES --}}
-                            <td class="text-center align-middle">
-                                <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
-                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
-                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
-            @else
-            <small class="text-muted">(Ainda sem estudantes associados)</small>
-            @endif
-
-
-
-
-        </div>
 
 
     </div>
