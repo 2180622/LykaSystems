@@ -61,12 +61,21 @@
                         value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" readonly><br>
                 
                         <label for="anoAcademico">Ano académico:</label><br>
-                        <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
-                        value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required><br>
+                        @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                            <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
+                            value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required><br>
+                        @else
+                            <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
+                            value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" readonly><br>
+                        @endIf
                 
                         <label for="agente">Agente:</label><br>
-                        <select id="agente" name="agente" class="form-control" required>
-                            <option value="" selected hidden></option>
+                        @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                            <select id="agente" name="agente" class="form-control" required>
+                        @else
+                            <select id="agente" name="agente" class="form-control" readonly>
+                        @endIf
+                            <option value="" selected></option>
                             @foreach($Agentes as $agente)
                                 @if($agente->idAgente == $produto->idAgente)
                                     <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}" selected>{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
@@ -76,21 +85,26 @@
                             @endforeach
                         </select><br>
                 
-                        <label for="subagente">Sub-Agente:</label><br>
-                        <select id="subagente" name="subagente" class="form-control">
-                            <option value="" selected hidden></option>
-                            @foreach($SubAgentes as $subagente)
-                                @if($subagente->idAgente == $produto->idSubAgente)
-                                    <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}" selected>{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
-                                @else
-                                    <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
-                                @endif
-                            @endforeach
-                        </select><br>
-                
+                        @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)
+                            <label for="subagente">Sub-Agente:</label><br>
+                            <select id="subagente" name="subagente" class="form-control" onchange="AlteraInputSubAgente($(this))">
+                                <option value="" selected></option>
+                                @foreach($SubAgentes as $subagente)
+                                    @if($subagente->idAgente == $produto->idSubAgente)
+                                        <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}" selected>{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
+                                    @else
+                                        <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
+                                    @endif
+                                @endforeach
+                            </select><br>
+                        @endif
                         <label for="uni1">Universidade Principal:</label><br>
-                        <select id="uni1" name="uni1" class="form-control" required>
-                            <option value="" selected hidden></option>
+                        @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                            <select id="uni1" name="uni1" class="form-control" required>
+                        @else
+                            <select id="uni1" name="uni1" class="form-control" readonly>
+                        @endIf
+                            <option value="" selected></option>
                             @foreach($Universidades as $uni)
                                 @if($uni->idUniversidade == $produto->idUniversidade1)
                                     <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}" selected>{{$uni->nome.' -> '.$uni->email}}</option>
@@ -101,8 +115,12 @@
                         </select><br>
                 
                         <label for="uni2">Universidade Secundária:</label><br>
-                        <select id="uni2" name="uni2" class="form-control">
-                            <option value="" selected hidden></option>
+                        @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                            <select id="uni2" name="uni2" class="form-control">
+                        @else
+                            <select id="uni2" name="uni2" class="form-control" readonly>
+                        @endIf
+                            <option value="" selected></option>
                             @foreach($Universidades as $uni)
                                 @if($uni->idUniversidade == $produto->idUniversidade2)
                                     <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}" selected>{{$uni->nome.' -> '.$uni->email}}</option>
@@ -126,12 +144,12 @@
                             @if($num == 1)
                                 <li class="nav-item" style="width:25%">
                                     <a class="nav-link active" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
-                                    aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
+                                    aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}} - {{$fase->descricao}}</a>
                                 </li>
                             @else
                                 <li class="nav-item" style="width:25%">
                                     <a class="nav-link" id="fase{{$num}}-tab" data-toggle="tab" href="#fase{{$num}}" role="tab"
-                                    aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}}</a>
+                                    aria-controls="fase{{$num}}" aria-selected="false">Fase {{$num}} - {{$fase->descricao}}</a>
                                 </li>
                             @endif
                         @endforeach
@@ -162,31 +180,60 @@
                                     value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
                 
                                     <label for="data-fase{{$fase->idFase}}">Data de vencimento:</label><br>
-                                    <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
-                                    value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
+                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                        <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
+                                        value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
+                                    @else
+                                        <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
+                                        value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" readonly><br>
+                                    @endIf
                                     
                                 </div>
-                                <div class="col mr-3">
+                                <div class="col mr-3" id="responsabilidades{{$responsabilidade->idResponsabilidade}}">
                                     <div><span><b>Responsabilidades</b></span></div><br>
                                     <label for="resp-cliente-fase{{$fase->idFase}}">Valor a pagar ao cliente:</label><br>
-                                    <input type="number" class="form-control" name="resp-cliente-fase{{$fase->idFase}}" id="resp-cliente-fase{{$fase->idFase}}"
-                                    value="{{old('valorCliente',$responsabilidade->valorCliente)}}" style="width:250px" required><br>
+                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                        <input type="number" class="form-control" name="resp-cliente-fase{{$fase->idFase}}" id="resp-cliente-fase{{$fase->idFase}}"
+                                        value="{{old('valorCliente',$responsabilidade->valorCliente)}}" style="width:250px" required><br>
+                                    @else
+                                        <input type="number" class="form-control" name="resp-cliente-fase{{$fase->idFase}}" id="resp-cliente-fase{{$fase->idFase}}"
+                                        value="{{old('valorCliente',$responsabilidade->valorCliente)}}" style="width:250px" readonly><br>
+                                    @endIf
                 
                                     <label for="resp-agente-fase{{$fase->idFase}}">Valor a pagar ao agente:</label><br>
-                                    <input type="number" class="form-control" name="resp-agente-fase{{$fase->idFase}}" id="resp-agente-fase{{$fase->idFase}}"
-                                    value="{{old('valorAgente',$responsabilidade->valorAgente)}}" style="width:250px" required><br>
-                
-                                    <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
-                                    <input type="number" class="form-control" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
-                                    value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"><br>
+                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                        <input type="number" class="form-control valor-pagar-agente" name="resp-agente-fase{{$fase->idFase}}" id="resp-agente-fase{{$fase->idFase}}"
+                                        value="{{old('valorAgente',$responsabilidade->valorAgente)}}" style="width:250px" required><br>
+                                    @else
+                                        <input type="number" class="form-control" name="resp-agente-fase{{$fase->idFase}}" id="resp-agente-fase{{$fase->idFase}}"
+                                        value="{{old('valorAgente',$responsabilidade->valorAgente)}}" style="width:250px" readonly><br>
+                                    @endIf
+                                    <div class="valor-responsabilidade-subagente" style="display: none;">
+                                        @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)
+                                            <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
+                                            <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
+                                            value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"
+                                            onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'))"><br>
+                                        @endIf
+                                    </div>
                 
                                     <label for="resp-uni1-fase{{$fase->idFase}}">Valor a pagar á universidade principal:</label><br>
-                                    <input type="number" class="form-control" name="resp-uni1-fase{{$fase->idFase}}" id="resp-uni1-fase{{$fase->idFase}}"
-                                    value="{{old('valorUniversidade1',$responsabilidade->valorUniversidade1)}}" style="width:250px" required><br>
+                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                        <input type="number" class="form-control" name="resp-uni1-fase{{$fase->idFase}}" id="resp-uni1-fase{{$fase->idFase}}"
+                                        value="{{old('valorUniversidade1',$responsabilidade->valorUniversidade1)}}" style="width:250px" required><br>
+                                    @else
+                                        <input type="number" class="form-control" name="resp-uni1-fase{{$fase->idFase}}" id="resp-uni1-fase{{$fase->idFase}}"
+                                        value="{{old('valorUniversidade1',$responsabilidade->valorUniversidade1)}}" style="width:250px" readonly><br>
+                                    @endIf
                 
                                     <label for="resp-uni2-fase{{$fase->idFase}}">Valor a pagar á universidade secundária:</label><br>
-                                    <input type="number" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
-                                    value="{{old('valorUniversidade2',$responsabilidade->valorUniversidade2)}}" style="width:250px"><br>
+                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                        <input type="number" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
+                                        value="{{old('valorUniversidade2',$responsabilidade->valorUniversidade2)}}" style="width:250px"><br>
+                                    @else
+                                        <input type="number" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
+                                        value="{{old('valorUniversidade2',$responsabilidade->valorUniversidade2)}}" style="width:250px" readonly><br>
+                                    @endIf
                                 </div>
 
                                 <div class="col list-fornecedores" style="min-width:225px">
@@ -196,7 +243,7 @@
                                         <div class="clones" id="clonar">
                                             <label class="label1" for="fornecedor-fase{{$fase->idFase}}">Fornecedor 0:</label><br>
                                             <select id="fornecedor-fase{{$fase->idFase}}" name="fornecedor-fase{{$fase->idFase}}" class="form-control" required>
-                                                <option value="" selected hidden></option>
+                                                <option value="" selected></option>
                                                 @foreach($Fornecedores as $fornecedor)
                                                     <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
                                                 @endforeach
@@ -204,16 +251,23 @@
                                             <label class="label2" for="valor-fornecedor-fase{{$fase->idFase}}">Valor a pagar:</label><br>
                                             <input type="number" min="0" class="form-control" name="valor-fornecedor-fase{{$fase->idFase}}" id="valor-fornecedor-fase{{$fase->idFase}}"
                                             value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                            <div class="float-right">
+                                                <button type="button" onclick="" class="top-button">Remover fornecedor</button>
+                                            </div>
                                         </div>
                                         @if($relacoes->toArray())
                                             @foreach ($relacoes as $relacao)
                                                 @php
                                                     $numF++;
                                                 @endphp
-                                                <div id="div-relacao{{$relacao->idRelacao}}">
+                                                <div id="div-fornecedor{{$numF}}-fase{{$fase->idFase}}">
                                                     <label class="label1" for="fornecedor{{$numF}}-fase{{$fase->idFase}}">Fornecedor {{$numF}}:</label><br>
-                                                    <select id="fornecedor{{$numF}}-fase{{$fase->idFase}}" name="fornecedor{{$numF}}-fase{{$fase->idFase}}" class="form-control" required>
-                                                        <option value="" selected hidden></option>
+                                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                                        <select id="fornecedor{{$numF}}-fase{{$fase->idFase}}" name="fornecedor{{$numF}}-fase{{$fase->idFase}}" class="form-control" required>
+                                                    @else
+                                                        <select id="fornecedor{{$numF}}-fase{{$fase->idFase}}" name="fornecedor{{$numF}}-fase{{$fase->idFase}}" class="form-control" readonly>
+                                                    @endIf
+                                                        <option value="" selected></option>
                                                         @foreach($Fornecedores as $fornecedor)
                                                             @if($relacao->ifFornecedor == $fornecedor->ifFornecedor)
                                                             <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}" selected>{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
@@ -225,13 +279,18 @@
                                                     <label class="label2" for="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}">Valor a pagar:</label><br>
                                                     <input type="number" min="0" class="form-control" name="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}" id="valor-fornecedor{{$numF}}-fase{{$fase->idFase}}"
                                                     value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                                    <div class="float-right">
+                                                        <button type="button" onclick="removerFornecedor({{$numF}},{{$fase->idFase}},$(this).closest('#div-fornecedor{{$numF}}-fase{{$fase->idFase}}'))" class="top-button">Remover fornecedor {{$numF}}</button>
+                                                    </div>
                                                 </div>
                                             @endforeach
                                         @endif
                                     </div>
-                                    <div>
-                                        <button type="button" onclick="addFornecedor({{$fase->idFase}},$(this).closest('.list-fornecedores'))" class="top-button">Adicionar fornecedor</button>
-                                    </div>
+                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                        <div>
+                                            <button type="button" onclick="addFornecedor({{$fase->idFase}},$(this).closest('.list-fornecedores'))" class="top-button">Adicionar fornecedor</button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -269,19 +328,50 @@
         $("#formulario-fases").css("display", "none");
 
 
-        function addFornecedor(num, closest){
+        function addFornecedor(idFase, closest){
 	        var numF = parseInt(closest.find('.numF').first().text());
 			var clone = clones.clone();
 	        closest.find('.numF').first().text(numF+1);
+			clone.attr('id','div-fornecedor'+numF+'-fase'+idFase);
 			$('.label1', clone).text("Fornecedor "+numF+":");
-			$('.label1', clone).attr('for','fornecedor'+numF+'-fase'+num);
-			$('select', clone).attr('id','fornecedor'+numF+'-fase'+num);
-			$('select', clone).attr('name','fornecedor'+numF+'-fase'+num);
-			$('.label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+num);
-			$('input', clone).attr('id','valor-fornecedor'+numF+'-fase'+num);
-			$('input', clone).attr('name','valor-fornecedor'+numF+'-fase'+num);
+			$('.label1', clone).attr('for','fornecedor'+numF+'-fase'+idFase);
+			$('select', clone).attr('id','fornecedor'+numF+'-fase'+idFase);
+			$('select', clone).attr('name','fornecedor'+numF+'-fase'+idFase);
+			$('.label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+idFase);
+			$('input', clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
+			$('input', clone).attr('name','valor-fornecedor'+numF+'-fase'+idFase);
+			$('button', clone).attr('onclick','removerFornecedor('+numF+','+idFase+',$(this).closest("#div-fornecedor'+numF+'-fase'+idFase+'"))');
+			$('button', clone).text('Remover fornecedor '+numF);
 	        closest.find('.fornecedor').first().append(clone);
         }
+        function removerFornecedor(numF,idFase,fornecedor){
+            $('#fornecedor'+numF+'-fase'+idFase).val($('#fornecedor'+numF+'-fase'+idFase+' > option:first').val());
+            $("#fornecedor"+numF+"-fase"+idFase).attr("required", false);
+            $("#valor-fornecedor"+numF+"-fase"+idFase).attr("required", false);
+            fornecedor.css("display", "none");
+        }
+        function AlteraInputSubAgente(input){
+            var valueInput = input.val();
+            if(valueInput){
+                $(".valor-responsabilidade-subagente").css("display", "block");
+                $(".valor-responsabilidade-subagente").find(input).first().attr("required", true);
+            }else{
+                $(".valor-responsabilidade-subagente").css("display", "none");
+                $(".valor-responsabilidade-subagente").find(input).first().attr("required", false);
+            }
+        }
+        function adicionaValorSubAgente(valorAgente, formulario){
+            var inputAgente = formulario.find('.valor-pagar-agente').first();
+            var inputSubAgente = formulario.find('.valor-pagar-subagente').first();
+            var valorSubAgente = parseFloat(inputSubAgente.text());
+            var novoValorAgente = valorAgente - valorSubAgente;
+            if(valorAgente<=valorSubAgente){
+			    inputAgente.text(0);
+                inputSubAgente.text(valorAgente);
+            }else{
+			    inputAgente.text(novoValorAgente);
+            }
+        } 
     </script>
 
 @endsection

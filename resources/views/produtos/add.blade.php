@@ -53,7 +53,7 @@
                         <div class="col">
                             <label for="nome">Escolha o produto: </label>
                             <select class="form-control" id="produto" onchange="AtualizaProduto(this.value)">
-                                <option value="0" selected hidden></option>
+                                <option value="0" selected></option>
                                 @foreach($produtoStock as $prodS)
                                     @php
                                         $faseS = $prodS->faseStock->toArray();
@@ -81,23 +81,23 @@
             
                             <label for="agente">Agente:</label><br>
                             <select id="agente" name="agente" class="form-control" required>
-                                <option value="" selected hidden></option>
+                                <option value="" selected></option>
                                 @foreach($Agentes as $agente)
                                     <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
                                 @endforeach
                             </select><br>
-            
+                            {{--
                             <label for="subagente">Sub-Agente:</label><br>
                             <select id="subagente" name="subagente" class="form-control">
-                                <option value="" selected hidden></option>
+                                <option value="" selected></option>
                                 @foreach($SubAgentes as $subagente)
                                     <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
                                 @endforeach
                             </select><br>
-            
+                            --}}
                             <label for="uni1">Universidade Principal:</label><br>
                             <select id="uni1" name="uni1" class="form-control" required>
-                                <option value="" selected hidden></option>
+                                <option value="" selected></option>
                                 @foreach($Universidades as $uni)
                                     <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
                                 @endforeach
@@ -105,7 +105,7 @@
             
                             <label for="uni2">Universidade Secundária:</label><br>
                             <select id="uni2" name="uni2" class="form-control">
-                                <option value="" selected hidden></option>
+                                <option value="" selected></option>
                                 @foreach($Universidades as $uni)
                                     <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
                                 @endforeach
@@ -176,11 +176,11 @@
                                         <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
                                         value="{{old('valorAgente',$Responsabilidades[$num-1]->valorAgente)}}" style="width:250px" required><br>
-                        
+                                        {{--
                                         <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
                                         value="{{old('valorSubAgente',$Responsabilidades[$num-1]->valorSubAgente)}}" style="width:250px"><br>
-                        
+                                        --}}
                                         <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
                                         value="{{old('valorUniversidade1',$Responsabilidades[$num-1]->valorUniversidade1)}}" style="width:250px" required><br>
@@ -197,7 +197,7 @@
                                             <div id="clonar">
                                                 <label class="label1" for="fornecedor-fase{{$num}}">Fornecedor 1:</label><br>
                                                 <select id="fornecedor-fase{{$num}}" name="fornecedor-fase{{$num}}" class="form-control" required>
-                                                    <option value="" selected hidden></option>
+                                                    <option value="" selected></option>
                                                     @foreach($Fornecedores as $fornecedor)
                                                         <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
                                                     @endforeach
@@ -205,6 +205,9 @@
                                                 <label class="label2" for="valor-fornecedor-fase{{$num}}">Valor a pagar:</label><br>
                                                 <input type="number" min="0" class="form-control" name="valor-fornecedor-fase{{$num}}" id="valor-fornecedor-fase{{$num}}"
                                                 value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+                                                <div class="float-right">
+                                                    <button type="button" onclick="" class="top-button">Remover fornecedor</button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div>
@@ -245,20 +248,29 @@
         $("#formulario-fases").css("display", "none");
 
 
-        function addFornecedor(num, closest){
+        function addFornecedor(idFase, closest){
 	        var numF = parseInt(closest.find('.numF').first().text());
 			var clone = clones.clone();
 	        closest.find('.numF').first().text(numF+1);
+			clone.attr('id','div-fornecedor'+numF+'-fase'+idFase);
 			$('.label1', clone).text("Fornecedor "+numF+":");
-			$('.label1', clone).attr('for','fornecedor'+numF+'-fase'+num);
-			$('select', clone).attr('id','fornecedor'+numF+'-fase'+num);
-			$('select', clone).attr('name','fornecedor'+numF+'-fase'+num);
-			$('.label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+num);
-			$('input', clone).attr('id','valor-fornecedor'+numF+'-fase'+num);
-			$('input', clone).attr('name','valor-fornecedor'+numF+'-fase'+num);
+			$('.label1', clone).attr('for','fornecedor'+numF+'-fase'+idFase);
+			$('select', clone).attr('id','fornecedor'+numF+'-fase'+idFase);
+			$('select', clone).attr('name','fornecedor'+numF+'-fase'+idFase);
+			$('.label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+idFase);
+			$('input', clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
+			$('input', clone).attr('name','valor-fornecedor'+numF+'-fase'+idFase);
+			$('button', clone).attr('onclick','removerFornecedor('+numF+','+idFase+',$(this).closest("#div-fornecedor'+numF+'-fase'+idFase+'"))');
+			$('button', clone).text('Remover fornecedor '+numF);
 	        closest.find('.fornecedor').first().append(clone);
         }
 
+        function removerFornecedor(numF,idFase,fornecedor){
+            $('#fornecedor'+numF+'-fase'+idFase).val($('#fornecedor'+numF+'-fase'+idFase+' > option:first').val());
+            $("#fornecedor"+numF+"-fase"+idFase).attr("required", false);
+            $("#valor-fornecedor"+numF+"-fase"+idFase).attr("required", false);
+            fornecedor.css("display", "none");
+        }
 
         function AtualizaProduto(idproduto){
             if(idproduto>0){

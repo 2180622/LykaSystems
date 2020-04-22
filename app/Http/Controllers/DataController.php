@@ -258,10 +258,18 @@ class DataController extends Controller
         /*****************          Fornecedores          ******************/
 
         $fornecedor = new Fornecedor;
-        $fornecedor->nome = 'Táxi';
+        $fornecedor->nome = 'Táxi - Leiria';
         $fornecedor->morada = 'Rua Leiria, Leiria';
-        $fornecedor->descricao = 'Taxista Dinis';
+        $fornecedor->descricao = 'Taxista André Vieira';
         $fornecedor->contacto = '244 025 968';
+        $fornecedor->save();
+
+        $fornecedor = new Fornecedor;
+        $fornecedor->nome = 'Embaixada de Portugal MX';
+        $fornecedor->morada = 'Rua Monterrey, México';
+        $fornecedor->descricao = 'Embaixada de Portugal - México';
+        $fornecedor->contacto = 'embaixadaportugalmx@mail.com';
+        $fornecedor->observacoes = 'Demoram muito tempo a responder... Não perder a esperança :)';
         $fornecedor->save();
 
         /****************          Produtos Stock          *****************/
@@ -441,11 +449,11 @@ class DataController extends Controller
         $responsabilidade->valorSubAgente = null;
         $responsabilidade->valorUniversidade1 = 40;
         $responsabilidade->valorUniversidade2 = null;
-        $responsabilidade->verificacaoPagoCliente = true;
-        $responsabilidade->verificacaoPagoAgente = true;
-        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -456,9 +464,9 @@ class DataController extends Controller
         $responsabilidade->valorUniversidade2 = null;
         $responsabilidade->verificacaoPagoCliente = false;
         $responsabilidade->verificacaoPagoAgente = false;
-        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -467,11 +475,11 @@ class DataController extends Controller
         $responsabilidade->valorSubAgente = null;
         $responsabilidade->valorUniversidade1 = 40;
         $responsabilidade->valorUniversidade2 = null;
-        $responsabilidade->verificacaoPagoCliente = true;
-        $responsabilidade->verificacaoPagoAgente = true;
-        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -480,11 +488,11 @@ class DataController extends Controller
         $responsabilidade->valorSubAgente = null;
         $responsabilidade->valorUniversidade1 = 40;
         $responsabilidade->valorUniversidade2 = null;
-        $responsabilidade->verificacaoPagoCliente = true;
-        $responsabilidade->verificacaoPagoAgente = true;
-        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
         /************          Pago Responsabilidades          *************/
