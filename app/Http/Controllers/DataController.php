@@ -116,6 +116,7 @@ class DataController extends Controller
         $agente->telefone1 = 963423423;
         $agente->telefone2 = null;
         $agente->tipo = 'Subagente';
+        $agente->idAgenteAssociado = 1;
         $agente->save();
 
         /******************          Bibliotecas          ******************/
@@ -147,17 +148,16 @@ class DataController extends Controller
         $cliente->emailMae = null;
         $cliente->fotografia = null;
         $cliente->NIF = 3490587685;
-        $cliente->IBAN = 'ERH84 3280F 0U23R 237TF RGE89';
+        $cliente->IBAN = 'FR76 123 4321 1345678901 72';
         $cliente->nivEstudoAtual = 4;
         $cliente->nomeInstituicaoOrigem = 'Instituto Frances';
         $cliente->cidadeInstituicaoOrigem = 'Paris';
         $cliente->num_docOficial = '9845776436ZZ8';
         $cliente->img_docOficial = 'default-photos/M.jpg';
-        $cliente->info_docOficial = '{"campo1":"NIF","valor1":9845776436ZZ8,
-            "campo2":"Data Validade","valor2":"25/03/2022"}';
+        $cliente->info_docOficial = date('Y-m-d',strtotime('27-01-1995'));
         $cliente->img_Passaport = 'default-photos/M.jpg';
-        $cliente->info_Passaport = '{"campo1":"Numero Passaport","valor1":9453574976496,
-            "campo2":"Data Validade","valor2":"25/03/2022"}';
+        $cliente->info_Passaport = '{"numPassaport":"9453574976496","dataValidPP":"'.date('Y-m-d',strtotime('27-01-1995')).'",
+            "passaportPaisEmi":"França","localEmissaoPP":"Paris"}';
         $cliente->img_docAcademico = 'default-photos/M.jpg';
         $cliente->info_docAcademico = '{"campo1":"Tipo","valor1":"Certificado",
             "campo2":"Nota Final","valor2":16}';
@@ -174,7 +174,7 @@ class DataController extends Controller
         $cliente->telefone1 = 945345784;
         $cliente->telefone2 = null;
         $cliente->dataNasc = date('Y-m-d',strtotime('02-05-1998'));
-        $cliente->paisNaturalidade = 'Russia';
+        $cliente->paisNaturalidade = 'Rússia';
         $cliente->morada = 'Rua Russia';
         $cliente->cidade = 'Cidade Russa';
         $cliente->moradaResidencia = 'Russia';
@@ -186,7 +186,7 @@ class DataController extends Controller
         $cliente->emailMae = 'vaness@mail.ru';
         $cliente->fotografia = null;
         $cliente->NIF = 759456385645;
-        $cliente->IBAN = 'FOK04 WDF8Y DSF98 346TJ WE9F9';
+        $cliente->IBAN = 'RU76 123 4321 1345678901 72';
         $cliente->nivEstudoAtual = 5;
         $cliente->nomeInstituicaoOrigem = 'Instituto Russo';
         $cliente->cidadeInstituicaoOrigem = 'Cidade Russa';
@@ -196,8 +196,8 @@ class DataController extends Controller
         $cliente->info_docOficial = '{"campo1":"NIF","valor1":61436534643DS4,
             "campo2":"Data Validade","valor2":"25/03/2022"}';
         $cliente->img_Passaport = 'default-photos/F.jpg';
-        $cliente->info_Passaport = '{"campo1":"Numero Passaport","valor1":2354134352464,
-            "campo2":"Data Validade","valor2":"25/03/2022"}';
+        $cliente->info_Passaport = '{"numPassaport":"9453574976496","dataValidPP":"'.date('Y-m-d',strtotime('27-01-1995')).'",
+            "passaportPaisEmi":"França","localEmissaoPP":"Paris"}';
         $cliente->img_docAcademico = null;
         $cliente->info_docAcademico = null;
         $cliente->obsPessoais = null;
@@ -213,7 +213,7 @@ class DataController extends Controller
         $conta->titular = 'Estudar Portugal';
         $conta->morada = 'Praça Goa Damäo e Diu, 2400 - 147 Leiria';
         $conta->numConta = rand(999999, 9999999999);
-        $conta->IBAN = '8843H ERUE4 G9Y34 G9HG3 EG8U9';
+        $conta->IBAN = 'PT50 123 4321 1345678901 72';
         $conta->SWIFT = 'DS26E HD23D ASD55 62DS6 FWW23';
         $conta->contacto = '244 032 985';
         $conta->obsConta = null;
@@ -225,7 +225,7 @@ class DataController extends Controller
         $conta->titular = 'Estudar Portugal';
         $conta->morada = 'R. 25 de Abril 168, 2415-602 Leiria';
         $conta->numConta = rand(999999, 9999999999);
-        $conta->IBAN = '99DAS DAS25 23DSD 56KJI PO12L';
+        $conta->IBAN = 'PT50 123 5543 1345678901 72';
         $conta->SWIFT = 'TR23R 89DSA GH1H2 KM22N T12G1';
         $conta->contacto = '244 023 034';
         $conta->obsConta = null;
@@ -354,7 +354,7 @@ class DataController extends Controller
         $universidade->telefone = 1234235346;
         $universidade->email = 'estg.ipleiria.pt';
         $universidade->NIF = 7846575487;
-        $universidade->IBAN = 'RGE0U 4804G 34TJG RG445 ERG89';
+        $universidade->IBAN = 'PT50 6573 4321 1345678901 72';
         $universidade->obsContactos = null;
         $universidade->obsCursos = null;
         $universidade->obsCandidaturas = null;

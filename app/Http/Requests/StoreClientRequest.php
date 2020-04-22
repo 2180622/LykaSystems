@@ -50,7 +50,6 @@ class StoreClientRequest extends FormRequest
             'cidadeInstituicaoOrigem' => 'required',
 
             'num_docOficial'=> 'required|unique:Cliente',
-            'dataValidade_docOficial'=> 'nullable',
             'img_docOficial'=> 'nullable',
             'info_docOficial'=> 'nullable',
 

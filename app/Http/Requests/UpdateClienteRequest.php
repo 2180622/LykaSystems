@@ -50,7 +50,6 @@ class UpdateClienteRequest extends FormRequest
             'cidadeInstituicaoOrigem' => 'required',
 
             'num_docOficial'=> 'required',
-            'dataValidade_docOficial'=> 'nullable',
             'img_docOficial'=> 'nullable',
             'info_docOficial'=> 'nullable',
 
