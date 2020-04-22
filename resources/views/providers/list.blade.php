@@ -6,13 +6,14 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('/css/providers.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteúdo da Página --}}
 @section('content')
 
 @php
-  use \App\Http\Controllers\ExtraFunctionsController;
+use \App\Http\Controllers\ExtraFunctionsController;
 @endphp
 
 <div class="container mt-2 ">
@@ -33,58 +34,51 @@
     <br><br>
 
     <div class="cards-navigation">
-        <div class="title">
-            <h6>Listagem de fornecedores</h6>
-        </div>
-        <br>
-        <div class="row mt-2">
-            <div class="col">
-                @if (count($providers) == 1)
-                Existe <strong>{{count($providers)}}</strong> fornecedor registado no sistema.
-                @else
-                Existem <strong>{{count($providers)}}</strong> fornecedores registados no sistema.
-                @endif
+        <div class="title row">
+            <div class="col-md-6">
+                <h6>Listagem de fornecedores</h6>
+            </div>
+            <div class="col-md-6" style="bottom:5px; height:32px;">
+                <div class="input-group pl-0 float-right search-section" style="width:250px">
+                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
+                    <div class="search-button input-group-append">
+                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
-        <div class="container">
-            @foreach ($providers as $provider)
-            <a href="{{route('provider.show', $provider)}}" oncontextmenu="return showContextMenu();">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            <ion-icon name="cube" id="icon"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="col-md-1 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$provider->nome}}">{{$provider->nome}}</p>
-                    </div>
-                    <div class="col-md-2 align-self-center ml-5">
-                        <p class="text-truncate" title="{{$provider->descricao}}">{{$provider->descricao}}</p>
-                    </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-5">
-                        <p class="text-truncate" title="{{$provider->morada}}">{{$provider->morada}}</p>
-                    </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate" title="{{$provider->contacto}}">{{$provider->contacto}}</p>
-                    </div>
-                </div>
-            </a>
+        <div class="table-responsive mt-2" style="overflow:hidden">
+            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Morada</th>
+                        <th>Contacto</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($providers as $provider)
+                    <tr>
+                        <td class="align-middle">{{$provider->nome}}</td>
+                        <td class="align-middle">{{$provider->descricao}}</td>
+                        <td class="align-middle">{{$provider->morada}}</td>
+                        <td class="align-middle">{{$provider->contacto}}</td>
 
-            <div class="custom-cm" id="contextMenu">
-                <div class="custom-cm-item">
-                    <a href="{{route('provider.edit', $provider)}}">Editar</a>
-                </div>
-                <div class="custom-cm-item">
-                    <?php
-                      $descricao = ExtraFunctionsController::post_slug($provider->descricao);
-                    ?>
-                    <p data-toggle="modal" data-target="#deleteModal" data-name="{{$provider->nome}}" data-descricao="{{$descricao}}">Remover</p>
-                </div>
-                <div class="custom-cm-divider"></div>
-                <div class="custom-cm-item">Cancelar</div>
-            </div>
-            @endforeach
+                        <td class="text-center align-middle">
+                            <a href="{{route('provider.show', $provider)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                            <a href="{{route('provider.edit', $provider)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                            <?php
+                              $descricao = ExtraFunctionsController::post_slug($provider->descricao);
+                            ?>
+                            <button type="button" class="btn_delete" title="Eliminar fornecedor" data-toggle="modal" data-target="#deleteModal" data-name="{{$provider->nome}}" data-descricao="{{$descricao}}"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -127,22 +121,7 @@
         modal.find('#provider-delete-descricao').val(button.data('descricao'));
         modal.find("form").attr('action', '/fornecedores/' + button.data('descricao'));
     });
-
-    // Context Menu
-    window.onclick = hideContextMenu;
-    var contextMenu = document.getElementById("contextMenu");
-
-    function showContextMenu() {
-        contextMenu.style.display = "inline-block";
-        contextMenu.style.left = event.clientX - '260' + 'px';
-        contextMenu.style.top = event.clientY + 'px';
-        return false;
-    }
-
-    function hideContextMenu() {
-        contextMenu.style.display = "none";
-    }
 </script>
+<script src="{{asset('/js/datatables.js')}}"></script>
 @endsection
-
 @endsection

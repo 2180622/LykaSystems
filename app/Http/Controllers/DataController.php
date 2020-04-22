@@ -258,10 +258,18 @@ class DataController extends Controller
         /*****************          Fornecedores          ******************/
 
         $fornecedor = new Fornecedor;
-        $fornecedor->nome = 'Táxi';
+        $fornecedor->nome = 'Táxi - Leiria';
         $fornecedor->morada = 'Rua Leiria, Leiria';
-        $fornecedor->descricao = 'Taxista Dinis';
+        $fornecedor->descricao = 'Taxista André Vieira';
         $fornecedor->contacto = '244 025 968';
+        $fornecedor->save();
+
+        $fornecedor = new Fornecedor;
+        $fornecedor->nome = 'Embaixada de Portugal MX';
+        $fornecedor->morada = 'Rua Monterrey, México';
+        $fornecedor->descricao = 'Embaixada de Portugal - México';
+        $fornecedor->contacto = 'embaixadaportugalmx@mail.com';
+        $fornecedor->observacoes = 'Demoram muito tempo a responder... Não perder a esperança :)';
         $fornecedor->save();
 
         /****************          Produtos Stock          *****************/
