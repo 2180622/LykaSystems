@@ -6,9 +6,12 @@
 }
 
 .payment-card p {
-    font-weight: 600;
-    margin: 0 !important;
+    margin: 0;
+    color: #747474;
+    font-weight: 700;
     display: inline-block;
+    text-transform: uppercase;
+    margin-left: 13px !important;
 }
 
 a {
@@ -40,16 +43,6 @@ input, select, textarea {
     padding: 7px 12px;
     border-radius: 5px;
     background-color: #EAEAEA;
-}
-
-.payment-card p:first-child {
-    color: #747474;
-    font-weight: 600;
-}
-
-.payment-card p:nth-child(2) {
-    color: #747474;
-    font-weight: 700;
 }
 
 .input-file-div {
@@ -230,9 +223,6 @@ p {
     transform: translate(-50%, 15%);
 }
 
-/* Filters Div */
-.filters-div {
-    border-radius: 10px;
+.cancel-button {
     background-color: white;
-    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
 }

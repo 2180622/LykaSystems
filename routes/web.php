@@ -58,7 +58,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
 
     /* Pagamentos */
-    Route::get('/payments', 'PaymentController@index')->name('payments.index');
+    Route::get('/pagamentos', 'PaymentController@index')->name('payments.index');
+    Route::get('/pagamentos/pesquisa', 'PaymentController@search')->name('payments.search');
 
     /* Cobranças */
     Route::get('/cobrancas', 'ChargesController@index')->name('charges.index');

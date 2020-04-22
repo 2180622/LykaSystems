@@ -106,80 +106,98 @@
                 <div class="col">
                     <div class="filters-div collapse" id="collapseExample">
                         <div class="payment-card shadow-sm">
-                            <div class="row">
+                            <form action="{{route('payments.search')}}" method="get" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <p>Secção de filtragem &nbsp;</p>
+                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top"
+                                      title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade. Não é necessário preencher todos campos para realizar uma consulta.">
+                                        <span>
+                                            ?
+                                        </span>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="estudante">Estudante</label>
+                                        <br>
+                                        <select name="estudante">
+                                            <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
+                                            @foreach ($estudantes as $estudante)
+                                            <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="agente">Agente</label>
+                                        <br>
+                                        <select name="agente">
+                                            <option selected disabled hidden class="text-truncate">Selecionar agente</option>
+                                            @foreach ($agentes as $agente)
+                                            <option value="{{$agente->idAgente}}" class="text-truncate">{{$agente->nome.' '.$agente->apelido}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="subagente">SubAgente</label>
+                                        <br>
+                                        <select name="subagente">
+                                            <option selected disabled hidden class="text-truncate">Selecionar subagente</option>
+                                            @foreach ($subagentes as $subagente)
+                                            <option value="{{$subagente->idAgente}}" class="text-truncate">{{$subagente->nome.' '.$subagente->apelido}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
 
-                                <div class="col-md-4">
-                                    <label for="estudante">Estudante</label>
-                                    <br>
-                                    <select name="estudante">
-                                        <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
-                                        @foreach ($estudantes as $estudante)
-                                        <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="agente">Agente</label>
-                                    <br>
-                                    <select name="agente">
-                                        <option selected disabled hidden class="text-truncate">Selecionar agente</option>
-                                        @foreach ($agentes as $agente)
-                                        <option value="{{$agente->idAgente}}" class="text-truncate">{{$agente->nome.' '.$agente->apelido}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="subagente">SubAgente</label>
-                                    <br>
-                                    <select name="subagente">
-                                        <option selected disabled hidden class="text-truncate">Selecionar subagente</option>
-                                        @foreach ($subagentes as $subagente)
-                                          <option value="{{$subagente->idAgente}}" class="text-truncate">{{$subagente->nome.' '.$subagente->apelido}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                                <br><br>
 
-                            <br><br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="universidade">Universidade</label>
+                                        <br>
+                                        <select name="universidade">
+                                            <option selected disabled hidden class="text-truncate">Selecionar universidade</option>
+                                            @foreach ($universidades as $universidade)
+                                            <option value="{{$universidade->idUniversidade}}" class="text-truncate">{{$universidade->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="fornecedor">Fornecedor</label>
+                                        <br>
+                                        <select name="fornecedor">
+                                            <option selected disabled hidden class="text-truncate">Selecionar fornecedor</option>
+                                            @foreach ($fornecedores as $fornecedor)
+                                            <option value="{{$fornecedor->idFornecedor}}" class="text-truncate">{{$fornecedor->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="universidade">Universidade</label>
-                                    <br>
-                                    <select name="universidade">
-                                        <option selected disabled hidden class="text-truncate">Selecionar universidade</option>
-                                        @foreach ($universidades as $universidade)
-                                          <option value="{{$universidade->idUniversidade}}" class="text-truncate">{{$universidade->nome}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="fornecedor">Fornecedor</label>
-                                    <br>
-                                    <select name="fornecedor">
-                                        <option selected disabled hidden class="text-truncate">Selecionar fornecedor</option>
-                                        @foreach ($fornecedores as $fornecedor)
-                                          <option value="{{$fornecedor->idFornecedor}}" class="text-truncate">{{$fornecedor->nome}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                                <br><br>
 
-                            <br><br>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="valorRecebido">Data de início</label>
-                                    <br>
-                                    <input type="date" name="valorRecebido">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="dataInicio">Data de início</label>
+                                        <br>
+                                        <input type="date" name="dataInicio">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="dataFim">Data de fim</label>
+                                        <br>
+                                        <input type="date" name="dataFim">
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="tipoPagamento">Data de fim</label>
-                                    <br>
-                                    <input type="date" name="valorRecebido">
+                                <br><br>
+                                <div class="row">
+                                    <div class="form-group text-right ml-auto" style="margin-right:15px;">
+                                        <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
+                                        <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -161,7 +161,11 @@ class PaymentController extends Controller
           }
         }
       }
-
       return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores'));
+    }
+
+    public function search()
+    {
+      
     }
 }
