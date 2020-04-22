@@ -20,10 +20,13 @@ class Cliente extends Model
         'cidade','moradaResidencia','nomePai','telefonePai',
         'emailPai','nomeMae','telefoneMae','emailMae','fotografia','NIF','IBAN',
         'nivEstudoAtual','nomeInstituicaoOrigem','cidadeInstituicaoOrigem',
-        'obsPessoais','obsFinanceiras','obsAcademicas','num_docOficial','img_docOficial','info_docOficial',
+        'obsPessoais','obsFinanceiras','obsAcademicas','num_docOficial','img_docOficial','dataValidade_docOficial','info_docOficial',
         'img_Passaport','info_Passaport','img_docAcademico','info_docAcademico'
         ];
 
+        /* !!!!!!!!!!! TENS QUE AVISAR QUANDO MUDAS ISTO !!!!!!!!!!!!!!!!!!!!!!!! */
+
+        
     public function user(){
         return $this->belongsTo("App\User","idUser","idUser")->withTrashed();
     }
