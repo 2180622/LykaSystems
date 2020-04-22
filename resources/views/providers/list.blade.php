@@ -11,6 +11,10 @@
 {{-- Conteúdo da Página --}}
 @section('content')
 
+@php
+  use \App\Http\Controllers\ExtraFunctionsController;
+@endphp
+
 <div class="container mt-2 ">
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -72,12 +76,14 @@
                     <a href="{{route('provider.edit', $provider)}}">Editar</a>
                 </div>
                 <div class="custom-cm-item">
-                    <p data-toggle="modal" data-target="#deleteModal" data-name="{{$provider->nome}}" data-id="{{$provider->idConta}}">Remover</p>
+                    <?php
+                      $descricao = ExtraFunctionsController::post_slug($provider->descricao);
+                    ?>
+                    <p data-toggle="modal" data-target="#deleteModal" data-name="{{$provider->nome}}" data-descricao="{{$descricao}}">Remover</p>
                 </div>
                 <div class="custom-cm-divider"></div>
                 <div class="custom-cm-item">Cancelar</div>
             </div>
-
             @endforeach
         </div>
     </div>
@@ -88,7 +94,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Eliminar conta bancária</h5>
+                <h5 class="modal-title">Eliminar fornecedor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -99,14 +105,14 @@
                     @method('DELETE')
                     <p id="text"></p>
                     <br>
-                    <p style="font-weight:500;">Ao clicar "Sim, eliminar conta", irá eliminar a conta para definitivamente e perder todos os dados associados.</p>
-                    <input type="hidden" id="conta_delete_id" name="id">
-                  </div>
-                    <div class="modal-footer">
-                        <button class="top-button btn_submit bg-danger" type="submit"><i class="far fa-trash-alt mr-2"></i>Sim, eliminar conta</button>
-                        <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
+                    <p style="font-weight:500;">Ao clicar "Sim, eliminar fornecedor", irá eliminar a conta definitivamente e perder todos os dados associados.</p>
+                    <input type="hidden" id="provider-delete-descricao" name="id">
+            </div>
+            <div class="modal-footer">
+                <button class="top-button btn_submit bg-danger" type="submit"><i class="far fa-trash-alt mr-2"></i>Sim, eliminar fornecedor</button>
+                <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -117,9 +123,9 @@
         var button = $(event.relatedTarget);
         var name = button.data('name');
         var modal = $(this);
-        modal.find('#text').text('Pretende eliminar a conta bancária ' + name + '?');
-        modal.find('#conta_delete_id').val(button.data('id'));
-        modal.find("form").attr('action', '/fornecedor/' + button.data('id'));
+        modal.find('#text').text('Pretende eliminar o fornecedor ' + name + '?');
+        modal.find('#provider-delete-descricao').val(button.data('descricao'));
+        modal.find("form").attr('action', '/fornecedores/' + button.data('descricao'));
     });
 
     // Context Menu

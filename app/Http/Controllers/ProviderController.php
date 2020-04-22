@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Fornecedor;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProviderRequest;
+use App\Http\Requests\UpdateProviderRequest;
 
 class ProviderController extends Controller
 {
@@ -32,5 +33,24 @@ class ProviderController extends Controller
     public function show(Fornecedor $provider)
     {
       return view('providers.show', compact('provider'));
+    }
+
+    public function edit(Fornecedor $provider)
+    {
+      return view('providers.edit', compact('provider'));
+    }
+
+    public function update(UpdateProviderRequest $providerRequest, Fornecedor $provider)
+    {
+      $fields = $providerRequest->validated();
+      $provider->fill($fields);
+      $provider->save();
+      return redirect()->route('provider.index')->with('success', 'Fornecedor editado com sucesso.');
+    }
+
+    public function destroy(Fornecedor $provider)
+    {
+      $provider->delete();
+      return redirect()->route('provider.index')->with('success', 'Fornecedor eliminado com sucesso');
     }
 }

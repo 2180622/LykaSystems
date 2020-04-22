@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Visualização de uma conta bancária')
+@section('title', 'Visualização de um fornecedor')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
@@ -33,22 +33,28 @@
             <h6>Visualização do fornecedor: {{$provider->nome}}</h6>
         </div>
         <br>
-        <div class="payment-card shadow-sm">
-          <div>
-            <p>Nome:{{$provider->nome}}</p>
-          </div>
-          <br>
-          <div>
-            <p>Morada: {{$provider->morada}}</p>
-          </div>
-          <br>
-          <div>
-            <p>Contacto: {{$provider->contacto}}</p>
-          </div>
-          <br>
-          <div>
-            <p>Descrição: {{$provider->descricao}}</p>
-          </div>
+        <div class="payment-card shadow-sm show-provider">
+            <div>
+                <p><b>Nome:</b> {{$provider->nome}}</p>
+            </div>
+            <br>
+            <div>
+                <p><b>Descrição:</b> {{$provider->descricao}}</p>
+            </div>
+            <br>
+            <div>
+                <p><b>Contacto:</b> {{$provider->contacto}}</p>
+            </div>
+            <br>
+            <div>
+                <p><b>Morada:</b> {{$provider->morada}}</p>
+            </div>
+            @if ($provider->observacoes != null)
+            <br>
+            <div>
+                <p><b>Observações:</b> {{$provider->observacoes}}</p>
+            </div>
+            @endif
         </div>
         <br>
     </div>
