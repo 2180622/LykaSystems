@@ -15,7 +15,7 @@
                         <script
                             src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
                     </div>
-
+                    <input type="hidden" name="idAgenda">
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -58,8 +58,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Guadar</button>
-                    <button type="button" class="top-button btn_submit bg-danger deleteEvent" style="display: none">Eliminar</button>
+                    <button type="submit" name="action" value="save" class="top-button mr-2" name="ok" id="buttonSubmit">Guardar</button>
+                    <button type="submit" name="action" value="delete" class="top-button btn_submit bg-danger deleteEvent" style="display: none">Eliminar</button>
                     <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
