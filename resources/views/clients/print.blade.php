@@ -130,10 +130,10 @@
 
             <div class="col p-3 ">
                 <h5><i class="far fa-id-card mr-2"></i>Documento de identificação</h5><br>
-                <div><span class="text-secondary font-weight-bold">Número de identificação pessoal:</span>
+                <div><span class="text-secondary font-weight-bold">Número de identificação pessoal:<br></span>
                     {{$client->num_docOficial}}</div>
-                <div><span class="text-secondary font-weight-bold">Número de identificação fiscal:</span>
-                    {{$client->NIF}}</div>
+                <div><span class="text-secondary font-weight-bold">Número de identificação fiscal:<br></span>
+                    {{$client->NIF}}</div><br>
                     <div><span class="text-secondary font-weight-bold">Data de validade:</span>
                         {{$client->info_docOficial}}</div>
             </div>
@@ -194,7 +194,7 @@
             </div>
             <div class="col pt-4">
                 {{-- Contactos dos pais --}}
-                <div><span class="text-secondary font-weight-bold">Nome do pai:</span>{{$client->nomePai}}</div>
+                <div><span class="text-secondary font-weight-bold">Nome do pai:</span> {{$client->nomePai}}</div>
                 <div><span class="text-secondary font-weight-bold">Telefone do pai:</span> {{$client->telefonePai}}</div>
                 <div><span class="text-secondary font-weight-bold">E-mail do pai:</span> {{$client->emailPai}}</div>
                 <div><span class="text-secondary font-weight-bold">Nome da mãe:</span> {{$client->nomeMae}}</div>

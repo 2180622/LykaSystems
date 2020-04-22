@@ -50,8 +50,8 @@ class ClientController extends Controller
             selectRaw("Cliente.idCliente,nome,apelido,genero,email,telefone1,telefone2,dataNasc,paisNaturalidade,morada,cidade,moradaResidencia,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,num_docOficial,img_docOficial,info_docOficial,img_Passaport,info_Passaport,img_docAcademico,info_docAcademico,obsPessoais,obsFinanceiras,obsAcademicas")
             ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
             ->where('Produto.idAgente', '=', Auth::user()->agente->idAgente)
-            ->groupBy('cliente.idCliente')
-            ->orderBy('cliente.idCliente','asc')
+            ->groupBy('Cliente.idCliente')
+            ->orderBy('Cliente.idCliente','asc')
             ->get();
 
         }
@@ -184,7 +184,7 @@ class ClientController extends Controller
         }
 
 
-        
+
         /* Guarda Documento oficial */
         $doc_id->create_at == date("Y-m-d",$t);
         $doc_id->save();
