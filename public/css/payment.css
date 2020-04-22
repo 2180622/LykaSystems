@@ -187,3 +187,52 @@ p {
 *[data-href] {
     cursor: pointer;
 }
+
+/* Filter Button */
+#filter-icon-div {
+    right: 4px;
+    width: 7%;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 11px;
+    background-color: white;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
+}
+
+#filter-icon-div #icon-funnel {
+    top: 50%;
+    left: 50%;
+    color: #575757;
+    font-size: 1.3rem;
+    position: relative;
+    transform: translate(-50%, 15%);
+}
+
+#close-icon-div {
+    right: 4px;
+    display: none;
+    width: 7%;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 11px;
+    background-color: white;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
+}
+
+#close-icon-div #icon-close {
+    top: 50%;
+    left: 50%;
+    color: #575757;
+    font-size: 1.3rem;
+    position: relative;
+    transform: translate(-50%, 15%);
+}
+
+/* Filters Div */
+.filters-div {
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
+}

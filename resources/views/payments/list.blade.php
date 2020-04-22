@@ -87,6 +87,118 @@
             </div>
         </div>
         <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div id="filter-icon-div" class="ml-auto" onclick="showCloseIcon()" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <ion-icon id="icon-funnel" name="funnel" title="Filtragem"></ion-icon>
+                    </div>
+                    <div id="close-icon-div" class="ml-auto" onclick="showFunnelIcon()" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <ion-icon id="icon-close" name="close" title="Filtragem"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="filters-div collapse" id="collapseExample">
+                        <div class="payment-card shadow-sm">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo e deve ter o seguinte formato: 10,00 ou 10.000">
+                                        <span>
+                                            ?
+                                        </span>
+                                    </div>
+                                    <label for="valorRecebido">Estudante</label>
+                                    <br>
+                                    <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="tipoPagamento">Agente</label>
+                                    <br>
+                                    <select name="tipoPagamento">
+                                        <option selected disabled hidden class="text-truncate">Escolher tipo pagamento</option>
+                                        <option value="Multibanco">Multibanco</option>
+                                        <option value="Paypal">Paypal</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="comprovativoPagamento">SubAgente</label>
+                                    <br>
+                                    <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
+                                    <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo e deve ter o seguinte formato: 10,00 ou 10.000">
+                                        <span>
+                                            ?
+                                        </span>
+                                    </div>
+                                    <label for="valorRecebido">Universidade</label>
+                                    <br>
+                                    <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="tipoPagamento">Fornecedor</label>
+                                    <br>
+                                    <select name="tipoPagamento">
+                                        <option selected disabled hidden class="text-truncate">Escolher tipo pagamento</option>
+                                        <option value="Multibanco">Multibanco</option>
+                                        <option value="Paypal">Paypal</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="comprovativoPagamento" style="width:90%;">SubAgente</label>
+                                    <br>
+                                    <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
+                                    <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo e deve ter o seguinte formato: 10,00 ou 10.000">
+                                        <span>
+                                            ?
+                                        </span>
+                                    </div>
+                                    <label for="valorRecebido">Valor recebido</label>
+                                    <br>
+                                    <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="tipoPagamento">Tipo de pagamento</label>
+                                    <br>
+                                    <select name="tipoPagamento">
+                                        <option selected disabled hidden class="text-truncate">Escolher tipo pagamento</option>
+                                        <option value="Multibanco">Multibanco</option>
+                                        <option value="Paypal">Paypal</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="comprovativoPagamento" style="width:90%;">SubAgente</label>
+                                    <br>
+                                    <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
+                                    <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+
         <div class="container">
             @if (count($products))
             @foreach ($products as $product)
