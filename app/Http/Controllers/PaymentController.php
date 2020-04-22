@@ -164,8 +164,26 @@ class PaymentController extends Controller
       return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores'));
     }
 
-    public function search()
+    public function search(Request $request)
     {
-      
+      $fields = $request->all();
+      $idEstudante = $fields['estudante'];
+      $idAgente = $fields['agente'];
+      $idSubAgente = $fields['subagente'];
+      $idUniversidade = $fields['universidade'];
+      $idFornecedor = $fields['fornecedor'];
+      $dataInicio = $fields['dataInicio'];
+      $dataFim = $fields['dataFim'];
+
+      $queryCliente = Cliente::select();
+      $queryResponsabilidade = Fase::select();
+
+      if ($idEstudante != null) {
+        $queryCliente->where('idCliente', '=', $idEstudante)->get();
+      }
+
+      if ($dataInicio != null && $dataFim != null) {
+        $queryResponsabilidade->where('dataVencimento', '<=', $dataInicio AND 'dataVencimento', '>=', $dataFim)->get()->dd();
+      }
     }
 }
