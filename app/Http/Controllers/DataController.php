@@ -449,11 +449,11 @@ class DataController extends Controller
         $responsabilidade->valorSubAgente = null;
         $responsabilidade->valorUniversidade1 = 40;
         $responsabilidade->valorUniversidade2 = null;
-        $responsabilidade->verificacaoPagoCliente = true;
-        $responsabilidade->verificacaoPagoAgente = true;
-        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -464,9 +464,9 @@ class DataController extends Controller
         $responsabilidade->valorUniversidade2 = null;
         $responsabilidade->verificacaoPagoCliente = false;
         $responsabilidade->verificacaoPagoAgente = false;
-        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -475,11 +475,11 @@ class DataController extends Controller
         $responsabilidade->valorSubAgente = null;
         $responsabilidade->valorUniversidade1 = 40;
         $responsabilidade->valorUniversidade2 = null;
-        $responsabilidade->verificacaoPagoCliente = true;
-        $responsabilidade->verificacaoPagoAgente = true;
-        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -488,11 +488,11 @@ class DataController extends Controller
         $responsabilidade->valorSubAgente = null;
         $responsabilidade->valorUniversidade1 = 40;
         $responsabilidade->valorUniversidade2 = null;
-        $responsabilidade->verificacaoPagoCliente = true;
-        $responsabilidade->verificacaoPagoAgente = true;
-        $responsabilidade->verificacaoPagoSubAgente = true;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = true;
+        $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
         /************          Pago Responsabilidades          *************/

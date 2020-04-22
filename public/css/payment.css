@@ -126,6 +126,10 @@ p {
     transform: translate(-50%, -50%);
 }
 
+.white-circle img {
+    border-radius: 50%;
+}
+
 /* Context Menu */
 #contextMenu {
     background-color: red;
