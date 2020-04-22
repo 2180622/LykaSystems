@@ -262,8 +262,6 @@ class ClientController extends Controller
         }
 
 
-
-
         /* Lê os dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
 /*         $infosPassaport = new stdClass(); */
 
