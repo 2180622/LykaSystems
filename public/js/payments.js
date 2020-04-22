@@ -25,7 +25,7 @@ $(document).ready(function() {
             "paginate": {
                 "first": "Primeiro",
                 "last": "Ultimo",
-                "next": "Proximo",
+                "next": "Seguinte",
                 "previous": "Anterior"
             },
 
@@ -35,10 +35,6 @@ $(document).ready(function() {
         },
 
         "order": [1, 'desc'],
-
-        /* "bLengthChange": false, */
-        /* "bFilter": false, */
-
     });
 
     $(".dataTables_filter").hide();

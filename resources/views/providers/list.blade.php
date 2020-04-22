@@ -48,10 +48,19 @@ use \App\Http\Controllers\ExtraFunctionsController;
             </div>
         </div>
         <br>
-        <div class="table-responsive mt-2" style="overflow:hidden">
+        <div class="row mt-2 mb-4">
+            <div class="col-md-6">
+                @if (count($providers) == 1)
+                Está registado <strong>{{count($providers)}}</strong> pagamento pendente.
+                @else
+                Estão registados <strong>{{count($providers)}}</strong> pagamentos pendentes.
+                @endif
+            </div>
+        </div>
+        <div class="table-responsive" style="overflow:hidden">
             <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
                 <thead>
-                    <tr>
+                    <tr style="border-bottom: 2px solid #dee2e6;">
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Morada</th>
