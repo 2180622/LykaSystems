@@ -130,10 +130,12 @@
 
             <div class="col p-3 ">
                 <h5><i class="far fa-id-card mr-2"></i>Documento de identificação</h5><br>
-                <div><span class="text-secondary font-weight-bold">Número de cartão de cidadão:</span>
-                    {{$client->numCCid}}</div>
+                <div><span class="text-secondary font-weight-bold">Número de identificação pessoal:</span>
+                    {{$client->num_docOficial}}</div>
                 <div><span class="text-secondary font-weight-bold">Número de identificação fiscal:</span>
                     {{$client->NIF}}</div>
+                    <div><span class="text-secondary font-weight-bold">Data de validade:</span>
+                        {{$client->info_docOficial}}</div>
             </div>
 
 
