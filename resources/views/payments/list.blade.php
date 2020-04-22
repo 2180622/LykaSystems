@@ -107,102 +107,89 @@
                     <div class="filters-div collapse" id="collapseExample">
                         <div class="payment-card shadow-sm">
                             <div class="row">
+
                                 <div class="col-md-4">
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo e deve ter o seguinte formato: 10,00 ou 10.000">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                    <label for="valorRecebido">Estudante</label>
+                                    <label for="estudante">Estudante</label>
                                     <br>
-                                    <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="tipoPagamento">Agente</label>
-                                    <br>
-                                    <select name="tipoPagamento">
-                                        <option selected disabled hidden class="text-truncate">Escolher tipo pagamento</option>
-                                        <option value="Multibanco">Multibanco</option>
-                                        <option value="Paypal">Paypal</option>
-                                        <option value="Outro">Outro</option>
+                                    <select name="estudante">
+                                        <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
+                                        @foreach ($estudantes as $estudante)
+                                        <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="comprovativoPagamento">SubAgente</label>
+                                    <label for="agente">Agente</label>
                                     <br>
-                                    <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
-                                    <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
+                                    <select name="agente">
+                                        <option selected disabled hidden class="text-truncate">Selecionar agente</option>
+                                        @foreach ($agentes as $agente)
+                                        <option value="{{$agente->idAgente}}" class="text-truncate">{{$agente->nome.' '.$agente->apelido}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="subagente">SubAgente</label>
+                                    <br>
+                                    <select name="subagente">
+                                        <option selected disabled hidden class="text-truncate">Selecionar subagente</option>
+                                        @foreach ($subagentes as $subagente)
+                                          <option value="{{$subagente->idAgente}}" class="text-truncate">{{$subagente->nome.' '.$subagente->apelido}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
+
                             <br><br>
+
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo e deve ter o seguinte formato: 10,00 ou 10.000">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                    <label for="valorRecebido">Universidade</label>
+                                <div class="col-md-6">
+                                    <label for="universidade">Universidade</label>
                                     <br>
-                                    <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="tipoPagamento">Fornecedor</label>
-                                    <br>
-                                    <select name="tipoPagamento">
-                                        <option selected disabled hidden class="text-truncate">Escolher tipo pagamento</option>
-                                        <option value="Multibanco">Multibanco</option>
-                                        <option value="Paypal">Paypal</option>
-                                        <option value="Outro">Outro</option>
+                                    <select name="universidade">
+                                        <option selected disabled hidden class="text-truncate">Selecionar universidade</option>
+                                        @foreach ($universidades as $universidade)
+                                          <option value="{{$universidade->idUniversidade}}" class="text-truncate">{{$universidade->nome}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="comprovativoPagamento" style="width:90%;">SubAgente</label>
+                                <div class="col-md-6">
+                                    <label for="fornecedor">Fornecedor</label>
                                     <br>
-                                    <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
-                                    <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
+                                    <select name="fornecedor">
+                                        <option selected disabled hidden class="text-truncate">Selecionar fornecedor</option>
+                                        @foreach ($fornecedores as $fornecedor)
+                                          <option value="{{$fornecedor->idFornecedor}}" class="text-truncate">{{$fornecedor->nome}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
+
                             <br><br>
+
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="O valor recebido não deve conter nenhum símbolo e deve ter o seguinte formato: 10,00 ou 10.000">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                    <label for="valorRecebido">Valor recebido</label>
+                                <div class="col-md-6">
+                                    <label for="valorRecebido">Data de início</label>
                                     <br>
-                                    <input type="text" name="valorRecebido" placeholder="Inserir o valor recebido" autocomplete="off">
+                                    <input type="date" name="valorRecebido">
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="tipoPagamento">Tipo de pagamento</label>
+                                <div class="col-md-6">
+                                    <label for="tipoPagamento">Data de fim</label>
                                     <br>
-                                    <select name="tipoPagamento">
-                                        <option selected disabled hidden class="text-truncate">Escolher tipo pagamento</option>
-                                        <option value="Multibanco">Multibanco</option>
-                                        <option value="Paypal">Paypal</option>
-                                        <option value="Outro">Outro</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="comprovativoPagamento" style="width:90%;">SubAgente</label>
-                                    <br>
-                                    <input type="file" name="comprovativoPagamento" id="upfile" onchange="sub(this)">
-                                    <div class="input-file-div text-truncate" id="addFileButton" onclick="getFile()">Adicionar um ficheiro</div>
+                                    <input type="date" name="valorRecebido">
                                 </div>
                             </div>
+                            <br>
                         </div>
                     </div>
                 </div>
-                <br>
             </div>
         </div>
 
         <div class="container">
             @if (count($products))
             @foreach ($products as $product)
-            <a href="{{route('charges.show', $product)}}">
+            <a href="#">
                 <div class="row charge-div">
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">

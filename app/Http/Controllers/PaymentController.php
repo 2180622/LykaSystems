@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Fase;
 use App\Conta;
+use App\Agente;
 use App\Produto;
+use App\Cliente;
+use App\Fornecedor;
 use App\RelFornResp;
+use App\Universidade;
 use App\DocTransacao;
 use App\Responsabilidade;
 use Illuminate\Http\Request;
@@ -18,6 +22,12 @@ class PaymentController extends Controller
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
       $responsabilidadesPagas = Responsabilidade::where('estado', '=', 'Pago')->get();
       $responsabilidadesDivida = Responsabilidade::where('estado', '=', 'Dívida')->get();
+
+      $estudantes = Cliente::all();
+      $universidades = Universidade::all();
+      $agentes = Agente::where('tipo', '=', 'Agente')->get();
+      $subagentes = Agente::where('tipo', '=', 'Subagente')->get();
+      $fornecedores = Fornecedor::all();
 
       $valorTotalPendente = 0;
       $valorTotalPago = 0;
@@ -152,17 +162,6 @@ class PaymentController extends Controller
         }
       }
 
-      return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida'));
-    }
-
-    public function show(Fase $fase, Produto $product)
-    {
-      $fases = Fase::where('idProduto', '=', $product->idProduto)->get();
-      return view('payments.show', compact('product', 'fases'));
-    }
-
-    public function showpayment(Produto $product, Fase $fase)
-    {
-      return view('payments.showpayment', compact('product', 'fase'));
+      return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores'));
     }
 }
