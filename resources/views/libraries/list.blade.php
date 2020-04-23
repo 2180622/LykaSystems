@@ -47,6 +47,7 @@
             <br>
 
 
+
             <div class="row mt-3 mb-4">
                 <div class="col">
                     <span class="mr-2">Mostrar</span>
@@ -59,10 +60,10 @@
                     <span class="ml-2">por página</span>
                 </div>
                 <div class="col ">
-                    <div class="input-group pl-0 float-right" style="width:250px">
-                        <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
-                        <div class="input-group-append">
-                            <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+                    <div class="input-group pl-0 float-right search-section" style="width:250px">
+                        <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
+                        <div class="search-button input-group-append">
+                            <ion-icon name="search-outline" class="search-icon"></ion-icon>
                         </div>
                     </div>
                 </div>
