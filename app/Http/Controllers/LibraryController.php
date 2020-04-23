@@ -14,8 +14,14 @@ class LibraryController extends Controller
      */
     public function index()
     {
+        /* Permissões */
+        if (Auth::user()->tipo != "admin" ){
+            abort (401);
+        }
+
         $files = Biblioteca::all();
         return view('libraries.list', compact('files'));
+
     }
 
     /**

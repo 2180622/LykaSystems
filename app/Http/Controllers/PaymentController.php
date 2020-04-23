@@ -177,11 +177,13 @@ class PaymentController extends Controller
       $dataInicio = $fields['dataInicio'];
       $dataFim = $fields['dataFim'];
 
-      $query = Produto::select();
+      $query = Responsabilidade::select();
 
       if ($idFornecedor != 'null') {
-        $query->with(['fase', 'fase.responsabilidade','fase.responsabilidade.relacao', 'fase.responsabilidade.relacao.fornecedor'])->find($idProduto);
+        $query->with(['relacao', 'relacao.fornecedor'])->find();
       }
+
+      dd($query->get());
 
       if ($idEstudante != 'null') {
         $query->where('idCliente', $idEstudante);
@@ -201,8 +203,5 @@ class PaymentController extends Controller
             ->orWhere('idUniversidade2', $idUniversidade);
         });
       }
-
-      dd($query->get());
-
     }
 }
