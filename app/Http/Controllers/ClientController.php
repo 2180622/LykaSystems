@@ -235,7 +235,7 @@ class ClientController extends Controller
        }
 
         // Produtos adquiridos pelo cliente
-        $produtos = $client->produto;
+        $produtos = $client->produtoSaved;
 
         if ($produtos->isEmpty()) {
             $produtos=null;

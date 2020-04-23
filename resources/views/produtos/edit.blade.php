@@ -183,9 +183,17 @@
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
+                        
+                                        <label for="valor-fase{{$num}}">Valor da fase:</label><br>
+                                        <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
+                                        value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required><br>
                                     @else
                                         <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" readonly><br>
+                        
+                                        <label for="valor-fase{{$num}}">Valor da fase:</label><br>
+                                        <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
+                                        value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" readonly><br>
                                     @endIf
                                     
                                 </div>

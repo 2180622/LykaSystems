@@ -34,4 +34,8 @@ class Cliente extends Model
     public function produto(){
         return $this->hasMany("App\Produto","idCliente","idCliente")->withTrashed();
     }
+
+    public function produtoSaved(){
+        return $this->hasMany("App\Produto","idCliente","idCliente");
+    }
 }

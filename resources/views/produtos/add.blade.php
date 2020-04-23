@@ -162,6 +162,10 @@
                                         <label for="data-fase{{$num}}">Data de vencimento:</label><br>
                                         <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px"><br>
+                        
+                                        <label for="valor-fase{{$num}}">Valor da fase:</label><br>
+                                        <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
+                                        value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required><br>
 
                                         <input type="text" class="form-control" name="fase-idStock{{$num}}" id="fase-idStock{{$num}}" 
                                         value="{{old('idFaseStock',$fase->idFaseStock)}}"  maxlength="20" 

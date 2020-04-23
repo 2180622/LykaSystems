@@ -22,6 +22,7 @@ class DocAcademico extends Migration
             $table->enum('tipo',['Exame Universitário','Exame Nacional','Diploma','Certificado']);
             $table->string('imagem',255);
             $table->text('info');
+            $table->string('slug')->nullable();
             $table->timestamps();
             $table->boolean('verificacao')->default(false);
             $table->unsignedBigInteger('idFase');

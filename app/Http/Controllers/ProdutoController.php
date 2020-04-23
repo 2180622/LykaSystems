@@ -21,10 +21,10 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-          $produtos = Produto::all();
-          $totalprodutos = $produtos->count();
+        $produtos = Produto::all();
+        $totalprodutos = $produtos->count();
 
-          return view('produtos.list', compact('produtos', 'totalprodutos'));
+        return view('produtos.list', compact('produtos', 'totalprodutos'));
     }
 
 
@@ -53,7 +53,9 @@ class ProdutoController extends Controller
             $relacao->valor=0;
 
             for($i=0;$i<20;$i++){
-                $Fases[] = new Fase;
+                $fase = new Fase;
+                $fase->valorFase = 0;
+                $Fases[] = $fase;
                 $responsabilidade = new Responsabilidade;
                 $responsabilidade->valorCliente = 0;
                 $responsabilidade->valorAgente = 0;
@@ -149,8 +151,7 @@ class ProdutoController extends Controller
                     $fase->descricao = $fields['descricao-fase'.$i];
                     $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$i]));
                     $fase->idFaseStock = $fields['fase-idStock'.$i];
-                    $fase->valorFase = $valorRelacoes + $responsabilidade->valorCliente + $responsabilidade->valorAgente + 
-                        $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 +$responsabilidade->valorUniversidade2;
+                    $fase->valorFase = $fields['valor-fase'.$i];
                     $fase->create_at == date("Y-m-d",$t);
                     $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
                     $fase->idProduto = $produto->idProduto;
@@ -354,8 +355,7 @@ class ProdutoController extends Controller
 
                 $fase->descricao = $fields['descricao-fase'.$fase->idFase];
                 $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$fase->idFase]));
-                $fase->valorFase = $valorRelacoes + $responsabilidade->valorCliente + $responsabilidade->valorAgente + 
-                    $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 +$responsabilidade->valorUniversidade2;
+                $fase->valorFase = $fields['valor-fase'.$fase->idFase];
                 $fase->create_at == date("Y-m-d",$t);
                 $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
                 $fase->idProduto = $produto->idProduto;

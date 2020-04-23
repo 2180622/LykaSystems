@@ -23,6 +23,7 @@ class DocPessoal extends Migration
             $table->text('info')->nullable();
             $table->date('dataValidade')->nullable();
             $table->boolean('verificacao')->default(false);
+            $table->string('slug')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('idFase')->nullable();
                 $table->foreign('idFase')->references('idFase')->on('Fase');
