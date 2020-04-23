@@ -4,11 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasSlug;
 
 class Responsabilidade extends Model
 {
-    use HasSlug;
     use SoftDeletes;
     protected $table = 'Responsabilidade';
 
@@ -26,17 +24,5 @@ class Responsabilidade extends Model
 
     public function relacao(){
         return $this->hasMany("App\RelFornResp","idResponsabilidade","idResponsabilidade");
-    }
-
-    public function getSlugOptions() : SlugOptions
-    {
-      return SlugOptions::create()
-          ->generateSlugsFrom('descricao')
-          ->saveSlugsTo('slug');
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 }

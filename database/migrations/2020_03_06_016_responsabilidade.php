@@ -28,7 +28,6 @@ class Responsabilidade extends Migration
             $table->boolean('verificacaoPagoUni1')->default(false);
             $table->boolean('verificacaoPagoUni2')->default(false);
             $table->enum('estado', ['Pendente', 'Pago', 'Dívida'])->default('Pendente');
-            $table->string('slug')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

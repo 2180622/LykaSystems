@@ -2,14 +2,12 @@
 
 namespace App;
 
-use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fase extends Model
 {
-    use HasSlug;
     use SoftDeletes;
     protected $table = 'Fase';
 
@@ -45,17 +43,5 @@ class Fase extends Model
 
     public function faseStock(){
         return $this->belongsTo("App\FaseStock","idFaseStock","idFaseStock")->withTrashed();
-    }
-
-    public function getSlugOptions() : SlugOptions
-    {
-      return SlugOptions::create()
-          ->generateSlugsFrom('descricao')
-          ->saveSlugsTo('slug');
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 }
