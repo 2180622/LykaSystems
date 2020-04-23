@@ -166,9 +166,10 @@
                                 <br>
                             </div>
 
+                            {{-- Estudantes -> Secção de procura --}}
                             <div id="div-estudante" style="display:none;">
                                 <div class="row">
-                                    <p>Estudantes &nbsp;</p>
+                                    <p>Filtragem por Estudantes &nbsp;</p>
                                     <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
                                         <span>
                                             ?
@@ -177,12 +178,13 @@
                                 </div>
                                 <br>
                                 <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="estudante">Estudantes</label>
                                             <br>
                                             <select name="estudante">
-                                                <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
+                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar estudante</option>
                                                 @foreach ($estudantes as $estudante)
                                                 <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
                                                 @endforeach
@@ -208,9 +210,10 @@
                                 </form>
                             </div>
 
+                            {{-- Agentes -> Secção de procura --}}
                             <div id="div-agente" style="display:none;">
                                 <div class="row">
-                                    <p>Estudantes &nbsp;</p>
+                                    <p>Filtragem por Agentes &nbsp;</p>
                                     <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
                                         <span>
                                             ?
@@ -219,14 +222,15 @@
                                 </div>
                                 <br>
                                 <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="estudante">Estudantes</label>
+                                            <label for="agente">Agentes</label>
                                             <br>
-                                            <select name="estudante">
-                                                <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
-                                                @foreach ($estudantes as $estudante)
-                                                <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                            <select name="agente">
+                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar agente</option>
+                                                @foreach ($agentes as $agente)
+                                                <option value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -250,9 +254,10 @@
                                 </form>
                             </div>
 
+                            {{-- SubAgentes -> Secção de procura --}}
                             <div id="div-subagente" style="display:none;">
                                 <div class="row">
-                                    <p>Estudantes &nbsp;</p>
+                                    <p>Filtragem por SubAgentes &nbsp;</p>
                                     <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
                                         <span>
                                             ?
@@ -261,14 +266,15 @@
                                 </div>
                                 <br>
                                 <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="estudante">Estudantes</label>
+                                            <label for="subagente">SubAgentes</label>
                                             <br>
-                                            <select name="estudante">
-                                                <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
-                                                @foreach ($estudantes as $estudante)
-                                                <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                            <select name="subagente">
+                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar subagente</option>
+                                                @foreach ($subagentes as $subagente)
+                                                <option value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -292,9 +298,10 @@
                                 </form>
                             </div>
 
+                            {{-- Universidade -> Secção de procura --}}
                             <div id="div-universidade" style="display:none;">
                                 <div class="row">
-                                    <p>Estudantes &nbsp;</p>
+                                    <p>Filtragem por Universidades &nbsp;</p>
                                     <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
                                         <span>
                                             ?
@@ -303,14 +310,15 @@
                                 </div>
                                 <br>
                                 <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="estudante">Estudantes</label>
+                                            <label for="universidade">Universidades</label>
                                             <br>
-                                            <select name="estudante">
-                                                <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
-                                                @foreach ($estudantes as $estudante)
-                                                <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                            <select name="universidade">
+                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar universidade</option>
+                                                @foreach ($universidades as $universidade)
+                                                <option value="{{$universidade->idUniversidade}}">{{$universidade->nome}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -334,9 +342,10 @@
                                 </form>
                             </div>
 
+                            {{-- Fornecedor -> Secção de procura --}}
                             <div id="div-fornecedor" style="display:none;">
                                 <div class="row">
-                                    <p>Estudantes &nbsp;</p>
+                                    <p>Filtragem por Fornecedor &nbsp;</p>
                                     <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
                                         <span>
                                             ?
@@ -345,14 +354,15 @@
                                 </div>
                                 <br>
                                 <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="estudante">Estudantes</label>
+                                            <label for="fornecedor">Fornecedores</label>
                                             <br>
-                                            <select name="estudante">
-                                                <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
-                                                @foreach ($estudantes as $estudante)
-                                                <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                            <select name="fornecedor">
+                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar fornecedor</option>
+                                                @foreach ($fornecedores as $fornecedor)
+                                                <option value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -376,9 +386,10 @@
                                 </form>
                             </div>
 
+                            {{-- Data -> Secção de procura --}}
                             <div id="div-data" style="display:none;">
                                 <div class="row">
-                                    <p>Estudantes &nbsp;</p>
+                                    <p>Filtragem por Data &nbsp;</p>
                                     <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
                                         <span>
                                             ?
@@ -387,15 +398,25 @@
                                 </div>
                                 <br>
                                 <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="estudante">Estudantes</label>
+                                            <label for="mes">Mês do ano</label>
                                             <br>
-                                            <select name="estudante">
-                                                <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
-                                                @foreach ($estudantes as $estudante)
-                                                <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
-                                                @endforeach
+                                            <select name="mes">
+                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar mês</option>
+                                                <option value="jan">Janeiro</option>
+                                                <option value="fev">Fevereiro</option>
+                                                <option value="mar">Março</option>
+                                                <option value="abr">Abril</option>
+                                                <option value="mai">Maio</option>
+                                                <option value="jun">Junho</option>
+                                                <option value="jul">Julho</option>
+                                                <option value="ago">Agosto</option>
+                                                <option value="set">Setembro</option>
+                                                <option value="out">Outubro</option>
+                                                <option value="nov">Novembro</option>
+                                                <option value="dez">Dezembro</option>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
