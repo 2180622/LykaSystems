@@ -125,7 +125,7 @@
                                         <select name="estudante">
                                             <option selected hidden class="text-truncate" value="null">Selecionar estudante</option>
                                             @foreach ($estudantes as $estudante)
-                                            <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                            <option value="{{$estudante->idCliente}}" title="{{$estudante->nome.' '.$estudante->apelido}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -135,7 +135,7 @@
                                         <select name="agente">
                                             <option selected hidden class="text-truncate" value="null">Selecionar agente</option>
                                             @foreach ($agentes as $agente)
-                                            <option value="{{$agente->idAgente}}" class="text-truncate">{{$agente->nome.' '.$agente->apelido}}</option>
+                                            <option value="{{$agente->idAgente}}" class="text-truncate" title="{{$agente->nome.' '.$agente->apelido}}">{{$agente->nome.' '.$agente->apelido}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -145,7 +145,7 @@
                                         <select name="subagente">
                                             <option selected hidden class="text-truncate" value="null">Selecionar subagente</option>
                                             @foreach ($subagentes as $subagente)
-                                            <option value="{{$subagente->idAgente}}" class="text-truncate">{{$subagente->nome.' '.$subagente->apelido}}</option>
+                                            <option value="{{$subagente->idAgente}}" class="text-truncate" title="{{$subagente->nome.' '.$subagente->apelido}}">{{$subagente->nome.' '.$subagente->apelido}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -154,23 +154,33 @@
                                 <br><br>
 
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="universidade">Universidade</label>
-                                        <br>
-                                        <select name="universidade">
-                                            <option selected hidden class="text-truncate" value="null">Selecionar universidade</option>
-                                            @foreach ($universidades as $universidade)
-                                            <option value="{{$universidade->idUniversidade}}" class="text-truncate">{{$universidade->nome}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
+                                  <div class="col-md-4">
+                                      <label for="universidade">Universidade</label>
+                                      <br>
+                                      <select name="universidade">
+                                          <option selected hidden class="text-truncate" value="null">Selecionar universidade</option>
+                                          @foreach ($universidades as $universidade)
+                                          <option value="{{$universidade->idUniversidade}}" class="text-truncate" title="{{$universidade->nome}}">{{$universidade->nome}}</option>
+                                          @endforeach
+                                      </select>
+                                  </div>
+                                    <div class="col-md-4">
                                         <label for="fornecedor">Fornecedor</label>
                                         <br>
                                         <select name="fornecedor">
                                             <option selected hidden class="text-truncate" value="null">Selecionar fornecedor</option>
                                             @foreach ($fornecedores as $fornecedor)
-                                            <option value="{{$fornecedor->idFornecedor}}" class="text-truncate">{{$fornecedor->nome}}</option>
+                                            <option value="{{$fornecedor->idFornecedor}}" class="text-truncate" title="{{$fornecedor->nome}}">{{$fornecedor->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="conta">Conta bancária</label>
+                                        <br>
+                                        <select name="conta">
+                                            <option selected hidden class="text-truncate" value="null">Selecionar conta banc...</option>
+                                            @foreach ($contas as $conta)
+                                            <option value="{{$conta->idConta}}" class="text-truncate" title="{{$conta->descricao}}">{{$conta->descricao}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -179,12 +189,12 @@
                                 <br><br>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="dataInicio">Data de início</label>
                                         <br>
                                         <input type="date" name="dataInicio" value="null">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="dataFim">Data de fim</label>
                                         <br>
                                         <input type="date" name="dataFim" value="null">

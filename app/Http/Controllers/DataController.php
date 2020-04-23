@@ -360,6 +360,18 @@ class DataController extends Controller
         $universidade->obsCandidaturas = null;
         $universidade->save();
 
+        $universidade = new Universidade;
+        $universidade->nome = 'Universidade de Aveiro';
+        $universidade->morada = 'Aveiro, Portugal';
+        $universidade->telefone = 912345678;
+        $universidade->email = 'aveiro@uni.pt';
+        $universidade->NIF = 5478236541;
+        $universidade->IBAN = 'PT50 8651 2364 0901678901 12';
+        $universidade->obsContactos = null;
+        $universidade->obsCursos = null;
+        $universidade->obsCandidaturas = null;
+        $universidade->save();
+
         /*********************          Users          *********************/
 
         $user = new User;
@@ -437,8 +449,8 @@ class DataController extends Controller
         $produto->idAgente = 1;
         $produto->idSubAgente = null;
         $produto->idCliente = 2;
-        $produto->idUniversidade1 = 1;
-        $produto->idUniversidade2 = null;
+        $produto->idUniversidade1 = 2;
+        $produto->idUniversidade2 = 1;
         $produto->save();
 
         /***************          Responsabilidades          ***************/
