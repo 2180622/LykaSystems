@@ -32,9 +32,10 @@
             <h6>Adicionar ficheiro</h6>
         </div>
         <br>
-        <form method="POST" action="#" class="form-group needs-validation pt-3" id="form_library" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="#" class="form-group needs-validation pt-3" id="form_library"
+            enctype="multipart/form-data" novalidate>
             @csrf
-            @include('libraries.partials.addfile')
+            @include('libraries.partials.add-edit')
             <br>
             <div class="text-right">
                 <button type="submit" class="top-button mr-2" name="submit"></i>Adicionar ficheiro</button>

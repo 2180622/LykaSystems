@@ -17,6 +17,7 @@ class Biblioteca extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idBiblioteca');
+            $table->enum('acesso',['Privado', 'Público'])->default('Privado');
             $table->string('descricao',255);
             $table->string('ficheiro',255);
             $table->timestamps();

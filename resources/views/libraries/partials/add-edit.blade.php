@@ -21,9 +21,11 @@
     <div class="col" style="min-width: 300px">
         <div>Informação sobre o ficheiro</div><br>
         {{-- Instruçõess --}}
-        <div id="div_incial" class="p-3 bg-light rounded shadow-sm text-secondary" style="display:blcok;">
-            <div><i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado</div><br>
-            <div>Para continuar escolha um ficheiro</div>
+        <div id="div_incial" class="p-3 bg-light rounded border" style="display:blcok;">
+            <div><i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado
+                <br><br>
+                <small>(Para continuar escolha um ficheiro)</small></div>
+            <div></div>
         </div>
 
 
@@ -37,14 +39,19 @@
 
         <hr>
 
-        <div id="div_descricao">
-            <label for="descricao" style="font-weight: 700!important;">Descrição:</label>
-            <input type="text" class="form-control" name="descricao" id="descricao"
-                value="{{old('descricao',$library->descricao)}}" maxlength="100">
+        <div class="row">
+            <div class="col">
+                <label for="descricao" style="font-weight: 700!important;">Descrição:</label>
+                <input type="text" class="form-control" name="descricao" id="descricao" maxlength="100">
+            </div>
+            <div class="col">
+                <label for="permissao" style="font-weight: 700!important;">Tipo de acesso:</label>
+                <select name="permissao" id="permissao" class="form-control" >
+                    <option>Privado</option>
+                    <option>Público</option>
+                </select>
+            </div>
         </div>
-
-        <br>
-
 
     </div>
 

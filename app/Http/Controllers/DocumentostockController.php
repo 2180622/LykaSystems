@@ -38,31 +38,32 @@ class DocumentostockController extends Controller
         return view('documentostock.show', compact('documentostock'));
     }
 
-    public function edit(DocStock $docstock)
+    public function edit(DocStock $documentostock)
     {
         if (Auth::user()->tipo == "admin"){
-            return view('documentostock.edit', compact('docstock'));
+
+            return view('documentostock.edit', compact('documentostock'));
         }else{
             /* não tem permissões */
             abort (401);
       }
     }
 
-    public function update(StoreDocstockRequest $request, DocStock $docstock)
+    public function update(StoreDocstockRequest $request, DocStock $documentostock)
     {
         $fields = $request->validated();
-        $docstock->fill($fields);
+        $documentostock->fill($fields);
 
         // data em que foi modificado
         $t=time();
-        $docstock->updated_at == date("Y-m-d",$t);
-        $docstock->save();
+        $documentostock->updated_at == date("Y-m-d",$t);
+        $documentostock->save();
 
         return redirect()->route('produtostock.index')->with('success', 'Dados do documento de stock modificados com sucesso');
     }
 
-    public function destroy(DocStock $docstock){
-        $docstock->delete();
+    public function destroy(DocStock $documentostock){
+        $documentostock->delete();
 
         return redirect()->route('produtostock.index')->with('success', 'Documento stock eliminado com sucesso');
     }

@@ -31,15 +31,16 @@
                 <h6>Editar informações</h6>
             </div>
             <br>
-            <p>Está neste momento a editar o Documento Stock - <b>{{$docstock->tipo}}
-              @if ($docstock->tipoPessoal == null)
-                <td>{{$docstock->tipoAcademico}}</td>
+            <h6>Está neste momento a editar o <b>Documento Stock número {{$documentostock->idDocStock}}:</b><br><br><br>
+                  Documento do Tipo {{$documentostock->tipo}} -
+              @if ($documentostock->tipoPessoal == null)
+                {{$documentostock->tipoAcademico}}
               @else
-                <td>{{$docstock->tipoPessoal}}</td>
+                {{$documentostock->tipoPessoal}}
               @endif
-            </b>.</p>
+            </h6>
 
-            <form method="PUT" action="{{route('documentostock.update', $docstock)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="POST" action="{{route('documentostock.update', $documentostock)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
