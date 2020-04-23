@@ -168,40 +168,20 @@ class PaymentController extends Controller
     public function search(Request $request)
     {
       $fields = $request->all();
-      $idEstudante = $fields['estudante'];
-      $idAgente = $fields['agente'];
-      $idSubAgente = $fields['subagente'];
-      $idUniversidade = $fields['universidade'];
-      $idFornecedor = $fields['fornecedor'];
-      $idConta = $fields['conta'];
-      $dataInicio = $fields['dataInicio'];
-      $dataFim = $fields['dataFim'];
+      $idEstudante = (isset($fields['estudante']) ? $fields['estudante'] : null);
+      $idAgente = (isset($fields['agente']) ? $fields['agente'] : null);
+      $idSubAgente = (isset($fields['subagente']) ? $fields['subagente'] : null);
+      $idUniversidade = (isset($fields['universidade']) ? $fields['universidade'] : null);
+      $idFornecedor = (isset($fields['fornecedor']) ? $fields['fornecedor'] : null);
+      $dataInicio = (isset($fields['dataInicio']) ? $fields['dataInicio'] : null);
+      $dataFim = (isset($fields['dataFim']) ? $fields['dataFim'] : null);
+      $mes = (isset($fields['mes']) ? $fields['mes'] : null);
 
-      $query = Responsabilidade::select();
-
-      if ($idFornecedor != 'null') {
-        $query->with(['relacao', 'relacao.fornecedor'])->find();
+      if ($idEstudante != null) {
+        // $query = Cliente::select();
+        // $query->with(['produto', 'produto.fase', 'produto.fase.responsabilidade'])->find($idEstudante);
+        // dd($query->get());
       }
 
-      dd($query->get());
-
-      if ($idEstudante != 'null') {
-        $query->where('idCliente', $idEstudante);
-      }
-
-      if ($idAgente != 'null') {
-        $query->where('idAgente', $idAgente);
-      }
-
-      if ($idSubAgente != 'null') {
-        $query->where('idSubAgente', $idSubAgente);
-      }
-
-      if ($idUniversidade != 'null') {
-        $query->where(function($query) use($idUniversidade) {
-            $query->where('idUniversidade1', $idUniversidade)
-            ->orWhere('idUniversidade2', $idUniversidade);
-        });
-      }
     }
 }
