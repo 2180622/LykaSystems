@@ -175,15 +175,16 @@ class PaymentController extends Controller
       $dataInicio = $fields['dataInicio'];
       $dataFim = $fields['dataFim'];
 
-      $queryCliente = Cliente::select();
-      $queryResponsabilidade = Fase::select();
+      $query = Produto::select();
 
-      if ($idEstudante != null) {
-        $queryCliente->where('idCliente', '=', $idEstudante)->get();
+      if ($idEstudante != 'null') {
+        $query->where('idCliente', '=', $idEstudante)->get();
       }
 
-      if ($dataInicio != null && $dataFim != null) {
-        $queryResponsabilidade->where('dataVencimento', '<=', $dataInicio AND 'dataVencimento', '>=', $dataFim)->get()->dd();
+      if ($idAgente != 'null') {
+        $query->where('idAgente', '=', $idAgente)->get();
       }
+
+      dd($query->get());
     }
 }
