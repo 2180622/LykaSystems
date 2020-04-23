@@ -507,6 +507,19 @@ class DataController extends Controller
         $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->save();
 
+        $responsabilidade = new Responsabilidade;
+        $responsabilidade->valorCliente = 15;
+        $responsabilidade->valorAgente = 0;
+        $responsabilidade->valorSubAgente = null;
+        $responsabilidade->valorUniversidade1 = 40;
+        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->verificacaoPagoSubAgente = false;
+        $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->verificacaoPagoUni2 = false;
+        $responsabilidade->save();
+
         /************          Pago Responsabilidades          *************/
 
         /*$pago = new PagoResponsabilidade;
@@ -522,6 +535,12 @@ class DataController extends Controller
         $relacao = new RelFornResp;
         $relacao->valor = 80;
         $relacao->idResponsabilidade = 2;
+        $relacao->idFornecedor = 1;
+        $relacao->save();
+
+        $relacao = new RelFornResp;
+        $relacao->valor = 150;
+        $relacao->idResponsabilidade = 5;
         $relacao->idFornecedor = 1;
         $relacao->save();
 
@@ -582,7 +601,7 @@ class DataController extends Controller
         $fase->icon = 'cube';
         $fase->idProduto = 2;
         $fase->idFaseStock = 1;
-        $fase->idResponsabilidade = 1;
+        $fase->idResponsabilidade = 5;
         $fase->save();
 
         $fase = new Fase;

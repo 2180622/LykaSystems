@@ -93,6 +93,8 @@ class AgenteController extends Controller
         $user->fill($fieldsUser);
 
 
+
+
         /* Criação de SubAgente */
         $agent->idAgenteAssociado= $requestAgent->idAgenteAssociado;
 
