@@ -179,6 +179,10 @@ class PaymentController extends Controller
 
       $query = Produto::select();
 
+      if ($idFornecedor != 'null') {
+        $query->with(['fase', 'fase.responsabilidade','fase.responsabilidade.relacao', 'fase.responsabilidade.relacao.fornecedor'])->find($idProduto);
+      }
+
       if ($idEstudante != 'null') {
         $query->where('idCliente', $idEstudante);
       }
@@ -199,5 +203,6 @@ class PaymentController extends Controller
       }
 
       dd($query->get());
+
     }
 }

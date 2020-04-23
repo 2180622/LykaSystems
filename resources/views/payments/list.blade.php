@@ -204,7 +204,6 @@
                                 <div class="row">
                                     <div class="form-group text-right ml-auto" style="margin-right:15px;">
                                         <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
-                                        <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
                                     </div>
                                 </div>
                             </form>
