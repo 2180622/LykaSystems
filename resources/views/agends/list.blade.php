@@ -143,7 +143,7 @@
                     $("#modalCalendar input[name='cor']").val(color);
 
                     let description = element.event.extendedProps.description;
-                    $("#modalCalendar textarea[name='descricao']").val(description);
+                    $("#modalCalendar input[name='descricao']").val(description);
                 },
 
                 select: function (element) {

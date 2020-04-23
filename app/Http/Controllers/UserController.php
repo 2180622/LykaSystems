@@ -5,11 +5,12 @@ use Mail;
 use App\User;
 use App\Agente;
 use App\Cliente;
-use Carbon\Carbon;
 use App\Administrador;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Mail\SendEmailConfirmation;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\SendEmailConfirmation;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreAdministradorRequest;
 
@@ -66,9 +67,20 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request, User $user)
+    public function update(StoreUserRequest $request, StoreAdministradorRequest $requestAdmin, User $user)
     {
+        $fields = $request->validated();
+        $user->fill($fields);
+
+        $update = time();
+        $user->updated_at == date("Y-m-d",$update);
         //
+        // DB::table('User')
+        // ->where('idAdmin', $admin->idAdmin)
+        // ->update(['email' => $admin->email]);
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', 'Dados do user modificados com sucesso');
     }
 
 

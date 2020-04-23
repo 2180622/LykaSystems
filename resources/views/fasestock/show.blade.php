@@ -53,7 +53,7 @@
                     {{-- Cabeçalho da tabela --}}
                     <thead>
                         <tr>
-                            <th>Número de Documentos</th>
+                            <th>Número de Documentos da Fase</th>
                             <th>Tipo</th>
                             <th>Documento</th>
                             <th class="text-center">Opções</th>
@@ -82,7 +82,7 @@
                                     action="{{route('documentostock.destroy',$docstock)}}" class="d-inline-block form_client_id">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
+                                    <button type="submit" class="btn_delete" title="Eliminar DocStock" data-toggle="modal"
                                         data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>

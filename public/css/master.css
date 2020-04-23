@@ -30,6 +30,7 @@ html, body {
     font-weight: 800;
     padding: 7px 17px;
     font-size: 0.6rem;
+    cursor: pointer;
     border-radius: 25px;
     border: 2px solid #A9A9A9;
     text-transform: uppercase;

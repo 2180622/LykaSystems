@@ -72,7 +72,6 @@ class DataController extends Controller
         $agente->pais = 'Portugal';
         $agente->NIF = 123456789;
         $agente->num_doc = 123456789;
-        $agente->img_doc = 'default-photos/M.jpg';
         $agente->info_doc = '{"campo1":"NIF","valor1":123456789,
             "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefone1 = 932354453;
@@ -91,7 +90,6 @@ class DataController extends Controller
         $agente->pais = 'Portugal';
         $agente->NIF = '213455767';
         $agente->num_doc = 321654987;
-        $agente->img_doc = 'default-photos/F.jpg';
         $agente->info_doc = '{"campo1":"NIF","valor1":321654987,
             "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefone1 = 932355555;
@@ -110,7 +108,6 @@ class DataController extends Controller
         $agente->pais = 'Portugal';
         $agente->NIF = '987654321';
         $agente->num_doc = 789456123;
-        $agente->img_doc = 'default-photos/M.jpg';
         $agente->info_doc = '{"campo1":"NIF","valor1":789456123,
             "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefone1 = 963423423;
@@ -153,12 +150,9 @@ class DataController extends Controller
         $cliente->nomeInstituicaoOrigem = 'Instituto Frances';
         $cliente->cidadeInstituicaoOrigem = 'Paris';
         $cliente->num_docOficial = '9845776436ZZ8';
-        $cliente->img_docOficial = 'default-photos/M.jpg';
         $cliente->info_docOficial = date('Y-m-d',strtotime('27-01-1995'));
-        $cliente->img_Passaport = 'default-photos/M.jpg';
         $cliente->info_Passaport = '{"numPassaport":"9453574976496","dataValidPP":"'.date('Y-m-d',strtotime('27-01-1995')).'",
             "passaportPaisEmi":"França","localEmissaoPP":"Paris"}';
-        $cliente->img_docAcademico = 'default-photos/M.jpg';
         $cliente->info_docAcademico = '{"campo1":"Tipo","valor1":"Certificado",
             "campo2":"Nota Final","valor2":16}';
         $cliente->obsPessoais = null;
@@ -192,13 +186,9 @@ class DataController extends Controller
         $cliente->cidadeInstituicaoOrigem = 'Cidade Russa';
         $cliente->cidadeInstituicaoOrigem = 'Paris';
         $cliente->num_docOficial = '61436534643DS4';
-        $cliente->img_docOficial = 'default-photos/F.jpg';
-        $cliente->info_docOficial = '{"campo1":"NIF","valor1":61436534643DS4,
-            "campo2":"Data Validade","valor2":"25/03/2022"}';
-        $cliente->img_Passaport = 'default-photos/F.jpg';
+        $cliente->info_docOficial = date('Y-m-d',strtotime('27-01-1993'));
         $cliente->info_Passaport = '{"numPassaport":"9453574976496","dataValidPP":"'.date('Y-m-d',strtotime('27-01-1995')).'",
             "passaportPaisEmi":"França","localEmissaoPP":"Paris"}';
-        $cliente->img_docAcademico = null;
         $cliente->info_docAcademico = null;
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;

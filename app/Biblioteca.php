@@ -11,6 +11,6 @@ class Biblioteca extends Model
     protected $primaryKey = 'idBiblioteca';
 
     protected $fillable = [
-        'descricao','ficheiro'
+        'acesso','descricao','ficheiro'
         ];
 }
