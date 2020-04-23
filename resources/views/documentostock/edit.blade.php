@@ -39,7 +39,7 @@
               @endif
             </b>.</p>
 
-            <form method="POST" action="{{route('documentostock.update',$docstock)}}" class="form-group needs-validation pt-3" id="form_client"
+            <form method="PUT" action="{{route('documentostock.update', $docstock)}}" class="form-group needs-validation pt-3" id="form_client"
                   enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
@@ -50,19 +50,9 @@
                     <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
                 </div>
             </form>
-
-
         </div>
     </div>
-
-
-
 @endsection
-
-
-
-
-
 {{-- Scripts --}}
 @section('scripts')
 
@@ -71,5 +61,4 @@
 
     {{-- script permite definir se um input recebe só numeros OU so letras --}}
     <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
-
 @endsection

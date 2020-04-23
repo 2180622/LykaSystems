@@ -45,7 +45,7 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Estão registados no sistema <strong>{{$totalprodutostock}}</strong> produtos stock
+                Estão registados no sistema <strong>{{$totalprodutostock}}</strong> produtos stock, <strong>{{$totalfasestock}}</strong> fases stock e <strong>{{$totaldocstock}}</strong> documentos stock.
             </div>
         </div>
 
