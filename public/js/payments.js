@@ -23,37 +23,46 @@ function showFunnelIcon() {
 var optionsDiv = document.getElementById("div-options");
 
 function estudante() {
-  var estudanteDiv = document.getElementById("div-estudante");
-  optionsDiv.style.display = "none";
-  estudanteDiv.style.display = "block";
+    var estudanteDiv = document.getElementById("div-estudante");
+    optionsDiv.style.display = "none";
+    estudanteDiv.style.display = "block";
 }
 
 function agente() {
-  var agenteDiv = document.getElementById("div-agente");
-  optionsDiv.style.display = "none";
-  agenteDiv.style.display = "block";
+    var agenteDiv = document.getElementById("div-agente");
+    optionsDiv.style.display = "none";
+    agenteDiv.style.display = "block";
 }
 
 function subagente() {
-  var subagenteDiv = document.getElementById("div-subagente");
-  optionsDiv.style.display = "none";
-  subagenteDiv.style.display = "block";
+    var subagenteDiv = document.getElementById("div-subagente");
+    optionsDiv.style.display = "none";
+    subagenteDiv.style.display = "block";
 }
 
 function universidade() {
-  var universidadeDiv = document.getElementById("div-universidade");
-  optionsDiv.style.display = "none";
-  universidadeDiv.style.display = "block";
+    var universidadeDiv = document.getElementById("div-universidade");
+    optionsDiv.style.display = "none";
+    universidadeDiv.style.display = "block";
 }
 
 function fornecedor() {
-  var fornecedorDiv = document.getElementById("div-fornecedor");
-  optionsDiv.style.display = "none";
-  fornecedorDiv.style.display = "block";
+    var fornecedorDiv = document.getElementById("div-fornecedor");
+    optionsDiv.style.display = "none";
+    fornecedorDiv.style.display = "block";
 }
 
 function datas() {
-  var datasDiv = document.getElementById("div-data");
-  optionsDiv.style.display = "none";
-  datasDiv.style.display = "block";
+    var datasDiv = document.getElementById("div-data");
+    optionsDiv.style.display = "none";
+    datasDiv.style.display = "block";
+}
+
+
+var cancelButton = document.getElementsByClassName('cancel-button');
+for (var i = 0; i < cancelButton.length; i++) {
+    cancelButton[i].onclick = function() {
+        this.parentElement.parentElement.parentElement.parentElement.style.display = "none";
+        optionsDiv.style.display = "block";
+    }
 }

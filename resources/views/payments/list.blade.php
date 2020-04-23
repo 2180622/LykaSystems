@@ -105,7 +105,7 @@
             <div class="row">
                 <div class="col">
                     <div class="filters-div collapse" id="collapseExample">
-                        <div class="payment-card shadow-sm">
+                        <div class="payment-card shadow-sm" style="height: 310px;">
                             <div id="div-options">
                                 <div class="row">
                                     <p>Secção de filtragem &nbsp;</p>
@@ -118,8 +118,8 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div id="estudantes">
-                                            <div class="box text-center" onclick="estudante()">
+                                        <div id="estudantes" onclick="estudante()">
+                                            <div class="box text-center">
                                                 <p>Estudantes</p>
                                             </div>
                                         </div>
@@ -185,6 +185,7 @@
                                             <br>
                                             <select name="estudante">
                                                 <option selected disabled hidden class="text-truncate" value="null">Selecionar estudante</option>
+                                                <option value="all">Todos</option>
                                                 @foreach ($estudantes as $estudante)
                                                 <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
                                                 @endforeach
@@ -205,6 +206,7 @@
                                     <div class="row">
                                         <div class="form-group text-right ml-auto" style="margin-right:15px;">
                                             <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
+                                            <button type="button" class="cancel-button">Cancelar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -249,6 +251,7 @@
                                     <div class="row">
                                         <div class="form-group text-right ml-auto" style="margin-right:15px;">
                                             <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
+                                            <button type="button" class="cancel-button">Cancelar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -293,6 +296,7 @@
                                     <div class="row">
                                         <div class="form-group text-right ml-auto" style="margin-right:15px;">
                                             <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
+                                            <button type="button" class="cancel-button">Cancelar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -337,6 +341,7 @@
                                     <div class="row">
                                         <div class="form-group text-right ml-auto" style="margin-right:15px;">
                                             <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
+                                            <button type="button" class="cancel-button">Cancelar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -381,6 +386,7 @@
                                     <div class="row">
                                         <div class="form-group text-right ml-auto" style="margin-right:15px;">
                                             <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
+                                            <button type="button" class="cancel-button">Cancelar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -434,6 +440,7 @@
                                     <div class="row">
                                         <div class="form-group text-right ml-auto" style="margin-right:15px;">
                                             <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
+                                            <button type="button" class="cancel-button">Cancelar</button>
                                         </div>
                                     </div>
                                 </form>

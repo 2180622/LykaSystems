@@ -178,10 +178,8 @@ class PaymentController extends Controller
       $mes = (isset($fields['mes']) ? $fields['mes'] : null);
 
       if ($idEstudante != null) {
-        // $query = Cliente::select();
-        // $query->with(['produto', 'produto.fase', 'produto.fase.responsabilidade'])->find($idEstudante);
-        // dd($query->get());
+        $cliente = Cliente::where('idCliente', $idEstudante)->first();
+        $fases = Fase::where('idProduto', $cliente->produto->first()->idProduto)->get();
       }
-
     }
 }

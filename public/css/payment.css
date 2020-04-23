@@ -229,7 +229,8 @@ p {
 
 /* Option box */
 #estudantes, #agentes, #subagentes, #universidades, #fornecedores, #datas {
-    padding: 20px;
+    cursor: pointer;
+    padding: 10px;
 }
 
 .box {
