@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Console\Kernel;
 
@@ -92,7 +91,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/documentostock', 'DocumentostockController');
     Route::post('/fasestock/{fasestock}', 'DocumentostockController@store')->name('documentostock.store');
     Route::get('/documentostock/{docstock}', 'DocumentostockController@show')->name('documentostock.show');
-    Route::delete('/documentostock/{docstock}', 'DocumentostockController@destroy')->name('documentostock.destroy');
 
     /* Produtos */
     Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
