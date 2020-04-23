@@ -175,10 +175,10 @@
     </ul>
 
 
-    {{-- Informação do utilizador + Terminar Sessão --}}
+    {{-- AJUDA + Terminar Sessão --}}
     <div class="text-center mb-4">
         <div class="opts_btn shadow-sm align-self-center">
-            <a href="#" title="Definições" class="user_btn"><i class="fas fa-cog"></i></a>
+            <a href="#" title="Ajuda" class="user_btn"><i class="fas fa-question"></i></a>
         </div>
 
         <div class="user_opts shadow-sm align-self-center">
