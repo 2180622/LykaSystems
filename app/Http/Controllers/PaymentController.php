@@ -28,6 +28,7 @@ class PaymentController extends Controller
       $agentes = Agente::where('tipo', '=', 'Agente')->get();
       $subagentes = Agente::where('tipo', '=', 'Subagente')->get();
       $fornecedores = Fornecedor::all();
+      $contas = Conta::all();
 
       $valorTotalPendente = 0;
       $valorTotalPago = 0;
@@ -161,11 +162,42 @@ class PaymentController extends Controller
           }
         }
       }
-      return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores'));
+      return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores', 'contas'));
     }
 
-    public function search()
+    public function search(Request $request)
     {
-      
+      $fields = $request->all();
+      $idEstudante = $fields['estudante'];
+      $idAgente = $fields['agente'];
+      $idSubAgente = $fields['subagente'];
+      $idUniversidade = $fields['universidade'];
+      $idFornecedor = $fields['fornecedor'];
+      $idConta = $fields['conta'];
+      $dataInicio = $fields['dataInicio'];
+      $dataFim = $fields['dataFim'];
+
+      $query = Produto::select();
+
+      if ($idEstudante != 'null') {
+        $query->where('idCliente', $idEstudante);
+      }
+
+      if ($idAgente != 'null') {
+        $query->where('idAgente', $idAgente);
+      }
+
+      if ($idSubAgente != 'null') {
+        $query->where('idSubAgente', $idSubAgente);
+      }
+
+      if ($idUniversidade != 'null') {
+        $query->where(function($query) use($idUniversidade) {
+            $query->where('idUniversidade1', $idUniversidade)
+            ->orWhere('idUniversidade2', $idUniversidade);
+        });
+      }
+
+      dd($query->get());
     }
 }

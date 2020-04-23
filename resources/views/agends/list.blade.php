@@ -102,6 +102,7 @@
                 events: [
                         @foreach($agends as $agend)
                     {
+                        id: '{{ $agend->idAgenda }}',
                         title: '{{ $agend->titulo }}',
                         start: '{{ $agend->dataInicio }}',
                         end: '{{ $agend->dataFim }}',
@@ -117,15 +118,17 @@
                     };
                 },
 
-                eventClick: function (event) {
+                eventClick: function (element) {
                     resetForm("#formEvent");
+
+                    console.log("event", element.event.extendedProps)
 
                     $("#modalCalendar").modal('show');
                     $("#modalCalendar #titleModal").text('Alterar Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'flex');
 
                     let id = element.event.id;
-                    $("#modalCalendar input[name='id']").val(id);
+                    $("#modalCalendar input[name='idAgenda']").val(id);
 
                     let title = element.event.title;
                     $("#modalCalendar input[name='titulo']").val(title);
@@ -140,7 +143,7 @@
                     $("#modalCalendar input[name='cor']").val(color);
 
                     let description = element.event.extendedProps.description;
-                    $("#modalCalendar texterea[name='descricao']").val(description);
+                    $("#modalCalendar textarea[name='descricao']").val(description);
                 },
 
                 select: function (element) {

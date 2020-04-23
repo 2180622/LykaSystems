@@ -51,29 +51,52 @@ class AgendController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'idUniversidade'=> 'nullable',
-            'titulo' => 'required',
-            'descricao' => 'required',
-            'dataInicio' => 'required',
-            'dataFim' => 'required',
-            'cor' => 'required',
-        ]);
+        switch($request->input('action')) {
+            case "save":
 
-        $agenda = new Agenda;
+                $this->validate($request, [
+                    'idUniversidade'=> 'nullable',
+                    'titulo' => 'required',
+                    'descricao' => 'required',
+                    'dataInicio' => 'required',
+                    'dataFim' => 'required',
+                    'cor' => 'required',
+                ]);
 
-        $agenda->idUser = auth()->user()->idUser;
-        $agenda->idUniversidade = $request->idUniversidade;
+                $agenda = Agenda::find($request->input('idAgenda'));
 
-        $agenda->titulo = $request->input('titulo');
-        $agenda->descricao = $request->input('descricao');
-        $agenda->dataInicio = $request->input('dataInicio');
-        $agenda->dataFim = $request->input('dataFim');
-        $agenda->cor = $request->input('cor');
+                if ($agenda) {
 
-        $agenda->save();
+                    $agenda->titulo = $request->input('titulo');
+                    $agenda->descricao = $request->input('descricao');
+                    $agenda->dataInicio = $request->input('dataInicio');
+                    $agenda->dataFim = $request->input('dataFim');
+                    $agenda->cor = $request->input('cor');
 
-        return redirect()->back()->with('success', 'Evento Adicionado com Sucesso!');
+                    return redirect()->back()->with('success', 'Evento Editado com Sucesso!');
+                } else {
+                    $agenda = new Agenda;
+
+                    $agenda->idUser = auth()->user()->idUser;
+                    $agenda->idUniversidade = $request->idUniversidade;
+                    $agenda->titulo = $request->input('titulo');
+                    $agenda->descricao = $request->input('descricao');
+                    $agenda->dataInicio = $request->input('dataInicio');
+                    $agenda->dataFim = $request->input('dataFim');
+                    $agenda->cor = $request->input('cor');
+                }
+
+                $agenda->save();
+                return redirect()->back()->with('success', 'Evento Adicionado com Sucesso!');
+                break;
+            case "delete":
+                $agenda = Agenda::find($request->input('idAgenda'));
+                $agenda->delete();
+                return redirect()->back()->with('success', 'Evento Eliminado com Sucesso!');
+                break;
+        }
+
+        return redirect()->back();
         /* return redirect()->route('agends.index')->with('success', 'Evento Adicionado com Sucesso!'); */
     }
 

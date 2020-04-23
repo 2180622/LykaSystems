@@ -106,7 +106,7 @@
                 <div class="col">
                     <div class="filters-div collapse" id="collapseExample">
                         <div class="payment-card shadow-sm">
-                            <form action="{{route('payments.search')}}" method="get" enctype="multipart/form-data">
+                            <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <p>Secção de filtragem &nbsp;</p>
@@ -123,9 +123,9 @@
                                         <label for="estudante">Estudante</label>
                                         <br>
                                         <select name="estudante">
-                                            <option selected disabled hidden class="text-truncate">Selecionar estudante</option>
+                                            <option selected hidden class="text-truncate" value="null">Selecionar estudante</option>
                                             @foreach ($estudantes as $estudante)
-                                            <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                            <option value="{{$estudante->idCliente}}" title="{{$estudante->nome.' '.$estudante->apelido}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -133,9 +133,9 @@
                                         <label for="agente">Agente</label>
                                         <br>
                                         <select name="agente">
-                                            <option selected disabled hidden class="text-truncate">Selecionar agente</option>
+                                            <option selected hidden class="text-truncate" value="null">Selecionar agente</option>
                                             @foreach ($agentes as $agente)
-                                            <option value="{{$agente->idAgente}}" class="text-truncate">{{$agente->nome.' '.$agente->apelido}}</option>
+                                            <option value="{{$agente->idAgente}}" class="text-truncate" title="{{$agente->nome.' '.$agente->apelido}}">{{$agente->nome.' '.$agente->apelido}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -143,9 +143,9 @@
                                         <label for="subagente">SubAgente</label>
                                         <br>
                                         <select name="subagente">
-                                            <option selected disabled hidden class="text-truncate">Selecionar subagente</option>
+                                            <option selected hidden class="text-truncate" value="null">Selecionar subagente</option>
                                             @foreach ($subagentes as $subagente)
-                                            <option value="{{$subagente->idAgente}}" class="text-truncate">{{$subagente->nome.' '.$subagente->apelido}}</option>
+                                            <option value="{{$subagente->idAgente}}" class="text-truncate" title="{{$subagente->nome.' '.$subagente->apelido}}">{{$subagente->nome.' '.$subagente->apelido}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -154,23 +154,33 @@
                                 <br><br>
 
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="universidade">Universidade</label>
-                                        <br>
-                                        <select name="universidade">
-                                            <option selected disabled hidden class="text-truncate">Selecionar universidade</option>
-                                            @foreach ($universidades as $universidade)
-                                            <option value="{{$universidade->idUniversidade}}" class="text-truncate">{{$universidade->nome}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
+                                  <div class="col-md-4">
+                                      <label for="universidade">Universidade</label>
+                                      <br>
+                                      <select name="universidade">
+                                          <option selected hidden class="text-truncate" value="null">Selecionar universidade</option>
+                                          @foreach ($universidades as $universidade)
+                                          <option value="{{$universidade->idUniversidade}}" class="text-truncate" title="{{$universidade->nome}}">{{$universidade->nome}}</option>
+                                          @endforeach
+                                      </select>
+                                  </div>
+                                    <div class="col-md-4">
                                         <label for="fornecedor">Fornecedor</label>
                                         <br>
                                         <select name="fornecedor">
-                                            <option selected disabled hidden class="text-truncate">Selecionar fornecedor</option>
+                                            <option selected hidden class="text-truncate" value="null">Selecionar fornecedor</option>
                                             @foreach ($fornecedores as $fornecedor)
-                                            <option value="{{$fornecedor->idFornecedor}}" class="text-truncate">{{$fornecedor->nome}}</option>
+                                            <option value="{{$fornecedor->idFornecedor}}" class="text-truncate" title="{{$fornecedor->nome}}">{{$fornecedor->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="conta">Conta bancária</label>
+                                        <br>
+                                        <select name="conta">
+                                            <option selected hidden class="text-truncate" value="null">Selecionar conta banc...</option>
+                                            @foreach ($contas as $conta)
+                                            <option value="{{$conta->idConta}}" class="text-truncate" title="{{$conta->descricao}}">{{$conta->descricao}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -179,15 +189,15 @@
                                 <br><br>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="dataInicio">Data de início</label>
                                         <br>
-                                        <input type="date" name="dataInicio">
+                                        <input type="date" name="dataInicio" value="null">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="dataFim">Data de fim</label>
                                         <br>
-                                        <input type="date" name="dataFim">
+                                        <input type="date" name="dataFim" value="null">
                                     </div>
                                 </div>
                                 <br><br>
