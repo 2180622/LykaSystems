@@ -32,10 +32,10 @@ class DocumentostockController extends Controller
         return redirect()->route('produtostock.index')->with('success', 'Documento stock adicionado com sucesso');
     }
 
-    public function show(DocStock $documentostock, FaseStock $fasestock){
-        $documentostock = DocStock::where('idFaseStock', '=', $fasestock->idFaseStock)->get();
+    public function show(DocStock $documentostock){
+        // $documentostock = DocStock::where('idFaseStock', '=', $fasestock->idFaseStock)->get();
 
-        return view('documentostock.show', compact('documentostock', 'fasestocks'));
+        return view('documentostock.show', compact('documentostock'));
     }
 
     public function edit(DocStock $docstock)

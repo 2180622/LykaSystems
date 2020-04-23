@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProdutoStock;
 use App\FaseStock;
+use App\DocStock;
 use App\Http\Requests\StoreProdutosstockRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,9 +11,11 @@ class ProdutosstockController extends Controller
 {
     public function index(){
           $produtoStocks = ProdutoStock::all();
+          $totalfasestock = FaseStock::all()->count();
+          $totaldocstock = DocStock::all()->count();
           $totalprodutostock = $produtoStocks->count();
 
-          return view('produtostock.list', compact('produtoStocks', 'totalprodutostock'));
+          return view('produtostock.list', compact('produtoStocks', 'totalprodutostock', 'totalfasestock', 'totaldocstock'));
     }
 
     public function create(){
@@ -64,7 +67,7 @@ class ProdutosstockController extends Controller
 
     public function destroy(ProdutoStock $produtostock){
         $produtostock->delete();
-        
+
         return redirect()->route('produtostock.index')->with('success', 'Produto stock eliminado com sucesso');
     }
 }
