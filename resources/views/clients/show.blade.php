@@ -270,9 +270,9 @@
 
                         <hr><br>
                         {{-- CC IDENTIFICAÇÃO --}}
-                        <div><span class="text-secondary">Número de identificação pessoal:</span> {{--$client->num_docOficial--}}</div>
+                        <div><span class="text-secondary">Número de identificação pessoal:</span> {{$client->num_docOficial}}</div>
                         <br>
-                        <div><span class="text-secondary">Data de validade:</span> {{--$client->info_docOficial--}}</div>
+                        <div><span class="text-secondary">Data de validade:</span> {{$client->info_docOficial}}</div>
                         <br>
                         <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
 

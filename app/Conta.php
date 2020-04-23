@@ -27,6 +27,10 @@ class Conta extends Model
         return $this->hasMany("App\DocTransacao","idConta","idConta")->withTrashed();
     }
 
+
+
+    /* URL */
+
     public function getSlugOptions() : SlugOptions
     {
       return SlugOptions::create()
@@ -38,4 +42,7 @@ class Conta extends Model
     {
         return 'slug';
     }
+
+
+
 }

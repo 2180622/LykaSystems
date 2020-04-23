@@ -96,7 +96,7 @@
                     @method('DELETE')
                     <p id="text"></p>
                     <br>
-                    <p style="font-weight:500;">Ao clicar "Sim, eliminar conta", irá eliminar a conta para definitivamente e perder todos os dados associados.</p>
+                    <p style="font-weight:500;">Ao clicar "Sim, eliminar conta", irá eliminar a conta definitivamente e perder todos os dados associados.</p>
                     <input type="hidden" id="conta_delete_id" name="id">
                   </div>
                     <div class="modal-footer">

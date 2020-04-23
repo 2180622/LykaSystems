@@ -6,9 +6,12 @@
 }
 
 .payment-card p {
-    font-weight: 600;
-    margin: 0 !important;
+    margin: 0;
+    color: #747474;
+    font-weight: 700;
     display: inline-block;
+    text-transform: uppercase;
+    margin-left: 13px !important;
 }
 
 a {
@@ -40,16 +43,6 @@ input, select, textarea {
     padding: 7px 12px;
     border-radius: 5px;
     background-color: #EAEAEA;
-}
-
-.payment-card p:first-child {
-    color: #747474;
-    font-weight: 600;
-}
-
-.payment-card p:nth-child(2) {
-    color: #747474;
-    font-weight: 700;
 }
 
 .input-file-div {
@@ -126,6 +119,10 @@ p {
     transform: translate(-50%, -50%);
 }
 
+.white-circle img {
+    border-radius: 50%;
+}
+
 /* Context Menu */
 #contextMenu {
     background-color: red;
@@ -182,4 +179,50 @@ p {
 
 *[data-href] {
     cursor: pointer;
+}
+
+/* Filter Button */
+#filter-icon-div {
+    right: 4px;
+    width: 7%;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 11px;
+    background-color: white;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
+}
+
+#filter-icon-div #icon-funnel {
+    top: 50%;
+    left: 50%;
+    color: #575757;
+    font-size: 1.3rem;
+    position: relative;
+    transform: translate(-50%, 15%);
+}
+
+#close-icon-div {
+    right: 4px;
+    display: none;
+    width: 7%;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 11px;
+    background-color: white;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
+}
+
+#close-icon-div #icon-close {
+    top: 50%;
+    left: 50%;
+    color: #575757;
+    font-size: 1.3rem;
+    position: relative;
+    transform: translate(-50%, 15%);
+}
+
+.cancel-button {
+    background-color: white;
 }

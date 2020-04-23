@@ -37,7 +37,7 @@ class Cliente extends Migration
             $table->string('nomeMae',255)->nullable();
             $table->string('telefoneMae',255)->nullable();
             $table->string('emailMae',255)->nullable();
-            $table->string('fotografia',255)->nullable()->default(null);
+            $table->string('fotografia',255)->nullable();
             $table->string('NIF',255)->unique()->default(null);
 
             $table->string('IBAN',255)->nullable();
@@ -47,6 +47,7 @@ class Cliente extends Migration
 
             $table->string('num_docOficial',255)->unique();
             $table->string('img_docOficial',255)->nullable();
+
             $table->longText('info_docOficial')->nullable();
             $table->string('img_Passaport',255)->nullable();
             $table->json('info_Passaport')->nullable();

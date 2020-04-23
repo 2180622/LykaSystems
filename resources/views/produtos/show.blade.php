@@ -23,7 +23,12 @@
         </div>
         <div class="float-right">
             <a href="{{route('produtos.edit',$produto)}}" class="top-button mr-2">Editar informação</a>
-            <a href="{{route('produtos.print',$produto)}}" target="_blank" class="top-button">Imprimir</a>
+            <form method="POST" role="form" id="{{ $produto->idCliente }}" action="{{route('produtos.destroy',$produto)}}" class="d-inline-block form_produto_id">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="top-button mr-2" title="Eliminar Produto" data-toggle="modal" data-target="#deleteModal">Eliminar Produto</i></button>
+            </form>
+            {{--<a href="{{route('produtos.print',$produto)}}" target="_blank" class="top-button">Imprimir</a>--}}
         </div>
 
         <br><br>
@@ -232,14 +237,26 @@
                                                             <span class="text-danger">Inválido</span>
                                                         @endif
                                                     </div><br>
+                                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                                        <div class="float-right">
+                                                            <a href="{{route('documentos.create',$produto)}}" class="top-button mr-2">Verificar documento</a>
+                                                        </div>
+                                                    @else
+                                                        <div class="float-right">
+                                                            <a href="{{route('documentos.create',$produto)}}" class="top-button mr-2">Editar documento</a>
+                                                        </div>
+                                                    @endif
                                                     @php
                                                         $existe = true;
                                                     @endphp
                                                 @endif
                                             @endforeach
                                             @if(!$existe)
-                                                {{'<adicionar>'}}</div><br>
+                                                </div><br>
                                                 <div><span class="text-secondary"> - Estado:</span><span class="text-danger">Inválido</span></div><br>
+                                                <div class="float-right">
+                                                    <a href="{{route('documentos.create',$produto)}}" class="top-button mr-2">Adicionar documento</a>
+                                                </div>
                                             @endif
                                         @endif
                                     @endforeach

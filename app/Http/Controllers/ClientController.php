@@ -50,8 +50,8 @@ class ClientController extends Controller
             selectRaw("Cliente.idCliente,nome,apelido,genero,email,telefone1,telefone2,dataNasc,paisNaturalidade,morada,cidade,moradaResidencia,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,num_docOficial,img_docOficial,info_docOficial,img_Passaport,info_Passaport,img_docAcademico,info_docAcademico,obsPessoais,obsFinanceiras,obsAcademicas")
             ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
             ->where('Produto.idAgente', '=', Auth::user()->agente->idAgente)
-            ->groupBy('cliente.idCliente')
-            ->orderBy('cliente.idCliente','asc')
+            ->groupBy('Cliente.idCliente')
+            ->orderBy('Cliente.idCliente','asc')
             ->get();
 
         }
@@ -108,7 +108,6 @@ class ClientController extends Controller
         $fieldsUser = $requestUser->validated();
         $user->fill($fieldsUser);
 
-
         /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
         $passaportInfo =[];
         Arr::set($passaportInfo, 'numPassaport', $requestClient->numPassaport);
@@ -119,26 +118,16 @@ class ClientController extends Controller
         $client->info_Passaport = $passaportInfoJSON;
 
 
-        /* Criação de cliente */
-        $client->info_docOficial = $requestClient->dataValidade_docOficial;
-        $client->create_at == date("Y-m-d",$t); // data em que foi criado
-        $client->save();
-
-        if ($requestClient->hasFile('fotografia')) {
-            $photo = $requestClient->file('fotografia');
-            $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.$client->nome.'/', $photo, $profileImg);
-            $client->fotografia = $profileImg;
-            $client->save();
-        }
 
 
-        /* Criação de documentos Pessoais */
+
+    /* Criação de documentos Pessoais */
 
         /* Documento de identificação */
         $doc_id= new DocPessoal;
         $doc_id->idCliente = $client->idCliente;
         $doc_id->tipo="Cartão Cidadão";
+
         $doc_id->info= $requestClient->num_docOficial;
         $doc_id->dataValidade= $requestClient->dataValidade_docOficial;
 
@@ -153,11 +142,6 @@ class ClientController extends Controller
             $client->save();
 
         }
-
-        $doc_id->create_at == date("Y-m-d",$t);
-        $doc_id->save();
-
-
 
         /* Passaporte */
         $passaporte= new DocPessoal;
@@ -181,8 +165,38 @@ class ClientController extends Controller
 
         }
 
+
+
+
+
+
+        /* Criação de cliente */
+        $client->info_docOficial = $requestClient->dataValidade_docOficial;
+
+
+        if ($requestClient->hasFile('fotografia')) {
+            $photo = $requestClient->file('fotografia');
+            $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.$client->nome.'/', $photo, $profileImg);
+            $client->fotografia = $profileImg;
+            $doc_id->imagem = $profileImg;
+            $client->save();
+        }
+
+
+
+        /* Guarda Documento oficial */
+        $doc_id->create_at == date("Y-m-d",$t);
+        $doc_id->save();
+
+        /* Guarda Passaporte */
         $passaporte->create_at == date("Y-m-d",$t);
         $passaporte->save();
+
+
+        /* Guarda Cliente */
+        $client->create_at == date("Y-m-d",$t);
+        $client->save();
 
 
 
@@ -194,12 +208,13 @@ class ClientController extends Controller
         $user->idCliente = $client->idCliente;
         $user->save();
 
-
         /* Envia o e-mail para ativação */
         $email = $user->email;
         $id = $user->idUser;
         $name = $client->nome;
         Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+
+
 
         return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }
@@ -220,7 +235,7 @@ class ClientController extends Controller
        }
 
         // Produtos adquiridos pelo cliente
-        $produtos = $client->produto;
+        $produtos = $client->produtoSaved;
 
         if ($produtos->isEmpty()) {
             $produtos=null;
@@ -260,8 +275,6 @@ class ClientController extends Controller
         if ($subagents->isEmpty()) {
             $subagents=null;
         }
-
-
 
 
         /* Lê os dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */

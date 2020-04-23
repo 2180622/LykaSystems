@@ -24,11 +24,18 @@ class Cliente extends Model
         'img_Passaport','info_Passaport','img_docAcademico','info_docAcademico'
         ];
 
+        /* !!!!!!!!!!! TENS QUE AVISAR QUANDO MUDAS ISTO !!!!!!!!!!!!!!!!!!!!!!!! */
+
+
     public function user(){
         return $this->belongsTo("App\User","idUser","idUser")->withTrashed();
     }
 
     public function produto(){
         return $this->hasMany("App\Produto","idCliente","idCliente")->withTrashed();
+    }
+
+    public function produtoSaved(){
+        return $this->hasMany("App\Produto","idCliente","idCliente");
     }
 }

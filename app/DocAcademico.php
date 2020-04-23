@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sluggable\HasSlug;
 
 class DocAcademico extends Model
 {
+    use HasSlug;
     protected $table = 'DocAcademico';
 
     protected $primaryKey = 'idDocAcademico';
@@ -16,5 +18,17 @@ class DocAcademico extends Model
 
     public function fase(){
         return $this->belongsTo("App\User","idFase","idFase")->withTrashed();
+    }
+
+    public function getSlugOptions() : SlugOptions
+    {
+      return SlugOptions::create()
+          ->generateSlugsFrom('descricao')
+          ->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

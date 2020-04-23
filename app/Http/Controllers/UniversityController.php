@@ -74,14 +74,20 @@ class UniversityController extends Controller
         }
 
 
+
+
         /* Obtem os clientes da que estão na universidade */
-        $clients = Cliente::where('idCliente', function ($query) use ($university){
-            $query->select('idCliente')
-            ->from(with(new Produto)->getTable())
-            ->where('idUniversidade1', $university->idUniversidade)
-            ->orwhere('idUniversidade2', $university->idUniversidade)
-            ->distinct('idCliente');
-        })->get();
+/*      SELECT DISTINCT cliente.idCliente FROM cliente JOIN produto ON
+        cliente.idCliente=produto.idCliente WHERE produto.idUniversidade1 LIKE 1 OR produto.idUniversidade2 =1; */
+
+        $clients = Cliente::distinct('Cliente.idCliente')
+        ->join('Produto', 'Produto.idCliente', '=', 'Cliente.idCliente')
+        ->where('Produto.idUniversidade1', '=',$university->idUniversidade )
+        ->orWhere('Produto.idUniversidade2', '=',$university->idUniversidade)
+        ->select('Cliente.idCliente','Cliente.fotografia','Cliente.nome','Cliente.apelido','Cliente.paisNaturalidade')
+        ->get();
+
+       /*  dd($clients); */
 
         if ($clients->isEmpty()) {
             $clients=null;
