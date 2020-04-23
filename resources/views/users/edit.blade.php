@@ -32,8 +32,9 @@
         </div>
         <br>
         <p>Está neste momento a editar o utilizador <b>{{$user->admin->nome.' '.$user->admin->apelido}}</b>.</p>
-        <form method="POST" action="{{route('users.storeAdmin')}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('users.update', $user)}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
             @csrf
+            @method("PUT")
             <div class="row">
                 <div class="col">
                     <div class="form-group">
