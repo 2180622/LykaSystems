@@ -73,12 +73,14 @@ class AgendController extends Controller
                     $agenda->dataFim = $request->input('dataFim');
                     $agenda->cor = $request->input('cor');
 
+                    $agenda->save();
                     return redirect()->back()->with('success', 'Evento Editado com Sucesso!');
                 } else {
                     $agenda = new Agenda;
 
                     $agenda->idUser = auth()->user()->idUser;
                     $agenda->idUniversidade = $request->idUniversidade;
+
                     $agenda->titulo = $request->input('titulo');
                     $agenda->descricao = $request->input('descricao');
                     $agenda->dataInicio = $request->input('dataInicio');
@@ -92,7 +94,7 @@ class AgendController extends Controller
             case "delete":
                 $agenda = Agenda::find($request->input('idAgenda'));
                 $agenda->delete();
-                return redirect()->back()->with('success', 'Evento Eliminado com Sucesso!');
+                return redirect()->back()->with('success', 'Evento Eliminado!');
                 break;
         }
 
@@ -140,11 +142,7 @@ class AgendController extends Controller
      * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        $agenda = Agenda::find($id);
-        $agenda->delete();
-
-        return redirect('agends')->with('success', 'Evento Eliminado');
     }
 }

@@ -10,7 +10,7 @@ $(function () {
 
         let color = $("#modalCalendar input[name='cor']").val();
 
-        let description = $("#modalCalendar texterea[name='descricao']").val();
+        let description = $("#modalCalendar input[name='descricao']").val();
     });
 });
 
