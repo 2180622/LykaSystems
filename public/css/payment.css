@@ -222,3 +222,31 @@ p {
     position: relative;
     transform: translate(-50%, 15%);
 }
+
+.closeButton {
+    position: absolute;
+    right: 30px;
+    top: 38px;
+    font-weight: 800;
+    color: #747474;
+    cursor: default;
+}
+
+select[disabled="true"] {
+    background: repeating-linear-gradient(45deg,
+            #EAEAEA,
+            #EAEAEA 10px,
+            #d3d3d3 10px,
+            #d3d3d3 20px);
+}
+
+#searchButton {
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 10px 30px;
+    font-size: 0.7rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    background-color: #6A74C9;
+}
