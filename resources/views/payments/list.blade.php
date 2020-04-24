@@ -123,8 +123,8 @@
                                         <br>
                                         <select name="estudante" id="estudantes" onclick="selected()">
                                             <option selected disabled hidden class="text-truncate" value="defeito">Selecionar estudante</option>
-                                            <option class="text-truncate" value="nenhum">Nenhum</option>
                                             <option class="text-truncate" value="todos">Todos</option>
+                                            <option class="text-truncate" value="outro">Outro valor</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -132,8 +132,8 @@
                                         <br>
                                         <select name="agente" id="agentes" onchange="selected()">
                                             <option selected disabled hidden class="text-truncate" value="defeito">Selecionar agente</option>
-                                            <option class="text-truncate" value="nenhum">Nenhum</option>
                                             <option class="text-truncate" value="todos">Todos</option>
+                                            <option class="text-truncate" value="outro">Outro valor</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -141,8 +141,8 @@
                                         <br>
                                         <select name="universidade" id="universidades" onchange="selected()">
                                             <option selected disabled hidden class="text-truncate" value="defeito">Selecionar universidade</option>
-                                            <option class="text-truncate" value="nenhum">Nenhum</option>
                                             <option class="text-truncate" value="todos">Todos</option>
+                                            <option class="text-truncate" value="outro">Outro valor</option>
                                         </select>
                                     </div>
                                 </div>
@@ -153,8 +153,8 @@
                                         <br>
                                         <select name="fornecedor" id="fornecedores" onchange="selected()">
                                             <option selected disabled hidden class="text-truncate" value="defeito">Selecionar fornecedor</option>
-                                            <option class="text-truncate" value="nenhum">Nenhum</option>
                                             <option class="text-truncate" value="todos">Todos</option>
+                                            <option class="text-truncate" value="outro">Outro valor</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -169,6 +169,11 @@
                                     </div>
                                 </div>
                                 <br>
+                                <div class="row mt-3">
+                                  <div class="col text-right">
+                                    <button type="submit" name="button" id="searchButton">Pesquisar</button>
+                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>
