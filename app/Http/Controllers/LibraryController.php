@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Biblioteca;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LibraryController extends Controller
@@ -14,10 +15,7 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        /* Permissões */
-        if (Auth::user()->tipo != "admin" ){
-            abort (401);
-        }
+
 
         $files = Biblioteca::all();
         return view('libraries.list', compact('files'));
@@ -31,6 +29,10 @@ class LibraryController extends Controller
      */
     public function create()
     {
+        /* Permissões */
+        if (Auth::user()->tipo != "admin" ){
+            abort (401);
+        }
         $library = new Biblioteca;
         return view('libraries.add' , compact('library'));
     }
@@ -65,7 +67,10 @@ class LibraryController extends Controller
      */
     public function edit(Biblioteca $biblioteca)
     {
-        //
+        /* Permissões */
+        if (Auth::user()->tipo != "admin" ){
+            abort (401);
+        }
     }
 
     /**
@@ -88,6 +93,9 @@ class LibraryController extends Controller
      */
     public function destroy(Biblioteca $biblioteca)
     {
-        //
+        /* Permissões */
+        if (Auth::user()->tipo != "admin" ){
+            abort (401);
+        }
     }
 }
