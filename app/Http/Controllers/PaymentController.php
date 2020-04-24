@@ -26,9 +26,7 @@ class PaymentController extends Controller
       $estudantes = Cliente::all();
       $universidades = Universidade::all();
       $agentes = Agente::where('tipo', '=', 'Agente')->get();
-      $subagentes = Agente::where('tipo', '=', 'Subagente')->get();
       $fornecedores = Fornecedor::all();
-      $contas = Conta::all();
 
       $valorTotalPendente = 0;
       $valorTotalPago = 0;
@@ -162,12 +160,13 @@ class PaymentController extends Controller
           }
         }
       }
-      return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores', 'contas'));
+      return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'universidades', 'fornecedores'));
     }
 
     public function search(Request $request)
     {
       $fields = $request->all();
+
       $idEstudante = (isset($fields['estudante']) ? $fields['estudante'] : null);
       $idAgente = (isset($fields['agente']) ? $fields['agente'] : null);
       $idUniversidade = (isset($fields['universidade']) ? $fields['universidade'] : null);
@@ -176,8 +175,16 @@ class PaymentController extends Controller
       $dataFim = (isset($fields['dataFim']) ? $fields['dataFim'] : null);
 
       if ($idEstudante != null) {
-        $cliente = Cliente::where('idCliente', $idEstudante)->first();
-        $fases = Fase::where('idProduto', $cliente->produto->first()->idProduto)->get();
+        if ($idEstudante == 'todos') {
+          $query = Responsabilidade::select();
+        }
+        if ($dataInicio != null) {
+          $query->where('created_at', '>=', $dataInicio);
+        }
+        if ($dataFim != null) {
+          $query->where('created_at', '<=', $dataFim);
+        }
       }
+      $query->get()->dd();
     }
 }
