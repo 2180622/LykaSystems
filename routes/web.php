@@ -51,9 +51,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/libraries', 'LibraryController');
 
     /* Agenda */
-    Route::resource('/agends', 'AgendController');
-    Route::post('/agends/create', 'AgendController@store')->name('agend.store');
-    Route::get('/test/agends/events', 'AgendController@events');
+    Route::resource('/agenda', 'AgendController');
+    Route::post('/agenda/criar', 'AgendController@store')->name('agend.store');
+    Route::get('/test/agenda/events', 'AgendController@events');
 
 
     /* Pagamentos */
