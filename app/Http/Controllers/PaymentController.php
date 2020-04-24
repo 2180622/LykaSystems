@@ -166,29 +166,35 @@ class PaymentController extends Controller
     public function search(Request $request)
     {
       $fields = $request->all();
-
+      // Escolha de estudantes, agentes, etc...
       $idEstudante = (isset($fields['estudante']) ? $fields['estudante'] : null);
       $idAgente = (isset($fields['agente']) ? $fields['agente'] : null);
       $idUniversidade = (isset($fields['universidade']) ? $fields['universidade'] : null);
       $idFornecedor = (isset($fields['fornecedor']) ? $fields['fornecedor'] : null);
+      // Intervalo de datas escolhidas
       $dataInicio = (isset($fields['dataInicio']) ? $fields['dataInicio'] : null);
       $dataFim = (isset($fields['dataFim']) ? $fields['dataFim'] : null);
 
+      // Pesquisa de estudantes
       if ($idEstudante != null) {
         if ($idEstudante == 'todos') {
-          $query = Responsabilidade::select();
+          $queryResp = Responsabilidade::select();
         if ($dataInicio != null) {
-          $query->where('created_at', '>=', $dataInicio);
+          $queryResp->where('created_at', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $query->where('created_at', '<=', $dataFim);
+          $queryResp->where('created_at', '<=', $dataFim);
         }
       }else {
-        $query = Responsabilidade::select();
-        // Responsabilidade associada ao estudante escolhido
+        $produtos = Produto::where('idCliente', $idEstudante)->get();
+        foreach ($produtos as $produto) {
+          $fases = Fase::where('idProduto', $produto->idProduto)->get();
         }
       }
+      return view('payments.list', compact('queryResp'));
+      }
 
+      // Pesquisa de agentes
       if ($idAgente != null) {
         if ($idAgente == 'todos') {
           // Responsabilidades associadas a todos os agentes
@@ -197,6 +203,7 @@ class PaymentController extends Controller
         }
       }
 
+      // Pesquisa de universidades
       if ($idUniversidade != null) {
         if ($idUniversidade == 'todos') {
           // Responsabilidades associadas a todas as universidades
@@ -205,6 +212,7 @@ class PaymentController extends Controller
         }
       }
 
+      // Pesquisa de fornecedores
       if ($idFornecedor != null) {
         if ($idFornecedor == 'todos') {
           // Responsabilidades associadas a todos os fornecedores

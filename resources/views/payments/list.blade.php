@@ -123,7 +123,7 @@
                                         <div class="col-md-4">
                                             <label for="estudante">Estudantes</label>
                                             <br>
-                                            <select name="estudante" id="estudantes" onclick="selected()">
+                                            <select name="estudante" id="estudantes" onchange="selected()">
                                                 <option selected disabled hidden class="text-truncate" value="defeito">Selecionar estudante</option>
                                                 <option class="text-truncate" value="todos">(Todos)</option>
                                                 @foreach ($estudantes as $estudante)
@@ -181,7 +181,7 @@
                                     <br>
                                     <div class="row mt-3">
                                         <div class="col text-right">
-                                            <button type="submit" name="button" id="searchButton">Pesquisar</button>
+                                            <button type="submit" name="button" id="searchButton">filtrar</button>
                                         </div>
                                     </div>
                                 </form>
