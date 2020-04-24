@@ -127,7 +127,7 @@
                                                 <option selected disabled hidden class="text-truncate" value="defeito">Selecionar estudante</option>
                                                 <option class="text-truncate" value="todos">(Todos)</option>
                                                 @foreach ($estudantes as $estudante)
-                                                <option class="text-truncate" value="{{$estudante->idEstudante}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                                <option class="text-truncate" value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

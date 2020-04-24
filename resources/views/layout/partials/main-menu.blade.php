@@ -112,8 +112,8 @@
 
             <!-- Agenda -->
             <li class="menu-option">
-                <a href="{{route('agends.index')}}">
-                    <span class="option-name {{Route::is('agends.*') ? 'active' : ''}}">Agenda</span>
+                <a href="{{route('agenda.index')}}">
+                    <span class="option-name {{Route::is('agenda.*') ? 'active' : ''}}">Agenda</span>
                 </a>
             </li>
         </div>
