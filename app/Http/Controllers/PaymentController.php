@@ -177,14 +177,41 @@ class PaymentController extends Controller
       if ($idEstudante != null) {
         if ($idEstudante == 'todos') {
           $query = Responsabilidade::select();
-        }
         if ($dataInicio != null) {
           $query->where('created_at', '>=', $dataInicio);
         }
         if ($dataFim != null) {
           $query->where('created_at', '<=', $dataFim);
         }
+      }else {
+        $query = Responsabilidade::select();
+        // Responsabilidade associada ao estudante escolhido
+        }
       }
-      $query->get()->dd();
+
+      if ($idAgente != null) {
+        if ($idAgente == 'todos') {
+          // Responsabilidades associadas a todos os agentes
+        }else{
+          // Responsabilidades associadas ao agente escolhido
+        }
+      }
+
+      if ($idUniversidade != null) {
+        if ($idUniversidade == 'todos') {
+          // Responsabilidades associadas a todas as universidades
+        }else{
+          // Responsabilidades associadas a uni escolhida
+        }
+      }
+
+      if ($idFornecedor != null) {
+        if ($idFornecedor == 'todos') {
+          // Responsabilidades associadas a todos os fornecedores
+        }else{
+          // Responsabilidades associadas ao fornecedor escolhido
+        }
+      }
+
     }
 }
