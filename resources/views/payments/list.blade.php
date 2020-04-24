@@ -105,11 +105,12 @@
             <div class="row">
                 <div class="col">
                     <div class="filters-div collapse" id="collapseExample">
-                        <div class="payment-card shadow-sm" style="height: 310px;">
+                        <div class="payment-card shadow-sm">
                             <div id="div-options">
                                 <div class="row">
                                     <p>Secção de filtragem &nbsp;</p>
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
+                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top"
+                                      title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade. Apenas pode fazer a pesquisa usando um elemento e a escolha de um intervalo de datas.">
                                         <span>
                                             ?
                                         </span>
@@ -118,332 +119,56 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div id="estudantes" onclick="estudante()">
-                                            <div class="box text-center">
-                                                <p>Estudantes</p>
-                                            </div>
-                                        </div>
+                                        <label for="estudante">Estudantes</label>
+                                        <br>
+                                        <select name="estudante" id="estudantes" onclick="selected()">
+                                            <option selected disabled hidden class="text-truncate" value="defeito">Selecionar estudante</option>
+                                            <option class="text-truncate" value="nenhum">Nenhum</option>
+                                            <option class="text-truncate" value="todos">Todos</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <div id="agentes" onclick="agente()">
-                                            <div class="box text-center">
-                                                <p>Agentes</p>
-                                            </div>
-                                        </div>
+                                        <label for="agente">Agentes</label>
+                                        <br>
+                                        <select name="agente" id="agentes" onchange="selected()">
+                                            <option selected disabled hidden class="text-truncate" value="defeito">Selecionar agente</option>
+                                            <option class="text-truncate" value="nenhum">Nenhum</option>
+                                            <option class="text-truncate" value="todos">Todos</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <div id="subagentes" onclick="subagente()">
-                                            <div class="box text-center">
-                                                <p>SubAgentes</p>
-                                            </div>
-                                        </div>
+                                        <label for="universidade">Universidades</label>
+                                        <br>
+                                        <select name="universidade" id="universidades" onchange="selected()">
+                                            <option selected disabled hidden class="text-truncate" value="defeito">Selecionar universidade</option>
+                                            <option class="text-truncate" value="nenhum">Nenhum</option>
+                                            <option class="text-truncate" value="todos">Todos</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <br>
+                                <br><br>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div id="universidades" onclick="universidade()">
-                                            <div class="box text-center">
-                                                <p>Universidades</p>
-                                            </div>
-                                        </div>
+                                        <label for="fornecedor">Fornecedores</label>
+                                        <br>
+                                        <select name="fornecedor" id="fornecedores" onchange="selected()">
+                                            <option selected disabled hidden class="text-truncate" value="defeito">Selecionar fornecedor</option>
+                                            <option class="text-truncate" value="nenhum">Nenhum</option>
+                                            <option class="text-truncate" value="todos">Todos</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <div id="fornecedores" onclick="fornecedor()">
-                                            <div class="box text-center">
-                                                <p>Fornecedores</p>
-                                            </div>
-                                        </div>
+                                        <label for="dataInicio">Data de início</label>
+                                        <br>
+                                        <input type="date" name="dataInicio">
                                     </div>
                                     <div class="col-md-4">
-                                        <div id="datas" onclick="datas()">
-                                            <div class="box text-center">
-                                                <p>Datas</p>
-                                            </div>
-                                        </div>
+                                        <label for="dataFim">Data de fim</label>
+                                        <br>
+                                        <input type="date" name="dataFim">
                                     </div>
                                 </div>
                                 <br>
-                            </div>
-
-                            {{-- Estudantes -> Secção de procura --}}
-                            <div id="div-estudante" style="display:none;">
-                                <div class="row">
-                                    <p>Filtragem por Estudantes &nbsp;</p>
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                </div>
-                                <br>
-                                <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="estudante">Estudantes</label>
-                                            <br>
-                                            <select name="estudante">
-                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar estudante</option>
-                                                <option value="all">Todos</option>
-                                                @foreach ($estudantes as $estudante)
-                                                <option value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataInicio">Data de início</label>
-                                            <br>
-                                            <input type="date" name="dataInicio">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataFim">Data de fim</label>
-                                            <br>
-                                            <input type="date" name="dataFim">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                    <div class="row">
-                                        <div class="form-group text-right ml-auto" style="margin-right:15px;">
-                                            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
-                                            <button type="button" class="cancel-button">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            {{-- Agentes -> Secção de procura --}}
-                            <div id="div-agente" style="display:none;">
-                                <div class="row">
-                                    <p>Filtragem por Agentes &nbsp;</p>
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                </div>
-                                <br>
-                                <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="agente">Agentes</label>
-                                            <br>
-                                            <select name="agente">
-                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar agente</option>
-                                                @foreach ($agentes as $agente)
-                                                <option value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataInicio">Data de início</label>
-                                            <br>
-                                            <input type="date" name="dataInicio">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataFim">Data de fim</label>
-                                            <br>
-                                            <input type="date" name="dataFim">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                    <div class="row">
-                                        <div class="form-group text-right ml-auto" style="margin-right:15px;">
-                                            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
-                                            <button type="button" class="cancel-button">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            {{-- SubAgentes -> Secção de procura --}}
-                            <div id="div-subagente" style="display:none;">
-                                <div class="row">
-                                    <p>Filtragem por SubAgentes &nbsp;</p>
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                </div>
-                                <br>
-                                <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="subagente">SubAgentes</label>
-                                            <br>
-                                            <select name="subagente">
-                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar subagente</option>
-                                                @foreach ($subagentes as $subagente)
-                                                <option value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataInicio">Data de início</label>
-                                            <br>
-                                            <input type="date" name="dataInicio">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataFim">Data de fim</label>
-                                            <br>
-                                            <input type="date" name="dataFim">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                    <div class="row">
-                                        <div class="form-group text-right ml-auto" style="margin-right:15px;">
-                                            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
-                                            <button type="button" class="cancel-button">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            {{-- Universidade -> Secção de procura --}}
-                            <div id="div-universidade" style="display:none;">
-                                <div class="row">
-                                    <p>Filtragem por Universidades &nbsp;</p>
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                </div>
-                                <br>
-                                <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="universidade">Universidades</label>
-                                            <br>
-                                            <select name="universidade">
-                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar universidade</option>
-                                                @foreach ($universidades as $universidade)
-                                                <option value="{{$universidade->idUniversidade}}">{{$universidade->nome}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataInicio">Data de início</label>
-                                            <br>
-                                            <input type="date" name="dataInicio">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataFim">Data de fim</label>
-                                            <br>
-                                            <input type="date" name="dataFim">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                    <div class="row">
-                                        <div class="form-group text-right ml-auto" style="margin-right:15px;">
-                                            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
-                                            <button type="button" class="cancel-button">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            {{-- Fornecedor -> Secção de procura --}}
-                            <div id="div-fornecedor" style="display:none;">
-                                <div class="row">
-                                    <p>Filtragem por Fornecedor &nbsp;</p>
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                </div>
-                                <br>
-                                <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="fornecedor">Fornecedores</label>
-                                            <br>
-                                            <select name="fornecedor">
-                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar fornecedor</option>
-                                                @foreach ($fornecedores as $fornecedor)
-                                                <option value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataInicio">Data de início</label>
-                                            <br>
-                                            <input type="date" name="dataInicio">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataFim">Data de fim</label>
-                                            <br>
-                                            <input type="date" name="dataFim">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                    <div class="row">
-                                        <div class="form-group text-right ml-auto" style="margin-right:15px;">
-                                            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
-                                            <button type="button" class="cancel-button">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            {{-- Data -> Secção de procura --}}
-                            <div id="div-data" style="display:none;">
-                                <div class="row">
-                                    <p>Filtragem por Data &nbsp;</p>
-                                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade.">
-                                        <span>
-                                            ?
-                                        </span>
-                                    </div>
-                                </div>
-                                <br>
-                                <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="mes">Mês do ano</label>
-                                            <br>
-                                            <select name="mes">
-                                                <option selected disabled hidden class="text-truncate" value="null">Selecionar mês</option>
-                                                <option value="jan">Janeiro</option>
-                                                <option value="fev">Fevereiro</option>
-                                                <option value="mar">Março</option>
-                                                <option value="abr">Abril</option>
-                                                <option value="mai">Maio</option>
-                                                <option value="jun">Junho</option>
-                                                <option value="jul">Julho</option>
-                                                <option value="ago">Agosto</option>
-                                                <option value="set">Setembro</option>
-                                                <option value="out">Outubro</option>
-                                                <option value="nov">Novembro</option>
-                                                <option value="dez">Dezembro</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataInicio">Data de início</label>
-                                            <br>
-                                            <input type="date" name="dataInicio">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dataFim">Data de fim</label>
-                                            <br>
-                                            <input type="date" name="dataFim">
-                                        </div>
-                                    </div>
-                                    <br><br>
-                                    <div class="row">
-                                        <div class="form-group text-right ml-auto" style="margin-right:15px;">
-                                            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">pesquisar pagamento</button>
-                                            <button type="button" class="cancel-button">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>

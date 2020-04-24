@@ -222,24 +222,3 @@ p {
     position: relative;
     transform: translate(-50%, 15%);
 }
-
-.cancel-button {
-    background-color: white;
-}
-
-/* Option box */
-#estudantes, #agentes, #subagentes, #universidades, #fornecedores, #datas {
-    cursor: pointer;
-    padding: 10px;
-}
-
-.box {
-    padding: 20px 15px;
-    border-radius: 10px;
-    background-color: #EAEAEA;
-    cursor: pointer;
-}
-
-.box p {
-    margin-left: 0px !important;
-}

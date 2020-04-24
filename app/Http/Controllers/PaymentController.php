@@ -170,12 +170,10 @@ class PaymentController extends Controller
       $fields = $request->all();
       $idEstudante = (isset($fields['estudante']) ? $fields['estudante'] : null);
       $idAgente = (isset($fields['agente']) ? $fields['agente'] : null);
-      $idSubAgente = (isset($fields['subagente']) ? $fields['subagente'] : null);
       $idUniversidade = (isset($fields['universidade']) ? $fields['universidade'] : null);
       $idFornecedor = (isset($fields['fornecedor']) ? $fields['fornecedor'] : null);
       $dataInicio = (isset($fields['dataInicio']) ? $fields['dataInicio'] : null);
       $dataFim = (isset($fields['dataFim']) ? $fields['dataFim'] : null);
-      $mes = (isset($fields['mes']) ? $fields['mes'] : null);
 
       if ($idEstudante != null) {
         $cliente = Cliente::where('idCliente', $idEstudante)->first();
