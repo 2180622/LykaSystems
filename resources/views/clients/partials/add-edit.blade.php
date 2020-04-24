@@ -39,6 +39,14 @@
     </li>
 
 
+    {{-- MENU: Financeiro --}}
+    <li class="nav-item">
+        <a class="nav-link" id="financas-tab" data-toggle="tab" href="#financas" role="tab" aria-controls="financas"
+            aria-selected="false"><i class="fas fa-exclamation-circle text-danger warning_sign mr-2"
+                id="warning_financas" title="Existem campos obrigatórios por preencher"></i>Financeiro</a>
+    </li>
+
+
 </ul>
 
 <div class="tab-content p-2 mt-3" id="myTabContent">
@@ -285,26 +293,11 @@
 
         <hr>
 
-
-        <div class="row ">
-            <div class="col mr-3">
-
-
-                {{-- DADOS FINANCEIROS --}}
-                {{-- INUPUT IBAN --}}
-                <label for="IBAN" class="mr-2">IBAN: </label><br>
-                <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}"
-                    maxlength="25" required><br>
-
-                {{-- INUPUT Observações Financeiras --}}
-                <label for="obsFinanceiras">Observações Financeiras:</label><br>
-                <textarea name="obsFinanceiras" id="obsFinanceiras" rows="5"
-                    class="form-control">{{old('obsFinanceiras',$client->obsFinanceiras)}}</textarea><br><br>
+        <div class="row">
+            <div class="col">
+                Outros documentos:
             </div>
-
-
         </div>
-
 
     </div>
 
@@ -451,6 +444,34 @@
 
 
     </div>
+
+
+
+
+
+    {{-- Conteudo: Financas --}}
+    <div class="tab-pane fade" id="financas" role="tabpanel" aria-labelledby="financas-tab">
+        <div class="row ">
+            <div class="col">
+
+
+                {{-- DADOS FINANCEIROS --}}
+                {{-- INUPUT IBAN --}}
+                <label for="IBAN" class="mr-2">IBAN: </label><br>
+                <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}"
+                    maxlength="25" required><br>
+
+                {{-- INUPUT Observações Financeiras --}}
+                <label for="obsFinanceiras">Observações Financeiras:</label><br>
+                <textarea name="obsFinanceiras" id="obsFinanceiras" rows="5"
+                    class="form-control">{{old('obsFinanceiras',$client->obsFinanceiras)}}</textarea><br><br>
+            </div>
+
+
+        </div>
+    </div>
+
+
 
 
 
