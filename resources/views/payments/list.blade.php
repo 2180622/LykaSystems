@@ -117,58 +117,74 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="estudante">Estudantes</label>
-                                        <br>
-                                        <select name="estudante" id="estudantes" onclick="selected()">
-                                            <option selected disabled hidden class="text-truncate" value="defeito">Selecionar estudante</option>
-                                            <option class="text-truncate" value="nenhum">Nenhum</option>
-                                            <option class="text-truncate" value="todos">Todos</option>
-                                        </select>
+                                <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="estudante">Estudantes</label>
+                                            <br>
+                                            <select name="estudante" id="estudantes" onchange="selected()">
+                                                <option selected disabled hidden class="text-truncate" value="defeito">Selecionar estudante</option>
+                                                <option class="text-truncate" value="todos">(Todos)</option>
+                                                @foreach ($estudantes as $estudante)
+                                                <option class="text-truncate" value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="agente">Agentes</label>
+                                            <br>
+                                            <select name="agente" id="agentes" onchange="selected()">
+                                                <option selected disabled hidden class="text-truncate" value="defeito">Selecionar agente</option>
+                                                <option class="text-truncate" value="todos">(Todos)</option>
+                                                @foreach ($agentes as $agente)
+                                                <option class="text-truncate" value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="universidade">Universidades</label>
+                                            <br>
+                                            <select name="universidade" id="universidades" onchange="selected()">
+                                                <option selected disabled hidden class="text-truncate" value="defeito">Selecionar universidade</option>
+                                                <option class="text-truncate" value="todos">(Todas)</option>
+                                                @foreach ($universidades as $universidade)
+                                                <option class="text-truncate" value="{{$universidade->idUniversidade}}">{{$universidade->nome}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="agente">Agentes</label>
-                                        <br>
-                                        <select name="agente" id="agentes" onchange="selected()">
-                                            <option selected disabled hidden class="text-truncate" value="defeito">Selecionar agente</option>
-                                            <option class="text-truncate" value="nenhum">Nenhum</option>
-                                            <option class="text-truncate" value="todos">Todos</option>
-                                        </select>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="fornecedor">Fornecedores</label>
+                                            <br>
+                                            <select name="fornecedor" id="fornecedores" onchange="selected()">
+                                                <option selected disabled hidden class="text-truncate" value="defeito">Selecionar fornecedor</option>
+                                                <option class="text-truncate" value="todos">(Todos)</option>
+                                                @foreach ($fornecedores as $fornecedor)
+                                                <option class="text-truncate" value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="dataInicio">Data de início</label>
+                                            <br>
+                                            <input type="date" name="dataInicio">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="dataFim">Data de fim</label>
+                                            <br>
+                                            <input type="date" name="dataFim">
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="universidade">Universidades</label>
-                                        <br>
-                                        <select name="universidade" id="universidades" onchange="selected()">
-                                            <option selected disabled hidden class="text-truncate" value="defeito">Selecionar universidade</option>
-                                            <option class="text-truncate" value="nenhum">Nenhum</option>
-                                            <option class="text-truncate" value="todos">Todos</option>
-                                        </select>
+                                    <br>
+                                    <div class="row mt-3">
+                                        <div class="col text-right">
+                                            <button type="submit" name="button" id="searchButton">filtrar</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <br><br>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="fornecedor">Fornecedores</label>
-                                        <br>
-                                        <select name="fornecedor" id="fornecedores" onchange="selected()">
-                                            <option selected disabled hidden class="text-truncate" value="defeito">Selecionar fornecedor</option>
-                                            <option class="text-truncate" value="nenhum">Nenhum</option>
-                                            <option class="text-truncate" value="todos">Todos</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="dataInicio">Data de início</label>
-                                        <br>
-                                        <input type="date" name="dataInicio">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="dataFim">Data de fim</label>
-                                        <br>
-                                        <input type="date" name="dataFim">
-                                    </div>
-                                </div>
-                                <br>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -177,62 +193,65 @@
         </div>
 
         <div class="container">
-            @if (count($products))
-            @foreach ($products as $product)
-            <a href="#">
+            @if (count($responsabilidades))
+            @foreach ($responsabilidades as $responsabilidade)
+            <?php
+              if ($responsabilidade->valorCliente == null) {
+                $valorCliente = '00,00€';
+              }else {
+                $valorCliente = number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€';
+              }
+
+              if ($responsabilidade->valorAgente == null) {
+                $valorAgente = '00,00€';
+              }else {
+                $valorAgente = number_format((float)$responsabilidade->valorAgente, 2, ',', '').'€';
+              }
+
+              if ($responsabilidade->valorSubAgente == null) {
+                $valorSubAgente = '00,00€';
+              }else {
+                $valorSubAgente = number_format((float)$responsabilidade->valorSubAgente, 2, ',', '').'€';
+              }
+
+              if ($responsabilidade->valorUniversidade1 == null) {
+                $valorUniversidade1 = '00,00€';
+              }else {
+                $valorUniversidade1 = number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€';
+              }
+
+              if ($responsabilidade->valorUniversidade2 == null) {
+                $valorUniversidade2 = '00,00€';
+              }else {
+                $valorUniversidade2 = number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€';
+              }
+              ?>
+
+
+            <a href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}" data-valorsubagente="{{$valorSubAgente}}"
+              data-valoruni1="{{$valorUniversidade1}}" data-valoruni2="{{$valorUniversidade2}}" data-nome="{{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}">
                 <div class="row charge-div">
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">
-                            @if($product->cliente->fotografia)
-                                <img src="{{Storage::disk('public')->url('client-documents/'.$product->cliente->idCliente.$product->cliente->nome.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
-                                @elseif($product->cliente->genero == 'F')
-                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                    @else
-                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                    @endif
+                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
                         </div>
                     </div>
                     <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$product->cliente->nome.' '.$product->cliente->apelido}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</p>
+                        <p class="text-truncate" title="{{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}">
+                            {{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}</p>
                     </div>
                     <div class="col-md-2 align-self-center">
-                        <p class="text-truncate" title="{{$product->descricao}}">{{$product->descricao}}</p>
+                        <p class="text-truncate" title="{{$responsabilidade->fase->descricao}}">{{$responsabilidade->fase->descricao}}</p>
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <?php
-                          $valorPago = 0;
-                          foreach ($product->fase as $fase) {
-                            if (count($fase->DocTransacao)) {
-                              foreach ($fase->DocTransacao as $document) {
-                                $valorPago = $valorPago + $document->valorRecebido;
-                              }
-                            }
-                          }
-
-                          $valorDivida = 0;
-                          foreach ($product->fase as $fase) {
-                            if (count($fase->DocTransacao)) {
-                              foreach ($fase->DocTransacao as $document) {
-                                if ($document->valorRecebido < $fase->valorFase) {
-                                  $valorDivida = $valorDivida + ($fase->valorFase - $document->valorRecebido);
-                                }
-                              }
-                            }
-                          }
-
-                      ?>
-                        @if ($valorPago != 0)
-                        <p class="text-truncate" style="color:#47BC00;">{{number_format((float)$valorPago, 2, ',', '')}}€</p>
-                        @endif
-                        @if ($valorDivida != 0)
-                        <p class="text-truncate" style="color:#FF3D00;">{{number_format((float)$valorDivida, 2, ',', '')}}€</p>
-                        @endif
-                        <p class="text-truncate">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</p>
+                        <p class="text-truncate">{{
+                          $valorTotal = $responsabilidade->valorCliente + $responsabilidade->valorAgente + $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 + $responsabilidade->valorUniversidade2.'€'
+                        }}</p>
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
                         <p class="text-truncate">
                             @php
-                            switch ($product->estado) {
+                            switch ($responsabilidade->estado) {
                             case 'Pendente':
                             printf('Pendente');
                             break;
@@ -244,10 +263,6 @@
                             case 'Dívida':
                             printf('Dívida');
                             break;
-
-                            case 'Crédito':
-                            printf('Crédito');
-                            break;
                             }
                             @endphp
                         </p>
@@ -256,6 +271,56 @@
             </a>
             @endforeach
             @endif
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-around">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Valor cliente:</label>
+                        <input type="text" class="form-control" id="valor-cliente">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Valor agente:</label>
+                        <input type="text" class="form-control" id="valor-agente">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Valor subagente:</label>
+                        <input type="text" class="form-control" id="valor-subagente">
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-around">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Valor universidade1:</label>
+                        <input type="text" class="form-control" id="valor-uni1">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Valor universidade2:</label>
+                        <input type="text" class="form-control" id="valor-uni2">
+                    </div>
+                    <div class="form-group" style="opacity:0;">
+                        <label for="message-text" class="col-form-label">Valor universidade2:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                </div>
+            </div>
+            <form action="" method="post">
+              @csrf
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Pagamento</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

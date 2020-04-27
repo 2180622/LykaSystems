@@ -105,6 +105,8 @@
                     @endif
                 </div><br>
 
+
+
                 @if (Auth::user()->tipo == "admin")
 
                     <div>
@@ -122,7 +124,7 @@
                         @endif
                     </div>
 
-
+                    {{-- Adicionar produto --}}
                     <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
 
                 @endif
@@ -303,6 +305,9 @@
 
                         </ul>
 
+                    {{-- Carregar novos documentos --}}
+                    <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Carregar Documentos</a></div>
+
                     </div>
 
                 </div>
@@ -356,6 +361,10 @@
                             @else
                             <li class="text-muted"><small>Sem documentos</small></li>
                             @endif
+
+
+                            {{-- Carregar novos documentos --}}
+                            <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Carregar Documentos</a></div>
 
 
 

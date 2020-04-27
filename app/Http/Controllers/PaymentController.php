@@ -13,12 +13,13 @@ use App\Universidade;
 use App\DocTransacao;
 use App\Responsabilidade;
 use Illuminate\Http\Request;
+use App\PagoResponsabilidade;
 
 class PaymentController extends Controller
 {
     public function index()
     {
-      $products = Produto::all();
+      $responsabilidades = Responsabilidade::all();
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
       $responsabilidadesPagas = Responsabilidade::where('estado', '=', 'Pago')->get();
       $responsabilidadesDivida = Responsabilidade::where('estado', '=', 'Dívida')->get();
@@ -26,9 +27,7 @@ class PaymentController extends Controller
       $estudantes = Cliente::all();
       $universidades = Universidade::all();
       $agentes = Agente::where('tipo', '=', 'Agente')->get();
-      $subagentes = Agente::where('tipo', '=', 'Subagente')->get();
       $fornecedores = Fornecedor::all();
-      $contas = Conta::all();
 
       $valorTotalPendente = 0;
       $valorTotalPago = 0;
@@ -162,22 +161,147 @@ class PaymentController extends Controller
           }
         }
       }
-      return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores', 'contas'));
+      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'universidades', 'fornecedores'));
     }
 
     public function search(Request $request)
     {
       $fields = $request->all();
+      // Escolha de estudantes, agentes, etc...
       $idEstudante = (isset($fields['estudante']) ? $fields['estudante'] : null);
       $idAgente = (isset($fields['agente']) ? $fields['agente'] : null);
       $idUniversidade = (isset($fields['universidade']) ? $fields['universidade'] : null);
       $idFornecedor = (isset($fields['fornecedor']) ? $fields['fornecedor'] : null);
+      // Intervalo de datas escolhidas
       $dataInicio = (isset($fields['dataInicio']) ? $fields['dataInicio'] : null);
       $dataFim = (isset($fields['dataFim']) ? $fields['dataFim'] : null);
 
+      // Pesquisa de estudantes
       if ($idEstudante != null) {
-        $cliente = Cliente::where('idCliente', $idEstudante)->first();
-        $fases = Fase::where('idProduto', $cliente->produto->first()->idProduto)->get();
+        if ($idEstudante == 'todos') {
+          $queryResp = Responsabilidade::select();
+        if ($dataInicio != null) {
+          $queryResp->where('created_at', '>=', $dataInicio);
+        }
+        if ($dataFim != null) {
+          $queryResp->where('created_at', '<=', $dataFim);
+        }
+      }else {
+        $produtos = Produto::where('idCliente', $idEstudante)->get();
+        foreach ($produtos as $produto) {
+          $fases = Fase::where('idProduto', $produto->idProduto)->get();
+        }
       }
+      return view('payments.list', compact('queryResp'));
+      }
+
+      // Pesquisa de agentes
+      if ($idAgente != null) {
+        if ($idAgente == 'todos') {
+          // Responsabilidades associadas a todos os agentes
+        }else{
+          // Responsabilidades associadas ao agente escolhido
+        }
+      }
+
+      // Pesquisa de universidades
+      if ($idUniversidade != null) {
+        if ($idUniversidade == 'todos') {
+          // Responsabilidades associadas a todas as universidades
+        }else{
+          // Responsabilidades associadas a uni escolhida
+        }
+      }
+
+      // Pesquisa de fornecedores
+      if ($idFornecedor != null) {
+        if ($idFornecedor == 'todos') {
+          // Responsabilidades associadas a todos os fornecedores
+        }else{
+          // Responsabilidades associadas ao fornecedor escolhido
+        }
+      }
+
+    }
+
+    public function create(Responsabilidade $responsabilidade)
+    {
+      return view('payments.add', compact('responsabilidade'));
+    }
+
+    public function store(Request $request, Responsabilidade $responsabilidade)
+    {
+      $pagoResponsabilidade = new PagoResponsabilidade;
+      $fields = $request->all();
+      // Campos de CLIENTE
+      $valorCliente = (isset($fields['valorPagoCliente']) ? $fields['valorPagoCliente'] : null);
+      $comprovativoCliente = (isset($fields['comprovativoPagamentoCliente']) ? $fields['comprovativoPagamentoCliente'] : null);
+      $dataCliente = (isset($fields['dataCliente']) ? $fields['dataCliente'] : null);
+
+      // Campos de AGENTE
+      $valorAgente = (isset($fields['valorPagoAgente']) ? $fields['valorPagoAgente'] : null);
+      $comprovativoAgente = (isset($fields['comprovativoPagamentoAgente']) ? $fields['comprovativoPagamentoAgente'] : null);
+      $dataAgente = (isset($fields['dataAgente']) ? $fields['dataAgente'] : null);
+
+      // Campos de SUBAGENTE
+      $valorSubAgente = (isset($fields['valorPagoSubAgente']) ? $fields['valorPagoSubAgente'] : null);
+      $comprovativoSubAgente = (isset($fields['comprovativoPagamentoSubAgente']) ? $fields['comprovativoPagamentoSubAgente'] : null);
+      $dataSubAgente = (isset($fields['dataSubAgente']) ? $fields['dataSubAgente'] : null);
+
+      // Campos de UNIVERSIDADE1
+      $valorUni1 = (isset($fields['valorPagoUni1']) ? $fields['valorPagoUni1'] : null);
+      $comprovativoUni1 = (isset($fields['comprovativoPagamentoUni1']) ? $fields['comprovativoPagamentoUni1'] : null);
+      $dataUni1 = (isset($fields['dataUni1']) ? $fields['dataUni1'] : null);
+
+      // Campos de UNIVERSIDADE2
+      $valorUni2 = (isset($fields['valorPagoUni2']) ? $fields['valorPagoUni2'] : null);
+      $comprovativoUni2 = (isset($fields['comprovativoPagamentoUni2']) ? $fields['comprovativoPagamentoUni2'] : null);
+      $dataUni2 = (isset($fields['dataUni2']) ? $fields['dataUni2'] : null);
+
+      if ($valorCliente != null) {
+        $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido;
+        $pagoResponsabilidade->comprovativoPagamento = "lorem";
+        $pagoResponsabilidade->dataPagamento = $dataCliente;
+        $pagoResponsabilidade->idFase = '1';
+        $pagoResponsabilidade->idConta = '1';
+        $pagoResponsabilidade->save();
+      }
+
+      if ($valorCliente != null) {
+        $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido;
+        $pagoResponsabilidade->comprovativoPagamento = "lorem";
+        $pagoResponsabilidade->dataPagamento = $dataCliente;
+        $pagoResponsabilidade->idFase = '1';
+        $pagoResponsabilidade->idConta = '1';
+        $pagoResponsabilidade->save();
+      }
+
+      if ($valorSubAgente != null) {
+        $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido;
+        $pagoResponsabilidade->comprovativoPagamento = "lorem";
+        $pagoResponsabilidade->dataPagamento = $dataCliente;
+        $pagoResponsabilidade->idFase = '1';
+        $pagoResponsabilidade->idConta = '1';
+        $pagoResponsabilidade->save();
+      }
+
+      if ($valorUni1 != null) {
+        $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido;
+        $pagoResponsabilidade->comprovativoPagamento = "lorem";
+        $pagoResponsabilidade->dataPagamento = $dataCliente;
+        $pagoResponsabilidade->idFase = '1';
+        $pagoResponsabilidade->idConta = '1';
+        $pagoResponsabilidade->save();
+      }
+
+      if ($valorUni2 != null) {
+        $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido;
+        $pagoResponsabilidade->comprovativoPagamento = "lorem";
+        $pagoResponsabilidade->dataPagamento = $dataCliente;
+        $pagoResponsabilidade->idFase = '1';
+        $pagoResponsabilidade->idConta = '1';
+        $pagoResponsabilidade->save();
+      }
+      return redirect()->route('payments.index')->with('success', 'Pagamento registado com sucesso');
     }
 }

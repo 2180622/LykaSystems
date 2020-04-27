@@ -287,10 +287,17 @@
 
 
                     /* valida Campos dos documentos */
-                    if ( ($("#num_docOficial").val()=="")  || ($("#numPassaport").val()=="")  || ($("#dataValidPP").val()=="") || ($("#passaportPaisEmi").val()=="") || ($("#localEmissaoPP").val()=="") || ($("#IBAN").val()=="") ){
+                    if ( ($("#num_docOficial").val()=="")  || ($("#numPassaport").val()=="")  || ($("#dataValidPP").val()=="") || ($("#passaportPaisEmi").val()=="") || ($("#localEmissaoPP").val()=="") ){
                         $("#warning_documentation").removeClass("warning_sign");
                     } else {
                         $("#warning_documentation").addClass("warning_sign");
+                    }
+
+                    /* valida Campos das finanças */
+                    if ( $("#IBAN").val()=="" ){
+                        $("#warning_financas").removeClass("warning_sign");
+                    } else {
+                        $("#warning_financas").addClass("warning_sign");
                     }
 
 
