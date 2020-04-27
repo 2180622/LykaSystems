@@ -41,9 +41,8 @@
             ?>
             <p style="margin-left: 0px !important;">&nbsp;{{$valorTotal}}</p>
             <hr>
-            <form action="#" method="post" class="mt-4">
+            <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4">
                 @csrf
-                @method('put')
                 @if ($responsabilidade->valorCliente != '0.00')
                 <div class="row">
                     <div class="col-md-4">
@@ -152,7 +151,7 @@
         </div>
         <div class="form-group text-right">
             <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">confirmar cobrança</button>
+            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">confirmar pagamento</button>
             <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
         </div>
         </form>
