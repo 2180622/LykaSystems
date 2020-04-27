@@ -222,4 +222,14 @@ class PaymentController extends Controller
       }
 
     }
+
+    public function create(Responsabilidade $responsabilidade)
+    {
+      return view('payments.add', compact('responsabilidade'));
+    }
+
+    public function store(Responsabilidade $responsabilidade)
+    {
+      return view('payments.add', compact('responsabilidade'));
+    }
 }

@@ -228,7 +228,7 @@
               ?>
 
 
-            <a href="#" data-toggle="modal" data-target="#exampleModal" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}" data-valorsubagente="{{$valorSubAgente}}"
+            <a href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}" data-valorsubagente="{{$valorSubAgente}}"
               data-valoruni1="{{$valorUniversidade1}}" data-valoruni2="{{$valorUniversidade2}}" data-nome="{{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}">
                 <div class="row charge-div">
                     <div class="col-md-1 align-self-center">
@@ -314,10 +314,13 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Pagamento</button>
-            </div>
+            <form action="" method="post">
+              @csrf
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Pagamento</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
