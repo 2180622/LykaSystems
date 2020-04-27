@@ -13,8 +13,7 @@ class StoreDocstockRequest extends FormRequest
     {
         return [
             'tipo' => 'required|in:Pessoal,Academico',
-            'tipoPessoal' => 'in:Passaport,Cartão Cidadão,Carta Condução,Doc. Oficial',
-            'tipoAcademico' => 'in:Exame Universitário,Exame Nacional,Diploma,Certificado',
+            'tipoDocumento' => 'required|max:255',
         ];
     }
 }

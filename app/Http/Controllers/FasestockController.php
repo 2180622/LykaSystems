@@ -26,7 +26,7 @@ class FasestockController extends Controller
 
         $faseStock->save();
 
-        return redirect()->route('produtostock.index')->with('success', 'Fase stock adicionada com sucesso');
+        return redirect()->back()->with('success', 'Fase stock adicionada com sucesso');
     }
 
     public function show(DocStock $docstocks, FaseStock $fasestock){
@@ -55,12 +55,12 @@ class FasestockController extends Controller
         $fasestock->updated_at == date("Y-m-d",$t);
         $fasestock->save();
 
-        return redirect()->route('produtostock.index')->with('success', 'Dados da fase de stock modificados com sucesso');
+        return redirect()->back()->with('success', 'Dados da fase de stock modificados com sucesso');
     }
 
     public function destroy(FaseStock $fasestock){
         $fasestock->delete();
 
-        return redirect()->route('produtostock.index')->with('success', 'Fase stock eliminada com sucesso');
+        return redirect()->back()->with('success', 'Fase stock eliminada com sucesso');
     }
 }

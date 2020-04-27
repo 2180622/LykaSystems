@@ -29,7 +29,7 @@ class DocumentostockController extends Controller
 
         $docStock->save();
 
-        return redirect()->route('produtostock.index')->with('success', 'Documento stock adicionado com sucesso');
+        return redirect()->back()->with('success', 'Documento stock adicionado com sucesso');
     }
 
     public function show(DocStock $documentostock){
@@ -59,12 +59,12 @@ class DocumentostockController extends Controller
         $documentostock->updated_at == date("Y-m-d",$t);
         $documentostock->save();
 
-        return redirect()->route('produtostock.index')->with('success', 'Dados do documento de stock modificados com sucesso');
+        return redirect()->back()->with('success', 'Dados do documento de stock modificados com sucesso');
     }
 
     public function destroy(DocStock $documentostock){
         $documentostock->delete();
 
-        return redirect()->route('produtostock.index')->with('success', 'Documento stock eliminado com sucesso');
+        return redirect()->back()->with('success', 'Documento stock eliminado com sucesso');
     }
 }

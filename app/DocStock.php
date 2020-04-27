@@ -13,7 +13,7 @@ class DocStock extends Model
     protected $primaryKey = 'idDocStock';
 
     protected $fillable = [
-        'tipo','tipoPessoal','tipoAcademico','$idFaseStock'
+        'tipo','tipoDocumento','$idFaseStock'
         ];
 
     public function faseStock(){
