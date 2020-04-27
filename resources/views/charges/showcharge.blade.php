@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Pagamento')
+@section('title', 'Cobranças')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')

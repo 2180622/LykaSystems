@@ -38,12 +38,12 @@
                     <div class="row">
                         <div class="col">
                             {{-- INPUT nome --}}
-                            <label for="nome">Cliente: 
+                            <label for="nome">Cliente:
                                 <a class="name_link" href="{{route('clients.show',$cliente)}}">
                                     {{$cliente->nome.' '.$cliente->apelido}}
                                 </a>
-                                <input type="text" class="form-control" name="idCliente" id="idCliente" 
-                                value="{{$cliente->idCliente}}"  maxlength="20" 
+                                <input type="text" class="form-control" name="idCliente" id="idCliente"
+                                value="{{$cliente->idCliente}}"  maxlength="20"
                                 style="display:none;" readonly><br>
                             </label>
                         </div>
@@ -66,19 +66,19 @@
                     <div class="row" id="formulario-produto">
                         <div class="col">
                             <div><span><b>Produto</b></span></div><br>
-            
+
                             <label for="tipo">Tipo:</label><br>
-                            <input type="text" class="form-control" name="tipo" id="tipo" 
+                            <input type="text" class="form-control" name="tipo" id="tipo"
                             value="{{old('tipo',$produto->tipo)}}" placeholder="Tipo" maxlength="20" readonly><br>
-            
+
                             <label for="descricao">Descrição:</label><br>
-                            <input type="text" class="form-control" name="descricao" id="descricao" 
+                            <input type="text" class="form-control" name="descricao" id="descricao"
                             value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" readonly><br>
-            
+
                             <label for="AnoAcademico">Ano académico:</label><br>
-                            <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
+                            <input type="text" class="form-control" name="anoAcademico" id="anoAcademico"
                             value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required><br>
-            
+
                             <label for="agente">Agente:</label><br>
                             <select id="agente" name="agente" class="form-control" required>
                                 <option value="" selected></option>
@@ -102,7 +102,7 @@
                                     <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
                                 @endforeach
                             </select><br>
-            
+
                             <label for="uni2">Universidade Secundária:</label><br>
                             <select id="uni2" name="uni2" class="form-control">
                                 <option value="" selected></option>
@@ -110,7 +110,7 @@
                                     <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
                                 @endforeach
                             </select><br>
-            
+
                         </div>
                     </div>
                 </div>
@@ -147,28 +147,28 @@
                             @endphp
                             @if($num==1)
                                 <div class="tab-pane fade active show" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
-                            @else 
+                            @else
                                 <div class="tab-pane fade" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
                             @endif
                                 <div class="row">
                                     <div class="col-md-12">
-                        
+
                                         <div><span><b>Fase {{$num}}</b></span></div><br>
-                        
+
                                         <label for="descricao-fase{{$num}}">Descrição:</label><br>
-                                        <input type="text" class="form-control" name="descricao-fase{{$num}}" id="descricao-fase{{$num}}" 
+                                        <input type="text" class="form-control" name="descricao-fase{{$num}}" id="descricao-fase{{$num}}"
                                         value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
-                        
+
                                         <label for="data-fase{{$num}}">Data de vencimento:</label><br>
                                         <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px"><br>
-                        
+
                                         <label for="valor-fase{{$num}}">Valor da fase:</label><br>
                                         <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
                                         value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required><br>
 
-                                        <input type="text" class="form-control" name="fase-idStock{{$num}}" id="fase-idStock{{$num}}" 
-                                        value="{{old('idFaseStock',$fase->idFaseStock)}}"  maxlength="20" 
+                                        <input type="text" class="form-control" name="fase-idStock{{$num}}" id="fase-idStock{{$num}}"
+                                        value="{{old('idFaseStock',$fase->idFaseStock)}}"  maxlength="20"
                                         style="display:none;" readonly><br>
                                     </div>
                                     <div class="col mr-3">
@@ -176,7 +176,7 @@
                                         <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
                                         value="{{old('valorCliente',$Responsabilidades[$num-1]->valorCliente)}}" style="width:250px" required><br>
-                        
+
                                         <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
                                         value="{{old('valorAgente',$Responsabilidades[$num-1]->valorAgente)}}" style="width:250px" required><br>
@@ -188,7 +188,7 @@
                                         <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
                                         value="{{old('valorUniversidade1',$Responsabilidades[$num-1]->valorUniversidade1)}}" style="width:250px" required><br>
-                        
+
                                         <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
                                         value="{{old('valorUniversidade2',$Responsabilidades[$num-1]->valorUniversidade2)}}" style="width:250px"><br>
