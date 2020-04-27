@@ -543,7 +543,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'cube';
         $fase->idProduto = 1;
-        $fase->idFaseStock = 1;
         $fase->idResponsabilidade = 1;
         $fase->save();
 
@@ -554,7 +553,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'layers';
         $fase->idProduto = 1;
-        $fase->idFaseStock = 2;
         $fase->idResponsabilidade = 2;
         $fase->save();
 
@@ -565,7 +563,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'school';
         $fase->idProduto = 1;
-        $fase->idFaseStock = 3;
         $fase->idResponsabilidade = 3;
         $fase->save();
 
@@ -576,7 +573,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'pie-chart';
         $fase->idProduto = 1;
-        $fase->idFaseStock = 4;
         $fase->idResponsabilidade = 4;
         $fase->save();
 
@@ -590,7 +586,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'cube';
         $fase->idProduto = 2;
-        $fase->idFaseStock = 1;
         $fase->idResponsabilidade = 5;
         $fase->save();
 
@@ -601,7 +596,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'layers';
         $fase->idProduto = 2;
-        $fase->idFaseStock = 2;
         $fase->idResponsabilidade = 2;
         $fase->save();
 
@@ -612,7 +606,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'school';
         $fase->idProduto = 2;
-        $fase->idFaseStock = 3;
         $fase->idResponsabilidade = 3;
         $fase->save();
 
@@ -623,7 +616,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'pie-chart';
         $fase->idProduto = 2;
-        $fase->idFaseStock = 4;
         $fase->idResponsabilidade = 4;
         $fase->save();
 

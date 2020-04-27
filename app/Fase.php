@@ -41,7 +41,7 @@ class Fase extends Model
         return $this->belongsTo("App\PagoResponsabilidade","idFase","idFase")->withTrashed();
     }
 
-    public function faseStock(){
-        return $this->belongsTo("App\FaseStock","idFaseStock","idFaseStock")->withTrashed();
+    public function docNecessario(){
+        return $this->hasMany("App\DocNecessario","idFase","idFase")->withTrashed();
     }
 }

@@ -131,7 +131,7 @@
                         $DocsAcademicos = $fase->docAcademico;
                         $DocsPessoais = $fase->docPessoal;
                         $DocsTransacao = $fase->docTransacao;
-                        $DocsStock = $fase->faseStock->docStock;
+                        $DocsNecessarios = $fase->docNecessario;
                         $DocsRespons = $fase->pagoResponsabilidade;
                     @endphp
                     @if($numfase == 1)
@@ -221,7 +221,7 @@
                             <div class="col">
                                 @if($DocsPessoais->toArray())
                                     <div><span><b>Documentos Pessoais</b></span></div><br>
-                                    @foreach($DocsStock as $documento)
+                                    @foreach($DocsNecessarios as $documento)
                                         @if($documento->tipo == 'Pessoal')
                                             @php
                                                 $existe = false;
@@ -239,11 +239,11 @@
                                                     </div><br>
                                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                                         <div class="float-right">
-                                                            <a href="{{route('documentos.create',$produto)}}" class="top-button mr-2">Verificar documento</a>
+                                                            <a href="{{route('documentos.edit',$fase)}}" class="top-button mr-2">Verificar documento</a>
                                                         </div>
                                                     @else
                                                         <div class="float-right">
-                                                            <a href="{{route('documentos.create',$produto)}}" class="top-button mr-2">Editar documento</a>
+                                                            <a href="{{route('documentos.edit',$fase)}}" class="top-button mr-2">Editar documento</a>
                                                         </div>
                                                     @endif
                                                     @php
@@ -255,7 +255,7 @@
                                                 </div><br>
                                                 <div><span class="text-secondary"> - Estado:</span><span class="text-danger">Inválido</span></div><br>
                                                 <div class="float-right">
-                                                    <a href="{{route('documentos.create',$produto)}}" class="top-button mr-2">Adicionar documento</a>
+                                                    <a href="{{route('documentos.create',$fase,$documento->tipo,$documento->tipoPessoal)}}" class="top-button mr-2">Adicionar documento</a>
                                                 </div>
                                             @endif
                                         @endif
@@ -264,7 +264,7 @@
                                     @php
                                         $num = 0;
                                     @endphp
-                                    @foreach($DocsStock as $documento)
+                                    @foreach($DocsNecessarios as $documento)
                                         @if($documento->tipo == 'Pessoal')
                                             @if($num==0)
                                                 <div><span><b>Documentos Pessoais</b></span></div><br>
@@ -279,7 +279,7 @@
                                 @endif
                                 @if($DocsAcademicos->toArray())
                                     <div><span><b>Documentos Académicos</b></span></div><br>
-                                    @foreach($DocsStock as $documento)
+                                    @foreach($DocsNecessarios as $documento)
                                         @if($documento->tipo == 'Academico')
                                             @php
                                                 $existe = false;
@@ -310,7 +310,7 @@
                                     @php
                                         $num = 0;
                                     @endphp
-                                    @foreach($DocsStock as $documento)
+                                    @foreach($DocsNecessarios as $documento)
                                         @if($documento->tipo == 'Academico')
                                             @if($num==0)
                                                 <div><span><b>Documentos Académicos</b></span></div><br>
