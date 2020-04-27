@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Pagamento')
+@section('title', 'Cobranças')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
@@ -36,8 +36,8 @@
         <div class="payment-card shadow-sm">
             <p>VALOR A COBRAR:</p>
             <p>&nbsp;{{number_format((float)$fase->valorFase, 2, ',', '')}}€</p>
-            <br><br>
-            <form action="{{route('charges.store', [$product, $fase])}}" method="post" enctype="multipart/form-data">
+            <hr>
+            <form class="mt-4" action="{{route('charges.store', [$product, $fase])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">

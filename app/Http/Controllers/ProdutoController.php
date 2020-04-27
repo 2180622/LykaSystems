@@ -11,6 +11,7 @@ use App\ProdutoStock;
 use App\Responsabilidade;
 use App\Universidade;
 use App\RelFornResp;
+use App\DocNecessario;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -50,18 +51,18 @@ class ProdutoController extends Controller
             $Fases=null;
             $Responsabilidades = null;
             $relacao = new RelFornResp;
-            $relacao->valor=0;
+            //$relacao->valor=0;
 
             for($i=0;$i<20;$i++){
                 $fase = new Fase;
-                $fase->valorFase = 0;
+                //$fase->valorFase = 0;
                 $Fases[] = $fase;
                 $responsabilidade = new Responsabilidade;
-                $responsabilidade->valorCliente = 0;
+                /*$responsabilidade->valorCliente = 0;
                 $responsabilidade->valorAgente = 0;
                 $responsabilidade->valorSubAgente = 0;
                 $responsabilidade->valorUniversidade1 = 0;
-                $responsabilidade->valorUniversidade2 = 0;
+                $responsabilidade->valorUniversidade2 = 0;*/
                 $Responsabilidades[] = $responsabilidade;
             }
 
@@ -80,7 +81,7 @@ class ProdutoController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreProdutoRequest $request){
+    public function store(StoreProdutoRequest $request, ProdutoStock $produtoStock){
 
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
             $fields = $request->all();
@@ -91,7 +92,6 @@ class ProdutoController extends Controller
             $produto->anoAcademico = $fields['anoAcademico'];
             $produto->idCliente = $fields['idCliente'];
             $produto->idAgente = $fields['agente'];
-            //$produto->idSubAgente = $fields['subagente'];
             $produto->idSubAgente = null;
             $produto->idUniversidade1 = $fields['uni1'];
             $produto->idUniversidade2 = $fields['uni2'];
@@ -106,6 +106,8 @@ class ProdutoController extends Controller
             $valorTAgente = 0;
             $valorTSubAgente = 0;
 
+            $fasesStock = $produtoStock->faseStock;
+
             for($i=1;$i<=20;$i++){
                 if($fields['descricao-fase'.$i]!=null){
                     $fase = new Fase;
@@ -113,11 +115,7 @@ class ProdutoController extends Controller
                     $valorRelacoes = 0;
                     $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
                     $responsabilidade->valorAgente = $fields['resp-agente-fase'.$i];
-                    //if($produto->idSubAgente){
-                    //    $responsabilidade->valorSubAgente = $fields['resp-subagente-fase'.$i];
-                    //}else{
-                        $responsabilidade->valorSubAgente = null;
-                    //}
+                    $responsabilidade->valorSubAgente = null;
                     $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$i];
                     if($produto->idUniversidade2){
                         $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$i];
@@ -150,13 +148,22 @@ class ProdutoController extends Controller
 
                     $fase->descricao = $fields['descricao-fase'.$i];
                     $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$i]));
-                    $fase->idFaseStock = $fields['fase-idStock'.$i];
+                    //$fase->idFaseStock = $fields['fase-idStock'.$i];
                     $fase->valorFase = $fields['valor-fase'.$i];
                     $fase->create_at == date("Y-m-d",$t);
                     $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
                     $fase->idProduto = $produto->idProduto;
                     $fase->save();
 
+                    $docsStock = $fasesStock[$i-1]->docStock;
+                    foreach($docsStock as $doc){
+                        $documento = new DocNecessario;
+                        $documento->tipo = $doc->tipo;
+                        $documento->tipoPessoal = $doc->tipoPessoal;
+                        $documento->tipoAcademico = $doc->tipoAcademico;
+                        $documento->idFase = $fase->idFase;
+                        $documento->save();
+                    }
 
                     $valorProduto = $valorProduto + $fase->valorFase;
                     $valorTAgente = $valorTAgente + $responsabilidade->valorAgente;
@@ -230,7 +237,6 @@ class ProdutoController extends Controller
             $relacao = new RelFornResp;
             $relacao->valor=0;
             $fases = $produto->fase;
-
             return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores','relacao'));
         }else{
             return redirect()->route('clients.show',$cliente);
