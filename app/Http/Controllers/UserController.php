@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Mail\SendEmailConfirmation;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreAdministradorRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -67,17 +68,22 @@ class UserController extends Controller
     }
 
 
-    public function update(StoreUserRequest $request, StoreAdministradorRequest $requestAdmin, User $user)
+    public function update(UpdateUserRequest $requestUser, StoreAdministradorRequest $requestAdmin, User $user, Administrador $admin)
     {
-        $fields = $request->validated();
-        $user->fill($fields);
+        $fieldsUser = $requestUser->validated();
+        $fieldsAdmin = $requestAdmin->validated();
+        $user->fill($fieldsUser);
+        $admin->fill($fieldsAdmin);
 
         $update = time();
-        $user->updated_at == date("Y-m-d",$update);
-        //
-        // DB::table('User')
-        // ->where('idAdmin', $admin->idAdmin)
-        // ->update(['email' => $admin->email]);
+        $user->updated_at == date("Y-m-d", $update);
+        $admin->updated_at == date("Y-m-d", $update);
+        $admin->save();
+
+        DB::table('User')
+        ->where('idAdmin', $admin->idAdmin)
+        ->update(['email' => $admin->email]);
+
         $user->save();
 
         return redirect()->route('users.index')->with('success', 'Dados do user modificados com sucesso');

@@ -456,6 +456,11 @@ class DataController extends Controller
         $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
         $responsabilidade->verificacaoPagoUni2 = false;
+        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -469,6 +474,11 @@ class DataController extends Controller
         $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
         $responsabilidade->verificacaoPagoUni2 = false;
+        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -482,6 +492,11 @@ class DataController extends Controller
         $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
         $responsabilidade->verificacaoPagoUni2 = false;
+        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -495,6 +510,11 @@ class DataController extends Controller
         $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
         $responsabilidade->verificacaoPagoUni2 = false;
+        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
@@ -508,28 +528,25 @@ class DataController extends Controller
         $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->verificacaoPagoUni1 = false;
         $responsabilidade->verificacaoPagoUni2 = false;
+        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $responsabilidade->save();
-
-        /************          Pago Responsabilidades          *************/
-
-        /*$pago = new PagoResponsabilidade;
-        $pago->data = (new DateTime)->format('Y-m-d');
-        $pago->nomeAutor = 'Cliente';
-        $pago->imagem = '1_1_1_1.png';
-        $pago->idFase = 1;
-        $pago->idConta = 1;
-        $pago->save();
 
         /*****************          Rel Forn Resp          *****************/
 
         $relacao = new RelFornResp;
         $relacao->valor = 80;
+        $relacao->dataVencimentoPagamento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $relacao->idResponsabilidade = 2;
         $relacao->idFornecedor = 1;
         $relacao->save();
 
         $relacao = new RelFornResp;
         $relacao->valor = 150;
+        $relacao->dataVencimentoPagamento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $relacao->idResponsabilidade = 5;
         $relacao->idFornecedor = 1;
         $relacao->save();
