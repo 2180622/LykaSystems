@@ -20,8 +20,6 @@ class Fase extends Migration
             $table->enum('estado', ['Pendente', 'Pago', 'Dívida', 'Crédito'])->default('Pendente');
             $table->unsignedBigInteger('idProduto');
                 $table->foreign('idProduto')->references('idProduto')->on('Produto');
-            $table->unsignedBigInteger('idFaseStock');
-                $table->foreign('idFaseStock')->references('idFaseStock')->on('FaseStock');
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->timestamps();
