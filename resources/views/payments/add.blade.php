@@ -59,7 +59,7 @@
                     <div class="col-md-4">
                         <label for="dataCliente">Data de pagamento</label>
                         <br>
-                        <input name="dataCliente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataCliente" type="date">
                     </div>
                 </div>
                 <br>
@@ -93,7 +93,7 @@
                     <div class="col-md-4">
                         <label for="dataAgente">Data de pagamento</label>
                         <br>
-                        <input name="dataAgente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataAgente" type="date">
                     </div>
                 </div>
                 <br>
@@ -127,7 +127,7 @@
                     <div class="col-md-4">
                         <label for="dataSubAgente">Data de pagamento</label>
                         <br>
-                        <input name="dataSubAgente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataSubAgente" type="date">
                     </div>
                 </div>
                 <br>
@@ -161,7 +161,7 @@
                     <div class="col-md-4">
                         <label for="dataUni1">Data de pagamento</label>
                         <br>
-                        <input name="dataUni1" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataUni1" type="date">
                     </div>
                 </div>
                 <br>
@@ -195,7 +195,7 @@
                     <div class="col-md-4">
                         <label for="dataUni2">Data de pagamento</label>
                         <br>
-                        <input name="dataUni2" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataUni2" type="date">
                     </div>
                 </div>
                 <br>

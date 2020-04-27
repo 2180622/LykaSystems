@@ -196,32 +196,32 @@
             @if (count($responsabilidades))
             @foreach ($responsabilidades as $responsabilidade)
             <?php
-              if ($responsabilidade->valorCliente == null) {
-                $valorCliente = '00,00€';
+              if ($responsabilidade->valorCliente == '0.00') {
+                $valorCliente = 'N/A';
               }else {
                 $valorCliente = number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€';
               }
 
-              if ($responsabilidade->valorAgente == null) {
-                $valorAgente = '00,00€';
+              if ($responsabilidade->valorAgente == '0.00') {
+                $valorAgente = 'N/A';
               }else {
                 $valorAgente = number_format((float)$responsabilidade->valorAgente, 2, ',', '').'€';
               }
 
               if ($responsabilidade->valorSubAgente == null) {
-                $valorSubAgente = '00,00€';
+                $valorSubAgente = 'N/A';
               }else {
                 $valorSubAgente = number_format((float)$responsabilidade->valorSubAgente, 2, ',', '').'€';
               }
 
-              if ($responsabilidade->valorUniversidade1 == null) {
-                $valorUniversidade1 = '00,00€';
+              if ($responsabilidade->valorUniversidade1 == '0.00') {
+                $valorUniversidade1 = 'N/A';
               }else {
                 $valorUniversidade1 = number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€';
               }
 
               if ($responsabilidade->valorUniversidade2 == null) {
-                $valorUniversidade2 = '00,00€';
+                $valorUniversidade2 = 'N/A';
               }else {
                 $valorUniversidade2 = number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€';
               }
@@ -244,9 +244,10 @@
                         <p class="text-truncate" title="{{$responsabilidade->fase->descricao}}">{{$responsabilidade->fase->descricao}}</p>
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate">{{
-                          $valorTotal = $responsabilidade->valorCliente + $responsabilidade->valorAgente + $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 + $responsabilidade->valorUniversidade2.'€'
-                        }}</p>
+                        <p class="text-truncate"><?php
+                          $valorTotal = $responsabilidade->valorCliente + $responsabilidade->valorAgente + $responsabilidade->valorSubAgente + $responsabilidade->valorUniversidade1 + $responsabilidade->valorUniversidade2;
+                          echo $valorTotal = number_format((float) $valorTotal,2 ,',' ,'').'€';
+                        ?></p>
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
                         <p class="text-truncate">
@@ -288,29 +289,29 @@
                 <div class="row d-flex justify-content-around">
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Valor cliente:</label>
-                        <input type="text" class="form-control" id="valor-cliente">
+                        <input type="text" disabled class="form-control" id="valor-cliente">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Valor agente:</label>
-                        <input type="text" class="form-control" id="valor-agente">
+                        <input type="text" disabled class="form-control" id="valor-agente">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Valor subagente:</label>
-                        <input type="text" class="form-control" id="valor-subagente">
+                        <input type="text" disabled class="form-control" id="valor-subagente">
                     </div>
                 </div>
                 <div class="row d-flex justify-content-around">
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Valor universidade1:</label>
-                        <input type="text" class="form-control" id="valor-uni1">
+                        <label for="recipient-name" class="col-form-label">Valor universidade principal:</label>
+                        <input type="text" disabled class="form-control" id="valor-uni1">
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Valor universidade2:</label>
-                        <input type="text" class="form-control" id="valor-uni2">
+                        <label for="message-text" class="col-form-label">Valor universidade secundária:</label>
+                        <input type="text" disabled class="form-control" id="valor-uni2">
                     </div>
                     <div class="form-group" style="opacity:0;">
-                        <label for="message-text" class="col-form-label">Valor universidade2:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <label class="col-form-label"></label>
+                        <input type="text" disabled class="form-control">
                     </div>
                 </div>
             </div>
@@ -318,7 +319,7 @@
               @csrf
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Pagamento</button>
+                    <button type="submit" class="btn btn-primary">Registar pagamento</button>
                 </div>
             </form>
         </div>

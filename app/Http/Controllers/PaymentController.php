@@ -281,6 +281,11 @@ class PaymentController extends Controller
         $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
         $pagoResponsabilidade->idConta = $contaCliente;
         $pagoResponsabilidade->save();
+
+        if ($valorCliente >= $responsabilidade->valorCliente) {
+          Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
+          ->update(['verificacaoPagoCliente' => '1']);
+        }
       }
 
       if ($valorAgente != null) {
@@ -293,6 +298,11 @@ class PaymentController extends Controller
         $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
         $pagoResponsabilidade->idConta = $contaAgente;
         $pagoResponsabilidade->save();
+
+        if ($valorAgente >= $responsabilidade->valorAgente) {
+          Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
+          ->update(['verificacaoPagoAgente' => '1']);
+        }
       }
 
       if ($valorSubAgente != null) {
@@ -305,6 +315,11 @@ class PaymentController extends Controller
         $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
         $pagoResponsabilidade->idConta = $contaSubAgente;
         $pagoResponsabilidade->save();
+
+        if ($valorSubAgente >= $responsabilidade->valorSubAgente) {
+          Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
+          ->update(['verificacaoPagoSubAgente' => '1']);
+        }
       }
 
       if ($valorUni1 != null) {
@@ -317,6 +332,11 @@ class PaymentController extends Controller
         $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
         $pagoResponsabilidade->idConta = $contaUni1;
         $pagoResponsabilidade->save();
+
+        if ($valorUni1 >= $responsabilidade->valorUniversidade1) {
+          Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
+          ->update(['verificacaoPagoUni1' => '1']);
+        }
       }
 
       if ($valorUni2 != null) {
@@ -329,6 +349,11 @@ class PaymentController extends Controller
         $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
         $pagoResponsabilidade->idConta = $contaUni2;
         $pagoResponsabilidade->save();
+
+        if ($valorUni2 >= $responsabilidade->valorUniversidade2) {
+          Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
+          ->update(['verificacaoPagoUni2' => '1']);
+        }
       }
       return redirect()->route('payments.index')->with('success', 'Pagamento registado com sucesso!');
     }
