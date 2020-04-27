@@ -250,3 +250,7 @@ select[disabled="true"] {
     text-transform: uppercase;
     background-color: #6A74C9;
 }
+
+.collapse-charge {
+    background-color: white;
+}

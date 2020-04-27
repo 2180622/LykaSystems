@@ -18,7 +18,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-      $products = Produto::all();
+      $responsabilidades = Responsabilidade::all();
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
       $responsabilidadesPagas = Responsabilidade::where('estado', '=', 'Pago')->get();
       $responsabilidadesDivida = Responsabilidade::where('estado', '=', 'Dívida')->get();
@@ -160,7 +160,7 @@ class PaymentController extends Controller
           }
         }
       }
-      return view('payments.list', compact('products', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'universidades', 'fornecedores'));
+      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'universidades', 'fornecedores'));
     }
 
     public function search(Request $request)
