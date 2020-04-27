@@ -4,18 +4,28 @@ $(function() {
 });
 
 // Custom upload file area
-function getFile() {
+function getFileCliente() {
     document.getElementById("upfileCliente").click();
-    // document.getElementById("upfileAgente").click();
-    // document.getElementById("upfileSubAgente").click();
-    document.getElementById("upfileUni1").click();
-    // document.getElementById("upfileUni2").click();
 }
 
+function getFileAgente() {
+    document.getElementById("upfileAgente").click();
+}
+
+function getFileSubAgente() {
+    document.getElementById("upfileSubAgente").click();
+}
+
+function getFileUni1() {
+    document.getElementById("upfileUni1").click();
+}
+
+function getFileUni2() {
+    document.getElementById("upfileUni2").click();
+}
+
+
 function sub(obj) {
-
-    console.log(obj);
-
     var file = obj.value;
     var fileName = file.split("\\");
 

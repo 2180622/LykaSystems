@@ -228,8 +228,9 @@ class PaymentController extends Controller
       return view('payments.add', compact('responsabilidade'));
     }
 
-    public function store(Responsabilidade $responsabilidade)
+    public function store(Request $request, Responsabilidade $responsabilidade)
     {
-      return view('payments.add', compact('responsabilidade'));
+      $fields = $request->all();
+      $idEstudante = (isset($fields['estudante']) ? $fields['estudante'] : null);
     }
 }

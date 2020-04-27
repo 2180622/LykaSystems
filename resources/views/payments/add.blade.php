@@ -47,20 +47,20 @@
                 @if ($responsabilidade->valorCliente != '0.00')
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorPago">Valor pago ao cliente</label>
+                        <label for="valorPagoCliente">Valor pago ao cliente</label>
                         <br>
-                        <input type="text" name="valorPago" value="{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}">
+                        <input type="text" name="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}">
                     </div>
                     <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                        <label for="comprovativoPagamento">Comp. de pagamento</label>
+                        <label for="comprovativoPagamentoCliente">Comp. de pagamento</label>
                         <br>
-                        <input type="file" name="comprovativoPagamento" id="upfileCliente" onchange="sub(this)">
-                        <div class="input-file-div text-truncate" id="addFileButtonCliente" onclick="getFile()">Adicionar um ficheiro</div>
+                        <input type="file" name="comprovativoPagamentoCliente" id="upfileCliente" onchange="sub(this)">
+                        <div class="input-file-div text-truncate" id="addFileButtonCliente" onclick="getFileCliente()">Adicionar um ficheiro</div>
                     </div>
                     <div class="col-md-4">
-                        <label for="comprovativo">Data de pagamento</label>
+                        <label for="dataCliente">Data de pagamento</label>
                         <br>
-                        <input placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataCliente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
                     </div>
                 </div>
                 <br><br>
@@ -68,20 +68,20 @@
                 @if ($responsabilidade->valorAgente != "0.00")
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorPago">Valor pago ao agente</label>
+                        <label for="valorPagoAgente">Valor pago ao agente</label>
                         <br>
-                        <input type="text" name="valorPago" value="{{number_format((float)$responsabilidade->valorAgente, 2, ',', '').'€'}}">
+                        <input type="text" name="valorPagoAgente" value="{{number_format((float)$responsabilidade->valorAgente, 2, ',', '').'€'}}">
                     </div>
                     <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                        <label for="comprovativoPagamento">Comp. de pagamento</label>
+                        <label for="comprovativoPagamentoAgente">Comp. de pagamento</label>
                         <br>
-                        <input type="file" name="comprovativoPagamento" id="upfileAgente" onchange="sub(this)">
-                        <div class="input-file-div text-truncate" id="addFileButtonAgente" onclick="getFile()">Adicionar um ficheiro</div>
+                        <input type="file" name="comprovativoPagamentoAgente" id="upfileAgente" onchange="sub(this)">
+                        <div class="input-file-div text-truncate" id="addFileButtonAgente" onclick="getFileAgente()">Adicionar um ficheiro</div>
                     </div>
                     <div class="col-md-4">
-                        <label for="comprovativo">Data de pagamento</label>
+                        <label for="dataAgente">Data de pagamento</label>
                         <br>
-                        <input placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataAgente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
                     </div>
                 </div>
                 <br><br>
@@ -89,20 +89,20 @@
                 @if ($responsabilidade->valorSubAgente != null)
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorPago">Valor pago ao subagente</label>
+                        <label for="valorPagoSubAgente">Valor pago ao subagente</label>
                         <br>
-                        <input type="text" name="valorPago" value="{{number_format((float)$responsabilidade->valorSubAgente, 2, ',', '').'€'}}">
+                        <input type="text" name="valorPagoSubAgente" value="{{number_format((float)$responsabilidade->valorSubAgente, 2, ',', '').'€'}}">
                     </div>
                     <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                        <label for="comprovativoPagamento">Comp. de pagamento</label>
+                        <label for="comprovativoPagamentoSubAgente">Comp. de pagamento</label>
                         <br>
-                        <input type="file" name="comprovativoPagamento" id="upfileSubAgente" onchange="sub(this)">
-                        <div class="input-file-div text-truncate" id="addFileButtonSubAgente" onclick="getFile()">Adicionar um ficheiro</div>
+                        <input type="file" name="comprovativoPagamentoSubAgente" id="upfileSubAgente" onchange="sub(this)">
+                        <div class="input-file-div text-truncate" id="addFileButtonSubAgente" onclick="getFileSubAgente()">Adicionar um ficheiro</div>
                     </div>
                     <div class="col-md-4">
-                        <label for="comprovativo">Data de pagamento</label>
+                        <label for="dataSubAgente">Data de pagamento</label>
                         <br>
-                        <input placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataSubAgente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
                     </div>
                 </div>
                 <br><br>
@@ -110,20 +110,20 @@
                 @if ($responsabilidade->valorUniversidade1 != '0.00')
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorPago">Valor pago à universidade</label>
+                        <label for="valorPagoUni1">Valor pago à universidade</label>
                         <br>
-                        <input type="text" name="valorPago" value="{{number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€'}}">
+                        <input type="text" name="valorPagoUni1" value="{{number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€'}}">
                     </div>
                     <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                        <label for="comprovativoPagamento">Comp. de pagamento</label>
+                        <label for="comprovativoPagamentoUni1">Comp. de pagamento</label>
                         <br>
-                        <input type="file" name="comprovativoPagamento" id="upfileUni1" onchange="sub(this)">
-                        <div class="input-file-div text-truncate" id="addFileButtonUni1" onclick="getFile()">Adicionar um ficheiro</div>
+                        <input type="file" name="comprovativoPagamentoUni1" id="upfileUni1" onchange="sub(this)">
+                        <div class="input-file-div text-truncate" id="addFileButtonUni1" onclick="getFileUni1()">Adicionar um ficheiro</div>
                     </div>
                     <div class="col-md-4">
-                        <label for="comprovativo">Data de pagamento</label>
+                        <label for="dataUni1">Data de pagamento</label>
                         <br>
-                        <input placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataUni1" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
                     </div>
                 </div>
                 <br><br>
@@ -131,20 +131,20 @@
                 @if ($responsabilidade->valorUniversidade2 != null)
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="valorPago">Valor pago à universidade</label>
+                        <label for="valorPagoUni2">Valor pago à universidade</label>
                         <br>
-                        <input type="text" name="valorPago" value="{{number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€'}}">
+                        <input type="text" name="valorPagoUni2" value="{{number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€'}}">
                     </div>
                     <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                        <label for="comprovativoPagamento">Comp. de pagamento</label>
+                        <label for="comprovativoPagamentoUni2">Comp. de pagamento</label>
                         <br>
-                        <input type="file" name="comprovativoPagamento" id="upfileUni2" onchange="sub(this)">
-                        <div class="input-file-div text-truncate" id="addFileButtonUni2" onclick="getFile()">Adicionar um ficheiro</div>
+                        <input type="file" name="comprovativoPagamentoUni2" id="upfileUni2" onchange="sub(this)">
+                        <div class="input-file-div text-truncate" id="addFileButtonUni2" onclick="getFileUni2()">Adicionar um ficheiro</div>
                     </div>
                     <div class="col-md-4">
-                        <label for="comprovativo">Data de pagamento</label>
+                        <label for="dataUni2">Data de pagamento</label>
                         <br>
-                        <input placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataUni2" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
                     </div>
                 </div>
                 <br><br>
