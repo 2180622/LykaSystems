@@ -296,43 +296,37 @@ class DataController extends Controller
 
         $docstock = new DocStock;
         $docstock->tipo = 'Pessoal';
-        $docstock->tipoPessoal = 'Doc. Oficial';
-        $docstock->tipoAcademico = null;
+        $docstock->tipoDocumento = 'Doc. Oficial';
         $docstock->idFaseStock = 1;
         $docstock->save();
 
         $docstock = new DocStock;
         $docstock->tipo = 'Academico';
-        $docstock->tipoPessoal = null;
-        $docstock->tipoAcademico = 'Certificado';
+        $docstock->tipoDocumento = 'Certificado';
         $docstock->idFaseStock = 1;
         $docstock->save();
 
         $docstock = new DocStock;
         $docstock->tipo = 'Pessoal';
-        $docstock->tipoPessoal = 'Passaport';
-        $docstock->tipoAcademico = null;
+        $docstock->tipoDocumento = 'Passaport';
         $docstock->idFaseStock = 2;
         $docstock->save();
 
         $docstock = new DocStock;
         $docstock->tipo = 'Pessoal';
-        $docstock->tipoPessoal = 'Cartão Cidadão';
-        $docstock->tipoAcademico = null;
+        $docstock->tipoDocumento = 'Cartão Cidadão';
         $docstock->idFaseStock = 2;
         $docstock->save();
 
         $docstock = new DocStock;
         $docstock->tipo = 'Pessoal';
-        $docstock->tipoPessoal = 'Carta Condução';
-        $docstock->tipoAcademico = null;
+        $docstock->tipoDocumento = 'Carta Condução';
         $docstock->idFaseStock = 2;
         $docstock->save();
 
         $docstock = new DocStock;
         $docstock->tipo = 'Academico';
-        $docstock->tipoPessoal = null;
-        $docstock->tipoAcademico = 'Exame Universitário';
+        $docstock->tipoDocumento = 'Exame Universitário';
         $docstock->idFaseStock = 4;
         $docstock->save();
 
