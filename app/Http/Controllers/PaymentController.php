@@ -12,6 +12,7 @@ use App\RelFornResp;
 use App\Universidade;
 use App\DocTransacao;
 use App\Responsabilidade;
+use App\Events\StorePayment;
 use Illuminate\Http\Request;
 use App\PagoResponsabilidade;
 use Illuminate\Support\Facades\Storage;
@@ -264,7 +265,7 @@ class PaymentController extends Controller
       if ($valorCliente != null) {
         $valorCliente = str_replace('€', '', $valorCliente);
         $valorCliente = number_format((float) $valorCliente,2 ,'.' ,'');
-
+        $pagoResponsabilidade->valorPago = $valorCliente;
         $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido;
           $ficheiroPagamento = $comprovativoCliente;
           $nomeFicheiro = strtolower($responsabilidade->fase->produto->cliente->nome.'_'.$responsabilidade->fase->descricao).'_comprovativoPagamento_'.$responsabilidade->fase->idFase.'.' .$ficheiroPagamento->getClientOriginalExtension();
@@ -284,7 +285,7 @@ class PaymentController extends Controller
       if ($valorAgente != null) {
         $valorAgente = str_replace('€', '', $valorAgente);
         $valorAgente = number_format((float) $valorAgente,2 ,'.' ,'');
-
+        $pagoResponsabilidade->valorPago = $valorAgente;
         $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->agente->nome.' '.$responsabilidade->fase->produto->agente->apelido;
           $ficheiroPagamento = $comprovativoAgente;
           $nomeFicheiro = strtolower($responsabilidade->fase->produto->agente->nome.'_'.$responsabilidade->fase->descricao).'_comprovativoPagamento_'.$responsabilidade->fase->idFase.'.' .$ficheiroPagamento->getClientOriginalExtension();
@@ -299,13 +300,12 @@ class PaymentController extends Controller
           Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
           ->update(['verificacaoPagoAgente' => '1']);
         }
-        event(new StorePayment());
       }
 
       if ($valorSubAgente != null) {
         $valorSubAgente = str_replace('€', '', $valorSubAgente);
         $valorSubAgente = number_format((float) $valorSubAgente,2 ,'.' ,'');
-
+        $pagoResponsabilidade->valorPago = $valorSubAgente;
         $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->subAgente->nome.' '.$responsabilidade->fase->produto->subAgente->apelido;
           $ficheiroPagamento = $comprovativoSubAgente;
           $nomeFicheiro = strtolower($responsabilidade->fase->produto->subAgente->nome.'_'.$responsabilidade->fase->descricao).'_comprovativoPagamento_'.$responsabilidade->fase->idFase.'.' .$ficheiroPagamento->getClientOriginalExtension();
@@ -325,7 +325,7 @@ class PaymentController extends Controller
       if ($valorUni1 != null) {
         $valorUni1 = str_replace('€', '', $valorUni1);
         $valorUni1 = number_format((float) $valorUni1,2 ,'.' ,'');
-
+        $pagoResponsabilidade->valorPago = $valorUni1;
         $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->universidade1->nome;
           $ficheiroPagamento = $comprovativoUni1;
           $nomeFicheiro = strtolower($responsabilidade->fase->produto->universidade1->nome.'_'.$responsabilidade->fase->descricao).'_comprovativoPagamento_'.$responsabilidade->fase->idFase.'.' .$ficheiroPagamento->getClientOriginalExtension();
@@ -345,7 +345,7 @@ class PaymentController extends Controller
       if ($valorUni2 != null) {
         $valorUni2 = str_replace('€', '', $valorUni2);
         $valorUni2 = number_format((float) $valorUni2,2 ,'.' ,'');
-
+        $pagoResponsabilidade->valorPago = $valorUni2;
         $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->universidade2->nome;
           $ficheiroPagamento = $comprovativoUni1;
           $nomeFicheiro = strtolower($responsabilidade->fase->produto->universidade2->nome.'_'.$responsabilidade->fase->descricao).'_comprovativoPagamento_'.$responsabilidade->fase->idFase.'.' .$ficheiroPagamento->getClientOriginalExtension();
@@ -361,6 +361,7 @@ class PaymentController extends Controller
           ->update(['verificacaoPagoUni2' => '1']);
         }
       }
+      event(new StorePayment($responsabilidade));
       return redirect()->route('payments.index')->with('success', 'Pagamento registado com sucesso!');
     }
 }

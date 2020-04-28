@@ -13,6 +13,7 @@ class PagoResponsabilidade extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idPagoResp');
             $table->string('beneficiario',255);
+            $table->decimal('valorPago', 18, 2);
             $table->string('comprovativoPagamento',255);
             $table->date('dataPagamento');
             $table->unsignedBigInteger('idFase');

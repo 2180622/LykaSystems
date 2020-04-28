@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Events\StorePayment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -26,8 +25,4 @@ class Responsabilidade extends Model
     public function relacao(){
         return $this->hasMany("App\RelFornResp","idResponsabilidade","idResponsabilidade");
     }
-
-    protected $dispatchesEvents = [
-        'updated' => StorePayment::class,
-    ];
 }
