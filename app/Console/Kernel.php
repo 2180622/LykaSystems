@@ -8,18 +8,18 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        'App\Console\Commands\PaymentStatus'
+        Commands\PaymentStatus::class
     ];
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('payment:update')->daily();
+        $schedule->command('payment:update')
+        ->everyMinute();
     }
 
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
     }
 }
