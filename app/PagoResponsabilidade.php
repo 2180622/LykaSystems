@@ -13,8 +13,8 @@ class PagoResponsabilidade extends Model
     protected $primaryKey = 'idPagoResp';
 
     protected $fillable = [
-        'data','nomeAutor','imagem','$idFase','$idConta'
-        ];
+      'beneficiario', 'comprovativoPagamento', 'dataPagamento', '$idFase', '$idConta'
+    ];
 
     public function fase(){
         return $this->belongsTo("App\Fase","idFase","idFase")->withTrashed();

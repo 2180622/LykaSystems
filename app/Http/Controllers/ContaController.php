@@ -43,7 +43,6 @@ class ContaController extends Controller
     public function update(UpdateContaRequest $contaRequest, Conta $contum)
     {
       $fields = $contaRequest->validated();
-      dd($fields);
       $contum->fill($fields);
       $contum->save();
       return redirect()->route('conta.index')->with('success', 'Conta bancária editada com sucesso.');

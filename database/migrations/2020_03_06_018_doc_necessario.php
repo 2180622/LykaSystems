@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PagoResponsabilidade extends Migration
+class DocNecessario extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,19 @@ class PagoResponsabilidade extends Migration
      */
     public function up()
     {
-        Schema::create('PagoResponsabilidade', function (Blueprint $table) {
+        Schema::create('DocNecessario', function (Blueprint $table) {
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
-            $table->bigIncrements('idPagoResp');
-            $table->date('data');
-            $table->string('nomeAutor',255);
-            $table->string('imagem',255);
+            $table->bigIncrements('idDocNecessario');
+            $table->enum('tipo',['Pessoal', 'Academico']);
+            $table->enum('tipoPessoal',['Passaport','Cartão Cidadão','Carta Condução','Doc. Oficial'])->nullable();
+            $table->enum('tipoAcademico',['Exame Universitário','Exame Nacional','Diploma','Certificado'])->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');
-            $table->unsignedBigInteger('idConta');
-                $table->foreign('idConta')->references('idConta')->on('Conta');
+
+            $table->softDeletes();
+
         });
     }
 
@@ -35,6 +36,6 @@ class PagoResponsabilidade extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PagoResponsabilidade');
+        Schema::dropIfExists('DocNecessario');
     }
 }

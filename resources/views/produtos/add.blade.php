@@ -29,7 +29,7 @@
             <h6>Adicionar produto</h6>
         </div>
         <br>
-        <form method="POST" action="{{route('produtos.store')}}" class="form-group needs-validation pt-3" id="form_produto"
+        <form method="POST" action="{{route('produtos.store', 'null')}}" class="form-group needs-validation pt-3" id="form_produto"
             enctype="multipart/form-data" novalidate>
             @csrf<div class="tab-content p-2 mt-3" id="myTabContent">
 
@@ -52,7 +52,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="nome">Escolha o produto: </label>
-                            <select class="form-control" id="produto" onchange="AtualizaProduto(this.value)">
+                            <select class="form-control" id="produto" onchange="AtualizaProduto(this.value, $(this).closest('#form_produto'))">
                                 <option value="0" selected></option>
                                 @foreach($produtoStock as $prodS)
                                     @php
@@ -81,7 +81,7 @@
 
                             <label for="agente">Agente:</label><br>
                             <select id="agente" name="agente" class="form-control" required>
-                                <option value="" selected></option>
+                                <option value="" disabled selected></option>
                                 @foreach($Agentes as $agente)
                                     <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
                                 @endforeach
@@ -97,7 +97,7 @@
                             --}}
                             <label for="uni1">Universidade Principal:</label><br>
                             <select id="uni1" name="uni1" class="form-control" required>
-                                <option value="" selected></option>
+                                <option value="" disabled selected></option>
                                 @foreach($Universidades as $uni)
                                     <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
                                 @endforeach
@@ -105,7 +105,7 @@
 
                             <label for="uni2">Universidade Secundária:</label><br>
                             <select id="uni2" name="uni2" class="form-control">
-                                <option value="" selected></option>
+                                <option value="" disabled selected></option>
                                 @foreach($Universidades as $uni)
                                     <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
                                 @endforeach
@@ -161,15 +161,12 @@
 
                                         <label for="data-fase{{$num}}">Data de vencimento:</label><br>
                                         <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
-                                        value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px"><br>
+                                        value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
 
-                                        <label for="valor-fase{{$num}}">Valor da fase:</label><br>
+                                        <label for="valor-fase{{$num}}">Valor total da fase:</label><br>
                                         <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
                                         value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required><br>
 
-                                        <input type="text" class="form-control" name="fase-idStock{{$num}}" id="fase-idStock{{$num}}"
-                                        value="{{old('idFaseStock',$fase->idFaseStock)}}"  maxlength="20"
-                                        style="display:none;" readonly><br>
                                     </div>
                                     <div class="col mr-3">
                                         <div><span><b>Responsabilidades</b></span></div><br>
@@ -177,21 +174,37 @@
                                         <input type="number" min="0" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
                                         value="{{old('valorCliente',$Responsabilidades[$num-1]->valorCliente)}}" style="width:250px" required><br>
 
+                                        <label for="resp-data-cliente-fase{{$num}}">Data de vencimento do pagamento ao cliente:</label><br>
+                                        <input type="date" class="form-control" name="resp-data-cliente-fase{{$num}}" id="resp-data-cliente-fase{{$num}}"
+                                        value="{{date_create(old('dataVencimentoPagamentoCliente',$Responsabilidades[$num-1]->dataVencimentoPagamentoCliente))->format('Y-m-d')}}" 
+                                        style="width:250px" required><br>
+
                                         <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
                                         value="{{old('valorAgente',$Responsabilidades[$num-1]->valorAgente)}}" style="width:250px" required><br>
-                                        {{--
-                                        <label for="resp-subagente-fase{{$num}}">Valor a pagar ao sub-agente:</label><br>
-                                        <input type="number" min="0" class="form-control" name="resp-subagente-fase{{$num}}" id="resp-subagente-fase{{$num}}"
-                                        value="{{old('valorSubAgente',$Responsabilidades[$num-1]->valorSubAgente)}}" style="width:250px"><br>
-                                        --}}
+
+                                        <label for="resp-data-agente-fase{{$num}}">Data de vencimento do pagamento ao agente:</label><br>
+                                        <input type="date" class="form-control" name="resp-data-agente-fase{{$num}}" id="resp-data-agente-fase{{$num}}"
+                                        value="{{date_create(old('dataVencimentoPagamentoAgente',$Responsabilidades[$num-1]->dataVencimentoPagamentoAgente))->format('Y-m-d')}}" 
+                                        style="width:250px" required><br>
+
                                         <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
                                         value="{{old('valorUniversidade1',$Responsabilidades[$num-1]->valorUniversidade1)}}" style="width:250px" required><br>
 
+                                        <label for="resp-data-uni1-fase{{$num}}">Data de vencimento do pagamento à universidade principal:</label><br>
+                                        <input type="date" class="form-control" name="resp-data-uni1-fase{{$num}}" id="resp-data-uni1-fase{{$num}}"
+                                        value="{{date_create(old('dataVencimentoPagamentoUni1',$Responsabilidades[$num-1]->dataVencimentoPagamentoUni1))->format('Y-m-d')}}" 
+                                        style="width:250px" required><br>
+
                                         <label for="resp-uni2-fase{{$num}}">Valor a pagar á universidade secundária:</label><br>
                                         <input type="number" min="0" class="form-control" name="resp-uni2-fase{{$num}}" id="resp-uni2-fase{{$num}}"
                                         value="{{old('valorUniversidade2',$Responsabilidades[$num-1]->valorUniversidade2)}}" style="width:250px"><br>
+
+                                        <label for="resp-data-uni2-fase{{$num}}">Data de vencimento do pagamento à universidade secundária:</label><br>
+                                        <input type="date" class="form-control" name="resp-data-uni2-fase{{$num}}" id="resp-data-uni2-fase{{$num}}"
+                                        value="{{date_create(old('dataVencimentoPagamentoUni2',$Responsabilidades[$num-1]->dataVencimentoPagamentoUni2))->format('Y-m-d')}}"
+                                        style="width:250px" required><br>
                                     </div>
 
                                     <div class="col list-fornecedores" style="min-width:225px">
@@ -199,16 +212,21 @@
                                         <span class="numF" style="display: none;">1</span>
                                         <div class="fornecedor">
                                             <div id="clonar">
-                                                <label class="label1" for="fornecedor-fase{{$num}}">Fornecedor 1:</label><br>
+                                                <label id="label1" for="fornecedor-fase{{$num}}">Fornecedor 1:</label><br>
                                                 <select id="fornecedor-fase{{$num}}" name="fornecedor-fase{{$num}}" class="form-control" required>
                                                     <option value="" selected></option>
                                                     @foreach($Fornecedores as $fornecedor)
                                                         <option {{old('idFornecedor',$relacao->idFornecedor)}} value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome.' -> '.$fornecedor->descricao}}</option>
                                                     @endforeach
                                                 </select><br>
-                                                <label class="label2" for="valor-fornecedor-fase{{$num}}">Valor a pagar:</label><br>
+                                                <label id="label2" for="valor-fornecedor-fase{{$num}}">Valor a pagar:</label><br>
                                                 <input type="number" min="0" class="form-control" name="valor-fornecedor-fase{{$num}}" id="valor-fornecedor-fase{{$num}}"
                                                 value="{{old('valor',$relacao->valor)}}" style="width:250px" required><br>
+
+                                                <label id="label3" for="data-fornecedor-fase{{$num}}">Data de vencimento do pagamento ao fornecedor:</label><br>
+                                                <input type="date" class="form-control" name="data-fornecedor-fase{{$num}}" id="data-fornecedor-fase{{$num}}"
+                                                value="{{date_create(old('dataVencimentoPagamento',$relacao->dataVencimentoPagamento))->format('Y-m-d')}}"
+                                                style="width:250px" required><br>
                                                 <div class="float-right">
                                                     <button type="button" onclick="" class="top-button">Remover fornecedor</button>
                                                 </div>
@@ -257,13 +275,17 @@
 			var clone = clones.clone();
 	        closest.find('.numF').first().text(numF+1);
 			clone.attr('id','div-fornecedor'+numF+'-fase'+idFase);
-			$('.label1', clone).text("Fornecedor "+numF+":");
-			$('.label1', clone).attr('for','fornecedor'+numF+'-fase'+idFase);
+			$('#label1', clone).text("Fornecedor "+numF+":");
+			$('#label1', clone).attr('for','fornecedor'+numF+'-fase'+idFase);
 			$('select', clone).attr('id','fornecedor'+numF+'-fase'+idFase);
 			$('select', clone).attr('name','fornecedor'+numF+'-fase'+idFase);
-			$('.label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+idFase);
-			$('input', clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
-			$('input', clone).attr('name','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#valor-fornecedor-fase'+idFase, clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#valor-fornecedor-fase'+idFase,, clone).attr('name','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#label3', clone).text('Data de vencimento do pagamento ao fornecedor'+numF+':');
+			$('#label3', clone).attr('for','data-fornecedor'+numF+'-fase'+idFase);
+			$('#data-fornecedor-fase'+idFase, clone).attr('id','data-fornecedor'+numF+'-fase'+idFase);
+			$('#data-fornecedor-fase'+idFase,, clone).attr('name','data-fornecedor'+numF+'-fase'+idFase);
 			$('button', clone).attr('onclick','removerFornecedor('+numF+','+idFase+',$(this).closest("#div-fornecedor'+numF+'-fase'+idFase+'"))');
 			$('button', clone).text('Remover fornecedor '+numF);
 	        closest.find('.fornecedor').first().append(clone);
@@ -273,12 +295,14 @@
             $('#fornecedor'+numF+'-fase'+idFase).val($('#fornecedor'+numF+'-fase'+idFase+' > option:first').val());
             $("#fornecedor"+numF+"-fase"+idFase).attr("required", false);
             $("#valor-fornecedor"+numF+"-fase"+idFase).attr("required", false);
+            $("#data-fornecedor"+numF+"-fase"+idFase).attr("required", false);
             fornecedor.css("display", "none");
         }
 
-        function AtualizaProduto(idproduto){
+        function AtualizaProduto(idproduto, form){
             if(idproduto>0){
                 AjaxProdutos(idproduto[0]);
+                form.attr('action','/produtos/store/'+idproduto[0]);
             }else{
                 $("#formulario-produto").css("display", "none");
                 $("#formulario-fases").css("display", "none");

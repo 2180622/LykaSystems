@@ -295,7 +295,6 @@ class ClientController extends Controller
         /* Documentos académicos */
         $docsAcademicos = $client->docAcademico;
 
-
         return view('clients.show',compact("client","agents","subagents","produtos","totalprodutos","infosPassaport",'docsAcademicos'));
     }
 

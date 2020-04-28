@@ -19,11 +19,12 @@ class RelFornResp extends Migration
             $table->bigIncrements('idRelacao');
             $table->decimal('valor', 18, 2);
             $table->boolean('verificacaoPago')->default(false);
-            $table->timestamps();
+            $table->dateTime('dataVencimentoPagamento');
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->unsignedBigInteger('idFornecedor');
                 $table->foreign('idFornecedor')->references('idFornecedor')->on('Fornecedor');
+            $table->timestamps();
         });
     }
 
