@@ -54,7 +54,7 @@
                     </div>
                     <div class="info">
                         <p class="number">{{count($fasesPendentes)}}</p>
-                        <p class="word">fases pendentes</p>
+                        <p class="word">cobranças pendentes</p>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="info">
                         <p class="number" style="color:#47BC00;">{{count($fasesPagas)}}</p>
-                        <p class="word">fases pagas</p>
+                        <p class="word">cobranças pagas</p>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="info">
                         <p class="number" style="color:#FF3D00;">{{count($fasesDivida)}}</p>
-                        <p class="word">fases em dívida</p>
+                        <p class="word">cobranças em dívida</p>
                     </div>
                 </div>
             </div>
@@ -165,6 +165,12 @@
                 </div>
             </a>
             @endforeach
+            @else
+              <div class="row" style="padding: 0px 18px;">
+                  <div class="container no-data-div text-center mt-3">
+                      <p style="color:#252525;">Não existem cobranças registadas.</p>
+                  </div>
+              </div>
             @endif
         </div>
     </div>

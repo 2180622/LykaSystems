@@ -88,6 +88,7 @@
         </div>
         <br>
 
+        @if (count($responsabilidades))
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -191,6 +192,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <div class="container">
             @if (count($responsabilidades))
@@ -228,8 +230,9 @@
               ?>
 
 
-            <a href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}" data-valorsubagente="{{$valorSubAgente}}"
-              data-valoruni1="{{$valorUniversidade1}}" data-valoruni2="{{$valorUniversidade2}}" data-nome="{{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}">
+            <a href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}"
+              data-valorsubagente="{{$valorSubAgente}}" data-valoruni1="{{$valorUniversidade1}}" data-valoruni2="{{$valorUniversidade2}}"
+              data-nome="{{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}">
                 <div class="row charge-div">
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">
@@ -251,26 +254,32 @@
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
                         <p class="text-truncate" @if($responsabilidade->estado == 'Pago') style="color:#47BC00;" @elseif($responsabilidade->estado == 'Dívida') style="color:#FF3D00;" @endif>
-                            @php
-                            switch ($responsabilidade->estado) {
-                            case 'Pendente':
-                            printf('Pendente');
-                            break;
+                                    @php
+                                    switch ($responsabilidade->estado) {
+                                    case 'Pendente':
+                                    printf('Pendente');
+                                    break;
 
-                            case 'Pago':
-                            printf('Pago');
-                            break;
+                                    case 'Pago':
+                                    printf('Pago');
+                                    break;
 
-                            case 'Dívida':
-                            printf('Dívida');
-                            break;
-                            }
-                            @endphp
+                                    case 'Dívida':
+                                    printf('Dívida');
+                                    break;
+                                    }
+                                    @endphp
                         </p>
                     </div>
                 </div>
             </a>
             @endforeach
+            @else
+            <div class="row" style="padding: 0px 18px;">
+                <div class="container no-data-div text-center mt-3">
+                    <p style="color:#252525;">Não existem pagamentos registados.</p>
+                </div>
+            </div>
             @endif
         </div>
     </div>
@@ -316,7 +325,7 @@
                 </div>
             </div>
             <form action="" method="post">
-              @csrf
+                @csrf
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-primary">Registar pagamento</button>

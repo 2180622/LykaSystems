@@ -212,3 +212,10 @@ p {
 .search-section .search-button .search-icon {
     font-size: 0.9rem;
 }
+
+.no-data-div {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
+}
