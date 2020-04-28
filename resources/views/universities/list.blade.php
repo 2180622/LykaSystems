@@ -46,7 +46,7 @@
 
         <div class="row mt-3 mb-4">
             <div class="col">
-                Existem <strong>{{$totaluniversidades}}</strong> registo(s) no sistema
+                Existem <strong>{{count($universities)}}</strong> registo(s) no sistema
             </div>
         </div>
 

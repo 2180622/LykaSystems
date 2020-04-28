@@ -14,13 +14,15 @@ use App\Mail\SendEmailConfirmation;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreAdministradorRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdateAdministradorRequest;
 
 class UserController extends Controller
 {
     public function index()
     {
         $users = User::where('tipo', '=', 'admin')->get();
-        return view('users.list', compact('users'));
+        $admin = Administrador::get();
+        return view('users.list', compact('users', 'admin'));
     }
 
     public function create()
@@ -56,19 +58,19 @@ class UserController extends Controller
     }
 
 
-    public function show(User $user, Administrador $admin)
+    public function show(User $user)
     {
-        return view('users.show', compact('user', 'admin'));
+        return view('users.show', compact('user'));
     }
 
 
-    public function edit(User $user)
+    public function edit(User $user, Administrador $admin)
     {
-      return view('users.edit', compact('user'));
+        return view('users.edit', compact('user', 'admin'));
     }
 
 
-    public function update(UpdateUserRequest $requestUser, StoreAdministradorRequest $requestAdmin, User $user, Administrador $admin)
+    public function update(UpdateUserRequest $requestUser, UpdateAdministradorRequest $requestAdmin, User $user, Administrador $admin)
     {
         $fieldsUser = $requestUser->validated();
         $fieldsAdmin = $requestAdmin->validated();
@@ -78,12 +80,12 @@ class UserController extends Controller
         $update = time();
         $user->updated_at == date("Y-m-d", $update);
         $admin->updated_at == date("Y-m-d", $update);
-        $admin->save();
 
         DB::table('User')
         ->where('idAdmin', $admin->idAdmin)
         ->update(['email' => $admin->email]);
 
+        $admin->save();
         $user->save();
 
         return redirect()->route('users.index')->with('success', 'Dados do user modificados com sucesso');

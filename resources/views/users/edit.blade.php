@@ -10,7 +10,6 @@
 
 {{-- Page Content --}}
 @section('content')
-
 <div class="container mt-2">
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -32,7 +31,7 @@
         </div>
         <br>
         <p>Está neste momento a editar o utilizador <b>{{$user->admin->nome.' '.$user->admin->apelido}}</b>.</p>
-        <form method="POST" action="{{route('users.update', $user)}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('users.update', [$user->idUser, $user->idAdmin])}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
             @csrf
             @method("PUT")
             <div class="row">
