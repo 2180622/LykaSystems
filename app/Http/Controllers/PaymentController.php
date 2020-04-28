@@ -21,7 +21,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-      $responsabilidades = Responsabilidade::all();
+      $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")->get();
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
       $responsabilidadesPagas = Responsabilidade::where('estado', '=', 'Pago')->get();
       $responsabilidadesDivida = Responsabilidade::where('estado', '=', 'Dívida')->get();

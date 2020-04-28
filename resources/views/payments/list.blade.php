@@ -250,7 +250,7 @@
                         ?></p>
                     </div>
                     <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate">
+                        <p class="text-truncate" @if($responsabilidade->estado == 'Pago') style="color:#47BC00;" @elseif($responsabilidade->estado == 'Dívida') style="color:#FF3D00;" @endif>
                             @php
                             switch ($responsabilidade->estado) {
                             case 'Pendente':
