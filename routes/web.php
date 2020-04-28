@@ -79,6 +79,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Utilizadores */
     Route::resource('/users', 'UserController');
     Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
+    Route::get('/users/{user}/{admin}', 'UserController@edit')->name('users.edit');
+    Route::put('/users/{user}/{admin}', 'UserController@update')->name('users.update');    
 
     /* Produto Stock*/
     Route::resource('/produtostock', 'ProdutosstockController');

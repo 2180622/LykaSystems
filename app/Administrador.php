@@ -7,13 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Administrador extends Model
 {
-
     use SoftDeletes;
-
     protected $table = 'Administrador';
-
     protected $primaryKey = 'idAdmin';
-
     protected $fillable = [
         'nome','apelido','genero','email','dataNasc','fotografia','telefone1','telefone2',
         ];
