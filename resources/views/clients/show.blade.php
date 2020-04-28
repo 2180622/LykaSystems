@@ -260,7 +260,7 @@
 
                         {{-- dataValidPP --}}
                         <div><span class="text-secondary">Data de validade do passaporte:</span>
-                            {{$infosPassaport->dataValidPP ?? ''}}</div><br>
+                            {{$infosPassaport->dataValidPP }}</div><br>
 
                         {{-- passaportPaisEmi --}}
                         <div><span class="text-secondary">Pais emissor do passaporte:</span>
@@ -268,15 +268,16 @@
 
                         {{-- localEmissaoPP --}}
                         <div><span class="text-secondary">Local de emissão do passaporte:</span>
-                            {{$infosPassaport->localEmissaoPP ?? ''}}</div><br>
+                            {{$infosPassaport->localEmissaoPP ?? ''}}</div>
 
-                        <hr><br>
+                        <br><br>
                         {{-- CC IDENTIFICAÇÃO --}}
                         <div><span class="text-secondary">Número de identificação pessoal:</span> {{$client->num_docOficial}}</div>
                         <br>
-                        <div><span class="text-secondary">Data de validade:</span> {{$client->info_docOficial}}</div>
-                        <br>
                         <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
+                        <br>
+                        <div><span class="text-secondary">Data de validade:</span> {{$client->info_docOficial}}</div>
+
 
 
                     </div>

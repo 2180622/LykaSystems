@@ -1,8 +1,8 @@
 {{-- value="{{old('email',$university->email)}}" --}}
 
-<div class="row font-weight-bold" style="color:#6A74C9">
+<div class="row font-weight-bold px-4" style="color:#6A74C9">
 
-    <div class="col col-2 text-center mr-4" style="min-width:250px">
+    <div class="col mr-4 col-lg-2 col-md-12  text-center" style="min-width:350px">
 
         <label for="ficheiro" style="font-weight: 700!important;">Ficheiro:</label>
 
@@ -20,11 +20,11 @@
 
     <div class="col" style="min-width: 300px">
         <div>Informação sobre o ficheiro</div><br>
-        {{-- Instruçõess --}}
+        {{-- Instruções --}}
         <div id="div_incial" class="p-3 bg-light rounded border" style="display:blcok;">
             <div><i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado
                 <br><br>
-                <small>(Para continuar escolha um ficheiro)</small></div>
+                <small>(Para continuar escolha um ficheiro)</small><br><br></div>
             <div></div>
         </div>
 
@@ -41,8 +41,8 @@
 
         <div class="row">
             <div class="col">
-                <label for="descricao" style="font-weight: 700!important;">Descrição:</label>
-                <input type="text" class="form-control" name="descricao" id="descricao" maxlength="100">
+                <label for="file_name" style="font-weight: 700!important;">Nome:</label>
+                <input type="text" class="form-control" name="file_name" id="file_name" maxlength="100">
             </div>
             <div class="col">
                 <label for="permissao" style="font-weight: 700!important;">Tipo de acesso:</label>
