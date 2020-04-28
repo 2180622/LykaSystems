@@ -16,8 +16,16 @@ class LibraryController extends Controller
     public function index()
     {
 
+        /* Ficheiros para os agentes */
+        if (Auth::user()->tipo != "admin" ){
+            $files = Biblioteca::
+            where('acesso', '=', "Público")
+            ->get();
+        }else{
+            /* Ficheiros para os admins */
+            $files = Biblioteca::all();
+        }
 
-        $files = Biblioteca::all();
         return view('libraries.list', compact('files'));
 
     }

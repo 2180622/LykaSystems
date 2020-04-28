@@ -23,9 +23,7 @@ class UniversityController extends Controller
       }
 
         $universities = Universidade::all();
-        $totaluniversidades = $universities->count();
-
-        return view('universities.list', compact('universities', 'totaluniversidades'));
+        return view('universities.list', compact('universities'));
 
 
     }
@@ -72,8 +70,6 @@ class UniversityController extends Controller
         if ($eventos->isEmpty()) {
             $eventos=null;
         }
-
-
 
 
         /* Obtem os clientes da que estão na universidade */
