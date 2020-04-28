@@ -234,7 +234,6 @@ class PaymentController extends Controller
 
     public function store(Request $request, Responsabilidade $responsabilidade)
     {
-      $pagoResponsabilidade = new PagoResponsabilidade;
       $fields = $request->all();
       // Campos de CLIENTE
       $valorCliente = (isset($fields['valorPagoCliente']) ? $fields['valorPagoCliente'] : null);
@@ -263,6 +262,7 @@ class PaymentController extends Controller
       $contaUni2 = (isset($fields['contaUni2']) ? $fields['contaUni2'] : null);
 
       if ($valorCliente != null) {
+        $pagoResponsabilidade = new PagoResponsabilidade;
         $valorCliente = str_replace('€', '', $valorCliente);
         $valorCliente = number_format((float) $valorCliente,2 ,'.' ,'');
         $pagoResponsabilidade->valorPago = $valorCliente;
@@ -283,6 +283,7 @@ class PaymentController extends Controller
       }
 
       if ($valorAgente != null) {
+        $pagoResponsabilidade = new PagoResponsabilidade;
         $valorAgente = str_replace('€', '', $valorAgente);
         $valorAgente = number_format((float) $valorAgente,2 ,'.' ,'');
         $pagoResponsabilidade->valorPago = $valorAgente;
@@ -303,6 +304,7 @@ class PaymentController extends Controller
       }
 
       if ($valorSubAgente != null) {
+        $pagoResponsabilidade = new PagoResponsabilidade;
         $valorSubAgente = str_replace('€', '', $valorSubAgente);
         $valorSubAgente = number_format((float) $valorSubAgente,2 ,'.' ,'');
         $pagoResponsabilidade->valorPago = $valorSubAgente;
@@ -323,6 +325,7 @@ class PaymentController extends Controller
       }
 
       if ($valorUni1 != null) {
+        $pagoResponsabilidade = new PagoResponsabilidade;
         $valorUni1 = str_replace('€', '', $valorUni1);
         $valorUni1 = number_format((float) $valorUni1,2 ,'.' ,'');
         $pagoResponsabilidade->valorPago = $valorUni1;
@@ -343,6 +346,7 @@ class PaymentController extends Controller
       }
 
       if ($valorUni2 != null) {
+        $pagoResponsabilidade = new PagoResponsabilidade;
         $valorUni2 = str_replace('€', '', $valorUni2);
         $valorUni2 = number_format((float) $valorUni2,2 ,'.' ,'');
         $pagoResponsabilidade->valorPago = $valorUni2;
@@ -361,6 +365,7 @@ class PaymentController extends Controller
           ->update(['verificacaoPagoUni2' => '1']);
         }
       }
+      $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->first();
       event(new StorePayment($responsabilidade));
       return redirect()->route('payments.index')->with('success', 'Pagamento registado com sucesso!');
     }
