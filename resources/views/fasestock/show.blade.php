@@ -68,11 +68,7 @@
                             {{-- Tipo --}}
                             <td>{{$docstock->tipo}}</td>
                             {{-- Documento --}}
-                            @if ($docstock->tipoPessoal == null)
-                              <td>{{$docstock->tipoAcademico}}</td>
-                            @else
-                              <td>{{$docstock->tipoPessoal}}</td>
-                            @endif
+                            <td>{{$docstock->tipoDocumento}}</td>
                             {{-- OPÇÔES --}}
                             <td class="text-center align-middle">
                                 <a href="{{route('fasestock.show',$fasestock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
@@ -101,29 +97,17 @@
                                       <label for="">Tipo (DocumentoStock):</label><br>
                                       <select type="text" class="form-control" name="tipo" id="tipodocstock"
                                         onchange="myFunction()" required>
-                                        <option value="None">...</option>
                                          <option value="Pessoal">Pessoal</option>
                                          <option value="Academico">Academico</option>
-                                      </select><br><br><br><br>
-                                      {{-- INPUT Documento --}}
+                                         <option value="Financeiro">Financeiro</option>
+                                         <option value="Familiar">Familiar</option>
+                                         <option value="País">País</option>
+                                         <option value="Outros">Outro</option>
+                                      </select><br><br><br>
+                                      {{-- INPUT tipoDocumento --}}
                                       <div class="" id="tipoacademico">
-                                        <label for="">Documento Academico</label>
-                                        <select class="form-control" name="tipoAcademico">
-                                          <option value="Exame Universitário">Exame Universitário</option>
-                                          <option value="Exame Nacional">Exame Nacional</option>
-                                          <option value="Diploma">Diploma</option>
-                                          <option value="Certificado">Certificado</option>
-                                        </select>
-                                      </div>
-
-                                      <div class="" id="tipopessoal">
-                                        <label for="">Documento Pessoal</label>
-                                        <select class="form-control" name="tipoPessoal">
-                                          <option value="Passaport">Passaport</option>
-                                          <option value="Cartão Cidadão">Cartão de Cidadão</option>
-                                          <option value="Carta Condução">Carta de Condução</option>
-                                          <option value="Doc. Oficial">Documento Oficial</option>
-                                        </select>
+                                        <label for="">Tipo de Documento</label>
+                                        <input class="form-control" name="tipoDocumento" required>
                                       </div>
                                   </div>
                                 </div>
@@ -142,24 +126,5 @@
 @endsection
 {{-- Scripts --}}
 @section('scripts')
-  <style>
-  #tipopessoal {
-    display: none;
-  }
-
-  #tipoacademico {
-    display: none;
-  }
-  </style>
-
-  <script type="text/javascript">
-    function myFunction() {
-        var select = document.getElementById("tipodocstock");
-        var tipopessoal = document.getElementById("tipopessoal");
-        var tipoacademico = document.getElementById("tipoacademico");
-        tipopessoal.style.display = select.value == "Pessoal" ? "block" : "none";
-        tipoacademico.style.display = select.value == "Academico" ? "block" : "none";
-    }
-  </script>
     {{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
 @endsection

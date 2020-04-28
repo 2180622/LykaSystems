@@ -21,11 +21,6 @@ class DocumentostockController extends Controller
         $docStock->fill($docFields);
         $idFaseStock = $fasestock->idFaseStock;
         $docStock->idFaseStock = $idFaseStock;
-        if($docStock->tipo == "Pessoal"){
-            $docStock->tipoAcademico = null;
-        }else {
-            $docStock->tipoPessoal = null;
-        }
 
         $docStock->save();
 

@@ -9,7 +9,6 @@ class DocStock extends Model
 {
     use SoftDeletes;
     protected $table = 'DocStock';
-
     protected $primaryKey = 'idDocStock';
 
     protected $fillable = [
