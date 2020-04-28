@@ -7,12 +7,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/agends/create" method="POST">
+            <form action="/agenda/criar" method="POST" class="form-group needs-validation pt-3"
+                  enctype="multipart/form-data" id="formEvent" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="calendar">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+                        <script
+                            src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
                     </div>
+
+
+
 
                     <div class="row mb-2">
                         <div class="col">
@@ -24,6 +29,8 @@
                         </div>
                     </div>
 
+
+                    <input type="hidden" name="idAgenda">
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -44,29 +51,30 @@
                             <div class="form-group">
                                 <i class="far fa-calendar-alt mr-2" style="color: #6A74C9;"></i>
                                 <label for="startDate">Data/Hora Inicial</label>
-                                <input type="date" class="form-control" id="startDate" name="dataInicio">
+                                <input type="datetime-local" class="form-control" id="startDate" name="dataInicio">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <i class="far fa-calendar-alt mr-2" style="color: #6A74C9;"></i>
                                 <label for="endDate">Data/Hora Final</label>
-                                <input type="date" class="form-control" id="endDate" name="dataFim">
+                                <input type="datetime-local" class="form-control" id="endDate" name="dataFim">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <i class="fas fa-align-right mr-2" style="color: #6A74C9;"></i>
                                 <label for="description">Descrição</label>
-                                <input type="text" class="form-control" id="description" name="descricao"
-                                       placeholder="Insira a Descrição do evento.">
+                                <input class="form-control" name="descricao" id="description" rows="2"
+                                       maxlength="150" placeholder="Insira a Descrição do evento." fixed>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Guadar</button>
-                    <button type="button" class="top-button btn_submit bg-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" name="action" value="save" class="top-button mr-2" name="ok" id="buttonSubmit">Guardar</button>
+                    <button type="submit" name="action" value="delete" class="top-button btn_submit bg-danger deleteEvent" style="display: none">Eliminar</button>
+                    <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>
