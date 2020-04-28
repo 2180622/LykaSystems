@@ -41,7 +41,7 @@
             ?>
             <p style="margin-left: 0px !important;">&nbsp;{{$valorTotal}}</p>
             <hr>
-            <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4">
+            <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
                 @csrf
                 @if ($responsabilidade->valorCliente != '0.00')
                 <div class="row">
@@ -59,7 +59,20 @@
                     <div class="col-md-4">
                         <label for="dataCliente">Data de pagamento</label>
                         <br>
-                        <input name="dataCliente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataCliente" type="date">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="contaCliente">Associar conta bancária</label>
+                        <br>
+                        <select name="contaCliente">
+                            @foreach ($contas as $conta)
+                            <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
+                            @endforeach
+                            <option selected disabled hidden>Escolher conta bancária</option>
+                        </select>
                     </div>
                 </div>
                 <br><br>
@@ -80,7 +93,20 @@
                     <div class="col-md-4">
                         <label for="dataAgente">Data de pagamento</label>
                         <br>
-                        <input name="dataAgente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataAgente" type="date">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="contaAgente">Associar conta bancária</label>
+                        <br>
+                        <select name="contaAgente">
+                            @foreach ($contas as $conta)
+                            <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
+                            @endforeach
+                            <option selected disabled hidden>Escolher conta bancária</option>
+                        </select>
                     </div>
                 </div>
                 <br><br>
@@ -101,7 +127,20 @@
                     <div class="col-md-4">
                         <label for="dataSubAgente">Data de pagamento</label>
                         <br>
-                        <input name="dataSubAgente" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataSubAgente" type="date">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="contaSubAgente">Associar conta bancária</label>
+                        <br>
+                        <select name="contaSubAgente">
+                            @foreach ($contas as $conta)
+                            <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
+                            @endforeach
+                            <option selected disabled hidden>Escolher conta bancária</option>
+                        </select>
                     </div>
                 </div>
                 <br><br>
@@ -122,7 +161,20 @@
                     <div class="col-md-4">
                         <label for="dataUni1">Data de pagamento</label>
                         <br>
-                        <input name="dataUni1" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataUni1" type="date">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="contaUni1">Associar conta bancária</label>
+                        <br>
+                        <select name="contaUni1">
+                            @foreach ($contas as $conta)
+                            <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
+                            @endforeach
+                            <option selected disabled hidden>Escolher conta bancária</option>
+                        </select>
                     </div>
                 </div>
                 <br><br>
@@ -143,7 +195,20 @@
                     <div class="col-md-4">
                         <label for="dataUni2">Data de pagamento</label>
                         <br>
-                        <input name="dataUni2" placeholder="Selecionar data" type="text" onfocus="(this.type='date')" id="date" style="cursor:pointer;">
+                        <input name="dataUni2" type="date">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="contaUni2">Associar conta bancária</label>
+                        <br>
+                        <select name="contaUni2">
+                            @foreach ($contas as $conta)
+                            <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
+                            @endforeach
+                            <option selected disabled hidden>Escolher conta bancária</option>
+                        </select>
                     </div>
                 </div>
                 <br><br>
