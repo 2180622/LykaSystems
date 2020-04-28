@@ -27,10 +27,10 @@ class Responsabilidade extends Migration
             $table->boolean('verificacaoPagoSubAgente')->default(false);
             $table->boolean('verificacaoPagoUni1')->default(false);
             $table->boolean('verificacaoPagoUni2')->default(false);
-            $table->dateTime('dataVencimentoPagamentoCliente');
-            $table->dateTime('dataVencimentoPagamentoAgente');
+            $table->dateTime('dataVencimentoPagamentoCliente')->nullable();
+            $table->dateTime('dataVencimentoPagamentoAgente')->nullable();
             $table->dateTime('dataVencimentoPagamentoSubAgente')->nullable();
-            $table->dateTime('dataVencimentoPagamentoUni1');
+            $table->dateTime('dataVencimentoPagamentoUni1')->nullable();
             $table->dateTime('dataVencimentoPagamentoUni2')->nullable();
             $table->enum('estado', ['Pendente', 'Pago', 'Dívida'])->default('Pendente');
             $table->timestamps();
