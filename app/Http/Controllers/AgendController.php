@@ -65,6 +65,8 @@ class AgendController extends Controller
 
                 $agenda = Agenda::find($request->input('idAgenda'));
 
+                $successMessage = "";
+
                 if ($agenda) {
 
                     $agenda->titulo = $request->input('titulo');
@@ -73,8 +75,8 @@ class AgendController extends Controller
                     $agenda->dataFim = $request->input('dataFim');
                     $agenda->cor = $request->input('cor');
 
-                    $agenda->save();
-                    return redirect()->back()->with('success', 'Evento Editado com Sucesso!');
+                    $successMessage = "Evento Editado com Sucesso!";
+
                 } else {
                     $agenda = new Agenda;
 
@@ -86,10 +88,16 @@ class AgendController extends Controller
                     $agenda->dataInicio = $request->input('dataInicio');
                     $agenda->dataFim = $request->input('dataFim');
                     $agenda->cor = $request->input('cor');
+
+                    $successMessage = "Evento Adicionado com Sucesso!";
                 }
 
+                /*echo $agenda;
+                die();*/
+
                 $agenda->save();
-                return redirect()->back()->with('success', 'Evento Adicionado com Sucesso!');
+
+                return redirect()->back()->with('success', $successMessage);
                 break;
             case "delete":
                 $agenda = Agenda::find($request->input('idAgenda'));

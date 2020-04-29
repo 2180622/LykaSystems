@@ -10,6 +10,7 @@
 
     <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
     <link href="{{asset('css/agends.css')}}" rel="stylesheet"/>
+
     <link href="{{asset('vendor/fullcalendar/core/main.css')}}" rel='stylesheet'/>
     <link href="{{asset('vendor/fullcalendar/daygrid/main.css')}}" rel='stylesheet'/>
     <link href="{{asset('vendor/fullcalendar/list/main.css')}}" rel='stylesheet'/>
@@ -75,6 +76,9 @@
 
     <script src="{{asset('/js/agends.js')}}"></script>
 
+    {{-- script permite definir se um input recebe só numeros OU so letras --}}
+    <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
+
     <script>
         var dateToday = new Date();
         var dd = String(dateToday.getDate()).padStart(2, '0');
@@ -82,6 +86,16 @@
         var yyyy = dateToday.getFullYear();
 
         dateToday = mm + '/' + dd + '/' + yyyy;
+
+        /**
+         *  Dealing with data to be shown in datetime-local type input
+         * */
+        function dealWithDate(value) {
+            let month = value.getMonth() + 1;
+            return value.getFullYear() + "-" + ("0" + month).slice(-2)
+            + "-" + ("0" + value.getDate()).slice(-2) + "T"
+            + ("0" + value.getHours()).slice(-2) + ":" + ("0" + value.getMinutes()).slice(-2);
+        }
 
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
@@ -119,6 +133,7 @@
                 },
 
                 eventClick: function (element) {
+
                     resetForm("#formEvent");
 
                     console.log("event", element.event.extendedProps)
@@ -134,16 +149,20 @@
                     $("#modalCalendar input[name='titulo']").val(title);
 
                     let start = element.event.start;
-                    $("#modalCalendar input[name='dataInicio']").val(start);
+                    $("#modalCalendar input[name='dataInicio']").val(dealWithDate(start));
 
                     let end = element.event.end;
-                    $("#modalCalendar input[name='dataFim']").val(end);
+                    $("#modalCalendar input[name='dataFim']").val(dealWithDate(end));
+
+                    console.log(dealWithDate(start))
+                    console.log(dealWithDate(end))
 
                     let color = element.event.backgroundColor;
                     $("#modalCalendar input[name='cor']").val(color);
 
                     let description = element.event.extendedProps.description;
-                    $("#modalCalendar input[name='descricao']").val(description);
+                    $("#modalCalendar textarea[name='descricao']").val(description);
+                    console.log(description);
                 },
 
                 select: function (element) {
