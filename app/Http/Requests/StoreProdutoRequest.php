@@ -19,7 +19,7 @@ class StoreProdutoRequest extends FormRequest
             'valorTotalAgente' => 'required',
             '$idAgente' => 'required',
             '$idCliente' => 'required',
-            '$idUniversidade1' => 'required',*/
+            '$idUniversidade1' => 'required',/**/
         ];
     }
 }

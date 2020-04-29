@@ -15,6 +15,6 @@ class DocStock extends Model
         ];
 
     public function faseStock(){
-        return $this->belongsTo("App\FaseStock","idFaseStock","idFaseStock")->withTrashed();
+        return $this->belongsTo("App\FaseStock","idFaseStock","idFaseStock");
     }
 }

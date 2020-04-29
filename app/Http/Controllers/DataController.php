@@ -554,14 +554,14 @@ class DataController extends Controller
 
         $relacao = new RelFornResp;
         $relacao->valor = 80;
-        $relacao->dataVencimentoPagamento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $relacao->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $relacao->idResponsabilidade = 2;
         $relacao->idFornecedor = 1;
         $relacao->save();
 
         $relacao = new RelFornResp;
         $relacao->valor = 150;
-        $relacao->dataVencimentoPagamento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $relacao->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
         $relacao->idResponsabilidade = 4;
         $relacao->idFornecedor = 2;
         $relacao->save();
