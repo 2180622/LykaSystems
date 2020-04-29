@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Conta extends Model
 {
-    use HasSlug;
-    use SoftDeletes;
+    use SoftDeletes, HasSlug;
+
     protected $table = 'Conta';
 
     protected $primaryKey = 'idConta';
@@ -27,10 +27,6 @@ class Conta extends Model
         return $this->hasMany("App\DocTransacao","idConta","idConta")->withTrashed();
     }
 
-
-
-    /* URL */
-
     public function getSlugOptions() : SlugOptions
     {
       return SlugOptions::create()
@@ -42,7 +38,4 @@ class Conta extends Model
     {
         return 'slug';
     }
-
-
-
 }
