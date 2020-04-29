@@ -20,7 +20,7 @@ class DocPessoal extends Migration
             $table->string('idCliente',255)->nullable();
             $table->enum('tipo',['Passaporte','Cartão Cidadão','Carta Condução','Doc. Oficial']);
             $table->string('imagem',255)->nullable();
-            $table->text('info')->nullable();
+            $table->longText('info')->nullable();
             $table->date('dataValidade')->nullable();
             $table->boolean('verificacao')->default(false);
             $table->string('slug')->nullable();
