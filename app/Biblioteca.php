@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Biblioteca extends Model
 {
-/*     use HasSlug; */
+    use HasSlug;
 
     protected $table = 'Biblioteca';
 
@@ -23,7 +23,7 @@ class Biblioteca extends Model
 
         /* URL */
 
-/*         public function getSlugOptions() : SlugOptions
+        public function getSlugOptions() : SlugOptions
         {
           return SlugOptions::create()
               ->generateSlugsFrom('descricao')
@@ -33,6 +33,6 @@ class Biblioteca extends Model
         public function getRouteKeyName()
         {
             return 'slug';
-        } */
+        }
 
 }
