@@ -181,47 +181,87 @@ class PaymentController extends Controller
       // Pesquisa de estudantes
       if ($idEstudante != null) {
         if ($idEstudante == 'todos') {
-          $queryResp = Responsabilidade::select();
+          $responsabilidades = Responsabilidade::select();
         if ($dataInicio != null) {
-          $queryResp->where('created_at', '>=', $dataInicio);
+          $responsabilidades->where('created_at', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $queryResp->where('created_at', '<=', $dataFim);
+          $responsabilidades->where('created_at', '<=', $dataFim);
         }
       }else {
-        $produtos = Produto::where('idCliente', $idEstudante)->get();
-        foreach ($produtos as $produto) {
-          $fases = Fase::where('idProduto', $produto->idProduto)->get();
+        $responsabilidades = Responsabilidade::where('idCliente', $idEstudante)->get();
+        if ($dataInicio != null) {
+          $responsabilidades->where('created_at', '>=', $dataInicio)->dd();
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('created_at', '<=', $dataFim);
         }
       }
-      return view('payments.list', compact('queryResp'));
+      dd($responsabilidades);
+      return view('payments.list', compact('responsabilidades'));
       }
 
       // Pesquisa de agentes
       if ($idAgente != null) {
         if ($idAgente == 'todos') {
-          // Responsabilidades associadas a todos os agentes
-        }else{
-          // Responsabilidades associadas ao agente escolhido
+          $responsabilidades = Responsabilidade::select();
+        if ($dataInicio != null) {
+          $responsabilidades->where('created_at', '>=', $dataInicio);
         }
+        if ($dataFim != null) {
+          $responsabilidades->where('created_at', '<=', $dataFim);
+        }
+      }else {
+        $responsabilidades = Responsabilidade::where('idAgente', $idAgente)->get();
+        if ($dataInicio != null) {
+          $responsabilidades->where('created_at', '>=', $dataInicio)->dd();
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('created_at', '<=', $dataFim);
+        }
+      }
+      dd($responsabilidades);
+      return view('payments.list', compact('responsabilidades'));
       }
 
       // Pesquisa de universidades
       if ($idUniversidade != null) {
         if ($idUniversidade == 'todos') {
-          // Responsabilidades associadas a todas as universidades
-        }else{
-          // Responsabilidades associadas a uni escolhida
+          $responsabilidades = Responsabilidade::select();
+        if ($dataInicio != null) {
+          $responsabilidades->where('created_at', '>=', $dataInicio);
         }
+        if ($dataFim != null) {
+          $responsabilidades->where('created_at', '<=', $dataFim);
+        }
+      }else {
+        $responsabilidades = Responsabilidade::where('idUniversidade1', $idUniversidade)->orWhere('idUniversidade2', $idUniversidade)->get();
+        if ($dataInicio != null) {
+          $responsabilidades->where('created_at', '>=', $dataInicio)->dd();
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('created_at', '<=', $dataFim);
+        }
+      }
+      dd($responsabilidades);
+      return view('payments.list', compact('responsabilidades'));
       }
 
       // Pesquisa de fornecedores
       if ($idFornecedor != null) {
         if ($idFornecedor == 'todos') {
-          // Responsabilidades associadas a todos os fornecedores
-        }else{
-          // Responsabilidades associadas ao fornecedor escolhido
+          $responsabilidades = Responsabilidade::select();
+        if ($dataInicio != null) {
+          $responsabilidades->where('created_at', '>=', $dataInicio);
         }
+        if ($dataFim != null) {
+          $responsabilidades->where('created_at', '<=', $dataFim);
+        }
+      }else {
+        // Filtrar por fornecedor específico
+      }
+      dd($responsabilidades);
+      return view('payments.list', compact('responsabilidades'));
       }
 
     }
