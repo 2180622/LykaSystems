@@ -33,7 +33,7 @@
         </div>
         <br>
         <div class="card shadow-sm p-3" style="border-radius:10px;">
-        <form method="POST" action="#" class="form-group needs-validation pt-3" id="form_library"
+        <form method="POST" action="{{route('libraries.store')}}" class="form-group needs-validation pt-3" id="form_library"
             enctype="multipart/form-data" novalidate>
             @csrf
             @include('libraries.partials.add-edit')
@@ -54,10 +54,6 @@
 {{-- Scripts --}}
 @section('scripts')
 
-{{-- script contem: datatable configs, input configs, validações --}}
-{{-- <script src="{{asset('/js/clients.js')}}"></script> --}}
-
-{{-- script permite definir se um input recebe só numeros OU so letras --}}
-{{-- <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script> --}}
+<script src="{{asset('/js/library.js')}}"></script>
 
 @endsection

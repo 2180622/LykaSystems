@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Biblioteca;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreLibraryRequest;
+use App\Http\Requests\UpdateLibraryRequest;
+use Illuminate\Support\Facades\Storage;
+
 
 class LibraryController extends Controller
 {
@@ -51,9 +54,21 @@ class LibraryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLibraryRequest $request)
     {
-        //
+        $file = new Biblioteca;
+        $fields = $request->validated();
+        $file->fill($fields);
+
+        $file->save();
+
+        if ($request->hasFile('ficheiro')) {
+            $uploadfile = $request->file('ficheiro');
+            $file_name = 'File_'.$file->idBiblioteca->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('library/', $uploadfile, $file_name);
+            $file->save();
+        }
+
     }
 
     /**
@@ -88,7 +103,7 @@ class LibraryController extends Controller
      * @param  \App\Biblioteca  $biblioteca
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Biblioteca $biblioteca)
+    public function update(UpdateLibraryRequest $request, Biblioteca $biblioteca)
     {
         //
     }
