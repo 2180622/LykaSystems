@@ -35,6 +35,11 @@ class Cliente extends Model
         return $this->hasMany("App\Produto","idCliente","idCliente")->withTrashed();
     }
 
+    public function responsabilidade()
+    {
+        return $this->hasMany("App\Responsabilidade","idCliente","idCliente")->withTrashed();
+    }
+
     public function produtoSaved(){
         return $this->hasMany("App\Produto","idCliente","idCliente");
     }

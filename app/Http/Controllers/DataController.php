@@ -441,92 +441,117 @@ class DataController extends Controller
 
         $responsabilidade = new Responsabilidade;
         $responsabilidade->valorCliente = 10;
-        $responsabilidade->valorAgente = 0;
-        $responsabilidade->valorSubAgente = null;
-        $responsabilidade->valorUniversidade1 = 40;
-        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->idCliente = 1;
         $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->dataVencimentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorAgente = null;
+        $responsabilidade->idAgente = 1;
         $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->dataVencimentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorSubAgente = null;
+        $responsabilidade->idSubAgente = 1;
         $responsabilidade->verificacaoPagoSubAgente = false;
+        $responsabilidade->dataVencimentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorUniversidade1 = 40;
+        $responsabilidade->idUniversidade1 = 1;
         $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->dataVencimentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->idUniversidade2 = 2;
         $responsabilidade->verificacaoPagoUni2 = false;
-        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
         $responsabilidade->save();
 
-        $responsabilidade = new Responsabilidade;
-        $responsabilidade->valorCliente = 50;
-        $responsabilidade->valorAgente = 50;
-        $responsabilidade->valorSubAgente = null;
-        $responsabilidade->valorUniversidade1 = 120;
-        $responsabilidade->valorUniversidade2 = null;
-        $responsabilidade->verificacaoPagoCliente = false;
-        $responsabilidade->verificacaoPagoAgente = false;
-        $responsabilidade->verificacaoPagoSubAgente = false;
-        $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = false;
-        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
-        $responsabilidade->valorCliente = 10;
-        $responsabilidade->valorAgente = 0;
-        $responsabilidade->valorSubAgente = null;
-        $responsabilidade->valorUniversidade1 = 40;
-        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->valorCliente = null;
+        $responsabilidade->idCliente = 1;
         $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->dataVencimentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorAgente = 20;
+        $responsabilidade->idAgente = 1;
         $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->dataVencimentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorSubAgente = 10;
+        $responsabilidade->idSubAgente = 1;
         $responsabilidade->verificacaoPagoSubAgente = false;
+        $responsabilidade->dataVencimentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorUniversidade1 = 150;
+        $responsabilidade->idUniversidade1 = 1;
         $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->dataVencimentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorUniversidade2 = 10;
+        $responsabilidade->idUniversidade2 = 2;
         $responsabilidade->verificacaoPagoUni2 = false;
-        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
         $responsabilidade->save();
 
-        $responsabilidade = new Responsabilidade;
-        $responsabilidade->valorCliente = 10;
-        $responsabilidade->valorAgente = 0;
-        $responsabilidade->valorSubAgente = null;
-        $responsabilidade->valorUniversidade1 = 40;
-        $responsabilidade->valorUniversidade2 = null;
-        $responsabilidade->verificacaoPagoCliente = false;
-        $responsabilidade->verificacaoPagoAgente = false;
-        $responsabilidade->verificacaoPagoSubAgente = false;
-        $responsabilidade->verificacaoPagoUni1 = false;
-        $responsabilidade->verificacaoPagoUni2 = false;
-        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->save();
 
         $responsabilidade = new Responsabilidade;
-        $responsabilidade->valorCliente = 15;
-        $responsabilidade->valorAgente = 0;
-        $responsabilidade->valorSubAgente = null;
-        $responsabilidade->valorUniversidade1 = 40;
-        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->valorCliente = 125;
+        $responsabilidade->idCliente = 1;
         $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->dataVencimentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorAgente = 55;
+        $responsabilidade->idAgente = 1;
         $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->dataVencimentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorSubAgente = null;
+        $responsabilidade->idSubAgente = 1;
         $responsabilidade->verificacaoPagoSubAgente = false;
+        $responsabilidade->dataVencimentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorUniversidade1 = null;
+        $responsabilidade->idUniversidade1 = 1;
         $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->dataVencimentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->idUniversidade2 = 2;
         $responsabilidade->verificacaoPagoUni2 = false;
-        $responsabilidade->dataVencimentoPagamentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $responsabilidade->dataVencimentoPagamentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->dataVencimentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->save();
+
+
+        $responsabilidade = new Responsabilidade;
+        $responsabilidade->valorCliente = null;
+        $responsabilidade->idCliente = 1;
+        $responsabilidade->verificacaoPagoCliente = false;
+        $responsabilidade->dataVencimentoCliente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorAgente = null;
+        $responsabilidade->idAgente = 1;
+        $responsabilidade->verificacaoPagoAgente = false;
+        $responsabilidade->dataVencimentoAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorSubAgente = null;
+        $responsabilidade->idSubAgente = 1;
+        $responsabilidade->verificacaoPagoSubAgente = false;
+        $responsabilidade->dataVencimentoSubAgente = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorUniversidade1 = 650;
+        $responsabilidade->idUniversidade1 = 1;
+        $responsabilidade->verificacaoPagoUni1 = false;
+        $responsabilidade->dataVencimentoUni1 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
+        $responsabilidade->valorUniversidade2 = null;
+        $responsabilidade->idUniversidade2 = 2;
+        $responsabilidade->verificacaoPagoUni2 = false;
+        $responsabilidade->dataVencimentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+
         $responsabilidade->save();
 
         /*****************          Rel Forn Resp          *****************/
@@ -541,8 +566,8 @@ class DataController extends Controller
         $relacao = new RelFornResp;
         $relacao->valor = 150;
         $relacao->dataVencimentoPagamento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $relacao->idResponsabilidade = 5;
-        $relacao->idFornecedor = 1;
+        $relacao->idResponsabilidade = 4;
+        $relacao->idFornecedor = 2;
         $relacao->save();
 
         /*********************          Fases          *********************/
@@ -584,49 +609,6 @@ class DataController extends Controller
         $fase->verificacaoPago = false;
         $fase->icon = 'pie-chart';
         $fase->idProduto = 1;
-        $fase->idResponsabilidade = 4;
-        $fase->save();
-
-
-
-
-        $fase = new Fase;
-        $fase->descricao = 'Inscrição';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('16-03-2020 15:00'));
-        $fase->valorFase = 50;
-        $fase->verificacaoPago = false;
-        $fase->icon = 'cube';
-        $fase->idProduto = 2;
-        $fase->idResponsabilidade = 5;
-        $fase->save();
-
-        $fase = new Fase;
-        $fase->descricao = 'Matricula';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
-        $fase->valorFase = 300;
-        $fase->verificacaoPago = false;
-        $fase->icon = 'layers';
-        $fase->idProduto = 2;
-        $fase->idResponsabilidade = 2;
-        $fase->save();
-
-        $fase = new Fase;
-        $fase->descricao = 'Propinas';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $fase->valorFase = 1000;
-        $fase->verificacaoPago = false;
-        $fase->icon = 'school';
-        $fase->idProduto = 2;
-        $fase->idResponsabilidade = 3;
-        $fase->save();
-
-        $fase = new Fase;
-        $fase->descricao = 'Final';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('01-07-2021 18:30'));
-        $fase->valorFase = 150;
-        $fase->verificacaoPago = false;
-        $fase->icon = 'pie-chart';
-        $fase->idProduto = 2;
         $fase->idResponsabilidade = 4;
         $fase->save();
 

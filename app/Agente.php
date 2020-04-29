@@ -32,6 +32,16 @@ class Agente extends Model
         return $this->hasMany("App\Produto","idSubAgente","idAgente")->withTrashed();
     }
 
+    public function responsabilidade()
+    {
+        return $this->hasMany("App\Responsabilidade","idAgente","idAgente")->withTrashed();
+    }
+
+    public function responsabilidadeSub()
+    {
+        return $this->hasMany("App\Responsabilidade","idSubAgente","idAgente")->withTrashed();
+    }
+
     public function subAgente(){
         return $this->hasMany("App\Agente","idAgente","idAgenteAssociado")->withTrashed();
     }

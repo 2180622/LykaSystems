@@ -24,7 +24,7 @@ class Produto extends Migration
             $table->decimal('valorTotalAgente', 18, 2);
             $table->decimal('valorTotalSubAgente', 18, 2)->nullable();
             $table->enum('estado', ['Pendente', 'Pago', 'Dívida', 'Crédito'])->default('Pendente');
-            $table->timestamps();
+            $table->string('slug')->nullable();
             $table->unsignedBigInteger('idAgente');
                 $table->foreign('idAgente')->references('idAgente')->on('Agente');
 
@@ -39,8 +39,8 @@ class Produto extends Migration
 
             $table->unsignedBigInteger('idUniversidade2')->nullable();
                 $table->foreign('idUniversidade2')->references('idUniversidade')->on('Universidade');
+            $table->timestamps();
             $table->softDeletes();
-            $table->string('slug')->nullable();
         });
     }
 
