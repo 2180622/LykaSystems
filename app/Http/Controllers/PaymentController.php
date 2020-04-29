@@ -250,20 +250,12 @@ class PaymentController extends Controller
       // Pesquisa de fornecedores
       if ($idFornecedor != null) {
         if ($idFornecedor == 'todos') {
-          $responsabilidades = Responsabilidade::select();
-        if ($dataInicio != null) {
-          $responsabilidades->where('created_at', '>=', $dataInicio);
+          $responsabilidades = Responsabilidade::distinct('relacao')->get();
+        }else{
+          $responsabilidades = Responsabilidade::with('relacao');
         }
-        if ($dataFim != null) {
-          $responsabilidades->where('created_at', '<=', $dataFim);
-        }
-      }else {
-        // Filtrar por fornecedor específico
+        return view('payments.list', compact('responsabilidades'));
       }
-      $responsabilidades->get()->dd();
-      return view('payments.list', compact('responsabilidades'));
-      }
-
     }
 
     public function create(Responsabilidade $responsabilidade)

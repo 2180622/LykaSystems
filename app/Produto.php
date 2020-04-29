@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Produto extends Model
 {
-    use HasSlug;
-    use SoftDeletes;
+    use SoftDeletes, HasSlug;
+
     protected $table = 'Produto';
 
     protected $primaryKey = 'idProduto';
