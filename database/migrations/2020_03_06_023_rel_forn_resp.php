@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class RelFornResp extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('RelFornResp', function (Blueprint $table) {
@@ -19,7 +14,7 @@ class RelFornResp extends Migration
             $table->bigIncrements('idRelacao');
             $table->decimal('valor', 18, 2);
             $table->boolean('verificacaoPago')->default(false);
-            $table->dateTime('dataVencimentoPagamento');
+            $table->dateTime('dataVencimento');
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->unsignedBigInteger('idFornecedor');
@@ -27,12 +22,7 @@ class RelFornResp extends Migration
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('RelFornResp');
