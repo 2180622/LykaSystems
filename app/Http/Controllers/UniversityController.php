@@ -80,7 +80,7 @@ class UniversityController extends Controller
         ->join('Produto', 'Produto.idCliente', '=', 'Cliente.idCliente')
         ->where('Produto.idUniversidade1', '=',$university->idUniversidade )
         ->orWhere('Produto.idUniversidade2', '=',$university->idUniversidade)
-        ->select('Cliente.idCliente','Cliente.fotografia','Cliente.nome','Cliente.apelido','Cliente.paisNaturalidade')
+        ->select('Cliente.idCliente','Cliente.fotografia','Cliente.nome','Cliente.apelido','Cliente.paisNaturalidade','Cliente.slug')
         ->get();
 
        /*  dd($clients); */

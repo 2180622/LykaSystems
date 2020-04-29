@@ -16,11 +16,11 @@ class FaseStock extends Model
         ];
 
     public function produtoStock(){
-        return $this->belongsTo("App\ProdutoStock","idProdutoStock","idProdutoStock")->withTrashed();
+        return $this->belongsTo("App\ProdutoStock","idProdutoStock","idProdutoStock");
     }
 
     public function docStock(){
-        return $this->hasMany("App\DocStock","idFaseStock","idFaseStock")->withTrashed();
+        return $this->hasMany("App\DocStock","idFaseStock","idFaseStock");
     }
     public function fase(){
         return $this->hasMany("App\Fase","idFaseStock","idFaseStock")->withTrashed();

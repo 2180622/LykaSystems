@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Universidade extends Model
 {
-/*     use HasSlug; */
+    use HasSlug;
     use SoftDeletes;
 
     protected $table = 'Universidade';
@@ -56,7 +56,7 @@ class Universidade extends Model
 
         /* URL */
 
-/*         public function getSlugOptions() : SlugOptions
+        public function getSlugOptions() : SlugOptions
         {
           return SlugOptions::create()
               ->generateSlugsFrom('nome')
@@ -66,7 +66,7 @@ class Universidade extends Model
         public function getRouteKeyName()
         {
             return 'slug';
-        } */
+        }
 
 
 

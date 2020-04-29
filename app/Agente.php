@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Agente extends Model
 {
 
-/*     use HasSlug; */
+    use HasSlug;
     use SoftDeletes;
 
 
@@ -59,10 +59,10 @@ class Agente extends Model
 
         /* URL */
 
-/*         public function getSlugOptions() : SlugOptions
+        public function getSlugOptions() : SlugOptions
         {
           return SlugOptions::create()
-              ->generateSlugsFrom('idAgente')
+              ->generateSlugsFrom(['nome','apelido'])
               ->saveSlugsTo('slug');
         }
 
@@ -70,7 +70,7 @@ class Agente extends Model
         {
             return 'slug';
         }
- */
+
 
 
 }

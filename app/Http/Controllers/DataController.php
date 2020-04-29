@@ -136,7 +136,7 @@ class DataController extends Controller
         $cliente->paisNaturalidade = 'França';
         $cliente->morada = 'Rua francesa';
         $cliente->cidade = 'Paris';
-        $cliente->moradaResidencia = 'Paris';
+        $cliente->moradaResidencia = 'Av. dos Combatentes n.34, 3300-303 Xixaria';
         $cliente->nomePai = 'João Oliveira';
         $cliente->telefonePai = 914535342;
         $cliente->emailPai = 'oliveira.joao@gmail.com';
@@ -171,7 +171,7 @@ class DataController extends Controller
         $cliente->paisNaturalidade = 'Rússia';
         $cliente->morada = 'Rua Russia';
         $cliente->cidade = 'Cidade Russa';
-        $cliente->moradaResidencia = 'Russia';
+        $cliente->moradaResidencia = 'Av. dos Combatentes n.34, 3300-303 Xixaria';
         $cliente->nomePai = 'Arthem Romaria';
         $cliente->telefonePai = 932452343;
         $cliente->emailPai = 'arthem@mail.ru';

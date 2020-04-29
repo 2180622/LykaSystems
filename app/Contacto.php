@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class contacto extends Model
 {
-/*     use HasSlug; */
+    use HasSlug;
 
     protected $table = 'Contacto';
 
@@ -29,17 +29,17 @@ class contacto extends Model
 
 
         /* URL */
-/*
+
         public function getSlugOptions() : SlugOptions
         {
           return SlugOptions::create()
-              ->generateSlugsFrom('idContacto')
+              ->generateSlugsFrom('nome')
               ->saveSlugsTo('slug');
         }
 
         public function getRouteKeyName()
         {
             return 'slug';
-        } */
+        }
 
 }
