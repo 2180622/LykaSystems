@@ -20,6 +20,8 @@ class Biblioteca extends Migration
             $table->enum('acesso',['Privado', 'Público'])->default('Privado');
             $table->string('descricao',255);
             $table->string('ficheiro',255);
+
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

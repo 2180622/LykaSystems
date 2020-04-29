@@ -2,12 +2,16 @@
 
 namespace App;
 
+
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Cliente extends Model
 {
+    use HasSlug;
     use SoftDeletes;
 
     protected $table = 'Cliente';
@@ -23,8 +27,6 @@ class Cliente extends Model
         'obsPessoais','obsFinanceiras','obsAcademicas','num_docOficial','img_docOficial','info_docOficial',
         'img_Passaport','info_Passaport','img_docAcademico','info_docAcademico'
         ];
-
-        /* !!!!!!!!!!! TENS QUE AVISAR QUANDO MUDAS ISTO !!!!!!!!!!!!!!!!!!!!!!!! */
 
 
     public function user(){
@@ -43,4 +45,21 @@ class Cliente extends Model
     public function produtoSaved(){
         return $this->hasMany("App\Produto","idCliente","idCliente");
     }
+
+
+        /* URL */
+
+        public function getSlugOptions() : SlugOptions
+        {
+          return SlugOptions::create()
+              ->generateSlugsFrom(['nome','apelido'])
+              ->saveSlugsTo('slug');
+        }
+
+        public function getRouteKeyName()
+        {
+            return 'slug';
+        }
+
+
 }

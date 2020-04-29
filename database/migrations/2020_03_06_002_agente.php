@@ -26,22 +26,23 @@ class Agente extends Migration
             $table->enum('genero',['F','M']);
             $table->enum('tipo',['Agente', 'Subagente']);
             $table->string('email',255)->unique();
-                //$table->unique('email');
+
             $table->date('dataNasc');
             $table->string('fotografia',255)->nullable();
             $table->string('morada',255);
             $table->string('pais',255);
             $table->string('NIF',255)->unique();
-                //$table->unique('NIF');
+
 
             $table->string('num_doc',255)->unique();
-                //$table->unique('num_id');
+
             $table->string('img_doc',255)->nullable();
             $table->longText('info_doc')->nullable();
 
             $table->string('telefone1',255);
             $table->string('telefone2',255)->nullable();
 
+            $table->string('slug')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
