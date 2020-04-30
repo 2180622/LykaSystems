@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/agenda/criar" method="POST" class="form-group needs-validation pt-3" novalidate
+            <form action="/agenda/criar" method="POST" class="form-group needs-validation pt-3 " novalidate
                   enctype="multipart/form-data" id="formEvent">
                 @csrf
                 <div class="modal-body">
@@ -66,3 +66,4 @@
         </div>
     </div>
 </div>
+

@@ -1,9 +1,7 @@
 @extends('layout.master')
 
-
 {{-- Titulo da Página --}}
 @section('title', 'Agenda')
-
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
@@ -35,7 +33,7 @@
             </a>
         </div>
 
-        <button type="button" class="float-right top-button" data-toggle="modal" data-target="#modalCalendar">
+        <button type="button" class="float-right top-button limpar" id="titleModalNew" data-toggle="modal" data-target="#modalCalendar">
             Novo Evento
         </button>
 
@@ -50,7 +48,6 @@
             <br>
 
             <div id='calendar'></div>
-
 
         </div>
     </div>
@@ -113,6 +110,7 @@
                 navLinks: true,
                 eventLimit: true,
                 selectable: true,
+                timeZone: 'UTC',
                 events: [
                         @foreach($agends as $agend)
                     {
@@ -186,6 +184,13 @@
             });
 
             calendar.render();
+        });
+
+        $("#titleModalNew").click(function () {
+            $(".limpar").each(function () {
+                $(".limpar").val("");
+                $("#color").val("#6A74C9");
+            });
         });
     </script>
 

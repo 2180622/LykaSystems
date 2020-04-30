@@ -13,14 +13,6 @@ $(function () {
         let description = $("#modalCalendar textarea[name='descricao']").val();
     });
 
-    // var formEvent = $('#formEvent input').on('invalid', function (event) {
-    //     //console.log(event.target);
-    //     event.target.classList.add('was-validated');
-    //     event.preventDefault();
-    // });
-    //
-
-
     /* VALIDAÇÃO DE INPUTS */
 
     /* Apenas numeros:  .numbersOnly();  */
@@ -45,16 +37,15 @@ $(function () {
             });
         }, false);
     })();
+
+    $("#titleModal").click(function () {
+        $(".limpar").each(function () {
+            $(".limpar").val("");
+            $("#color").val("#6A74C9");
+        });
+    });
 });
 
 function resetForm(form) {
     $(form)[0].reset();
 }
-
-$(function (){
-    $("#btnFechar").click(function (){
-        $( ".limpar" ).each(function() {
-            $(".limpar").val("");
-        });
-    });
-});

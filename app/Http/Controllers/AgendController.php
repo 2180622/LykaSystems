@@ -15,20 +15,6 @@ class AgendController extends Controller
     public function index()
     {
         $agends = Agenda::all();
-        /*$agend = [];
-
-        foreach ($agends as $agendEvent) {
-            $agend[] = \Calendar::agend(
-                $agendEvent->titulo,
-                false,
-                new \DateTime($agendEvent->dataInicio),
-                new \DateTime($agendEvent->dataFim),
-                $agendEvent->id,
-                [
-                    'cor' => $agendEvent->color,
-                ]
-            );
-        }*/
 
         return view('agends.list', compact('agends'));
     }
@@ -92,9 +78,6 @@ class AgendController extends Controller
                     $successMessage = "Evento Adicionado com Sucesso!";
                 }
 
-                /*echo $agenda;
-                die();*/
-
                 $agenda->save();
 
                 return redirect()->back()->with('success', $successMessage);
@@ -107,7 +90,6 @@ class AgendController extends Controller
         }
 
         return redirect()->back();
-        /* return redirect()->route('agends.index')->with('success', 'Evento Adicionado com Sucesso!'); */
     }
 
     /**
