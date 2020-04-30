@@ -198,13 +198,13 @@
             @if (count($responsabilidades))
             @foreach ($responsabilidades as $responsabilidade)
             <?php
-              if ($responsabilidade->valorCliente == '0.00') {
+              if ($responsabilidade->valorCliente == null) {
                 $valorCliente = 'N/A';
               }else {
                 $valorCliente = number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€';
               }
 
-              if ($responsabilidade->valorAgente == '0.00') {
+              if ($responsabilidade->valorAgente == null) {
                 $valorAgente = 'N/A';
               }else {
                 $valorAgente = number_format((float)$responsabilidade->valorAgente, 2, ',', '').'€';
@@ -216,7 +216,7 @@
                 $valorSubAgente = number_format((float)$responsabilidade->valorSubAgente, 2, ',', '').'€';
               }
 
-              if ($responsabilidade->valorUniversidade1 == '0.00') {
+              if ($responsabilidade->valorUniversidade1 == null) {
                 $valorUniversidade1 = 'N/A';
               }else {
                 $valorUniversidade1 = number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€';
@@ -232,7 +232,7 @@
 
             <a href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}"
               data-valorsubagente="{{$valorSubAgente}}" data-valoruni1="{{$valorUniversidade1}}" data-valoruni2="{{$valorUniversidade2}}"
-              data-nome="{{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}">
+              data-nome="{{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}">
                 <div class="row charge-div">
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">
@@ -240,8 +240,8 @@
                         </div>
                     </div>
                     <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}">
-                            {{$responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido}}</p>
+                        <p class="text-truncate" title="{{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}">
+                            {{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}</p>
                     </div>
                     <div class="col-md-2 align-self-center">
                         <p class="text-truncate" title="{{$responsabilidade->fase->descricao}}">{{$responsabilidade->fase->descricao}}</p>

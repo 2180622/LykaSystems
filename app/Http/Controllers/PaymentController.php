@@ -21,7 +21,10 @@ class PaymentController extends Controller
 {
     public function index()
     {
-      $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")->get();
+      $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")
+      ->with(['cliente', 'agente', 'universidade1'])
+      ->get();
+
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
       $responsabilidadesPagas = Responsabilidade::where('estado', '=', 'Pago')->get();
       $responsabilidadesDivida = Responsabilidade::where('estado', '=', 'Dívida')->get();
@@ -336,7 +339,7 @@ class PaymentController extends Controller
         $pagoResponsabilidade->valorPago = $valorAgente;
         $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->agente->nome.' '.$responsabilidade->fase->produto->agente->apelido;
           $ficheiroPagamento = $comprovativoAgente;
-          $nomeFicheiro = strtolower($responsabilidade->fase->produto->agente->nome.'_'.$responsabilidade->fase->descricao).'_comprovativoPagamento_'.$responsabilidade->fase->idFase.'.' .$ficheiroPagamento->getClientOriginalExtension();
+          $nomeFicheiro = strtolower($responsabilidade->fase->produto->agente->nome.'_'.$responsabilidade->fase->descricao).'_comprovativoPagamento_'.$responsabilidade->fase->idFase.'.'.$ficheiroPagamento->getClientOriginalExtension();
           Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
           $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
         $pagoResponsabilidade->dataPagamento = $dataAgente;
