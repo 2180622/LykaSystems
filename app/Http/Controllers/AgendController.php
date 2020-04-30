@@ -15,20 +15,6 @@ class AgendController extends Controller
     public function index()
     {
         $agends = Agenda::all();
-        /*$agend = [];
-
-        foreach ($agends as $agendEvent) {
-            $agend[] = \Calendar::agend(
-                $agendEvent->titulo,
-                false,
-                new \DateTime($agendEvent->dataInicio),
-                new \DateTime($agendEvent->dataFim),
-                $agendEvent->id,
-                [
-                    'cor' => $agendEvent->color,
-                ]
-            );
-        }*/
 
         return view('agends.list', compact('agends'));
     }
@@ -65,6 +51,8 @@ class AgendController extends Controller
 
                 $agenda = Agenda::find($request->input('idAgenda'));
 
+                $successMessage = "";
+
                 if ($agenda) {
 
                     $agenda->titulo = $request->input('titulo');
@@ -73,8 +61,8 @@ class AgendController extends Controller
                     $agenda->dataFim = $request->input('dataFim');
                     $agenda->cor = $request->input('cor');
 
-                    $agenda->save();
-                    return redirect()->back()->with('success', 'Evento Editado com Sucesso!');
+                    $successMessage = "Evento Editado com Sucesso!";
+
                 } else {
                     $agenda = new Agenda;
 
@@ -86,10 +74,13 @@ class AgendController extends Controller
                     $agenda->dataInicio = $request->input('dataInicio');
                     $agenda->dataFim = $request->input('dataFim');
                     $agenda->cor = $request->input('cor');
+
+                    $successMessage = "Evento Adicionado com Sucesso!";
                 }
 
                 $agenda->save();
-                return redirect()->back()->with('success', 'Evento Adicionado com Sucesso!');
+
+                return redirect()->back()->with('success', $successMessage);
                 break;
             case "delete":
                 $agenda = Agenda::find($request->input('idAgenda'));
@@ -99,7 +90,6 @@ class AgendController extends Controller
         }
 
         return redirect()->back();
-        /* return redirect()->route('agends.index')->with('success', 'Evento Adicionado com Sucesso!'); */
     }
 
     /**

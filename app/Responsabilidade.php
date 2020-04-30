@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Responsabilidade extends Model
 {
     use SoftDeletes;
+
     protected $table = 'Responsabilidade';
 
     protected $primaryKey = 'idResponsabilidade';
@@ -16,7 +17,7 @@ class Responsabilidade extends Model
         'valorCliente','valorAgente','valorSubAgente','valorUniversidade1',
         'valorUniversidade2','verificacaoPagoCliente','verificacaoPagoAgente',
         'verificacaoPagoSubAgente','verificacaoPagoUni1','verificacaoPagoUni2',
-        '$idAgente','$idSubAgente','$idCliente', '$idUniversidade1','$idUniversidade2'
+        '$idAgente','$idSubAgente','$idCliente','$idUniversidade1','$idUniversidade2'
     ];
 
     public function cliente(){

@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fornecedor extends Model
 {
-    use HasSlug;
-    use SoftDeletes;
+    use SoftDeletes, HasSlug;
+
     protected $table = 'Fornecedor';
 
     protected $primaryKey = 'idFornecedor';

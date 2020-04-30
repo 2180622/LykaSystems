@@ -13,7 +13,7 @@ class RelFornResp extends Model
 
     protected $fillable = [
         'valor','verificacaoPago','$idResponsabilidade','$idFornecedor','$idConta'
-        ];
+    ];
 
     public function fornecedor(){
         return $this->belongsTo("App\Fornecedor","idFornecedor","idFornecedor")->withTrashed();
