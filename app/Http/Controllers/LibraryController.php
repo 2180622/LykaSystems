@@ -44,8 +44,8 @@ class LibraryController extends Controller
         if (Auth::user()->tipo != "admin" ){
             abort (401);
         }
-        $library = new Biblioteca;
-        return view('libraries.add' , compact('library'));
+        $biblioteca = new Biblioteca;
+        return view('libraries.add' , compact('biblioteca'));
     }
 
     /**
@@ -64,10 +64,15 @@ class LibraryController extends Controller
 
         if ($request->hasFile('ficheiro')) {
             $uploadfile = $request->file('ficheiro');
-            $file_name = 'File_'.$file->idBiblioteca->getClientOriginalExtension();
+
+            $file_name = $request->file_name . $file->idBiblioteca.'.'.$uploadfile->getClientOriginalExtension();
+            $file->ficheiro = $file_name;
             Storage::disk('public')->putFileAs('library/', $uploadfile, $file_name);
+
             $file->save();
         }
+
+        return redirect()->route('libraries.index')->with('success', 'Ficheiro carregado com sucesso!');
 
     }
 
