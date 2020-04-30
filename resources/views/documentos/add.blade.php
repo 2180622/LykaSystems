@@ -34,71 +34,118 @@
         </div>
         <br>
         <div class="payment-card shadow-sm">
-            <form action="{{route('provider.store')}}" method="post" enctype="multipart/form-data">
+            @if($tipoPAT == 'Pessoal')
+                <form action="{{route('documento_pessoal.store', $fase)}}" method="post" enctype="multipart/form-data">
+            @elseif($tipoPAT == 'Academico')
+                <form action="{{route('documento_academico.store', $fase)}}" method="post" enctype="multipart/form-data">
+            @else
+                <form action="{{route('documento_transacao.store', $fase)}}" method="post" enctype="multipart/form-data">
+            @endif
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <label for="nome">Insira o documento</label>
                         <br>
-                        <input type="text" name="nome" placeholder="Inserir o nome do fornecedor" autocomplete="off" required>
                     </div>
                 </div>
                 <br><br>
                 @if($TipoDocumento == "Documento Transação")
-                    <div class="row documento-transacao">
+                    <div class="row para-clone documento-transacao">
                         <span class="num" style="display: none;">1</span>
                         <div class="clones" id="clonar">
-                            <div class="col-md-6">
-                                <label for="nome-campo">Nome do Campo</label>
+                            <div class="col-md-12">
+                                <label for="descricao">Descrição</label>
                                 <br>
-                                <input type="text" name="nome-campo" placeholder="Inserir nome do campo" autocomplete="off" required>
+                                <input type="text" class="form-control" name="descricao" placeholder="Descrição" autocomplete="off" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="valor-campo">Valor do Campo</label>
+                                <label for="valorRecebido">Valor</label>
                                 <br>
-                                <input type="text" name="nome-campo" placeholder="Inserir valor do campo" autocomplete="off" required>
+                                <input type="number" class="form-control" name="valorRecebido" placeholder="0,00" autocomplete="off" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tipoPagamento">Tipo pagamento</label>
+                                <br>
+                                <input type="text" class="form-control" name="tipoPagamento" placeholder="Tipo pagamento" autocomplete="off" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dataOperacao">Data da operação:</label>
+                                <br>
+                                <input type="date" class="form-control" name="dataOperacao" value="" style="width:250px" required><br>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dataRecebido">Data recebido:</label>
+                                <br>
+                                <input type="date" class="form-control" name="dataRecebido" value="" style="width:250px" ><br>
+                            </div>
+                            <div class="col-md-10">
+                                <label for="idConta">Conta:</label><br>
+                                <select name="idConta" class="form-control" required>
+                                    <option value="" selected></option>
+                                    @foreach($Contas as $conta)
+                                        <option {{old('idConta',$documento->idConta)}} value="{{$conta->idConta}}">{{$conta->numConta.' => '.$conta->descricao}}</option>
+                                    @endforeach
+                                </select><br>
                             </div>
                         </div>
                         <div>
-                            <button type="button" onclick="addFornecedor({{$num}},$(this).closest('.list-fornecedores'))" class="top-button">Adicionar fornecedor</button>
+                            <button type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
                         </div>
                     </div>
                 @elseif($TipoDocumento == "Passaport")
-                    <div class="row documento-passaport">
+                    <div class="row para-clone documento-passaport">
                         <span class="num" style="display: none;">1</span>
+
+                        <div class="col-md-6">
+                            <label for="numPassaport">Nº Passaport: </label>
+                            <input type="text" class="form-control" name="numPassaport" placeholder="Nº Passaport" autocomplete="off" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dataValidPP">Data de validade: </label>
+                            <input type="text" class="form-control" name="dataValidPP" value="" style="width:250px" required><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="passaportPaisEmi">País de Emissão: </label>
+                            <input type="text" class="form-control" name="passaportPaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="localEmissaoPP">Local de Emissão: </label>
+                            <input type="text" class="form-control" name="localEmissaoPP" value="" style="width:250px" required ><br>
+                        </div>
+
                         <div class="clones" id="clonar">
-                            <div class="col-md-6">
-                                <label for="contacto">Nome do Campo</label>
+                            <div class="col-md-3">
+                                <label for="nome-campo">Nome do Campo</label>
                                 <br>
-                                <input type="text" name="contacto" placeholder="Inserir o contacto do fornecedor" autocomplete="off" required>
+                                <input type="text" class="form-control" name="nome-campo" placeholder="Inserir nome do campo" autocomplete="off" required>
                             </div>
-                            <div class="col-md-6">
-                                <label for="morada">Valor do Campo</label>
+                            <div class="col-md-3">
+                                <label for="valor-campo">Valor do Campo</label>
                                 <br>
-                                <input type="text" name="morada" placeholder="Inserir a morada do fornecedor" autocomplete="off" required>
+                                <input type="text" class="form-control" name="valor-campo" placeholder="Inserir valor do campo" autocomplete="off" required>
                             </div>
                         </div>
                         <div>
-                            <button type="button" onclick="addFornecedor({{$num}},$(this).closest('.list-fornecedores'))" class="top-button">Adicionar fornecedor</button>
+                            <button type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
                         </div>
                     </div>
                 @else
-                    <div class="row documento">
+                    <div class="row para-clone documento">
                         <span class="num" style="display: none;">1</span>
                         <div class="clones" id="clonar">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <label for="nome-campo">Nome do Campo</label>
                                 <br>
-                                <input type="text" name="nome-campo" placeholder="Inserir nome do campo" autocomplete="off" required>
+                                <input type="text" class="form-control" name="nome-campo" placeholder="Inserir nome do campo" autocomplete="off" required>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <label for="valor-campo">Valor do Campo</label>
                                 <br>
-                                <input type="text" name="nome-campo" placeholder="Inserir valor do campo" autocomplete="off" required>
+                                <input type="text" class="form-control" name="valor-campo" placeholder="Inserir valor do campo" autocomplete="off" required>
                             </div>
                         </div>
                         <div>
-                            <button type="button" onclick="addFornecedor($(this).closest('.documento'))" class="top-button">Adicionar fornecedor</button>
+                            <button type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
                         </div>
                     </div>
                 @endif
@@ -115,7 +162,29 @@
 
 @section('scripts')
     <script type="text/javascript">
+        var clones = $('#clonar').clone();
+        $(".clones").remove();
 
+        function addCampo(closest){
+	        var num = parseInt(closest.find('.num').first().text());
+			var clone = clones.clone();
+	        closest.find('.num').first().text(num+1);
+			clone.attr('id','campo-documento'+num);
+			$('#label1', clone).text("Fornecedor "+numF+":");
+			$('#label1', clone).attr('for','fornecedor'+numF+'-fase'+idFase);
+			$('select', clone).attr('id','fornecedor'+numF+'-fase'+idFase);
+			$('select', clone).attr('name','fornecedor'+numF+'-fase'+idFase);
+			$('#label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#valor-fornecedor-fase'+idFase, clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#valor-fornecedor-fase'+idFase, clone).attr('name','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#label3', clone).text('Data de vencimento do pagamento ao fornecedor'+numF+':');
+			$('#label3', clone).attr('for','data-fornecedor'+numF+'-fase'+idFase);
+			$('#data-fornecedor-fase'+idFase, clone).attr('id','data-fornecedor'+numF+'-fase'+idFase);
+			$('#data-fornecedor-fase'+idFase, clone).attr('name','data-fornecedor'+numF+'-fase'+idFase);
+			$('button', clone).attr('onclick','removerFornecedor('+numF+','+idFase+',$(this).closest("#div-fornecedor'+numF+'-fase'+idFase+'"))');
+			$('button', clone).text('Remover fornecedor '+numF);
+	        closest.find('.fornecedor').first().append(clone);
+        }
     </script>
 @endsection
 

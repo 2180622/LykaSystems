@@ -23,7 +23,7 @@ class DocAcademico extends Model
     public function getSlugOptions() : SlugOptions
     {
       return SlugOptions::create()
-          ->generateSlugsFrom('descricao')
+          ->generateSlugsFrom('tipo')
           ->saveSlugsTo('slug');
     }
 
