@@ -169,12 +169,12 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="dataInicio">Data de início (De)</label>
+                                            <label for="dataInicio">De (Data de início)</label>
                                             <br>
                                             <input type="date" name="dataInicio">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="dataFim">Data de fim (Até)</label>
+                                            <label for="dataFim">Até (Data de fim)</label>
                                             <br>
                                             <input type="date" name="dataFim">
                                         </div>

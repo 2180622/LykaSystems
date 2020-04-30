@@ -252,11 +252,20 @@ class PaymentController extends Controller
         if ($idFornecedor == 'todos') {
           $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
           ->where('idFornecedor', '!=', null);
+          if ($dataInicio != null) {
+            $responsabilidades->where('dataVencimento', '>=', $dataInicio);
+          }
+          if ($dataFim != null) {
+            $responsabilidades->where('dataVencimento', '<=', $dataFim);
+          }
         }else{
           $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
           ->where('idFornecedor', $idFornecedor);
           if ($dataInicio != null) {
-            $responsabilidade->where();
+            $responsabilidades->where('dataVencimento', '>=', $dataInicio);
+          }
+          if ($dataFim != null) {
+            $responsabilidades->where('dataVencimento', '<=', $dataFim);
           }
         }
         $responsabilidades->get()->dd();

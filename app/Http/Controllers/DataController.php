@@ -553,15 +553,22 @@ class DataController extends Controller
         /*****************          Rel Forn Resp          *****************/
 
         $relacao = new RelFornResp;
-        $relacao->valor = 80;
-        $relacao->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $relacao->valor = 82;
+        $relacao->dataVencimento = date('Y-m-d H:i',strtotime('12-04-2020 23:59'));
         $relacao->idResponsabilidade = 2;
         $relacao->idFornecedor = 1;
         $relacao->save();
 
         $relacao = new RelFornResp;
-        $relacao->valor = 150;
-        $relacao->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $relacao->valor = 120;
+        $relacao->dataVencimento = date('Y-m-d H:i',strtotime('21-07-2020 23:59'));
+        $relacao->idResponsabilidade = 4;
+        $relacao->idFornecedor = 1;
+        $relacao->save();
+
+        $relacao = new RelFornResp;
+        $relacao->valor = 14;
+        $relacao->dataVencimento = date('Y-m-d H:i',strtotime('10-08-2020 23:59'));
         $relacao->idResponsabilidade = 4;
         $relacao->idFornecedor = 2;
         $relacao->save();

@@ -15,6 +15,7 @@ class RelFornResp extends Migration
             $table->decimal('valor', 18, 2);
             $table->boolean('verificacaoPago')->default(false);
             $table->dateTime('dataVencimento');
+            $table->enum('estado', ['Pendente', 'Pago', 'Dívida'])->default('Pendente');
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->unsignedBigInteger('idFornecedor');
@@ -22,7 +23,7 @@ class RelFornResp extends Migration
             $table->timestamps();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('RelFornResp');
