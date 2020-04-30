@@ -15,7 +15,7 @@ $(document).ready(function () {
             {
                 "orderable": false,
                 "width": "130px",
-                "targets": 2
+                "targets": 3
             },
 
         ],

@@ -44,8 +44,8 @@ class LibraryController extends Controller
         if (Auth::user()->tipo != "admin" ){
             abort (401);
         }
-        $biblioteca = new Biblioteca;
-        return view('libraries.add' , compact('biblioteca'));
+        $library = new Biblioteca;
+        return view('libraries.add' , compact('library'));
     }
 
     /**
@@ -79,10 +79,10 @@ class LibraryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Biblioteca  $biblioteca
+     * @param  \App\Biblioteca  $file
      * @return \Illuminate\Http\Response
      */
-    public function show(Biblioteca $biblioteca)
+    public function show(Biblioteca $library)
     {
         //
     }
@@ -90,25 +90,28 @@ class LibraryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Biblioteca  $biblioteca
+     * @param  \App\Biblioteca  $file
      * @return \Illuminate\Http\Response
      */
-    public function edit(Biblioteca $biblioteca)
+    public function edit(Biblioteca $library)
     {
         /* Permissões */
         if (Auth::user()->tipo != "admin" ){
             abort (401);
         }
+
+        return view('libraries.edit', compact('library'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Biblioteca  $biblioteca
+     * @param  \App\Biblioteca  $library
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLibraryRequest $request, Biblioteca $biblioteca)
+    public function update(UpdateLibraryRequest $request, Biblioteca $library)
     {
         //
     }
@@ -116,10 +119,10 @@ class LibraryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Biblioteca  $biblioteca
+     * @param  \App\Biblioteca  $library
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Biblioteca $biblioteca)
+    public function destroy(Biblioteca $library)
     {
         /* Permissões */
         if (Auth::user()->tipo != "admin" ){
