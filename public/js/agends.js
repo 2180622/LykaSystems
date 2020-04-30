@@ -50,3 +50,11 @@ $(function () {
 function resetForm(form) {
     $(form)[0].reset();
 }
+
+$(function (){
+    $("#btnFechar").click(function (){
+        $( ".limpar" ).each(function() {
+            $(".limpar").val("");
+        });
+    });
+});
