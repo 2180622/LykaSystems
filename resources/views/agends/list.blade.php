@@ -189,6 +189,7 @@
         $("#titleModalNew").click(function () {
             $(".limpar").each(function () {
                 $(".limpar").val("");
+                $("#color").val("#6A74C9");
             });
         });
     </script>
