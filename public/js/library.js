@@ -44,7 +44,7 @@
                     var str = input.files[0].name;
                     str = str.split('.').slice(0, -1).join('.'); /* remove a extensão nome do ficheiro*/
                     str = str.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-'); /* remove caracteres especiais do nome*/
-
+                    str = str.substring(0, 15); /* limita o nome a 15 caracteres */
 
                     $('#file_name').val(str);
                     $('#aux_file_name').text(input.files[0].name);

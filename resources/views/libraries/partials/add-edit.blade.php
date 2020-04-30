@@ -5,7 +5,7 @@
         {{-- INPUT Ficheiro --}}
         <div>
             <label for="ficheiro" style="font-weight: 700!important;">Ficheiro:</label>
-            <input type='file' id="ficheiro" name="ficheiro" style="display:none" required/>
+            <input type='file' id="ficheiro" name="ficheiro" style="display:none" required />
 
         </div>
 
@@ -21,14 +21,16 @@
         {{-- EXISTE FICHEIRO --}}
 
         <a id="replace_file" href="#" class="name_link" title="Clique para mudar">
-            <div id="file_frame" class="card rounded shadow-sm p-2 text-center align-middle " style="height:250px;cursor:pointer">
+            <div id="file_frame" class="card rounded shadow-sm p-2 text-center align-middle "
+                style="height:250px;cursor:pointer">
                 <div class="my-auto">
                     <i class="far fa-file-alt" style="font-size:60px"></i>
                     <div class="mt-3" id="aux_file_name">{{old('ficheiro',$biblioteca->ficheiro)}}</div>
                 </div>
             </div>
         </a>
-        <div id="warning-file" style="display:none;"><small class="text-danger"><strong>É necessário escolher um ficheiro</strong></small></div>
+        <div id="warning-file" style="display:none;"><small class="text-danger"><strong>É necessário escolher um
+                    ficheiro</strong></small></div>
         <div class="mt-2 mb-3"><small class="text-muted">(clique para mudar)</small></div>
 
     </div>
@@ -60,7 +62,7 @@
                 <label for="descricao" style="font-weight: 700!important;">Descrição curta:</label>
                 <input value="{{old('descricao',$biblioteca->descricao)}}" type="text" class="form-control"
                     name="descricao" id="descricao" maxlength="100" required>
-                    <div class="invalid-feedback">É necessário inserir uma descricão curta</div>
+                <div class="invalid-feedback">É necessário inserir uma descricão curta</div>
             </div>
 
             {{-- Inputs auxiliares --}}
@@ -71,9 +73,11 @@
         <div class="p-3 bg-light rounded border mt-4">
 
             {{-- Quando NÃO EXISTE ficheiro --}}
-            <div id="div_nofile">
-                <i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado
-                <small>(Para continuar escolha um ficheiro)</small>
+            <div id="div_nofile" style="height:70px">
+                <div class="text-center" style="line-height:70px;">
+                    <i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado
+                    <small>(Para continuar escolha um ficheiro)</small>
+                </div>
             </div>
 
 
