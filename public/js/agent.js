@@ -175,20 +175,20 @@
 
 
 
-
         /* VALIDAÇÃO DE INPUTS */
+        if($('#nome').length){
 
         /* Apenas letras:  .lettersOnly();  */
         $("#nome").lettersOnly();
         $("#apelido").lettersOnly();
 
-
-
-
         /* Apenas numeros:  .numbersOnly();  */
         $("#telefone1").numbersOnly();
         $("#telefone2").numbersOnly();
         $("#NIF").numbersOnly();
+
+        }
+
 
 
 

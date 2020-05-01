@@ -60,7 +60,7 @@
             <div class="col">
                 <label for="descricao" style="font-weight: 700!important;">Descrição curta:</label>
                 <input value="{{old('descricao',$library->descricao)}}" type="text" class="form-control"
-                    name="descricao" id="descricao" maxlength="100" required>
+                    name="descricao" id="descricao" maxlength="70" required>
                 <div class="invalid-feedback">É necessário inserir uma descricão curta</div>
             </div>
 
