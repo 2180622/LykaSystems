@@ -33,7 +33,7 @@
         </div>
         <br>
         <div class="card shadow-sm p-3" style="border-radius:10px;">
-        <form method="POST" action="{{route('libraries.store')}}" class="form-group needs-validation pt-3" id="form_library"
+        <form id="form_library" method="POST" action="{{route('libraries.update',$library)}}" class="form-group needs-validation pt-3"
             enctype="multipart/form-data" novalidate>
             @csrf
             @method("PUT")

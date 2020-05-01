@@ -113,7 +113,26 @@ class LibraryController extends Controller
      */
     public function update(UpdateLibraryRequest $request, Biblioteca $library)
     {
-        //
+        $fields = $request->validated();
+        $library->fill($fields);
+
+        if ($request->hasFile('ficheiro')) {
+            $uploadfile = $request->file('ficheiro');
+
+            $file_name = $request->file_name . $library->idBiblioteca.'.'.$uploadfile->getClientOriginalExtension();
+            $library->ficheiro = $file_name;
+            Storage::disk('public')->putFileAs('library/', $uploadfile, $file_name);
+
+            $library->save();
+        }
+
+        // data em que foi modificado
+        $t=time();
+        $library->updated_at == date("Y-m-d",$t);
+
+        $library->save();
+
+        return redirect()->route('libraries.index')->with('success', 'Informações do ficheiro editadas com sucesso!');
     }
 
     /**

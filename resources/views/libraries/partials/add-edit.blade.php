@@ -5,8 +5,7 @@
         {{-- INPUT Ficheiro --}}
         <div>
             <label for="ficheiro" style="font-weight: 700!important;">Ficheiro:</label>
-            <input type='file' id="ficheiro" name="ficheiro" style="display:none" required />
-
+            <input type='file' id="ficheiro" name="ficheiro" style="display:none"  />
         </div>
 
 
@@ -25,7 +24,7 @@
                 style="height:250px;cursor:pointer">
                 <div class="my-auto">
                     <i class="far fa-file-alt" style="font-size:60px"></i>
-                    <div class="mt-3" id="aux_file_name">{{old('ficheiro',$library->ficheiro)}}</div>
+                    <div class="mt-3" id="aux_file_name" value="{{old('ficheiro',$library->ficheiro)}}">{{old('ficheiro',$library->ficheiro)}}</div>
                 </div>
             </div>
         </a>

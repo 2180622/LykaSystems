@@ -48,6 +48,7 @@
 
                     $('#file_name').val(str);
                     $('#aux_file_name').text(input.files[0].name);
+                    $('#aux_file_name').val(input.files[0].name);
 
                     $('#info_fileType').text(input.files[0].type);
                     $('#tipo').val(input.files[0].type);
@@ -120,9 +121,11 @@
                     event.stopPropagation();
 
 
-                    if ( !$('#ficheiro').val()){
+
+                    if ( $('#aux_file_name').val()==""){
                         $('#file_frame').addClass("border-danger");
                         $('#warning-file').show();
+                        return;
                     }
 
                     /* É obrigatório ter uma descrição */
