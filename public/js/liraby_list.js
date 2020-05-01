@@ -3,14 +3,19 @@ $(document).ready(function () {
     var table = $('#dataTable').DataTable({
 
         "columnDefs": [{
-                "orderable": true,
+                "orderable": false,
                 "width": "auto",
                 "targets": 0
             },
             {
                 "orderable": true,
-                "width": "auto",
+                "width": "150px",
                 "targets": 1
+            },
+            {
+                "orderable": true,
+                "width": "150px",
+                "targets": 2
             },
             {
                 "orderable": false,
@@ -37,7 +42,7 @@ $(document).ready(function () {
             "infoFiltered": ""
         },
 
-        "order": [1, 'desc'],
+        "order": [2, 'desc'],
 
         /* "bLengthChange": false, */
         /* "bFilter": false, */
@@ -64,6 +69,22 @@ $(document).ready(function () {
 
     /* FIM configs DATATABLES */
 
+
+
+            /* OPÇÃO DE APAGAR */
+            var formToSubmit //Variavel para indicar o forumulário a submeter
+
+            $(".form_file_id").submit(function (e) {
+                e.preventDefault();
+                formToSubmit = this;
+                $("#deletefile_name").text($(this).attr("data"));
+                return false;
+            });
+
+            //click sim na modal
+            $(".btn_submit").click(function (e) {
+                formToSubmit.submit();
+            });
 
 
 

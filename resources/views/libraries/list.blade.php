@@ -82,8 +82,8 @@
                 <thead>
                     <tr>
                         <th class="align-content-center ">Descrição</th>
-                        <th class="align-content-center ">Tamanho</th>
-                        <th class="align-content-center ">Criado em</th>
+                        <th class="align-content-center">Tamanho</th>
+                        <th class="align-content-center">Data</th>
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -98,7 +98,7 @@
                             <i class="fas fa-lock mr-2 text-warning" title="Ficheiro Privado"></i>
                         @endif
 
-                        <a href="#" class="name_link">{{$library->descricao}}</a>
+                        <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}" class="name_link">{{ \Illuminate\Support\Str::limit($library->descricao, 50, $end=' (...)') }}</a>
 
                     </td>
 
@@ -108,13 +108,13 @@
 
 
                     {{-- Data de criação --}}
-                    <td>{{ date('d-M-y', strtotime($library->created_at)) }} </td>
+                    <td>{{ date('d-M-y', strtotime($library->updated_at)) }} </td>
 
                     {{-- OPÇÔES --}}
-                    <td class="text-center align-middle">
+                    <td class="text-center align-middle align-content-center">
 
                         {{-- Download --}}
-                        <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}" class="btn_list_opt " title="Download"><i class="fas fa-download mr-2"></i></a>
+                        <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}" class="btn_list_opt " title="Fazer download do ficheiro"><i class="fas fa-download mr-2"></i></a>
 
                         @if (Auth()->user()->tipo == "admin")
                         {{-- Editar --}}
@@ -124,8 +124,8 @@
 
                         {{-- Admins: Apagar ficheiro --}}
                         @if (Auth::user()->tipo == "admin")
-                        <form method="POST" role="form" id="#########" action="#" data="ID_DO_FICHEIRO++++++"
-                            class="d-inline-block form_client_id">
+                        <form method="POST" role="form" id="{{ $library->idBiblioteca }}" action="{{route('libraries.destroy',$library)}}" data="{{ $library->descricao }}"
+                            class="d-inline-block form_file_id">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn_delete" title="Eliminar ficheiro" data-toggle="modal"

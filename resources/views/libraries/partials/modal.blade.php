@@ -11,7 +11,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <span>Tem a certeza que deseja eliminar este ficheiro?</span><br><br>
+                <div>Tem a certeza que deseja eliminar este ficheiro:<br><span id="deletefile_name"></span> ?
+                    <br><br>
+                    <div><strong>Esta ação é irreversível. O ficheiro não poderá ser recuperado!</strong></div>
+                </div><br><br>
 
             </div>
             <div class="modal-footer">
