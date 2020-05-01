@@ -33,9 +33,10 @@ class AccountConfirmationController extends Controller
       return view('auth.confirmation-password', compact('user'));
     }
 
-    public function update(UpdateUserRequest $request, User $user){
-      $fields = $request->validated();
-      $user->fill($fields);
+    public function setpassword(UpdateUserRequest $request, User $user){
+      dd($user);
+      // $fields = $request->validated();
+      // $user->fill($fields);
       $password = $request->input('password');
       $passwordConf = $request->input('password-confirmation');
 

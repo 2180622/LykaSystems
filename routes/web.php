@@ -134,7 +134,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
 /* Email Confirmation */
 Route::get('/confirmation/{user}', 'AccountConfirmationController@mailconfirmation')->name('confirmation.mail');
-Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
+Route::put('/confirmation/{user}', 'AccountConfirmationController@setpassword')->name('confirmation.setpassword');
 
 /* Ajuda */
 Route::get('/ajuda', 'HelpController@show')->name('ajuda');
