@@ -15,6 +15,24 @@
                         <script
                             src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
                     </div>
+
+
+                    
+                    {{-- Para utilização apartir da página show da universidade --}}
+                    @if ( isset($university))
+                        <div class="row mb-2">
+                            <div class="col">
+                                <div class="form-group">
+                                    {{-- Id da Universidade --}}
+                                    <div class="card rounded text-center p-3"><strong><span class="text-muted">{{$university->nome}}</span></strong></div>
+                                    <input type="hidden" name="idUniversidade" value="{{$university->idUniversidade}}">
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+
+
                     <input type="hidden" name="idAgenda">
                     <div class="row">
                         <div class="col-md-9">

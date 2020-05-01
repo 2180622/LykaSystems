@@ -1,31 +1,37 @@
-{{-- value="{{old('email',$university->email)}}" --}}
-
 <div class="row font-weight-bold px-4" style="color:#6A74C9">
 
     <div class="col col-lg-2 col-md-12 text-center" style="min-width:350px">
 
-                {{-- INPUT Ficheiro --}}
-                <div>
-                    <label for="ficheiro" style="font-weight: 700!important;">Ficheiro:</label>
-                    <input type='file' id="ficheiro" name="ficheiro" style="display:none" accept="image/*" />
-                </div>
+        {{-- INPUT Ficheiro --}}
+        <div>
+            <label for="ficheiro" style="font-weight: 700!important;">Ficheiro:</label>
+            <input type='file' id="ficheiro" name="ficheiro" style="display:none" required />
 
-                <!-- Verifica se a imagem já existe-->
-                @if ( $biblioteca->ficheiro!=null )
-                <a href="#" class="name_link" title="Clique para mudar">
-                    <div class="card rounded shadow-sm p-2 text-center align-middle" style="height:250px">
-                        <div class="my-auto">
-                            <i class="far fa-file-alt" style="font-size:60px" ></i>
-                            <div class="mt-3">Ficheiro atual<div>
-                        </div>
-                    </div>
-                </a>
-                @else
-                    <div class="card rounded shadow-sm p-2 text-center align-middle " style="height:250px">
-                        <i class="fas fa-plus-circle my-auto" style="font-size:60px;cursor:pointer" title="Clique para mudar"></i>
-                    </div>
-                @endif
-                <div class="mt-2 mb-3"><small class="text-muted">(clique para mudar)</small></div>
+        </div>
+
+
+
+        {{-- NÃO EXISTE FICHEIRO --}}
+        <div id="add_file" class="card rounded shadow-sm p-2 text-center align-middle "
+            style="height:250px;cursor:pointer">
+            <i class="fas fa-plus-circle my-auto" style="font-size:60px;" title="Clique para mudar"></i>
+        </div>
+
+
+        {{-- EXISTE FICHEIRO --}}
+
+        <a id="replace_file" href="#" class="name_link" title="Clique para mudar">
+            <div id="file_frame" class="card rounded shadow-sm p-2 text-center align-middle "
+                style="height:250px;cursor:pointer">
+                <div class="my-auto">
+                    <i class="far fa-file-alt" style="font-size:60px"></i>
+                    <div class="mt-3" id="aux_file_name">{{old('ficheiro',$library->ficheiro)}}</div>
+                </div>
+            </div>
+        </a>
+        <div id="warning-file" style="display:none;"><small class="text-danger"><strong>É necessário escolher um
+                    ficheiro</strong></small></div>
+        <div class="mt-2 mb-3"><small class="text-muted">(clique para mudar)</small></div>
 
     </div>
 
@@ -34,39 +40,61 @@
     <div class="col" style="min-width: 300px">
 
         <div class="row">
+
+            {{-- Nome do ficheiro --}}
+            <input type="hidden" value="{{old('ficheiro',$library->ficheiro)}}" class="form-control" name="file_name"
+                id="file_name" maxlength="30" required>
+
             <div class="col">
-                <label for="file_name" style="font-weight: 700!important;">Nome:</label>
-                <input type="text" class="form-control" name="file_name" id="file_name" maxlength="100">
-            </div>
-            <div class="col">
+                {{-- Tipo de acesso --}}
                 <label for="acesso" style="font-weight: 700!important;">Tipo de acesso:</label>
-                <select name="acesso" id="acesso" class="form-control" >
-                    <option>Privado</option>
-                    <option>Público</option>
+                <select name="acesso" id="acesso" class="form-control" required>
+                    <option {{old('acesso',$library->acesso)=='Privado'?"selected":""}} value="Privado">Privado
+                    </option>
+                    <option {{old('acesso',$library->acesso)=='Público'?"selected":""}} value="Público">Público
+                    </option>
                 </select>
             </div>
+
         </div>
         <div class="row mt-3">
             <div class="col">
-                <label for="descricao" style="font-weight: 700!important;">Descrição:</label>
-                <input type="text" class="form-control" name="descricao" id="descricao" maxlength="100">
+                <label for="descricao" style="font-weight: 700!important;">Descrição curta:</label>
+                <input value="{{old('descricao',$library->descricao)}}" type="text" class="form-control"
+                    name="descricao" id="descricao" maxlength="100" required>
+                <div class="invalid-feedback">É necessário inserir uma descricão curta</div>
             </div>
+
+            {{-- Inputs auxiliares --}}
+            <input type="hidden" name="tipo" id="tipo" value="{{old('tipo',$library->tipo)}}">
+            <input type="hidden" name="tamanho" id="tamanho" value="{{old('tamanho',$library->tamanho)}}">
         </div>
 
-        <div id="div_incial" class="p-3 bg-light rounded border mt-4" style="display:blcok;">
-            <div><i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado
-                <small>(Para continuar escolha um ficheiro)</small></div>
-            <div></div>
+        <div class="p-3 bg-light rounded border mt-4">
 
-        </div>
+            {{-- Quando NÃO EXISTE ficheiro --}}
+            <div id="div_nofile" style="height:70px">
+                <div class="text-center" style="line-height:70px;">
+                    <i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado
+                    <small>(Para continuar escolha um ficheiro)</small>
+                </div>
+            </div>
 
 
-        {{-- File info --}}
-        <div id="div_propriedades" class="p-3 bg-light rounded shadow-sm" style="display:none">
-            <div>Nome do ficheiro: <span id="fileName" class="text-secondary"></span> </div><br>
-            <div>Tipo: <span id="fileType" class="text-secondary"></span> </div><br>
-            <div>Tamanho: <span id="fileSize" class="text-secondary"></span> </div><br>
-            <div>Criado em: <span id="dateCreated" class="text-secondary"></span> </div>
+            {{-- Quand EXISTE ficheiro --}}
+            {{-- File info --}}
+            <div id="div_propriedades">
+                <div><i class="fas fa-info-circle mr-2"></i>Informação do ficheiro</div>
+                <div class="mt-3">Tipo de ficheiro: <span id="info_fileType"
+                        class="text-secondary">{{old('ficheiro',$library->tipo)}}</span> </div>
+                <div class="mt-2">Tamanho: <span id="info_fileSize"
+                        class="text-secondary">{{old('ficheiro',$library->tamanho)}}</span> </div>
+
+                <div class="mt-2">Última modificação: <span id="info_dateCreated"
+                        class="text-secondary">{{old('ficheiro',$library->created_ate)}}</span></div>
+            </div>
+
+
         </div>
 
 

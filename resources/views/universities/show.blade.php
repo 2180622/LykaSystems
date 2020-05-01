@@ -12,7 +12,11 @@
 
 {{-- Page Content --}}
 @section('content')
-@include('universities.partials.add-event')
+
+{{-- Inclui a modal da agenda, utilizando as variaveis para a universidade --}}
+@include('agends.partials.modal')
+
+
 @include('contacts.partials.modal')
 
 
@@ -306,7 +310,7 @@
     </div>
 
 
-    
+
 
 
 
@@ -397,14 +401,6 @@
 
 
 
-
-
-
-
-
-
-
-
         {{-- Conteudo: Observações --}}
         <div class="tab-pane fade show text-muted" id="obsevacoes" role="tabpanel" aria-labelledby="obsevacoes-tab">
             <div>
@@ -435,20 +431,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 
 @endsection
@@ -456,4 +438,6 @@
 {{-- Scripts --}}
 @section('scripts')
 <script src="{{asset('/js/university_show.js')}}"></script>
+<script src="{{asset('/js/agends.js')}}"></script>
+
 @endsection

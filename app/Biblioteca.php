@@ -16,7 +16,7 @@ class Biblioteca extends Model
     protected $primaryKey = 'idBiblioteca';
 
     protected $fillable = [
-        'acesso','descricao','ficheiro'
+        'acesso','descricao','ficheiro','tipo','tamanho'
         ];
 
 
@@ -26,7 +26,7 @@ class Biblioteca extends Model
         public function getSlugOptions() : SlugOptions
         {
           return SlugOptions::create()
-              ->generateSlugsFrom('descricao')
+              ->generateSlugsFrom('ficheiro')
               ->saveSlugsTo('slug');
         }
 

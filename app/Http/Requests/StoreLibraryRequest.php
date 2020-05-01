@@ -28,6 +28,8 @@ class StoreLibraryRequest extends FormRequest
             'descricao' => 'required',
             'file_name'=>'required',
             'ficheiro' => 'required',
+            'tipo'=> 'required',
+            'tamanho' => 'required',
         ];
     }
 

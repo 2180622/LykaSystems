@@ -64,20 +64,25 @@ class LibraryController extends Controller
 
         if ($request->hasFile('ficheiro')) {
             $uploadfile = $request->file('ficheiro');
-            $file_name = 'File_'.$file->idBiblioteca->getClientOriginalExtension();
+
+            $file_name = $request->file_name . $file->idBiblioteca.'.'.$uploadfile->getClientOriginalExtension();
+            $file->ficheiro = $file_name;
             Storage::disk('public')->putFileAs('library/', $uploadfile, $file_name);
+
             $file->save();
         }
+
+        return redirect()->route('libraries.index')->with('success', 'Ficheiro carregado com sucesso!');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Biblioteca  $biblioteca
+     * @param  \App\Biblioteca  $file
      * @return \Illuminate\Http\Response
      */
-    public function show(Biblioteca $biblioteca)
+    public function show(Biblioteca $library)
     {
         //
     }
@@ -85,25 +90,28 @@ class LibraryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Biblioteca  $biblioteca
+     * @param  \App\Biblioteca  $file
      * @return \Illuminate\Http\Response
      */
-    public function edit(Biblioteca $biblioteca)
+    public function edit(Biblioteca $library)
     {
         /* Permissões */
         if (Auth::user()->tipo != "admin" ){
             abort (401);
         }
+
+        return view('libraries.edit', compact('library'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Biblioteca  $biblioteca
+     * @param  \App\Biblioteca  $library
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLibraryRequest $request, Biblioteca $biblioteca)
+    public function update(UpdateLibraryRequest $request, Biblioteca $library)
     {
         //
     }
@@ -111,10 +119,10 @@ class LibraryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Biblioteca  $biblioteca
+     * @param  \App\Biblioteca  $library
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Biblioteca $biblioteca)
+    public function destroy(Biblioteca $library)
     {
         /* Permissões */
         if (Auth::user()->tipo != "admin" ){

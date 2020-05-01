@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\DocAcademico;
-use App\DocPessoal;
 use App\DocTransacao;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
-class DocumentoController extends Controller
+class DocTransacaoController extends Controller
 {
 
     /**
@@ -20,14 +18,9 @@ class DocumentoController extends Controller
     public function create(Fase $fase, String $tipoPAT, String $tipo)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-            $documento = null;
-            if($tipoPAT == 'Pessoal'){
-                $documento = new DocPessoal;
-            }elseif($tipoPAT == 'Academico'){
-                $documento = new DocAcademico;
-            }else{
-                $documento = new DocTransacao;
-            }
+            
+            $documento = new DocTransacao;
+            
             return view('documentos.add',compact('fase','tipoPAT','tipo','documento'));
         }else{
             return redirect()->route('produtos.show',$fase->produto);
@@ -43,10 +36,16 @@ class DocumentoController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreProdutoRequest $request){
+    public function store(StoreDocTransacaoRequest $request){
 
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
 
+            $documento = new DocTransacao;
+            
+            $fields = $request->validated();
+            $documento->fill($fields);
+            $documento->idFase = $fase->idFase;
+            $documento->save();
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', 'Documento adicionado com sucesso');
         }else{
