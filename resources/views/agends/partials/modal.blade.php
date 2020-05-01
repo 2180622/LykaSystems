@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/agenda/criar" method="POST" class="form-group needs-validation pt-3 " novalidate
+            <form action="/agenda" method="POST" class="form-group needs-validation pt-3 " novalidate
                   enctype="multipart/form-data" id="formEvent">
                 @csrf
                 <div class="modal-body">
@@ -17,7 +17,7 @@
                     </div>
 
 
-                    
+
                     {{-- Para utilização apartir da página show da universidade --}}
                     @if ( isset($university))
                         <div class="row mb-2">
@@ -70,7 +70,7 @@
                                 <label for="description">Descrição</label>
                                 <textarea class="form-control limpar" name="descricao" id="description" rows="2"
                                           style="resize: none"
-                                          maxlength="150" placeholder="Insira a Descrição do evento." fixed></textarea>
+                                          maxlength="150" placeholder="Insira a Descrição do evento." required fixed></textarea>
                             </div>
                         </div>
                     </div>
