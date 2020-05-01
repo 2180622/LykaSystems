@@ -52,9 +52,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Agenda */
     Route::resource('/agenda', 'AgendController');
-    Route::post('/agenda/criar', 'AgendController@store')->name('agend.store');
-    Route::get('/test/agenda/events', 'AgendController@events');
-
+    Route::post('/agenda', 'AgendController@store')->name('agend.store');
 
     /* Pagamentos */
     Route::get('/pagamentos', 'PaymentController@index')->name('payments.index');
@@ -137,6 +135,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 /* Email Confirmation */
 Route::get('/confirmation/{user}', 'AccountConfirmationController@mailconfirmation')->name('confirmation.mail');
 Route::post('/confirmation/{user}', 'AccountConfirmationController@update')->name('confirmation.update');
+
+/* Ajuda */
+Route::get('/ajuda', 'HelpController@show')->name('ajuda');
 
 /* Edgar Teste -> Eliminar no futuro */
 Route::get('/data', 'EdgarTesteController@index');
