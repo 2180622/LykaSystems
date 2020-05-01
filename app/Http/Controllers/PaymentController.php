@@ -29,6 +29,7 @@ class PaymentController extends Controller
       $responsabilidadesPagas = Responsabilidade::where('estado', '=', 'Pago')->get();
       $responsabilidadesDivida = Responsabilidade::where('estado', '=', 'Dívida')->get();
 
+      $relacoes = RelFornResp::all();
       $estudantes = Cliente::all();
       $universidades = Universidade::all();
       $agentes = Agente::where('tipo', '=', 'Agente')->get();
@@ -69,16 +70,6 @@ class PaymentController extends Controller
         }elseif ($responsabilidadePendente->verificacaoPagoUni2 == 1 && $responsabilidadePendente->valorUniversidade2 != null) {
           $valorTotalPago++;
         }
-
-        if (count($responsabilidadePendente->relacao)) {
-          foreach ($responsabilidadePendente->relacao as $relacao) {
-            if ($relacao->verificacaoPago == 0) {
-              $valorTotalPendente++;
-            }else {
-              $valorTotalPago++;
-            }
-          }
-        }
       }
 
       // Responsabilidades com estado = PAGO
@@ -111,16 +102,6 @@ class PaymentController extends Controller
           $valorTotalPendente++;
         }elseif ($responsabilidadePaga->verificacaoPagoUni2 == 1 && $responsabilidadePaga->valorUniversidade2 != null) {
           $valorTotalPago++;
-        }
-
-        if (count($responsabilidadePaga->relacao)) {
-          foreach ($responsabilidadePaga->relacao as $relacao) {
-            if ($relacao->verificacaoPago == 0) {
-              $valorTotalPendente++;
-            }else {
-              $valorTotalPago++;
-            }
-          }
         }
       }
 
@@ -156,12 +137,14 @@ class PaymentController extends Controller
           $valorTotalPago++;
         }
 
-        if (count($responsabilidadeDivida->relacao)) {
-          foreach ($responsabilidadeDivida->relacao as $relacao) {
-            if ($relacao->verificacaoPago == 0) {
+        if (count($relacoes)) {
+          foreach ($relacoes as $relacao) {
+            if ($relacao->estado == 'Dívida' && $relacao->verificacaoPago == 0) {
               $valorTotalDivida++;
-            }else {
+            }elseif($relacao->verificacaoPago == 1) {
               $valorTotalPago++;
+            }else {
+              $valorTotalPendente++;
             }
           }
         }
