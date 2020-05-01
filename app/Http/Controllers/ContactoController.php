@@ -20,8 +20,6 @@ class ContactoController extends Controller
      */
     public function index()
     {
-
-
         $contacts = Contacto::
         where('Contacto.idUser', '=', Auth::user()->idUser)
         ->get();
@@ -76,13 +74,19 @@ class ContactoController extends Controller
 
         $contact->save();
 
+
+
         if($request->idUniversidade!=null){
-            return redirect()->route('universities.show',$request->idUniversidade)->with('success', 'Novo contacto criado com sucesso');
+
+            $university=Universidade::
+            where('idUniversidade', $request->idUniversidade)
+            ->first();
+
+            return redirect()->route('universities.show',$university)->with('success', 'Novo contacto criado com sucesso');
 
         }else{
-            return redirect()->route('contacts.show',$contact)->with('success', 'Novo contacto criado com sucesso');
+            return redirect()->route('contacts.index',$contact)->with('success', 'Novo contacto criado com sucesso');
         }
-
 
     }
 
@@ -138,13 +142,20 @@ class ContactoController extends Controller
 
         $contact->save();
 
+
+
         if($request->idUniversidade!=null){
-            return redirect()->route('universities.show',$request->idUniversidade)->with('success', 'Novo contacto criado com sucesso');
+
+            $university=Universidade::
+            where('idUniversidade', $request->idUniversidade)
+            ->first();
+
+            return redirect()->route('universities.show',$university)->with('success', 'Informações do contacto alteradas com sucesso');
 
         }else{
-            return redirect()->route('contacts.index',$contact)->with('success', 'Novo contacto criado com sucesso');
-        }
+            return redirect()->route('contacts.index',$contact)->with('success', 'Informações do contacto alteradas com sucesso');
 
+        }
 
     }
 

@@ -84,10 +84,12 @@ $(document).ready(function () {
     /* Apenas letras:  .lettersOnly();  */
 /*     $("#inputNome").lettersOnly(); */
 
-    /* Apenas numeros:  .numbersOnly();  */
-    $("#inputTelefone").numbersOnly();
-    $("#inputNIF").numbersOnly();
-    $("#inputIBAN").numbersOnly();
+    if($('#inputTelefone').length){
+        /* Apenas numeros:  .numbersOnly();  */
+        $("#inputTelefone").numbersOnly();
+        $("#inputNIF").numbersOnly();
+        $("#inputIBAN").numbersOnly();
+    }
 
 
 

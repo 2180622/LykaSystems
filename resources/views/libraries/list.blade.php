@@ -81,7 +81,7 @@
                 {{-- Cabeçalho da tabela --}}
                 <thead>
                     <tr>
-                        <th class="align-content-center ">Descrição</th>
+                        <th class="align-content-center ">Descrição do ficheiro</th>
                         <th class="align-content-center">Tamanho</th>
                         <th class="align-content-center">Data</th>
                         <th class="text-center">Opções</th>
@@ -94,11 +94,11 @@
                     @foreach ($files as $library)
                     {{-- Descrição --}}
                     <td>
+                        <i class="fas fa-file-alt"></i>
                         @if ($library->acesso =="Privado")
-                            <i class="fas fa-lock mr-2 text-warning" title="Ficheiro Privado"></i>
+                            <small><i class="fas fa-lock text-warning ml-1" title="Ficheiro Privado"></i></small>
                         @endif
-
-                        <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}" class="name_link">{{ \Illuminate\Support\Str::limit($library->descricao, 50, $end=' (...)') }}</a>
+                        <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}" class="name_link ml-2">{{ \Illuminate\Support\Str::limit($library->descricao, 50, $end=' (...)') }}</a>
 
                     </td>
 
@@ -116,8 +116,9 @@
                         {{-- Download --}}
                         <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}" class="btn_list_opt " title="Fazer download do ficheiro"><i class="fas fa-download mr-2"></i></a>
 
-                        @if (Auth()->user()->tipo == "admin")
+
                         {{-- Editar --}}
+                        @if (Auth()->user()->tipo == "admin")
                         <a href="{{route('libraries.edit',$library)}}" class="btn_list_opt btn_list_opt_edit"
                             title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
                         @endif
@@ -150,6 +151,6 @@
 {{-- Utilização de scripts: --}}
 @section('scripts')
 
-<script src="{{asset('/js/liraby_list.js')}}"></script>
+<script src="{{asset('/js/library.js')}}"></script>
 
 @endsection

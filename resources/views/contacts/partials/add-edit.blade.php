@@ -9,7 +9,6 @@
                 <strong><span style="color:#6A74C9">{{$university->nome}}</span></strong>
             </span>
             <input type="hidden" id="idUniversidade" name="idUniversidade" value="{{$university ->idUniversidade}}">
-
     </div>
 
 </div>

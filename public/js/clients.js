@@ -211,6 +211,8 @@
 
         /* VALIDAÇÃO DE INPUTS */
 
+        if($('#nome').length){
+
         /* Apenas letras:  .lettersOnly();  */
         $("#nome").lettersOnly();
         $("#apelido").lettersOnly();
@@ -218,8 +220,6 @@
         $("#nomePai").lettersOnly();
         $("#nomeMae").lettersOnly();
         $("#localEmissaoPP").lettersOnly();
-
-
 
         /* Apenas numeros:  .numbersOnly();  */
         $("#telefone1").numbersOnly();
@@ -231,8 +231,7 @@
         $("#IBAN").numbersOnly();
         $("#NIF").numbersOnly();
 
-
-
+        }
 
 
 
