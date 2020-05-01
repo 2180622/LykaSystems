@@ -94,11 +94,11 @@
                     @foreach ($files as $library)
                     {{-- Descrição --}}
                     <td>
+                        <i class="fas fa-file-alt"></i>
                         @if ($library->acesso =="Privado")
-                            <i class="fas fa-lock mr-2 text-warning" title="Ficheiro Privado"></i>
+                            <small><i class="fas fa-lock text-warning ml-1" title="Ficheiro Privado"></i></small>
                         @endif
-
-                        <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}" class="name_link">{{ \Illuminate\Support\Str::limit($library->descricao, 50, $end=' (...)') }}</a>
+                        <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}" class="name_link ml-2">{{ \Illuminate\Support\Str::limit($library->descricao, 50, $end=' (...)') }}</a>
 
                     </td>
 
