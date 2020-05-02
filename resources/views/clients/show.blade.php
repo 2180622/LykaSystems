@@ -6,6 +6,12 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+
+<style>
+    .active{
+        color: #6A74C9
+    }
+</style>
 @endsection
 
 
@@ -53,18 +59,19 @@
 
         <br>
 
-        <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
-            <div class="col p-0 text-center" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
+        <div class="card shadow-sm p-3" style="border-radius:10px">
+        <div class="row font-weight-bold p-2" style="color:#6A74C9">
+            <div class="col col-md-12 text-center my-auto " style="min-width:195px; max-width:290px">
 
                 @if($client->fotografia)
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}" style="width:90%">
+                <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                    src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}" style="width:100%">
                 @elseif($client->genero == 'F')
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
+                <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                    src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
                 @else
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
+                <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                    src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
                 @endif
 
             </div>
@@ -94,8 +101,6 @@
             </div>
 
             <div class="col p-2" style="min-width:230px !important">
-                <div><span class="text-secondary">Estado financeiro: </span><span
-                        class="text-success">Regularizado</span></div><br>
 
                 <div><span class="text-secondary">Observações pessoais:</span><br>
                     @if ($client->obsPessoais==null)
@@ -132,57 +137,105 @@
             </div>
 
         </div>
-
-        <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
-
-            {{-- MENU: Produtos --}}
-            <li class="nav-item " style="width:20%; min-width:110px">
-                <a class="nav-link active" id="produtos-tab" data-toggle="tab" href="#produtos" role="tab"
-                    aria-controls="produto" aria-selected="false">Produtos</a>
-            </li>
-
-            {{-- MENU: Documentação --}}
-            <li class="nav-item text-center" style="width:20%; min-width:144px">
-                <a class="nav-link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
-                    aria-controls="documentation" aria-selected="false">Documentação pessoal</a>
-            </li>
-
-            {{-- MENU: Informação académica --}}
-            <li class="nav-item text-center" style="width:20%; min-width:144px">
-                <a class="nav-link" id="academicos-tab" data-toggle="tab" href="#academicos" role="tab"
-                    aria-controls="contacts" aria-selected="true">Dados académicos</a>
-            </li>
-
-            {{-- MENU: Contactos --}}
-            <li class="nav-item text-center" style="width:20%; min-width:110px">
-                <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
-                    aria-controls="contacts" aria-selected="false">Contactos</a>
-            </li>
-
-            {{-- MENU: Moradas --}}
-            <li class="nav-item text-center" style="width:20%; min-width:114px">
-                <a class="nav-link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab"
-                    aria-controls="adresses" aria-selected="false">Financeiro</a>
-            </li>
-
-        </ul>
+        </div>
 
 
+        <div class="row nav nav-fill w-100 text-center mt-2 mx-auto p-3">
 
 
+            <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link" id="produtos-tab" data-toggle="tab" href="#produtos" role="tab" aria-controls="produto" aria-selected="true">
+                <div class="col"><i class="fas fa-th-large mr-2"></i>Produtos</div>
+            </a>
 
 
-        <div class="tab-content p-2 " id="myTabContent">
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab" aria-controls="documentation" aria-selected="false">
+                <div class="col"><i class="far fa-id-card mr-2"></i>Documentos</div>
+            </a>
+
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="academicos-tab" data-toggle="tab" href="#academicos" role="tab" aria-controls="contacts" aria-selected="false">
+                <div class="col" style="min-width: 197px"><i class="fas fa-graduation-cap mr-2"></i>Dados académicos</div>
+            </a>
+
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab" aria-controls="contacts" aria-selected="false">
+                <div class="col"><i class="fas fa-comments mr-2"></i>Contactos</div>
+            </a>
+
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab" aria-controls="adresses" aria-selected="false">
+                <div class="col"><i class="fas fa-chart-pie mr-2"></i>Financeiro</div>
+            </a>
+
+
+        </div>
+
+
+        <div class="bg-white shadow-sm mb-4 p-4" style="margin-top:-30px">
+
+        <div class="tab-content  " id="myTabContent">
             {{-- Conteudo: Produtos --}}
             <div class="tab-pane fade active show text-muted" id="produtos" role="tabpanel"
                 aria-labelledby="produtos-tab">
 
                 @if($produtos)
-                    <table nowarp class="table table-borderless text-muted" id="dataTable" width="100%" row-border="0"
-                        style="overflow:hidden;">
+
+                <div class="row mt-2 pl-2">
+
+                    @foreach ($produtos as $produto)
+
+                        <a class="name_link text-center m-2" href="{{route('produtos.show',$produto)}}" >
+                            <div class="col bg-light border rounded shadow-sm p-4">
+                                <div class="text-secondary"><i class="fas fa-database p-2 " style="font-size: 25px"></i></div>
+                                <div>{{$produto->tipo}}</div>
+                                {{-- <div>{{$produto->descricao}} em desenvolvimento Web & Multimédia</div> --}}
+                                <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
+                            </div>
+                        </a>
+
+
+
+                        <a class="name_link text-center m-2" href="{{route('produtos.show',$produto)}}" >
+                            <div class="col bg-light border rounded shadow-sm p-4">
+                                <div class="text-secondary"><i class="fas fa-database p-2 " style="font-size: 25px"></i></div>
+                                <div>{{$produto->tipo}}</div>
+                                {{-- <div>{{$produto->descricao}} em desenvolvimento Web & Multimédia</div> --}}
+                                <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
+                            </div>
+                        </a>
+
+                        <a class="name_link text-center m-2" href="{{route('produtos.show',$produto)}}" >
+                            <div class="col bg-light border rounded shadow-sm p-4">
+                                <div class="text-secondary"><i class="fas fa-database p-2 " style="font-size: 25px"></i></div>
+                                <div>{{$produto->tipo}}</div>
+                                {{-- <div>{{$produto->descricao}} em desenvolvimento Web & Multimédia</div> --}}
+                                <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
+                            </div>
+                        </a>
+
+                        <a class="name_link text-center m-2" href="{{route('produtos.show',$produto)}}" >
+                            <div class="col bg-light border rounded shadow-sm p-4">
+                                <div class="text-secondary"><i class="fas fa-database p-2 " style="font-size: 25px"></i></div>
+                                <div>{{$produto->tipo}}</div>
+                                {{-- <div>{{$produto->descricao}} em desenvolvimento Web & Multimédia</div> --}}
+                                <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
+                            </div>
+                        </a>
+
+
+
+
+                    @endforeach
+
+                </div>
+
+
+
+{{--                     <table nowarp class="table table-borderless text-muted" id="dataTable" width="100%" row-border="0"
+                        style="overflow:hidden;"> --}}
 
                         {{-- Cabeçalho da tabela --}}
-                        <thead>
+{{--                         <thead>
                             <tr>
                                 <th>Tipo</th>
                                 <th>Descrição</th>
@@ -192,26 +245,26 @@
 
 
 
-                        </thead>
+                        </thead> --}}
 
                         {{-- Corpo da tabela --}}
-                        <tbody>
+{{--                         <tbody>
 
                             @foreach ($produtos as $produto)
-                            <tr>
+                            <tr> --}}
                                 {{-- Tipo --}}
-                                <td class="align-middle"><a class="name_link"
-                                        href="{{route('produtos.show',$produto)}}">{{$produto->tipo}}</a></td>
+{{--                                 <td class="align-middle"><a class="name_link"
+                                        href="{{route('produtos.show',$produto)}}">{{$produto->tipo}}</a></td> --}}
 
                                 {{-- Descrição --}}
-                                <td class="align-middle"><a class="name_link"
-                                        href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></td>
+{{--                                 <td class="align-middle"><a class="name_link" --}}
+                                        {{-- href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></td> --}}
 
                                 {{-- Ano Academico --}}
-                                <td class="align-middle">{{$produto->anoAcademico}}</td>
+{{--                                 <td class="align-middle">{{$produto->anoAcademico}}</td> --}}
 
                                 {{-- Total --}}
-                                <td class="align-middle">{{$produto->valorTotal.'€'}}</td>
+{{--                                 <td class="align-middle">{{$produto->valorTotal.'€'}}</td> --}}
 
 
                                 {{-- OPÇÔES --}}
@@ -230,11 +283,11 @@
                                 </form>
 
                                 </th> --}}
-                            </tr>
+{{--                             </tr>
                             @endforeach
 
                         </tbody>
-                    </table>
+                    </table> --}}
 
                     <hr>
 
@@ -397,7 +450,7 @@
 
                         {{-- Contactos --}}
                         <div><span class="text-secondary">Morada de residência (Portugal):</span></div>
-                        <div>{{$client->moradaResidencia}}</div><br>
+                        <div class="mt-1">{{$client->moradaResidencia}}</div><br>
 
                     </div>
                 </div>
@@ -470,9 +523,12 @@
 
 
 
-
+        </div>
 
     </div>
+
+
+
 </div>
 
 @endsection
