@@ -78,6 +78,18 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                      <label for="inputFullname">Género:</label>
+                      <select type="text" class="form-control" name="genero" id="genero"
+                       placeholder="Género" required>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                      </select>
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group text-right">
                 <br>

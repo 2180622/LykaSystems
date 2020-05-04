@@ -93,13 +93,13 @@
                             <a href="{{route('users.show', $user)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                             <a href="{{route('users.edit', $user)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
-                            <form method="POST" role="form" id=""
-                              action="{{route('users.destroy', $user->admin)}}" class="d-inline-block form_university_id">
+                            <form method="POST" role="form" id="{{$user->idUser}}"
+                                action="{{route('users.destroy', $user)}}" class="d-inline-block form_university_id">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn_delete" title="Eliminar Utilizador" data-toggle="modal" data-target="#eliminarUtilizador" data-title="{{$user->nome}}"><i class="fas fa-trash-alt"></i></button>
+                                <button type="submit" class="btn_delete" title="Eliminar Utilizador" data-toggle="modal"
+                                data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                             </form>
-
                         </td>
                     </tr>
                     @endforeach

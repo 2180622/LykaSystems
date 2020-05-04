@@ -192,7 +192,7 @@
 
         <!-- Verifica se a imagem já existe-->
         @if ($agent->fotografia!=null)
-        <img src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.$agent->nome.'/').$agent->fotografia}}" id="preview"
+        <img src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}" id="preview"
             class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px;"
             alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
 

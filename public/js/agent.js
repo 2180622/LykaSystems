@@ -236,6 +236,12 @@
                     }
 
                   }
+                  
+                  /* mostrar div de espera */
+                  $("#wait_screen").show();
+
+                  window.scrollTo(0, 0);
+
                   form.classList.add('was-validated');
                 }, false);
               });
