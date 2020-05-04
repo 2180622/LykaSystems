@@ -63,12 +63,12 @@
 
         <div class="card shadow-sm p-3" style="border-radius:10px">
             <div class="row font-weight-bold p-2" style="color:#6A74C9">
-                <div class="col col-md-12 text-center my-auto " style="min-width:195px; max-width:290px">
+                <div class="col col-md-12 text-center my-auto " style="min-width:195px; max-width:290px; max-height:295px; overflow:hidden">
 
                     @if($client->fotografia)
                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
                         src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}"
-                        style="width:100%">
+                        style="width:100%; ">
                     @elseif($client->genero == 'F')
                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
                         src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
@@ -185,7 +185,7 @@
 
         <div class="bg-white shadow-sm mb-4 p-4" style="margin-top:-30px">
 
-            <div class="tab-content  " id="myTabContent">
+            <div class="tab-content" id="myTabContent">
                 {{-- Conteudo: Produtos --}}
                 <div class="tab-pane fade active show text-muted" id="produtos" role="tabpanel"
                     aria-labelledby="produtos-tab">
@@ -368,34 +368,34 @@
         </div>
 
 
-        <div class="col" style="min-width:225px">
+        <div class="col" style="min-width:250px">
             <div class="text-secondary mb-2">Ficheiros carregados:</div>
 
             <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
 
                 {{-- Verifica se existe imagem para cartão de documento de id pessoal --}}
                 @if ($client->img_docOficial)
-                <li class="my-3">
-                    <i class="far fa-address-card mr-2"></i>
-                    <a class="name_link" target="_blank"
-                        href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/'.$client->img_docOficial)}}">Documento
-                        de identificação pessoal</a>
-                </li>
+                    <li class="my-3">
+                        <i class="far fa-address-card mr-2"></i>
+                        <a class="name_link" target="_blank"
+                            href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/'.$client->img_docOficial)}}">Documento
+                            de identificação pessoal</a>
+                    </li>
+                @else
+                    <li class="my-3 text-secondary"><small>Falta ficheiro de identificação pessoal</small></li>
                 @endif
 
                 {{-- Verifica se existe imagem para passaporte --}}
                 @if ($client->img_Passaport)
-                <li class="my-3">
-                    <i class="far fa-address-card mr-2"></i>
-                    <a class="name_link" target="_blank"
-                        href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/'.$client->img_Passaport)}}">Passaporte</a>
-                </li>
+                    <li class="my-3">
+                        <i class="far fa-address-card mr-2"></i>
+                        <a class="name_link" target="_blank"
+                            href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/'.$client->img_Passaport)}}">Passaporte</a>
+                    </li>
+                @else
+                    <li class="my-3 text-secondary"><small>Falta ficheiro do passaporte</small></li>
                 @endif
 
-                <li class="my-3"><i class="far fa-address-card mr-2"></i>dssdsfsdfs</li>
-                <li class="my-3"><i class="far fa-address-card mr-2"></i>dssdsfsdfs</li>
-                <li class="my-3"><i class="far fa-address-card mr-2"></i>dssdsfsdfs</li>
-                <li class="my-3"><i class="far fa-address-card mr-2"></i>dssdsfsdfs</li>
 
             </ul>
 
@@ -506,9 +506,9 @@
             {{-- Morada PT --}}
             <div class="text-secondary mb-2" style="min-width: 256px">Morada de residência em Portugal:</div>
             <div class="border rounded bg-light p-3">
-                <div>{{$client->moradaResidencia}}</div><br>
+                <div>{{$client->moradaResidencia}}</div>
             </div>
-
+        <br>
         </div>
 
     </div>
@@ -542,6 +542,7 @@
                 <div><span class="text-secondary">Nome do pai:</span> {{$client->nomePai}}</div><br>
                 <div><span class="text-secondary">Telefone do pai:</span> {{$client->telefonePai}}</div><br>
                 <div><span class="text-secondary">E-mail do pai:</span> {{$client->emailPai}}</div>
+                <br>
             </div>
             <div class="col" style="min-width: 300px">
                 <div><span class="text-secondary">Nome da mãe:</span> {{$client->nomeMae}}</div><br>

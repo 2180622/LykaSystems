@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Utilizadores */
     Route::resource('/utilizadores', 'UserController')->parameters([
-      'utilizadores' => 'users'
+      'utilizadores' => 'user'
     ])->names([
       'index' => 'users.index',
       'store' => 'users.store',
@@ -86,10 +86,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       'destroy' => 'users.destroy',
       'edit' => 'users.edit',
     ]);
-
-    Route::post('/utilizadores/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
-    Route::get('/utilizadores/{user}/{admin}', 'UserController@edit')->name('users.edit');
-    Route::put('/utilizadores/{user}/{admin}', 'UserController@update')->name('users.update');
 
     /* Produto Stock*/
     Route::resource('/produtostock', 'ProdutosstockController');

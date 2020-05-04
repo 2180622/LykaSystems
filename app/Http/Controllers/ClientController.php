@@ -204,8 +204,14 @@ class ClientController extends Controller
         /* Criação de utilizador */
 
         $user->tipo = "cliente";
-        $user->status = 10;
         $user->idCliente = $client->idCliente;
+
+        $user->auth_key = random_str(50);
+
+
+        
+        $user->slug = post_slug($client->nome.' '.$client->apelido);
+
         $user->save();
 
         /* Envia o e-mail para ativação */
@@ -218,6 +224,8 @@ class ClientController extends Controller
 
         return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }
+
+
 
 
     /**

@@ -76,33 +76,13 @@
                     <tr>
                         <td>
                             <div class="align-middle mx-auto shadow-sm rounded" style="overflow:hidden; width:50px; height:50px">
-                                @if($user->tipo == 'admin' && $user->idAdmin != null)
-                                    @if($user->admin->fotografia)
-                                        <img src="{{Storage::disk('public')->url('admin-photos/').$user->admin->fotografia}}" width="100%" class="mx-auto">
-                                        @elseif($user->admin->genero == 'F')
-                                            <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                            @else
-                                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                            @endif
-                                            @elseif($user->tipo == 'agente' && $user->idAgente != null)
-                                                @if($user->agente->fotografia)
-                                                    <img src="{{Storage::disk('public')->url('agent-photos/').$user->agente->fotografia}}" width="100%" class="mx-auto">
-                                                    @elseif($user->agente->genero == 'F')
-                                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                                        @else
-                                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                                        @endif
-                                                        @elseif($user->tipo == 'cliente' && $user->idCliente != null)
-                                                            @if($user->cliente->fotografia)
-                                                                <img src="{{Storage::disk('public')->url('client-photos/').$user->cliente->fotografia}}" width="100%" class="mx-auto">
-                                                                @elseif($user->cliente->genero == 'F')
-                                                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                                                    @else
-                                                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                                                    @endif
-                                                                    @else
-                                                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                                                    @endif
+                                @if($user->admin->fotografia)
+                                    <img src="{{Storage::disk('public')->url('admin-photos/').$user->admin->fotografia}}" width="100%" class="mx-auto">
+                                @elseif($user->admin->genero == 'F')
+                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
+                                @else
+                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                                @endif
                             </div>
                         </td>
                         <td class="align-middle">{{ $user->admin->nome }}</td>
@@ -110,8 +90,8 @@
 
                         {{-- OPÇÔES --}}
                         <td class="text-center align-middle">
-                            <a href="{{route('users.show', $user->admin)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                            <a href="{{route('users.edit', [$user->idUser, $user->idAdmin])}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                            <a href="{{route('users.show', $user)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                            <a href="{{route('users.edit', $user)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
                             <form method="POST" role="form" id=""
                               action="{{route('users.destroy', $user->admin)}}" class="d-inline-block form_university_id">
