@@ -1,10 +1,17 @@
 @component('mail::message')
 Olá **{{$name}}**,
 
-A Lyka Systems informa que você foi adicionado(a) na aplicação. Para aceder à sua conta basta clicar no botão abaixo e seguir os passos que serão fornecidos na aplicação.
-@component('mail::button', ['url' => $link])
-Ativar Conta
+O seu caminho com a Lyka Systems está prestes a começar, sendo apenas necessário seguir os passos abaixos indicados.
+
+Para aceder à sua conta basta clicar neste link **<a href="{{$link}}">{{$link}}</a>** e em seguida inserir o código de autenticação que se encontra abaixo.
+
+@component('mail::panel')
+**{{$key}}**
 @endcomponent
-Bom trabalho,
+
+Se não sabe como recebeu este e-mail, sugerimos que apague o mesmo.
+
+Obrigado e bom trabalho,
+
 Lyka Systems.
 @endcomponent

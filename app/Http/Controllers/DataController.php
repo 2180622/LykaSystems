@@ -355,7 +355,7 @@ class DataController extends Controller
         $user->email = 'nill546@hotmail.com';
         $user->tipo = 'admin';
         $user->password = Hash::make('teste1234');
-        $user->auth_key = random_str(50);
+        $user->auth_key = strtoupper(random_str(5));
         $user->slug = post_slug('Neuza Cordeiro');
         $user->idAdmin = 2;
         $user->idAgente = null;
@@ -366,7 +366,7 @@ class DataController extends Controller
         $user->email = 'jose.fer@gmail.com';
         $user->tipo = 'agente';
         $user->password = Hash::make('teste1234');
-        $user->auth_key = random_str(50);
+        $user->auth_key = strtoupper(random_str(5));
         $user->slug = post_slug('José Fernandes');
         $user->idAdmin = null;
         $user->idAgente = 1;
@@ -377,7 +377,7 @@ class DataController extends Controller
         $user->email = 'tiaveira@gmail.com';
         $user->tipo = 'cliente';
         $user->password = Hash::make('teste1234');
-        $user->auth_key = random_str(50);
+        $user->auth_key = strtoupper(random_str(5));
         $user->slug = post_slug('Tiago Oliveira');
         $user->idAdmin = null;
         $user->idAgente = null;
