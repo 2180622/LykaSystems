@@ -238,6 +238,7 @@
 
 
         /* VALIDAÇÃO DO FORMULÁRIO */
+
         (function () {
             'use strict';
             window.addEventListener('load', function () {
@@ -247,18 +248,18 @@
                 var validation = Array.prototype.filter.call(forms, function (form) {
                     form.addEventListener('submit', function (event) {
 
+                        /* mostrar div de espera */
+                        $("#wait_screen").show();
+
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
 
-                            /* mostrar div de espera */
-                            $("#wait_screen").show();
-
-                            /* valida Campos da informação pessoal */
+                             /* valida Campos da informação pessoal */
                             if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
+                                $("#wait_screen").hide();
                                 $("#pessoal-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
-
                             } else {
                                 $("#pessoal-tab").removeClass("border-danger text-danger");
                             }
@@ -266,6 +267,7 @@
 
                             /* valida Campos dos documentos */
                             if (($("#num_docOficial").val() == "") || ($("#numPassaport").val() == "") || ($("#dataValidPP").val() == "") || ($("#passaportPaisEmi").val() == "") || ($("#localEmissaoPP").val() == "")) {
+                                $("#wait_screen").hide();
                                 $("#documentation-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
@@ -275,6 +277,7 @@
 
                             /* valida Campos dos dados académicos */
                             if (($("#nivEstudoAtual").val() == "") || ($("#nomeInstituicaoOrigem").val() == "") || ($("#cidadeInstituicaoOrigem").val() == "")) {
+                                $("#wait_screen").hide();
                                 $("#academicos-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
@@ -285,6 +288,7 @@
 
                             /* valida Campos dos contactos */
                             if (($("#telefone1").val() == "") || ($("#email").val() == "")) {
+                                $("#wait_screen").hide();
                                 $("#contacts-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
@@ -295,6 +299,7 @@
 
                             /* valida Campos das moradas */
                             if (($("#moradaResidencia").val() == "") || ($("#morada").val() == "") || ($("#cidade").val() == "")) {
+                                $("#wait_screen").hide();
                                 $("#contacts-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
@@ -305,28 +310,24 @@
 
                             /* valida Campos das finanças */
                             if ($("#IBAN").val() == "") {
+                                $("#wait_screen").hide();
                                 $("#financas-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
                                 $("#financas-tab").removeClass("border-danger text-danger");
                             }
 
-
-
                         }
 
                         window.scrollTo(0, 0);
                         form.classList.add('was-validated');
 
-
                     }, false);
 
                 });
 
-
             }, false);
 
         })();
-
 
     });
