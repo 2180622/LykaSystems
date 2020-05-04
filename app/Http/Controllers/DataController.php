@@ -356,6 +356,7 @@ class DataController extends Controller
         $user->tipo = 'admin';
         $user->password = Hash::make('teste1234');
         $user->auth_key = random_str(50);
+        $user->slug = post_slug('Neuza Cordeiro');
         $user->idAdmin = 2;
         $user->idAgente = null;
         $user->idCliente = null;
@@ -366,6 +367,7 @@ class DataController extends Controller
         $user->tipo = 'agente';
         $user->password = Hash::make('teste1234');
         $user->auth_key = random_str(50);
+        $user->slug = post_slug('José Fernandes');
         $user->idAdmin = null;
         $user->idAgente = 1;
         $user->idCliente = null;
@@ -376,6 +378,7 @@ class DataController extends Controller
         $user->tipo = 'cliente';
         $user->password = Hash::make('teste1234');
         $user->auth_key = random_str(50);
+        $user->slug = post_slug('Tiago Oliveira');
         $user->idAdmin = null;
         $user->idAgente = null;
         $user->idCliente = 1;

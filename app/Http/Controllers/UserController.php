@@ -37,7 +37,6 @@ class UserController extends Controller
 
       $user = new User;
       $user->tipo = "admin";
-      $user->status = 10;
       $user->fill($fieldsUser);
 
       $admin = new Administrador;
@@ -48,6 +47,7 @@ class UserController extends Controller
       $admin->save();
       $user->idAdmin = $admin->idAdmin;
       $user->email = $admin->email;
+      $user->slug = post_slug($admin->nome.' '.$admin->apelido);
       $user->save();
 
       $email = $user->email;
