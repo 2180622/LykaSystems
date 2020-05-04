@@ -52,10 +52,12 @@ class UserController extends Controller
       $user->idAdmin = $admin->idAdmin;
       $user->email = $admin->email;
       $user->slug = post_slug($name);
+      $user->auth_key = strtoupper(random_str(5));
       $user->save();
 
       $email = $user->email;
-      Mail::to($email)->send(new SendEmailConfirmation($name));
+      $auth_key = $user->auth_key;
+      Mail::to($email)->send(new SendEmailConfirmation($name, $auth_key));
 
       return redirect()->route('users.index')->with('success', 'Utilizador criado com sucesso.');
     }

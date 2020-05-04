@@ -18,7 +18,7 @@ class DocPessoal extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocPessoal');
             $table->string('idCliente',255)->nullable();
-            $table->enum('tipo',['Passaporte','Cartão Cidadão','Carta Condução','Doc. Oficial']);
+            $table->string('tipo', 255);
             $table->string('imagem',255)->nullable();
             $table->longText('info')->nullable();
             $table->date('dataValidade')->nullable();
