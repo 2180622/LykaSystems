@@ -1,6 +1,6 @@
 <style>
     .name_link {
-    color: gray;
+        color: gray;
     }
 
     .active {
@@ -36,8 +36,6 @@
         color: #747474;
         font-weight: 700;
     }
-
-
 
 </style>
 
@@ -92,7 +90,7 @@
         <div class="tab-pane fade show active" id="agent_type" role="tabpanel" aria-labelledby="agent-type-tab">
 
             <div class="row">
-                <div class="col">
+                <div class="col" style="min-width: 300px">
 
                     {{-- INPUT Tipo de agente --}}
                     <label for="tipo">Tipo:</label><br>
@@ -102,10 +100,12 @@
                         </option>
                     </select>
 
+                    <br>
+
                 </div>
 
 
-                <div class="col">
+                <div class="col" style="min-width: 300px">
                     {{-- INPUT Subagente de...... --}}
                     <label for="subagent">Subagente de:</label><br>
 
@@ -167,33 +167,52 @@
             <div class="row">
                 <div class="col">
 
-                    {{-- INPUT nome --}}
-                    <label for="nome">Nome:</label><br>
-                    <input type="text" class="form-control" name="nome" id="nome" value="{{old('nome',$agent->nome)}}"
-                        placeholder="Insira o nome" maxlength="25" required>
+                    <div class="row">
 
-                        <br>
+                        <div class="col" style="min-width: 300px">
+                            {{-- INPUT nome --}}
+                            <label for="nome">Nome:</label><br>
+                            <input type="text" class="form-control" name="nome" id="nome"
+                                value="{{old('nome',$agent->nome)}}" placeholder="Insira o nome" maxlength="25"
+                                required><br>
+                        </div>
 
-                    {{-- INPUT apelido --}}
-                    <label for="apelido">Apelido:</label><br>
-                    <input type="text" class="form-control" name="apelido" id="apelido"
-                        value="{{old('apelido',$agent->apelido)}}" placeholder="Insira o apelido" maxlength="25"
-                        required>
 
-                        <br>
-                    {{-- INPUT GENERO --}}
-                    <label for="genero">Género:</label><br>
-                    <select id="genero" name="genero" class="form-control select_style" required>
-                        <option {{old('genero',$agent->genero)=='F'?"selected":""}} value="F">Feminino</option>
-                        <option {{old('genero',$agent->genero)=='M'?"selected":""}} value="M">Masculino</option>
-                    </select>
+                        <div class="col" style="min-width: 300px">
+                            {{-- INPUT apelido --}}
+                            <label for="apelido">Apelido:</label><br>
+                            <input type="text" class="form-control" name="apelido" id="apelido"
+                                value="{{old('apelido',$agent->apelido)}}" placeholder="Insira o apelido" maxlength="25"
+                                required>
+                        </div>
+
+                    </div>
 
                     <br>
 
-                    {{-- INPUT dataNasc --}}
-                    <label for="dataNasc">Data de nascimento:</label><br>
-                    <input type="date" class="form-control" name="dataNasc" id="dataNasc"
-                        value="{{old('dataNasc',$agent->dataNasc)}}" required>
+                    <div class="row">
+                        <div class="col" style="min-width: 300px">
+                            {{-- INPUT GENERO --}}
+                            <label for="genero">Género:</label><br>
+                            <select id="genero" name="genero" class="form-control select_style" required>
+                                <option value="" selected hidden>Selecione o género</option>
+                                <option {{old('genero',$agent->genero)=='F'?"selected":""}} value="F">Feminino</option>
+                                <option {{old('genero',$agent->genero)=='M'?"selected":""}} value="M">Masculino</option>
+                            </select>
+
+                            <br>
+                        </div>
+
+                        <div class="col" style="min-width: 300px">
+                            {{-- INPUT dataNasc --}}
+                            <label for="dataNasc">Data de nascimento:</label><br>
+                            <input type="date" class="form-control" name="dataNasc" id="dataNasc"
+                                value="{{old('dataNasc',$agent->dataNasc)}}" required>
+                        </div>
+
+                    </div>
+
+                    <br>
 
                 </div>
 
@@ -213,19 +232,20 @@
 
                     @else
                     <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
-                        class="m-2 p-1 border rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px;"
-                        alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+                        class="m-2 p-1 border rounded bg-white shadow-sm"
+                        style="width:80%;cursor:pointer;min-width:118px;" alt="Imagem de apresentação"
+                        title="Clique para mudar a imagem de apresentação" />
                     @endif
                     <br><small class="text-muted">(clique para mudar)</small>
                 </div>
 
             </div>
 
-
-
         </div>
 
 
+
+        
 
         {{-- Conteudo: Documentos  --}}
         <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
@@ -291,6 +311,18 @@
         <div class="tab-pane fade " id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
             <div class="row">
                 <div class="col">
+                    {{-- INPUT email --}}
+                    <label for="email">E-mail:</label><br>
+                    <input type="email" class="form-control" name="email" id="email"
+                        value="{{old('email',$agent->email)}}" placeholder="Insira o email" required maxlength="200">
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col">
 
 
                     {{-- INPUT País --}}
@@ -327,22 +359,14 @@
                     <input type="text" class="form-control" name="telefone2" id="telefone2"
                         value="{{old('telefone2',$agent->telefone2)}}" placeholder="Insira o telefone" maxlength="20">
                 </div>
-            </div>
 
-            <br>
-
-            <div class="row">
-                <div class="col">
-                    {{-- INPUT email --}}
-                    <label for="email">E-mail:</label><br>
-                    <input type="email" class="form-control" name="email" id="email"
-                        value="{{old('email',$agent->email)}}" placeholder="Insira o email" required maxlength="200">
-                </div>
+                <br>
 
             </div>
-
 
         </div>
+
+
 
         {{-- Conteudo: Financeiro --}}
         <div class="tab-pane fade " id="financas" role="tabpanel" aria-labelledby="financas-tab">
@@ -351,15 +375,16 @@
                 <div class="col">
                     {{-- INPUT IBAN --}}
                     <label for="IBAN">IBAN:</label><br>
-                    <input type="text" class="form-control" name="IBAN" id="IBAN"
-                        value="{{old('IBAN',$agent->IBAN)}}" placeholder="Insira o IBAN" required maxlength="30">
+                    <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$agent->IBAN)}}"
+                        placeholder="Insira o IBAN" required maxlength="30">
                 </div>
-                <br>
+
             </div>
+
+            <br>
+
         </div>
 
-
     </div>
-
 
 </div>

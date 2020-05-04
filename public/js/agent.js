@@ -237,17 +237,54 @@
                                 $("#wait_screen").hide();
                                 $("#idAgenteAssociado").addClass("is-invalid");
                                 $("#idAgenteAssociado").addClass(":invalid");
-                                return;
+                                $("#agent-type-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            }else {
+                                $("#agent-type-tab").removeClass("border-danger text-danger");
                             }
 
-                            /* valida Campos */
-                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
+
+                            /* valida Dados pessoais */
+                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#genero").val() == "") || ($("#dataNasc").val() == "") ) {
                                 $("#wait_screen").hide();
-                                $("#pessoal-tab").addClass("border-danger text-danger");
+                                $("#personal-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
-                                $("#pessoal-tab").removeClass("border-danger text-danger");
+                                $("#personal-tab").removeClass("border-danger text-danger");
                             }
+
+
+
+                            /* valida Documentos */
+                            if (($("#num_doc").val() == "") || ($("#NIF").val() == "") ) {
+                                $("#wait_screen").hide();
+                                $("#documents-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#documents-tab").removeClass("border-danger text-danger");
+                            }
+
+
+
+                            /* valida Contactos */
+                            if (($("#email").val() == "") || ($("#pais").val() == "") || ($("#morada").val() == "") || ($("#telefone1").val() == "") ) {
+                                $("#wait_screen").hide();
+                                $("#contacts-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#contacts-tab").removeClass("border-danger text-danger");
+                            }
+
+                            /* valida Financeiro */
+/*                             if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
+                                $("#wait_screen").hide();
+                                $("#financas-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#financas-tab").removeClass("border-danger text-danger");
+                            } */
+
+
 
                         }
 
