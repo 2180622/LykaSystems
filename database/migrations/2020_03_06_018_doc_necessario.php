@@ -18,8 +18,7 @@ class DocNecessario extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocNecessario');
             $table->enum('tipo',['Pessoal', 'Academico']);
-            $table->enum('tipoPessoal',['Passaport','Cartão Cidadão','Carta Condução','Doc. Oficial'])->nullable();
-            $table->enum('tipoAcademico',['Exame Universitário','Exame Nacional','Diploma','Certificado'])->nullable();
+            $table->string('tipoDocumento', 255);
             $table->timestamps();
             $table->unsignedBigInteger('idFase');
                 $table->foreign('idFase')->references('idFase')->on('Fase');

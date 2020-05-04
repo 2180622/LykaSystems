@@ -15,6 +15,9 @@ use App\Agenda;
 use App\Produto;
 use App\Cliente;
 use App\Contacto;
+use App\DocAcademico;
+use App\DocPessoal;
+use App\DocNecessario;
 use App\DocStock;
 use App\FaseStock;
 use App\Fornecedor;
@@ -591,6 +594,44 @@ class DataController extends Controller
         $fase->idProduto = 1;
         $fase->idResponsabilidade = 4;
         $fase->save();
+
+        /******************          Docs Necessarios          *******************/
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Pessoal';
+        $docnecessario->tipoDocumento = 'Doc. Oficial';
+        $docnecessario->idFase = 1;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Academico';
+        $docnecessario->tipoDocumento = 'Certificado';
+        $docnecessario->idFase = 1;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Pessoal';
+        $docnecessario->tipoDocumento = 'Passaport';
+        $docnecessario->idFase = 2;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Pessoal';
+        $docnecessario->tipoDocumento = 'Cartão Cidadão';
+        $docnecessario->idFase = 2;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Pessoal';
+        $docnecessario->tipoDocumento = 'Carta Condução';
+        $docnecessario->idFase = 2;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Academico';
+        $docnecessario->tipoDocumento = 'Exame Universitário';
+        $docnecessario->idFase = 4;
+        $docnecessario->save();
 
         /****************          Docs Academicos          ****************/
 /*

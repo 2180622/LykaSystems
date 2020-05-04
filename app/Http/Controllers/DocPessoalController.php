@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\DocPessoal;
+use App\DocNecessario;
+use App\Fase;
+use App\Http\Requests\UpdateDocumentoRequest;
+use App\Http\Requests\StoreDocumentoRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -15,13 +19,15 @@ class DocPessoalController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function create(Fase $fase, String $tipoPAT, String $tipo)
+    public function create(Fase $fase, DocNecessario $docnecessario)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-                
+            
             $documento = new DocPessoal;
+            $tipoPAT = $docnecessario->tipo;
+            $tipo = $docnecessario->tipoDocumento;
 
-            return view('documentos.add',compact('fase','tipoPAT','tipo','documento'));
+            return view('documentos.add',compact('fase','tipoPAT','tipo','documento', 'docnecessario'));
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }
@@ -36,22 +42,32 @@ class DocPessoalController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreDocumentoRequest $request,Fase $fase, String $tipo){
+    public function store(StoreDocumentoRequest $request,Fase $fase, DocNecessario $docnecessario){
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
             
             $fields = $request->all();
+            //dd($fields);
             $infoDoc = null;
-
+            if(strtolower($docnecessario->tipoDocumento) == "passaport"){
+                $infoDoc['numPassaport'] = $fields['numPassaport'];
+                $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP']));
+                $infoDoc['passaportPaisEmi'] = $fields['passaportPaisEmi'];
+                $infoDoc['localEmissaoPP'] = $fields['localEmissaoPP'];
+            }
             for($i=1;$i<=500;$i++){
-                if($fields['nome-campo'.$i]){
-                    $infoDoc[$fields['nome-campo'.$i]] = $fields['valor-campo'.$i];
+                if(array_key_exists('nome-campo'.$i, $fields)){
+                    if($fields['nome-campo'.$i]){
+                        $infoDoc[$fields['nome-campo'.$i]] = $fields['valor-campo'.$i];
+                    }
+                }else{
+                    break;
                 }
             }
 
             $documento = new DocPessoal;
-            $documento->tipo=$tipo;
-            $documento->dataValidade = $fields['dataValidade'];
+            $documento->tipo=$docnecessario->tipoDocumento;
+            $documento->dataValidade = date("Y-m-d",strtotime($fields['dataValidade'].'-1'));
             if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
                 $documento->verificacao = true;
             }else{
@@ -59,11 +75,14 @@ class DocPessoalController extends Controller
             }
             $documento->idCliente = $fase->produto->cliente->idCliente;
             $documento->idFase = $fase->idFase;
-            $documento->imagem = 'source';
-            $documento->info = json_encode($infoDoc);
+            $imagem = $fields['img_doc'];
+            $documento->imagem = 'source';//$imagem->originalName;
+            if($infoDoc){
+                $documento->info = json_encode($infoDoc);
+            }
             $documento->save();
 
-            return redirect()->route('produtos.show',$fase->produto)->with('success', $tipo.' adicionado com sucesso');
+            return redirect()->route('produtos.show',$fase->produto)->with('success', $docnecessario->tipoDocumento.' adicionado com sucesso');
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }

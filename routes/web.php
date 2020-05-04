@@ -108,19 +108,19 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/produtos', 'ProdutoController')->only(['destroy', 'update','show','edit']);
 
     /* Documentos Pessoais */
-    Route::get('/documentos/create/{fase}/{tipoPAT}/{tipo}', 'DocPessoalController@create')->name('documento_pessoal.create');
-    Route::post('/documentos/store/{fase}/{tipo}', 'DocPessoalController@store')->name('documento_pessoal.store');
-    Route::resource('/documentos', 'DocPessoalController')->only(['destroy', 'update','show','edit']);
+    Route::get('/documento_pessoal/create/{fase}/{docnecessario}', 'DocPessoalController@create')->name('documento_pessoal.create');
+    Route::post('/documento_pessoal/store/{fase}/{docnecessario}', 'DocPessoalController@store')->name('documento_pessoal.store');
+    Route::resource('/documento_pessoal', 'DocPessoalController')->only(['destroy', 'update','show','edit']);
 
     /* Documentos Academicos */
-    Route::get('/documentos/create/{fase}/{tipoPAT}/{tipo}', 'DocAcademicoController@create')->name('documento_academico.create');
-    Route::post('/documentos/store/{fase}/{tipo}', 'DocAcademicoController@store')->name('documento_academico.store');
-    Route::resource('/documentos', 'DocAcademicoController')->only(['destroy', 'update','show','edit']);
+    Route::get('/documento_academico/create/{fase}/{docnecessario}', 'DocAcademicoController@create')->name('documento_academico.create');
+    Route::post('/documento_academico/store/{fase}/{docnecessario}', 'DocAcademicoController@store')->name('documento_academico.store');
+    Route::resource('/documento_academico', 'DocAcademicoController')->only(['destroy', 'update','show','edit']);
 
     /* Documentos Transações */
-    Route::get('/documentos/create/{fase}/{tipoPAT}/{tipo}', 'DocTransacaoController@create')->name('documento_transacao.create');
-    Route::post('/documentos/store/{fase}/{tipo}', 'DocTransacaoController@store')->name('documento_transacao.store');
-    Route::resource('/documentos', 'DocTransacaoController')->only(['destroy', 'update','show','edit']);
+    Route::get('/documento_transacao/create/{fase}', 'DocTransacaoController@create')->name('documento_transacao.create');
+    Route::post('/documento_transacao/store/{fase}', 'DocTransacaoController@store')->name('documento_transacao.store');
+    Route::resource('/documento_transacao', 'DocTransacaoController')->only(['destroy', 'update','show','edit']);
 
     /* Conta */
     Route::resource('/conta', 'ContaController');

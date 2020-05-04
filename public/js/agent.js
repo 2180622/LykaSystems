@@ -66,12 +66,12 @@
 
 
         /* Verificação inicial */
-        if ($("#tipo").val()=="Agente"){
-            $("#idAgenteAssociado").prop( "disabled", true );
+        if ($("#tipo").val() == "Agente") {
+            $("#idAgenteAssociado").prop("disabled", true);
             $("#idAgenteAssociado").val(null);
         }
 
-        if ( $("#aux_idAgenteAssociado").val()!=null){
+        if ($("#aux_idAgenteAssociado").val() != null) {
             $("#idAgenteAssociado").val($("#aux_idAgenteAssociado").val());
         }
 
@@ -86,10 +86,10 @@
 
         //Preview da fotografia
 
-/*         $('#search_btn').on('click', function (e) {
-            e.preventDefault();
-            $('#fotografia').trigger('click');
-        }); */
+        /*         $('#search_btn').on('click', function (e) {
+                    e.preventDefault();
+                    $('#fotografia').trigger('click');
+                }); */
 
         $('#preview').on('click', function (e) {
             e.preventDefault();
@@ -118,7 +118,7 @@
 
         //Documento de identificação
 
-         $('#doc_preview_file').on('click', function (e) {
+        $('#doc_preview_file').on('click', function (e) {
             e.preventDefault();
             $('#img_doc').trigger('click');
         });
@@ -133,7 +133,7 @@
                 var documento = new FileReader();
 
                 documento.onload = function (e) {
-                    $('#name_id_file').text( input.files[0].name );
+                    $('#name_id_file').text(input.files[0].name);
                 }
 
                 documento.readAsDataURL(input.files[0]);
@@ -176,16 +176,16 @@
 
 
         /* VALIDAÇÃO DE INPUTS */
-        if($('#nome').length){
+        if ($('#nome').length) {
 
-        /* Apenas letras:  .lettersOnly();  */
-        $("#nome").lettersOnly();
-        $("#apelido").lettersOnly();
+            /* Apenas letras:  .lettersOnly();  */
+            $("#nome").lettersOnly();
+            $("#apelido").lettersOnly();
 
-        /* Apenas numeros:  .numbersOnly();  */
-        $("#telefone1").numbersOnly();
-        $("#telefone2").numbersOnly();
-        $("#NIF").numbersOnly();
+            /* Apenas numeros:  .numbersOnly();  */
+            $("#telefone1").numbersOnly();
+            $("#telefone2").numbersOnly();
+            $("#NIF").numbersOnly();
 
         }
 
@@ -193,14 +193,14 @@
 
 
         /* mudança de tipo de agente */
-        $('#tipo').change(function() {
+        $('#tipo').change(function () {
 
-            if ($("#tipo").val()=="Subagente"){
-                $("#idAgenteAssociado").prop( "disabled", false );
+            if ($("#tipo").val() == "Subagente") {
+                $("#idAgenteAssociado").prop("disabled", false);
                 $("#idAgenteAssociado").val("pickone");
 
-            }else{
-                $("#idAgenteAssociado").prop( "disabled", true );
+            } else {
+                $("#idAgenteAssociado").prop("disabled", true);
                 $("#idAgenteAssociado").val(null);
                 $("#idAgenteAssociado").removeClass("is-invalid");
                 $("#idAgenteAssociado").addClass("invalid");
@@ -208,7 +208,7 @@
         });
 
 
-        $('#idAgenteAssociado').change(function() {
+        $('#idAgenteAssociado').change(function () {
             $("#idAgenteAssociado").removeClass("is-invalid");
             $("#idAgenteAssociado").addClass("invalid");
         });
@@ -216,45 +216,87 @@
 
 
         /* VALIDAÇÃO DO FORMULÁRIO */
-        (function() {
+        (function () {
             'use strict';
-            window.addEventListener('load', function() {
-              // Fetch all the forms we want to apply custom Bootstrap validation styles to
-              var forms = document.getElementsByClassName('needs-validation');
-              // Loop over them and prevent submission
-              var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
 
-                  /* mostrar div de espera */
-                  $("#wait_screen").show();
+                        /* mostrar div de espera */
+                        $("#wait_screen").show();
 
-                  if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
 
-                    /* Se for subagente é obrigatorio ter um agente */
-                    if ( $("#idAgenteAssociado").val()=="pickone" ){
-                        $("#wait_screen").hide();
-                        $("#idAgenteAssociado").addClass("is-invalid");
-                        $("#idAgenteAssociado").addClass(":invalid");
-                        return;
-                    }
+                            /* Se for subagente é obrigatorio ter um agente */
+                            if ($("#idAgenteAssociado").val() == "pickone") {
+                                $("#wait_screen").hide();
+                                $("#idAgenteAssociado").addClass("is-invalid");
+                                $("#idAgenteAssociado").addClass(":invalid");
+                                $("#agent-type-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            }else {
+                                $("#agent-type-tab").removeClass("border-danger text-danger");
+                            }
 
-                  }
 
-                  window.scrollTo(0, 0);
-                  form.classList.add('was-validated');
+                            /* valida Dados pessoais */
+                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#genero").val() == "") || ($("#dataNasc").val() == "") ) {
+                                $("#wait_screen").hide();
+                                $("#personal-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#personal-tab").removeClass("border-danger text-danger");
+                            }
 
-                }, false);
-              });
+
+
+                            /* valida Documentos */
+                            if (($("#num_doc").val() == "") || ($("#NIF").val() == "") ) {
+                                $("#wait_screen").hide();
+                                $("#documents-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#documents-tab").removeClass("border-danger text-danger");
+                            }
+
+
+
+                            /* valida Contactos */
+                            if (($("#email").val() == "") || ($("#pais").val() == "") || ($("#morada").val() == "") || ($("#telefone1").val() == "") ) {
+                                $("#wait_screen").hide();
+                                $("#contacts-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#contacts-tab").removeClass("border-danger text-danger");
+                            }
+
+                            /* valida Financeiro */
+/*                             if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
+                                $("#wait_screen").hide();
+                                $("#financas-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#financas-tab").removeClass("border-danger text-danger");
+                            } */
+
+
+
+                        }
+
+                        window.scrollTo(0, 0);
+                        form.classList.add('was-validated');
+
+                    }, false);
+                });
             }, false);
-          })();
+        })();
 
 
 
 
     });
-
-
-
-
