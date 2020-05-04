@@ -134,7 +134,8 @@ class AgenteController extends Controller
         $user->tipo = "agente";
         $user->idAgente = $agent->idAgente;
         $user->auth_key = strtoupper(random_str(5));
-
+        $password = random_str(64);
+        $user->password = Hash::make($password);
         $user->save();
 
         /* Envia o e-mail para ativação */
