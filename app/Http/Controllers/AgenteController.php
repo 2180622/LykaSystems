@@ -133,7 +133,7 @@ class AgenteController extends Controller
 
         $user->tipo = "agente";
         $user->idAgente = $agent->idAgente;
-        $user->auth_key = random_str(50);
+        $user->auth_key = strtoupper(random_str(5));
 
         $user->save();
 
