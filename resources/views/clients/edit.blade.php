@@ -33,7 +33,7 @@
         <div class="title">
             <h6>Editar informações do Estudante</h6>
         </div>
-        <br>
+
 
 
         <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
@@ -41,7 +41,7 @@
             @method("PUT")
             @include('clients.partials.add-edit')
             <div class="form-group text-right" style="min-width:285px">
-                <br><br>
+
                 <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
                 <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
             </div>
