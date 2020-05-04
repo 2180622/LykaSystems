@@ -9,12 +9,9 @@ use Illuminate\Queue\SerializesModels;
 class SendEmailConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $id;
     public $name;
 
-    public function __construct(string $id, string $name){
-      $this->id = $id;
+    public function __construct(string $name){
       $this->name = $name;
     }
 
@@ -26,7 +23,7 @@ class SendEmailConfirmation extends Mailable
             ->markdown('mails.confirmation')
             ->with([
                 'name' => $this->name,
-                'link' => url('/').'/confirmation/'.$this->id
+                'link' => url('/').'/ativacaoconta/'.post_slug($this->name)
             ]);
     }
 }

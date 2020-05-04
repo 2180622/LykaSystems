@@ -43,7 +43,7 @@ class AccountConfirmationController extends Controller
       if ($password == $passwordConf) {
         $hashed = Hash::make($password);
         $user->password = $hashed;
-        $user->auth_key = rand(655541,getrandmax());
+        $user->auth_key = random_str(50);
         $user->save();
         return view('auth.accountactive', compact('user'));
       }else {
