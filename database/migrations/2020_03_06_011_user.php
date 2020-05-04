@@ -16,6 +16,7 @@ class User extends Migration
             $table->enum('tipo',['admin', 'agente', 'cliente']);
             $table->string('password',255)->nullable();
             $table->string('auth_key', 5)->nullable();
+            $table->boolean('estado')->default(false);
             $table->string('slug')->nullable();
 
             $table->unsignedBigInteger('idAdmin')->nullable();
@@ -34,7 +35,7 @@ class User extends Migration
     $password = Hash::make('admin');
 
     $data = array(
-        array('idUser'=>'1', 'email'=>'admin@test.com', 'password'=> $password, 'tipo'=>'admin', 'auth_key' => strtoupper(random_str(5)), 'slug' => 'senhor-administrador', 'idAdmin'=>'1', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
+        array('idUser'=>'1', 'email'=>'admin@test.com', 'password'=> $password, 'tipo'=>'admin', 'auth_key' => strtoupper(random_str(5)), 'estado' => true, 'slug' => 'senhor-administrador', 'idAdmin'=>'1', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
     );
 
     DB::table('User')->insert($data);

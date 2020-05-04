@@ -53,6 +53,8 @@ class UserController extends Controller
       $user->email = $admin->email;
       $user->slug = post_slug($name);
       $user->auth_key = strtoupper(random_str(5));
+      $password = random_str(64);
+      $user->password = Hash::make($password);
       $user->save();
 
       $email = $user->email;
