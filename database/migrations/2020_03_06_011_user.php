@@ -13,9 +13,10 @@ class User extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idUser');
             $table->string('email', 255)->unique();
-            $table->string('password',255)->nullable();
             $table->enum('tipo',['admin', 'agente', 'cliente']);
+            $table->string('password',255)->nullable();
             $table->string('auth_key',50)->nullable();
+            $table->string('slug')->nullable();
 
             $table->unsignedBigInteger('idAdmin')->nullable();
                 $table->foreign('idAdmin')->references('idAdmin')->on('Administrador');
@@ -26,7 +27,6 @@ class User extends Migration
             $table->unsignedBigInteger('idCliente')->nullable();
                 $table->foreign('idCliente')->references('idCliente')->on('Cliente');
 
-                $table->string('slug')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,7 +34,7 @@ class User extends Migration
     $password = Hash::make('admin');
 
     $data = array(
-        array('idUser'=>'1', 'email'=>'admin@test.com', 'password'=> $password, 'tipo'=>'admin', 'auth_key' => random_str(50), 'idAdmin'=>'1', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
+        array('idUser'=>'1', 'email'=>'admin@test.com', 'password'=> $password, 'tipo'=>'admin', 'auth_key' => random_str(50), 'slug' => 'senhor-administrador', 'idAdmin'=>'1', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
     );
 
     DB::table('User')->insert($data);

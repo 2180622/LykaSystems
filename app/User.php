@@ -3,8 +3,6 @@
 namespace App;
 
 use App\User;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,12 +10,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes, HasSlug;
+    use Notifiable, SoftDeletes;
     protected $table = 'User';
     protected $primaryKey = 'idUser';
 
     protected $fillable = [
-        'email','tipo','password','$idAdmin','$idAgente','$idCliente'
+        'email', 'tipo', 'password', '$idAdmin', '$idAgente', '$idCliente', 'admin'
     ];
 
     public function admin(){
@@ -68,13 +66,6 @@ class User extends Authenticatable
             }
         }
         return $notifications;
-    }
-
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-              ->generateSlugsFrom(['admin.nome'])
-              ->saveSlugsTo('slug');
     }
 
     public function getRouteKeyName()
