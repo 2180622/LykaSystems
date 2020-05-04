@@ -83,10 +83,10 @@
 
 
         //Preview da fotografia++++++++++++++++++
-/*         $('#search_btn').on('click', function (e) {
-            e.preventDefault();
-            $('#fotografia').trigger('click');
-        }); */
+        /*         $('#search_btn').on('click', function (e) {
+                    e.preventDefault();
+                    $('#fotografia').trigger('click');
+                }); */
 
 
         $('#preview').on('click', function (e) {
@@ -131,7 +131,7 @@
                 var iddocumento = new FileReader();
                 iddocumento.onload = function (e) {
                     iddocumento.fileName = img_docOficial.name;
-                    $('#name_doc_id_file').text( input.files[0].name );
+                    $('#name_doc_id_file').text(input.files[0].name);
                 }
 
                 iddocumento.readAsDataURL(input.files[0]);
@@ -166,7 +166,7 @@
                 var passaporte = new FileReader();
 
                 passaporte.onload = function (e) {
-                    $('#name_passaport_file').text( input.files[0].name );
+                    $('#name_passaport_file').text(input.files[0].name);
                 }
 
                 passaporte.readAsDataURL(input.files[0]);
@@ -211,25 +211,25 @@
 
         /* VALIDAÇÃO DE INPUTS */
 
-        if($('#nome').length){
+        if ($('#nome').length) {
 
-        /* Apenas letras:  .lettersOnly();  */
-        $("#nome").lettersOnly();
-        $("#apelido").lettersOnly();
-        $("#cidadeInstituicaoOrigem").lettersOnly();
-        $("#nomePai").lettersOnly();
-        $("#nomeMae").lettersOnly();
-        $("#localEmissaoPP").lettersOnly();
+            /* Apenas letras:  .lettersOnly();  */
+            $("#nome").lettersOnly();
+            $("#apelido").lettersOnly();
+            $("#cidadeInstituicaoOrigem").lettersOnly();
+            $("#nomePai").lettersOnly();
+            $("#nomeMae").lettersOnly();
+            $("#localEmissaoPP").lettersOnly();
 
-        /* Apenas numeros:  .numbersOnly();  */
-        $("#telefone1").numbersOnly();
-        $("#telefone2").numbersOnly();
-        $("#telefonePai").numbersOnly();
-        $("#telefoneMae").numbersOnly();
-        $("#num_docOficial").numbersOnly();
-        $("#numPassaport").numbersOnly();
-        $("#IBAN").numbersOnly();
-        $("#NIF").numbersOnly();
+            /* Apenas numeros:  .numbersOnly();  */
+            $("#telefone1").numbersOnly();
+            $("#telefone2").numbersOnly();
+            $("#telefonePai").numbersOnly();
+            $("#telefoneMae").numbersOnly();
+            $("#num_docOficial").numbersOnly();
+            $("#numPassaport").numbersOnly();
+            $("#IBAN").numbersOnly();
+            $("#NIF").numbersOnly();
 
         }
 
@@ -238,83 +238,95 @@
 
 
         /* VALIDAÇÃO DO FORMULÁRIO */
-        (function() {
+        (function () {
             'use strict';
-            window.addEventListener('load', function() {
-              // Fetch all the forms we want to apply custom Bootstrap validation styles to
-              var forms = document.getElementsByClassName('needs-validation');
-              // Loop over them and prevent submission
-              var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                  if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                            /* mostrar div de espera */
+                            $("#wait_screen").show();
+
+                            /* valida Campos da informação pessoal */
+                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
+                                $("#pessoal-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+
+                            } else {
+                                $("#pessoal-tab").removeClass("border-danger text-danger");
+                            }
 
 
-                    /* valida Campos da informação pessoal */
-                    if ( ($("#nome").val()=="") || ($("#apelido").val()=="") || ($("#paisNaturalidade").val()=="") || ($("#dataNasc").val()=="") || ($("#genero").val()=="")){
-                        $("#warning_info_pessoal").removeClass("warning_sign");
-                    } else {
-                        $("#warning_info_pessoal").addClass("warning_sign");
-                    }
+                            /* valida Campos dos documentos */
+                            if (($("#num_docOficial").val() == "") || ($("#numPassaport").val() == "") || ($("#dataValidPP").val() == "") || ($("#passaportPaisEmi").val() == "") || ($("#localEmissaoPP").val() == "")) {
+                                $("#documentation-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#documentation-tab").removeClass("border-danger text-danger");
 
+                            }
 
-                    /* valida Campos dos dados académicos */
-                    if ( ($("#nivEstudoAtual").val()=="") || ($("#nomeInstituicaoOrigem").val()=="") || ($("#cidadeInstituicaoOrigem").val()=="") ){
-                        $("#warning_academico").removeClass("warning_sign");
-                    } else {
-                        $("#warning_academico").addClass("warning_sign");
-                    }
-
-
-
-                    /* valida Campos dos contactos */
-                    if ( ($("#telefone1").val()=="") || ($("#email").val()=="")){
-                        $("#warning_contactos").removeClass("warning_sign");
-                    } else {
-                        $("#warning_contactos").addClass("warning_sign");
-                    }
-
-
-
-                    /* valida Campos das moradas */
-                    if ( ($("#moradaResidencia").val()=="") || ($("#morada").val()=="") || ($("#cidade").val()=="") ){
-                        $("#warning_moradas").removeClass("warning_sign");
-                    } else {
-                        $("#warning_moradas").addClass("warning_sign");
-                    }
-
-
-                    /* valida Campos dos documentos */
-                    if ( ($("#num_docOficial").val()=="")  || ($("#numPassaport").val()=="")  || ($("#dataValidPP").val()=="") || ($("#passaportPaisEmi").val()=="") || ($("#localEmissaoPP").val()=="") ){
-                        $("#warning_documentation").removeClass("warning_sign");
-                    } else {
-                        $("#warning_documentation").addClass("warning_sign");
-                    }
-
-                    /* valida Campos das finanças */
-                    if ( $("#IBAN").val()=="" ){
-                        $("#warning_financas").removeClass("warning_sign");
-                    } else {
-                        $("#warning_financas").addClass("warning_sign");
-                    }
+                            /* valida Campos dos dados académicos */
+                            if (($("#nivEstudoAtual").val() == "") || ($("#nomeInstituicaoOrigem").val() == "") || ($("#cidadeInstituicaoOrigem").val() == "")) {
+                                $("#academicos-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#academicos-tab").removeClass("border-danger text-danger");
+                            }
 
 
 
+                            /* valida Campos dos contactos */
+                            if (($("#telefone1").val() == "") || ($("#email").val() == "")) {
+                                $("#contacts-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#contacts-tab").removeClass("border-danger text-danger");
 
-                  }
-                  window.scrollTo(0, 0);
-                  form.classList.add('was-validated');
-                }, false);
-              });
+                            }
+
+
+                            /* valida Campos das moradas */
+                            if (($("#moradaResidencia").val() == "") || ($("#morada").val() == "") || ($("#cidade").val() == "")) {
+                                $("#contacts-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#contacts-tab").removeClass("border-danger text-danger");
+                            }
+
+
+
+                            /* valida Campos das finanças */
+                            if ($("#IBAN").val() == "") {
+                                $("#financas-tab").addClass("border-danger text-danger");
+                                $("#warning_msg").show();
+                            } else {
+                                $("#financas-tab").removeClass("border-danger text-danger");
+                            }
+
+
+
+                        }
+
+                        window.scrollTo(0, 0);
+                        form.classList.add('was-validated');
+
+
+                    }, false);
+
+                });
+
+
             }, false);
 
-
-
-
-
-
-          })();
+        })();
 
 
     });

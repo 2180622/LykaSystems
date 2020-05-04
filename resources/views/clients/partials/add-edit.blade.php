@@ -4,18 +4,25 @@
     }
 
 
-    textarea, select, input[type="text"],input[type="date"],input[type="email"]{
+    textarea, input[type="text"],input[type="date"],input[type="email"]{
         border: none;
         resize: none;
         padding: 7px 12px;
         border-radius: 5px;
         background-color: #EAEAEA;
-
         color: #747474;
         font-weight: 600;
-        appearance: none;
-        -moz-appearance: none;
-        -webkit-appearance: none;
+
+    }
+
+    .select_style{
+        border: none;
+        resize: none;
+        padding: 7px 12px;
+        border-radius: 5px;
+        background-color: #EAEAEA;
+        color: #747474;
+        font-weight: 600;
     }
 
     label {
@@ -25,6 +32,8 @@
 
 </style>
 
+
+<div class="alert alert-danger mb-3" id="warning_msg" style="display: none"><i class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos assinalados.</div>
 
 <div class="row nav nav-fill w-100 text-center mx-auto p-3">
 
@@ -54,7 +63,7 @@
     </a>
 
 
-    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="financas-tab" data-toggle="tab"
+    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link border" id="financas-tab" data-toggle="tab"
         href="#financas" role="tab" aria-controls="financas" aria-selected="false">
         <div class="col"><i class="fas fa-chart-pie mr-2"></i>Financeiro</div>
     </a>
@@ -72,14 +81,14 @@
                 <div class="col">
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style="min-width:250px">
                             {{-- INPUT nome --}}
                             <label for="nome">Nome:</label><br>
                             <input type="text" class="form-control" name="nome" id="nome"
                                 value="{{old('nome',$client->nome)}}" placeholder="Insira o nome do aluno"
                                 maxlength="20" required>
                         </div>
-                        <div class="col">
+                        <div class="col" style="min-width:250px">
                             {{-- INPUT apelido --}}
                             <label for="apelido">Apelido:</label><br>
                             <input type="text" class="form-control" name="apelido" id="apelido"
@@ -92,38 +101,44 @@
 
                     <div class="row mb-4">
 
-                        <div class="col">
+                        <div class="col" style="min-width:250px">
                             {{-- INPUT GENERO --}}
                             <label for="genero">Género:</label><br>
-                            <select id="genero" name="genero" style="width:100%" required>
-                                <option value="" selected hidden></option>
+                            <select id="genero" name="genero" style="width:100%" class="form-control select_style" required>
+                                <option value="" selected hidden>Selecione o género</option>
                                 <option {{old('genero',$client->genero)=='F'?"selected":""}} value="F">Feminino</option>
                                 <option {{old('genero',$client->genero)=='M'?"selected":""}} value="M">Masculino
                                 </option>
                             </select>
                         </div>
 
-                        <div class="col">
+                        <div class="col" style="min-width:250px">
 
                             {{-- INPUT paisNaturalidade --}}
                             <label for="paisNaturalidade">Naturalidade:</label><br>
                             <input type="hidden" id="hidden_paisNaturalidade"
                                 value="{{old('paisNaturalidade',$client->paisNaturalidade)}}">
-                            <select id="paisNaturalidade" name="paisNaturalidade" style="width:100%" required>
+                            <select id="paisNaturalidade" name="paisNaturalidade" style="width:100%" class="form-control select_style" required>
                                 @include('clients.partials.countries');
                             </select>
                         </div>
 
                     </div>
 
+                    <div class="row">
+                        <div class="col-6">
+                        {{-- INPUT dataNasc --}}
+                        <label for="dataNasc">Data de nascimento:</label><br>
+                        <input type="date" class="form-control" name="dataNasc" id="dataNasc"
+                            value="{{old('dataNasc',$client->dataNasc)}}" style="width:100%" class="form-control select_style" required>
+                        </div>
+                    </div>
 
-                    {{-- INPUT dataNasc --}}
-                    <label for="dataNasc">Data de nascimento:</label><br>
-                    <input type="date" class="form-control" name="dataNasc" id="dataNasc"
-                        value="{{old('dataNasc',$client->dataNasc)}}" style="width:40%" required><br>
+                    <br>
+
                 </div>
 
-                <div class="col col-4 text-center" style="max-height:295px; overflow:hidden">
+                <div class="col col-4 text-center" style="max-height:350px; overflow:hidden;">
                     {{-- INPUT fotografia --}}
                     <div>
                         <label for="fotografia">Fotografia:</label>
@@ -133,15 +148,16 @@
 
                     <!-- Verifica se a imagem já existe-->
                     @if ($client->fotografia!=null)
-                    <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}"
-                        id="preview" class="m-2 p-1 rounded bg-white shadow-sm"
-                        style="width:80%;cursor:pointer;min-width:118px" alt="Imagem de apresentação"
+                    <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
+                        id="preview" class="m-2 p-1 border rounded bg-white shadow-sm"
+                        style="width:80%; cursor:pointer; min-width:118px;" alt="Imagem de apresentação"
                         title="Clique para mudar a imagem de apresentação" />
                     @else
                     <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
-                        class="m-2 p-1 rounded bg-white shadow-sm" style="width:80%;cursor:pointer;min-width:118px"
+                        class="m-2 p-1 border rounded bg-white shadow-sm" style="width:80%; cursor:pointer; min-width:118px"
                         alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
                     @endif
+
                     <br><small class="text-muted">(clique para mudar)</small>
                 </div>
             </div>
@@ -166,16 +182,16 @@
                 <div class="col">
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style="min-width:300px">
                             <label for="num_docOficial">Número de identificação pessoal:</label><br>
                             <input type="text" class="form-control" name="num_docOficial" id="num_docOficial"
-                                value="{{old('num_docOficial',$client->num_docOficial)}}" required maxlength="20">
+                                value="{{old('num_docOficial',$client->num_docOficial)}}" placeholder="Número de identificação pessoal" required maxlength="20">
                         </div>
                         <div class="col">
                             <label for="dataValidade_docOficial">Data de validade:</label><br>
                             <input type="date" class="form-control" name="dataValidade_docOficial"
                                 id="dataValidade_docOficial"
-                                value="{{old('info_docOficial',$client->info_docOficial)}}">
+                                value="{{old('info_docOficial',$client->info_docOficial)}}" required>
                         </div>
                     </div>
 
@@ -183,7 +199,7 @@
 
                     <label for="NIF">Número de identificação fiscal:</label><br>
                     <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$client->NIF)}}"
-                        maxlength="20"><br>
+                        maxlength="20" placeholder="Número de identificação fiscal"><br>
 
                 </div>
 
@@ -228,7 +244,7 @@
             </div>
 
 
-            <hr>
+            <hr class="my-4">
 
 
             {{-- Passaporte --}}
@@ -240,7 +256,7 @@
                             {{-- INUPUT numPassaport --}}
                             <label for="numPassaport">Número do passaporte:</label><br>
                             <input type="text" class="form-control" name="numPassaport" id="numPassaport"
-                                value="{{$infosPassaport->numPassaport ?? null }}" required maxlength="20">
+                                value="{{$infosPassaport->numPassaport ?? null }}" required maxlength="20" placeholder="Número do passaporte">
                         </div>
                         <div class="col">
                             {{-- INUPUT dataValidPP --}}
@@ -258,7 +274,7 @@
                             <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
                             <input type="hidden" id="hidden_passaportPaisEmi"
                                 value="{{$infosPassaport->passaportPaisEmi ?? null }}">
-                            <select id="passaportPaisEmi" name="passaportPaisEmi" style="width:100%" required>
+                            <select id="passaportPaisEmi" name="passaportPaisEmi" style="width:100%" class="form-control select_style" required>
                                 @include('clients.partials.countries');
                             </select>
                         </div>
@@ -266,7 +282,7 @@
                             {{-- INUPUT localEmissaoPP --}}
                             <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                             <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                                value="{{$infosPassaport->localEmissaoPP ?? null }}" maxlength="30" required>
+                                value="{{$infosPassaport->localEmissaoPP ?? null }}" maxlength="30" required placeholder="Insira o local de emissão">
                         </div>
                     </div>
 
@@ -311,17 +327,6 @@
 
             </div>
 
-
-            <hr>
-
-
-            {{-- LISTA DE OUTROS DOCUMENTOS --}}
-            <div class="row">
-                <div class="col">
-                    Outros documentos:
-                </div>
-            </div>
-
         </div>
 
 
@@ -332,36 +337,36 @@
                 <div class="col mr-3">
                     {{-- INPUT nivEstudoAtual --}}
                     <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
-                    <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" required>
-                        <option value="" selected hidden></option>
+                    <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" required>
+                        <option value="" selected hidden>Selecione nivel</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}}>1</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}}>2</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}}>3</option>
-                    </select><br>
+                    </select>
+
+                    <br>
 
                     {{-- INPUT nivEstudoAtual --}}
                     <label for="nomeInstituicaoOrigem">Nome da instituição de origem:</label><br>
                     <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem"
                         value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}" required
-                        maxlength="50"><br>
+                        maxlength="50" placeholder="Insira nome da instituição de origem">
+
+                    <br>
 
                     {{-- Cidade de Origem  --}}
                     <label for="morada">Cidade da Instituição de Origem:</label><br>
                     <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="cidadeInstituicaoOrigem"
                         value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}" required
-                        maxlength="50"><br>
-
-                    {{-- INPUT obsAcademicas --}}
-                    <label for="obsAcademicas">Observações académicas:</label><br>
-                    <textarea name="obsAcademicas" id="obsAcademicas" rows="5"
-                        style="width: 100%">{{old('obsAcademicas',$client->obsAcademicas)}}</textarea>
-
-
+                        maxlength="50" placeholder="Insira o nome da cidade da Instituição">
+                    <br>
                 </div>
 
-                <div class="col">
-                    <div class="text-center">Documentos académicos</div><br>
-                    <div class="text-muted text-center"><small>++++ (lista de ficheiros) ++++</small></div>
+                <div class="col" style="min-width:300px">
+                   {{-- INPUT obsAcademicas --}}
+                   <label for="obsAcademicas">Observações académicas:</label><br>
+                   <textarea name="obsAcademicas" id="obsAcademicas" rows="5"
+                       style="width: 100%; min-height:230px">{{old('obsAcademicas',$client->obsAcademicas)}}</textarea>
                 </div>
 
 
@@ -379,12 +384,12 @@
                 <div class="col">
                     <label for="telefone1">Telefone pessoal(1):</label><br>
                     <input type="text" class="form-control" name="telefone1" id="telefone1"
-                        value="{{old('telefone1',$client->telefone1)}}" maxlength="20" required maxlength="20"><br>
+                        value="{{old('telefone1',$client->telefone1)}}" maxlength="20" required maxlength="20" placeholder="Insira o número de telefone"><br>
                 </div>
                 <div class="col">
                     <label for="telefone2">Telefone pessoal(2):</label><br>
                     <input type="text" class="form-control" name="telefone2" id="telefone2"
-                        value="{{old('telefone2',$client->telefone2)}}" maxlength="20"><br>
+                        value="{{old('telefone2',$client->telefone2)}}" maxlength="20" placeholder="Insira o número de telefone"><br>
                 </div>
             </div>
 
@@ -392,12 +397,48 @@
                 <div class="col">
                     <label for="email">E-mail pessoal:</label><br>
                     <input type="email" class="form-control" name="email" id="email"
-                        value="{{old('email',$client->email)}}" required maxlength="250"><br>
+                        value="{{old('email',$client->email)}}" required maxlength="250" placeholder="Insira o endereço de e-mail"><br>
                 </div>
             </div>
 
+
+
+            <div class="row ">
+                <div class="col">
+                    {{-- Morada de residência em Portugal --}}
+                    <label for="moradaResidencia">Morada de residência em Portugal:</label><br>
+                    <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia"
+                        value="{{old('moradaResidencia',$client->moradaResidencia)}}" maxlength="255" placeholder="Insira a morada de residência em Portugal" required><br>
+                </div>
+
+
+            </div>
+
+
+            <hr class="my-3"><br>
+
+            <div class="row">
+
+                <div class="col">
+                    {{-- Morada de residência no pais de origem --}}
+                    <label for="morada">Morada no pais de origem:</label><br>
+                    <input type="text" class="form-control" name="morada" id="morada"
+                        value="{{old('morada',$client->morada)}}" maxlength="255" placeholder="Insira a morada no pais de origem" required><br>
+                </div>
+
+                <div class="col">
+                    {{-- Cidade de Origem  --}}
+                    <label for="cidade">Cidade de origem:</label><br>
+                    <input type="text" class="form-control" name="cidade" id="cidade"
+                        value="{{old('cidade',$client->cidade)}}" maxlength="50" placeholder="Insira a cidade de origem" required><br>
+                </div>
+
+            </div>
+
+            <hr class="my-3"><br>
+
             {{-- Contactos dos PAIS --}}
-            <div class="row mt-4">
+            <div class="row">
                 <div class="col">
 
                     <label for="nomePai">Nome do pai:</label><br>
@@ -430,35 +471,7 @@
             </div>
 
 
-                <div class="row ">
-                <div class="col">
-                    {{-- Morada de residência em Portugal --}}
-                    <label for="moradaResidencia">Morada de residência em Portugal:</label><br>
-                    <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia"
-                        value="{{old('moradaResidencia',$client->moradaResidencia)}}" maxlength="255" required><br>
-                </div>
 
-
-            </div>
-
-
-            <div class="row mt-4">
-
-                <div class="col">
-                    {{-- Morada de residência no pais de origem --}}
-                    <label for="morada">Morada no pais de origem:</label><br>
-                    <input type="text" class="form-control" name="morada" id="morada"
-                        value="{{old('morada',$client->morada)}}" maxlength="255" required><br>
-                </div>
-
-                <div class="col">
-                    {{-- Cidade de Origem  --}}
-                    <label for="cidade">Cidade de origem:</label><br>
-                    <input type="text" class="form-control" name="cidade" id="cidade"
-                        value="{{old('cidade',$client->cidade)}}" maxlength="50" required><br>
-                </div>
-
-            </div>
 
         </div>
 
@@ -474,7 +487,7 @@
                     {{-- INUPUT IBAN --}}
                     <label for="IBAN" class="mr-2">IBAN: </label><br>
                     <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$client->IBAN)}}"
-                        maxlength="25" required><br>
+                        maxlength="25" required placeholder="Insira o numero intenactional da conta bancária"><br>
 
                     {{-- INUPUT Observações Financeiras --}}
                     <label for="obsFinanceiras">Observações Financeiras:</label><br>

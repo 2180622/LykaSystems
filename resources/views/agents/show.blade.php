@@ -63,7 +63,7 @@
 
                 @if($agent->fotografia)
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.$agent->nome.'/').$agent->fotografia}}" style="width:90%">
+                    src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}" style="width:90%">
                 @elseif($agent->genero == 'F')
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
                     src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
@@ -79,7 +79,7 @@
                 <div class="card rounded shadow-sm m-2 p-3">
                     @if ($agent->img_doc)
                         <i class="far fa-id-card" style="font-size:40px"></i>
-                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.$agent->nome.'/').$agent->img_doc}}">Ver documento de identificação</a>
+                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->img_doc}}">Ver documento de identificação</a>
                     @else
                         <i class="far fa-id-card" style="font-size:40px"></i>
                         <a href="{{route('agents.edit',$agent)}}" class="mt-2 agent_link">

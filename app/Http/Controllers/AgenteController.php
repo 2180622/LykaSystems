@@ -101,13 +101,17 @@ class AgenteController extends Controller
         // data em que foi criado
         $t=time();
         $agent->create_at == date("Y-m-d",$t);
+
+        /* Slugs */
+        $agent->slug = ExtraFunctionsController::post_slug($agent->nome.' '.$agent->apelido);
+
         $agent->save();
 
         /* Fotografia do agente */
         if ($requestAgent->hasFile('fotografia')) {
             $photo = $requestAgent->file('fotografia');
-            $profileImg = $agent->nome . $agent->idCliente .'.'. $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $photo, $profileImg);
+            $profileImg = $agent->idCliente .'.'. $photo->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
             $agent->save();
         }
@@ -117,25 +121,21 @@ class AgenteController extends Controller
         /* Documento de identificação */
         if ($requestAgent->hasFile('img_doc')) {
             $docfile = $requestAgent->file('img_doc');
-            $docImg = $agent->nome . $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $docfile, $docImg);
+            $docImg = $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $docfile, $docImg);
             $agent->img_doc = $docImg;
             $agent->save();
         }
 
 
 
-
-
-
-
         /* Criação de utilizador */
 
         $user->tipo = "agente";
-        $user->status = 10;
         $user->idAgente = $agent->idAgente;
-        $user->save();
+        $user->auth_key = random_str(50);
 
+        $user->save();
 
         /* Envia o e-mail para ativação */
         $email = $user->email;
@@ -232,10 +232,12 @@ class AgenteController extends Controller
         $fields = $request->validated();
         $agent->fill($fields);
 
+
+        /* Fotografia */
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
-            $profileImg = $agent->nome . $agent->idCliente .'.'. $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $photo, $profileImg);
+            $profileImg = $agent->idCliente .'.'. $photo->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
         }
 
@@ -243,8 +245,8 @@ class AgenteController extends Controller
         /* Documento de identificação */
         if ($request->hasFile('img_doc')) {
             $docfile = $request->file('img_doc');
-            $docImg = $agent->nome . $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.$agent->nome.'/', $docfile, $docImg);
+            $docImg = $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $docfile, $docImg);
             $agent->img_doc = $docImg;
         }
 
@@ -261,6 +263,10 @@ class AgenteController extends Controller
         ->where('idAgente', $agent->idAgente)
         ->update(['idAgenteAssociado' => null]);
         }
+
+
+        /* Update das slugs */
+        $agent->slug = ExtraFunctionsController::post_slug($agent->nome.' '.$agent->apelido);
 
 
         /* update do user->email */
