@@ -51,13 +51,11 @@ class UserController extends Controller
 
       $user->idAdmin = $admin->idAdmin;
       $user->email = $admin->email;
-      $user->auth_key = random_str(50);
       $user->slug = post_slug($name);
       $user->save();
 
       $email = $user->email;
-      $id = $user->idUser;
-      Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+      Mail::to($email)->send(new SendEmailConfirmation($name));
 
       return redirect()->route('users.index')->with('success', 'Utilizador criado com sucesso.');
     }
@@ -66,7 +64,6 @@ class UserController extends Controller
     {
         return view('users.edit', compact('user'));
     }
-
 
     public function update(UpdateUserRequest $requestUser, UpdateAdministradorRequest $requestAdmin, User $user, Administrador $admin)
     {
