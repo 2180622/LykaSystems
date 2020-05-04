@@ -33,16 +33,17 @@ class AccountConfirmationController extends Controller
       return view('auth.confirmation-password', compact('user'));
     }
 
-    public function update(UpdateUserRequest $request, User $user){
-      $fields = $request->validated();
-      $user->fill($fields);
+    public function setpassword(UpdateUserRequest $request, User $user){
+      dd($user);
+      // $fields = $request->validated();
+      // $user->fill($fields);
       $password = $request->input('password');
       $passwordConf = $request->input('password-confirmation');
 
       if ($password == $passwordConf) {
         $hashed = Hash::make($password);
         $user->password = $hashed;
-        $user->auth_key = rand(655541,getrandmax());
+        $user->auth_key = random_str(50);
         $user->save();
         return view('auth.accountactive', compact('user'));
       }else {

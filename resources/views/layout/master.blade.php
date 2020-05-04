@@ -36,6 +36,26 @@
 
 <body>
 
+
+    {{-- Mensagem de carregamento / processamento --}}
+
+    <div id="wait_screen" style="display:none; position:absolute; top:0; left:0; width:100% ; height:100%; background-color:black; opacity:0.7;z-index:999;">
+        <div class="row" style="width: 100%; height:100%">
+
+            <div class="col my-auto mx-auto text-center text-white">
+
+                <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                <div style="font-size:30px">Aguarde por favor...</div>
+            </div>
+
+        </div>
+    </div>
+    {{-- Mensagem de carregamento / processamento --}}
+
+    
+
     <!-- Structure and Navigation -->
     <div class="container-fluid ">
         <div class="row" style="min-height:100vh">

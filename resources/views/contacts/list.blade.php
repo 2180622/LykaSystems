@@ -139,12 +139,12 @@
 
                                 {{-- Nome e Apelido --}}
                                 <td class="align-middle">
+                                    @if($contact->favorito)
+                                        <i class="fas fa-star text-warning mr-2" title="Contacto favorito" style="font-size:12px"></i>
+                                    @endif
+
                                     <a class="name_link" href="{{route('contacts.show',$contact)}}">
                                     {{$contact->nome}}</a>
-
-                                    @if($contact->favorito)
-                                        <i class="fas fa-star text-warning ml-1" title="Contacto favorito" style="font-size:12px"></i>
-                                    @endif
                                 </td>
 
                                 {{-- e-mail --}}

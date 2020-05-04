@@ -14,6 +14,7 @@ class StoreAdministradorRequest extends FormRequest
         return [
             'nome' => 'required',
             'apelido' => 'required',
+            'genero' => 'required',
             'email' => 'required',
             'dataNasc' => 'required',
             'telefone1' => 'required',

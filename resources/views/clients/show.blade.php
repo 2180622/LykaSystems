@@ -6,6 +6,13 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+
+<style>
+    .active {
+        color: #6A74C9
+    }
+
+</style>
 @endsection
 
 
@@ -26,7 +33,7 @@
     <div class="float-right">
         <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
         @if (Auth::user()->tipo == "admin")
-            <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
+        <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
         @endif
 
         <a href="{{route('clients.print',$client)}}" target="_blank" class="top-button">Imprimir</a>
@@ -44,7 +51,8 @@
                 </div>
             </div>
             <div class="col text-right">
-                <div class="text-muted"><small>Adicionado em: {{ date('d-M-y', strtotime($client->created_at)) }}</small></div>
+                <div class="text-muted"><small>Adicionado em:
+                        {{ date('d-M-y', strtotime($client->created_at)) }}</small></div>
 
                 <div class="text-muted"><small>Ultima atualização:
                         {{ date('d-M-y', strtotime($client->updated_at)) }}</small></div>
@@ -53,195 +61,166 @@
 
         <br>
 
-        <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
-            <div class="col p-0 text-center" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
+        <div class="card shadow-sm p-3" style="border-radius:10px">
+            <div class="row font-weight-bold p-2" style="color:#6A74C9">
+                <div class="col col-md-12 text-center my-auto "
+                    style="min-width:195px; max-width:290px; max-height:295px; overflow:hidden">
 
-                @if($client->fotografia)
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}" style="width:90%">
-                @elseif($client->genero == 'F')
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">
-                @else
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
-                @endif
-
-            </div>
-
-            <div class="col p-2" style="min-width:280px !important">
-
-                {{-- Informações Pessoais --}}
-                <div><span class="text-secondary ">Nome:</span> {{$client->nome}} {{$client->apelido}}</div><br>
-
-                <div><span class="text-secondary ">Género: </span>
-                    @if ($client->genero == 'M')
-                    Masculino
+                    @if($client->fotografia)
+                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                        src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
+                        style="width:100%; ">
+                    @elseif($client->genero == 'F')
+                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                        src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
                     @else
-                    Feminino
+                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                        src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
                     @endif
-                </div><br>
 
-                <div><span class="text-secondary">Naturalidade:</span> {{$client->paisNaturalidade}}</div><br>
+                </div>
 
-                <div><span class="text-secondary ">Data de nascimento: </span>
-                    {{ date('d-M-y', strtotime($client->dataNasc)) }}</div><br>
+                <div class="col p-2" style="min-width:280px !important">
 
-                <div><span class="text-secondary">Telefone (principal):</span> {{$client->telefone1}}</div><br>
+                    {{-- Informações Pessoais --}}
+                    <div><span class="text-secondary ">Nome:</span> {{$client->nome}} {{$client->apelido}}</div><br>
 
-                <div><span class="text-secondary">E-mail:</span> {{$client->email}}</div>
+                    <div><span class="text-secondary ">Género: </span>
+                        @if ($client->genero == 'M')
+                        Masculino
+                        @else
+                        Feminino
+                        @endif
+                    </div><br>
 
-            </div>
+                    <div><span class="text-secondary">Naturalidade:</span> {{$client->paisNaturalidade}}</div><br>
 
-            <div class="col p-2" style="min-width:230px !important">
-                <div><span class="text-secondary">Estado financeiro: </span><span
-                        class="text-success">Regularizado</span></div><br>
+                    <div><span class="text-secondary ">Data de nascimento: </span>
+                        {{ date('d-M-y', strtotime($client->dataNasc)) }}</div><br>
 
-                <div><span class="text-secondary">Observações pessoais:</span><br>
-                    @if ($client->obsPessoais==null)
-                    <span class="text-muted"><small>(sem dados para mostrar)</small></span>
-                    @else
-                    {{ $client->obsPessoais }}
-                    @endif
-                </div><br>
+                    <div><span class="text-secondary">Telefone (principal):</span> {{$client->telefone1}}</div><br>
+
+                    <div><span class="text-secondary">E-mail:</span> {{$client->email}}</div>
+
+                </div>
+
+                <div class="col p-2" style="min-width:230px !important">
+
+                    <div><span class="text-secondary">Observações pessoais:</span><br>
+                        @if ($client->obsPessoais==null)
+                        <span class="text-muted"><small>(sem dados para mostrar)</small></span>
+                        @else
+                        {{ $client->obsPessoais }}
+                        @endif
+                    </div><br>
 
 
 
-                @if (Auth::user()->tipo == "admin")
+                    @if (Auth::user()->tipo == "admin")
 
                     <div>
                         @if ($agents!=null )
                         <div class="text-secondary mb-2">Agente(s) associados:</div>
-                            @foreach ($agents as $agent)
-                            <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a><br>
-                            @endforeach
+                        @foreach ($agents as $agent)
+                        <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$agent)}}"
+                            class="name_link">{{$agent->nome}} {{$agent->apelido}}</a><br>
+                        @endforeach
 
-                            @if ($subagents!=null )
-                            @foreach ($subagents as $subagent)
-                            <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$subagent)}}" class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
-                            @endforeach
-                            @endif
+                        @if ($subagents!=null )
+                        @foreach ($subagents as $subagent)
+                        <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$subagent)}}"
+                            class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
+                        @endforeach
+                        @endif
                         @endif
                     </div>
 
                     {{-- Adicionar produto --}}
-                    <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
+                    <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i
+                                class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
+                    {{-- Adicionar Documento --}}
+                    <div class="mt-4"><a href="#" class="top-button" style="width:70px"><i class="fas fa-plus mr-2"></i>Adicionar
+                            documento</a></div>
 
-                @endif
+                    @endif
+
+                </div>
 
             </div>
+        </div>
+
+
+        <div class="row nav nav-fill w-100 text-center mt-2 mx-auto p-3">
+
+
+            <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link" id="produtos-tab"
+                data-toggle="tab" href="#produtos" role="tab" aria-controls="produto" aria-selected="true">
+                <div class="col"><i class="fas fa-th-large mr-2"></i>Produtos</div>
+            </a>
+
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="documentation-tab"
+                data-toggle="tab" href="#documentation" role="tab" aria-controls="documentation" aria-selected="false">
+                <div class="col"><i class="far fa-id-card mr-2"></i>Documentos</div>
+            </a>
+
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="academicos-tab"
+                data-toggle="tab" href="#academicos" role="tab" aria-controls="contacts" aria-selected="false">
+                <div class="col" style="min-width: 197px"><i class="fas fa-graduation-cap mr-2"></i>Dados académicos
+                </div>
+            </a>
+
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="contacts-tab"
+                data-toggle="tab" href="#contacts" role="tab" aria-controls="contacts" aria-selected="false">
+                <div class="col"><i class="fas fa-comments mr-2"></i>Contactos</div>
+            </a>
+
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="adresses-tab"
+                data-toggle="tab" href="#adresses" role="tab" aria-controls="adresses" aria-selected="false">
+                <div class="col"><i class="fas fa-chart-pie mr-2"></i>Financeiro</div>
+            </a>
+
 
         </div>
 
-        <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
 
-            {{-- MENU: Produtos --}}
-            <li class="nav-item " style="width:20%; min-width:110px">
-                <a class="nav-link active" id="produtos-tab" data-toggle="tab" href="#produtos" role="tab"
-                    aria-controls="produto" aria-selected="false">Produtos</a>
-            </li>
+        <div class="bg-white shadow-sm mb-4 p-4" style="margin-top:-30px">
 
-            {{-- MENU: Documentação --}}
-            <li class="nav-item text-center" style="width:20%; min-width:144px">
-                <a class="nav-link" id="documentation-tab" data-toggle="tab" href="#documentation" role="tab"
-                    aria-controls="documentation" aria-selected="false">Documentação pessoal</a>
-            </li>
+            <div class="tab-content" id="myTabContent">
+                {{-- Conteudo: Produtos --}}
+                <div class="tab-pane fade active show text-muted" id="produtos" role="tabpanel"
+                    aria-labelledby="produtos-tab">
 
-            {{-- MENU: Informação académica --}}
-            <li class="nav-item text-center" style="width:20%; min-width:144px">
-                <a class="nav-link" id="academicos-tab" data-toggle="tab" href="#academicos" role="tab"
-                    aria-controls="contacts" aria-selected="true">Dados académicos</a>
-            </li>
+                    @if($produtos)
 
-            {{-- MENU: Contactos --}}
-            <li class="nav-item text-center" style="width:20%; min-width:110px">
-                <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
-                    aria-controls="contacts" aria-selected="false">Contactos</a>
-            </li>
+                    <div class="row mt-2 pl-2">
 
-            {{-- MENU: Moradas --}}
-            <li class="nav-item text-center" style="width:20%; min-width:114px">
-                <a class="nav-link" id="adresses-tab" data-toggle="tab" href="#adresses" role="tab"
-                    aria-controls="adresses" aria-selected="false">Financeiro</a>
-            </li>
+                        @foreach ($produtos as $produto)
 
-        </ul>
+                        <a class="name_link text-center m-2" href="{{route('produtos.show',$produto)}}">
+                            <div class="col bg-light border rounded shadow-sm p-4">
+                                <div class="text-secondary"><i class="fas fa-database p-2 " style="font-size: 25px"></i>
+                                </div>
+                                <div>{{$produto->tipo}}</div>
+                                {{-- <div>{{$produto->descricao}} em desenvolvimento Web & Multimédia
+                            </div> --}}
+                            <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
+                    </div>
+                    </a>
 
+                    @endforeach
 
+                </div>
 
+                <hr>
 
-
-
-        <div class="tab-content p-2 " id="myTabContent">
-            {{-- Conteudo: Produtos --}}
-            <div class="tab-pane fade active show text-muted" id="produtos" role="tabpanel"
-                aria-labelledby="produtos-tab">
-
-                @if($produtos)
-                    <table nowarp class="table table-borderless text-muted" id="dataTable" width="100%" row-border="0"
-                        style="overflow:hidden;">
-
-                        {{-- Cabeçalho da tabela --}}
-                        <thead>
-                            <tr>
-                                <th>Tipo</th>
-                                <th>Descrição</th>
-                                <th>Ano Academico</th>
-                                <th>Valor</th>
-                            </tr>
-
-
-
-                        </thead>
-
-                        {{-- Corpo da tabela --}}
-                        <tbody>
-
-                            @foreach ($produtos as $produto)
-                            <tr>
-                                {{-- Tipo --}}
-                                <td class="align-middle"><a class="name_link"
-                                        href="{{route('produtos.show',$produto)}}">{{$produto->tipo}}</a></td>
-
-                                {{-- Descrição --}}
-                                <td class="align-middle"><a class="name_link"
-                                        href="{{route('produtos.show',$produto)}}">{{$produto->descricao}}</a></td>
-
-                                {{-- Ano Academico --}}
-                                <td class="align-middle">{{$produto->anoAcademico}}</td>
-
-                                {{-- Total --}}
-                                <td class="align-middle">{{$produto->valorTotal.'€'}}</td>
-
-
-                                {{-- OPÇÔES --}}
-                                {{-- <th class="text-center align-middle">
-                                    <a href="{{route('produtos.show',$produto)}}" class="btn_list_opt "
-                                title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                <a href="{{route('produtos.edit',$produto)}}" class="btn_list_opt btn_list_opt_edit"
-                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-
-                                <form method="POST" role="form" id="{{$produto->idProduto}}"
-                                    action="{{route('produtos.destroy',$produto)}}" class="d-inline-block form_produto_id">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn_delete" title="Eliminar produto" data-toggle="modal"
-                                        data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-
-                                </th> --}}
-                            </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-
-                    <hr>
-
-                    <div class="row border-dark p-2 pl-4 text-right">Total dos protudos: {{$totalprodutos}}€</div>
+                <div class="row border-dark p-2 pl-4 text-right">Total dos protudos: {{$totalprodutos}}€</div>
 
                 @else
-                    <div><span class="text-secondary">Sem Produtos</div>
+                <div class="mb-4 p-4"><span class="text-secondary">Sem Produtos</div>
                 @endif
 
             </div>
@@ -251,63 +230,85 @@
             <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
 
                 {{-- DADOS DE PASSAPORTE --}}
-                <div class="row">
+                <div class="row mt-2 pl-2 ">
 
                     <div class="col mr-3">
-                        {{-- numPassaport --}}
-                        <div><span class="text-secondary">Número do passaporte:</span> {{$infosPassaport->numPassaport ?? ''}}</div>
-                        <br>
 
-                        {{-- dataValidPP --}}
-                        <div><span class="text-secondary">Data de validade do passaporte:</span>
-                            {{$infosPassaport->dataValidPP }}</div><br>
+                        <div class="text-secondary mb-2">Passaporte:</div>
 
-                        {{-- passaportPaisEmi --}}
-                        <div><span class="text-secondary">Pais emissor do passaporte:</span>
-                            {{$infosPassaport->passaportPaisEmi ?? ''}}</div><br>
+                        <div class="border rounded bg-light p-3">
+                            {{-- numPassaport --}}
+                            <div><span class="text-secondary my-3">Número do passaporte:</span>
+                                {{$infosPassaport->numPassaport ?? ''}}</div>
+                            <br>
 
-                        {{-- localEmissaoPP --}}
-                        <div><span class="text-secondary">Local de emissão do passaporte:</span>
-                            {{$infosPassaport->localEmissaoPP ?? ''}}</div>
+                            {{-- dataValidPP --}}
+                            <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
+                                {{$infosPassaport->dataValidPP }}</div><br>
+
+                            {{-- passaportPaisEmi --}}
+                            <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
+                                {{$infosPassaport->passaportPaisEmi ?? ''}}</div><br>
+
+                            {{-- localEmissaoPP --}}
+                            <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>
+                                {{$infosPassaport->localEmissaoPP ?? ''}}</div>
+
+                        </div>
 
                         <br><br>
-                        {{-- CC IDENTIFICAÇÃO --}}
-                        <div><span class="text-secondary">Número de identificação pessoal:</span> {{$client->num_docOficial}}</div>
-                        <br>
-                        <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}</div>
-                        <br>
-                        <div><span class="text-secondary">Data de validade:</span> {{$client->info_docOficial}}</div>
 
+                        <div class="text-secondary mb-2">Documento de identificação pessoal:</div>
+
+                        <div class="border rounded bg-light p-3">
+                            {{-- CC IDENTIFICAÇÃO --}}
+                            <div><span class="text-secondary">Número de identificação pessoal:</span>
+                                {{$client->num_docOficial}}
+                            </div>
+                            <br>
+                            <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}
+                            </div>
+                            <br>
+                            <div><span class="text-secondary">Data de validade:</span> {{$client->info_docOficial}}
+                            </div>
+                        </div>
+
+                        <br>
 
 
                     </div>
 
 
-                    <div class="col" style="min-width:225px">
+                    <div class="col" style="min-width:250px">
                         <div class="text-secondary mb-2">Ficheiros carregados:</div>
 
-                        <ul style="list-style-type:none;margin:0px;padding:0">
+                        <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
 
                             {{-- Verifica se existe imagem para cartão de documento de id pessoal --}}
                             @if ($client->img_docOficial)
                             <li class="my-3">
                                 <i class="far fa-address-card mr-2"></i>
-                                <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/'.$client->img_docOficial)}}">Documento de identificação pessoal</a>
+                                <a class="name_link" target="_blank"
+                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$client->img_docOficial)}}">Documento
+                                    de identificação pessoal</a>
                             </li>
+                            @else
+                            <li class="my-3 text-secondary"><small>Falta ficheiro de identificação pessoal</small></li>
                             @endif
 
                             {{-- Verifica se existe imagem para passaporte --}}
                             @if ($client->img_Passaport)
                             <li class="my-3">
                                 <i class="far fa-address-card mr-2"></i>
-                                <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/'.$client->img_Passaport)}}">Passaporte</a>
+                                <a class="name_link" target="_blank"
+                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$client->img_Passaport)}}">Passaporte</a>
                             </li>
+                            @else
+                            <li class="my-3 text-secondary"><small>Falta ficheiro do passaporte</small></li>
                             @endif
 
-                        </ul>
 
-                    {{-- Carregar novos documentos --}}
-                    <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Carregar Documentos</a></div>
+                        </ul>
 
                     </div>
 
@@ -321,53 +322,56 @@
 
             {{-- Conteudo: DADOS ACADÉMICOS --}}
             <div class="tab-pane fade" id="academicos" role="tabpanel" aria-labelledby="academicos-tab">
-                <div class="row">
+                <div class="row mt-2 pl-2">
                     <div class="col">
 
                         {{-- Informações Escolares --}}
-                        <div><span class="text-secondary">Nivel de estudos(atual):</span> {{$client->nivEstudoAtual}}
-                        </div><br>
+                        <div class="text-secondary mb-2">Nível de estudos:</div>
 
-                        <div><span class="text-secondary">Nome da instituição de origem:</span>
-                            {{$client->nomeInstituicaoOrigem}}</div><br>
-
-                        <div><span class="text-secondary">Local da instituição:</span>
-                            {{$client->cidadeInstituicaoOrigem}}</div><br>
-
-                        <div><span class="text-secondary">Observações académicas:</span>
-
-                            @if ($client->obsAcademicas==null)
-                            <span class="text-muted"><small>(sem dados para mostrar)</small></span>
-                            @else
-                            {{$client->obsAcademicas}}
-                            @endif
-
+                        <div class="border rounded bg-light p-3">
+                            {{$client->nivEstudoAtual}}
                         </div>
+
+                        <br>
+
+                        <div class="text-secondary mb-2">Instituição de origem</div>
+                        <div class="border rounded bg-light p-3">
+                            <div><span class="text-secondary">Nome: </span>{{$client->nomeInstituicaoOrigem}}</div><br>
+                            <div><span class="text-secondary">Local: </span>{{$client->cidadeInstituicaoOrigem}}</div>
+                        </div>
+
+                        <br>
+
+
+
+                        <div class="text-secondary mb-2">Observações académicas:</div>
+                        <div class="border rounded bg-light p-3">
+                            @if ($client->obsAcademicas==null)
+                            <div class="text-muted "><small>(sem dados para mostrar)</small></div>
+                            @else
+                            <div> {{$client->obsAcademicas}}</div>
+                            @endif
+                        </div>
+
 
                     </div>
 
                     <div class="col" style="min-width:225px">
                         <div class="text-secondary mb-2">Documentos académicos:</div>
 
-                        <ul style="list-style-type:none;margin:0px;padding:0">
+                        <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                             @if($docsAcademicos)
 
                             @foreach($docsAcademicos as $docAcademico)
-                                <li class="my-3">
-                                    <i class="fas fa-file-alt mr-2"></i>
-                                    <a href="" class="name_link" target="_blank" href="#">{{$docAcademico->tipo}}</a>
-                                </li>
+                            <li class="my-3">
+                                <i class="fas fa-file-alt mr-2"></i>
+                                <a href="" class="name_link" target="_blank" href="#">{{$docAcademico->tipo}}</a>
+                            </li>
                             @endforeach
 
                             @else
-                            <li class="text-muted"><small>Sem documentos</small></li>
+                            <li class="text-muted my-3"><small>Sem documentos</small></li>
                             @endif
-
-
-                            {{-- Carregar novos documentos --}}
-                            <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Carregar Documentos</a></div>
-
-
 
                         </ul>
 
@@ -375,59 +379,87 @@
 
                 </div>
 
+                <br>
+
             </div>
 
 
             {{-- Conteudo: Contactos --}}
             <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
 
-                <div class="row">
+                <div class="row mt-2 pl-2">
                     <div class="col">
 
                         {{-- Contactos --}}
-                        <div><span class="text-secondary">Telefone (principal):</span> {{$client->telefone1}}</div><br>
+                        <div class="text-secondary mb-2" style="min-width: 256px">Contactos:</div>
 
-                        <div><span class="text-secondary">Telefone (secundário):</span> {{$client->telefone2}}</div><br>
-
-                        <div><span class="text-secondary">E-mail:</span> {{$client->email}}</div><br>
+                        <div class="border rounded bg-light p-3">
+                            <div><span class="text-secondary">Telefone (principal):</span> {{$client->telefone1}}</div>
+                            <br>
+                            @if ($client->telefone2!=null)
+                            <div><span class="text-secondary">Telefone (secundário):</span> {{$client->telefone2}}</div>
+                            <br>
+                            @endif
+                            <div><span class="text-secondary">E-mail:</span> {{$client->email}}</div>
+                        </div>
+                        <br>
                     </div>
+
 
 
                     <div class="col">
 
-                        {{-- Contactos --}}
-                        <div><span class="text-secondary">Morada de residência (Portugal):</span></div>
-                        <div>{{$client->moradaResidencia}}</div><br>
-
+                        {{-- Morada PT --}}
+                        <div class="text-secondary mb-2" style="min-width: 256px">Morada de residência em Portugal:
+                        </div>
+                        <div class="border rounded bg-light p-3">
+                            <div>{{$client->moradaResidencia}}</div>
+                        </div>
+                        <br>
                     </div>
+
                 </div>
 
-                <hr><br>
 
                 <div class="row">
                     <div class="col">
                         {{-- Morada de residência no pais de origem --}}
-                        <div><span class="text-secondary">Morada (origem):</span> {{$client->morada}}</div><br>
-                        <div><span class="text-secondary">Cidade (origem):</span> {{$client->cidade}}</div><br>
-                        <hr>
+                        <div class="text-secondary mb-2">Morada de origem:</div>
+                        <div class="border rounded bg-light p-3">
+                            <div><span class="text-secondary">Cidade (origem):</span> {{$client->cidade}}</div><br>
+                            <div><span class="text-secondary">Morada (origem):</span> {{$client->morada}}</div>
+                        </div>
                     </div>
+                    <br>
                 </div>
+
+
+                <br>
 
                 {{-- Contactos dos PAIS --}}
-                <div class="row mt-4">
-                    <div class="col ">
-                        <div><span class="text-secondary">Nome do pai:</span> {{$client->nomePai}}</div><br>
-                        <div><span class="text-secondary">Telefone do pai:</span> {{$client->telefonePai}}</div><br>
-                        <div><span class="text-secondary">E-mail do pai:</span> {{$client->emailPai}}</div><br>
+                <div class="row">
+                    <div class="col">
+                        <div class="text-secondary mb-2">Identificação dos pais:</div>
                     </div>
-
-                    <div class="col ">
-                        <div><span class="text-secondary">Nome da mãe:</span> {{$client->nomeMae}}</div><br>
-                        <div><span class="text-secondary">Telefone da mãe:</span> {{$client->telefoneMae}}</div><br>
-                        <div><span class="text-secondary">E-mail da mãe:</span> {{$client->emailMae}}</div><br>
-                    </div>
-
                 </div>
+
+                <div class="border rounded bg-light p-3">
+                    <div class="row">
+                        <div class="col " style="min-width: 300px">
+                            <div><span class="text-secondary">Nome do pai:</span> {{$client->nomePai}}</div><br>
+                            <div><span class="text-secondary">Telefone do pai:</span> {{$client->telefonePai}}</div><br>
+                            <div><span class="text-secondary">E-mail do pai:</span> {{$client->emailPai}}</div>
+                            <br>
+                        </div>
+                        <div class="col" style="min-width: 300px">
+                            <div><span class="text-secondary">Nome da mãe:</span> {{$client->nomeMae}}</div><br>
+                            <div><span class="text-secondary">Telefone da mãe:</span> {{$client->telefoneMae}}</div><br>
+                            <div><span class="text-secondary">E-mail da mãe:</span> {{$client->emailMae}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
 
             </div>
 
@@ -438,25 +470,32 @@
             {{-- DADOS FINANCEIROS --}}
             <div class="tab-pane fade" id="adresses" role="tabpanel" aria-labelledby="adresses-tab">
 
-                <div class="row ">
+                <div class="row mt-2 pl-2">
                     <div class="col">
 
-                        <div><span class="text-secondary">IBAN:</span> {{$client->IBAN}}</div>
-                        <hr><br>
-                        <div><span class="text-secondary">Estado financeiro: </span><span
-                                class="text-success">Regularizado</span></div><br>
+                        <div class="text-secondary mb-2">IBAN:</div>
+                        <div class="border rounded bg-light p-3">
+                            {{$client->IBAN}}
+                        </div>
 
-                        <div><span class="text-secondary">Observações Financeiras:</span><br>
+                        <br>
 
+                        <div class="text-secondary mb-2">Estado financeiro:</div>
+                        <div class="border rounded bg-light p-3">
+                            {{-- +++++++++ Falta a lógica  ++++++++++++--}}
+                            <span class="text-success">Regularizado</span>
+                        </div>
+
+                        <br>
+
+                        <div class="text-secondary mb-2">Observações Financeiras:</div>
+                        <div class="border rounded bg-light p-3">
                             @if ($client->obsFinanceiras==null)
                             <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                             @else
                             {{$client->obsFinanceiras}}
                             @endif
-
-                        </div><br>
-
-
+                        </div>
 
 
                     </div>
@@ -464,16 +503,11 @@
                 </div>
             </div>
 
-
-
         </div>
-
-
-
-
-
     </div>
 </div>
+</div>
+
 
 @endsection
 

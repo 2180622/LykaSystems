@@ -102,7 +102,7 @@
                             <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
                                 <a class="name_link" href="{{route('clients.show',$client)}}">
                                     @if($client->fotografia)
-                                        <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}" width="100%" class="mx-auto">
+                                        <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}" width="100%" class="mx-auto">
                                         @elseif($client->genero == 'F')
                                             <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
                                             @else

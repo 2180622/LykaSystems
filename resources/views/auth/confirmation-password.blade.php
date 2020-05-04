@@ -15,7 +15,7 @@
         </strong>
         @endif
         <div>
-            <form class="form-group" action="{{route('confirmation.update', $user)}}" method="post">
+            <form class="form-group" action="{{route('confirmation.setpassword', $user)}}" method="put">
                 @csrf
                 <div class="form-group">
                     <input id="password" type="password" class="form-control" name="password" placeholder="Password" />

@@ -2,34 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use DateTime;
 use DateInterval;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-use App\Notificacao;
-use App\Administrador;
-use App\Agenda;
-use App\Agente;
-use App\Biblioteca;
-use App\Cliente;
+use App\User;
+use App\Fase;
 use App\Conta;
+use App\Agente;
+use App\Agenda;
+use App\Produto;
+use App\Cliente;
 use App\Contacto;
 use App\DocAcademico;
 use App\DocPessoal;
 use App\DocNecessario;
 use App\DocStock;
-use App\DocTransacao;
-use App\Fase;
 use App\FaseStock;
 use App\Fornecedor;
-use App\PagoResponsabilidade;
-use App\Produto;
-use App\ProdutoStock;
+use App\Biblioteca;
+use App\DocPessoal;
 use App\RelFornResp;
-use App\Responsabilidade;
+use App\Notificacao;
+use App\DocAcademico;
+use App\ProdutoStock;
+use App\DocTransacao;
 use App\Universidade;
-use App\User;
+use App\Administrador;
+use App\Responsabilidade;
+use App\PagoResponsabilidade;
 
 
 class DataController extends Controller
@@ -116,13 +118,6 @@ class DataController extends Controller
         $agente->tipo = 'Subagente';
         $agente->idAgenteAssociado = 1;
         $agente->save();
-
-        /******************          Bibliotecas          ******************/
-
-/*         $biblioteca = new Biblioteca;
-        $biblioteca->nome = 'YII2-Intro';
-        $biblioteca->imagem = 'docs/Biblioteca-0001_YII2-Intro';
-        $biblioteca->save(); */
 
         /*******************          Clientes          ********************/
 
@@ -363,10 +358,8 @@ class DataController extends Controller
         $user->email = 'nill546@hotmail.com';
         $user->tipo = 'admin';
         $user->password = Hash::make('teste1234');
-        $user->password_reset_token = null;
-        $user->verification_token = null;
-        $user->auth_key = 'sdfglnsdbhkfnjslkdfgn';
-        $user->status = '10';
+        $user->auth_key = strtoupper(random_str(5));
+        $user->slug = post_slug('Neuza Cordeiro');
         $user->idAdmin = 2;
         $user->idAgente = null;
         $user->idCliente = null;
@@ -376,10 +369,8 @@ class DataController extends Controller
         $user->email = 'jose.fer@gmail.com';
         $user->tipo = 'agente';
         $user->password = Hash::make('teste1234');
-        $user->password_reset_token = null;
-        $user->verification_token = null;
-        $user->auth_key = 'sdfglnsdbhkfnjslkdfgn';
-        $user->status = '10';
+        $user->auth_key = strtoupper(random_str(5));
+        $user->slug = post_slug('José Fernandes');
         $user->idAdmin = null;
         $user->idAgente = 1;
         $user->idCliente = null;
@@ -389,25 +380,13 @@ class DataController extends Controller
         $user->email = 'tiaveira@gmail.com';
         $user->tipo = 'cliente';
         $user->password = Hash::make('teste1234');
-        $user->password_reset_token = null;
-        $user->verification_token = null;
-        $user->auth_key = 'sdfglnsdbhkfnjslkdfgn';
-        $user->status = '10';
+        $user->auth_key = strtoupper(random_str(5));
+        $user->slug = post_slug('Tiago Oliveira');
         $user->idAdmin = null;
         $user->idAgente = null;
         $user->idCliente = 1;
         $user->save();
 
-        /********************          Agendas          ********************/
-/*
-        $agenda = new Agenda;
-        $agenda->descricao = 'Teste';
-        $agenda->visibilidade = false;
-        $agenda->dataInicio = date('Y-m-d H:i',strtotime('01-03-2020 14:30'));
-        $agenda->dataFim = date('Y-m-d H:i',strtotime('20-06-2020 18:25'));
-        $agenda->idUser = 2;
-        $agenda->save();
- */
         /*******************          Produtos          ********************/
 
         $produto = new Produto;

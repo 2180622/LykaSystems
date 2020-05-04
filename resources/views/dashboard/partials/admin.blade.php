@@ -71,3 +71,24 @@
         </div>
     </div>
 </div>
+
+
+
+
+<div class="title  mt-5 ">
+    <h6>Espaço de aramazenamento</h6>
+</div>
+
+<div class="row ">
+    <div class="col">
+        <div>
+            Espaço de armazenamento ocupado: {{$size}}
+            <br>Disponivel: XX
+            <br> Gráfico ?
+        </div>
+    </div>
+
+</div>
+
+
+

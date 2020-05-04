@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DocStock extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'DocStock';
     protected $primaryKey = 'idDocStock';
 

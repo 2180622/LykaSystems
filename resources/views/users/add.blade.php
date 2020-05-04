@@ -32,7 +32,7 @@
         </div>
         <br>
         <p><b>Nota:</b> Ao adicionar um utilizador está a colocar esse mesmo utilizador como perfil de <b>administrador</b>.</p>
-        <form method="POST" action="{{route('users.storeAdmin')}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('users.store')}}" class="form-group needs-validation pt-3" id="form-user" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="row">
                 <div class="col">
@@ -75,6 +75,18 @@
                     <div class="form-group">
                         <label for="inputFullname">Telefone Secundário (Opcional):</label>
                         <input type="text" class="form-control" name="telefone2" value="{{old('telefone2', $user->telefone2)}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                      <label for="inputFullname">Género:</label>
+                      <select type="text" class="form-control" name="genero" id="genero"
+                       placeholder="Género" required>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                      </select>
                     </div>
                 </div>
             </div>

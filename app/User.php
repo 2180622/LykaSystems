@@ -2,21 +2,20 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\User;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-    use SoftDeletes;
+    use Notifiable, SoftDeletes;
     protected $table = 'User';
     protected $primaryKey = 'idUser';
 
     protected $fillable = [
-        'email','tipo','password','$idAdmin','$idAgente','$idCliente'
+        'email', 'tipo', 'password', '$idAdmin', '$idAgente', '$idCliente', 'admin'
     ];
 
     public function admin(){
@@ -68,4 +67,10 @@ class User extends Authenticatable
         }
         return $notifications;
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

@@ -20,9 +20,13 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::where('tipo', '=', 'admin')->get();
-        $admin = Administrador::get();
-        return view('users.list', compact('users', 'admin'));
+        $users = User::where('tipo', '=', 'admin')->with('admin')->get();
+        return view('users.list', compact('users'));
+    }
+
+    public function show(User $user)
+    {
+        return view('users.show', compact('user'));
     }
 
     public function create()
@@ -31,44 +35,37 @@ class UserController extends Controller
       return view('users.add', compact('user'));
     }
 
-    public function storeAdmin(StoreUserRequest $requestUser, StoreAdministradorRequest $requestAdmin){
+    public function store(StoreUserRequest $requestUser, StoreAdministradorRequest $requestAdmin){
       $fieldsUser = $requestUser->validated();
       $fieldsAdmin = $requestAdmin->validated();
 
       $user = new User;
       $user->tipo = "admin";
-      $user->status = 10;
       $user->fill($fieldsUser);
 
       $admin = new Administrador;
       $admin->fill($fieldsAdmin);
 
       $name = $admin->nome .' '. $admin->apelido;
-
       $admin->save();
+
       $user->idAdmin = $admin->idAdmin;
       $user->email = $admin->email;
+      $user->slug = post_slug($name);
+      $user->auth_key = strtoupper(random_str(5));
       $user->save();
 
       $email = $user->email;
-      $id = $user->idUser;
-      Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+      $auth_key = $user->auth_key;
+      Mail::to($email)->send(new SendEmailConfirmation($name, $auth_key));
 
       return redirect()->route('users.index')->with('success', 'Utilizador criado com sucesso.');
     }
 
-
-    public function show(User $user)
+    public function edit(User $user)
     {
-        return view('users.show', compact('user'));
+        return view('users.edit', compact('user'));
     }
-
-
-    public function edit(User $user, Administrador $admin)
-    {
-        return view('users.edit', compact('user', 'admin'));
-    }
-
 
     public function update(UpdateUserRequest $requestUser, UpdateAdministradorRequest $requestAdmin, User $user, Administrador $admin)
     {
@@ -94,7 +91,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        //
+        $user->admin->delete();
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'Administrador eliminado com sucesso');
     }
 
     public function print(User $user)

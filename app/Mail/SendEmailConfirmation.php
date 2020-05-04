@@ -2,22 +2,21 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendEmailConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $id;
     public $name;
+    public $auth_key;
 
-    public function __construct(string $id, string $name){
-      $this->id = $id;
+    public function __construct(string $name, string $auth_key){
       $this->name = $name;
+      $this->auth_key = $auth_key;
     }
-
 
     public function build()
     {
@@ -26,7 +25,8 @@ class SendEmailConfirmation extends Mailable
             ->markdown('mails.confirmation')
             ->with([
                 'name' => $this->name,
-                'link' => url('/').'/confirmation/'.$this->id
+                'key' => $this->auth_key,
+                'link' => url('/').'/ativacaoconta/'.post_slug($this->name)
             ]);
     }
 }

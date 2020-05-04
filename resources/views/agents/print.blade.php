@@ -109,7 +109,7 @@
 
                 @if($agent->fotografia)
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.$agent->nome.'/').$agent->fotografia}}" style="width:90%">
+                    src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}" style="width:90%">
                 @elseif($agent->genero == 'F')
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
                     src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:90%">

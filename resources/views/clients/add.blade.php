@@ -12,6 +12,8 @@
 {{-- Page Content --}}
 @section('content')
 
+
+
 <div class="container mt-2">
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -31,7 +33,8 @@
         <div class="title">
             <h6>Adicionar estudante</h6>
         </div>
-        <br>
+
+
         <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
             @csrf
             @include('clients.partials.add-edit')

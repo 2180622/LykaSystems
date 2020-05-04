@@ -134,7 +134,7 @@ class ClientController extends Controller
         if ($requestClient->hasFile('img_docOficial')) {
             $img_doc = $requestClient->file('img_docOficial');
             $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.$client->nome.'/', $img_doc, $nome_img);
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_img);
             $doc_id->imagem = $nome_img;
 
             /* salva o documento na tabela dos clientes */
@@ -156,7 +156,7 @@ class ClientController extends Controller
         if ($requestClient->hasFile('img_Passaport')) {
             $img_doc = $requestClient->file('img_Passaport');
             $nome_img = $client->idCliente . '_PP.' . $img_doc->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.$client->nome.'/', $img_doc, $nome_img);
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_img);
             $passaporte->imagem = $nome_img;
 
             /* salva o documento na tabela dos clientes */
@@ -167,9 +167,6 @@ class ClientController extends Controller
 
 
 
-
-
-
         /* Criação de cliente */
         $client->info_docOficial = $requestClient->dataValidade_docOficial;
 
@@ -177,7 +174,7 @@ class ClientController extends Controller
         if ($requestClient->hasFile('fotografia')) {
             $photo = $requestClient->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.$client->nome.'/', $photo, $profileImg);
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $photo, $profileImg);
             $client->fotografia = $profileImg;
             $doc_id->imagem = $profileImg;
             $client->save();
@@ -196,16 +193,20 @@ class ClientController extends Controller
 
         /* Guarda Cliente */
         $client->create_at == date("Y-m-d",$t);
-        $client->save();
 
+        /* Slugs */
+        $client->slug = ExtraFunctionsController::post_slug($client->nome.' '.$client->apelido);
+
+        $client->save();
 
 
 
         /* Criação de utilizador */
 
         $user->tipo = "cliente";
-        $user->status = 10;
         $user->idCliente = $client->idCliente;
+        $user->auth_key = strtoupper(random_str(5));
+
         $user->save();
 
         /* Envia o e-mail para ativação */
@@ -218,6 +219,8 @@ class ClientController extends Controller
 
         return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }
+
+
 
 
     /**
@@ -392,7 +395,7 @@ class ClientController extends Controller
         if ($request->hasFile('fotografia')) {
             $photo = $request->file('fotografia');
             $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.$client->nome.'/', $photo, $profileImg);
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $photo, $profileImg);
             $client->fotografia = $profileImg;
 
         }
@@ -402,7 +405,7 @@ class ClientController extends Controller
         if ($request->hasFile('img_docOficial')) {
             $img_doc = $request->file('img_docOficial');
             $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.$client->nome.'/', $img_doc, $nome_img);
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_img);
             $client->img_docOficial=$nome_img;
             $client->save();
         }
@@ -430,7 +433,7 @@ class ClientController extends Controller
         if ($request->hasFile('img_Passaport')) {
             $img_doc = $request->file('img_Passaport');
             $nome_img = $client->idCliente . '_PP.' . $img_doc->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.$client->nome.'/', $img_doc, $nome_img);
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_img);
             $client->img_Passaport=$nome_img;
             $client->save();
         }
@@ -440,6 +443,9 @@ class ClientController extends Controller
         // data em que foi modificado
         $t=time();
         $client->updated_at == date("Y-m-d",$t);
+
+        /* Slugs */
+        $client->slug = ExtraFunctionsController::post_slug($client->nome.' '.$client->apelido);
 
         $client->save();
 
