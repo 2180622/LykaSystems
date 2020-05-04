@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DocTransacao;
+use App\Fase;
+use App\Http\Requests\UpdateDocTransacaoRequest;
+use App\Http\Requests\StoreDocTransacaoRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -15,11 +18,13 @@ class DocTransacaoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function create(Fase $fase, String $tipoPAT, String $tipo)
+    public function create(Fase $fase)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
             
             $documento = new DocTransacao;
+            $tipoPAT = 'Transacao';
+            $tipo = 'Transacao';
             
             return view('documentos.add',compact('fase','tipoPAT','tipo','documento'));
         }else{
@@ -36,7 +41,7 @@ class DocTransacaoController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreDocTransacaoRequest $request){
+    public function store(StoreDocTransacaoRequest $request,Fase $fase){
 
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
 

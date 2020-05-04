@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\DocAcademico;
+use App\DocNecessario;
+use App\Fase;
+use App\Http\Requests\UpdateDocumentoRequest;
+use App\Http\Requests\StoreDocumentoRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -15,13 +19,15 @@ class DocAcademicoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function create(Fase $fase, String $tipoPAT, String $tipo)
+    public function create(Fase $fase, DocNecessario $docnecessario)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
 
             $documento = new DocAcademico;
+            $tipoPAT = $docnecessario->tipo;
+            $tipo = $docnecessario->tipoDocumento;
 
-            return view('documentos.add',compact('fase','tipoPAT','tipo','documento'));
+            return view('documentos.add',compact('fase','tipoPAT','tipo','documento', 'docnecessario'));
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }
@@ -36,7 +42,7 @@ class DocAcademicoController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreDocumentoRequest $request,Fase $fase, String $tipo){
+    public function store(StoreDocumentoRequest $request,Fase $fase,DocNecessario $docnecessario){
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
             
@@ -44,13 +50,17 @@ class DocAcademicoController extends Controller
             $infoDoc = null;
 
             for($i=1;$i<=500;$i++){
-                if($fields['nome-campo'.$i]){
-                    $infoDoc[$fields['nome-campo'.$i]] = $fields['valor-campo'.$i];
+                if(array_key_exists('nome-campo'.$i,$fields)){
+                    if($fields['nome-campo'.$i]){
+                        $infoDoc[$fields['nome-campo'.$i]] = $fields['valor-campo'.$i];
+                    }
+                }else{
+                    break;
                 }
             }
 
             $documento = new DocAcademico;
-            $documento->tipo=$tipo;
+            $documento->tipo=$docnecessario->tipoDocumento;
             if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
                 $documento->verificacao = true;
             }else{

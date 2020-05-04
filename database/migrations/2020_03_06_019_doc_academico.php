@@ -19,7 +19,7 @@ class DocAcademico extends Migration
             $table->bigIncrements('idDocAcademico');
             $table->string('idCliente',255)->nullable();
             $table->string('nome',255);
-            $table->enum('tipo',['Exame Universitário','Exame Nacional','Diploma','Certificado']);
+            $table->string('tipo', 255);
             $table->string('imagem',255);
             $table->longText('info');
             $table->string('slug')->nullable();
