@@ -82,16 +82,7 @@
 
             <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
 
-                {{-- Cabeçalho da tabela --}}
-                <thead>
-                    <tr>
-                        <th class="text-center align-content-center ">Foto</th>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>Naturalidade</th>
-                        <th class="text-center">Opções</th>
-                    </tr>
-                </thead>
+
 
                 {{-- Corpo da tabela --}}
                 <tbody>
