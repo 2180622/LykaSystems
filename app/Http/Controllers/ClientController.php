@@ -167,9 +167,6 @@ class ClientController extends Controller
 
 
 
-
-
-
         /* Criação de cliente */
         $client->info_docOficial = $requestClient->dataValidade_docOficial;
 
@@ -208,10 +205,7 @@ class ClientController extends Controller
 
         $user->tipo = "cliente";
         $user->idCliente = $client->idCliente;
-        $user->auth_key = random_str(50);
-
-
-
+        $user->auth_key = strtoupper(random_str(5));
 
         $user->save();
 

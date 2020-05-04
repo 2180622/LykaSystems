@@ -224,25 +224,27 @@
               // Loop over them and prevent submission
               var validation = Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
+
+                  /* mostrar div de espera */
+                  $("#wait_screen").show();
+
                   if (form.checkValidity() === false) {
                     event.preventDefault();
                     event.stopPropagation();
 
                     /* Se for subagente é obrigatorio ter um agente */
                     if ( $("#idAgenteAssociado").val()=="pickone" ){
+                        $("#wait_screen").hide();
                         $("#idAgenteAssociado").addClass("is-invalid");
                         $("#idAgenteAssociado").addClass(":invalid");
                         return;
                     }
 
                   }
-                  
-                  /* mostrar div de espera */
-                  $("#wait_screen").show();
 
                   window.scrollTo(0, 0);
-
                   form.classList.add('was-validated');
+
                 }, false);
               });
             }, false);

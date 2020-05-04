@@ -94,7 +94,7 @@
                     <div class="col-md-1 align-self-center">
                         <div class="white-circle">
                             @if($product->cliente->fotografia)
-                                <img src="{{Storage::disk('public')->url('client-documents/'.$product->cliente->idCliente.$product->cliente->nome.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
+                                <img src="{{Storage::disk('public')->url('client-documents/'.$product->cliente->idCliente.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
                                 @elseif($product->cliente->genero == 'F')
                                     <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
                                     @else
