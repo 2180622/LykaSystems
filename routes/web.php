@@ -139,9 +139,10 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     ]);
 });
 
-/* Email Confirmation */
-Route::get('/ativacaoconta/{user}', 'AccountConfirmationController@mailconfirmation')->name('confirmation.mail');
-Route::put('/ativacaoconta/{user}', 'AccountConfirmationController@setpassword')->name('confirmation.setpassword');
+/* Account Confirmation */
+Route::get('/ativacao-conta/{user}', 'AccountConfirmationController@index');
+Route::get('/ativacao-conta/{user}/confirmar-chave', 'AccountConfirmationController@keyconfirmation')->name('confirmation.key');
+Route::put('/ativacao-conta/{user}/confirmar-password', 'AccountConfirmationController@password')->name('confirmation.password');
 
 /* Ajuda */
 Route::get('/ajuda', 'HelpController@show')->name('ajuda');
