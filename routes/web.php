@@ -75,10 +75,21 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
 
     /* Utilizadores */
-    Route::resource('/users', 'UserController');
-    Route::post('/users/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
-    Route::get('/users/{user}/{admin}', 'UserController@edit')->name('users.edit');
-    Route::put('/users/{user}/{admin}', 'UserController@update')->name('users.update');
+    Route::resource('/utilizadores', 'UserController')->parameters([
+      'utilizadores' => 'users'
+    ])->names([
+      'index' => 'users.index',
+      'store' => 'users.store',
+      'create' => 'users.create',
+      'show' => 'users.show',
+      'update' => 'users.update',
+      'destroy' => 'users.destroy',
+      'edit' => 'users.edit',
+    ]);
+
+    Route::post('/utilizadores/storeAdmin', 'UserController@storeAdmin')->name('users.storeAdmin');
+    Route::get('/utilizadores/{user}/{admin}', 'UserController@edit')->name('users.edit');
+    Route::put('/utilizadores/{user}/{admin}', 'UserController@update')->name('users.update');
 
     /* Produto Stock*/
     Route::resource('/produtostock', 'ProdutosstockController');
@@ -133,7 +144,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 });
 
 /* Email Confirmation */
-Route::get('/confirmation/{user}', 'AccountConfirmationController@mailconfirmation')->name('confirmation.mail');
+Route::post('/confirmation/{user}', 'AccountConfirmationController@mailconfirmation')->name('confirmation.mail');
 Route::put('/confirmation/{user}', 'AccountConfirmationController@setpassword')->name('confirmation.setpassword');
 
 /* Ajuda */
