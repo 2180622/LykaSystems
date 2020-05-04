@@ -33,6 +33,48 @@ class DashboardController extends Controller{
         $this->NotController->getNotificacaoFaseAcaba($AllNotifications);
         $this->NotController->getNotificacaoDocFalta($AllNotifications);
 
-        return view('dashboard.index', compact('agentes', 'clientes', 'universidades'));
+
+
+        function folderSize ($dir)
+        {
+            $size = 0;
+
+            foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each) {
+                $size += is_file($each) ? filesize($each) : folderSize($each);
+            }
+
+            return $size;
+        }
+
+
+        function formatSize($bytes){
+            $kb = 1024;
+            $mb = $kb * 1024;
+            $gb = $mb * 1024;
+            $tb = $gb * 1024;
+            if (($bytes >= 0) && ($bytes < $kb)) {
+            return $bytes . ' B';
+            } elseif (($bytes >= $kb) && ($bytes < $mb)) {
+            return ceil($bytes / $kb) . ' KB';
+            } elseif (($bytes >= $mb) && ($bytes < $gb)) {
+            return ceil($bytes / $mb) . ' MB';
+            } elseif (($bytes >= $gb) && ($bytes < $tb)) {
+            return ceil($bytes / $gb) . ' GB';
+            } elseif ($bytes >= $tb) {
+            return ceil($bytes / $tb) . ' TB';
+            } else {
+            return $bytes . ' B';
+            }
+            }
+
+
+       $size = formatSize (folderSize(storage_path('app')));
+
+        return view('dashboard.index', compact('agentes', 'clientes', 'universidades','size'));
     }
+
+
+
+
+
 }
