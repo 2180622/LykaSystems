@@ -42,6 +42,8 @@ class Agente extends Migration
             $table->string('telefone1',255);
             $table->string('telefone2',255)->nullable();
 
+            $table->string('IBAN',255)->nullable();
+
             $table->string('slug')->nullable();
             $table->timestamps();
             $table->softDeletes();

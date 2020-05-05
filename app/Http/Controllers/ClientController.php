@@ -10,6 +10,8 @@ use Illuminate\Support\Arr;
 use App\DocAcademico;
 use App\DocPessoal;
 
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
@@ -20,9 +22,7 @@ use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\StoreUserRequest;
 
-use Mail;
-use App\Mail\SendEmailConfirmation;
-use stdClass;
+use App\Jobs\SendWelcomeEmail;
 
 class ClientController extends Controller
 {

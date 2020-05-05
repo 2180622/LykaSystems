@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Mail;
-use App\Mail\SendEmailConfirmation;
+
+use Illuminate\Support\Facades\Hash;
+
+use App\Jobs\SendWelcomeEmail;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateAgenteRequest;
 use App\Http\Requests\StoreAgenteRequest;
 use App\Http\Requests\StoreUserRequest;
+
 use App\Http\Requests\UpdateUserRequest;
-
-
 
 
 class AgenteController extends Controller

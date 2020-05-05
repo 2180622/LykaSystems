@@ -40,13 +40,16 @@ class UpdateAgenteRequest extends FormRequest
             'info_doc' => 'nullable',
             'telefone1' => 'required',
             'telefone2' => 'nullable',
+            'IBAN' => 'nullable',
         ];
     }
 
         public function messages()
     {
        return [
-       'email.unique'=>'Este e-mail já está registado. Insira um e-mail diferente',
+        'email.unique'=>'Este e-mail já está registado. Insira um e-mail diferente',
+        'NIF.unique'=>'Este NIF já está registado. Insira um NIF diferente',
+        'num_doc.unique'=>'Esta identificação já esta registada.',
        ];
     }
 }

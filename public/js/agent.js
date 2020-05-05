@@ -226,7 +226,7 @@
                     form.addEventListener('submit', function (event) {
 
                         /* mostrar div de espera */
-                        $("#wait_screen").show();
+                        /* $("#wait_screen").show(); */
 
                         if (form.checkValidity() === false) {
                             event.preventDefault();
