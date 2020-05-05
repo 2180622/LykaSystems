@@ -66,13 +66,14 @@ class DocAcademicoController extends Controller
             }else{
                 $documento->verificacao = false;
             }
+            $documento->nome = $fields['nome'];
             $documento->idCliente = $fase->produto->cliente->idCliente;
             $documento->idFase = $fase->idFase;
             $documento->imagem = 'source';
             $documento->info = json_encode($infoDoc);
             $documento->save();
 
-            return redirect()->route('produtos.show',$fase->produto)->with('success', 'Documento adicionado com sucesso');
+            return redirect()->route('produtos.show',$fase->produto)->with('success', $docnecessario->tipoDocumento.' adicionado com sucesso');
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }

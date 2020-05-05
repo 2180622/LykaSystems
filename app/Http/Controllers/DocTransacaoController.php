@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DocTransacao;
 use App\Fase;
+use App\Conta;
 use App\Http\Requests\UpdateDocTransacaoRequest;
 use App\Http\Requests\StoreDocTransacaoRequest;
 use Illuminate\Support\Facades\Storage;
@@ -25,8 +26,9 @@ class DocTransacaoController extends Controller
             $documento = new DocTransacao;
             $tipoPAT = 'Transacao';
             $tipo = 'Transacao';
+            $Contas = Conta::all();
             
-            return view('documentos.add',compact('fase','tipoPAT','tipo','documento'));
+            return view('documentos.add',compact('fase','tipoPAT','tipo','documento','Contas'));
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }
@@ -49,6 +51,7 @@ class DocTransacaoController extends Controller
             
             $fields = $request->validated();
             $documento->fill($fields);
+            $documento->comprovativoPagamento = "Source";
             $documento->idFase = $fase->idFase;
             $documento->save();
 

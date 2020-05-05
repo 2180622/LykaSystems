@@ -273,7 +273,7 @@
                                                             <span class="text-danger">Inválido</span>
                                                         @endif
                                                     </div>
-                                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docpessoal->verificacao)
                                                         <div><br>
                                                             <a href="{{route('documento_pessoal.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
@@ -336,7 +336,7 @@
                                                             <span class="text-danger">Inválido</span>
                                                         @endif
                                                     </div>
-                                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                                    @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docacademico->verificacao)
                                                         <div><br>
                                                             <a href="{{route('documento_academico.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
@@ -399,7 +399,7 @@
                                                 <span class="text-danger">Não Recebido</span>
                                             @endif
                                         </div>
-                                        @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
+                                        @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docpessoal->verificacao)
                                             <div><br>
                                                 <a href="{{route('documento_academico.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
                                             </div><br>
