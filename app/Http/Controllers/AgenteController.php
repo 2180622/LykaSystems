@@ -173,8 +173,11 @@ class AgenteController extends Controller
             $mainAgent=null;
         }
 
+        $telefone2 = $agent->telefone2;
+        $IBAN = $agent->IBAN;
 
-        return view('agents.show',compact("agent" ,'listagents','mainAgent'));
+
+        return view('agents.show',compact("agent" ,'listagents','mainAgent','telefone2','IBAN'));
 
     }
 
