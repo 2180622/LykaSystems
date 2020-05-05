@@ -119,8 +119,6 @@ class ClientController extends Controller
 
 
 
-
-
     /* Criação de documentos Pessoais */
 
         /* Documento de identificação */
@@ -206,7 +204,8 @@ class ClientController extends Controller
         $user->tipo = "cliente";
         $user->idCliente = $client->idCliente;
         $user->auth_key = strtoupper(random_str(5));
-
+        $password = random_str(64);
+        $user->password = Hash::make($password);
         $user->save();
 
         /* Envia o e-mail para ativação */
