@@ -17,6 +17,8 @@ De seguida, deve inserir o código de autenticação que se encontra abaixo.
 
 Posteriormente, ser-lhe-á pedido para inserir uma palavra-chave para a sua conta. Recomendamos que utilize uma palavra-chave segura, de modo a proteger a sua preciosa conta.
 
+Lembramos que lhe é cedido **1 mês** para a ativação da sua conta, caso contrário a sua conta será desativada e terá que pedir um restauro da mesma.
+
 Se não sabe como e o porquê de ter recebido este este e-mail, sugerimos que apague o mesmo ou entre em contacto connosco.
 
 Bom trabalho,

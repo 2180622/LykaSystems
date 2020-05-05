@@ -21,21 +21,20 @@ body, html {
 
 /* Login Form */
 .login-form {
-    left: 50%;
+    top: 15%;
     padding: 0 20px;
     position: relative;
-    transform: translate(-50%, 40%);
 }
 
 /* Login Paragraphs */
 .login-form p:first-child {
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.5rem;
     color: #6A74C9 !important;
 }
 
 .login-form p {
-    color: #ADADAD;
+    color: #6c6c6c;
     font-weight: 700;
     padding: 0 50px;
 }
@@ -45,7 +44,7 @@ form {
 }
 
 /* Input Styles */
-#username, #password, #password-conf, #email {
+#username, #password, #password-conf, #email, #code {
     left: 50%;
     width: 65%;
     font-weight: 600;
@@ -60,12 +59,19 @@ form {
     box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
-#username::placeholder, #password::placeholder, #password-conf::placeholder, #email::placeholder {
-    color: #ADADAD;
-    font-weight: 700;
+#code {
+    text-transform: uppercase;
+    letter-spacing: 4px;
 }
 
-#username:focus, #password:focus, #password-conf:focus, #email:focus {
+#username::placeholder, #password::placeholder, #password-conf::placeholder, #email::placeholder, #code::placeholder {
+    color: #ADADAD;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+#username:focus, #password:focus, #password-conf:focus, #email:focus, #code:focus {
     border-color: #6A74C9;
     box-shadow: inset 0 1px 1px #6A74C9, 0 0 5px #565eac;
 }
@@ -126,4 +132,25 @@ a:hover {
     font-size: 0.7rem;
     font-weight: 600;
     color: #ADADAD;
+}
+
+/* Conta Inativa - Style */
+/* Restore Form */
+.restore-account-form {
+    top: 15%;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* Restore Paragraphs */
+.restore-account-form p:first-child {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #6A74C9 !important;
+}
+
+.restore-account-form p {
+    color: #6c6c6c;
+    font-weight: 700;
+    padding: 0 50px;
 }

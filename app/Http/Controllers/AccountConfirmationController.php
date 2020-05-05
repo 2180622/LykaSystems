@@ -10,8 +10,10 @@ class AccountConfirmationController extends Controller
 {
     public function index(Request $request, User $user)
     {
-      if ($user->estado == true || $user->auth_key == null) {
+      if ($user->estado == true) {
           abort(404);
+      }elseif($user->auth_key == null) {
+          return view('auth.account-inactive', compact('user'));
       }else {
           return view('auth.confirmation-key', compact('user'));
       }
@@ -35,16 +37,17 @@ class AccountConfirmationController extends Controller
       $passwordConf = $request->input('password-confirmation');
 
       if ($password == $passwordConf) {
-        $hashed = Hash::make($password);
-        $user->password = $hashed;
-        $user->save();
-        if (Auth::check()) {
-          Auth::logout();
-        }
-        return view('auth.accountactive', compact('user'));
+          $hashed = Hash::make($password);
+          $user->password = $hashed;
+          $user->estado = true;
+          $user->save();
+          if (Auth::check()) {
+              Auth::logout();
+          }
+          return view('auth.accountactive', compact('user'));
       }else {
-        $error = "As palavras-chaves não coincidem. Verifique a sua inserção.";
-        return view('auth.confirmation-password', compact('user', 'error'));
+          $error = "As palavras-chaves não coincidem. Verifique a sua inserção.";
+          return view('auth.confirmation-password', compact('user', 'error'));
       }
     }
 }
