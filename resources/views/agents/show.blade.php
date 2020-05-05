@@ -13,6 +13,12 @@
 {{-- Page Content --}}
 @section('content')
 
+@php
+
+$tipo_agent_atual=$agent->tipo;
+
+@endphp
+
 <div class="container mt-2">
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -120,23 +126,26 @@
 
         <div class="row nav nav-fill w-100 text-center mx-auto p-3 ">
 
-            <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link"
-                id="subagentes-type-tab" data-toggle="tab" href="#subagentes-type" role="tab" aria-controls="agent_type"
-                aria-selected="true">
-                <div class="col"><i class="fas fa-share-alt mr-2"></i>Subagentes</div>
-            </a>
+
+            @if ( $agent->tipo == "Agente" )
+                <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link"
+                    id="subagentes-type-tab" data-toggle="tab" href="#subagentes-type" role="tab" aria-controls="agent_type"
+                    aria-selected="true">
+                    <div class="col"><i class="fas fa-share-alt mr-2"></i>Subagentes</div>
+                </a>
+            @endif
 
 
-            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="clients-tab"
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link {{ $tipo_agent_atual == "Subagente" ? 'active' : '' }}" id="clients-tab"
                 data-toggle="tab" href="#clients" role="tab" aria-controls="clients" aria-selected="false">
-                <div class="col"><i class="far fa-id-card mr-2"></i>Estudantes
+                <div class="col"><ion-icon name="person-circle-outline" class="mr-2" style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 0px;"></ion-icon>Estudantes
                 </div>
             </a>
 
 
             <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="documents-tab"
                 data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">
-                <div class="col"><i class="fas fa-user mr-2"></i>Dados pessoais</div>
+                <div class="col"><i class="far fa-id-card mr-2"></i>Dados pessoais</div>
             </a>
 
 
@@ -162,26 +171,71 @@
             <div class="tab-content p-2 mt-3" id="myTabContent">
 
 
-                {{-- SUB AGENTES --}}
-                <div class="tab-pane fade show active" id="subagentes-type" role="tabpanel" aria-labelledby="subagentes-type-tab">
+                @if ( Auth::user()->tipo == "admin" || Auth::user()->agente->tipo == "Agente" )
+                    @if ($agent->tipo == "Agente")
+                    {{-- SUB AGENTES --}}
+                    <div class="tab-pane fade show active" id="subagentes-type" role="tabpanel" aria-labelledby="subagentes-type-tab">
 
-                    @if ( Auth::user()->tipo == "admin" || Auth::user()->agente->tipo == "Agente" )
-                            @if($listagents==null)
+                                @if($listagents==null)
+                                    <div class="border rounded bg-light p-3">
+                                        <div class="text-muted"><small>(sem registos)</small></div>
+                                    </div>
+                                    <br>
+                                @else
+                                    <div class="row">
+                                        @foreach ($listagents as $agent)
+                                            <a class="name_link text-center m-2" href="{{route('agents.show',$agent)}}">
+                                                <div class="col">
+                                                    <div style="width: 200px; height:210px; overflow:hidden">
+                                                        @if($agent->fotografia)
+                                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                                src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}"
+                                                                style="width:100%; height:100%">
+                                                            @elseif($agent->genero == 'F')
+                                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                                src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
+                                                            @else
+                                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                                src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
+                                                        @endif
+                                                    </div>
+                                                    <div class="mt-2">{{$agent->nome}} {{$agent->apelido}}</div>
+                                                    <div ><small>({{$agent->pais}})</small></div>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endif
+                    </div>
+                    @endif
+                @endif
+
+
+
+
+            {{-- Clientes --}}
+            <div class="tab-pane fade {{ $tipo_agent_atual == 'Subagente' ? 'show active' : '' }}" id="clients" role="tabpanel" aria-labelledby="clients-tab">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        @if($clients==null)
                                 <div class="border rounded bg-light p-3">
                                     <div class="text-muted"><small>(sem registos)</small></div>
                                 </div>
                                 <br>
                             @else
                                 <div class="row">
-                                    @foreach ($listagents as $agent)
-                                        <a class="name_link text-center m-2" href="{{route('agents.show',$agent)}}">
+                                    @foreach ($clients as $client)
+                                        <a class="name_link text-center m-2" href="{{route('clients.show',$client)}}">
                                             <div class="col">
-                                                <div style="width: 200px; max-height:230px; overflow:hidden">
-                                                    @if($agent->fotografia)
+                                                <div style="width: 200px; height:210px; overflow:hidden">
+                                                    @if($client->fotografia)
                                                         <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                            src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}"
-                                                            style="width:100%; ">
-                                                        @elseif($agent->genero == 'F')
+                                                            src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
+                                                            style="width:100%; height:100% ">
+                                                        @elseif($client->genero == 'F')
                                                         <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                             src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
                                                         @else
@@ -189,28 +243,13 @@
                                                             src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
                                                     @endif
                                                 </div>
-                                                <div class="mt-2">{{$agent->nome}} {{$agent->apelido}}</div>
+                                                <div class="mt-2">{{$client->nome}} {{$client->apelido}}</div>
+                                                <div ><small>({{$client->paisNaturalidade}})</small></div>
                                             </div>
                                         </a>
                                     @endforeach
                                 </div>
                             @endif
-                    @endif
-
-
-                </div>
-
-
-
-
-
-            {{-- Clientes --}}
-            <div class="tab-pane fade" id="clients" role="tabpanel" aria-labelledby="clients-tab">
-
-                <div class="row">
-
-                    <div class="col">
-                        lista de clientes
                     </div>
 
                 </div>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Agente;
 use App\User;
+use App\Cliente;
 use App\Produto;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
@@ -177,7 +179,21 @@ class AgenteController extends Controller
         $IBAN = $agent->IBAN;
 
 
-        return view('agents.show',compact("agent" ,'listagents','mainAgent','telefone2','IBAN'));
+        /* lista de alunos do agente */
+
+
+        $clients = Cliente::
+        selectRaw("Cliente.idCliente,Cliente.slug,nome,apelido,genero,email,telefone1,telefone2,dataNasc,paisNaturalidade,morada,cidade,moradaResidencia,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,num_docOficial,img_docOficial,info_docOficial,img_Passaport,info_Passaport,img_docAcademico,info_docAcademico,obsPessoais,obsFinanceiras,obsAcademicas")
+        ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
+        ->where('Produto.idAgente', '=', $agent->idAgente)
+        ->orWhere('Produto.idSubAgente', '=', $agent->idAgente)
+        ->groupBy('Cliente.idCliente')
+        ->orderBy('Cliente.idCliente','asc')
+        ->get();
+
+ 
+
+        return view('agents.show',compact("agent" ,'listagents','mainAgent','telefone2','IBAN','clients'));
 
     }
 
