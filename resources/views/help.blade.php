@@ -47,8 +47,8 @@
                         <br> <br>
 
                         <div class="col-md-6 text-center">
-                            <div class="search-bar-helper shadow">
-                                <p>Palavras-chaves</p>
+                            <div class="search-bar-helper">
+                                <input class="shadow-sm" type="text" id="searchHelper" placeholder="Palavras-chaves" aria-label="Procurar">
                                 <div class="search-button-helper">
                                     <ion-icon name="search-outline" class="search-icon-helper"></ion-icon>
                                 </div>
@@ -67,9 +67,13 @@
 
                         <div class="col-md-4 text-center card-help-info">
                             <div class="card shadow">
-                                <h5 class="card-title">Alunos</h5>
-                                <p class="card-text">
-
+                                <h5 class="card-title">Estudantes</h5>
+                                <p class="card-text pl-4 text-left">
+                                    <a> <i class="fas fa-angle-right"></i> Como criar um
+                                        Estudante?</a>
+                                    <br>
+                                    <a> <i class="fas fa-angle-right"></i> Como editar um
+                                        Estudante?</a>
                                 </p>
                             </div>
                         </div>
@@ -79,8 +83,9 @@
                         <div class="col-md-4 text-center card-help-info">
                             <div class="card shadow">
                                 <h5 class="card-title">Produtos</h5>
-                                <p class="card-text">
-
+                                <p class="card-text pl-4 text-left">
+                                    <a> <i class="fas fa-angle-right"></i> Como adicionar Produto?</a>
+                                    <br>
                                 </p>
                             </div>
                         </div>
@@ -90,8 +95,9 @@
                         <div class="col-md-4 text-center card-help-info">
                             <div class="card shadow">
                                 <h5 class="card-title">Universidades</h5>
-                                <p class="card-text">
-
+                                <p class="card-text pl-4 text-left">
+                                    <a> <i class="fas fa-angle-right"></i> Como criar um Universidade?</a>
+                                    <br>
                                 </p>
                             </div>
                         </div>
