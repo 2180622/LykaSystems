@@ -139,10 +139,10 @@ class AgenteController extends Controller
         $user->save();
 
         /* Envia o e-mail para ativação */
-        $email = $user->email;
-        $id = $user->idUser;
-        $name = $agent->nome;
-        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+        $name = $agent->nome .' '. $agent->apelido;
+        $email = $agent->email;
+        $auth_key = $user->auth_key;
+        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
         return redirect()->route('agents.index')->with('success', 'Registo criado com sucesso. Aguarda Ativação');
     }

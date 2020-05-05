@@ -209,12 +209,10 @@ class ClientController extends Controller
         $user->save();
 
         /* Envia o e-mail para ativação */
-        $email = $user->email;
-        $id = $user->idUser;
-        $name = $client->nome;
-        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
-
-
+        $name = $client->nome .' '. $client->apelido;
+        $email = $client->email;
+        $auth_key = $user->auth_key;
+        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
         return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }

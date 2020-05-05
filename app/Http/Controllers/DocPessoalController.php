@@ -22,7 +22,7 @@ class DocPessoalController extends Controller
     public function create(Fase $fase, DocNecessario $docnecessario)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-            
+
             $documento = new DocPessoal;
             $tipoPAT = $docnecessario->tipo;
             $tipo = $docnecessario->tipoDocumento;
@@ -45,7 +45,7 @@ class DocPessoalController extends Controller
     public function store(StoreDocumentoRequest $request,Fase $fase, DocNecessario $docnecessario){
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-            
+
             $fields = $request->all();
             //dd($fields);
             $infoDoc = null;
@@ -75,7 +75,26 @@ class DocPessoalController extends Controller
             }
             $documento->idCliente = $fase->produto->cliente->idCliente;
             $documento->idFase = $fase->idFase;
-            $imagem = $fields['img_doc'];
+
+
+
+
+            /* Upload Imagem */  /* Tens de identificar no ficheiro dos requests os campos */
+/*             if ($request->hasFile('img_doc')) {
+                $ficheiro = $request->file('img_doc');
+                $nomeficheiro = request->tipodedocumento?? . $client->idCliente . $ficheiro->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
+                $agent->fotografia = $nomeficheiro;
+            } */
+
+
+
+            /* Código antigo: */
+           /*  $imagem = $fields['img_doc']; */
+
+
+
+
             $documento->imagem = 'source';//$imagem->originalName;
             if($infoDoc){
                 $documento->info = json_encode($infoDoc);
