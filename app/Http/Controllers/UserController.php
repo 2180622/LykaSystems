@@ -92,8 +92,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->admin->delete();
+        User::where('idUser', $user->idUser)->update([
+          'auth_key' => null,
+          'estado' => false
+        ]);
         $user->delete();
-
         return redirect()->route('users.index')->with('success', 'Administrador eliminado com sucesso');
     }
 

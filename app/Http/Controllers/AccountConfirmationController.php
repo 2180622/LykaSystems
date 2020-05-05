@@ -12,7 +12,7 @@ class AccountConfirmationController extends Controller
     public function index(Request $request, User $user)
     {
       if ($user->estado == true) {
-          abort(404);
+          abort(403);
       }elseif($user->auth_key == null) {
           return view('auth.account-inactive', compact('user'));
       }else {

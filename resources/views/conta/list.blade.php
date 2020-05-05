@@ -74,7 +74,6 @@
                 <div class="custom-cm-divider"></div>
                 <div class="custom-cm-item">Cancelar</div>
             </div>
-
             @endforeach
         </div>
     </div>
