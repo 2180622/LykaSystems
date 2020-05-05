@@ -49,50 +49,50 @@
                     </div>
                 </div>
                 <br>
-                @if(strtolower($tipo) == "transação")
-                    <div class="row para-clone documento-transacao">
-                        <div class="clones" id="clonar">
-                            <div class="col-md-10">
-                                <label for="descricao">Descrição</label>
-                                <br>
-                                <input type="text" class="form-control" name="descricao" placeholder="Descrição" autocomplete="off" required>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="img_doc">Upload:</label>
-                                <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="valorRecebido">Valor</label>
-                                <br>
-                                <input type="number" class="form-control" name="valorRecebido" placeholder="0,00" autocomplete="off" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="tipoPagamento">Tipo pagamento</label>
-                                <br>
-                                <input type="text" class="form-control" name="tipoPagamento" placeholder="Tipo pagamento" autocomplete="off" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="dataOperacao">Data da operação:</label>
-                                <br>
-                                <input type="date" class="form-control" name="dataOperacao" value="" style="width:250px" required><br>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="dataRecebido">Data recebido:</label>
-                                <br>
-                                <input type="date" class="form-control" name="dataRecebido" value="" style="width:250px" ><br>
-                            </div>
-                            <div class="col-md-10">
-                                <label for="idConta">Conta:</label><br>
-                                <select name="idConta" class="form-control" required>
-                                    <option value="" selected></option>
-                                    @foreach($Contas as $conta)
-                                        <option {{old('idConta',$documento->idConta)}} value="{{$conta->idConta}}">{{$conta->numConta.' => '.$conta->descricao}}</option>
-                                    @endforeach
-                                </select><br>
-                            </div>
+                @if(strtolower($tipo) == "transacao")
+                    <div class="row documento-transacao">
+                        <div class="col-md-10">
+                            <label for="descricao">Descrição</label>
+                            <br>
+                            <input type="text" class="form-control" name="descricao" placeholder="Descrição" autocomplete="off" required><br>
                         </div>
-                        <div>
-                            <button type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
+                        <div class="col-md-2">
+                            <label for="img_doc">Upload:</label>
+                            <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*"/><br>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="valorRecebido">Valor</label>
+                            <br>
+                            <input type="number" class="form-control" min="0" name="valorRecebido" placeholder="0,00" autocomplete="off" required><br>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="tipoPagamento">Tipo pagamento</label>
+                            <br>
+                            <input type="text" class="form-control" name="tipoPagamento" placeholder="Tipo pagamento" autocomplete="off" required><br>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="dataOperacao">Data da operação:</label>
+                            <br>
+                            <input type="date" class="form-control" name="dataOperacao" value="" style="width:250px" required><br>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="dataRecebido">Data recebido:</label>
+                            <br>
+                            <input type="date" class="form-control" name="dataRecebido" value="" style="width:250px" ><br>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="idConta">Conta:</label><br>
+                            <select name="idConta" class="form-control" required>
+                                <option value="" selected></option>
+                                @foreach($Contas as $conta)
+                                    <option {{old('idConta',$documento->idConta)}} value="{{$conta->idConta}}">{{$conta->numConta.' => '.$conta->descricao}}</option>
+                                @endforeach
+                            </select><br>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="observacoes">Observações</label>
+                            <br>
+                            <textarea name="observacoes" class="form-control" id="observacoes" rows="4" placeholder="Observações"></textarea>
                         </div>
                     </div>
                 @elseif(strtolower($tipo) == "passaport")
@@ -149,10 +149,17 @@
                                 <label for="img_doc">Upload:</label>
                                 <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
                             </div>
-                            <div class="col-md-6">
-                                <label for="dataValidade">Data de validade: </label>
-                                <input type="month" class="form-control"  id="dataValidade" name="dataValidade" value="" style="width:250px" required><br>
-                            </div>
+                            @if($tipoPAT == "Academico")
+                                <div class="col-md-6">
+                                    <label for="nome">Nome: </label>
+                                    <input type="text" class="form-control" name="nome" placeholder="Nome" autocomplete="off" required>
+                                </div>
+                            @else
+                                <div class="col-md-6">
+                                    <label for="dataValidade">Data de validade: </label>
+                                    <input type="month" class="form-control"  id="dataValidade" name="dataValidade" value="" style="width:250px" required><br>
+                                </div>
+                            @endif
                         </div>
                         <div class="list-clones">
                             <div class="row" id="documento-campo1">
@@ -187,10 +194,10 @@
                 <div class="col-md-5">
                     <br><label id="label2" for="valor-campo">Valor do Campo</label>
                     <br>
-                    <input id="input1" type="text" class="form-control" name="valor-campo" placeholder="Inserir valor do campo" autocomplete="off" required>
+                    <input id="input2" type="text" class="form-control" name="valor-campo" placeholder="Inserir valor do campo" autocomplete="off" required>
                 </div>
                 <div class="col-md-2">
-                    <br><br><button type="button" onclick="" class="top-button">Remover 1</button>
+                    <br><br><button id="clone-button" type="button" onclick="" class="top-button">Remover 1</button>
                 </div>
             </div>
             <div class="form-group text-right">
@@ -222,6 +229,7 @@
 			$('#input2', clone).attr('name','valor-campo'+num);
 			$('#input2', clone).attr('id','valor-campo'+num);
 			$('button', clone).attr('onclick','removeCampo('+num+',$(this).closest("#documento-campo'+num+'"))');
+			$('button', clone).attr('id','javascript-button');
 			$('button', clone).text('Remover '+num);
 	        closest.find('.list-clones').first().append(clone);
         }

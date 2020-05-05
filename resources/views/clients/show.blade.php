@@ -207,9 +207,9 @@
                                 <div>{{$produto->tipo}}</div>
                                 {{-- <div>{{$produto->descricao}} em desenvolvimento Web & Multimédia
                             </div> --}}
-                            <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
-                    </div>
-                    </a>
+                                <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
+                            </div>
+                        </a>
 
                     @endforeach
 

@@ -34,53 +34,180 @@
         </div>
         <br>
         <div class="payment-card shadow-sm">
-            <form action="{{route('provider.update', $provider)}}" method="post" enctype="multipart/form-data">
+            @if($tipoPAT == 'Pessoal')
+                <form action="{{route('documento_pessoal.update', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+            @elseif($tipoPAT == 'Academico')
+                <form action="{{route('documento_academico.update', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+            @else
+                <form action="{{route('documento_transacao.update', $fase)}}" method="post" enctype="multipart/form-data">
+            @endif
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="col-md-6">
-                        <label for="nome">Nome do fornecedor *</label>
+                    <div class="col-md-12">
+                        <label for="nome">Insira o documento</label>
                         <br>
-                        <input type="text" name="nome" placeholder="Inserir o nome do fornecedor" autocomplete="off" required value="{{old('nome', $provider->nome)}}">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="descricao">Descrição do fornecedor *</label>
-                        <br>
-                        <input type="text" name="descricao" placeholder="Inserir uma descrição" autocomplete="off" required value="{{old('descricao', $provider->descricao)}}">
                     </div>
                 </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-6">
-                      <div class="help-button" id="tooltipContacto" data-toggle="tooltip" data-placement="top" title="São aceites como contactos números de telefone e/ou endereços eletrónicos.">
-                          <span>
-                              ?
-                          </span>
-                      </div>
-                        <label for="contacto">Contacto do fornecedor *</label>
-                        <br>
-                        <input type="text" name="contacto" placeholder="Inserir o contacto do fornecedor" autocomplete="off" required value="{{old('contacto', $provider->contacto)}}">
+                <br>
+                @if(strtolower($tipo) == "transacao")
+                    <div class="row documento-transacao">
+                        <div>
+                            <div class="col-md-10">
+                                <label for="descricao">Descrição</label>
+                                <br>
+                                <input type="text" class="form-control" name="descricao" placeholder="Descrição" autocomplete="off" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="img_doc">Upload:</label>
+                                <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="valorRecebido">Valor</label>
+                                <br>
+                                <input type="number" class="form-control" name="valorRecebido" placeholder="0,00" autocomplete="off" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tipoPagamento">Tipo pagamento</label>
+                                <br>
+                                <input type="text" class="form-control" name="tipoPagamento" placeholder="Tipo pagamento" autocomplete="off" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dataOperacao">Data da operação:</label>
+                                <br>
+                                <input type="date" class="form-control" name="dataOperacao" value="" style="width:250px" required><br>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dataRecebido">Data recebido:</label>
+                                <br>
+                                <input type="date" class="form-control" name="dataRecebido" value="" style="width:250px" ><br>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="idConta">Conta:</label><br>
+                                <select name="idConta" class="form-control" required>
+                                    <option value="" selected></option>
+                                    @foreach($Contas as $conta)
+                                        <option {{old('idConta',$documento->idConta)}} value="{{$conta->idConta}}">{{$conta->numConta.' => '.$conta->descricao}}</option>
+                                    @endforeach
+                                </select><br>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="observacoes">Tipo pagamento</label>
+                                <br>
+                                <input type="text" class="form-control" name="observacoes" placeholder="Observações" autocomplete="off">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="morada">Morada do fornecedor *</label>
-                        <br>
-                        <input type="text" name="morada" placeholder="Inserir a morada do fornecedor" autocomplete="off" required value="{{old('morada', $provider->morada)}}">
+                @elseif(strtolower($tipo) == "passaport")
+                    <div class="row para-clone documento-passaport">
+                        <span class="num" style="display: none;">2</span>
+
+                        <div class="col-md-6">
+                            <label for="img_doc">Upload:</label>
+                            <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="numPassaport">Nº Passaport: </label>
+                            <input type="text" class="form-control" name="numPassaport" placeholder="Nº Passaport" autocomplete="off" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dataValidPP">Data de validade: </label>
+                            <input type="text" class="form-control" name="dataValidPP" value="" style="width:250px" required><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="passaportPaisEmi">País de Emissão: </label>
+                            <input type="text" class="form-control" name="passaportPaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="localEmissaoPP">Local de Emissão: </label>
+                            <input type="text" class="form-control" name="localEmissaoPP" value="" style="width:250px" required ><br>
+                        </div>
+
+                        <div class="list-clones">
+                            <div class="row" id="documento-campo1">
+                                <div class="col-md-6">
+                                    <label for="nome-campo1">Nome do Campo</label>
+                                    <br>
+                                    <input id="nome-campo1" type="text" class="form-control" name="nome-campo1" placeholder="Inserir nome do campo" autocomplete="off" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="valor-campo1">Valor do Campo</label>
+                                    <br>
+                                    <input id="valor-campo1" type="text" class="form-control" name="valor-campo1" placeholder="Inserir valor do campo" autocomplete="off" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <br><br><button type="button" onclick="removeCampo(1,$(this).closest('#documento-campo1'))" class="top-button">Remover 1</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button id="passaport-button" type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
+                        </div>
                     </div>
+                @else
+                    <div class="para-clone documento">
+                        <span class="num" style="display: none;">2</span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="img_doc">Upload:</label>
+                                <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
+                            </div>
+                            @if($tipoPAT == "Academico")
+                                <div class="col-md-6">
+                                    <label for="nome">Nome: </label>
+                                    <input type="text" class="form-control" name="nome" placeholder="Nome" autocomplete="off" required>
+                                </div>
+                            @else
+                                <div class="col-md-6">
+                                    <label for="dataValidade">Data de validade: </label>
+                                    <input type="month" class="form-control"  id="dataValidade" name="dataValidade" value="" style="width:250px" required><br>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="list-clones">
+                            <div class="row" id="documento-campo1">
+                                <div class="col-md-5">
+                                    <br><label for="nome-campo1">Nome do Campo</label>
+                                    <br>
+                                    <input id="nome-campo1" type="text" class="form-control" name="nome-campo1" placeholder="Inserir nome do campo" autocomplete="off" required>
+                                </div>
+                                <div class="col-md-5">
+                                    <br><label for="valor-campo1">Valor do Campo</label>
+                                    <br>
+                                    <input id="valor-campo1" type="text" class="form-control" name="valor-campo1" placeholder="Inserir valor do campo" autocomplete="off" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <br><br><button type="button" onclick="removeCampo(1,$(this).closest('#documento-campo1'))" class="top-button">Remover 1</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <br><button id="else-button" type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            <div class="row clones" id="clonar">
+                <div class="col-md-5">
+                    <br><label id="label1" for="nome-campo">Nome do Campo</label>
+                    <br>
+                    <input id="input1" type="text" class="form-control" name="nome-campo" placeholder="Inserir nome do campo" autocomplete="off" required>
                 </div>
-                <br><br>
-                <div class="row">
-                    <div class="col">
-                        <label for="observacoes">Observações do fornecedor</label>
-                        <br>
-                        <textarea name="observacoes" rows="5">{{old('observacoes', $provider->observacoes)}}</textarea>
-                    </div>
+                <div class="col-md-5">
+                    <br><label id="label2" for="valor-campo">Valor do Campo</label>
+                    <br>
+                    <input id="input2" type="text" class="form-control" name="valor-campo" placeholder="Inserir valor do campo" autocomplete="off" required>
                 </div>
-        </div>
-        <div class="form-group text-right">
-            <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Editar fornecedor</button>
-            <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
-        </div>
+                <div class="col-md-2">
+                    <br><br><button id="clone-button" type="button" onclick="" class="top-button">Remover 1</button>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <br>
+                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar documento</button>
+                <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
+            </div>
         </form>
         <br>
     </div>
