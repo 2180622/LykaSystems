@@ -10,7 +10,7 @@ class AccountConfirmationController extends Controller
 {
     public function index(Request $request, User $user)
     {
-      if ($user->estado == true) {
+      if ($user->estado == true || $user->auth_key == null) {
           abort(404);
       }else {
           return view('auth.confirmation-key', compact('user'));
