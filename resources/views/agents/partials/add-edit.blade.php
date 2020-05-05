@@ -245,7 +245,7 @@
 
 
 
-        
+
 
         {{-- Conteudo: Documentos  --}}
         <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
@@ -376,7 +376,7 @@
                     {{-- INPUT IBAN --}}
                     <label for="IBAN">IBAN:</label><br>
                     <input type="text" class="form-control" name="IBAN" id="IBAN" value="{{old('IBAN',$agent->IBAN)}}"
-                        placeholder="Insira o IBAN" required maxlength="30">
+                        placeholder="Insira o IBAN" maxlength="30">
                 </div>
 
             </div>
