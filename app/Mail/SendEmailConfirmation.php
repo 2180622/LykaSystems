@@ -14,8 +14,8 @@ class SendEmailConfirmation extends Mailable
     public $auth_key;
 
     public function __construct(string $name, string $auth_key){
-      $this->name = $name;
-      $this->auth_key = $auth_key;
+        $this->name = $name;
+        $this->auth_key = $auth_key;
     }
 
     public function build()
