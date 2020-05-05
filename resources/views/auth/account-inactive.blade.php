@@ -16,7 +16,12 @@
         <br>
         <p>Lamentamos imenso informar, mas a sua conta foi desativada devido a um grande período de tempo após a receção do e-mail para a ativação da mesma</p>
         <p>Caso queira restaurar a sua conta, insira o seu e-mail no local abaixo disponível.</p>
-        <form class="email-form mt-5" action="" method="POST">
+        @if (isset($error))
+        <strong class="text-center" style="color:#e3342f; display: inherit; margin-top: 20px; margin-bottom: -25px; font-size:14px; padding:0 50px;">
+            {{$error}}
+        </strong>
+        @endif
+        <form class="email-form mt-5" action="{{route('confirmation.restore', $user)}}" method="POST">
             @csrf
             @method('get')
             <div class="form-group">

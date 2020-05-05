@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Jobs\RestoreAccount;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,5 +50,29 @@ class AccountConfirmationController extends Controller
           $error = "As palavras-chaves não coincidem. Verifique a sua inserção.";
           return view('auth.confirmation-password', compact('user', 'error'));
       }
+    }
+
+    public function restore(Request $request, User $user)
+    {
+        $email = $request->only('email');
+
+        if ($email['email'] == $user->email) {
+            $auth_key = strtoupper(random_str(5));
+            User::where('idUser', $user->idUser)->update(['auth_key' => $auth_key]);
+            $email = $user->email;
+            if ($user->tipo == 'admin') {
+                $name = $user->admin->nome.' '.$user->admin->apelido;
+            }elseif ($user->tipo == 'agente') {
+                $name = $user->agente->nome.' '.$user->agente->apelido;
+            }else {
+                $name = $user->cliente->nome.' '.$user->cliente->apelido;
+            }
+            dispatch(new RestoreAccount($email, $name, $auth_key));
+            $success = 'Confira a sua caixa de e-mail.';
+            return redirect()->route('confirmation.index', $user)->with(compact('success'));
+        }else {
+            $error = "O e-mail que inseriu não correspodem ao registado no sistema.";
+            return view('auth.account-inactive', compact('user', 'error'));
+        }
     }
 }

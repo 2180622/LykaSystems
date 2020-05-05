@@ -8,8 +8,8 @@ use App\Jobs\SendWelcomeEmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\StoreAdministradorRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\StoreAdministradorRequest;
 use App\Http\Requests\UpdateAdministradorRequest;
 
 class UserController extends Controller
