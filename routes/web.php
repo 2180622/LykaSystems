@@ -13,8 +13,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     /* Report Problem */
-    Route::get('/reportproblem', 'ExtraFunctionsController@report')->name('report');
-    Route::post('/reportproblem/sendmail', 'ExtraFunctionsController@reportmail')->name('report.send');
+    Route::get('/reportar-problema', 'ExtraFunctionsController@report')->name('report');
+    Route::post('/reportar-problema/email', 'ExtraFunctionsController@reportmail')->name('report.send');
 
     /* Contacts */
     /* Route::resource('/contacts', 'ContactoController'); */
@@ -75,8 +75,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
 
     /* Utilizadores */
-    Route::resource('/utilizadores', 'UserController')->parameters([
-      'utilizadores' => 'user'
+    Route::resource('/administradores', 'UserController')->parameters([
+      'administradores' => 'user'
     ])->names([
       'index' => 'users.index',
       'store' => 'users.store',
