@@ -86,13 +86,10 @@ class AgenteController extends Controller
         $fields = $requestAgent->validated();
         $agent->fill($fields);
 
-
-
         /* obtem os dados para criar o utilizador */
         $user = new User;
         $fieldsUser = $requestUser->validated();
         $user->fill($fieldsUser);
-
 
 
 
@@ -233,7 +230,6 @@ class AgenteController extends Controller
     {
         $fields = $request->validated();
         $agent->fill($fields);
-
 
         /* Fotografia */
         if ($request->hasFile('fotografia')) {
