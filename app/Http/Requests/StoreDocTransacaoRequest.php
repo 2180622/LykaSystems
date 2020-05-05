@@ -18,7 +18,6 @@ class StoreDocTransacaoRequest extends FormRequest
             'dataOperacao' => 'required',
             'dataRecebido' => 'nullable',
             'obsevacoes' => 'nullable',
-            'comprovativoPagamento' => 'nullable',
             'idConta' => 'required',
         ];
     }

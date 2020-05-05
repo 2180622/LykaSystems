@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Agenda;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AgendController extends Controller
 {
@@ -14,6 +16,11 @@ class AgendController extends Controller
      */
     public function index()
     {
+        /* Permissões */
+        if (Auth::user()->tipo != "admin" ){
+            abort (401);
+        }
+
         $agends = Agenda::all();
 
         return view('agends.list', compact('agends'));

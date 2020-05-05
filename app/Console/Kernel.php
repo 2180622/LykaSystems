@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         ->daily();
 
         $schedule->command('account:verification')
-        ->everyMinute();
+        ->daily();
     }
 
     protected function commands()
