@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('/css/report.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/help.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -27,14 +27,78 @@
         <br><br>
 
         <div class="cards-navigation">
+            <div class="title">
+                <h6>Ajuda e Perguntas Frequentes</h6>
+            </div>
+
+            <br>
+
             <div class="report-card shadow-sm">
                 <form action="" method="POST" enctype="multipart/form-data">
 
+                    <div class="row justify-content-md-center">
+
+                        <br>
+
+                        <div class="col-md-12 text-center">
+                            <label>Qual é a sua dúvida?</label>
+                        </div>
+
+                        <br> <br>
+
+                        <div class="col-md-6 text-center">
+                            <div class="search-bar-helper shadow">
+                                <p>Palavras-chaves</p>
+                                <div class="search-button-helper">
+                                    <ion-icon name="search-outline" class="search-icon-helper"></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br><br>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12 text-center">
+                            <label>Perguntas Frequentes</label>
+                        </div>
+
+                        <br><br><br>
+
+                        <div class="col-md-4 text-center card-help-info">
+                            <div class="card shadow">
+                                <h5 class="card-title">Alunos</h5>
+                                <p class="card-text">
+
+                                </p>
+                            </div>
+                        </div>
+
+                        <br> <br> <br>
+
+                        <div class="col-md-4 text-center card-help-info">
+                            <div class="card shadow">
+                                <h5 class="card-title">Produtos</h5>
+                                <p class="card-text">
+
+                                </p>
+                            </div>
+                        </div>
+
+                        <br> <br> <br>
+
+                        <div class="col-md-4 text-center card-help-info">
+                            <div class="card shadow">
+                                <h5 class="card-title">Universidades</h5>
+                                <p class="card-text">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
-
     </div>
-
 
 @endsection
