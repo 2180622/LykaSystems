@@ -36,8 +36,6 @@
                 Editar informações do Subagente<br>
             @endif</h6>
         </div>
-        <br>
-
 
         <form method="POST" action="{{route('agents.update',$agent)}}" class="form-group needs-validation pt-3"
             id="form_agent" enctype="multipart/form-data" novalidate>

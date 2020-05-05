@@ -255,7 +255,7 @@
                             event.preventDefault();
                             event.stopPropagation();
 
-                             /* valida Campos da informação pessoal */
+                            /* valida Campos da informação pessoal */
                             if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
                                 $("#wait_screen").hide();
                                 $("#pessoal-tab").addClass("border-danger text-danger");

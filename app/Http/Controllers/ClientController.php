@@ -10,6 +10,8 @@ use Illuminate\Support\Arr;
 use App\DocAcademico;
 use App\DocPessoal;
 
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
@@ -20,9 +22,7 @@ use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\StoreUserRequest;
 
-use Mail;
-use App\Mail\SendEmailConfirmation;
-use stdClass;
+use App\Jobs\SendWelcomeEmail;
 
 class ClientController extends Controller
 {
@@ -119,8 +119,6 @@ class ClientController extends Controller
 
 
 
-
-
     /* Criação de documentos Pessoais */
 
         /* Documento de identificação */
@@ -206,16 +204,15 @@ class ClientController extends Controller
         $user->tipo = "cliente";
         $user->idCliente = $client->idCliente;
         $user->auth_key = strtoupper(random_str(5));
-
+        $password = random_str(64);
+        $user->password = Hash::make($password);
         $user->save();
 
         /* Envia o e-mail para ativação */
-        $email = $user->email;
-        $id = $user->idUser;
-        $name = $client->nome;
-        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
-
-
+        $name = $client->nome .' '. $client->apelido;
+        $email = $client->email;
+        $auth_key = $user->auth_key;
+        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
         return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }

@@ -13,7 +13,7 @@
                 <div>
                     <div>
                         <input id="username" type="email" class="form-control @error('email') is-invalid @enderror"
-                        name="email" value="{{ old('email') }}" required autocomplete="off" autofocus placeholder="Endereço eletrónico">
+                        name="email" value="{{ old('email') }}" required autofocus placeholder="Endereço eletrónico">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

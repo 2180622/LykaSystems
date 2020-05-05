@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Mail;
-use App\Mail\SendEmailConfirmation;
+
+use Illuminate\Support\Facades\Hash;
+
+use App\Jobs\SendWelcomeEmail;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateAgenteRequest;
 use App\Http\Requests\StoreAgenteRequest;
 use App\Http\Requests\StoreUserRequest;
+
 use App\Http\Requests\UpdateUserRequest;
-
-
 
 
 class AgenteController extends Controller
@@ -85,13 +86,10 @@ class AgenteController extends Controller
         $fields = $requestAgent->validated();
         $agent->fill($fields);
 
-
-
         /* obtem os dados para criar o utilizador */
         $user = new User;
         $fieldsUser = $requestUser->validated();
         $user->fill($fieldsUser);
-
 
 
 
@@ -134,14 +132,15 @@ class AgenteController extends Controller
         $user->tipo = "agente";
         $user->idAgente = $agent->idAgente;
         $user->auth_key = strtoupper(random_str(5));
-
+        $password = random_str(64);
+        $user->password = Hash::make($password);
         $user->save();
 
         /* Envia o e-mail para ativação */
-        $email = $user->email;
-        $id = $user->idUser;
-        $name = $agent->nome;
-        Mail::to($email)->send(new SendEmailConfirmation($id, $name));
+        $name = $agent->nome .' '. $agent->apelido;
+        $email = $agent->email;
+        $auth_key = $user->auth_key;
+        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
         return redirect()->route('agents.index')->with('success', 'Registo criado com sucesso. Aguarda Ativação');
     }
@@ -231,7 +230,6 @@ class AgenteController extends Controller
     {
         $fields = $request->validated();
         $agent->fill($fields);
-
 
         /* Fotografia */
         if ($request->hasFile('fotografia')) {
