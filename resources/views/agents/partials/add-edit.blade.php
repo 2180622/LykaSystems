@@ -142,9 +142,9 @@
 
             </div>
 
-            <br>
+            <hr>
 
-            <div class="row text-secondary">
+            <div class="row text-secondary mt-4">
                 <div class="col">
                     <label><i class="far fa-question-circle"></i> Informações sobre permissões</label>
                 </div>
@@ -166,7 +166,7 @@
                 <div class="col p-3 m-2 bg-light border rounded"  style="min-width: 280px">
                     <div><strong>O subagente:</strong></div>
                     <div class="my-3">- Apenas tem acesso à lista dos seus clientes</div>
-                    <div class="my-3">- Tem acesso ao perfil do seu AGENTE superior</div>
+                    <div class="my-3">- Tem acesso à página de perfil do seu superior</div>
                 </div>
 
             </div>
@@ -175,6 +175,7 @@
             <div class="row  text-secondary">
 
                 <div class="col m-2 p-3 bg-light border rounded">
+                    <div><strong>Ambos:</strong></div>
                     <div class="my-3">- Podem carregar documentos nas fichas dos seus clientes</div>
                     <div class="my-3">- Têm acesso às notificações públicas</div>
                     <div class="my-3">- Podem visualizar os ficheiros públicos inseridos na biblioteca</div>

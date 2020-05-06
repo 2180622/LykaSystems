@@ -53,6 +53,10 @@ table {
     color: #eac300;
 }
 
+.btn_list_opt_delete:hover {
+    color: #FF0000;
+}
+
 .btn_list_opt_download:hover {
     color: #1a9b00;
 }

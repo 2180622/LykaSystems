@@ -183,7 +183,7 @@ class AgenteController extends Controller
 
 
         $clients = Cliente::
-        selectRaw("Cliente.idCliente,Cliente.slug,nome,apelido,genero,email,telefone1,telefone2,dataNasc,paisNaturalidade,morada,cidade,moradaResidencia,nomePai,telefonePai,emailPai,nomeMae,telefoneMae,emailMae,fotografia,NIF,IBAN,nivEstudoAtual,nomeInstituicaoOrigem,cidadeInstituicaoOrigem,num_docOficial,img_docOficial,info_docOficial,img_Passaport,info_Passaport,img_docAcademico,info_docAcademico,obsPessoais,obsFinanceiras,obsAcademicas")
+        selectRaw("Cliente.*")
         ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
         ->where('Produto.idAgente', '=', $agent->idAgente)
         ->orWhere('Produto.idSubAgente', '=', $agent->idAgente)
@@ -191,7 +191,10 @@ class AgenteController extends Controller
         ->orderBy('Cliente.idCliente','asc')
         ->get();
 
- 
+
+        if ($clients->isEmpty()) {
+            $clients=null;
+        }
 
         return view('agents.show',compact("agent" ,'listagents','mainAgent','telefone2','IBAN','clients'));
 
