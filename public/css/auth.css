@@ -40,19 +40,16 @@ body, html {
     font-weight: 700;
 }
 
+.master-form p a {
+    color: #6C6C6C;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
 /* Form Inputs */
 form {
     padding: 10px 50px;
-}
-
-#restore-pass {
-    color: #6C6C6C !important;
-    font-size: 14px;
-    font-weight: 700;
-    position: relative;
-    float: right;
-    padding: 15px 15px;
-    display: inline;
 }
 
 /* Input Styles */
@@ -66,7 +63,7 @@ form {
     border: 2px solid #ADADAD;
     color: #252525 !important;
     transition: 0.3s ease-in-out;
-    box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1) !important;
 }
 
 #code {
@@ -142,23 +139,13 @@ a:hover {
     color: #ADADAD;
 }
 
-/* Conta Inativa - Style */
-/* Restore Form */
-.restore-account-form {
-    top: 15%;
-    padding: 0 20px;
-    position: relative;
-}
-
-/* Restore Paragraphs */
-.restore-account-form p:first-child {
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: #6A74C9 !important;
-}
-
-.restore-account-form p {
-    color: #6c6c6c;
-    font-weight: 700;
+/* Error Style */
+#error {
+    color: #e3342f;
+    display: inherit;
+    margin-top: 20px;
+    margin-bottom: -15px;
+    margin-bottom: 10px;
+    font-size: 10pt;
     padding: 0 50px;
 }

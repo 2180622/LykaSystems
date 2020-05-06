@@ -6,7 +6,7 @@
 <div class="master-form">
     <div>
         <p>Iniciar sessão</p>
-        <p>Insira os seus dados de autenticação para aceder a aplicação, por favor.</p>
+        <p>Se por algum motivo esqueceu-se da sua palavra-chave, <a href="#">clique neste link.</a></p>
         <div>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -31,10 +31,7 @@
                         @enderror
                     </div>
                 </div>
-                <div>
-                    <a href="#" id="restore-pass">Esqueceu-se da palavra-chave?</a>
-                </div>
-                <br><br>
+                <br>
                 <div>
                     <div>
                         <button type="submit" class="btn submit-button">
