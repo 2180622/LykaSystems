@@ -80,9 +80,10 @@ class AccountConfirmationController extends Controller
         return view('auth.mail-password');
     }
 
-    public function sendmailpassword(Request $request)
+    public function checkemail(Request $request)
     {
         $email = $request->input('email');
-        return $email->toJson();
+        $user = User::where('email', $email);
+        return response()->json(array('user'=> $user), 200);
     }
 }

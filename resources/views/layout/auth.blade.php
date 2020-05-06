@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('/media/favicon.png') }}" type="image/x-icon">
     <!-- Scripts -->
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
