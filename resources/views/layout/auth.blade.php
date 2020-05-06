@@ -27,7 +27,10 @@
             <p class="text-center">© {{ date('Y') }} Direitos de autor. Lyka Systems todos os direitos reservados.</p>
         </div>
     </div>
-    @yield('scripts')
+    @hasSection('scripts')
+        <script src="{{asset('/vendor/jquery/jquery.min.js')}}"></script>
+        @yield('scripts')
+    @endif
 </body>
 
 </html>

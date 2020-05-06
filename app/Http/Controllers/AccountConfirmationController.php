@@ -74,4 +74,15 @@ class AccountConfirmationController extends Controller
             return view('auth.account-inactive', compact('user', 'error'));
         }
     }
+
+    public function mailrestorepassword()
+    {
+        return view('auth.mail-password');
+    }
+
+    public function sendmailpassword(Request $request)
+    {
+        $email = $request->input('email');
+        return $email->toJson();
+    }
 }

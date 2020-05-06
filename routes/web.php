@@ -4,7 +4,7 @@ use Illuminate\Contracts\Console\Kernel;
 
 Auth::routes();
 
-/* Route group protected with authentication */
+/* Route group protected with authentication and prevent back in history after logout */
 Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Logout */
     Route::get('/logout', 'Auth\LoginController@logout');
@@ -72,7 +72,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       // Editar cobrança
       Route::get('/cobrancas/{product}/{fase}/{document}/editar', 'ChargesController@edit')->name('charges.edit');
       Route::put('/cobrancas/{product}/{document}', 'ChargesController@update')->name('charges.update');
-
 
     /* Utilizadores */
     Route::resource('/administradores', 'UserController')->parameters([
@@ -144,6 +143,10 @@ Route::get('/ativacao-conta/{user}', 'AccountConfirmationController@index')->nam
 Route::get('/ativacao-conta/{user}/confirmar-chave', 'AccountConfirmationController@keyconfirmation')->name('confirmation.key');
 Route::put('/ativacao-conta/{user}/confirmar-password', 'AccountConfirmationController@password')->name('confirmation.password');
 Route::get('/ativacao-conta/{user}/restaurar-conta', 'AccountConfirmationController@restore')->name('confirmation.restore');
+
+/* Restore password */
+Route::get('/restaurar-password', 'AccountConfirmationController@mailrestorepassword')->name('mailrestore.password');
+Route::post('/restaurar-password/confirmacao', 'AccountConfirmationController@sendmailpassword')->name('sendmail.password');
 
 /* Ajuda */
 Route::get('/ajuda', 'HelpController@show')->name('ajuda');

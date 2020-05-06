@@ -6,7 +6,7 @@
 <div class="master-form">
     <div>
         <p>Iniciar sessão</p>
-        <p>Se por algum motivo esqueceu-se da sua palavra-chave, <a href="#">clique neste link.</a></p>
+        <p>Se por algum motivo esqueceu-se da sua palavra-chave, <a href="{{route('mailrestore.password')}}">clique neste link.</a></p>
         <div>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
