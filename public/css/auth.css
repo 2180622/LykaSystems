@@ -12,41 +12,52 @@ body, html {
 }
 
 /* White Background */
-.form {
+.background {
     width: 40%;
     height: 100%;
     background-color: white;
     border-top: 5px solid #6A74C9;
 }
 
-/* Login Form */
-.login-form {
+/* Master Form */
+.master-form {
     top: 15%;
     padding: 0 20px;
     position: relative;
 }
 
-/* Login Paragraphs */
-.login-form p:first-child {
+/* Master Form Paragraphs */
+.master-form p:first-child {
     font-weight: 700;
     font-size: 1.5rem;
     color: #6A74C9 !important;
 }
 
-.login-form p {
-    color: #6c6c6c;
-    font-weight: 700;
+.master-form p {
+    color: #6C6C6C;
     padding: 0 50px;
+    font-size: 14px;
+    font-weight: 700;
 }
 
+/* Form Inputs */
 form {
-    margin-top: 40px;
+    padding: 10px 50px;
+}
+
+#restore-pass {
+    color: #6C6C6C !important;
+    font-size: 14px;
+    font-weight: 700;
+    position: relative;
+    float: right;
+    padding: 15px 15px;
+    display: inline;
 }
 
 /* Input Styles */
 #username, #password, #password-conf, #email, #code {
-    left: 50%;
-    width: 65%;
+    width: 96%;
     font-weight: 600;
     font-size: 0.8rem;
     padding: 25px 20px;
@@ -55,13 +66,12 @@ form {
     border: 2px solid #ADADAD;
     color: #252525 !important;
     transition: 0.3s ease-in-out;
-    transform: translate(-50%, 0%);
     box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
 #code {
-    text-transform: uppercase;
     letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
 #username::placeholder, #password::placeholder, #password-conf::placeholder, #email::placeholder, #code::placeholder {
@@ -81,8 +91,7 @@ form-control::placeholder {
 }
 
 .submit-button {
-    left: 50%;
-    width: 65%;
+    width: 40%;
     font-weight: 700;
     font-size: 0.7rem;
     padding: 15px 20px;
@@ -91,7 +100,6 @@ form-control::placeholder {
     color: white !important;
     text-transform: uppercase;
     transition: 0.3s ease-in-out;
-    transform: translate(-50%, 0%);
     background-color: #6A74C9 !important;
     box-shadow: 0 0.5rem 1rem rgba(68, 75, 137, 0.5) !important;
 }

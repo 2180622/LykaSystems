@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.auth')
 
 @section('title', 'Ativação de conta')
 
@@ -15,7 +15,7 @@
 </div>
 @endif
 
-<div class="login-form" @if(isset($success)) style="top:5% !important;" @endif>
+<div class="master-form" @if(isset($success)) style="top:5% !important;" @endif>
     <div>
         <p>Ativação de conta.</p>
         <p>Introduza o código de autenticação fornecido para dar continuidade a ativação da sua conta.</p>
