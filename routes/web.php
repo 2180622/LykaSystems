@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Agenda */
     Route::resource('/agenda', 'AgendController');
-    Route::post('/agenda', 'AgendController@store')->name('agend.store');
+/*     Route::post('/agenda', 'AgendController@store')->name('agend.store'); */ /* ????????????? */
 
     /* Pagamentos */
     Route::get('/pagamentos', 'PaymentController@index')->name('payments.index');

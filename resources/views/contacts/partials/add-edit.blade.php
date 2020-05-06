@@ -31,12 +31,12 @@
             <div class="col mr-2">
                 <label for="telefone1">Telefone (principal):</label><br>
                 <input type="text" class="form-control" name="telefone1" id="telefone1"
-                    value="{{old('telefone1',$contact->telefone1)}}">
+                    value="{{old('telefone1',$contact->telefone1)}}" maxlength="20">
             </div>
             <div class="col">
                 <label for="telefone2">Telefone (alternativo):</label><br>
                 <input type="text" class="form-control" name="telefone2" id="telefone2"
-                    value="{{old('telefone2',$contact->telefone2)}}">
+                    value="{{old('telefone2',$contact->telefone2)}}" maxlength="20">
             </div>
         </div>
 
@@ -47,7 +47,7 @@
             </div>
             <div class="col ">
                 <label for="fax">Fax:</label><br>
-                <input type="text" class="form-control" name="fax" id="fax" value="{{old('fax',$contact->fax)}}">
+                <input type="text" class="form-control" name="fax" id="fax" value="{{old('fax',$contact->fax)}}" maxlength="20">
             </div>
         </div>
 

@@ -288,17 +288,6 @@
                                 $("#contacts-tab").removeClass("border-danger text-danger");
                             }
 
-                            /* valida Financeiro */
-                            /*                             if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
-                                                            $("#wait_screen").hide();
-                                                            $("#financas-tab").addClass("border-danger text-danger");
-                                                            $("#warning_msg").show();
-                                                        } else {
-                                                            $("#financas-tab").removeClass("border-danger text-danger");
-                                                        } */
-
-
-
                         }
 
                         form.classList.add('was-validated');
