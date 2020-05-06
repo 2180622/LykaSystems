@@ -51,7 +51,7 @@ class DocPessoalController extends Controller
             $infoDoc = null;
             if(strtolower($docnecessario->tipoDocumento) == "passaport"){
                 $infoDoc['numPassaport'] = $fields['numPassaport'];
-                $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP']));
+                $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP']).'-1');
                 $infoDoc['passaportPaisEmi'] = $fields['passaportPaisEmi'];
                 $infoDoc['localEmissaoPP'] = $fields['localEmissaoPP'];
             }
@@ -67,7 +67,9 @@ class DocPessoalController extends Controller
 
             $documento = new DocPessoal;
             $documento->tipo=$docnecessario->tipoDocumento;
-            $documento->dataValidade = date("Y-m-d",strtotime($fields['dataValidade'].'-1'));
+            if(array_key_exists('dataValidade', $fields)){
+                $documento->dataValidade = date("Y-m-d",strtotime($fields['dataValidade'].'-1'));
+            }
             if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
                 $documento->verificacao = true;
             }else{
@@ -78,24 +80,17 @@ class DocPessoalController extends Controller
 
 
 
-
-            /* Upload Imagem */  /* Tens de identificar no ficheiro dos requests os campos */
-/*             if ($request->hasFile('img_doc')) {
-                $ficheiro = $request->file('img_doc');
-                $nomeficheiro = request->tipodedocumento?? . $client->idCliente . $ficheiro->getClientOriginalExtension();
+            $source = null;
+/*
+            if ($request->hasFile($fields['img_doc'])) {
+                $ficheiro = $request->file($fields['img_doc']);
+                $nomeficheiro = $request->tipodedocumento??$client->idCliente.$ficheiro->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
+                $source = 'client-documents/'.$client->idCliente.'/'.$nomeficheiro;
                 $agent->fotografia = $nomeficheiro;
-            } */
+            }
 
-
-
-            /* Código antigo: */
-           /*  $imagem = $fields['img_doc']; */
-
-
-
-
-            $documento->imagem = 'source';//$imagem->originalName;
+            $documento->imagem = $source;/** */
             if($infoDoc){
                 $documento->info = json_encode($infoDoc);
             }
@@ -116,29 +111,10 @@ class DocPessoalController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function show(Produto $produto)
+    public function show(DocPessoal $documento)
     {
-        $Fases = $produto->fase;
-
-        return view('produtos.show',compact("produto",'Fases'));
+        return view('documentos.show',compact('documento'));
     }
-
-
-
-
-    /**
-    * Prepares document for printing the specified client.
-    *
-    * @param  \App\Cliente  $client
-    * @return \Illuminate\Http\Response
-    */
-    public function print(Produto $produto)
-    {
-        return view('produtos.print',compact("produto"));
-    }
-
-
-
 
 
 
@@ -149,20 +125,18 @@ class DocPessoalController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function edit(Produto $produto)
+    public function edit(DocPessoal $documento, Fase $fase)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-            $Fornecedores = Fornecedor::all();
-            $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
-            $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
-            $Universidades = Universidade::all();
-            $relacao = new RelFornResp;
-            $relacao->valor=0;
-            $fases = $produto->fase;
 
-            return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores','relacao'));
+            $infoDoc = json_decode($documento->info);
+            $infoKeys = array_keys($infoDoc);
+            $tipoPAT = 'Pessoal';
+            $tipo = $documento->tipo;
+
+            return view('documentos.edit', compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produtos.show',$fase->produto);
         }
     }
 
@@ -176,13 +150,59 @@ class DocPessoalController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function update(UpdateProdutoRequest $request, Produto $produto)
+    public function update(UpdateDocumentoRequest $request, DocPessoal $documento)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
 
-            return redirect()->route('clients.show',$produto->cliente)->with('success', 'Dados do produto modificados com sucesso');
+            $fields = $request->all();
+            //dd($fields);
+
+            $infoDoc = null;
+            if(strtolower($documento->tipo) == "passaport"){
+                $infoDoc['numPassaport'] = $fields['numPassaport'];
+                $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP']).'-1');
+                $infoDoc['passaportPaisEmi'] = $fields['passaportPaisEmi'];
+                $infoDoc['localEmissaoPP'] = $fields['localEmissaoPP'];
+            }
+            for($i=1;$i<=500;$i++){
+                if(array_key_exists('nome-campo'.$i, $fields)){
+                    if($fields['nome-campo'.$i]){
+                        $infoDoc[$fields['nome-campo'.$i]] = $fields['valor-campo'.$i];
+                    }
+                }else{
+                    break;
+                }
+            }
+            
+            if(array_key_exists('dataValidade', $fields)){
+                $documento->dataValidade = date("Y-m-d",strtotime($fields['dataValidade'].'-1'));
+            }
+            if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+                $documento->verificacao = true;
+            }else{
+                $documento->verificacao = false;
+            }
+            if($fields['img_doc']){
+                $source = null;
+                /*
+                if ($request->hasFile($fields['img_doc'])) {
+                    $ficheiro = $request->file($fields['img_doc']);
+                    $nomeficheiro = $request->tipodedocumento??$client->idCliente.$ficheiro->getClientOriginalExtension();
+                    Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
+                    $source = 'client-documents/'.$client->idCliente.'/'.$nomeficheiro;
+                    $agent->fotografia = $nomeficheiro;
+                }
+
+                $documento->imagem = $source;/** */
+            }
+            if($infoDoc){
+                $documento->info = json_encode($infoDoc);
+            }
+            $documento->save();
+
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do produto modificados com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
 
     }
@@ -199,19 +219,15 @@ class DocPessoalController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function destroy(Produto $produto)
+    public function destroy(DocPessoal $documento)
     {
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
-            $produto->delete();
-            $fases = $produto->fase;
-            foreach($fases as $fase){
-                $responsabilidade = $fase->responsabilidade;
-                $responsabilidade->delete();
-                $fase->delete();
-            }
-            return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto eliminado com sucesso');
+
+            $documento->delete();
+            
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Produto eliminado com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
     }
 }
