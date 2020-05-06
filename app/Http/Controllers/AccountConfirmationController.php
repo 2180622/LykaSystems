@@ -68,8 +68,7 @@ class AccountConfirmationController extends Controller
                 $name = $user->cliente->nome.' '.$user->cliente->apelido;
             }
             dispatch(new RestoreAccount($email, $name, $auth_key));
-            $success = 'Confira a sua caixa de e-mail.';
-            return redirect()->route('confirmation.index', $user)->with(compact('success'));
+            return redirect()->route('confirmation.index', $user);
         }else {
             $error = "O e-mail que inseriu não correspodem ao registado no sistema.";
             return view('auth.account-inactive', compact('user', 'error'));
