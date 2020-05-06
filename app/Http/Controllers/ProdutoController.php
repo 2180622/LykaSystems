@@ -61,7 +61,7 @@ class ProdutoController extends Controller
 
             return view('produtos.add',compact('produto','produtoStock','cliente','Agentes','SubAgentes','Universidades','Fases','Responsabilidades','Fornecedores','relacao'));
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('clients.show',$produto->cliente);
         }
     }
 
@@ -201,7 +201,7 @@ class ProdutoController extends Controller
 
             return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto criada com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('clients.show',$produto->cliente);
         }
     }
 
@@ -260,7 +260,7 @@ class ProdutoController extends Controller
             $fases = $produto->fase;
             return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores','relacao'));
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('clients.show',$produto->cliente);
         }
     }
 
@@ -443,7 +443,7 @@ class ProdutoController extends Controller
 
             return redirect()->route('clients.show',$produto->cliente)->with('success', 'Dados do produto modificados com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('clients.show',$produto->cliente);
         }
 
     }
@@ -472,7 +472,7 @@ class ProdutoController extends Controller
             }
             return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto eliminado com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('clients.show',$produto->cliente);
         }
     }
 }

@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="dataValidPP">Data de validade: </label>
-                            <input type="text" class="form-control" name="dataValidPP" value="" style="width:250px" required><br>
+                            <input type="month" class="form-control" name="dataValidPP" value="" style="width:250px" required><br>
                         </div>
                         <div class="col-md-6">
                             <label for="passaportPaisEmi">País de Emissão: </label>

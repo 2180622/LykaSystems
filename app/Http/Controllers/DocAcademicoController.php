@@ -69,7 +69,19 @@ class DocAcademicoController extends Controller
             $documento->nome = $fields['nome'];
             $documento->idCliente = $fase->produto->cliente->idCliente;
             $documento->idFase = $fase->idFase;
-            $documento->imagem = 'source';
+
+            $source = null;
+            /*
+            if ($request->hasFile($fields['img_doc'])) {
+                $ficheiro = $request->file($fields['img_doc']);
+                $nomeficheiro = $request->tipodedocumento??$client->idCliente.$ficheiro->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
+                $source = 'client-documents/'.$client->idCliente.'/'.$nomeficheiro;
+                $agent->fotografia = $nomeficheiro;
+            }
+
+            $documento->imagem = $source;/** */
+            
             $documento->info = json_encode($infoDoc);
             $documento->save();
 
@@ -88,26 +100,11 @@ class DocAcademicoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function show(Produto $produto)
+    public function show(DocAcademico $documento)
     {
-        $Fases = $produto->fase;
-
-        return view('produtos.show',compact("produto",'Fases'));
+        return view('documentos.show',compact('documento'));
     }
 
-
-
-
-    /**
-    * Prepares document for printing the specified client.
-    *
-    * @param  \App\Cliente  $client
-    * @return \Illuminate\Http\Response
-    */
-    public function print(Produto $produto)
-    {
-        return view('produtos.print',compact("produto"));
-    }
 
 
 
@@ -121,20 +118,18 @@ class DocAcademicoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function edit(Produto $produto)
+    public function edit(DocAcademico $documento, Fase $fase)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-            $Fornecedores = Fornecedor::all();
-            $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
-            $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
-            $Universidades = Universidade::all();
-            $relacao = new RelFornResp;
-            $relacao->valor=0;
-            $fases = $produto->fase;
+            
+            $infoDoc = json_decode($documento->info);
+            $infoKeys = array_keys($infoDoc);
+            $tipoPAT = 'Academico';
+            $tipo = $documento->tipo;
 
-            return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores','relacao'));
+            return view('documentos.edit', compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produto.show',$fase->produto);
         }
     }
 
@@ -148,13 +143,48 @@ class DocAcademicoController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function update(UpdateProdutoRequest $request, Produto $produto)
+    public function update(UpdateDocumentoRequest $request, DocAcademico $documento)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
 
-            return redirect()->route('clients.show',$produto->cliente)->with('success', 'Dados do produto modificados com sucesso');
+            $fields = $request->all();
+            $infoDoc = null;
+
+            for($i=1;$i<=500;$i++){
+                if(array_key_exists('nome-campo'.$i,$fields)){
+                    if($fields['nome-campo'.$i]){
+                        $infoDoc[$fields['nome-campo'.$i]] = $fields['valor-campo'.$i];
+                    }
+                }else{
+                    break;
+                }
+            }
+            
+            if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+                $documento->verificacao = true;
+            }else{
+                $documento->verificacao = false;
+            }
+            $documento->nome = $fields['nome'];
+            
+            if($fields['img_doc']){
+                $source = null;
+                /*
+                if ($request->hasFile($fields['img_doc'])) {
+                    $ficheiro = $request->file($fields['img_doc']);
+                    $nomeficheiro = $request->tipodedocumento??$client->idCliente.$ficheiro->getClientOriginalExtension();
+                    Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
+                    $source = 'client-documents/'.$client->idCliente.'/'.$nomeficheiro;
+                    $agent->fotografia = $nomeficheiro;
+                }
+
+                $documento->imagem = $source;/** */
+            }
+            $documento->info = json_encode($infoDoc);
+            $documento->save();
+            return redirect()->route('produto.show',$documento->fase->produto)->with('success', 'Dados do produto modificados com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produto.show',$documento->fase->produto);
         }
 
     }
@@ -171,19 +201,15 @@ class DocAcademicoController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function destroy(Produto $produto)
+    public function destroy(DocAcademico $documento)
     {
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
-            $produto->delete();
-            $fases = $produto->fase;
-            foreach($fases as $fase){
-                $responsabilidade = $fase->responsabilidade;
-                $responsabilidade->delete();
-                $fase->delete();
-            }
-            return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto eliminado com sucesso');
+
+            $documento->delete();
+            
+            return redirect()->route('produto.show',$documento->fase->produto)->with('success', 'Produto eliminado com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produto.show',$documento->fase->produto);
         }
     }
 }
