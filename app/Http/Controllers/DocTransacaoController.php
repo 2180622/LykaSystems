@@ -51,21 +51,23 @@ class DocTransacaoController extends Controller
             
             $fields = $request->validated();
             $documento->fill($fields);
-            $documento->comprovativoPagamento = "Source";
 
             $source = null;
-            /*
-            if ($request->hasFile($fields['img_doc'])) {
-                $ficheiro = $request->file($fields['img_doc']);
-                $nomeficheiro = $request->tipodedocumento??$client->idCliente.$ficheiro->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
-                $source = 'client-documents/'.$client->idCliente.'/'.$nomeficheiro;
-                $agent->fotografia = $nomeficheiro;
-            }
 
-            $documento->comprovativoPagamento = $source;/** */
+            $documento->comprovativoPagamento = $source;
             
             $documento->idFase = $fase->idFase;
+            $documento->save();
+
+
+            if($fields['img_doc']) {
+                $ficheiro = $fields['img_doc'];
+                $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+            }
+
+            $documento->comprovativoPagamento = $source;
             $documento->save();
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', 'Documento adicionado com sucesso');
@@ -135,18 +137,16 @@ class DocTransacaoController extends Controller
             
             $fields = $request->validated();
             $documento->fill($fields);
-            $documento->comprovativoPagamento = "Source";
             $source = null;
-            /*
-            if ($request->hasFile($fields['img_doc'])) {
-                $ficheiro = $request->file($fields['img_doc']);
-                $nomeficheiro = $request->tipodedocumento??$client->idCliente.$ficheiro->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
-                $source = 'client-documents/'.$client->idCliente.'/'.$nomeficheiro;
-                $agent->fotografia = $nomeficheiro;
+
+            if($fields['img_doc']) {
+                $ficheiro = $fields['img_doc'];
+                $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
             }
 
-            $documento->comprovativoPagamento = $source;/** */
+            $documento->comprovativoPagamento = $source;
             $documento->idFase = $fase->idFase;
             $documento->save();
 

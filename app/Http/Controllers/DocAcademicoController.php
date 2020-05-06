@@ -71,16 +71,15 @@ class DocAcademicoController extends Controller
             $documento->idFase = $fase->idFase;
 
             $source = null;
-            /*
-            if ($request->hasFile($fields['img_doc'])) {
-                $ficheiro = $request->file($fields['img_doc']);
-                $nomeficheiro = $request->tipodedocumento??$client->idCliente.$ficheiro->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
-                $source = 'client-documents/'.$client->idCliente.'/'.$nomeficheiro;
-                $agent->fotografia = $nomeficheiro;
-            }
 
-            $documento->imagem = $source;/** */
+            if($fields['img_doc']) {
+                $ficheiro = $fields['img_doc'];
+                $tipoDoc = str_replace(".","_",str_replace(" ","",$documento->tipo));
+                $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_academico_'.$tipoDoc.'.'.$ficheiro->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+            }
+            $documento->imagem = $source;
             
             $documento->info = json_encode($infoDoc);
             $documento->save();
@@ -169,16 +168,15 @@ class DocAcademicoController extends Controller
             
             if($fields['img_doc']){
                 $source = null;
-                /*
-                if ($request->hasFile($fields['img_doc'])) {
-                    $ficheiro = $request->file($fields['img_doc']);
-                    $nomeficheiro = $request->tipodedocumento??$client->idCliente.$ficheiro->getClientOriginalExtension();
-                    Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $ficheiro, $nomeficheiro);
-                    $source = 'client-documents/'.$client->idCliente.'/'.$nomeficheiro;
-                    $agent->fotografia = $nomeficheiro;
-                }
 
-                $documento->imagem = $source;/** */
+                if($fields['img_doc']) {
+                    $ficheiro = $fields['img_doc'];
+                    $tipoDoc = str_replace(".","_",str_replace(" ","",$documento->tipo));
+                    $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_academico_'.$tipoDoc.'.'.$ficheiro->getClientOriginalExtension();
+                    Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                    $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+                }
+                $documento->imagem = $source;
             }
             $documento->info = json_encode($infoDoc);
             $documento->save();
