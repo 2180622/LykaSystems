@@ -201,15 +201,15 @@
                         @foreach ($produtos as $produto)
 
                         <a class="name_link text-center m-2" href="{{route('produtos.show',$produto)}}">
-                            <div class="col bg-light border rounded shadow-sm p-4">
+                            <div class="col bg-light border rounded shadow-sm p-4" style="min-width: 160px">
                                 <div class="text-secondary"><i class="fas fa-database p-2 " style="font-size: 25px"></i>
                                 </div>
                                 <div>{{$produto->tipo}}</div>
                                 {{-- <div>{{$produto->descricao}} em desenvolvimento Web & Multimédia
                             </div> --}}
-                            <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
-                    </div>
-                    </a>
+                                <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
+                            </div>
+                        </a>
 
                     @endforeach
 

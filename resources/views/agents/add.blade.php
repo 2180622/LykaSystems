@@ -38,7 +38,7 @@
             <div class="row mt-4">
                 <div class="col">
                     <div class="alert alert-primary " role="alert">
-                        <i class="fas fa-info-circle mr-1"></i><strong>Nota: </strong>O agente irá receber um e-mail
+                        <i class="fas fa-info-circle mr-2"></i><strong>Nota: </strong>O agente irá receber um e-mail
                         para ativação da sua conta pessoal
                     </div>
 

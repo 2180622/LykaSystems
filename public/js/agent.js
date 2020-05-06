@@ -65,18 +65,6 @@
         /* FIM configs DATATABLES */
 
 
-        /* Verificação inicial */
-        if ($("#tipo").val() == "Agente") {
-            $("#idAgenteAssociado").prop("disabled", true);
-            $("#idAgenteAssociado").val(null);
-        }
-
-        if ($("#aux_idAgenteAssociado").val() != null) {
-            $("#idAgenteAssociado").val($("#aux_idAgenteAssociado").val());
-        }
-
-
-
 
         /* Definir pais */
         var str_pais = $("#hidden_pais").val();
@@ -192,18 +180,39 @@
 
 
 
+        /* Verificação inicial */
+        if ($("#aux_idAgenteAssociado").val() != "") {
+            $("#idAgenteAssociado").val($("#aux_idAgenteAssociado").val());
+            $("#div_subagente").show();
+        }
+
+        if ($("#tipo").val() == "Agente") {
+            $("#div_subagente").hide();
+            $("#idAgenteAssociado").prop("disabled", true);
+            $("#idAgenteAssociado").val(null);
+        }
+
+
         /* mudança de tipo de agente */
         $('#tipo').change(function () {
-
             if ($("#tipo").val() == "Subagente") {
+                $("#div_subagente").show();
                 $("#idAgenteAssociado").prop("disabled", false);
-                $("#idAgenteAssociado").val("pickone");
+                $("#idAgenteAssociado").val(null);
+                $("#idAgenteAssociado").focus();
 
             } else {
+
+                $("#div_subagente").hide();
                 $("#idAgenteAssociado").prop("disabled", true);
                 $("#idAgenteAssociado").val(null);
+                $("#idAgenteAssociado").prop("disabled", true);
+                $("#idAgenteAssociado").val(null);
+                $("#idAgenteAssociado").removeClass("was-validated");
                 $("#idAgenteAssociado").removeClass("is-invalid");
-                $("#idAgenteAssociado").addClass("invalid");
+                $("#idAgenteAssociado").addClass(":invalid");
+
+
             }
         });
 
@@ -233,19 +242,23 @@
                             event.stopPropagation();
 
                             /* Se for subagente é obrigatorio ter um agente */
-                            if ($("#idAgenteAssociado").val() == "pickone") {
+                            if ($("#idAgenteAssociado").val() == 0 || $("#idAgenteAssociado").val() == null) {
                                 $("#wait_screen").hide();
-                                $("#idAgenteAssociado").addClass("is-invalid");
-                                $("#idAgenteAssociado").addClass(":invalid");
                                 $("#agent-type-tab").addClass("border-danger text-danger");
+                                $("#idAgenteAssociado").removeClass("is-valid");
+                                $("#idAgenteAssociado").addClass("is-invalid");
+                                $("#idAgenteAssociado").css("background-image", "none");
                                 $("#warning_msg").show();
-                            }else {
+                                return false;
+                            } else {
                                 $("#agent-type-tab").removeClass("border-danger text-danger");
                             }
 
 
+
+
                             /* valida Dados pessoais */
-                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#genero").val() == "") || ($("#dataNasc").val() == "") ) {
+                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#genero").val() == "") || ($("#dataNasc").val() == "")) {
                                 $("#wait_screen").hide();
                                 $("#personal-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
@@ -256,7 +269,7 @@
 
 
                             /* valida Documentos */
-                            if (($("#num_doc").val() == "") || ($("#NIF").val() == "") ) {
+                            if (($("#num_doc").val() == "") || ($("#NIF").val() == "")) {
                                 $("#wait_screen").hide();
                                 $("#documents-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
@@ -267,7 +280,7 @@
 
 
                             /* valida Contactos */
-                            if (($("#email").val() == "") || ($("#pais").val() == "") || ($("#morada").val() == "") || ($("#telefone1").val() == "") ) {
+                            if (($("#email").val() == "") || ($("#pais").val() == "") || ($("#morada").val() == "") || ($("#telefone1").val() == "")) {
                                 $("#wait_screen").hide();
                                 $("#contacts-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
@@ -276,19 +289,18 @@
                             }
 
                             /* valida Financeiro */
-/*                             if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#financas-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#financas-tab").removeClass("border-danger text-danger");
-                            } */
+                            /*                             if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
+                                                            $("#wait_screen").hide();
+                                                            $("#financas-tab").addClass("border-danger text-danger");
+                                                            $("#warning_msg").show();
+                                                        } else {
+                                                            $("#financas-tab").removeClass("border-danger text-danger");
+                                                        } */
 
 
 
                         }
 
-                        window.scrollTo(0, 0);
                         form.classList.add('was-validated');
 
                     }, false);

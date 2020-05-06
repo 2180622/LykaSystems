@@ -93,8 +93,8 @@
                 <div class="col" style="min-width: 300px">
 
                     {{-- INPUT Tipo de agente --}}
-                    <label for="tipo">Tipo:</label><br>
-                    <select id="tipo" name="tipo" class="form-control select_style">
+                    <label for="tipo">Tipo de agente:</label><br>
+                    <select id="tipo" name="tipo" class="form-control select_style" required>
                         <option {{old('tipo',$agent->tipo)=='Agente'?"selected":""}} value="Agente">Agente</option>
                         <option {{old('tipo',$agent->tipo)=='Subagente'?"selected":""}} value="Subagente">Subagente
                         </option>
@@ -106,31 +106,36 @@
 
 
                 <div class="col" style="min-width: 300px">
-                    {{-- INPUT Subagente de...... --}}
-                    <label for="subagent">Subagente de:</label><br>
 
-                    {{-- campo auxiliar: id do agente --}}
-                    <input type="hidden" id="aux_idAgenteAssociado"
-                        value="{{old('idAgenteAssociado',$agent->idAgenteAssociado)}}" disabled>
+                    <div id="div_subagente" style="display: none">
+                        {{-- INPUT Subagente de...... --}}
+                        <label for="subagent">Subagente de:</label><br>
+
+                        {{-- campo auxiliar: id do agente --}}
+                        <input type="hidden" id="aux_idAgenteAssociado"
+                            value="{{old('idAgenteAssociado',$agent->idAgenteAssociado)}}">
 
 
-                    {{-- disabled se o tipo escolhido for "subagente" --}}
-                    <select id="idAgenteAssociado" name="idAgenteAssociado" class="form-control select_style" required>
+                        {{-- disabled se o tipo escolhido for "subagente" --}}
 
-                        <option hidden value="0">(escolha o agente)</option>
+                        <select id="idAgenteAssociado" name="idAgenteAssociado" class="form-control select_style"
+                            required>
 
-                        {{-- Lista todos os agentes exepto o que esta a ser editado --}}
-                        @foreach($listagents as $agentx)
-                        @if ($agentx->idAgente != $agent->idAgente && $agentx->tipo != "Subagente" )
-                        <option value="{{$agentx->idAgente}}">{{$agentx->nome}} {{$agentx->apelido}}
-                            ({{$agentx->pais}})
-                        </option>
-                        @endif
-                        @endforeach
+                            <option hidden value="0">(escolha o agente)</option>
 
-                    </select>
+                            {{-- Lista todos os agentes exepto o que esta a ser editado --}}
+                            @foreach($listagents as $agentx)
+                            @if ($agentx->idAgente != $agent->idAgente && $agentx->tipo != "Subagente" )
+                            <option value="{{$agentx->idAgente}}">{{$agentx->nome}} {{$agentx->apelido}}
+                                ({{$agentx->pais}})
+                            </option>
+                            @endif
+                            @endforeach
 
-                    <div class="invalid-feedback">Escolha um subagente</div>
+                        </select>
+
+                        <div class="invalid-feedback mt-2"><i class="fas fa-times mr-2"></i>Escolha um subagente</div>
+                    </div>
                 </div>
 
                 <br>
@@ -141,25 +146,45 @@
 
             <div class="row text-secondary">
                 <div class="col">
-                    <div><label><i class="far fa-question-circle"></i> Informação sobre o tipo de agente e
-                            permissões</label></div>
-                    <div class="border rounded bg-light p-3">
-
-                        <div id="info_agente" class="">
-                            Info bla bla
-                        </div>
-
-                        <div id="info_subagente" class="">
-                            Info bla bla
-                        </div>
-
-                    </div>
+                    <label><i class="far fa-question-circle"></i> Informações sobre permissões</label>
                 </div>
             </div>
 
+            <div class="row text-secondary">
+
+                <div class="col p-3 m-2 bg-light border rounded" style="min-width: 280px">
+                    <div><strong>O agente:</strong></div>
+                    <div class="my-3">- Tem acesso à lista dos seus clientes e à dos seus subagentes</div>
+                    <div class="my-3">- Tem acesso à lista dos seus subagentes</div>
+
+
+
+                </div>
+
+                <br><br>
+
+                <div class="col p-3 m-2 bg-light border rounded"  style="min-width: 280px">
+                    <div><strong>O subagente:</strong></div>
+                    <div class="my-3">- Apenas tem acesso à lista dos seus clientes</div>
+                    <div class="my-3">- Tem acesso ao perfil do seu AGENTE superior</div>
+                </div>
+
+            </div>
+
+
+            <div class="row  text-secondary">
+
+                <div class="col m-2 p-3 bg-light border rounded">
+                    <div class="my-3">- Podem carregar documentos nas fichas dos seus clientes</div>
+                    <div class="my-3">- Têm acesso às notificações públicas</div>
+                    <div class="my-3">- Podem visualizar os ficheiros públicos inseridos na biblioteca</div>
+                    <div class="my-3">- Têm agenda e lista telefónica privada</div>
+                    <div class="mt-3">- Podem utilizar a funcionalidade de "Reportar problema"</div>
+                </div>
+
+            </div>
 
         </div>
-
 
         {{-- Conteudo: Dados pessoais --}}
         <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="personal-tab">

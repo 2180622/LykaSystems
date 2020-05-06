@@ -43,23 +43,21 @@ class UserController extends Controller
         $admin = new Administrador;
         $admin->fill($fieldsAdmin);
 
-        $name = $admin->nome .' '. $admin->apelido;
+        $name = $admin->nome.' '.$admin->apelido;
         $admin->save();
 
         $user->idAdmin = $admin->idAdmin;
         $user->email = $admin->email;
         $user->slug = post_slug($name);
         $user->auth_key = strtoupper(random_str(5));
-        $password = random_str(64);
-        $user->password = Hash::make($password);
+        $user->password = Hash::make(random_str(64));
         $user->save();
 
         $email = $user->email;
         $auth_key = $user->auth_key;
-
         dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
-        return redirect()->route('users.index')->with('success', 'Utilizador criado com sucesso.');
+        return redirect()->route('users.index')->with('success', 'Administrador criado com sucesso.');
     }
 
     public function edit(User $user)
@@ -92,8 +90,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->admin->delete();
+        User::where('idUser', $user->idUser)->update([
+          'auth_key' => null,
+          'estado' => false
+        ]);
         $user->delete();
-
         return redirect()->route('users.index')->with('success', 'Administrador eliminado com sucesso');
     }
 
