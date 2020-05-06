@@ -18,9 +18,9 @@ class AgendController extends Controller
     public function index()
     {
         /* Permissões */
-        /*if (Auth::user()->tipo != "admin" ){
+        if (Auth::user()->tipo != "admin" ){
             abort (401);
-        }*/
+        }
 
         $agends = Agenda::all();
 
@@ -139,9 +139,7 @@ class AgendController extends Controller
      * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Agenda $agenda)
+    public function destroy()
     {
-        $agenda->delete();
-        return redirect()->back()->with('success', 'Evento Eliminado!');
     }
 }
