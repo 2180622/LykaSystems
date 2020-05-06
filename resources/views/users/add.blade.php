@@ -33,8 +33,12 @@
         <br>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Atenção!</strong><br>
-            <p class="mt-1" style="font-weight:500;">Ao adicionar um utilizador está a colocar esse mesmo utilizador como perfil de <strong>administrador</strong>,
-            o que significa que este terá controlo total sobre a aplicação, podendo visualizar, editar e/ou eliminar dados importantes.</p>
+            <p class="mt-1" style="font-weight:500;">
+                Ao adicionar um administrador e colocá-lo com o cargo <strong>total</strong>, significa que este terá
+                controlo total sobre a aplicação, podendo visualizar, editar e/ou eliminar dados importantes.
+                <br>
+                Recordarmos, que depois de adicionar um novo administrador, este irá receber um e-mail para ativar a sua conta.
+            </p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -47,54 +51,62 @@
                     <div class="col-md-6">
                         <label for="nome">Primeiro nome *</label>
                         <br>
-                        <input type="text" name="nome" required placeholder="Inserir primeiro nome" value="{{old('nome', $user->nome)}}">
+                        <input type="text" name="nome" required title="Campo de preenchimento obrigatório." placeholder="Inserir primeiro nome" value="{{old('nome', $user->nome)}}">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputFullname">Último nome *</label>
+                        <label for="apelido">Último nome *</label>
                         <br>
-                        <input type="text" name="apelido" required placeholder="Inserir último nome" value="{{old('apelido', $user->apelido)}}">
+                        <input type="text" name="apelido" required title="Campo de preenchimento obrigatório." placeholder="Inserir último nome" value="{{old('apelido', $user->apelido)}}">
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="inputEmail">Endereço eletrónico *</label>
+                        <label for="email">Endereço eletrónico *</label>
                         <br>
-                        <input type="text" name="email" id="inputEmail" placeholder="Inserir endereço eletrónico" required value="{{old('email', $user->email)}}">
+                        <input type="text" name="email" id="inputEmail" placeholder="Inserir endereço eletrónico" required title="Campo de preenchimento obrigatório." value="{{old('email', $user->email)}}">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputFullname">Data de Nascimento *</label>
+                        <label for="dataNasc">Data de nascimento *</label>
                         <br>
-                        <input type="date" name="dataNasc" required value="{{old('dataNasc', $user->dataNasc)}}">
+                        <input type="date" name="dataNasc" required title="Campo de preenchimento obrigatório." value="{{old('dataNasc', $user->dataNasc)}}">
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="inputFullname">Telefone Princial *</label>
+                        <label for="telefone1">Telefone princial *</label>
                         <br>
-                        <input type="text" name="telefone1" required placeholder="Inserir número de telefone principal" value="{{old('telefone1', $user->telefone1)}}">
+                        <input type="text" name="telefone1" required title="Campo de preenchimento obrigatório." placeholder="Inserir número de telefone principal" maxlength="25" value="{{old('telefone1', $user->telefone1)}}">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputFullname">Telefone Secundário</label>
+                        <label for="telefone2">Telefone secundário</label>
                         <br>
-                        <input type="text" name="telefone2" placeholder="Inserir número de telefone secundário" value="{{old('telefone2', $user->telefone2)}}">
+                        <input type="text" name="telefone2" placeholder="Inserir número de telefone secundário" value="{{old('telefone2', $user->telefone2)}}" maxlength="25">
                     </div>
                 </div>
                 <br>
-                <div class="row">
-                    <div class="col">
-                        <label for="inputFullname">Género:</label>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="genero">Género do administrador *</label>
                         <br>
-                        <select type="text" name="genero" id="genero" required>
-                            <option selected disabled hidden>Escolher género</option>
+                        <select name="genero" required title="Campo de preenchimento obrigatório.">
+                            <option selected disabled hidden>Escolher género do administrador</option>
                             <option value="M">Masculino</option>
                             <option value="F">Feminino</option>
                         </select>
                     </div>
+                    <div class="col-md-6">
+                        <label for="superAdmin">Cargo do administrador *</label>
+                        <br>
+                        <select name="superAdmin" required title="Campo de preenchimento obrigatório.">
+                            <option selected disabled hidden>Escolher cargo de administrador</option>
+                            <option value="0">Regular</option>
+                            <option value="1">Total</option>
+                        </select>
+                    </div>
                 </div>
         </div>
-
         <div class="form-group text-right">
             <br>
             <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar administrador</button>
