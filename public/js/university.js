@@ -82,9 +82,9 @@ $(document).ready(function () {
     /* VALIDAÇÃO DE INPUTS */
 
     /* Apenas letras:  .lettersOnly();  */
-/*     $("#inputNome").lettersOnly(); */
+    /*     $("#inputNome").lettersOnly(); */
 
-    if($('#inputTelefone').length){
+    if ($('#inputTelefone').length) {
         /* Apenas numeros:  .numbersOnly();  */
         $("#inputTelefone").numbersOnly();
         $("#inputNIF").numbersOnly();
@@ -104,17 +104,23 @@ $(document).ready(function () {
             // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function (form) {
                 form.addEventListener('submit', function (event) {
+
+                        /* mostrar div de espera */
+                        $("#wait_screen").show();
+
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
 
 
-                        /* valida Campos da informação pessoal */
-                    if ( ($("#inputNome").val()=="") || ($("#inputNIF").val()=="") ){
-                        $("#warning_infos").removeClass("warning_sign");
-                    } else {
-                        $("#warning_infos").addClass("warning_sign");
-                    }
+                        /* valida os  Campos  */
+                        if (($("#inputNome").val() == "") || ($("#inputNIF").val() == "") || ($("#inputEmail").val() == "") ) {
+                            $("#wait_screen").hide();
+                            $("#warning_msg").show();
+                            $("#infos-tab").addClass("border-danger text-danger");
+                        } else {
+                            $("#infos-tab").removeClass("border-danger text-danger");
+                        }
                     }
                     form.classList.add('was-validated');
                 }, false);

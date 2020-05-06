@@ -1,27 +1,26 @@
-@extends('layout.app')
+@extends('layout.auth')
 
 @section('title', 'Conta desativada')
 
 @section('content')
 
-<div class="restore-account-form">
+<div class="master-form">
     <div>
         @if ($user->tipo == 'admin')
-        <h4 class="ml-5">Olá {{$user->admin->nome.' '.$user->admin->apelido}}!</h4>
+        <p>Olá {{$user->admin->nome.' '.$user->admin->apelido}}!</p>
         @elseif ($user->tipo == 'agente')
-        <h4 class="ml-5">Olá {{$user->agente->nome.' '.$user->agente->apelido}}!</h4>
+        <p>Olá {{$user->agente->nome.' '.$user->agente->apelido}}!</p>
         @else
-        <h4 class="ml-5">Olá {{$user->cliente->nome.' '.$user->cliente->apelido}}!</h4>
+        <p>Olá {{$user->cliente->nome.' '.$user->cliente->apelido}}!</p>
         @endif
-        <br>
-        <p>Lamentamos imenso informar, mas a sua conta foi desativada devido a um grande período de tempo após a receção do e-mail para a ativação da mesma</p>
+        <p>Lamentamos imenso informar, mas a sua conta foi desativada devido a um grande período de tempo após a receção do e-mail para a ativação da mesma.</p>
         <p>Caso queira restaurar a sua conta, insira o seu e-mail no local abaixo disponível.</p>
         @if (isset($error))
-        <strong class="text-center" style="color:#e3342f; display: inherit; margin-top: 20px; margin-bottom: -25px; font-size:14px; padding:0 50px;">
+        <strong id="error">
             {{$error}}
         </strong>
         @endif
-        <form class="email-form mt-5" action="{{route('confirmation.restore', $user)}}" method="POST">
+        <form class="email-form" action="{{route('confirmation.restore', $user)}}" method="POST">
             @csrf
             @method('get')
             <div class="form-group">

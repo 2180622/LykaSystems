@@ -220,36 +220,37 @@ $tipo_agent_atual=$agent->tipo;
 
                     <div class="col">
 
-                        @if($clients==null)
-                                <div class="border rounded bg-light p-3">
-                                    <div class="text-muted"><small>(sem registos)</small></div>
-                                </div>
-                                <br>
-                            @else
-                                <div class="row">
-                                    @foreach ($clients as $client)
-                                        <a class="name_link text-center m-2" href="{{route('clients.show',$client)}}">
-                                            <div class="col">
-                                                <div style="width: 200px; height:210px; overflow:hidden">
-                                                    @if($client->fotografia)
-                                                        <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                            src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
-                                                            style="width:100%; height:100% ">
-                                                        @elseif($client->genero == 'F')
-                                                        <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                            src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
-                                                        @else
-                                                        <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                            src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
-                                                    @endif
-                                                </div>
-                                                <div class="mt-2">{{$client->nome}} {{$client->apelido}}</div>
-                                                <div ><small>({{$client->paisNaturalidade}})</small></div>
+                        @if($clients)
+                            <div class="row">
+                                @foreach ($clients as $client)
+
+                                    <a class="name_link text-center m-2" href="{{route('clients.show',$client)}}">
+                                        <div class="col">
+                                            <div style="width: 200px; height:210px; overflow:hidden">
+                                                @if($client->fotografia)
+                                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                        src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
+                                                        style="width:100%; height:100% ">
+                                                @elseif($client->genero == 'F')
+                                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                        src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
+                                                @else
+                                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                        src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
+                                                @endif
                                             </div>
-                                        </a>
-                                    @endforeach
-                                </div>
-                            @endif
+                                            <div class="mt-2">{{$client->nome}} {{$client->apelido}}</div>
+                                            <div ><small>({{$client->paisNaturalidade}})</small></div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="border rounded bg-light p-3">
+                                <div class="text-muted"><small>(sem registos)</small></div>
+                            </div>
+                            <br>
+                        @endif
                     </div>
 
                 </div>
