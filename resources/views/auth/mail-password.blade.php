@@ -13,7 +13,7 @@
         </strong>
         @endif
         <div>
-            <form id="form" method="POST">
+            <form id="form" method="post">
                 <div>
                     <div>
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus required placeholder="Endereço eletrónico">
@@ -23,7 +23,7 @@
                 <div>
                     <div>
                         <button type="submit" class="btn submit-button">
-                            {{ __('Restaurar') }}
+                            {{ __('Confirmar') }}
                         </button>
                     </div>
                 </div>
@@ -34,24 +34,24 @@
 
 @section('scripts')
 <script type="text/javascript">
-    $(document).ready(function(){
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN' : "{{csrf_token()}}"
-            }
-        });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': "{{csrf_token()}}"
+        }
+    });
 
-        $('#form').submit(function(){
-            data = $('#email').val();
-            $.ajax({
-                type: "POST",
-                url: "{{route('sendmail.password')}}",
-                context: this,
-                data: data,
-                success: function(data){
-                    console.log('OK');
-                }
-            })
+    $('#form').submit(function(event) {
+        event.preventDefault();
+        info = { email: $("#email").val() };
+        $.ajax({
+            type: "post",
+            url: "{{route('check.email')}}",
+            context: this,
+            data: info,
+            success: function(data) {
+                user = JSON.parse(data);
+                console.log(user.nome);
+            }
         });
     });
 </script>

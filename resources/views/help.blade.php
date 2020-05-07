@@ -48,7 +48,8 @@
 
                         <div class="col-md-6 text-center">
                             <div class="search-bar-helper">
-                                <input class="shadow-sm" type="text" id="searchHelper" placeholder="Palavras-chaves" aria-label="Procurar">
+                                <input class="shadow-sm" type="text" id="searchHelper" placeholder="Palavras-chaves"
+                                       aria-label="Procurar">
                                 <div class="search-button-helper">
                                     <ion-icon name="search-outline" class="search-icon-helper"></ion-icon>
                                 </div>
@@ -65,38 +66,36 @@
 
                         <br><br><br>
 
-                        <div class="col-md-4 text-center card-help-info">
-                            <div class="card shadow">
+                        <div class="col-md-4 text-center card-help-info mb-5">
+                            <div class="card shadow pb-3">
                                 <h5 class="card-title">Estudantes</h5>
                                 <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right"></i> Como criar um
+                                    <a> <i class="fas fa-angle-right pb-2"></i> Como criar um
                                         Estudante?</a>
                                     <br>
-                                    <a> <i class="fas fa-angle-right"></i> Como editar um
+                                    <a> <i class="fas fa-angle-right pb-2"></i> Como editar um
                                         Estudante?</a>
                                 </p>
                             </div>
                         </div>
 
-                        <br> <br> <br>
-
-                        <div class="col-md-4 text-center card-help-info">
-                            <div class="card shadow">
+                        <div class="col-md-4 text-center card-help-info mb-5">
+                            <div class="card shadow pb-3">
                                 <h5 class="card-title">Produtos</h5>
                                 <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right"></i> Como adicionar Produto?</a>
+                                    <a> <i class="fas fa-angle-right pb-2"></i> Como adicionar Produto?</a>
+                                    <br>
+                                    <a> <i class="fas fa-angle-right pb-2"></i> Como ...?</a>
                                     <br>
                                 </p>
                             </div>
                         </div>
 
-                        <br> <br> <br>
-
-                        <div class="col-md-4 text-center card-help-info">
-                            <div class="card shadow">
+                        <div class="col-md-4 text-center card-help-info mb-5">
+                            <div class="card shadow pb-3">
                                 <h5 class="card-title">Universidades</h5>
                                 <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right"></i> Como criar um Universidade?</a>
+                                    <a> <i class="fas fa-angle-right pb-2"></i> Como criar um Universidade?</a>
                                     <br>
                                 </p>
                             </div>

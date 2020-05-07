@@ -33,7 +33,8 @@
             </a>
         </div>
 
-        <button type="button" class="float-right top-button limpar" id="titleModalNew" data-toggle="modal" data-target="#modalCalendar">
+        <button type="button" class="float-right top-button limpar" id="titleModalNew" data-toggle="modal"
+                data-target="#modalCalendar">
             Novo Evento
         </button>
 
@@ -49,6 +50,68 @@
 
             <div id='calendar'></div>
 
+            <br><br>
+
+            {{-- Conteudo: Eventos --}}
+            <div>
+                @if($agends!=null)
+                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                           style="overflow:hidden;">
+
+                        {{-- Cabeçalho da tabela --}}
+                        <thead>
+                        <tr>
+                            <th style="width:10px">{{-- COR DO EVENTO --}}</th>
+                            <th>Título</th>
+                            <th>Início</th>
+                            <th>Fim</th>
+                            <th class="text-center">Opções</th>
+                        </tr>
+                        </thead>
+
+                        {{-- Corpo da tabela --}}
+                        <tbody>
+
+                        @foreach ($agends as $agend)
+                            <tr>
+                                <td style="width:10px"><span class="p-1 shadow-sm"
+                                                             style="background-color:{{$agend->cor}}"></span>
+                                </td>
+
+                                {{-- Título --}}
+                                <td><a class="name_link" href="#">{{$agend->titulo}}</td>
+
+                                {{-- Inicio --}}
+                                <td class="align-middle">{{ date('d-M-y', strtotime($agend->dataInicio)) }}</td>
+
+                                {{-- Fim --}}
+                                <td class="align-middle">{{ date('d-M-y', strtotime($agend->dataFim)) }}</td>
+
+                                {{-- OPÇÔES --}}
+                                <td class="text-center align-middle">
+                                    <a href="#" class="btn_list_opt " title="Ver Evento"><i
+                                            class="far fa-eye mr-2"></i></a>
+                                    <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                            class="fas fa-pencil-alt mr-2"></i></a>
+
+                                    <form method="POST" role="form" id="#" action="#"
+                                          class="d-inline-block form_university_id" data="#">
+                                        @csrf
+                                        {{--  @method('DELETE') --}}
+                                        <button type="submit" class="btn_delete" title="Eliminar Evento"
+                                                data-toggle="modal"
+                                                data-target="#eliminarUniversidade" data-title="#"><i
+                                                class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+            </div>
+            @else
+                <small class="text-muted">(Sem eventos marcados)</small>
+            @endif
         </div>
     </div>
 @endsection
@@ -90,8 +153,8 @@
         function dealWithDate(value) {
             let month = value.getMonth() + 1;
             return value.getFullYear() + "-" + ("0" + month).slice(-2)
-            + "-" + ("0" + value.getDate()).slice(-2) + "T"
-            + ("0" + value.getHours()).slice(-2) + ":" + ("0" + value.getMinutes()).slice(-2);
+                + "-" + ("0" + value.getDate()).slice(-2) + "T"
+                + ("0" + value.getHours()).slice(-2) + ":" + ("0" + value.getMinutes()).slice(-2);
         }
 
         document.addEventListener('DOMContentLoaded', function () {

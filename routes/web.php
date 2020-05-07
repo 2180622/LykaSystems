@@ -30,11 +30,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/contacts/edit/{contact}/{university?}', 'ContactoController@edit')->name('contacts.edit');
     Route::resource('/contacts', 'ContactoController')->only(['index','destroy', 'update','store']);
 
-
-
 /*     Route::resource('/contacts', 'ContactoController', ['except' => ['create']]); */
-
-
 
     /* Universidades */
     Route::resource('/universities', 'UniversityController');
@@ -137,6 +133,10 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       'destroy' => 'provider.destroy',
       'edit' => 'provider.edit',
     ]);
+
+    /* Ajuda */
+    Route::get('/ajuda', 'HelpController@show')->name('ajuda');
+
 });
 
 /* Account Confirmation */
@@ -147,7 +147,7 @@ Route::get('/ativacao-conta/{user}/restaurar-conta', 'AccountConfirmationControl
 
 /* Restore password */
 Route::get('/restaurar-password', 'AccountConfirmationController@mailrestorepassword')->name('mailrestore.password');
-Route::post('/restaurar-password/confirmacao', 'AccountConfirmationController@sendmailpassword')->name('sendmail.password');
+Route::post('/restaurar-passwords/confirmacao', 'AccountConfirmationController@checkemail')->name('check.email');
 
 /* Ajuda */
 Route::get('/ajuda', 'HelpController@show')->name('ajuda');
