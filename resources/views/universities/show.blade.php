@@ -182,7 +182,7 @@
 
                         <div>
                             <div class="col border rounded bg-light shadow-sm text-secondary m-2 mt-4 p-3"
-                                style="min-width: 320px; max-width: 320px; height:235px; max-height:235px">
+                                style="min-width: 320px; max-width: 320px; height:auto; max-height:240px">
 
                                 <div class="row p-0 m-0" style="margin-top:-30px!important">
                                     <div class="col text-right p-0">
@@ -209,11 +209,13 @@
                                 </div>
 
                                 <div class="mt-2"><i class="fas fa-square mr-2" title="{{$agenda->titulo}}"
-                                        style="color:{{$agenda->cor}}"></i><strong>Evento: </strong>{{ \Illuminate\Support\Str::limit($agenda->titulo, 27, $end=' (...)') }}</strong></div>
+                                        style="color:{{$agenda->cor}}"></i><strong>Evento: </strong>{{ \Illuminate\Support\Str::limit($agenda->titulo, 50, $end=' (...)') }}</strong></div>
 
                                 <div class="mt-3">{{ \Illuminate\Support\Str::limit($agenda->descricao, 70, $end=' (...)') }}</div>
 
-                                <div class="row mt-4 ">
+
+
+                                <div class="row ">
 
                                     <div class="col border-right ">
                                         <div class="mt-3">

@@ -286,7 +286,7 @@
                     <label for="num_doc">Número de identificação pessoal:</label><br>
                     <input type="text" class="form-control" name="num_doc" id="num_doc"
                         value="{{old('num_doc',$agent->num_doc)}}" placeholder="Numero de identificação pessoal"
-                        required maxlength="50" required>
+                        required maxlength="20" required>
 
                     <br>
 

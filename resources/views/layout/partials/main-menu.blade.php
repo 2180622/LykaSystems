@@ -211,7 +211,7 @@
             <a href="{{route('agents.show', Auth::user()->agente )}}" title="Ver as minhas informações">
                 {{-- Foto Utilizador --}}
                 @if(Auth::user()->agente->fotografia != null)
-                    <img src="{{asset('/storage/agent-documents/'.Auth::user()->agente->idAgente.Auth::user()->agente->nome.'/'.Auth::user()->agente->fotografia)}}" style="width:100%">
+                    <img src="{{asset('/storage/agent-documents/'.Auth::user()->agente->idAgente.'/'.Auth::user()->agente->fotografia)}}" style="width:100%">
                     @elseif (Auth::user()->agente->genero == "F")
                     <img src="{{asset('/storage/default-photos/F.jpg')}}" style="width:100%">
                     @else
