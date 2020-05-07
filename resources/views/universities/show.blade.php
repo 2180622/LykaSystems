@@ -259,7 +259,7 @@
                                         @if($client->fotografia)
                                             <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                 src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
-                                                style="width:100%; height:100% ">
+                                                style="width:100%; height:auto ">
                                         @elseif($client->genero == 'F')
                                             <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                 src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
@@ -296,7 +296,7 @@
                                         @if($contact->fotografia)
                                             <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                 src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}"
-                                                style="width:100%; height:100% ">
+                                                style="width:100%; height:auto ">
                                         @else
                                             <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                 src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
@@ -385,6 +385,7 @@
 
 {{-- Scripts --}}
 @section('scripts')
+<script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 <script src="{{asset('/js/university_show.js')}}"></script>
 <script src="{{asset('/js/agends.js')}}"></script>
 

@@ -75,7 +75,7 @@ $tipo_agent_atual=$agent->tipo;
                     @if($agent->fotografia)
                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
                         src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}"
-                        style="width:100%; ">
+                        style="width:100%; height:auto ">
                     @elseif($agent->genero == 'F')
                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
                         src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
@@ -190,7 +190,7 @@ $tipo_agent_atual=$agent->tipo;
                                                         @if($agent->fotografia)
                                                             <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                                 src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}"
-                                                                style="width:100%; height:100%">
+                                                                style="width:100%; height:auto">
                                                             @elseif($agent->genero == 'F')
                                                             <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                                 src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
@@ -230,7 +230,7 @@ $tipo_agent_atual=$agent->tipo;
                                                 @if($client->fotografia)
                                                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                         src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
-                                                        style="width:100%; height:100% ">
+                                                        style="width:100%; height:auto ">
                                                 @elseif($client->genero == 'F')
                                                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                         src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
@@ -281,6 +281,8 @@ $tipo_agent_atual=$agent->tipo;
                         <div class="border rounded bg-light p-3">
                             <div>{{$agent->NIF}}</div>
                         </div>
+                        
+                        <br>
 
                     </div>
 

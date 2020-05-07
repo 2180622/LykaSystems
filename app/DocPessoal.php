@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Model;
 
 class DocPessoal extends Model
 {
@@ -14,8 +14,14 @@ class DocPessoal extends Model
     protected $primaryKey = 'idDocPessoal';
 
     protected $fillable = [
-        'idCliente','tipo','imagem','info','dataValidade','verificacao','$idFase'
-        ];
+        'idCliente',
+        'tipo',
+        'imagem',
+        'info',
+        'dataValidade',
+        'verificacao',
+        '$idFase'
+    ];
 
     public function fase(){
         return $this->belongsTo("App\Fase","idFase","idFase")->withTrashed();

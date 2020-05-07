@@ -118,12 +118,6 @@ class DocPessoalController extends Controller
 
 
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Cliente  $client
-    * @return \Illuminate\Http\Response
-    */
     public function edit(Fase $fase, DocPessoal $documento)
     {
         dd('aqui');
@@ -174,7 +168,7 @@ class DocPessoalController extends Controller
                     break;
                 }
             }
-            
+
             if(array_key_exists('dataValidade', $fields)){
                 $documento->dataValidade = date("Y-m-d",strtotime($fields['dataValidade'].'-1'));
             }
@@ -224,7 +218,7 @@ class DocPessoalController extends Controller
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
 
             $documento->delete();
-            
+
             return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Produto eliminado com sucesso');
         }else{
             return redirect()->route('produtos.show',$documento->fase->produto);
