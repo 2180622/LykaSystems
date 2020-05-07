@@ -30,16 +30,16 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Edição do fornecedor: {{$provider->nome}}</h6>
+            <h6>Edição do {{$tipo}}:</h6>
         </div>
         <br>
         <div class="payment-card shadow-sm">
             @if($tipoPAT == 'Pessoal')
-                <form action="{{route('documento-pessoal.update', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('documento-pessoal.update',$documento)}}" method="post" enctype="multipart/form-data">
             @elseif($tipoPAT == 'Academico')
-                <form action="{{route('documento-academico.update', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('documento-academico.update',$documento)}}" method="post" enctype="multipart/form-data">
             @else
-                <form action="{{route('documento-transacao.update', $fase)}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('documento-transacao.update', $documento)}}" method="post" enctype="multipart/form-data">
             @endif
                 @csrf
                 @method('PUT')
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="dataValidPP">Data de validade: </label>
-                            <input value="{{old('idConta',$documento->dataValidPP)}}" type="month" class="form-control" name="dataValidPP" value="" style="width:250px" required><br>
+                            <input value="{{old('idConta',$documento->dataValidPP)}}" type="month" class="form-control" name="dataValidPP" value="{{date('Y-m', strtotime($documento->dataValidade))}}" style="width:250px" required><br>
                         </div>
                         <div class="col-md-6">
                             <label for="passaportPaisEmi">País de Emissão: </label>
@@ -124,23 +124,29 @@
                         </div>
 
                         <div class="list-clones">
-                            @for($i=0;$i<count($infoKeys);$i++)
-                                <div class="row" id="documento-campo{{$i+1}}">
-                                    <div class="col-md-6">
-                                        <label for="nome-campo{{$i+1}}">Nome do Campo {{$i+1}}</label>
+                            @php
+                                $i=0;
+                            @endphp
+                            @foreach($infoKeys as $key)
+                                @php
+                                    $i++;
+                                @endphp
+                                <div class="row" id="documento-campo{{$i}}">
+                                    <div class="col-md-5">
+                                        <label for="nome-campo{{$i}}">Nome do Campo {{$i}}</label>
                                         <br>
-                                        <input value="{{$infoKeys[$i]}}" id="nome-campo{{$i+1}}" type="text" class="form-control" name="nome-campo{{$i+1}}" placeholder="Inserir nome do campo" autocomplete="off" required>
+                                        <input value="{{$key}}" id="nome-campo{{$i}}" type="text" class="form-control" name="nome-campo{{$i}}" placeholder="Inserir nome do campo" autocomplete="off" required>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="valor-campo{{$i+1}}">Valor do Campo {{$i+1}}</label>
+                                    <div class="col-md-5">
+                                        <label for="valor-campo{{$i}}">Valor do Campo {{$i}}</label>
                                         <br>
-                                        <input value="{{$infoDoc[$i]}}" id="valor-campo{{$i+1}}" type="text" class="form-control" name="valor-campo{{$i+1}}" placeholder="Inserir valor do campo" autocomplete="off" required>
+                                        <input value="{{$infoDoc[$key]}}" id="valor-campo{{$i}}" type="text" class="form-control" name="valor-campo{{$i}}" placeholder="Inserir valor do campo" autocomplete="off" required>
                                     </div>
                                     <div class="col-md-2">
-                                        <br><br><button type="button" onclick="removeCampo(1,$(this).closest('#documento-campo{{$i+1}}'))" class="top-button">Remover {{$i+1}}</button>
+                                        <br><button type="button" onclick="removeCampo({{$i}},$(this).closest('#documento-campo{{$i}}'))" class="top-button">Remover {{$i}}</button>
                                     </div>
                                 </div>
-                            @endfor
+                            @endforeach
                         </div>
                         <div>
                             <button id="passaport-button" type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
@@ -162,28 +168,34 @@
                             @else
                                 <div class="col-md-6">
                                     <label for="dataValidade">Data de validade: </label>
-                                    <input type="month" class="form-control"  id="dataValidade" name="dataValidade" value="" style="width:250px" required><br>
+                                    <input type="month" class="form-control"  id="dataValidade" name="dataValidade" value="{{date('Y-m', strtotime($documento->dataValidade))}}" style="width:250px" required><br>
                                 </div>
                             @endif
                         </div>
                         <div class="list-clones">
-                            @for($i=0;$i<count($infoKeys);$i++)
-                                <div class="row" id="documento-campo{{$i+1}}">
-                                    <div class="col-md-6">
-                                        <label for="nome-campo{{$i+1}}">Nome do Campo {{$i+1}}</label>
+                            @php
+                                $i=0;
+                            @endphp
+                            @foreach($infoKeys as $key)
+                                @php
+                                    $i++;
+                                @endphp
+                                <div class="row" id="documento-campo{{$i}}">
+                                    <div class="col-md-5">
+                                        <label for="nome-campo{{$i}}">Nome do Campo {{$i}}</label>
                                         <br>
-                                        <input value="{{$infoKeys[$i]}}" id="nome-campo{{$i+1}}" type="text" class="form-control" name="nome-campo{{$i+1}}" placeholder="Inserir nome do campo" autocomplete="off" required>
+                                        <input value="{{$key}}" id="nome-campo{{$i}}" type="text" class="form-control" name="nome-campo{{$i}}" placeholder="Inserir nome do campo" autocomplete="off" required>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="valor-campo{{$i+1}}">Valor do Campo {{$i+1}}</label>
+                                    <div class="col-md-5">
+                                        <label for="valor-campo{{$i}}">Valor do Campo {{$i}}</label>
                                         <br>
-                                        <input value="{{$infoDoc[$i]}}" id="valor-campo{{$i+1}}" type="text" class="form-control" name="valor-campo{{$i+1}}" placeholder="Inserir valor do campo" autocomplete="off" required>
+                                        <input value="{{$infoDoc[$key]}}" id="valor-campo{{$i}}" type="text" class="form-control" name="valor-campo{{$i}}" placeholder="Inserir valor do campo" autocomplete="off" required>
                                     </div>
                                     <div class="col-md-2">
-                                        <br><br><button type="button" onclick="removeCampo({{$i+1}},$(this).closest('#documento-campo{{$i+1}}'))" class="top-button">Remover {{$i+1}}</button>
+                                        <br><button type="button" onclick="removeCampo({{$i}},$(this).closest('#documento-campo{{$i}}'))" class="top-button">Remover {{$i}}</button>
                                     </div>
                                 </div>
-                            @endfor
+                            @endforeach
                         </div>
                         <div>
                             <br><button id="else-button" type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>

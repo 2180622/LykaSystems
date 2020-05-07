@@ -118,13 +118,17 @@ class DocPessoalController extends Controller
 
 
 
-    public function edit(Fase $fase, DocPessoal $documento)
+    /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Cliente  $client
+    * @return \Illuminate\Http\Response
+    */
+    public function edit(DocPessoal $documento)
     {
-        dd('aqui');
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
 
-            $infoDoc = json_decode($documento->info);
-            dd($documento);
+            $infoDoc = (array)json_decode($documento->info);
             $infoKeys = array_keys($infoDoc);
             $tipoPAT = 'Pessoal';
             $tipo = $documento->tipo;

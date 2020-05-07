@@ -1,45 +1,3 @@
-<style>
-    .name_link {
-        color: gray;
-    }
-
-    .active {
-        color: #6A74C9
-    }
-
-
-    textarea,
-    input[type="text"],
-    input[type="date"],
-    input[type="email"] {
-        border: none;
-        resize: none;
-        padding: 7px 12px;
-        border-radius: 5px;
-        background-color: #EAEAEA;
-        color: #747474;
-        font-weight: 600;
-
-    }
-
-    .select_style {
-        border: none;
-        resize: none;
-        padding: 7px 12px;
-        border-radius: 5px;
-        background-color: #EAEAEA;
-        color: #747474;
-        font-weight: 600;
-    }
-
-    label {
-        color: #747474;
-        font-weight: 700;
-    }
-
-</style>
-
-
 <div class="alert alert-danger mb-3" id="warning_msg" style="display: none"><i
         class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos
     assinalados.</div>
@@ -286,7 +244,7 @@
                     <label for="num_doc">Número de identificação pessoal:</label><br>
                     <input type="text" class="form-control" name="num_doc" id="num_doc"
                         value="{{old('num_doc',$agent->num_doc)}}" placeholder="Numero de identificação pessoal"
-                        required maxlength="50" required>
+                        required maxlength="20" required>
 
                     <br>
 

@@ -47,7 +47,7 @@
             <div class="col">
                 {{-- Tipo de acesso --}}
                 <label for="acesso" style="font-weight: 700!important;">Tipo de acesso:</label>
-                <select name="acesso" id="acesso" class="form-control" required>
+                <select name="acesso" id="acesso" class="form-control select_style" required>
                     <option {{old('acesso',$library->acesso)=='Privado'?"selected":""}} value="Privado">Privado
                     </option>
                     <option {{old('acesso',$library->acesso)=='Público'?"selected":""}} value="Público">Público
@@ -73,8 +73,8 @@
 
             {{-- Quando NÃO EXISTE ficheiro --}}
             <div id="div_nofile" style="height:70px">
-                <div class="text-center" style="line-height:70px;">
-                    <i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado
+                <div class="text-center" style="padding: 15px">
+                    <i class="fas fa-info-circle mr-2"></i>Nenhum ficheiro selecionado<br>
                     <small>(Para continuar escolha um ficheiro)</small>
                 </div>
             </div>
@@ -83,7 +83,7 @@
             {{-- Quand EXISTE ficheiro --}}
             {{-- File info --}}
             <div id="div_propriedades">
-                <div><i class="fas fa-info-circle mr-2"></i>Informação do ficheiro</div>
+                <div><i class="fas fa-info-circle mr-2"></i>Informação sobre o ficheiro:</div>
                 <div class="mt-3">Tipo de ficheiro: <span id="info_fileType"
                         class="text-secondary">{{old('ficheiro',$library->tipo)}}</span> </div>
                 <div class="mt-2">Tamanho: <span id="info_fileSize"

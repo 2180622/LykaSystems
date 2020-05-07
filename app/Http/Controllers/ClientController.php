@@ -171,7 +171,7 @@ class ClientController extends Controller
 
         if ($requestClient->hasFile('fotografia')) {
             $photo = $requestClient->file('fotografia');
-            $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            $profileImg = $client->idCliente .'.'. $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $photo, $profileImg);
             $client->fotografia = $profileImg;
             $doc_id->imagem = $profileImg;
@@ -393,8 +393,17 @@ class ClientController extends Controller
 
         /* Fotografia do cliente */
         if ($request->hasFile('fotografia')) {
+
+                    /* Verifica se o ficheiro antigo existe e apaga do storage*/
+        $oldfile=Cliente::
+        where('idCliente', '=',$client->idCliente)
+        ->first();
+        if(Storage::disk('public')->exists('client-documents/'.$client->idCliente.'/'. $oldfile->fotografia)){
+            Storage::disk('public')->delete('client-documents/'.$client->idCliente.'/'. $oldfile->fotografia);
+        }
+
             $photo = $request->file('fotografia');
-            $profileImg = $client->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+            $profileImg = $client->idCliente .'.'. $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $photo, $profileImg);
             $client->fotografia = $profileImg;
 

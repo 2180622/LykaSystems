@@ -385,9 +385,9 @@
 
 
             {{-- Conteudo: Contactos --}}
-            <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+            <div class="tab-pane fade pl-2" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
 
-                <div class="row mt-2 pl-2">
+                <div class="row mt-2">
                     <div class="col">
 
                         {{-- Contactos --}}
@@ -458,8 +458,6 @@
                         </div>
                     </div>
                 </div>
-
-                <br>
 
             </div>
 

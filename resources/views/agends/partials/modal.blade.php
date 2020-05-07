@@ -40,7 +40,7 @@
                                 <i class="fas fa-pen mr-2" style="color: #6A74C9;"></i>
                                 <label for="title">Titulo</label>
                                 <input type="text" class="form-control limpar" id="title" name="titulo"
-                                       placeholder="Insira o Titulo do evento." required>
+                                    maxlength="100" placeholder="Insira o Titulo do evento." required>
                             </div>
                         </div>
                         <div class="col-md-3">

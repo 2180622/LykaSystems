@@ -82,6 +82,12 @@ $(document).ready(function () {
 
 
 
+    /* Reset ao formulário de novos eventos */
+
+    $("#modalCalendar").on('hidden.bs.modal', function () {
+        resetForm($("#formEvent"));
+    });
+
 
     /* VALIDAÇÃO DO FORMULÁRIO de EVENTO */
     (function () {

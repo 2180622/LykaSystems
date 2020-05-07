@@ -87,6 +87,7 @@
                             <input type="text" class="form-control" name="nome" id="nome"
                                 value="{{old('nome',$client->nome)}}" placeholder="Insira o nome do aluno"
                                 maxlength="20" required>
+                                <br>
                         </div>
                         <div class="col" style="min-width:250px">
                             {{-- INPUT apelido --}}
@@ -94,10 +95,11 @@
                             <input type="text" class="form-control" name="apelido" id="apelido"
                                 value="{{old('apelido',$client->apelido)}}" placeholder="Insira o apelido do aluno"
                                 maxlength="20" required>
+                                <br>
                         </div>
                     </div>
 
-                    <br>
+
 
                     <div class="row mb-4">
 
@@ -110,6 +112,7 @@
                                 <option {{old('genero',$client->genero)=='M'?"selected":""}} value="M">Masculino
                                 </option>
                             </select>
+                            <br>
                         </div>
 
                         <div class="col" style="min-width:250px">
@@ -121,12 +124,12 @@
                             <select id="paisNaturalidade" name="paisNaturalidade" style="width:100%" class="form-control select_style" required>
                                 @include('clients.partials.countries');
                             </select>
-                        </div>
+                          </div>
 
                     </div>
 
-                    <div class="row">
-                        <div class="col-6">
+                    <div class="row mt-3">
+                        <div class="col-6" style="min-width:250px">
                         {{-- INPUT dataNasc --}}
                         <label for="dataNasc">Data de nascimento:</label><br>
                         <input type="date" class="form-control" name="dataNasc" id="dataNasc"
@@ -138,7 +141,7 @@
 
                 </div>
 
-                <div class="col col-4 text-center" style="max-height:350px; overflow:hidden;">
+                <div class="col col-4 text-center align-middle" style="min-width: 300px" >
                     {{-- INPUT fotografia --}}
                     <div>
                         <label for="fotografia">Fotografia:</label>
@@ -146,19 +149,21 @@
 
                     </div>
 
-                    <!-- Verifica se a imagem já existe-->
-                    @if ($client->fotografia!=null)
-                    <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
-                        id="preview" class="m-2 p-1 border rounded bg-white shadow-sm"
-                        style="width:80%; cursor:pointer; min-width:118px;" alt="Imagem de apresentação"
-                        title="Clique para mudar a imagem de apresentação" />
-                    @else
-                    <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
-                        class="m-2 p-1 border rounded bg-white shadow-sm" style="width:80%; cursor:pointer; min-width:118px"
-                        alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
-                    @endif
-
-                    <br><small class="text-muted">(clique para mudar)</small>
+                    <div class="text-center align-self-center align-middle" style="max-height:300px; overflow:hidden;">
+                        <!-- Verifica se a imagem já existe-->
+                        @if ($client->fotografia!=null)
+                        <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
+                            id="preview" class="m-2 p-1 border rounded bg-white shadow-sm"
+                            style="width:80%; height:auto; cursor:pointer; min-width:118px;" alt="Imagem de apresentação"
+                            title="Clique para mudar a imagem de apresentação" />
+                        @else
+                        <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
+                            class="m-2 p-1 border rounded bg-white shadow-sm" style="width:80%; cursor:pointer; min-width:118px; max-height:300px;"
+                            alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+                        @endif
+                    </div>
+                    <div class="mt-2"><small class="text-muted">(clique para mudar)</small></div>
+                    <br>
                 </div>
             </div>
 
