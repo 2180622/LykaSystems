@@ -5,6 +5,7 @@ namespace App\Jobs;
 use Mail;
 use App\User;
 use Illuminate\Bus\Queueable;
+use App\Mail\RestorePasswordMail;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;

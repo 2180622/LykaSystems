@@ -9,12 +9,12 @@
         <p id="last-p">Após inserir o seu endereço-eletrónico e clicar no botão "Restaurar", aceda ao seu e-mail para mais informações.</p>
         <div>
             <form id="form" method="post">
-                <div>
+                <div id="div-separador">
                     <div>
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus required placeholder="Endereço eletrónico">
                     </div>
                 </div>
-                <br>
+                <br id="separador">
                 <div>
                     <div>
                         <button type="submit" class="btn submit-button" id="submit-button">
@@ -58,7 +58,7 @@
             data: info,
             success: function(data) {
                 if ($('#error').text() != '') {
-                    $('#error').css("display", "none");
+                    $('#error').remove();
                 }
                 user = JSON.parse(data);
 
@@ -74,7 +74,8 @@
                     completeNumber.pop();
                 }
 
-                form = "<label id='label-code'></label> <div id='code' class='form-control' style='width:100%;'><input name='code' type=text id='code-input' maxlength='3' autocomplete='off' required> </div> <button type='submit' class='submit-button' id='submit-button2'>Recuperar</button>";
+                $('#separador').remove();
+                form = "<label id='label-code'></label> <div id='code' class='form-control' style='width:100%;'><input name='code' type=text id='code-input' maxlength='3' autocomplete='off' required> </div> <button type='submit' class='submit-button' id='submit-button2'>Restaurar</button>";
                 $('#form-code').append(form);
                 $('#form-code').css("display", "block");
                 $('#emailcode').attr("value", user.email);
@@ -86,8 +87,13 @@
             },
             error: function() {
                 if ($('#error').text() != '') {
-                    $('#error').css("display", "none");
+                    $('#error').remove();
                 }
+
+                if ($('#separador').length == 0) {
+                    $('#div-separador').after("<br id='separador'>");
+                }
+
                 $('#collapse').hide();
                 $('#form-code').css("display", "none");
                 $('#submit-button').css("display", "block");
@@ -112,13 +118,13 @@
             data: info,
             success: function(data) {
                 if ($('#error').text() != '') {
-                    $('#error').css("display", "none");
+                    $('#error').remove();
                 }
             window.location.href = 'http://lykasystems.test/login';
             },
             error: function() {
               if ($('#error').text() != '') {
-                  $('#error').css("display", "none");
+                  $('#error').remove();
               }
               error = "<strong id='error' style='margin-top: 0px;'>O número que inseriu não corresponde ao seu e-mail.</strong>";
               $('#collapse-p').after(error);
