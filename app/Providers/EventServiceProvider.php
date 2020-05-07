@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Auth\Events\Registered;
@@ -14,6 +13,13 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\StorePayment' => [
           'App\Listeners\PaymentVerification',
         ],
+        'App\Events\LoginVerification' => [
+          'App\Listeners\UserEventListener',
+        ]
+    ];
+
+    protected $subscribe = [
+        'App\Listeners\UserEventListener',
     ];
 
     public function boot()
