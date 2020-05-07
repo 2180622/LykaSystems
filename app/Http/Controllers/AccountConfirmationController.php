@@ -2,6 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Agente;
+use App\Cliente;
+use App\Administrador;
 use Illuminate\Http\Request;
 use App\Jobs\RestoreAccount;
 use Illuminate\Support\Facades\Hash;
@@ -83,7 +86,28 @@ class AccountConfirmationController extends Controller
     public function checkemail(Request $request)
     {
         $email = $request->input('email');
-        $user = User::where('email', $email);
-        return response()->json(array('user'=> $user), 200);
+        $users = User::where('email', $email)->first();
+
+        switch ($users->tipo) {
+            case 'admin':
+                $user = Administrador::where('idAdmin', $users->idAdmin)
+                ->select('nome', 'apelido', 'telefone1', 'email')
+                ->first();
+            break;
+
+            case 'agente':
+                $user = Agente::where('idAgente', $users->idAgente)
+                ->select('nome', 'apelido', 'telefone1', 'email')
+                ->first();
+            break;
+
+            case 'cliente':
+                $user = Cliente::where('idCliente', $users->idCliente)
+                ->select('nome', 'apelido', 'telefone1', 'email')
+                ->first();
+            break;
+        }
+        
+        return $user->toJson();
     }
 }

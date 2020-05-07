@@ -22,7 +22,7 @@
                 <br>
                 <div>
                     <div>
-                        <button type="button" id="submit-button" class="btn submit-button">
+                        <button type="submit" class="btn submit-button">
                             {{ __('Confirmar') }}
                         </button>
                     </div>
@@ -40,15 +40,17 @@
         }
     });
 
-    $('#submit-button').click(function() {
-        email = $('#email').val();
+    $('#form').submit(function(event) {
+        event.preventDefault();
+        info = { email: $("#email").val() };
         $.ajax({
             type: "post",
             url: "{{route('check.email')}}",
             context: this,
-            data: email,
+            data: info,
             success: function(data) {
-                console.log('hello world');
+                user = JSON.parse(data);
+                console.log(user.nome);
             }
         });
     });
