@@ -47,7 +47,7 @@
             <div class="col">
                 {{-- Tipo de acesso --}}
                 <label for="acesso" style="font-weight: 700!important;">Tipo de acesso:</label>
-                <select name="acesso" id="acesso" class="form-control" required>
+                <select name="acesso" id="acesso" class="form-control select_style" required>
                     <option {{old('acesso',$library->acesso)=='Privado'?"selected":""}} value="Privado">Privado
                     </option>
                     <option {{old('acesso',$library->acesso)=='Público'?"selected":""}} value="Público">Público

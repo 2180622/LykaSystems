@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-<link href="{{asset('css/clients.css')}}" rel="stylesheet">
+<link href="{{asset('css/inputs.css')}}" rel="stylesheet">
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
