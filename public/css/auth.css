@@ -89,6 +89,7 @@ form-control::placeholder {
 
 .submit-button {
     width: 40%;
+    border: none;
     font-weight: 700;
     font-size: 0.7rem;
     padding: 15px 20px;
@@ -148,4 +149,12 @@ a:hover {
     margin-bottom: 10px;
     font-size: 10pt;
     padding: 0 50px;
+}
+
+#collapse {
+    width: 96%;
+}
+
+#collapse-card {
+    border-radius: 0px !important;
 }

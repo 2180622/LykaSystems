@@ -110,7 +110,7 @@ class AgenteController extends Controller
         /* Fotografia do agente */
         if ($requestAgent->hasFile('fotografia')) {
             $photo = $requestAgent->file('fotografia');
-            $profileImg = $agent->idCliente .'.'. $photo->getClientOriginalExtension();
+            $profileImg = $agent->idAgente .'.'. $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
             $agent->save();
@@ -255,8 +255,15 @@ class AgenteController extends Controller
 
         /* Fotografia */
         if ($request->hasFile('fotografia')) {
+
+            /* Verifica se o ficheiro antigo existe e apaga do storage*/
+            dd(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/'. $agent->fotografia));
+            if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/'. $agent->fotografia)){
+                Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/'. $agent->fotografia);
+            }
+
             $photo = $request->file('fotografia');
-            $profileImg = $agent->idCliente .'.'. $photo->getClientOriginalExtension();
+            $profileImg = $agent->idAgente .'.'. $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
         }

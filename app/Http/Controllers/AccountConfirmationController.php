@@ -86,7 +86,11 @@ class AccountConfirmationController extends Controller
     public function checkemail(Request $request)
     {
         $email = $request->input('email');
-        $users = User::where('email', $email)->first();
+        $users = User::where('email', $email)
+        ->where(function($users){
+            $users->where('auth_key', '!=', null)
+            ->where('estado', 1);
+        })->first();
 
         switch ($users->tipo) {
             case 'admin':
@@ -97,17 +101,19 @@ class AccountConfirmationController extends Controller
 
             case 'agente':
                 $user = Agente::where('idAgente', $users->idAgente)
+                ->orWhere('estado', 1)
                 ->select('nome', 'apelido', 'telefone1', 'email')
                 ->first();
             break;
 
             case 'cliente':
                 $user = Cliente::where('idCliente', $users->idCliente)
+                ->orWhere('estado', 1)
                 ->select('nome', 'apelido', 'telefone1', 'email')
                 ->first();
             break;
         }
-        
+
         return $user->toJson();
     }
 }

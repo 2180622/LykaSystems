@@ -56,34 +56,34 @@
                 </div>
 
                 <div class="col">
-                    <div><span class="text-secondary">Cliente: 
+                    <div><span class="text-secondary">Cliente:
                         <a class="name_link" href="{{route('clients.show',$produto->cliente)}}">
                             {{$produto->cliente->nome.' '.$produto->cliente->apelido}}</span>
                         </a>
                     </div><br>
 
-                    <div><span class="text-secondary">Universidade: 
+                    <div><span class="text-secondary">Universidade:
                         <a class="name_link" href="{{route('universities.show',$produto->universidade1)}}">
                             {{$produto->universidade1->nome}}</span>
                         </a>
                     </div><br>
 
                     @if($produto->idUniversidade2)
-                        <div><span class="text-secondary">2ª Universidade: 
+                        <div><span class="text-secondary">2ª Universidade:
                             <a class="name_link" href="{{route('universities.show',$produto->universidade2)}}">
                                 {{$produto->universidade2->nome}}</span>
                             </a>
                         </div><br>
                     @endif
 
-                    <div><span class="text-secondary">Agente: 
+                    <div><span class="text-secondary">Agente:
                         <a class="name_link" href="{{route('agents.show',$produto->agente)}}">
                             {{$produto->agente->nome.' '.$produto->agente->apelido}}</span>
                         </a>
                     </div><br>
 
                     @if($produto->idSubAgente)
-                        <div><span class="text-secondary">Sub-Agente: 
+                        <div><span class="text-secondary">Sub-Agente:
                             <a class="name_link" href="{{route('agents.show',$produto->subAgente)}}">
                                 {{$produto->subAgente->nome.' '.$produto->subAgente->apelido}}</span>
                             </a>
@@ -152,7 +152,7 @@
 
                                 <div><span><b>Responsabilidades</b></span></div><br>
 
-                                <div><span class="text-secondary">Para cliente: </span> 
+                                <div><span class="text-secondary">Para cliente: </span>
                                     @if($fase->responsabilidade->valorCliente)
                                         {{$fase->responsabilidade->valorCliente.'€'}}
                                     @else
@@ -168,7 +168,7 @@
                                     @endif
                                 </div><br>
 
-                                <div><span class="text-secondary">Para agente: </span> 
+                                <div><span class="text-secondary">Para agente: </span>
                                     @if($fase->responsabilidade->valorAgente)
                                         {{$fase->responsabilidade->valorAgente.'€'}}
                                     @else
@@ -185,7 +185,7 @@
                                 </div><br>
 
                                 @if($fase->responsabilidade->valorSubAgente)
-                                    <div><span class="text-secondary">Para sub-agente: </span> 
+                                    <div><span class="text-secondary">Para sub-agente: </span>
                                         @if($fase->responsabilidade->valorSubAgente)
                                             {{$fase->responsabilidade->valorSubAgente.'€'}}
                                         @else
@@ -201,7 +201,7 @@
                                         @endif
                                     </div><br>
                                 @endif
-                                <div><span class="text-secondary">Para universidade: </span> 
+                                <div><span class="text-secondary">Para universidade: </span>
                                     @if($fase->responsabilidade->valorUniversidade1)
                                         {{$fase->responsabilidade->valorUniversidade1.'€'}}
                                     @else
@@ -217,7 +217,7 @@
                                     @endif
                                 </div><br>
                                 @if($fase->responsabilidade->valorUniversidade2)
-                                    <div><span class="text-secondary">Para 2ª universidade: </span> 
+                                    <div><span class="text-secondary">Para 2ª universidade: </span>
                                         @if($fase->responsabilidade->valorUniversidade2)
                                             {{$fase->responsabilidade->valorUniversidade2.'€'}}
                                         @else
@@ -235,7 +235,7 @@
                                 @endif
                                 @if($Relacoes)
                                     @foreach($Relacoes as $relacao)
-                                        <div><span class="text-secondary">Fornecedor {{$relacao->fornecedor->nome}}: </span> 
+                                        <div><span class="text-secondary">Fornecedor {{$relacao->fornecedor->nome}}: </span>
                                             @if($relacao->valor)
                                                 {{$relacao->valor.'€'}}
                                             @else
@@ -253,7 +253,7 @@
                                     @endforeach
                                 @endif
                             </div>
-                            
+
                             <div class="col">
                                 @if($DocsPessoais->toArray())
                                     <div><span><b>Documentos Pessoais</b></span></div><br>
@@ -375,7 +375,7 @@
                                             <div><span class="text-secondary"> - Estado:</span><span class="text-danger">Inválido</span></div>
                                             <div><br>
                                                 <a href="{{route('documento-academico.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
-                                            </div><br>  
+                                            </div><br>
                                         @endif
                                     @endforeach
                                 @endif
@@ -385,7 +385,7 @@
                                 @if($DocsTransacao->toArray())
                                     @foreach($DocsTransacao as $documento)
                                         <div><span class="text-secondary">{{$documento->tipoDocumento}}:</span>{{'<esta aqui>'}}</div><br>
-                                        <div><span class="text-secondary"> - Valor Recebido: </span> 
+                                        <div><span class="text-secondary"> - Valor Recebido: </span>
                                             @if($documento->valorRecebido)
                                                 {{$documento->valorRecebido.'€'}}
                                             @else
@@ -412,7 +412,7 @@
                                             $existe = true;
                                         @endphp
                                     @endforeach
-                                @else 
+                                @else
                                     <div><span class="text-secondary">Sem documentos de transação </span> </div>
                                 @endif
                                 <div><br>
@@ -426,7 +426,7 @@
                                         <div><span class="text-secondary">{{$documento->tipoDocumento}}:</span>{{'<esta aqui>'}}</div><br>
                                         <div><span class="text-secondary"> - Beneficiario: </span> {{$documento->beneficiario}}</div><br>
                                         <div><span class="text-secondary"> - Data de Pagamento: </span> {{$documento->dataPagamento}}</div><br>
-                                        <div><span class="text-secondary"> - Valor Pago: </span> 
+                                        <div><span class="text-secondary"> - Valor Pago: </span>
                                             @if($documento->valorPago)
                                                 {{$documento->valorPago.'€'}}
                                             @else
@@ -440,7 +440,7 @@
                                             $existe = true;
                                         @endphp
                                     @endforeach
-                                @else 
+                                @else
                                     <div><span class="text-secondary">Sem pagamentos de responsabilidades</span>{{--
                                         <a href="{{route('documento_pagoresponsabilidade.create',$fase,$documento->tipo,$documento->tipoDocumento)}}" class="top-button mr-2">Adicionar pagamento</a>
                                     --}}</div><br>
