@@ -124,11 +124,13 @@ class DocPessoalController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function edit(DocPessoal $documento, Fase $fase)
+    public function edit(Fase $fase, DocPessoal $documento)
     {
+        dd('aqui');
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
 
             $infoDoc = json_decode($documento->info);
+            dd($documento);
             $infoKeys = array_keys($infoDoc);
             $tipoPAT = 'Pessoal';
             $tipo = $documento->tipo;
