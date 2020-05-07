@@ -17,6 +17,7 @@ class Fase extends Migration
             $table->decimal('valorFase', 18, 2);
             $table->boolean('verificacaoPago')->default(false);
             $table->string('icon', 100)->nullable();
+            $table->string('slug')->nullable();
             $table->enum('estado', ['Pendente', 'Pago', 'Dívida', 'Crédito'])->default('Pendente');
             $table->unsignedBigInteger('idProduto');
                 $table->foreign('idProduto')->references('idProduto')->on('Produto');
