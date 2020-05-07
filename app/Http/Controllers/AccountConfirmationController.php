@@ -92,6 +92,10 @@ class AccountConfirmationController extends Controller
             ->where('estado', 1);
         })->first();
 
+        if ($users == null) {
+            return response()->json('NOK', 500);
+        }
+
         switch ($users->tipo) {
             case 'admin':
                 $user = Administrador::where('idAdmin', $users->idAdmin)
@@ -101,19 +105,22 @@ class AccountConfirmationController extends Controller
 
             case 'agente':
                 $user = Agente::where('idAgente', $users->idAgente)
-                ->orWhere('estado', 1)
                 ->select('nome', 'apelido', 'telefone1', 'email')
                 ->first();
             break;
 
             case 'cliente':
                 $user = Cliente::where('idCliente', $users->idCliente)
-                ->orWhere('estado', 1)
                 ->select('nome', 'apelido', 'telefone1', 'email')
                 ->first();
             break;
         }
 
         return $user->toJson();
+    }
+
+    public function test()
+    {
+        return response()->json('OK', 200);
     }
 }

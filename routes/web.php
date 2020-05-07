@@ -148,6 +148,7 @@ Route::get('/ativacao-conta/{user}/restaurar-conta', 'AccountConfirmationControl
 /* Restore password */
 Route::get('/restaurar-password', 'AccountConfirmationController@mailrestorepassword')->name('mailrestore.password');
 Route::post('/restaurar-passwords/confirmacao', 'AccountConfirmationController@checkemail')->name('check.email');
+Route::post('/restaurar-passwords/test', 'AccountConfirmationController@test')->name('check.test');
 
 /* Ajuda */
 Route::get('/ajuda', 'HelpController@show')->name('ajuda');

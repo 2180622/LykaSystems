@@ -17,7 +17,10 @@
                 <br>
                 <div class="collapse" id="collapse">
                     <div class="card card-body" id="collapse-card">
+                        <p id="collapse-p">Para efeitos de confirmação, insira, por favor, os três últimos dígitos do seu número de telemóvel.</p>
+                        <div id="js-form">
 
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -55,9 +58,24 @@
                     $('#error').css("display", "none");
                 }
                 user = JSON.parse(data);
-                form = "<form style='padding: 0px;' id='form2'> <button type='submit' class='submit-button' id='submit-button2'>Recuperar</button> </form>";
-                $('#collapse').show().append(form);
-                $('#collapse-card').prepend(user.telefone1).after("<br>");
+
+                phone = user.telefone1,
+                    completeNumber = [],
+                    phoneNumber = phone.toString();
+
+                for (var i = 0, len = phoneNumber.length; i < len; i += 1) {
+                    completeNumber.push(+phoneNumber.charAt(i));
+                }
+
+                for (var i = 0; i < 3; i++) {
+                    completeNumber.pop();
+                }
+
+                form = "<form style='padding: 0px;' id='form2'> <label id='label-code'></label> <div id='code' type='text' class='form-control' name='code' required style='width:100%;'><input type=text id='fake-input' maxlength='3' autocomplete='off'> </div> <button type='submit' class='submit-button' id='submit-button2'>Recuperar</button> </form>";
+                $('#js-form').append(form);
+                $('#label-code').append(completeNumber.join(''));
+                $('#code').after("<br>");
+                $('#collapse').show();
                 $('#submit-button').css("display", "none");
             },
             error: function() {
@@ -69,6 +87,19 @@
                 $('#submit-button').css("display", "block");
                 error = "<strong id='error'>O e-mail que introduziu não está registado no sistema, ou não está ativo.</strong>";
                 $('#last-p').after(error);
+            }
+        });
+    });
+
+    $('#form2').submit(function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "{{route('check.test')}}",
+            context: this,
+            data: 'hey',
+            success: function() {
+                console.log('Ok');
             }
         });
     });
