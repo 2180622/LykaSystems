@@ -65,7 +65,6 @@
                             <th>Título</th>
                             <th>Início</th>
                             <th>Fim</th>
-                            <th class="text-center">Opções</th>
                         </tr>
                         </thead>
 
@@ -87,23 +86,6 @@
                                 {{-- Fim --}}
                                 <td class="align-middle">{{ date('d-M-y', strtotime($agend->dataFim)) }}</td>
 
-                                {{-- OPÇÔES --}}
-                                <td class="text-center align-middle">
-                                    <a href="#" class="btn_list_opt " title="Ver Evento"><i
-                                            class="far fa-eye mr-2"></i></a>
-                                    <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                            class="fas fa-pencil-alt mr-2"></i></a>
-
-                                    <form method="POST" role="form" id="#" action="#"
-                                          class="d-inline-block form_university_id" data="#">
-                                        @csrf
-                                        {{--  @method('DELETE') --}}
-                                        <button type="submit" class="btn_delete" title="Eliminar Evento"
-                                                data-toggle="modal"
-                                                data-target="#eliminarUniversidade" data-title="#"><i
-                                                class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
