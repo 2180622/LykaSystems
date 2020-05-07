@@ -35,11 +35,11 @@
         <br>
         <div class="payment-card shadow-sm">
             @if($tipoPAT == 'Pessoal')
-                <form action="{{route('documento_pessoal.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('documento-pessoal.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
             @elseif($tipoPAT == 'Academico')
-                <form action="{{route('documento_academico.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('documento-academico.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
             @else
-                <form action="{{route('documento_transacao.store', $fase)}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('documento-transacao.store', $fase)}}" method="post" enctype="multipart/form-data">
             @endif
                 @csrf
                 <div class="row">

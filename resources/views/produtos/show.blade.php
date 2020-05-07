@@ -275,11 +275,11 @@
                                                     </div>
                                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docpessoal->verificacao)
                                                         <div><br>
-                                                            <a href="{{route('documento_pessoal.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
+                                                            <a href="{{route('documento-pessoal.edit',[$fase,$documento])}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
                                                     @else
                                                         <div><br>
-                                                            <a href="{{route('documento_pessoal.edit',$documento)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
+                                                            <a href="{{route('documento-pessoal.edit',[$fase,$documento])}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
                                                     @endif
                                                     @php
@@ -291,7 +291,7 @@
                                                 <span class="text-danger">Em falta</span></div><br>
                                                 <div><span class="text-secondary"> - Estado:</span><span class="text-danger">Inválido</span></div>
                                                 <div><br>
-                                                    <a href="{{route('documento_pessoal.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
+                                                    <a href="{{route('documento-pessoal.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
                                                 </div><br>
                                             @endif
                                         @endif
@@ -311,7 +311,7 @@
                                             <div><span class="text-secondary">{{$documento->tipoDocumento}}: </span><span class="text-danger">Em falta</span></div><br>
                                             <div><span class="text-secondary"> - Estado:</span><span class="text-danger">Inválido</span></div>
                                             <div><br>
-                                                <a href="{{route('documento_pessoal.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
+                                                <a href="{{route('documento-pessoal.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
                                             </div><br>
                                         @endif
                                     @endforeach
@@ -338,11 +338,11 @@
                                                     </div>
                                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docacademico->verificacao)
                                                         <div><br>
-                                                            <a href="{{route('documento_academico.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
+                                                            <a href="{{route('documento-academico.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
                                                     @else
                                                         <div><br>
-                                                            <a href="{{route('documento_academico.edit',$documento)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
+                                                            <a href="{{route('documento-academico.edit',$documento)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
                                                     @endif
                                                     @php
@@ -354,7 +354,7 @@
                                                 <span class="text-danger">Em falta</span></div><br>
                                                 <div><span class="text-secondary"> - Estado:</span><span class="text-danger">Inválido</span></div>
                                                 <div><br>
-                                                    <a href="{{route('documento_academico.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
+                                                    <a href="{{route('documento-academico.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
                                                 </div>
                                             @endif
                                         @endif
@@ -374,7 +374,7 @@
                                             <div><span class="text-secondary">{{$documento->tipoDocumento}}: <span class="text-danger">Em falta</span></span></div><br>
                                             <div><span class="text-secondary"> - Estado:</span><span class="text-danger">Inválido</span></div>
                                             <div><br>
-                                                <a href="{{route('documento_academico.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
+                                                <a href="{{route('documento-academico.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
                                             </div><br>  
                                         @endif
                                     @endforeach
@@ -401,11 +401,11 @@
                                         </div>
                                         @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docpessoal->verificacao)
                                             <div><br>
-                                                <a href="{{route('documento_academico.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
+                                                <a href="{{route('documento-academico.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
                                             </div><br>
                                         @else
                                             <div><br>
-                                                <a href="{{route('documento_academico.edit',$documento)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
+                                                <a href="{{route('documento-academico.edit',$documento)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
                                             </div><br>
                                         @endif
                                         @php
@@ -416,7 +416,7 @@
                                     <div><span class="text-secondary">Sem documentos de transação </span> </div>
                                 @endif
                                 <div><br>
-                                    <a href="{{route('documento_transacao.create',$fase)}}" class="top-button mr-2">Adicionar transação</a>
+                                    <a href="{{route('documento-transacao.create',$fase)}}" class="top-button mr-2">Adicionar transação</a>
                                 </div><br>
 
 
