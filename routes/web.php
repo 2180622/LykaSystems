@@ -105,7 +105,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Documentos Pessoais */
     Route::get('/documento-pessoal/create/{fase}/{docnecessario}', 'DocPessoalController@create')->name('documento-pessoal.create');
     Route::post('/documento-pessoal/store/{fase}/{docnecessario}', 'DocPessoalController@store')->name('documento-pessoal.store');
-    Route::get('/documento-pessoal/edit/{fase}/{documento}', 'DocPessoalController@edit')->name('documento-pessoal.edit');
+    Route::get('/documento-pessoal/{documento}/editar', 'DocPessoalController@edit')->name('documento-pessoal.edit');
     Route::resource('/documento-pessoal', 'DocPessoalController')->only(['destroy', 'update','show']);
 
     /* Documentos Academicos */
