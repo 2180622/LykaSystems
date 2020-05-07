@@ -253,17 +253,19 @@ class AgenteController extends Controller
         $fields = $request->validated();
         $agent->fill($fields);
 
-        /* Fotografia */
-        if ($request->hasFile('fotografia')) {
-
-
-        /* Verifica se o ficheiro antigo existe e apaga do storage*/
+        /* Registo antigo: para verificar se existem ficheiros para apagar/substituir */
         $oldfile=Agente::
         where('idAgente', '=',$agent->idAgente)
         ->first();
-        if(Storage::disk('public')->exists('library/' . $oldfile->ficheiro)){
-            Storage::disk('public')->delete('library/' . $oldfile->ficheiro);
-        }
+
+
+        /* Fotografia */
+        if ($request->hasFile('fotografia')) {
+
+            /* Verifica se o ficheiro antigo existe e apaga do storage*/
+            if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/' . $oldfile->fotografia)){
+                Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/' . $oldfile->fotografia);
+            }
 
         /* Guarda a nova fotografia */
             $photo = $request->file('fotografia');
@@ -273,8 +275,17 @@ class AgenteController extends Controller
         }
 
 
+
+
+
         /* Documento de identificação */
         if ($request->hasFile('img_doc')) {
+
+        /* Verifica se o ficheiro antigo existe e apaga do storage*/
+        if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/' . $oldfile->img_doc)){
+            Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/' . $oldfile->img_doc);
+        }
+
             $docfile = $request->file('img_doc');
             $docImg = $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $docfile, $docImg);
@@ -282,6 +293,9 @@ class AgenteController extends Controller
         }
 
 
+
+
+        
         // data em que foi modificado
         $t=time();
         $agent->updated_at == date("Y-m-d",$t);

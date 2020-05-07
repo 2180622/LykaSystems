@@ -36,7 +36,7 @@
                 "infoFiltered": ""
             },
 
-            "order": [2, 'asc'],
+            "order": [1, 'asc'],
 
             /* "bLengthChange": false, */
             /* "bFilter": false, */
@@ -220,6 +220,7 @@
         $('#idAgenteAssociado').change(function () {
             $("#idAgenteAssociado").removeClass("is-invalid");
             $("#idAgenteAssociado").addClass("invalid");
+            $("#agent-type-tab").removeClass("border-danger text-danger");
         });
 
 
@@ -242,7 +243,7 @@
                             event.stopPropagation();
 
                             /* Se for subagente é obrigatorio ter um agente */
-                            if ($("#idAgenteAssociado").val() == 0 || $("#idAgenteAssociado").val() == null) {
+                            if ( $("#tipo").val() == "Subagente" && $("#idAgenteAssociado").val() == 0 || $("#tipo").val() == "Subagente" && $("#idAgenteAssociado").val() == null) {
                                 $("#wait_screen").hide();
                                 $("#agent-type-tab").addClass("border-danger text-danger");
                                 $("#idAgenteAssociado").removeClass("is-valid");

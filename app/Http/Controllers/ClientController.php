@@ -394,7 +394,7 @@ class ClientController extends Controller
         /* Fotografia do cliente */
         if ($request->hasFile('fotografia')) {
 
-                    /* Verifica se o ficheiro antigo existe e apaga do storage*/
+        /* Verifica se o ficheiro antigo existe e apaga do storage*/
         $oldfile=Cliente::
         where('idCliente', '=',$client->idCliente)
         ->first();
@@ -411,6 +411,7 @@ class ClientController extends Controller
 
 
         /* Documento de identificação */
+
         if ($request->hasFile('img_docOficial')) {
             $img_doc = $request->file('img_docOficial');
             $nome_img = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
