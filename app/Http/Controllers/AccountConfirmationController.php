@@ -7,6 +7,7 @@ use App\Cliente;
 use App\Administrador;
 use Illuminate\Http\Request;
 use App\Jobs\RestoreAccount;
+use App\Jobs\RestorePassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -92,6 +93,10 @@ class AccountConfirmationController extends Controller
             ->where('estado', 1);
         })->first();
 
+        if ($users == null) {
+            return response()->json('NOK', 500);
+        }
+
         switch ($users->tipo) {
             case 'admin':
                 $user = Administrador::where('idAdmin', $users->idAdmin)
@@ -101,19 +106,59 @@ class AccountConfirmationController extends Controller
 
             case 'agente':
                 $user = Agente::where('idAgente', $users->idAgente)
-                ->orWhere('estado', 1)
                 ->select('nome', 'apelido', 'telefone1', 'email')
                 ->first();
             break;
 
             case 'cliente':
                 $user = Cliente::where('idCliente', $users->idCliente)
-                ->orWhere('estado', 1)
                 ->select('nome', 'apelido', 'telefone1', 'email')
                 ->first();
             break;
         }
 
         return $user->toJson();
+    }
+
+    public function checkphone(Request $request)
+    {
+        $codephone = $request->input('code');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+
+        $phone = str_split($phone);
+
+        for ($i=0; $i < 3; $i++) {
+            array_pop($phone);
+        }
+
+        $phone = implode('', $phone);
+        $phoneNumber = $phone.$codephone;
+
+        $users = User::where('email', $email)->first();
+
+        switch ($users->tipo) {
+            case 'admin':
+                $user = Administrador::where('idAdmin', $users->idAdmin)->first();
+            break;
+
+            case 'agente':
+                $user = Agente::where('idAgente', $users->idAgente)->first();
+            break;
+
+            case 'cliente':
+                $user = Cliente::where('idCliente', $users->idCliente)->first();
+            break;
+        }
+
+        $email = $user->email;
+        $name = $user->nome.' '.$user->apelido;
+
+        if ($user->telefone1 == $phoneNumber) {
+            dispatch(new RestorePassword($email, $name));
+            return response()->json('OK', 200);
+        }else {
+            return response()->json('NOK', 500);
+        }
     }
 }

@@ -157,4 +157,36 @@ a:hover {
 
 #collapse-card {
     border-radius: 0px !important;
+    border: none;
+    padding: 10px 0px;
+}
+
+#collapse-p {
+    color: #6C6C6C !important;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: normal;
+}
+
+#label-code {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #252525 !important;
+    margin-bottom: 0px;
+    padding: 20px;
+}
+
+#code-input {
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #252525 !important;
+    position: relative;
+    bottom: 8.5px;
+    left: 44px;
+    width: 90%;
 }
