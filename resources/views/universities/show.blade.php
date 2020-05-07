@@ -209,13 +209,13 @@
                                 </div>
 
                                 <div class="mt-2"><i class="fas fa-square mr-2" title="{{$agenda->titulo}}"
-                                        style="color:{{$agenda->cor}}"></i><strong>{{ \Illuminate\Support\Str::limit($agenda->titulo, 27, $end=' (...)') }}</strong></div>
+                                        style="color:{{$agenda->cor}}"></i><strong>Evento: </strong>{{ \Illuminate\Support\Str::limit($agenda->titulo, 27, $end=' (...)') }}</strong></div>
 
                                 <div class="mt-3">{{ \Illuminate\Support\Str::limit($agenda->descricao, 70, $end=' (...)') }}</div>
 
-                                <div class="row mt-4">
+                                <div class="row mt-4 ">
 
-                                    <div class="col border-right">
+                                    <div class="col border-right ">
                                         <div class="mt-3">
                                             <strong>Inicio:</strong><br>{{ date('d-M-y', strtotime($agenda->dataInicio)) }}
                                         </div>
