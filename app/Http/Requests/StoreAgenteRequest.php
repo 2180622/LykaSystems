@@ -31,7 +31,7 @@ class StoreAgenteRequest extends FormRequest
         'info_doc' => 'nullable',
         'telefone1' => 'required',
         'telefone2' => 'nullable',
-
+        'IBAN' => 'nullable',
         ];
     }
 
@@ -40,6 +40,9 @@ class StoreAgenteRequest extends FormRequest
     {
        return [
        'email.unique'=>'Este e-mail já está registado. Insira um e-mail diferente',
+       'NIF.unique'=>'Este NIF já está registado. Insira um NIF diferente',
+       'num_doc.unique'=>'Esta identificação já esta registada.',
+
        ];
     }
 

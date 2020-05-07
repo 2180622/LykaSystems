@@ -42,7 +42,7 @@
             <h6>Reportar um problema</h6>
             <div class="alert alert-warning alert-dismissible fade show shadow-sm mt-4" role="alert">
                 <strong>Olá {{$user->nome.' '.$user->apelido}}!</strong>
-                <p class="mt-3 mb-2">Para reportar um problema basta preencher o formulário abaixo disponível que será enviado para um administrador.</p>
+                <p class="mt-1 mb-1">Para reportar um problema basta preencher o formulário abaixo disponível que será enviado para um administrador.</p>
                 <p>O administrador irá ler o seu problema e responder-lhe-á o mais depressa possível com uma solução.</p>
                 <hr>
                 <strong>Obrigado pela sua atenção.</strong>

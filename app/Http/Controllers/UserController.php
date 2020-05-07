@@ -1,19 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
-use Mail;
 use App\User;
-use App\Agente;
-use App\Cliente;
 use App\Administrador;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Jobs\SendWelcomeEmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Mail\SendEmailConfirmation;
 use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\StoreAdministradorRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\StoreAdministradorRequest;
 use App\Http\Requests\UpdateAdministradorRequest;
 
 class UserController extends Controller
@@ -31,35 +27,37 @@ class UserController extends Controller
 
     public function create()
     {
-      $user = new User;
-      return view('users.add', compact('user'));
+        $user = new User;
+        return view('users.add', compact('user'));
     }
 
-    public function store(StoreUserRequest $requestUser, StoreAdministradorRequest $requestAdmin){
-      $fieldsUser = $requestUser->validated();
-      $fieldsAdmin = $requestAdmin->validated();
+    public function store(StoreUserRequest $requestUser, StoreAdministradorRequest $requestAdmin)
+    {
+        $fieldsUser = $requestUser->validated();
+        $fieldsAdmin = $requestAdmin->validated();
 
-      $user = new User;
-      $user->tipo = "admin";
-      $user->fill($fieldsUser);
+        $user = new User;
+        $user->tipo = "admin";
+        $user->fill($fieldsUser);
 
-      $admin = new Administrador;
-      $admin->fill($fieldsAdmin);
+        $admin = new Administrador;
+        $admin->fill($fieldsAdmin);
 
-      $name = $admin->nome .' '. $admin->apelido;
-      $admin->save();
+        $name = $admin->nome.' '.$admin->apelido;
+        $admin->save();
 
-      $user->idAdmin = $admin->idAdmin;
-      $user->email = $admin->email;
-      $user->slug = post_slug($name);
-      $user->auth_key = strtoupper(random_str(5));
-      $user->save();
+        $user->idAdmin = $admin->idAdmin;
+        $user->email = $admin->email;
+        $user->slug = post_slug($name);
+        $user->auth_key = strtoupper(random_str(5));
+        $user->password = Hash::make(random_str(64));
+        $user->save();
 
-      $email = $user->email;
-      $auth_key = $user->auth_key;
-      Mail::to($email)->send(new SendEmailConfirmation($name, $auth_key));
+        $email = $user->email;
+        $auth_key = $user->auth_key;
+        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
-      return redirect()->route('users.index')->with('success', 'Utilizador criado com sucesso.');
+        return redirect()->route('users.index')->with('success', 'Administrador criado com sucesso.');
     }
 
     public function edit(User $user)
@@ -92,8 +90,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->admin->delete();
+        User::where('idUser', $user->idUser)->update([
+          'auth_key' => null,
+          'estado' => false
+        ]);
         $user->delete();
-
         return redirect()->route('users.index')->with('success', 'Administrador eliminado com sucesso');
     }
 

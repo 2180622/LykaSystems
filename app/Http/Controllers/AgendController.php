@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Agenda;
+use App\User;
+use App\Universidade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AgendController extends Controller
 {
@@ -14,6 +17,11 @@ class AgendController extends Controller
      */
     public function index()
     {
+        /* Permissões */
+        if (Auth::user()->tipo != "admin" ){
+            abort (401);
+        }
+
         $agends = Agenda::all();
 
         return view('agends.list', compact('agends'));
@@ -100,7 +108,6 @@ class AgendController extends Controller
      */
     public function show(Agenda $agenda)
     {
-        //
     }
 
     /**
@@ -132,7 +139,9 @@ class AgendController extends Controller
      * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Agenda $agenda)
     {
+        $agenda->delete();
+        return redirect()->back()->with('success', 'Evento Eliminado!');
     }
 }

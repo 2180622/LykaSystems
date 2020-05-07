@@ -8,12 +8,16 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        Commands\PaymentStatus::class
+        Commands\PaymentStatus::class,
+        Commands\AccountVerification::class
     ];
 
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('payment:update')
+        ->daily();
+
+        $schedule->command('account:verification')
         ->daily();
     }
 

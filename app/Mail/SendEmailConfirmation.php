@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -14,8 +15,8 @@ class SendEmailConfirmation extends Mailable
     public $auth_key;
 
     public function __construct(string $name, string $auth_key){
-      $this->name = $name;
-      $this->auth_key = $auth_key;
+        $this->name = $name;
+        $this->auth_key = $auth_key;
     }
 
     public function build()
@@ -26,7 +27,7 @@ class SendEmailConfirmation extends Mailable
             ->with([
                 'name' => $this->name,
                 'key' => $this->auth_key,
-                'link' => url('/').'/ativacaoconta/'.post_slug($this->name)
+                'link' => url('/').'/ativacao-conta/'.post_slug($this->name)
             ]);
     }
 }

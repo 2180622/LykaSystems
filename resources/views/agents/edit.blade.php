@@ -36,8 +36,6 @@
                 Editar informações do Subagente<br>
             @endif</h6>
         </div>
-        <br>
-
 
         <form method="POST" action="{{route('agents.update',$agent)}}" class="form-group needs-validation pt-3"
             id="form_agent" enctype="multipart/form-data" novalidate>
@@ -45,7 +43,6 @@
             @method("PUT")
             @include('agents.partials.add-edit')
             <div class="form-group text-right" style="min-width:285px">
-                <br><br>
                 <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
                 <a href="{{route('agents.index')}}" class="cancel-button">Cancelar</a>
             </div>

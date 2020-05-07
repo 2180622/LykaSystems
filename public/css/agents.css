@@ -1,3 +1,11 @@
+.agent_link{
+    color: #6A74C9;
+}
+
 .agent_link:hover{
     text-decoration: none;
+
+}
+.active {
+    color: #6A74C9
 }

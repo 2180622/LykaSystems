@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\DocTransacao;
+use App\Fase;
+use App\Conta;
+use App\Http\Requests\UpdateDocTransacaoRequest;
+use App\Http\Requests\StoreDocTransacaoRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -15,13 +19,16 @@ class DocTransacaoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function create(Fase $fase, String $tipoPAT, String $tipo)
+    public function create(Fase $fase)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
             
             $documento = new DocTransacao;
+            $tipoPAT = 'Transacao';
+            $tipo = 'Transacao';
+            $Contas = Conta::all();
             
-            return view('documentos.add',compact('fase','tipoPAT','tipo','documento'));
+            return view('documentos.add',compact('fase','tipoPAT','tipo','documento','Contas'));
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }
@@ -36,7 +43,7 @@ class DocTransacaoController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreDocTransacaoRequest $request){
+    public function store(StoreDocTransacaoRequest $request,Fase $fase){
 
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
 
@@ -44,7 +51,23 @@ class DocTransacaoController extends Controller
             
             $fields = $request->validated();
             $documento->fill($fields);
+
+            $source = null;
+
+            $documento->comprovativoPagamento = $source;
+            
             $documento->idFase = $fase->idFase;
+            $documento->save();
+
+
+            if($fields['img_doc']) {
+                $ficheiro = $fields['img_doc'];
+                $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+            }
+
+            $documento->comprovativoPagamento = $source;
             $documento->save();
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', 'Documento adicionado com sucesso');
@@ -62,26 +85,13 @@ class DocTransacaoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function show(Produto $produto)
+    public function show(DocTransacao $documento)
     {
-        $Fases = $produto->fase;
 
-        return view('produtos.show',compact("produto",'Fases'));
+        return view('documentos.show',compact('documento'));
     }
 
 
-
-
-    /**
-    * Prepares document for printing the specified client.
-    *
-    * @param  \App\Cliente  $client
-    * @return \Illuminate\Http\Response
-    */
-    public function print(Produto $produto)
-    {
-        return view('produtos.print',compact("produto"));
-    }
 
 
 
@@ -95,20 +105,18 @@ class DocTransacaoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function edit(Produto $produto)
+    public function edit(DocTransacao $documento, Fase $fase)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-            $Fornecedores = Fornecedor::all();
-            $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
-            $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
-            $Universidades = Universidade::all();
-            $relacao = new RelFornResp;
-            $relacao->valor=0;
-            $fases = $produto->fase;
 
-            return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores','relacao'));
+            $infoDoc = json_decode($documento->info);
+            $infoKeys = array_keys($infoDoc);
+            $tipoPAT = 'Transacao';
+            $tipo = 'Transacao';
+
+            return view('documentos.edit', compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produtos.show',$fase->produto);
         }
     }
 
@@ -122,13 +130,29 @@ class DocTransacaoController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function update(UpdateProdutoRequest $request, Produto $produto)
+    public function update(UpdateDocTransacaoRequest $request, DocTransacao $documento)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
 
-            return redirect()->route('clients.show',$produto->cliente)->with('success', 'Dados do produto modificados com sucesso');
+            
+            $fields = $request->validated();
+            $documento->fill($fields);
+            $source = null;
+
+            if($fields['img_doc']) {
+                $ficheiro = $fields['img_doc'];
+                $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+            }
+
+            $documento->comprovativoPagamento = $source;
+            $documento->idFase = $fase->idFase;
+            $documento->save();
+
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do produto modificados com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
 
     }
@@ -145,19 +169,13 @@ class DocTransacaoController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function destroy(Produto $produto)
+    public function destroy(DocTransacao $documento)
     {
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
-            $produto->delete();
-            $fases = $produto->fase;
-            foreach($fases as $fase){
-                $responsabilidade = $fase->responsabilidade;
-                $responsabilidade->delete();
-                $fase->delete();
-            }
-            return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto eliminado com sucesso');
+            $documento->delete();
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Produto eliminado com sucesso');
         }else{
-            return redirect()->route('clients.show',$cliente);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
     }
 }

@@ -25,10 +25,10 @@ class Contacto extends Migration
             $table->foreign('idUser')->references('idUser')->on('User');
             $table->string('nome',255);
             $table->string('fotografia',255)->nullable();
-            $table->integer('telefone1')->nullable();
-            $table->integer('telefone2')->nullable();
+            $table->string('telefone1',255)->nullable();
+            $table->string('telefone2',255)->nullable();
             $table->string('email',255)->nullable();
-            $table->integer('fax')->nullable();
+            $table->string('fax',255)->nullable();
             $table->longText('observacao')->nullable();
             $table->boolean('favorito')->default(false);
             $table->boolean('visibilidade')->default(false);

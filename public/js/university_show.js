@@ -68,15 +68,15 @@ $(document).ready(function () {
     /* OPÇÃO DE APAGAR */
     var formToSubmit //Variavel para indicar o forumulário a submeter
 
-    $(".form_contact_id").submit(function (e) {
+    $(".form_university_event").submit(function (e) {
         e.preventDefault();
         formToSubmit = this;
-        $("#contact_name").text($(this).attr("data"));
+        $("#tituloEvento").text($(this).attr("data"));
         return false;
     });
 
     //click sim na modal
-    $(".btn_submit").click(function (e) {
+    $(".btn_submitx").click(function (e) {
         formToSubmit.submit();
     });
 

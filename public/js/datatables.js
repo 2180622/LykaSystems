@@ -40,7 +40,7 @@ $(document).ready(function() {
     });
 
 
-    $(".dataTables_filter").hide();
+    $(".dataTables_filter").hide()
     $("#customSearchBox").on('keyup', function() {
         $(".dataTables_filter input").val($("#customSearchBox").val())
         table.search($(".dataTables_filter input").val()).draw();

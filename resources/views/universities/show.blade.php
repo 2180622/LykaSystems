@@ -6,6 +6,31 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+
+<style>
+    .active {
+        color: #6A74C9
+    }
+    .edit_event_btn {
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
+        border-radius: 50%;
+        background-color: white;
+        border: 1px solid lightgray;
+    }
+
+    .delete_event_btn {
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
+        border-radius: 50%;
+        background-color: white;
+        border: 1px solid lightgray;
+    }
+
+</style>
 @endsection
 
 
@@ -16,8 +41,14 @@
 {{-- Inclui a modal da agenda, utilizando as variaveis para a universidade --}}
 @include('agends.partials.modal')
 
-
+{{-- Inclui a modal de confirmação para apagar contacto --}}
 @include('contacts.partials.modal')
+
+
+{{-- Inclui a modal de confirmação para apagar evento--}}
+@include('universities.partials.modal-events')
+
+
 
 
 <div class="container mt-2">
@@ -59,153 +90,45 @@
 
 
 
-        <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
-            <div class="col p-0 text-center" style="flex: 0 0 20%; -ms-flex: 0 0 20%; min-width:195px">
+        <div class="card shadow-sm p-3" style="border-radius:10px">
+            <div class="row font-weight-bold p-2" style="color:#6A74C9">
+                <div class="col col-md-12 text-center my-auto "
+                    style="min-width:195px; max-width:290px; max-height:295px; overflow:hidden">
+                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                        src="{{Storage::disk('public')->url('default-photos/university.png')}}" style="width:100%">
+                </div>
 
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
-                    src="{{Storage::disk('public')->url('default-photos/university.png')}}" width="100%"
-                    style="width:90%">
+                <div class="col p-2" style="min-width:280px !important">
+
+                    {{-- Informações Pessoais --}}
+                    <div><span class="text-secondary ">Nome da Universidade:</span><br>{{$university->nome}}</div><br>
+
+                    <div><span class="text-secondary ">Morada:</span><br>{{$university->morada}}</div><br>
+
+                    <div><span class="text-secondary">NIF:</span> {{$university->NIF}}</div><br>
+
+                    <div><span class="text-secondary">IBAN:</span><br>{{$university->IBAN}}</div><br>
+
+
+                </div>
+
+                <div class="col p-2" style="min-width: 200px">
+
+                    <div><span class="text-secondary ">E-mail:</span> {{$university->email}}</div><br>
+
+                    <div><span class="text-secondary">Telefone :</span> {{$university->telefone}}</div><br>
+
+                    <br>
+
+                    <a href="#" class="top-button" data-toggle="modal" data-target="#modalCalendar"><i
+                            class="fas fa-plus mr-2"></i>Adicionar evento</a><br><br>
+                    <a href="{{route('contacts.create',$university)}}" class="top-button"><i
+                            class="fas fa-plus mr-2"></i>Adicionar contacto</a>
+
+                </div>
+
 
             </div>
-
-            <div class="col p-2" style="min-width:280px !important">
-
-
-                {{-- Informações da universidade --}}
-                <div><span class="text-secondary ">Nome da Universidade:<br></span>{{$university->nome}}</div><br>
-
-                <div><span class="text-secondary ">Morada:</span><br>{{$university->morada}}</div><br>
-
-                <div><span class="text-secondary">NIF:</span> {{$university->NIF}}</div><br>
-
-                <div><span class="text-secondary">IBAN:</span> {{$university->IBAN}}</div><br>
-
-            </div>
-
-            <div class="col p-2" style="min-width: 200px">
-                <div><span class="text-secondary ">E-mail:</span> {{$university->email}}</div><br>
-
-                <div><span class="text-secondary">Telefone :</span> {{$university->telefone}}</div><br>
-
-                <br>
-                <a href="#" class="top-button" data-toggle="modal" data-target="#modalCalendar"><i
-                        class="fas fa-plus mr-2"></i>Adicionar evento</a><br><br>
-                <a href="{{route('contacts.create',$university)}}" class="top-button"><i
-                        class="fas fa-plus mr-2"></i>Adicionar contacto</a>
-
-            </div>
-        </div>
-
-    </div>
-
-
-
-
-
-
-    <ul class="nav nav-tabs mt-5 mb-4" id="myTab" role="tablist">
-
-        {{-- MENU: Eventos --}}
-        <li class="nav-item " style="width:20%; min-width:110px">
-            <a class="nav-link active" id="eventos-tab" data-toggle="tab" href="#eventos" role="tab"
-                aria-controls="evento" aria-selected="false">Eventos</a>
-        </li>
-
-        {{-- MENU: Estudantes associados --}}
-        <li class="nav-item text-center" style="width:20%; min-width:144px">
-            <a class="nav-link" id="estudantes-tab" data-toggle="tab" href="#estudantes" role="tab"
-                aria-controls="estudante" aria-selected="false">Estudantes</a>
-        </li>
-
-        {{-- MENU: Contactos --}}
-        <li class="nav-item text-center" style="width:20%; min-width:144px">
-            <a class="nav-link" id="contactos-tab" data-toggle="tab" href="#contactos" role="tab"
-                aria-controls="contacto" aria-selected="false">Contactos</a>
-        </li>
-
-        {{-- MENU: Observações --}}
-        <li class="nav-item text-center" style="width:20%; min-width:144px">
-            <a class="nav-link" id="obsevacoes-tab" data-toggle="tab" href="#obsevacoes" role="tab"
-                aria-controls="obsevacao" aria-selected="false">Observações</a>
-        </li>
-
-    </ul>
-
-
-
-
-
-
-
-    <div class="tab-content p-2 " id="myTabContent">
-
-        {{-- Conteudo: Eventos --}}
-        <div class="tab-pane fade active show text-muted" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
-
-            @if($eventos!=null)
-            <div class="table-responsive " style="overflow:hidden">
-
-                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                    style="overflow:hidden;">
-
-                    {{-- Cabeçalho da tabela --}}
-                    <thead>
-                        <tr>
-                            <th style="width:10px">{{-- COR DO EVENTO --}}</th>
-                            <th>Título</th>
-                            <th>Início</th>
-                            <th>Fim</th>
-                            <th class="text-center">Opções</th>
-                        </tr>
-                    </thead>
-
-                    {{-- Corpo da tabela --}}
-                    <tbody>
-
-
-                        @foreach ($eventos as $evento)
-                        <tr>
-                            <td style="width:10px"><span class="p-1 shadow-sm"
-                                    style="background-color:{{$evento->cor}}"></span>
-                            </td>
-
-                            {{-- Título --}}
-                            <td><a class="name_link" href="#">{{$evento->titulo}}</td>
-
-                            {{-- Ínicio --}}
-                            <td class="align-middle">{{ date('d-M-y', strtotime($evento->dataInicio)) }}</td>
-
-                            {{-- Fim --}}
-                            <td class="align-middle">{{ date('d-M-y', strtotime($evento->dataFim)) }}</td>
-
-
-                            {{-- OPÇÔES --}}
-                            <td class="text-center align-middle">
-                                <a href="#" class="btn_list_opt " title="Ver ficha completa"><i
-                                        class="far fa-eye mr-2"></i></a>
-                                <a href="#" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                        class="fas fa-pencil-alt mr-2"></i></a>
-
-                                <form method="POST" role="form" id="#" action="#"
-                                    class="d-inline-block form_university_id" data="#">
-                                    @csrf
-                                    {{--  @method('DELETE') --}}
-                                    <button type="submit" class="btn_delete" title="Eliminar Evento" data-toggle="modal"
-                                        data-target="#eliminarUniversidade" data-title="#"><i
-                                            class="fas fa-trash-alt"></i></button>
-                                </form>
-
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
-            @else
-            <small class="text-muted">(Sem eventos marcados)</small>
-            @endif
-
         </div>
 
 
@@ -213,232 +136,256 @@
 
 
 
+        <div class="row nav nav-fill w-100 text-center mx-auto p-3 ">
 
-    {{-- Conteudo: LISTA DE ESTUDANTES --}}
-    <div class="tab-pane fade show text-muted" id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
 
-        @if($clients!=null)
-            <div class="row mt-3 mb-4">
+            <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link" id="eventos-tab"
+                data-toggle="tab" href="#eventos" role="tab" aria-controls="eventos" aria-selected="true">
+                <div class="col"><i class="fas fa-calendar-alt mr-2"></i>Eventos</div>
+            </a>
+
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="estudantes-tab"
+                data-toggle="tab" href="#estudantes" role="tab" aria-controls="estudantes" aria-selected="false">
                 <div class="col">
-                    <span class="mr-2">Mostrar</span>
-                    <select class="custom-select" id="records_per_page" style="width:80px">
-                        <option selected>10</option>
-                        <option>25</option>
-                        <option>50</option>
-                        <option>100</option>
-                    </select>
-                    <span class="ml-2">por página</span>
+                    <ion-icon name="person-circle-outline" class="mr-2"
+                        style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 0px;">
+                    </ion-icon>Estudantes
                 </div>
-                <div class="col ">
-                    <div class="input-group pl-0 float-right search-section" style="width:250px">
-                        <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
-                        <div class="search-button input-group-append">
-                            <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
+            </a>
+
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="contactos-tab"
+                data-toggle="tab" href="#contactos" role="tab" aria-controls="contactos" aria-selected="false">
+                <div class="col"><i class="fas fa-address-book mr-2"></i>Lista telefónica</div>
+            </a>
 
 
-            <div class="table-responsive " style="overflow:hidden">
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link border" id="observacoes-tab"
+                data-toggle="tab" href="#observacoes" role="tab" aria-controls="observacoes" aria-selected="false">
+                <div class="col"><i class="fas fa-pencil-alt mr-2"></i>Observações</div>
+            </a>
+
+        </div>
 
 
-                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                    style="overflow:hidden;">
 
-                    {{-- Cabeçalho da tabela --}}
-                    <thead>
-                        <tr>
-                            <th class="text-center align-content-center ">Foto</th>
-                            <th>Nome</th>
-                            <th>Naturalidade</th>
-                            <th class="text-center">Opções</th>
-                        </tr>
-                    </thead>
 
-                    {{-- Corpo da tabela --}}
-                    <tbody>
+        <div class="bg-white shadow-sm mb-4 p-4" style="margin-top:-30px">
+            <div class="tab-content p-2 mt-3" id="myTabContent">
 
-                        @foreach ($clients as $client)
-                        <tr>
-                            <td>
-                                <div class="align-middle mx-auto shadow-sm rounded bg-white"
-                                    style="overflow:hidden; width:50px; height:50px">
-                                    <a class="name_link" href="{{route('clients.show',$client)}}">
-                                        @if($client->fotografia)
-                                        <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.$client->nome.'/').$client->fotografia}}"
-                                            width="100%" class="mx-auto">
-                                        @elseif($client->genero == 'F')
-                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
-                                            class="mx-auto">
-                                        @else
-                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
-                                            class="mx-auto">
-                                        @endif
-                                    </a>
+
+                {{-- Eventos --}}
+                <div class="tab-pane fade show active" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
+                    @if($eventos!=null)
+                    <div class="row mx-auto pt-0">
+                        @foreach ($eventos as $agenda)
+
+                        <div>
+                            <div class="col border rounded bg-light shadow-sm text-secondary m-2 mt-4 p-3"
+                                style="min-width: 320px; max-width: 320px; height:235px; max-height:235px">
+
+                                <div class="row p-0 m-0" style="margin-top:-30px!important">
+                                    <div class="col text-right p-0">
+
+                                        {{-- APAGAR --}}
+                                        <form method="POST" role="form" id="#" action="{{route('agenda.destroy',$agenda)}}"
+                                            class="d-inline-block form_university_event" data="{{$agenda->titulo}}">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit"
+                                                class="delete_event_btn shadow-sm text-center btn_list_opt btn_list_opt_delete mr-2"
+                                                title="Eliminar Evento" data-toggle="modal" data-target="#exampleModal">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+
+                                        {{-- EDITAR --}}
+{{--                                         <a href="#"
+                                            class="btn_list_opt btn_list_opt_edit edit_event_btn shadow-sm text-center "
+                                            title="Editar"><i class="fas fa-pencil-alt mt-1"></i></a> --}}
+
+                                    </div>
                                 </div>
 
-                            </td>
+                                <div class="mt-2"><i class="fas fa-square mr-2" title="{{$agenda->titulo}}"
+                                        style="color:{{$agenda->cor}}"></i><strong>Evento: </strong>{{ \Illuminate\Support\Str::limit($agenda->titulo, 27, $end=' (...)') }}</strong></div>
 
-                            {{-- Nome e Apelido --}}
-                            <td class="align-middle"><a class="name_link"
-                                    href="{{route('clients.show',$client)}}">{{ $client->nome }}
-                                    {{ $client->apelido }}</a></td>
+                                <div class="mt-3">{{ \Illuminate\Support\Str::limit($agenda->descricao, 70, $end=' (...)') }}</div>
 
-                            {{-- paisNaturalidade --}}
-                            <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+                                <div class="row mt-4 ">
 
-                            {{-- OPÇÔES --}}
-                            <td class="text-center align-middle">
-                                <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
-                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
-                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                                    <div class="col border-right ">
+                                        <div class="mt-3">
+                                            <strong>Inicio:</strong><br>{{ date('d-M-y', strtotime($agenda->dataInicio)) }}
+                                        </div>
+                                    </div>
 
-                            </td>
-                        </tr>
-                        @endforeach
+                                    <div class="col">
+                                        <div class="mt-3">
+                                            <strong>Fim:</strong><br>{{ date('d-M-y', strtotime($agenda->dataFim)) }}
+                                        </div>
+                                    </div>
 
-                    </tbody>
-                </table>
-            </div>
-        @else
-                <small class="text-muted">(Ainda sem estudantes associados)</small>
-        @endif
+                                </div>
 
-    </div>
+                            </div>
 
-
-
-
-
-
-
-
-
-        {{-- Conteudo: Contactos --}}
-        <div class="tab-pane fade show text-muted" id="contactos" role="tabpanel" aria-labelledby="Contactos-tab">
-
-            @if ($contacts)
-            {{-- Cabeçalho da tabela --}}
-            <table nowarp class="table table-borderless" id="ContactTable" width="100%" row-border="0"  style="overflow:hidden;">
-            <thead>
-                <tr>
-                    <th class="text-center align-content-center " style="width:50px">Foto</th>
-                    <th>Nome</th>
-                    <th>Observação</th>
-                    <th>Telefone</th>
-                    <th class="text-center">Opções</th>
-                </tr>
-            </thead>
-
-            {{-- Corpo da tabela --}}
-            <tbody>
-
-                @foreach ($contacts as $contact)
-
-                <tr>
-                    {{-- Fotografia --}}
-                    <td>
-                        <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
-                            <a class="name_link" href="{{route('contacts.show',$contact)}}">
-                                @if($contact->fotografia)
-                                    <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}" width="100%" class="mx-auto"">
-                                @else
-                                    <img src=" {{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                @endif
-                            </a>
                         </div>
-                    </td>
 
-                    {{-- Nome --}}
-                    <td class="align-middle">
-                        @if($contact->favorito)
-                        <i class="fas fa-star text-warning mr-2" title="Contacto favorito" style="font-size:12px"></i>
+                        @endforeach
+                    </div>
+                    @else
+                    <div class="border rounded bg-light p-3">
+                        <div class="text-muted"><small>(sem registos)</small></div>
+                    </div>
+                    <br>
                     @endif
-                        <a class="name_link" href="{{route('contacts.show',[$contact,$university])}}">
-                            {{$contact->nome}}</a>
-                    </td>
 
 
-                    {{-- observacao --}}
-                    <td class="align-middle">
-                        {{$contact->observacao}}
-                    </td>
+                </div>
 
 
-                    {{-- Telefone --}}
-                    <td class="align-middle">
-                        {{$contact->email}}
-                    </td>
+
+                {{-- Lista de estudantes --}}
+                <div class="tab-pane fade" id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
+                    @if($clients)
+                    <div class="row">
+                        @foreach ($clients as $client)
+
+                            <a class="name_link text-center m-2" href="{{route('clients.show',$client)}}">
+                                <div class="col">
+                                    <div style="width: 200px; height:210px; overflow:hidden">
+                                        @if($client->fotografia)
+                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
+                                                style="width:100%; height:auto ">
+                                        @elseif($client->genero == 'F')
+                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
+                                        @else
+                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
+                                        @endif
+                                    </div>
+                                    <div class="mt-2">{{$client->nome}} {{$client->apelido}}</div>
+                                    <div ><small>({{$client->paisNaturalidade}})</small></div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="border rounded bg-light p-3">
+                        <div class="text-muted"><small>(sem registos)</small></div>
+                    </div>
+                    <br>
+                @endif
+                </div>
 
 
-                    {{-- Opções --}}
-                    <td class="align-middle text-center">
-                        <a href="{{route('contacts.show',[$contact,$university])}}" class="btn_list_opt " title="Ver ficha completa"><i
-                            class="far fa-eye mr-2"></i></a>
-                    <a href="{{route('contacts.edit',[$contact,$university])}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                            class="fas fa-pencil-alt mr-2"></i></a>
 
-                            <form method="POST" role="form" id="{{ $contact->idContacto }}"
-                                action="{{route('contacts.destroy',$contact)}}" data="{{ $contact->nome }}" class="d-inline-block form_contact_id">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn_delete" title="Eliminar contacto" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-trash-alt"></i></button>
-                            </form>
-                    </td>
+                {{-- Lista de contactos --}}
+                <div class="tab-pane fade" id="contactos" role="tabpanel" aria-labelledby="contactos-tab">
+                    @if ($contacts)
+                    <div class="row">
+                        @foreach ($contacts as $contact)
 
-                </tr>
-                @endforeach
+                            <a class="name_link text-center m-2" href="{{route('contacts.show',[$contact,$university])}}">
+                                <div class="col">
+                                    <div style="width: 200px; height:210px; overflow:hidden">
+                                        @if($contact->fotografia)
+                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}"
+                                                style="width:100%; height:auto ">
+                                        @else
+                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                                src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
+                                        @endif
+                                    </div>
+                                    <div>
+                                        @if($contact->favorito)
+                                        <i class="fas fa-star text-warning mr-1" title="Contacto favorito"
+                                            style="font-size:12px"></i>
+                                        @endif
+                                        {{$contact->nome}}<br><small>{{$contact->telefone1}}</small>
+                                    </div>
+                                </div>
+                            </a>
 
-            </tbody>
-            </table>
-            @else
-            <small class="text-muted">(Sem contactos registados)</small>
-            @endif
+
+                        @endforeach
+                    </div>
+
+
+
+
+                    @else
+                    <div class="border rounded bg-light p-3">
+                        <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                    </div>
+                    @endif
+                </div>
+
+
+
+                {{-- Observações --}}
+                <div class="tab-pane fade" id="observacoes" role="tabpanel" aria-labelledby="observacoes-tab">
+
+                    <div class="text-secondary mb-2">Observação dos Contactos:</div>
+                    <div class="border rounded bg-light p-3">
+                        @if ($university->obsContactos)
+                            {{$university->obsContactos}}
+                        @else
+                            <div class="text-muted"><small>(sem contactos para mostrar)</small></div>
+                        @endif
+                    </div>
+
+                    <br>
+
+                    <div class="text-secondary mb-2">Observação dos Candidaturas:</div>
+                    <div class="border rounded bg-light p-3">
+                        @if ($university->obsCandidaturas)
+                            {{$university->obsCandidaturas}}
+                        @else
+                            <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                        @endif
+                    </div>
+
+                    <br>
+
+                    <div class="text-secondary mb-2">Observação dos Cursos:</div>
+                    <div class="border rounded bg-light p-3">
+                        @if ($university->obsCursos)
+                            {{$university->obsCursos}}
+                        @else
+                            <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                        @endif
+                    </div>
+
+                </div>
+
+
+            </div>
         </div>
 
 
 
-
-
-        {{-- Conteudo: Observações --}}
-        <div class="tab-pane fade show text-muted" id="obsevacoes" role="tabpanel" aria-labelledby="obsevacoes-tab">
-            <div>
-                <span class="text-secondary">Observação dos Contactos:</span> {{$university->obsContactos}}
-            </div>
-
-            <br>
-
-            <div>
-                <span class="text-secondary">Observação dos Cursos:</span> {{$university->obsCursos}}
-            </div>
-
-            <br>
-
-            <div>
-                <span class="text-secondary">Observação dos Candidaturas:</span> {{$university->obsCandidaturas}}
-            </div>
-
-        </div>
 
 
 
     </div>
-
-
-
-
-
-
-
 </div>
+
+
+
+
+
 
 @endsection
 
 {{-- Scripts --}}
 @section('scripts')
+<script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 <script src="{{asset('/js/university_show.js')}}"></script>
 <script src="{{asset('/js/agends.js')}}"></script>
 

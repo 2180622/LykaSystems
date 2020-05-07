@@ -15,11 +15,12 @@ use App\Agenda;
 use App\Produto;
 use App\Cliente;
 use App\Contacto;
+use App\DocPessoal;
+use App\DocNecessario;
 use App\DocStock;
 use App\FaseStock;
 use App\Fornecedor;
 use App\Biblioteca;
-use App\DocPessoal;
 use App\RelFornResp;
 use App\Notificacao;
 use App\DocAcademico;
@@ -356,6 +357,7 @@ class DataController extends Controller
         $user->tipo = 'admin';
         $user->password = Hash::make('teste1234');
         $user->auth_key = strtoupper(random_str(5));
+        $user->estado = true;
         $user->slug = post_slug('Neuza Cordeiro');
         $user->idAdmin = 2;
         $user->idAgente = null;
@@ -367,6 +369,7 @@ class DataController extends Controller
         $user->tipo = 'agente';
         $user->password = Hash::make('teste1234');
         $user->auth_key = strtoupper(random_str(5));
+        $user->estado = true;
         $user->slug = post_slug('José Fernandes');
         $user->idAdmin = null;
         $user->idAgente = 1;
@@ -378,6 +381,7 @@ class DataController extends Controller
         $user->tipo = 'cliente';
         $user->password = Hash::make('teste1234');
         $user->auth_key = strtoupper(random_str(5));
+        $user->estado = true;
         $user->slug = post_slug('Tiago Oliveira');
         $user->idAdmin = null;
         $user->idAgente = null;
@@ -591,6 +595,44 @@ class DataController extends Controller
         $fase->idProduto = 1;
         $fase->idResponsabilidade = 4;
         $fase->save();
+
+        /******************          Docs Necessarios          *******************/
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Pessoal';
+        $docnecessario->tipoDocumento = 'Doc. Oficial';
+        $docnecessario->idFase = 1;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Academico';
+        $docnecessario->tipoDocumento = 'Certificado';
+        $docnecessario->idFase = 1;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Pessoal';
+        $docnecessario->tipoDocumento = 'Passaport';
+        $docnecessario->idFase = 2;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Pessoal';
+        $docnecessario->tipoDocumento = 'Cartão Cidadão';
+        $docnecessario->idFase = 2;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Pessoal';
+        $docnecessario->tipoDocumento = 'Carta Condução';
+        $docnecessario->idFase = 2;
+        $docnecessario->save();
+
+        $docnecessario = new DocNecessario;
+        $docnecessario->tipo = 'Academico';
+        $docnecessario->tipoDocumento = 'Exame Universitário';
+        $docnecessario->idFase = 4;
+        $docnecessario->save();
 
         /****************          Docs Academicos          ****************/
 /*

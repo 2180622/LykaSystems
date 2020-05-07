@@ -2,53 +2,118 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Agente;
+use App\Cliente;
+use App\Administrador;
 use Illuminate\Http\Request;
+use App\Jobs\RestoreAccount;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\UserController;
-use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AccountConfirmationController extends Controller
 {
-    public function mailconfirmation(Request $request, User $user){
-      if ($user->auth_key != null) {
-        abort(404);
+    public function index(Request $request, User $user)
+    {
+      if ($user->estado == true) {
+          abort(403);
+      }elseif($user->auth_key == null) {
+          return view('auth.account-inactive', compact('user'));
       }else {
-        $mailinsert = $request->input('email');
-        if ($mailinsert == null) {
-          $error = null;
-          return view('auth.confirmation-mail', compact('user', 'error'));
-        }else {
-          if ($user->email == $mailinsert) {
-            $error = null;
-            return view('auth.confirmation-password', compact('user', 'error'));
-          }else {
-            $error = "O endereço eletrónico que introduziu é inválido.";
-            return view('auth.confirmation-mail', compact('user', 'error'));
-          }
-        }
+          return view('auth.confirmation-key', compact('user'));
       }
     }
 
-    public function edit(User $user){
-      return view('auth.confirmation-password', compact('user'));
+    public function keyconfirmation(Request $request, User $user)
+    {
+      $auth_key = $request->only('key');
+
+      if ($user->auth_key == $auth_key['key']) {
+          return view('auth.confirmation-password', compact('user'));
+      }else {
+          $error = "O código de autenticação que introduziu é inválido.";
+          return view('auth.confirmation-key', compact('user', 'error'));
+      }
     }
 
-    public function setpassword(UpdateUserRequest $request, User $user){
-      dd($user);
-      // $fields = $request->validated();
-      // $user->fill($fields);
+    public function password(Request $request, User $user)
+    {
       $password = $request->input('password');
       $passwordConf = $request->input('password-confirmation');
 
       if ($password == $passwordConf) {
-        $hashed = Hash::make($password);
-        $user->password = $hashed;
-        $user->auth_key = random_str(50);
-        $user->save();
-        return view('auth.accountactive', compact('user'));
+          $hashed = Hash::make($password);
+          $user->password = $hashed;
+          $user->estado = true;
+          $user->save();
+          if (Auth::check()) {
+              Auth::logout();
+          }
+          return view('auth.accountactive', compact('user'));
       }else {
-        $error = "As palavras-chaves não coincidem. Verifique a sua inserção.";
-        return view('auth.confirmation-password', compact('user', 'error'));
+          $error = "As palavras-chaves não coincidem. Verifique a sua inserção.";
+          return view('auth.confirmation-password', compact('user', 'error'));
       }
+    }
+
+    public function restore(Request $request, User $user)
+    {
+        $email = $request->only('email');
+
+        if ($email['email'] == $user->email) {
+            $auth_key = strtoupper(random_str(5));
+            User::where('idUser', $user->idUser)->update(['auth_key' => $auth_key]);
+            $email = $user->email;
+            if ($user->tipo == 'admin') {
+                $name = $user->admin->nome.' '.$user->admin->apelido;
+            }elseif ($user->tipo == 'agente') {
+                $name = $user->agente->nome.' '.$user->agente->apelido;
+            }else {
+                $name = $user->cliente->nome.' '.$user->cliente->apelido;
+            }
+            dispatch(new RestoreAccount($email, $name, $auth_key));
+            return redirect()->route('confirmation.index', $user);
+        }else {
+            $error = "O e-mail que inseriu não correspodem ao registado no sistema.";
+            return view('auth.account-inactive', compact('user', 'error'));
+        }
+    }
+
+    public function mailrestorepassword()
+    {
+        return view('auth.mail-password');
+    }
+
+    public function checkemail(Request $request)
+    {
+        $email = $request->input('email');
+        $users = User::where('email', $email)
+        ->where(function($users){
+            $users->where('auth_key', '!=', null)
+            ->where('estado', 1);
+        })->first();
+
+        switch ($users->tipo) {
+            case 'admin':
+                $user = Administrador::where('idAdmin', $users->idAdmin)
+                ->select('nome', 'apelido', 'telefone1', 'email')
+                ->first();
+            break;
+
+            case 'agente':
+                $user = Agente::where('idAgente', $users->idAgente)
+                ->orWhere('estado', 1)
+                ->select('nome', 'apelido', 'telefone1', 'email')
+                ->first();
+            break;
+
+            case 'cliente':
+                $user = Cliente::where('idCliente', $users->idCliente)
+                ->orWhere('estado', 1)
+                ->select('nome', 'apelido', 'telefone1', 'email')
+                ->first();
+            break;
+        }
+
+        return $user->toJson();
     }
 }

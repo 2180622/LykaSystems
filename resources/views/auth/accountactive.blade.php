@@ -1,25 +1,24 @@
-@extends('layout.app')
+@extends('layout.auth')
 
 @section('title', 'Ativação de conta')
 
 @section('content')
 
-<div class="login-form">
+<div class="master-form">
     <div>
-      @if ($user->tipo == 'admin')
-        <h4 class="text-center">Bem-vindo {{$user->admin->nome.' '.$user->admin->apelido}}!</h4>
-      @elseif ($user->tipo == 'agente')
-        <h4 class="text-center">Bem-vindo {{$user->agente->nome.' '.$user->agente->apelido}}!</h4>
-      @else
-        <h4 class="text-center">Bem-vindo {{$user->cliente->nome.' '.$user->cliente->apelido}}!</h4>
-      @endif
+        @if ($user->tipo == 'admin')
+        <p>Bem-vindo {{$user->admin->nome.' '.$user->admin->apelido}}!</p>
+        @elseif ($user->tipo == 'agente')
+        <p>Bem-vindo {{$user->agente->nome.' '.$user->agente->apelido}}!</p>
+        @else
+        <p>Bem-vindo {{$user->cliente->nome.' '.$user->cliente->apelido}}!</p>
+        @endif
+        <p>É com muita alegria que a Lyka Systems o recebe nesta aplicação, sendo que para começar, será apenas preciso clicar no botão abaixo para iniciar sessão com o seu endereço eletrónico e a palavre-chave que escolheu anteriormente,</p>
         <br>
-        <p class="text-center">Para utilizar a sua conta lyka, basta clicar no botão abaixo e inserir o seu e-mail e password.</p>
-        <br>
-        <div class="form-group">
-            <a href="{{route('login')}}">
+        <div>
+            <a style="padding: 0 50px;" href="{{route('login')}}">
                 <button type="submit" class="btn submit-button">
-                    Iniciar Sessão
+                    Iniciar sessão
                 </button>
             </a>
         </div>

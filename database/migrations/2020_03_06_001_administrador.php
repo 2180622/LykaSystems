@@ -18,15 +18,15 @@ class Administrador extends Migration
             $table->string('email',255)->unique();
             $table->date('dataNasc');
             $table->string('fotografia',255)->nullable();
-            $table->integer('telefone1');
-            $table->integer('telefone2')->nullable();
+            $table->string('telefone1', 25);
+            $table->string('telefone2', 25)->nullable();
             $table->boolean('superAdmin')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
 
         $data = array(
-            array('idAdmin'=>'1', 'nome'=>'Senhor', 'apelido'=>'Administrador', 'genero' => 'M','email' => 'admin@test.com', 'dataNasc'=>'2000-01-01', 'telefone1'=>'912345678', 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
+            array('idAdmin'=>'1', 'nome'=>'Senhor', 'apelido'=>'Administrador', 'genero' => 'M','email' => 'admin@test.com', 'dataNasc'=>'2000-01-01', 'telefone1'=>'912345678', 'superAdmin' => true, 'created_at'=>'2020-02-12 00:00:00', 'updated_at'=>'2020-02-12 00:00:00'),
         );
 
         DB::table('Administrador')->insert($data);
