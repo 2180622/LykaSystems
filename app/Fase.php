@@ -2,20 +2,30 @@
 
 namespace App;
 
+use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fase extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasSlug;
+
     protected $table = 'Fase';
 
     protected $primaryKey = 'idFase';
 
     protected $fillable = [
-        'descricao', 'dataVencimento', 'valorFase', 'verificacaoPago', 'icon', 'estado', '$idProduto', '$idFaseStock', '$idResponsabilidade'
-        ];
+        'descricao',
+        'dataVencimento',
+        'valorFase',
+        'verificacaoPago',
+        'icon',
+        'estado',
+        '$idProduto',
+        '$idFaseStock',
+        '$idResponsabilidade'
+    ];
 
     public function produto(){
         return $this->belongsTo("App\Produto","idProduto","idProduto")->withTrashed();
@@ -43,5 +53,17 @@ class Fase extends Model
 
     public function docNecessario(){
         return $this->hasMany("App\DocNecessario","idFase","idFase")->withTrashed();
+    }
+
+    public function getSlugOptions() : SlugOptions
+    {
+      return SlugOptions::create()
+          ->generateSlugsFrom('descricao')
+          ->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
