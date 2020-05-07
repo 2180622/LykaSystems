@@ -24,7 +24,7 @@ class RestoreAccountMail extends Mailable
     {
       return $this->from('lykasystems@mail.com', 'Lyka Systems')
           ->subject('Lyka Systems | Restaurar Conta - '.$this->name)
-          ->markdown('mails.restore')
+          ->markdown('mails.restore-account')
           ->with([
               'name' => $this->name,
               'key' => $this->auth_key,

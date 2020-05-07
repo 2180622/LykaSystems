@@ -147,8 +147,9 @@ Route::get('/ativacao-conta/{user}/restaurar-conta', 'AccountConfirmationControl
 
 /* Restore password */
 Route::get('/restaurar-password', 'AccountConfirmationController@mailrestorepassword')->name('mailrestore.password');
-Route::post('/restaurar-passwords/confirmacao', 'AccountConfirmationController@checkemail')->name('check.email');
-Route::post('/restaurar-passwords/test', 'AccountConfirmationController@test')->name('check.test');
+Route::post('/restaurar-passwords/confirmacao-email', 'AccountConfirmationController@checkemail')->name('check.email');
+Route::post('/restaurar-passwords/confirmacao-telemovel', 'AccountConfirmationController@checkphone')->name('check.phone');
+Route::get('/restaurar-password/{user}', 'AccountConfirmationController@restorepassword');
 
 /* Ajuda */
 Route::get('/ajuda', 'HelpController@show')->name('ajuda');

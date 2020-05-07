@@ -15,14 +15,6 @@
                     </div>
                 </div>
                 <br>
-                <div class="collapse" id="collapse">
-                    <div class="card card-body" id="collapse-card">
-                        <p id="collapse-p">Para efeitos de confirmação, insira, por favor, os três últimos dígitos do seu número de telemóvel.</p>
-                        <div id="js-form">
-
-                        </div>
-                    </div>
-                </div>
                 <div>
                     <div>
                         <button type="submit" class="btn submit-button" id="submit-button">
@@ -31,6 +23,17 @@
                     </div>
                 </div>
             </form>
+            <div class="collapse" id="collapse">
+                <div class="card card-body" id="collapse-card">
+                    <p id="collapse-p">Para efeitos de confirmação, insira, por favor, os três últimos dígitos do seu número de telemóvel.</p>
+                    <div id="js-form">
+                        <form id="form-code" method="post">
+                            <input id="emailcode" type="text" name="emailcode" hidden>
+                            <input id="phonecode" type="text" name="phonecode" hidden>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -71,8 +74,11 @@
                     completeNumber.pop();
                 }
 
-                form = "<form style='padding: 0px;' id='form2'> <label id='label-code'></label> <div id='code' type='text' class='form-control' name='code' required style='width:100%;'><input type=text id='fake-input' maxlength='3' autocomplete='off'> </div> <button type='submit' class='submit-button' id='submit-button2'>Recuperar</button> </form>";
-                $('#js-form').append(form);
+                form = "<label id='label-code'></label> <div id='code' class='form-control' style='width:100%;'><input name='code' type=text id='code-input' maxlength='3' autocomplete='off' required> </div> <button type='submit' class='submit-button' id='submit-button2'>Recuperar</button>";
+                $('#form-code').append(form);
+                $('#form-code').css("display", "block");
+                $('#emailcode').attr("value", user.email);
+                $('#phonecode').attr("value", user.telefone1);
                 $('#label-code').append(completeNumber.join(''));
                 $('#code').after("<br>");
                 $('#collapse').show();
@@ -83,7 +89,7 @@
                     $('#error').css("display", "none");
                 }
                 $('#collapse').hide();
-                $('#form2').css("display", "none");
+                $('#form-code').css("display", "none");
                 $('#submit-button').css("display", "block");
                 error = "<strong id='error'>O e-mail que introduziu não está registado no sistema, ou não está ativo.</strong>";
                 $('#last-p').after(error);
@@ -91,15 +97,31 @@
         });
     });
 
-    $('#form2').submit(function(event) {
+    $('#form-code').submit(function(event) {
         event.preventDefault();
+        info = {
+            code: $("#code-input").val(),
+            email: $("#emailcode").val(),
+            phone: $("#phonecode").val()
+        }
+        console.log(info.code);
         $.ajax({
             type: "post",
-            url: "{{route('check.test')}}",
+            url: "{{route('check.phone')}}",
             context: this,
-            data: 'hey',
-            success: function() {
-                console.log('Ok');
+            data: info,
+            success: function(data) {
+                if ($('#error').text() != '') {
+                    $('#error').css("display", "none");
+                }
+            window.location.href = 'http://lykasystems.test/login';
+            },
+            error: function() {
+              if ($('#error').text() != '') {
+                  $('#error').css("display", "none");
+              }
+              error = "<strong id='error' style='margin-top: 0px;'>O número que inseriu não corresponde ao seu e-mail.</strong>";
+              $('#collapse-p').after(error);
             }
         });
     });
