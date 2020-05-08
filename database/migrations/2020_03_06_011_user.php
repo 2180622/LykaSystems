@@ -14,9 +14,9 @@ class User extends Migration
             $table->bigIncrements('idUser');
             $table->string('email', 255)->unique();
             $table->enum('tipo',['admin', 'agente', 'cliente']);
-            $table->bigInteger('loginCount')->default(0);
             $table->string('password',255)->nullable();
             $table->string('auth_key', 5)->nullable();
+            $table->bigInteger('loginCount')->default(0);
             $table->boolean('estado')->default(false);
             $table->string('slug')->nullable();
 
