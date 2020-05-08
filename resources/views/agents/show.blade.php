@@ -5,18 +5,18 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 
-<link href="{{asset('css/inputs.css')}}" rel="stylesheet">
+    <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+    <link href="{{asset('css/inputs.css')}}" rel="stylesheet">
 
 @endsection
+
+
 {{-- Page Content --}}
 @section('content')
 
 @php
-
-$tipo_agent_atual=$agent->tipo;
-
+    $tipo_agent_atual=$agent->tipo;
 @endphp
 
 <div class="container mt-2">
@@ -297,7 +297,7 @@ $tipo_agent_atual=$agent->tipo;
                                             <div>Ver documento de identificação</div>
                                     </a>
                                 @else
-                                    <a href="{{route('agents.edit',$agent)}}" class="mt-2 agent_link my-auto"><small class="text-danger mt-2">
+                                    <a href="{{route('agents.edit',$agent)}}" class="mt-2 name_link my-auto"><small class="text-danger mt-2">
                                             <i class="far fa-id-card" style="font-size:40px"></i><br>
                                             <strong>Sem documento de identificação</strong></small>
                                     </a>
