@@ -150,6 +150,8 @@ Route::get('/restaurar-password', 'AccountConfirmationController@mailrestorepass
 Route::post('/restaurar-passwords/confirmacao-email', 'AccountConfirmationController@checkemail')->name('check.email');
 Route::post('/restaurar-passwords/confirmacao-telemovel', 'AccountConfirmationController@checkphone')->name('check.phone');
 Route::get('/restaurar-password/{user}', 'AccountConfirmationController@restorepassword');
+Route::post('/restaurar-password/confirmacao-utilizador', 'AccountConfirmationController@checkuser')->name('check.user');
+Route::post('/restaurar-password/confirmacao-password', 'AccountConfirmationController@checkpassword')->name('check.password');
 
 /* Ajuda */
 Route::get('/ajuda', 'HelpController@show')->name('ajuda');

@@ -164,7 +164,42 @@ class AccountConfirmationController extends Controller
 
     public function restorepassword(User $user)
     {
-        $user = User::where('idUser', $user->idUser)->select('idUser', 'email', 'tipo', 'slug')->first();
+        $user = User::where('idUser', $user->idUser)->select('idUser', 'email', 'slug')->first();
         return view('auth.restore-password', compact('user'));
+    }
+
+    public function checkuser(Request $request)
+    {
+        $id = $request->input('id');
+        $email = $request->input('email');
+
+        $user = User::where('email', $email)
+        ->where(function($user){
+            $user->where('auth_key', '!=', null)
+            ->where('estado', 1);
+        })->select('idUser', 'email', 'slug')->first();
+
+        if ($email == $user->email && $user != null) {
+            return response()->json($user, 200);
+        }else {
+            return response()->json('NOK', 500);
+        }
+    }
+
+    public function checkpassword(Request $request)
+    {
+        $id = $request->input('id');
+        $password = $request->input('password');
+        $passwordconf = $request->input('passwordconf');
+
+        if ($password == $passwordconf) {
+            User::where('idUser', $id)->update(['password' => Hash::make($password)]);
+            if (Auth::check()) {
+                Auth::logout();
+            }
+            return response()->json('OK', 200);
+        }else {
+            return response()->json('NOK', 500);
+        }
     }
 }
