@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Cliente;
 use App\Agente;
+
+use App\DocPessoal;
+use App\DocNecessario;
+use App\Fase;
+
+
 use App\Produto;
 use App\User;
 use Illuminate\Support\Arr;
-use App\DocAcademico;
-use App\DocPessoal;
+
 
 use Illuminate\Support\Facades\Hash;
 
@@ -240,9 +245,6 @@ class ClientController extends Controller
         // Produtos adquiridos pelo cliente
         $produtos = $client->produtoSaved;
 
-
-
-
         if ($produtos->isEmpty()) {
             $produtos=null;
         }else{
@@ -254,7 +256,8 @@ class ClientController extends Controller
             }
         }
 
-  /*       array('column1', 'column2', 'column3') */
+
+
 
         /* Agentes associados */
         $agents = Agente::
@@ -297,11 +300,20 @@ class ClientController extends Controller
         }
 
 
-
         /* Documentos académicos */
         $docsAcademicos = $client->docAcademico;
 
-        return view('clients.show',compact("client","agents","subagents","produtos","totalprodutos","infosPassaport",'docsAcademicos'));
+
+
+        $fase = Fase::first();
+        $docnecessario = new DocPessoal;
+
+        
+/*         dd($docNecessario); */
+
+
+
+        return view('clients.show',compact("client","agents","subagents","produtos","totalprodutos","infosPassaport",'docsAcademicos','fase','docnecessario'));
     }
 
 
@@ -359,6 +371,8 @@ class ClientController extends Controller
 
         /* Dados do passaporte JSON: numPassaport dataValidPP passaportPaisEmi localEmissaoPP */
 /*         $infosPassaport =new stdClass(); */
+
+
 
         if($client->info_Passaport){
             $infosPassaport= json_decode($client->info_Passaport);

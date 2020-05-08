@@ -20,6 +20,7 @@
 {{-- Page Content --}}
 @section('content')
 
+{{-- <a href="{{route('documento-pessoal.create',[$fase,$docnecessario])}}">ssssssssssssssssssssss</a> --}}
 
 <div class="container mt-2">
     {{-- Navegação --}}
