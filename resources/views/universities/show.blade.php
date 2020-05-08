@@ -252,7 +252,7 @@
                 {{-- Lista de estudantes --}}
                 <div class="tab-pane fade" id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
                     @if($clients)
-                    <div class="row">
+                    <div class="row mx-auto text-center" style="max-height:1000px; overflow:auto ">
                         @foreach ($clients as $client)
 
                             <a class="name_link text-center m-2" href="{{route('clients.show',$client)}}">
@@ -289,7 +289,7 @@
                 {{-- Lista de contactos --}}
                 <div class="tab-pane fade" id="contactos" role="tabpanel" aria-labelledby="contactos-tab">
                     @if ($contacts)
-                    <div class="row" style="max-height:1000px; overflow:auto ">
+                    <div class="row mx-auto" style="max-height:1000px; overflow:auto ">
                         @foreach ($contacts as $contact)
 
                             <a class="name_link text-center m-2" href="{{route('contacts.show',[$contact,$university])}}">

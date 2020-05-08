@@ -182,7 +182,7 @@
                                     </div>
                                     <br>
                                 @else
-                                    <div class="row" style="max-height:1000px; overflow:auto ">
+                                    <div class="row mx-auto" style="max-height:1000px; overflow:auto ">
                                         @foreach ($listagents as $agent)
                                             <a class="name_link text-center m-2" href="{{route('agents.show',$agent)}}">
                                                 <div class="col">
@@ -216,7 +216,7 @@
             {{-- Clientes --}}
             <div class="tab-pane fade {{ $tipo_agent_atual == 'Subagente' ? 'show active' : '' }}" id="clients" role="tabpanel" aria-labelledby="clients-tab">
 
-                <div class="row">
+                <div class="row mx-auto">
 
                     <div class="col">
 

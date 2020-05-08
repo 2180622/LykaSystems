@@ -24,7 +24,13 @@ class ContactoController extends Controller
         where('Contacto.idUser', '=', Auth::user()->idUser)
         ->get();
 
-        $totalcontacts = $contacts->count();
+        if ($contacts->isEmpty()) {
+            $contacts=null;
+        }else{
+            $totalcontacts = $contacts->count();
+        }
+
+
 
         return view('contacts.list', compact('contacts', 'totalcontacts'));
     }

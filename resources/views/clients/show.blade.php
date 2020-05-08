@@ -140,7 +140,8 @@
                     <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i
                                 class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
                     {{-- Adicionar Documento --}}
-                    <div class="mt-4"><a href="#" class="top-button" style="width:70px"><i class="fas fa-plus mr-2"></i>Adicionar
+                    <div class="mt-4"><a href="#" class="top-button" style="width:70px"><i
+                                class="fas fa-plus mr-2"></i>Adicionar
                             documento</a></div>
 
                     @endif
@@ -208,20 +209,28 @@
                                 <div>{{$produto->tipo}}</div>
                                 {{-- <div>{{$produto->descricao}} em desenvolvimento Web & Multimédia
                             </div> --}}
-                                <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
-                            </div>
-                        </a>
+                            <div class="mt-1">{{$produto->valorTotal.'€'}}</div>
+                    </div>
+                    </a>
 
                     @endforeach
 
                 </div>
 
-                <hr>
-
-                <div class="row border-dark p-2 pl-4 text-right">Total dos protudos: {{$totalprodutos}}€</div>
+                <div class="row ">
+                    <div class="col border rounded bg-light p-3 m-3">
+                        Total dos protudos: <span class="active">{{$totalprodutos}}€</span>
+                    </div>
+                </div>
 
                 @else
-                <div class="mb-4 p-4"><span class="text-secondary">Sem Produtos</div>
+
+                <div class="row ">
+                    <div class="col border rounded bg-light p-3 m-3">
+                        <div class="text-muted"><small>(sem registos)</small></div>
+                    </div>
+                </div>
+
                 @endif
 
             </div>
