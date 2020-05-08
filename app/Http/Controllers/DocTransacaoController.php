@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\DocTransacao;
 use App\Fase;
 use App\Conta;
-use App\Http\Requests\UpdateDocTransacaoRequest;
-use App\Http\Requests\StoreDocTransacaoRequest;
+use App\Http\Requests\UpdateDocumentoRequest;
+use App\Http\Requests\StoreDocumentoRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -43,15 +43,25 @@ class DocTransacaoController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreDocTransacaoRequest $request,Fase $fase){
+    public function store(StoreDocumentoRequest $request,Fase $fase){
 
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
 
             $documento = new DocTransacao;
             
-            $fields = $request->validated();
-            $documento->fill($fields);
-
+            $fields = $request->all();
+            $documento->descricao=$fields['descricao'];
+            if($fields['valorRecebido'] && $fields['valorRecebido']!=0){
+                $documento->valorRecebido=$fields['valorRecebido'];
+                $documento->verificacao = true;
+            }else{
+                $documento->verificacao = false;
+            }
+            $documento->tipoPagamento=$fields['tipoPagamento'];
+            $documento->dataOperacao=$fields['dataOperacao'];
+            $documento->dataRecebido=$fields['dataRecebido'];
+            $documento->observacoes=$fields['observacoes'];
+            $documento->idConta=$fields['idConta'];
             $source = null;
 
             $documento->comprovativoPagamento = $source;
@@ -70,7 +80,7 @@ class DocTransacaoController extends Controller
             $documento->comprovativoPagamento = $source;
             $documento->save();
 
-            return redirect()->route('produtos.show',$fase->produto)->with('success', 'Documento adicionado com sucesso');
+            return redirect()->route('produtos.show',$fase->produto)->with('success', 'Transação adicionado com sucesso');
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }
@@ -105,18 +115,17 @@ class DocTransacaoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function edit(DocTransacao $documento, Fase $fase)
+    public function edit(DocTransacao $documento)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
 
-            $infoDoc = json_decode($documento->info);
-            $infoKeys = array_keys($infoDoc);
             $tipoPAT = 'Transacao';
             $tipo = 'Transacao';
+            $Contas = Conta::all();
 
-            return view('documentos.edit', compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
+            return view('documentos.edit', compact('documento','tipo','tipoPAT','Contas'));
         }else{
-            return redirect()->route('produtos.show',$fase->produto);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
     }
 
@@ -130,27 +139,43 @@ class DocTransacaoController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function update(UpdateDocTransacaoRequest $request, DocTransacao $documento)
+    public function update(UpdateDocumentoRequest $request, DocTransacao $documento)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-
             
-            $fields = $request->validated();
-            $documento->fill($fields);
+            $fields = $request->all();
+            $documento->descricao=$fields['descricao'];
+            if($fields['valorRecebido'] && $fields['valorRecebido']!=0){
+                $documento->valorRecebido=$fields['valorRecebido'];
+                $documento->verificacao = true;
+            }else{
+                $documento->verificacao = false;
+            }
+            $documento->tipoPagamento=$fields['tipoPagamento'];
+            $documento->dataOperacao=$fields['dataOperacao'];
+            $documento->dataRecebido=$fields['dataRecebido'];
+            $documento->observacoes=$fields['observacoes'];
+            $documento->idConta=$fields['idConta'];
+
+            if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+                $documento->verificacao = true;
+            }else{
+                $documento->verificacao = false;
+            }
             $source = null;
 
-            if($fields['img_doc']) {
-                $ficheiro = $fields['img_doc'];
-                $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
-                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+            if(array_key_exists('img_doc',$fields)){
+                if($fields['img_doc']) {
+                    $ficheiro = $fields['img_doc'];
+                    $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
+                    Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                    $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+                    $documento->comprovativoPagamento = $source;
+                }
             }
-
-            $documento->comprovativoPagamento = $source;
-            $documento->idFase = $fase->idFase;
             $documento->save();
 
-            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do produto modificados com sucesso');
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados da Transação editados com sucesso');
         }else{
             return redirect()->route('produtos.show',$documento->fase->produto);
         }
@@ -173,7 +198,7 @@ class DocTransacaoController extends Controller
     {
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
             $documento->delete();
-            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Produto eliminado com sucesso');
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Transação eliminada com sucesso');
         }else{
             return redirect()->route('produtos.show',$documento->fase->produto);
         }

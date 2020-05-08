@@ -18,7 +18,7 @@ class DocAcademico extends Model
         ];
 
     public function fase(){
-        return $this->belongsTo("App\User","idFase","idFase")->withTrashed();
+        return $this->belongsTo("App\Fase","idFase","idFase")->withTrashed();
     }
 
     public function getSlugOptions() : SlugOptions
