@@ -20,7 +20,7 @@
 {{-- Page Content --}}
 @section('content')
 
-{{-- <a href="{{route('documento-pessoal.create',[$fase,$docnecessario])}}">ssssssssssssssssssssss</a> --}}
+<a href="{{route('documento-pessoal.create',["matricula",4])}}">ssssssssssssssssssssss</a>
 
 <div class="container mt-2">
     {{-- Navegação --}}
@@ -140,11 +140,6 @@
                     {{-- Adicionar produto --}}
                     <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i
                                 class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
-                    {{-- Adicionar Documento --}}
-                    <div class="mt-4"><a href="#" class="top-button" style="width:70px"><i
-                                class="fas fa-plus mr-2"></i>Adicionar
-                            documento</a></div>
-
                     @endif
 
                 </div>
@@ -320,6 +315,20 @@
 
 
                         </ul>
+
+                        {{-- Adicionar Documento --}}
+                        <div class="dropdown mt-4">
+                            <button class="top-button dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-plus mr-2"></i>Adicionar documento
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Cartão Cidadão</a>
+                                <a class="dropdown-item" href="#">Passaporte</a>
+                                <a class="dropdown-item" href="#">Carta Condução</a>
+                                <a class="dropdown-item" href="#">Doc. Oficial</a>
+                            </div>
+                        </div>
 
                     </div>
 

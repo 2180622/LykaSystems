@@ -31,6 +31,8 @@ class DocPessoalController extends Controller
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }
+
+        
     }
 
 

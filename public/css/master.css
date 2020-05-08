@@ -17,6 +17,7 @@ html, body {
     border-radius: 25px;
     text-transform: uppercase;
     background-color: #6A74C9;
+
     box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
 }
 
@@ -24,6 +25,14 @@ html, body {
     color: white;
     text-decoration: none;
 }
+
+
+.top-button:focus {
+    outline: none;
+}
+
+
+outline: none;
 
 .cancel-button {
     color: #A9A9A9;
