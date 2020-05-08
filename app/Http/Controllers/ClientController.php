@@ -254,6 +254,7 @@ class ClientController extends Controller
             foreach ($produtos as $produto) {
                 $totalprodutos=$totalprodutos+$produto->valorTotal;
             }
+
         }
 
 
@@ -305,12 +306,8 @@ class ClientController extends Controller
 
 
 
-        $fase = Fase::first();
-        $docnecessario = new DocPessoal;
-
-        
-/*         dd($docNecessario); */
-
+        $fase = Fase::where("idFase","=","2")->first();
+        $docnecessario = DocNecessario::where("idDocNecessario","=","4")->first();
 
 
         return view('clients.show',compact("client","agents","subagents","produtos","totalprodutos","infosPassaport",'docsAcademicos','fase','docnecessario'));
