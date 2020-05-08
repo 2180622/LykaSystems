@@ -58,12 +58,12 @@
                         </div>
                         <div class="col-md-2">
                             <label for="img_doc">Upload:</label>
-                            <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*"/><br>
+                            <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/><br>
                         </div>
                         <div class="col-md-2">
-                            <label for="valorRecebido">Valor</label>
+                            <label for="valorRecebido">Valor recebido</label>
                             <br>
-                            <input type="number" class="form-control" min="0" name="valorRecebido" placeholder="0,00" autocomplete="off" required><br>
+                            <input type="number" class="form-control" min="0" name="valorRecebido" placeholder="0,00" autocomplete="off" ><br>
                         </div>
                         <div class="col-md-4">
                             <label for="tipoPagamento">Tipo pagamento</label>
@@ -145,17 +145,17 @@
                     <div class="para-clone documento">
                         <span class="num" style="display: none;">2</span>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <label for="img_doc">Upload:</label>
                                 <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
                             </div>
                             @if($tipoPAT == "Academico")
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <label for="nome">Nome: </label>
                                     <input type="text" class="form-control" name="nome" placeholder="Nome" autocomplete="off" required>
                                 </div>
                             @else
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <label for="dataValidade">Data de validade: </label>
                                     <input type="month" class="form-control"  id="dataValidade" name="dataValidade" value="" style="width:250px" required><br>
                                 </div>
