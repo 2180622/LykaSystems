@@ -27,7 +27,7 @@ class LoginEmailConfirmation extends Mailable
             ->with([
                 'name' => $this->name,
                 'key' => $this->key,
-                'link' => url('/').'/verificacao-login/'.post_slug($this->name)
+                'link' => url('/').'/login-verification/'.post_slug($this->name)
             ]);
     }
 }
