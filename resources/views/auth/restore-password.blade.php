@@ -29,13 +29,13 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Restauro da palavra-chave</h5>
+                <h5 class="modal-title">Atualização da palavra-chave.</h5>
             </div>
             <div class="modal-body">
-                A sua palavra-chave foi atualizada com sucesso! <br> Clique no botão "Inicar sessão" para recomeçar o seu trabalho.
+                A sua palavra-chave foi atualizada com sucesso! <br> Clique no botão <strong>Inicar sessão</strong> para recomeçar o seu trabalho.
             </div>
             <div class="modal-footer">
-                <a href="{{route('login')}}" type="button" class="btn btn-primary">Iniciar sessão</a>
+                <a href="{{route('login')}}" id="submit-button-modal" type="button" class="text-center">Iniciar sessão</a>
             </div>
         </div>
     </div>

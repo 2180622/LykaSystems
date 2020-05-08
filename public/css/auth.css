@@ -128,27 +128,27 @@ a:hover {
 
 /* Others */
 .copyright {
-    position: absolute;
     bottom: 0;
     width: 40%;
+    position: absolute;
 }
 
 .copyright p {
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    font-weight: 600;
     color: #ADADAD;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
 }
 
 /* Error Style */
 #error {
     color: #e3342f;
-    display: inherit;
-    margin-top: 20px;
-    margin-bottom: -15px;
-    margin-bottom: 10px;
     font-size: 10pt;
     padding: 0 50px;
+    display: inherit;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-bottom: -15px;
 }
 
 #collapse {
@@ -156,42 +156,62 @@ a:hover {
 }
 
 #collapse-card {
-    border-radius: 0px !important;
     border: none;
     padding: 10px 0px;
+    border-radius: 0px !important;
 }
 
 #collapse-p {
-    color: #6C6C6C !important;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: normal;
+    color: #6C6C6C !important;
 }
 
 #label-code {
-    position: absolute;
     z-index: 2;
-    pointer-events: none;
+    padding: 20px;
     font-weight: 600;
     font-size: 0.8rem;
-    color: #252525 !important;
     margin-bottom: 0px;
-    padding: 20px;
+    position: absolute;
+    pointer-events: none;
+    color: #252525 !important;
 }
 
 #code-input {
-    background-color: transparent;
+    width: 110%;
+    right: 17px;
     border: none;
+    bottom: 22.5px;
     font-weight: 600;
     font-size: 0.8rem;
-    color: #252525 !important;
     position: relative;
-    bottom: 8.5px;
-    left: 44px;
-    width: 90%;
+    padding: 15.5px 61px;
+    color: #252525 !important;
+    background-color: transparent;
 }
 
 .modal-content {
     border: none !important;
     border-radius: 0px !important;
+    border-top: 5px solid #6A74C9 !important;
+}
+
+.modal-header, .modal-footer {
+    border: 0px !important;
+}
+
+#submit-button-modal {
+    width: 30%;
+    border: none;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 14px 15px;
+    position: relative;
+    border-radius: 0px;
+    color: white !important;
+    text-transform: uppercase;
+    transition: 0.3s ease-in-out;
+    background-color: #6A74C9 !important;
 }
