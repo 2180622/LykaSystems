@@ -93,7 +93,7 @@ class ProdutoController extends Controller
 
             $t=time();
             $produto->create_at == date("Y-m-d",$t);
-            
+
             $produto->save();
             $valorProduto = 0;
             $valorTAgente = 0;
@@ -150,7 +150,7 @@ class ProdutoController extends Controller
                     $responsabilidade->idUniversidade2 = $produto->idUniversidade2;
 
                     $responsabilidade->save();
-                    
+
                     for($numF=1;$numF<=500;$numF++){
                         if(array_key_exists("fornecedor".$numF."-fase".$i, $fields)){
                             if($fields["fornecedor".$numF."-fase".$i]){
@@ -294,7 +294,7 @@ class ProdutoController extends Controller
             // data em que foi modificado
             $t=time();
             $produto->updated_at == date("Y-m-d",$t);
-            
+
             $produto->save();
             $valorProduto = 0;
             $valorTAgente = 0;
@@ -419,7 +419,7 @@ class ProdutoController extends Controller
                         break;
                     }
                 }
-                
+
 
                 $fase->descricao = $fields['descricao-fase'.$fase->idFase];
                 $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$fase->idFase]));

@@ -18,8 +18,8 @@ class Administrador extends Migration
             $table->string('email',255)->unique();
             $table->date('dataNasc');
             $table->string('fotografia',255)->nullable();
-            $table->string('telefone1', 25);
-            $table->string('telefone2', 25)->nullable();
+            $table->integer('telefone1');
+            $table->integer('telefone2')->nullable();
             $table->boolean('superAdmin')->default(false);
             $table->timestamps();
             $table->softDeletes();

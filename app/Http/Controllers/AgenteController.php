@@ -110,7 +110,7 @@ class AgenteController extends Controller
         /* Fotografia do agente */
         if ($requestAgent->hasFile('fotografia')) {
             $photo = $requestAgent->file('fotografia');
-            $profileImg = $agent->idCliente .'.'. $photo->getClientOriginalExtension();
+            $profileImg = $agent->idAgente .'.'. $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
             $agent->save();
@@ -253,17 +253,39 @@ class AgenteController extends Controller
         $fields = $request->validated();
         $agent->fill($fields);
 
+        /* Registo antigo: para verificar se existem ficheiros para apagar/substituir */
+        $oldfile=Agente::
+        where('idAgente', '=',$agent->idAgente)
+        ->first();
+
+
         /* Fotografia */
         if ($request->hasFile('fotografia')) {
+
+            /* Verifica se o ficheiro antigo existe e apaga do storage*/
+            if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/' . $oldfile->fotografia)){
+                Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/' . $oldfile->fotografia);
+            }
+
+        /* Guarda a nova fotografia */
             $photo = $request->file('fotografia');
-            $profileImg = $agent->idCliente .'.'. $photo->getClientOriginalExtension();
+            $profileImg = $agent->idAgente .'.'. $photo->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
             $agent->fotografia = $profileImg;
         }
 
 
+
+
+
         /* Documento de identificação */
         if ($request->hasFile('img_doc')) {
+
+        /* Verifica se o ficheiro antigo existe e apaga do storage*/
+        if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/' . $oldfile->img_doc)){
+            Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/' . $oldfile->img_doc);
+        }
+
             $docfile = $request->file('img_doc');
             $docImg = $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $docfile, $docImg);
@@ -271,6 +293,9 @@ class AgenteController extends Controller
         }
 
 
+
+
+        
         // data em que foi modificado
         $t=time();
         $agent->updated_at == date("Y-m-d",$t);

@@ -118,20 +118,23 @@ class DocPessoalController extends Controller
 
 
 
-    public function edit(Fase $fase, DocPessoal $documento)
+    /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Cliente  $client
+    * @return \Illuminate\Http\Response
+    */
+    public function edit(DocPessoal $documento)
     {
-        dd('aqui');
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-
-            $infoDoc = json_decode($documento->info);
-            dd($documento);
+            $infoDoc = (array)json_decode($documento->info);
             $infoKeys = array_keys($infoDoc);
             $tipoPAT = 'Pessoal';
             $tipo = $documento->tipo;
 
             return view('documentos.edit', compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
         }else{
-            return redirect()->route('produtos.show',$fase->produto);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
     }
 
@@ -150,7 +153,7 @@ class DocPessoalController extends Controller
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
 
             $fields = $request->all();
-            //dd($fields);
+            //dd($documento);
 
             $infoDoc = null;
             if(strtolower($documento->tipo) == "passaport"){
@@ -177,7 +180,7 @@ class DocPessoalController extends Controller
             }else{
                 $documento->verificacao = false;
             }
-            if($fields['img_doc']){
+            if(array_key_exists('img_doc',$fields)){
                 $source = null;
 
                 if($fields['img_doc']) {
@@ -186,15 +189,14 @@ class DocPessoalController extends Controller
                     $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_pessoal_'.$tipoDoc.'.'.$ficheiro->getClientOriginalExtension();
                     Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
                     $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+                    $documento->imagem = $source;
                 }
-                $documento->imagem = $source;
             }
             if($infoDoc){
                 $documento->info = json_encode($infoDoc);
             }
             $documento->save();
-
-            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do produto modificados com sucesso');
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do '.$documento->tipo.' editados com sucesso');
         }else{
             return redirect()->route('produtos.show',$documento->fase->produto);
         }
@@ -219,7 +221,7 @@ class DocPessoalController extends Controller
 
             $documento->delete();
 
-            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Produto eliminado com sucesso');
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', $tipo.' eliminado com sucesso');
         }else{
             return redirect()->route('produtos.show',$documento->fase->produto);
         }

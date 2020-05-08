@@ -120,15 +120,14 @@ class LibraryController extends Controller
         if ($request->hasFile('ficheiro')) {
 
 
-            $oldfile=Biblioteca::
-            where('idBiblioteca', '=',$library->idBiblioteca)
-            ->first();
+        /* Verifica se o ficheiro antigo existe e apaga do storage*/
+        $oldfile=Biblioteca::
+        where('idBiblioteca', '=',$library->idBiblioteca)
+        ->first();
 
-            /* Verifica se o ficheiro antigo existe e apaga do storage*/
-            if(Storage::disk('public')->exists('library/' . $oldfile->ficheiro)){
-                Storage::disk('public')->delete('library/' . $oldfile->ficheiro);
-            }
-
+        if(Storage::disk('public')->exists('library/' . $oldfile->ficheiro)){
+            Storage::disk('public')->delete('library/' . $oldfile->ficheiro);
+        }
 
             /* Guarda o novo ficheiro */
             $uploadfile = $request->file('ficheiro');

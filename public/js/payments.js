@@ -222,25 +222,18 @@ function selected() {
 }
 
 // Modal -> Resposanbilidades content
-$('#exampleModal').on('show.bs.modal', function(event) {
+$('#modal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget);
-    var name = button.data('nome');
-    var fase = button.data('fase');
-    var valorCliente = button.data('valorcliente');
-    var valorAgente = button.data('valoragente');
-    var valorSubAgente = button.data('valorsubagente');
-    var valorUni1 = button.data('valoruni1');
-    var valorUni2 = button.data('valoruni2');
-    var valorUni2 = button.data('valoruni2');
-
     var modal = $(this);
 
-    modal.find('.modal-title').text('Responsabilidade de ' + name + ' - ' + fase);
-    modal.find('#valor-cliente').val(valorCliente);
-    modal.find('#valor-agente').val(valorAgente);
-    modal.find('#valor-subagente').val(valorSubAgente);
-    modal.find('#valor-uni1').val(valorUni1);
-    modal.find('#valor-uni2').val(valorUni2);
+    modal.find('.modal-title').text('Responsabilidade de ' + button.data('nome') + ' - ' + button.data('fase') + ' (Visualização)');
+    modal.find('.modal-body').append('Valor cliente: ' + button.data('valorcliente'));
+
+    modal.find('#valor-cliente').val(button.data('valorcliente'));
+    modal.find('#valor-agente').val(button.data('valoragente'));
+    modal.find('#valor-subagente').val(button.data('valorsubagente'));
+    modal.find('#valor-uni1').val(button.data('valoruni1'));
+    modal.find('#valor-uni2').val(button.data('valoruni2'));
     modal.find("form").attr('action', '/pagamentos/' + button.data('id'));
 
 })

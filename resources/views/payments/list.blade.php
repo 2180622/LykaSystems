@@ -230,7 +230,7 @@
               ?>
 
 
-            <a href="#" data-toggle="modal" data-target="#exampleModal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}"
+            <a href="#" data-toggle="modal" data-target="#modal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}"
               data-valorsubagente="{{$valorSubAgente}}" data-valoruni1="{{$valorUniversidade1}}" data-valoruni2="{{$valorUniversidade2}}"
               data-nome="{{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}">
                 <div class="row charge-div">
@@ -285,50 +285,23 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <h5 class="modal-title text-center" id="modalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row d-flex justify-content-around">
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Valor cliente:</label>
-                        <input type="text" disabled class="form-control" id="valor-cliente">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Valor agente:</label>
-                        <input type="text" disabled class="form-control" id="valor-agente">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Valor subagente:</label>
-                        <input type="text" disabled class="form-control" id="valor-subagente">
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-around">
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Valor universidade principal:</label>
-                        <input type="text" disabled class="form-control" id="valor-uni1">
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">Valor universidade secundária:</label>
-                        <input type="text" disabled class="form-control" id="valor-uni2">
-                    </div>
-                    <div class="form-group" style="opacity:0;">
-                        <label class="col-form-label"></label>
-                        <input type="text" disabled class="form-control">
-                    </div>
-                </div>
+                
             </div>
             <form action="" method="post">
                 @csrf
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Registar pagamento</button>
+                    <a id="a-close-modal" class="mr-4" data-dismiss="modal">Fechar</a>
+                    <button id="submit-button" type="submit" class="btn">Registar pagamento</button>
                 </div>
             </form>
         </div>

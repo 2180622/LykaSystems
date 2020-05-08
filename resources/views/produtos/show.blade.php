@@ -146,7 +146,7 @@
 
                                 <div><span class="text-secondary">Tipo:</span> {{$fase->descricao}}</div><br>
 
-                                <div><span class="text-secondary">Data de vencimento:</span> {{$fase->dataVencimento}}</div><br>
+                                <div><span class="text-secondary">Data de vencimento:</span> {{date('d/m/Y', strtotime($fase->dataVencimento))}}</div><br>
 
                                 <div><span class="text-secondary">Valor da fase:</span> {{$fase->valorFase.'€'}}</div><br>
 
@@ -275,11 +275,11 @@
                                                     </div>
                                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docpessoal->verificacao)
                                                         <div><br>
-                                                            <a href="{{route('documento-pessoal.edit',[$fase, $documento])}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
+                                                            <a href="{{route('documento-pessoal.edit',$docpessoal)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
                                                     @else
                                                         <div><br>
-                                                            <a href="{{route('documento-pessoal.edit',[$fase, $documento])}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
+                                                            <a href="{{route('documento-pessoal.edit',$docpessoal)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
                                                     @endif
                                                     @php
@@ -338,11 +338,11 @@
                                                     </div>
                                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docacademico->verificacao)
                                                         <div><br>
-                                                            <a href="{{route('documento-academico.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
+                                                            <a href="{{route('documento-academico.edit',$docacademico)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
                                                     @else
                                                         <div><br>
-                                                            <a href="{{route('documento-academico.edit',$documento)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
+                                                            <a href="{{route('documento-academico.edit',$docacademico)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
                                                         </div><br>
                                                     @endif
                                                     @php
@@ -384,7 +384,7 @@
                                 <br><div><span><b>Documentos Transações</b></span></div><br>
                                 @if($DocsTransacao->toArray())
                                     @foreach($DocsTransacao as $documento)
-                                        <div><span class="text-secondary">{{$documento->tipoDocumento}}:</span>{{'<esta aqui>'}}</div><br>
+                                        <div><span class="text-secondary">{{$documento->descricao}}:</span>{{'<esta aqui>'}}</div><br>
                                         <div><span class="text-secondary"> - Valor Recebido: </span>
                                             @if($documento->valorRecebido)
                                                 {{$documento->valorRecebido.'€'}}
@@ -393,7 +393,7 @@
                                             @endif
                                         </div><br>
                                         <div><span class="text-secondary"> - Estado:</span>
-                                            @if($docacademico->verificacao)
+                                            @if($documento->verificacao)
                                                 <span class="text-success">Recebido</span>
                                             @else
                                                 <span class="text-danger">Não Recebido</span>
@@ -401,11 +401,11 @@
                                         </div>
                                         @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && !$docpessoal->verificacao)
                                             <div><br>
-                                                <a href="{{route('documento-academico.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->tipoDocumento}}</a>
+                                                <a href="{{route('documento-transacao.edit',$documento)}}" class="top-button mr-2">Verificar {{$documento->descricao}}</a>
                                             </div><br>
                                         @else
                                             <div><br>
-                                                <a href="{{route('documento-academico.edit',$documento)}}" class="top-button mr-2">Editar {{$documento->tipoDocumento}}</a>
+                                                <a href="{{route('documento-transacao.edit',$documento)}}" class="top-button mr-2">Editar {{$documento->descricao}}</a>
                                             </div><br>
                                         @endif
                                         @php
