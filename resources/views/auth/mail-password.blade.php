@@ -38,6 +38,22 @@
     </div>
 </div>
 
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atualização da palavra-chave.</h5>
+            </div>
+            <div class="modal-body">
+                A Lyka Systems informa que acabou de receber um e-mail com informções importantes que deve seguir para recuperar a sua palavra-chave.
+            </div>
+            <div class="modal-footer">
+                <a href="{{route('login')}}" id="submit-button-modal" type="button" class="text-center">Entendido!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('scripts')
 <script type="text/javascript">
     $.ajaxSetup({
@@ -120,13 +136,13 @@
                 if ($('#error').text() != '') {
                     $('#error').remove();
                 }
-            window.location.href = 'http://lykasystems.test/login';
+                $('#modal').modal('show');
             },
             error: function() {
               if ($('#error').text() != '') {
                   $('#error').remove();
               }
-              error = "<strong id='error' style='margin-top: 0px;'>O número que inseriu não corresponde ao seu e-mail.</strong>";
+              error = "<strong id='error' style='margin-top: 0px; margin-bottom: 0px;'>O número que inseriu não corresponde ao seu e-mail.</strong>";
               $('#collapse-p').after(error);
             }
         });

@@ -155,6 +155,7 @@ class AccountConfirmationController extends Controller
         $name = $user->nome.' '.$user->apelido;
 
         if ($user->telefone1 == $phoneNumber) {
+            $users->update(['password' => null]);
             dispatch(new RestorePassword($email, $name));
             return response()->json('OK', 200);
         }else {
@@ -164,8 +165,13 @@ class AccountConfirmationController extends Controller
 
     public function restorepassword(User $user)
     {
+        $password = User::where('idUser', $user->idUser)->select('password')->first();
         $user = User::where('idUser', $user->idUser)->select('idUser', 'email', 'slug')->first();
-        return view('auth.restore-password', compact('user'));
+        if ($password->password == null) {
+            return view('auth.restore-password', compact('user'));
+        }else {
+            abort(403);
+        }
     }
 
     public function checkuser(Request $request)
@@ -173,11 +179,21 @@ class AccountConfirmationController extends Controller
         $id = $request->input('id');
         $email = $request->input('email');
 
+        $password = User::where('email', $email)
+        ->where(function($user){
+            $user->where('auth_key', '!=', null)
+            ->where('estado', 1);
+        })->select('password')->first();
+
         $user = User::where('email', $email)
         ->where(function($user){
             $user->where('auth_key', '!=', null)
             ->where('estado', 1);
         })->select('idUser', 'email', 'slug')->first();
+
+        if ($password->password != null) {
+            abort(403);
+        }
 
         if ($email == $user->email && $user != null) {
             return response()->json($user, 200);

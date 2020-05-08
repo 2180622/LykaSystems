@@ -148,7 +148,6 @@ a:hover {
     display: inherit;
     margin-top: 20px;
     margin-bottom: 10px;
-    margin-bottom: -15px;
 }
 
 #collapse {
@@ -190,6 +189,10 @@ a:hover {
     padding: 15.5px 61px;
     color: #252525 !important;
     background-color: transparent;
+}
+
+.modal-dialog {
+    max-width: 700px !important;
 }
 
 .modal-content {
