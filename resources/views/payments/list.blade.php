@@ -199,11 +199,13 @@
             @foreach ($responsabilidades as $responsabilidade)
             <?php
               if ($responsabilidade->valorCliente == null) {
-                $valorCliente = 'N/A';
+                $infocliente = 'N/A';
               }else {
-                $valorCliente = number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€';
+                $valorcliente = number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€';
+                $datacliente = date('d/m/Y', strtotime($responsabilidade->dataVencimentoCliente));
+                $arraycliente = array("valor" => $valorcliente, "data" => $datacliente);
+                $infocliente = json_encode($arraycliente);
               }
-
               if ($responsabilidade->valorAgente == null) {
                 $valorAgente = 'N/A';
               }else {
@@ -230,7 +232,7 @@
               ?>
 
 
-            <a href="#" data-toggle="modal" data-target="#modal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-valorcliente="{{$valorCliente}}" data-valoragente="{{$valorAgente}}"
+            <a href="#" data-toggle="modal" data-target="#modal" data-id="{{$responsabilidade->idResponsabilidade}}" data-fase="{{$responsabilidade->fase->descricao}}" data-infocliente="{{$infocliente}}" data-valoragente="{{$valorAgente}}"
               data-valorsubagente="{{$valorSubAgente}}" data-valoruni1="{{$valorUniversidade1}}" data-valoruni2="{{$valorUniversidade2}}"
               data-nome="{{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}">
                 <div class="row charge-div">
@@ -295,9 +297,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                
+
             </div>
-            <form action="" method="post">
+            <form method="post">
                 @csrf
                 <div class="modal-footer">
                     <a id="a-close-modal" class="mr-4" data-dismiss="modal">Fechar</a>
