@@ -161,4 +161,10 @@ class AccountConfirmationController extends Controller
             return response()->json('NOK', 500);
         }
     }
+
+    public function restorepassword(User $user)
+    {
+        $user = User::where('idUser', $user->idUser)->select('idUser', 'email', 'tipo', 'slug')->first();
+        return view('auth.restore-password', compact('user'));
+    }
 }
