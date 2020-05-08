@@ -57,35 +57,29 @@
                 @if($agends!=null)
                     <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
                            style="overflow:hidden;">
-
                         {{-- Cabeçalho da tabela --}}
                         <thead>
                         <tr>
                             <th style="width:10px">{{-- COR DO EVENTO --}}</th>
-                            <th>Título</th>
-                            <th>Início</th>
-                            <th>Fim</th>
+                            <th colspan="3">Todos os eventos agendados</th>
                         </tr>
                         </thead>
-
                         {{-- Corpo da tabela --}}
                         <tbody>
-
                         @foreach ($agends as $agend)
-                            <tr>
-                                <td style="width:10px"><span class="p-1 shadow-sm"
-                                                             style="background-color:{{$agend->cor}}"></span>
+                            <tr href="#">
+                                <td style="width:10px">
+                                    <span class="p-1 shadow-sm" style="background-color:{{$agend->cor}}"></span>
                                 </td>
 
                                 {{-- Título --}}
-                                <td><a class="name_link" href="#">{{$agend->titulo}}</td>
+                                <td><a class="name_link">{{$agend->titulo}}</td>
 
                                 {{-- Inicio --}}
-                                <td class="align-middle">{{ date('d-M-y', strtotime($agend->dataInicio)) }}</td>
+                                <td class="align-middle">{{ date('d-m-Y', strtotime($agend->dataInicio)) }}</td>
 
                                 {{-- Fim --}}
-                                <td class="align-middle">{{ date('d-M-y', strtotime($agend->dataFim)) }}</td>
-
+                                <td class="align-middle">{{ date('d-m-Y', strtotime($agend->dataFim)) }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -197,15 +191,12 @@
                     let end = element.event.end;
                     $("#modalCalendar input[name='dataFim']").val(dealWithDate(end));
 
-                    console.log(dealWithDate(start))
-                    console.log(dealWithDate(end))
-
                     let color = element.event.backgroundColor;
                     $("#modalCalendar input[name='cor']").val(color);
 
                     let description = element.event.extendedProps.description;
                     $("#modalCalendar textarea[name='descricao']").val(description);
-                    console.log(description);
+
                 },
 
                 select: function (element) {
@@ -225,6 +216,7 @@
                     $("#modalCalendar input[name='cor']").val("#6A74C9");
 
                     calendar.unselect();
+
                 },
             });
 
@@ -235,6 +227,7 @@
             $(".limpar").each(function () {
                 $(".limpar").val("");
                 $("#color").val("#6A74C9");
+
             });
         });
     </script>
