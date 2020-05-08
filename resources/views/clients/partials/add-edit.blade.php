@@ -35,6 +35,28 @@
 
 <div class="alert alert-danger mb-3" id="warning_msg" style="display: none"><i class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos assinalados.</div>
 
+@if (Auth::user()->tipo == "admin")
+    <div class="bg-white shadow-sm mb-4 " style="border-radius: 10px;">
+
+        <div class="row">
+
+                <div class="col m-4">
+                    <div >
+                        <i class="fas fa-user-tie active mr-2 ml-4"></i><label for="agent_responsavel">Agente responsável: </label>
+                        <select class="select_style" id="agente_responsavel" name="agente_responsavel" style="min-width: 200px">
+                            <option>dasd</option>
+                            <option>dasd</option>
+                            <option>dasd</option>
+                            <option>dasd</option>
+                        </select>
+                    </div>
+
+                </div>
+        </div>
+
+    </div>
+@endif
+
 <div class="row nav nav-fill w-100 text-center mx-auto p-3">
 
 
@@ -344,9 +366,12 @@
                     <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
                     <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" required>
                         <option value="" selected hidden>Selecione nivel</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}}>1</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}}>2</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}}>3</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}}>Secundário Incompleto</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}}>Secundário completo</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}}>Curso tecnologico</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='4'?"selected":""}}>Estuda na universidade</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='5'?"selected":""}}>Licenciado</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='6'?"selected":""}}>Mestrado</option>
                     </select>
 
                     <br>

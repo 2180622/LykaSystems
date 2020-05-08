@@ -70,7 +70,7 @@
         <div class="card shadow-sm p-3" style="border-radius:10px">
             <div class="row font-weight-bold p-2" style="color:#6A74C9">
                 <div class="col col-md-12 text-center my-auto "
-                    style="min-width:195px; max-width:290px; max-height:295px; overflow:hidden">
+                    style="min-width:195px; max-width:230px; max-height:295px; overflow:hidden">
 
                     @if($agent->fotografia)
                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
@@ -215,45 +215,97 @@
 
             {{-- Clientes --}}
             <div class="tab-pane fade {{ $tipo_agent_atual == 'Subagente' ? 'show active' : '' }}" id="clients" role="tabpanel" aria-labelledby="clients-tab">
-
-                <div class="row mx-auto">
-
+                @if($clients)
+                <div class="row mt-3 mb-4">
                     <div class="col">
-
-                        @if($clients)
-                            <div class="row" style="max-height:1000px; overflow:auto ">
-                                @foreach ($clients as $client)
-
-                                    <a class="name_link text-center m-2" href="{{route('clients.show',$client)}}">
-                                        <div class="col">
-                                            <div style="width: 200px; height:210px; overflow:hidden">
-                                                @if($client->fotografia)
-                                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                        src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
-                                                        style="width:100%; height:auto ">
-                                                @elseif($client->genero == 'F')
-                                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                        src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
-                                                @else
-                                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                        src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
-                                                @endif
-                                            </div>
-                                            <div class="mt-1">{{$client->nome}} {{$client->apelido}}</div>
-                                            <div style="margin-top:-7px"><small>({{$client->paisNaturalidade}})</small></div>
-                                        </div>
-                                    </a>
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="border rounded bg-light p-3">
-                                <div class="text-muted"><small>(sem registos)</small></div>
-                            </div>
-                            <br>
-                        @endif
+                        <span class="mr-2">Mostrar</span>
+                        <select class="custom-select" id="records_per_page" style="width:80px">
+                            <option selected>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                        <span class="ml-2">por página</span>
                     </div>
-
+                    <div class="col ">
+                        <div class="input-group pl-0 float-right search-section" style="width:250px">
+                            <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
+                            <div class="search-button input-group-append">
+                                <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <hr>
+
+
+                <div class="table-responsive " style="overflow:hidden">
+
+
+                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+
+                        {{-- Cabeçalho da tabela --}}
+                        <thead>
+                            <tr>
+                                <th class="text-center align-content-center ">Foto</th>
+                                <th>Nome</th>
+                                <th>Naturalidade</th>
+                                <th class="text-center">Opções</th>
+                            </tr>
+                        </thead>
+
+                        {{-- Corpo da tabela --}}
+                        <tbody>
+
+                            @foreach ($clients as $client)
+                            <tr>
+                                <td >
+                                    <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
+                                        <a class="name_link" href="{{route('clients.show',$client)}}">
+                                            @if($client->fotografia)
+                                                <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}" width="100%" class="mx-auto">
+                                                @elseif($client->genero == 'F')
+                                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
+                                                    @else
+                                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                                                    @endif
+                                        </a>
+                                    </div>
+
+                                </td>
+
+                                {{-- Nome e Apelido --}}
+                                <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
+
+
+                                {{-- paisNaturalidade --}}
+                                 <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+
+
+                                {{-- OPÇÔES --}}
+                                <td class="text-center align-middle">
+                                    <a href="{{route('clients.show',$client)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                    <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                                    <form method="POST" role="form" id="{{ $client->idCliente }}" action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+                @else
+                <div class="border rounded bg-light p-3">
+                    <div class="text-muted"><small>(sem registos)</small></div>
+                </div>
+                <br>
+                @endif
             </div>
 
 
@@ -424,5 +476,5 @@
 
 {{-- Scripts --}}
 @section('scripts')
-{{-- <script src="{{asset('/js/agent.js')}}"></script> --}}
+<script src="{{asset('/js/agent_show.js')}}"></script>
 @endsection

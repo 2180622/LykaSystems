@@ -9,7 +9,6 @@ use App\DocPessoal;
 use App\DocNecessario;
 use App\Fase;
 
-
 use App\Produto;
 use App\User;
 use Illuminate\Support\Arr;
@@ -201,7 +200,7 @@ class ClientController extends Controller
         $client->create_at == date("Y-m-d",$t);
 
         /* Slugs */
-        $client->slug = ExtraFunctionsController::post_slug($client->nome.' '.$client->apelido);
+        $client->slug = ExtraFunctionsController::post_slug($client->nome.'-'.$client->apelido);
 
         $client->save();
 
@@ -211,6 +210,7 @@ class ClientController extends Controller
 
         $user->tipo = "cliente";
         $user->idCliente = $client->idCliente;
+        $user->slug = ExtraFunctionsController::post_slug($client->nome.' '.$client->apelido);
         $user->auth_key = strtoupper(random_str(5));
         $password = random_str(64);
         $user->password = Hash::make($password);

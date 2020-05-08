@@ -20,8 +20,6 @@
 {{-- Page Content --}}
 @section('content')
 
-<a href="{{route('documento-pessoal.create',["matricula",4])}}">ssssssssssssssssssssss</a>
-
 <div class="container mt-2">
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -66,7 +64,7 @@
         <div class="card shadow-sm p-3" style="border-radius:10px">
             <div class="row font-weight-bold p-2" style="color:#6A74C9">
                 <div class="col col-md-12 text-center my-auto "
-                    style="min-width:195px; max-width:290px; max-height:295px; overflow:hidden">
+                    style="min-width:195px; max-width:230px; max-height:295px; overflow:hidden">
 
                     @if($client->fotografia)
                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
@@ -322,6 +320,10 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-plus mr-2"></i>Adicionar documento
                             </button>
+
+                            <a href="{{route('documento-pessoal.create',["matricula",4])}}">ssssssssssssssssssssss</a>
+
+
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Cartão Cidadão</a>
                                 <a class="dropdown-item" href="#">Passaporte</a>
@@ -349,7 +351,36 @@
                         <div class="text-secondary mb-2">Nível de estudos:</div>
 
                         <div class="border rounded bg-light p-3">
-                            {{$client->nivEstudoAtual}}
+                            @switch($client->nivEstudoAtual)
+                            @case(1)
+                                Secundário Incompleto
+                            @break
+
+                            @case(2)
+                                Secundário completo
+                            @break
+
+                            @case(3)
+                                Curso tecnologico
+                            @break
+
+                            @case(4)
+                                Estuda na universidade
+                            @break
+
+                            @case(5)
+                                Licenciado
+                            @break
+
+                            @case(6)
+                                Mestrado
+                            @break
+
+                            @default
+                            <span class="text-secondary"><small>(Aguarda dados...)</small></span>
+
+                        @endswitch
+
                         </div>
 
                         <br>
