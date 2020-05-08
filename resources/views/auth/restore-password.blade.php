@@ -23,10 +23,8 @@
     </div>
 </div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Atualização da palavra-chave.</h5>
@@ -66,8 +64,8 @@
                 }
                 user = data;
                 $('#form').remove();
-                form =
-                    "<div class='form-group'><input id='password' type='password' class='form-control passwords' name='password' placeholder='Palavra-chave'><input id='id' type='text' name='id' hidden value='{{ $user->idUser }}'></div><div class='form-group'><input id='password-conf' type='password' class='form-control passwords' name='password-conf' placeholder='Confirmar palavra-chave'></div><div><button type='submit' class='btn submit-button'>Confirmar</button></div>"
+                $('#paragraph').text('Insira uma palavra-chave segura.');
+                form = "<div class='form-group'><input id='password' type='password' class='form-control passwords' name='password' placeholder='Palavra-chave'><input id='id' type='text' name='id' hidden value='{{ $user->idUser }}'></div><div class='form-group'><input id='password-conf' type='password' class='form-control passwords' name='password-conf' placeholder='Confirmar palavra-chave'></div><div><button type='submit' class='btn submit-button'>Confirmar</button></div>"
                 $('#form-pass').append(form);
                 $('.passwords').attr("pattern", "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}");
                 $('.passwords').attr("title", "A palavra-chave deve conter letras maiúsculas, minúsculas, números e não deve ser menor que 8 caracteres");
