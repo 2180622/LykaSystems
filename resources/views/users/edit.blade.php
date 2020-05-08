@@ -31,8 +31,9 @@
         </div>
         <br>
         <div class="payment-card shadow-sm">
-            <form method="POST" action="{{route('users.edit', $user)}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('users.update', $user)}}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="col-md-6">
                         <label for="nome">Primeiro nome *</label>
@@ -73,8 +74,8 @@
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col">
-                        <label for="inputFullname">Género</label>
+                    <div class="col-md-6">
+                        <label for="inputFullname">Género do administrador *</label>
                         <br>
                         <select type="text" name="genero" id="genero" required>
                             @if ($user->admin->genero == 'M')
@@ -86,12 +87,25 @@
                             @endif
                         </select>
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="superAdmin">Cargo do administrador *</label>
+                        <br>
+                        <select name="superAdmin" required title="Campo de preenchimento obrigatório.">
+                          @if ($user->admin->superAdmin == true)
+                            <option value="0">Regular</option>
+                            <option value="1" selected>Total</option>
+                          @else
+                            <option value="0" selected>Regular</option>
+                            <option value="1">Total</option>
+                          @endif
+                        </select>
+                    </div>
                 </div>
         </div>
 
         <div class="form-group text-right">
             <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar administrador</button>
+            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">atualizar administrador</button>
             <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
         </div>
         </form>
