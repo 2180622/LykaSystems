@@ -26,6 +26,7 @@ class ContactoController extends Controller
 
         if ($contacts->isEmpty()) {
             $contacts=null;
+            $totalcontacts=0;
         }else{
             $totalcontacts = $contacts->count();
         }
