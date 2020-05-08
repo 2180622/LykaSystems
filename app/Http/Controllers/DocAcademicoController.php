@@ -117,18 +117,18 @@ class DocAcademicoController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function edit(DocAcademico $documento, Fase $fase)
+    public function edit(DocAcademico $documento)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
             
-            $infoDoc = json_decode($documento->info);
+            $infoDoc = (array)json_decode($documento->info);
             $infoKeys = array_keys($infoDoc);
             $tipoPAT = 'Academico';
             $tipo = $documento->tipo;
 
             return view('documentos.edit', compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
         }else{
-            return redirect()->route('produto.show',$fase->produto);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
     }
 
@@ -166,7 +166,7 @@ class DocAcademicoController extends Controller
             }
             $documento->nome = $fields['nome'];
             
-            if($fields['img_doc']){
+            if(array_key_exists('img_doc',$fields)){
                 $source = null;
 
                 if($fields['img_doc']) {
@@ -178,11 +178,13 @@ class DocAcademicoController extends Controller
                 }
                 $documento->imagem = $source;
             }
-            $documento->info = json_encode($infoDoc);
+            if($infoDoc){
+                $documento->info = json_encode($infoDoc);
+            }
             $documento->save();
-            return redirect()->route('produto.show',$documento->fase->produto)->with('success', 'Dados do produto modificados com sucesso');
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do '.$documento->tipo.' editados com sucesso');
         }else{
-            return redirect()->route('produto.show',$documento->fase->produto);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
 
     }
@@ -202,12 +204,12 @@ class DocAcademicoController extends Controller
     public function destroy(DocAcademico $documento)
     {
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
-
+            $tipo = $documento->tipo;
             $documento->delete();
             
-            return redirect()->route('produto.show',$documento->fase->produto)->with('success', 'Produto eliminado com sucesso');
+            return redirect()->route('produtos.show',$documento->fase->produto)->with('success', $tipo.' eliminado com sucesso');
         }else{
-            return redirect()->route('produto.show',$documento->fase->produto);
+            return redirect()->route('produtos.show',$documento->fase->produto);
         }
     }
 }
