@@ -5,18 +5,18 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 
-<link href="{{asset('css/agents.css')}}" rel="stylesheet">
+    <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+    <link href="{{asset('css/inputs.css')}}" rel="stylesheet">
 
 @endsection
+
+
 {{-- Page Content --}}
 @section('content')
 
 @php
-
-$tipo_agent_atual=$agent->tipo;
-
+    $tipo_agent_atual=$agent->tipo;
 @endphp
 
 <div class="container mt-2">
@@ -174,7 +174,7 @@ $tipo_agent_atual=$agent->tipo;
                 @if ( Auth::user()->tipo == "admin" || Auth::user()->agente->tipo == "Agente" )
                     @if ($agent->tipo == "Agente")
                     {{-- SUB AGENTES --}}
-                    <div class="tab-pane fade show active" id="subagentes-type" role="tabpanel" aria-labelledby="subagentes-type-tab">
+                    <div class="tab-pane fade show active" id="subagentes-type" role="tabpanel" aria-labelledby="subagentes-type-tab" >
 
                                 @if($listagents==null)
                                     <div class="border rounded bg-light p-3">
@@ -182,7 +182,7 @@ $tipo_agent_atual=$agent->tipo;
                                     </div>
                                     <br>
                                 @else
-                                    <div class="row">
+                                    <div class="row" style="max-height:1000px; overflow:auto ">
                                         @foreach ($listagents as $agent)
                                             <a class="name_link text-center m-2" href="{{route('agents.show',$agent)}}">
                                                 <div class="col">
@@ -199,8 +199,8 @@ $tipo_agent_atual=$agent->tipo;
                                                                 src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
                                                         @endif
                                                     </div>
-                                                    <div class="mt-2">{{$agent->nome}} {{$agent->apelido}}</div>
-                                                    <div ><small>({{$agent->pais}})</small></div>
+                                                    <div class="mt-1">{{$agent->nome}} {{$agent->apelido}}</div>
+                                                    <div style="margin-top:-7px"><small>({{$agent->pais}})</small></div>
                                                 </div>
                                             </a>
                                         @endforeach
@@ -221,7 +221,7 @@ $tipo_agent_atual=$agent->tipo;
                     <div class="col">
 
                         @if($clients)
-                            <div class="row">
+                            <div class="row" style="max-height:1000px; overflow:auto ">
                                 @foreach ($clients as $client)
 
                                     <a class="name_link text-center m-2" href="{{route('clients.show',$client)}}">
@@ -239,8 +239,8 @@ $tipo_agent_atual=$agent->tipo;
                                                         src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
                                                 @endif
                                             </div>
-                                            <div class="mt-2">{{$client->nome}} {{$client->apelido}}</div>
-                                            <div ><small>({{$client->paisNaturalidade}})</small></div>
+                                            <div class="mt-1">{{$client->nome}} {{$client->apelido}}</div>
+                                            <div style="margin-top:-7px"><small>({{$client->paisNaturalidade}})</small></div>
                                         </div>
                                     </a>
                                 @endforeach
@@ -281,7 +281,7 @@ $tipo_agent_atual=$agent->tipo;
                         <div class="border rounded bg-light p-3">
                             <div>{{$agent->NIF}}</div>
                         </div>
-                        
+
                         <br>
 
                     </div>
@@ -297,7 +297,7 @@ $tipo_agent_atual=$agent->tipo;
                                             <div>Ver documento de identificação</div>
                                     </a>
                                 @else
-                                    <a href="{{route('agents.edit',$agent)}}" class="mt-2 agent_link my-auto"><small class="text-danger mt-2">
+                                    <a href="{{route('agents.edit',$agent)}}" class="mt-2 name_link my-auto"><small class="text-danger mt-2">
                                             <i class="far fa-id-card" style="font-size:40px"></i><br>
                                             <strong>Sem documento de identificação</strong></small>
                                     </a>

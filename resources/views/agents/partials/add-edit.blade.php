@@ -1,45 +1,3 @@
-<style>
-    .name_link {
-        color: gray;
-    }
-
-    .active {
-        color: #6A74C9
-    }
-
-
-    textarea,
-    input[type="text"],
-    input[type="date"],
-    input[type="email"] {
-        border: none;
-        resize: none;
-        padding: 7px 12px;
-        border-radius: 5px;
-        background-color: #EAEAEA;
-        color: #747474;
-        font-weight: 600;
-
-    }
-
-    .select_style {
-        border: none;
-        resize: none;
-        padding: 7px 12px;
-        border-radius: 5px;
-        background-color: #EAEAEA;
-        color: #747474;
-        font-weight: 600;
-    }
-
-    label {
-        color: #747474;
-        font-weight: 700;
-    }
-
-</style>
-
-
 <div class="alert alert-danger mb-3" id="warning_msg" style="display: none"><i
         class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos
     assinalados.</div>
@@ -146,44 +104,67 @@
 
             <div class="row text-secondary mt-4">
                 <div class="col">
-                    <label><i class="far fa-question-circle"></i> Informações sobre permissões</label>
+
+                    <div>
+                        <i class="far fa-question-circle"></i>
+                        <a class="name_link" data-toggle="collapse" href="#collapseExample"
+                            role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Ver informações sobre permissões
+                        </a>
+                    </div>
+
+                    <div class="collapse mt-3 fade" id="collapseExample">
+                            <div class="row text-secondary">
+
+                                <div class="col p-3 m-2 bg-light border rounded" style="min-width: 280px">
+                                    <div><strong>O agente:</strong></div>
+                                    <div class="my-3">- Tem acesso à lista dos seus clientes e à dos seus subagentes
+                                    </div>
+                                    <div class="my-3">- Tem acesso à lista dos seus subagentes</div>
+
+
+
+                                </div>
+
+                                <br><br>
+
+                                <div class="col p-3 m-2 bg-light border rounded" style="min-width: 280px">
+                                    <div><strong>O subagente:</strong></div>
+                                    <div class="my-3">- Apenas tem acesso à lista dos seus clientes</div>
+                                    <div class="my-3">- Tem acesso à página de perfil do seu superior</div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row  text-secondary">
+
+                                <div class="col m-2 p-3 bg-light border rounded">
+                                    <div><strong>Ambos:</strong></div>
+                                    <div class="my-3">- Podem carregar documentos nas fichas dos seus clientes</div>
+                                    <div class="my-3">- Têm acesso às notificações públicas</div>
+                                    <div class="my-3">- Podem visualizar os ficheiros públicos inseridos na biblioteca
+                                    </div>
+                                    <div class="my-3">- Têm agenda e lista telefónica privada</div>
+                                    <div class="mt-3">- Podem utilizar a funcionalidade de "Reportar problema"</div>
+                                </div>
+
+                            </div>
+                    </div>
+
+
                 </div>
             </div>
 
-            <div class="row text-secondary">
-
-                <div class="col p-3 m-2 bg-light border rounded" style="min-width: 280px">
-                    <div><strong>O agente:</strong></div>
-                    <div class="my-3">- Tem acesso à lista dos seus clientes e à dos seus subagentes</div>
-                    <div class="my-3">- Tem acesso à lista dos seus subagentes</div>
 
 
 
-                </div>
-
-                <br><br>
-
-                <div class="col p-3 m-2 bg-light border rounded"  style="min-width: 280px">
-                    <div><strong>O subagente:</strong></div>
-                    <div class="my-3">- Apenas tem acesso à lista dos seus clientes</div>
-                    <div class="my-3">- Tem acesso à página de perfil do seu superior</div>
-                </div>
-
-            </div>
 
 
-            <div class="row  text-secondary">
 
-                <div class="col m-2 p-3 bg-light border rounded">
-                    <div><strong>Ambos:</strong></div>
-                    <div class="my-3">- Podem carregar documentos nas fichas dos seus clientes</div>
-                    <div class="my-3">- Têm acesso às notificações públicas</div>
-                    <div class="my-3">- Podem visualizar os ficheiros públicos inseridos na biblioteca</div>
-                    <div class="my-3">- Têm agenda e lista telefónica privada</div>
-                    <div class="mt-3">- Podem utilizar a funcionalidade de "Reportar problema"</div>
-                </div>
 
-            </div>
+
+
 
         </div>
 

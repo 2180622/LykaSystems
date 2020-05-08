@@ -65,25 +65,20 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(UpdateUserRequest $requestUser, UpdateAdministradorRequest $requestAdmin, User $user, Administrador $admin)
+    public function update(UpdateUserRequest $requestUser, UpdateAdministradorRequest $requestAdmin, User $user)
     {
         $fieldsUser = $requestUser->validated();
         $fieldsAdmin = $requestAdmin->validated();
+
+        $admin = Administrador::where('email', $user->email)->first();
+
         $user->fill($fieldsUser);
         $admin->fill($fieldsAdmin);
-
-        $update = time();
-        $user->updated_at == date("Y-m-d", $update);
-        $admin->updated_at == date("Y-m-d", $update);
-
-        DB::table('User')
-        ->where('idAdmin', $admin->idAdmin)
-        ->update(['email' => $admin->email]);
 
         $admin->save();
         $user->save();
 
-        return redirect()->route('users.index')->with('success', 'Dados do user modificados com sucesso');
+        return redirect()->route('users.index')->with('success', 'Administrador atualizado com sucesso.');
     }
 
 

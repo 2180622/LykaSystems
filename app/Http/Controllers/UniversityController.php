@@ -128,6 +128,10 @@ class UniversityController extends Controller
         // Data em que o registo é modificado
         $t = time();
         $university->updated_at == date("Y-m-d", $t);
+
+        /* Update das slugs */
+        $university->slug = ExtraFunctionsController::post_slug($university->nome);
+
         $university->save();
 
         return redirect()->route('universities.index')->with('success', 'Universidade Editada com Sucesso!');

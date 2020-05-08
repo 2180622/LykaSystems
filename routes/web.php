@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Agenda */
     Route::resource('/agenda', 'AgendController');
-/*     Route::post('/agenda', 'AgendController@store')->name('agend.store'); */ /* ????????????? */
+    Route::post('/agenda', 'AgendController@store')->name('agend.store');
 
     /* Pagamentos */
     Route::get('/pagamentos', 'PaymentController@index')->name('payments.index');
@@ -152,7 +152,11 @@ Route::get('/ativacao-conta/{user}/restaurar-conta', 'AccountConfirmationControl
 
 /* Restore password */
 Route::get('/restaurar-password', 'AccountConfirmationController@mailrestorepassword')->name('mailrestore.password');
-Route::post('/restaurar-passwords/confirmacao', 'AccountConfirmationController@checkemail')->name('check.email');
+Route::post('/restaurar-passwords/confirmacao-email', 'AccountConfirmationController@checkemail')->name('check.email');
+Route::post('/restaurar-passwords/confirmacao-telemovel', 'AccountConfirmationController@checkphone')->name('check.phone');
+Route::get('/restaurar-password/{user}', 'AccountConfirmationController@restorepassword');
+Route::post('/restaurar-password/confirmacao-utilizador', 'AccountConfirmationController@checkuser')->name('check.user');
+Route::post('/restaurar-password/confirmacao-password', 'AccountConfirmationController@checkpassword')->name('check.password');
 
 /* Ajuda */
 Route::get('/ajuda', 'HelpController@show')->name('ajuda');
