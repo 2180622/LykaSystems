@@ -200,7 +200,7 @@ class ClientController extends Controller
         $client->create_at == date("Y-m-d",$t);
 
         /* Slugs */
-        $client->slug = ExtraFunctionsController::post_slug($client->nome.'-'.$client->apelido);
+        $client->slug = post_slug($client->nome.' '.$client->apelido);
 
         $client->save();
 

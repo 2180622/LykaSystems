@@ -199,7 +199,7 @@
             @foreach ($responsabilidades as $responsabilidade)
             <?php
               if ($responsabilidade->valorCliente == null) {
-                $infocliente = 'N/A';
+                $infocliente = null;
               }else {
                 $valorcliente = number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€';
                 $datacliente = date('d/m/Y', strtotime($responsabilidade->dataVencimentoCliente));
