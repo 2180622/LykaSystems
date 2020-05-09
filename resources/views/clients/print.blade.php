@@ -135,7 +135,7 @@
                 <div><span class="text-secondary font-weight-bold">Número de identificação fiscal:<br></span>
                     {{$client->NIF}}</div><br>
                     <div><span class="text-secondary font-weight-bold">Data de validade:</span>
-                        {{$client->info_docOficial}}</div>
+                        {{$client->validade_docOficial}}</div>
             </div>
 
 

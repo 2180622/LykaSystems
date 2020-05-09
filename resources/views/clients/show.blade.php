@@ -243,20 +243,20 @@
                         <div class="border rounded bg-light p-3">
                             {{-- numPassaporte --}}
                             <div><span class="text-secondary my-3">Número do passaporte:</span>
-                                {{$infosPassaporte->numPassaporte ?? ''}}</div>
+                                {{$client->num_passaporte}}</div>
                             <br>
 
                             {{-- dataValidPP --}}
                             <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
-                                {{$infosPassaporte->dataValidPP }}</div><br>
+                                {{-- {{$infosPassaporte->dataValidPP }} --}}</div><br>
 
                             {{-- passaportePaisEmi --}}
                             <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
-                                {{$infosPassaporte->passaportePaisEmi ?? ''}}</div><br>
+                                {{-- {{$infosPassaporte->passaportePaisEmi ?? ''}} --}}</div><br>
 
                             {{-- localEmissaoPP --}}
                             <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>
-                                {{$infosPassaporte->localEmissaoPP ?? ''}}</div>
+                                {{-- {{$infosPassaporte->localEmissaoPP ?? ''}} --}}</div>
 
                         </div>
 
@@ -273,7 +273,7 @@
                             <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}
                             </div>
                             <br>
-                            <div><span class="text-secondary">Data de validade:</span> {{$client->info_docOficial}}
+                            <div><span class="text-secondary">Data de validade:</span> {{$client->validade_docOficial}}
                             </div>
                         </div>
 

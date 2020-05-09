@@ -117,13 +117,64 @@ class ClientController extends Controller
         $fields = $requestClient->validated();
         $client->fill($fields);
 
+        dd("asd");
+
         /* obtem os dados para criar o utilizador */
         $user = new User;
         $fieldsUser = $requestUser->validated();
         $user->fill($fieldsUser);
 
+
+        /* Criação de cliente */
+        if ($requestClient->hasFile('fotografia')) {
+            $photo = $requestClient->file('fotografia');
+            $profileImg = $client->idCliente .'.'. $photo->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $photo, $profileImg);
+            $client->fotografia = $profileImg;
+            $doc_id->imagem = $profileImg;
+            $client->save();
+        }
+        $client->slug = post_slug($client->nome.' '.$client->apelido); /*slugs */
+/*         $client->create_at == date("Y-m-d",$t); */
+        $client->save();
+
+
+
+
+
+
+
+        /* Criação de documentos Pessoais */
+
+        /* Documento de identificação Pessoal */
+        $doc_id = new DocPessoal;
+        $doc_id->idCliente = $client->idCliente;
+        $doc_id->tipo="Cartão Cidadão";
+        $doc_id->verificacao=true;
+        $doc_id->info= $requestClient->num_docOficial;
+        $doc_id->dataValidade= $requestClient->dataValidade_docOficial;
+
+
+        /* Imagem do documento de identificação Pessoal*/
+        if ($requestClient->hasFile('img_docOficial')) {
+            $img_doc = $requestClient->file('img_docOficial');
+            $nome_imgDocOff = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
+            $doc_id->imagem = $nome_imgDocOff;
+        }
+        /* Guarda documento de identificação Pessoal */
+        $doc_id->create_at == date("Y-m-d",$t);
+        $doc_id->save();
+
+
+
+
+
+
+        /* Passaporte */
+
         /* Dados do passaporte JSON: numPassaporte dataValidPP passaportePaisEmi localEmissaoPP */
-        $passaporteInfo =[];
+/*      $passaporteInfo = [];
         Arr::set($passaporteInfo, 'numPassaporte', $requestClient->numPassaporte);
         Arr::set($passaporteInfo, 'dataValidPP', $requestClient->dataValidPP);
         Arr::set($passaporteInfo, 'passaportePaisEmi', $requestClient->passaportePaisEmi);
@@ -132,33 +183,6 @@ class ClientController extends Controller
         $client->info_Passaporte = $passaporteInfoJSON;
 
 
-
-    /* Criação de documentos Pessoais */
-
-        /* Documento de identificação */
-        $doc_id = new DocPessoal;
-        $doc_id->idCliente = $client->idCliente;
-        $doc_id->tipo="Cartão Cidadão";
-
-        $doc_id->info= $requestClient->num_docOficial;
-        $doc_id->dataValidade= $requestClient->dataValidade_docOficial;
-
-
-
-        if ($requestClient->hasFile('img_docOficial')) {
-
-            $img_doc = $requestClient->file('img_docOficial');
-            $nome_imgDocOff = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
-            $doc_id->imagem = $nome_imgDocOff;
-
-            /* salva o documento na tabela dos clientes */
-            $client->img_docOficial=$nome_imgDocOff;
-            $client->save();
-
-        }
-
-        /* Passaporte */
         $passaporte = new DocPessoal;
         $passaporte->idCliente = $client->idCliente;
         $passaporte->tipo="Passaporte";
@@ -171,46 +195,17 @@ class ClientController extends Controller
             $nome_imgPassaporte = $client->idCliente . '_PP.' . $img_doc->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgPassaporte);
             $passaporte->imagem = $nome_imgPassaporte;
-
-            /* salva o documento na tabela dos clientes */
-            $client->img_Passaporte=$nome_imgPassaporte;
-            $client->save();
-
-        }
-
-
-
-        /* Criação de cliente */
-        $client->info_docOficial = $requestClient->dataValidade_docOficial;
-
-
-        if ($requestClient->hasFile('fotografia')) {
-            $photo = $requestClient->file('fotografia');
-            $profileImg = $client->idCliente .'.'. $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $photo, $profileImg);
-            $client->fotografia = $profileImg;
-            $doc_id->imagem = $profileImg;
-            $client->save();
-        }
-
-
-
-        /* Guarda Documento oficial */
-        $doc_id->create_at == date("Y-m-d",$t);
-        $doc_id->save();
+        } */
 
         /* Guarda Passaporte */
-        $passaporte->create_at == date("Y-m-d",$t);
+/*         $passaporte->create_at == date("Y-m-d",$t);
         $passaporte->save();
+ */
 
 
-        /* Guarda Cliente */
-        $client->create_at == date("Y-m-d",$t);
 
-        /* Slugs */
-        $client->slug = post_slug($client->nome.' '.$client->apelido);
 
-        $client->save();
+
 
 
 
@@ -295,7 +290,7 @@ class ClientController extends Controller
         /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportePaisEmi localEmissaoPP */
 /*         $infosPassaporte = new stdClass(); */
 
-        if($client->info_Passaporte){
+/*         if($client->info_Passaporte){
             $infosPassaporte= json_decode($client->info_Passaporte);
         }else{
             $passaporteInfo =[];
@@ -303,7 +298,7 @@ class ClientController extends Controller
             Arr::set($passaporteInfo, 'dataValidPP', null);
             Arr::set($passaporteInfo, 'passaportePaisEmi', null);
             Arr::set($passaporteInfo, 'localEmissaoPP', null);
-        }
+        } */
 
 
         /* Documentos pessoais */
@@ -354,7 +349,7 @@ class ClientController extends Controller
         /* Dados do passaporte JSON: numPassaporte dataValidPP passaportePaisEmi localEmissaoPP */
 /*         $infosPassaporte =new stdClass(); */
 
-        if($client->info_Passaporte){
+/*         if($client->info_Passaporte){
             $infosPassaporte= json_decode($client->info_Passaporte);
         }else{
             $passaporteInfo =[];
@@ -362,7 +357,7 @@ class ClientController extends Controller
             Arr::set($passaporteInfo, 'dataValidPP', null);
             Arr::set($passaporteInfo, 'passaportePaisEmi', null);
             Arr::set($passaporteInfo, 'localEmissaoPP', null);
-        }
+        } */
 
         return view('clients.print',compact("client","produtos","infosPassaporte"));
     }
@@ -387,7 +382,7 @@ class ClientController extends Controller
 
 
 
-        if($client->info_Passaporte){
+/*         if($client->info_Passaporte){
             $infosPassaporte= json_decode($client->info_Passaporte);
         }else{
             $passaporteInfo =[];
@@ -395,7 +390,7 @@ class ClientController extends Controller
             Arr::set($passaporteInfo, 'dataValidPP', null);
             Arr::set($passaporteInfo, 'passaportePaisEmi', null);
             Arr::set($passaporteInfo, 'localEmissaoPP', null);
-        }
+        } */
 
             return view('clients.edit', compact('client','agents','infosPassaporte'));
         }else{
@@ -457,20 +452,20 @@ class ClientController extends Controller
 
         /* Passaporte */
         /* Dados do passaporte JSON: numPassaporte dataValidPP passaportePaisEmi localEmissaoPP */
-        $passaporteInfo =[];
+/*         $passaporteInfo =[];
         Arr::set($passaporteInfo, 'numPassaporte', $request->numPassaporte);
         Arr::set($passaporteInfo, 'dataValidPP', $request->dataValidPP);
         Arr::set($passaporteInfo, 'passaportePaisEmi', $request->passaportePaisEmi);
         Arr::set($passaporteInfo, 'localEmissaoPP', $request->localEmissaoPP);
         $passaporteInfoJSON = json_encode($passaporteInfo);
-        $client->info_Passaporte = $passaporteInfoJSON;
+        $client->info_Passaporte = $passaporteInfoJSON; */
 
         /* ATUALIZA Passaporte NA TABELA DE DOCS PESSOAIS */
-        DB::table('DocPessoal')
+/*         DB::table('DocPessoal')
         ->where('idCliente', $client->idCliente)
         ->where('tipo', "Passaporte")
         ->update(['info' => $passaporteInfoJSON ]);
-
+ */
 
 
         /* Imagem do passaporte */
@@ -484,8 +479,6 @@ class ClientController extends Controller
             $client->img_Passaporte=$nome_imgPassaporte;
             $client->save();
         }
-
-        $client->info_docOficial = $request->dataValidade_docOficial;
 
         // data em que foi modificado
         $t=time();

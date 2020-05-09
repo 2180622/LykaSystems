@@ -255,8 +255,25 @@
                             event.preventDefault();
                             event.stopPropagation();
 
+
+                            /* Valida se tem agente associado */
+/*                             if ( ($("#idAgente").val() == 0)){
+                                $("#wait_screen").hide();
+
+                                $("#div_agente").addClass("border border-danger text-danger ");
+
+                                $("#idAgente").removeClass("is-valid");
+                                $("#idAgente").addClass("is-invalid");
+                                $("#idAgente").css("background-image", "none");
+
+                                $("#warning_msg").show();
+                            }else{
+                                $("#div_agente").removeClass("border-danger text-danger");
+                            } */
+
+
                             /* valida Campos da informação pessoal */
-                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
+                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#genero").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") ) {
                                 $("#wait_screen").hide();
                                 $("#pessoal-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
@@ -266,7 +283,7 @@
 
 
                             /* valida Campos dos documentos */
-                            if (($("#num_docOficial").val() == "") || ($("#numPassaporte").val() == "") || ($("#dataValidPP").val() == "") || ($("#passaportePaisEmi").val() == "") || ($("#localEmissaoPP").val() == "")) {
+                            if (($("#num_docOficial").val() == "") || ($("#numPassaporte").val() == "") ) {
                                 $("#wait_screen").hide();
                                 $("#documentation-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
@@ -276,13 +293,13 @@
                             }
 
                             /* valida Campos dos dados académicos */
-                            if (($("#nivEstudoAtual").val() == "") || ($("#nomeInstituicaoOrigem").val() == "") || ($("#cidadeInstituicaoOrigem").val() == "")) {
+/*                             if (($("#nivEstudoAtual").val() == "") ) {
                                 $("#wait_screen").hide();
                                 $("#academicos-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
                                 $("#academicos-tab").removeClass("border-danger text-danger");
-                            }
+                            } */
 
 
 
@@ -298,24 +315,24 @@
 
 
                             /* valida Campos das moradas */
-                            if (($("#moradaResidencia").val() == "") || ($("#morada").val() == "") || ($("#cidade").val() == "")) {
+/*                             if (($("#moradaResidencia").val() == "") || ($("#morada").val() == "") || ($("#cidade").val() == "")) {
                                 $("#wait_screen").hide();
                                 $("#contacts-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
                                 $("#contacts-tab").removeClass("border-danger text-danger");
-                            }
+                            } */
 
 
 
                             /* valida Campos das finanças */
-                            if ($("#IBAN").val() == "") {
+/*                             if ($("#IBAN").val() == "") {
                                 $("#wait_screen").hide();
                                 $("#financas-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();
                             } else {
                                 $("#financas-tab").removeClass("border-danger text-danger");
-                            }
+                            } */
 
                         }
 
