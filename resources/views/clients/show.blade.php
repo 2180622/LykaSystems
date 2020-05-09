@@ -535,7 +535,11 @@
 
                         <div class="text-secondary mb-2">IBAN:</div>
                         <div class="border rounded bg-light p-3">
+                            @if ($client->IBAN==null)
+                            <span class="text-muted"><small>(sem dados para mostrar)</small></span>
+                            @else
                             {{$client->IBAN}}
+                            @endif
                         </div>
 
                         <br>

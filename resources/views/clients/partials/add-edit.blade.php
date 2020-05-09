@@ -222,12 +222,12 @@
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ( $client->img_docOficial!=null)
-                        <a href="#" title="Clique para adicionar o documento de identificação" id="doc_id_preview"
+                        @if (isset($cartaoCidadao) && $cartaoCidadao!=null )
+                        <a href="#" title="Clique para modificar o documento de identificação" id="doc_id_preview"
                             class="name_link">
                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                             <div id="name_doc_id_file" class="text-muted">
-                                {{old('img_docOficial',$client->img_docOficial)}}
+                                {{$cartaoCidadao->imagem}}
                             </div>
                         </a>
                         @else
@@ -236,7 +236,8 @@
                             class="name_link">
                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                             <div id="name_doc_id_file" class="text-muted">
-                                {{old('img_docOficial',$client->img_docOficial)}}</div>
+
+                            </div>
                         </a>
                         <i id="doc_id_preview_file" class="fas fa-plus-circle mt-2"
                             style="font-size:60px;cursor:pointer"
@@ -269,7 +270,7 @@
                             {{-- INUPUT dataValidPP --}}
                             <label for="dataValidPP">Data de validade do passaporte:</label><br>
                             <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                                value="{{$infosPassaport->dataValidPP ?? null }}" >
+                                value="{{-- {{$infosPassaport->dataValidPP ?? null }} --}}" >
                         </div>
                     </div>
 
@@ -289,7 +290,7 @@
                             {{-- INUPUT localEmissaoPP --}}
                             <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                             <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                                value="{{$infosPassaport->localEmissaoPP ?? null }}" maxlength="30"  placeholder="Insira o local de emissão">
+                                value="{{-- {{$infosPassaport->localEmissaoPP ?? null }} --}}" maxlength="30"  placeholder="Insira o local de emissão">
                         </div>
                     </div>
 
@@ -345,7 +346,7 @@
                     {{-- INPUT nivEstudoAtual --}}
                     <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
                     <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" required>
-                        <option value="" selected hidden>Selecione nivel</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='0'?"selected":""}} value="0" value="0" selected hidden>Selecione nivel</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}} value="1">Secundário Incompleto</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}} value="2">Secundário completo</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}} value="3">Curso tecnologico</option>
@@ -394,7 +395,7 @@
                 <div class="col">
                     <label for="telefone1">Telefone pessoal(1):</label><br>
                     <input type="text" class="form-control" name="telefone1" id="telefone1"
-                        value="{{old('telefone1',$client->telefone1)}}" maxlength="20" required maxlength="20" placeholder="Insira o número de telefone"><br>
+                        value="{{old('telefone1',$client->telefone1)}}" maxlength="20" required maxlength="20" placeholder="Insira o número de telefone" required><br>
                 </div>
                 <div class="col">
                     <label for="telefone2">Telefone pessoal(2):</label><br>
@@ -418,7 +419,7 @@
                     {{-- Morada de residência em Portugal --}}
                     <label for="moradaResidencia">Morada de residência em Portugal:</label><br>
                     <input type="text" class="form-control" name="moradaResidencia" id="moradaResidencia"
-                        value="{{old('moradaResidencia',$client->moradaResidencia)}}" maxlength="255" placeholder="Insira a morada de residência em Portugal" required><br>
+                        value="{{old('moradaResidencia',$client->moradaResidencia)}}" maxlength="255" placeholder="Insira a morada de residência em Portugal"><br>
                 </div>
 
 
