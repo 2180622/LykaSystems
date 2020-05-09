@@ -12,9 +12,12 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Dashboard */
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    /* Report Problem */
+    /* Reportar Problema */
     Route::get('/reportar-problema', 'ExtraFunctionsController@report')->name('report');
     Route::post('/reportar-problema/email', 'ExtraFunctionsController@reportmail')->name('report.send');
+
+    /* Procura de contactos */
+    Route::post('/procurar-contacto', 'ExtraFunctionsController@searchcontact')->name('search.contact');
 
     /* Contacts */
     /* Route::resource('/contacts', 'ContactoController'); */
@@ -141,7 +144,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Ajuda */
     Route::get('/ajuda', 'HelpController@show')->name('ajuda');
-
 });
 
 /* Account Confirmation */
