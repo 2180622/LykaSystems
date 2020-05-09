@@ -14,7 +14,7 @@
                     </button>
                 </div>
                 <form id="form-contact" method="POST">
-                    <div class="modal-body">
+                    <div class="modal-body" id="modal-body-contact">
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="user-type">Tipo de utilizador:</label>
@@ -136,33 +136,5 @@
                             "display": "block"
                         });
                     }
-
-                    // Procura de contactos - AJAX
-
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': "{{csrf_token()}}"
-                        }
-                    });
-
-                    $('#form-contact').submit(function(event) {
-                        event.preventDefault();
-                        info = {
-                            users: $("#user-type").find(":selected").val(),
-                            name: $("#name").val()
-                        };
-                        $.ajax({
-                            type: "post",
-                            url: "{{route('search.contact')}}",
-                            context: this,
-                            data: info,
-                            success: function(data) {
-                                console.log('OK');
-                            },
-                            error: function(){
-                                console.log('NOK');
-                            }
-                        });
-                    });
                 </script>
               @endsection

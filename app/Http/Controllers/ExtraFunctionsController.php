@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Mail;
+use App\Agente;
+use App\Cliente;
+use App\Fornecedor;
+use App\Universidade;
 use App\RelatorioProblema;
 use Illuminate\Http\Request;
 use App\Mail\ReportProblemMail;
@@ -58,11 +62,31 @@ class ExtraFunctionsController extends Controller
     /* Procura de contactos */
     public function searchcontact(Request $request)
     {
-        $users = $request->input('user-type');
+        $usertype = $request->input('users');
         $name = $request->input('name');
 
-        dd($users);
+        switch ($usertype) {
+          case 'clientes':
+              $result = Cliente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->first();
+            break;
 
-        return response()->json('OK', 200);
+          case 'agentes':
+              $result = Agente::all();
+            break;
+
+          case 'universidades':
+              $result = Universidade::all();
+            break;
+
+          case 'fornecedores':
+              $result = Fornecedor::all();
+            break;
+        }
+
+        if ($result == null) {
+            return response()->json('NOK', 500);
+        }else {
+            return response()->json($result, 200);
+        }
     }
 }
