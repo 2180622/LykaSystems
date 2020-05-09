@@ -143,7 +143,6 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
                 },
-                dateToday,
                 locale: 'pt',
                 editable: true,
                 navLinks: true,
@@ -173,9 +172,6 @@
 
                     resetForm("#formEvent");
 
-                    console.log("event", element.event.extendedProps)
-
-                    $("#modalCalendar").modal('show');
                     $("#modalCalendar #titleModal").text('Alterar Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'flex');
 
@@ -197,21 +193,22 @@
                     let description = element.event.extendedProps.description;
                     $("#modalCalendar textarea[name='descricao']").val(description);
 
+                    $("#modalCalendar").modal('show');
+
+
                 },
 
                 select: function (element) {
 
                     resetForm("#formEvent");
-                    console.log(element);
+
                     $("#modalCalendar").modal('show');
                     $("#modalCalendar #titleModal").text('Novo Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'none');
 
                     let start = element.start;
-                    $("#modalCalendar input[name='dataInicio']").val(start);
 
-                    let end = element.end;
-                    $("#modalCalendar input[name='dataFim']").val(end);
+                    $("#modalCalendar input[name='dataInicio']").val(dealWithDate(start));
 
                     $("#modalCalendar input[name='cor']").val("#6A74C9");
 
@@ -224,12 +221,32 @@
         });
 
         $("#titleModalNew").click(function () {
+
             $(".limpar").each(function () {
                 $(".limpar").val("");
                 $("#color").val("#6A74C9");
 
             });
+
+            addDefaultFields();
+
+
         });
+
+        function addDefaultFields() {
+
+            var date = new Date();
+            string = ""
+
+            let month = date.getMonth() + 1;
+            string = date.getFullYear() + "-" + ("0" + month).slice(-2)
+                + "-" + ("0" + date.getDate()).slice(-2) + "T"
+                + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+
+            $("#modalCalendar input[name='dataInicio']").val(string)
+
+        }
+
     </script>
 
 @endsection

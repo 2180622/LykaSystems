@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('/css/help.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/help_list.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -33,75 +33,67 @@
 
             <br>
 
-            <div class="report-card shadow-sm">
-                <form action="" method="POST" enctype="multipart/form-data">
+            <div class="report-card">
 
-                    <div class="row justify-content-md-center">
-
-                        <br>
-
-                        <div class="col-md-12 text-center">
-                            <label>Qual é a sua dúvida?</label>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                        aria-expanded="true" aria-controls="collapseOne">
+                                    <i class="fas fa-angle-right pb-2"></i> Como criar um Estudante?
+                                </button>
+                            </h5>
                         </div>
 
-                        <br> <br>
-
-                        <div class="col-md-6 text-center">
-                            <div class="search-bar-helper">
-                                <input class="shadow-sm" type="text" id="searchHelper" placeholder="Palavras-chaves"
-                                       aria-label="Procurar">
-                                <div class="search-button-helper">
-                                    <ion-icon name="search-outline" class="search-icon-helper"></ion-icon>
-                                </div>
-                            </div>
-                        </div>
-                        <br><br><br>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-12 text-center">
-                            <label>Perguntas Frequentes</label>
-                        </div>
-
-                        <br><br><br>
-
-                        <div class="col-md-4 text-center card-help-info mb-5">
-                            <div class="card shadow pb-3">
-                                <h5 class="card-title">Estudantes</h5>
-                                <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como criar um
-                                        Estudante?</a>
-                                    <br>
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como editar um
-                                        Estudante?</a>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 text-center card-help-info mb-5">
-                            <div class="card shadow pb-3">
-                                <h5 class="card-title">Produtos</h5>
-                                <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como adicionar Produto?</a>
-                                    <br>
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como ...?</a>
-                                    <br>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 text-center card-help-info mb-5">
-                            <div class="card shadow pb-3">
-                                <a><h5 class="card-title">Universidades</h5></a>
-                                <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como criar um Universidade?</a>
-                                    <br>
-                                </p>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+                                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
                             </div>
                         </div>
                     </div>
-                </form>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                        data-target="#collapseTwo" aria-expanded="false"
+                                        aria-controls="collapseTwo">
+                                    <i class="fas fa-angle-right pb-2"></i> Como editar um Estudante?
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+                                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+
+                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                        data-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                    <i class="fas fa-angle-right pb-2"></i> Como editar um Estudante?
+                                </button>
+
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+                                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
