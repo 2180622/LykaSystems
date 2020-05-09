@@ -24,6 +24,7 @@ class UpdateClienteRequest extends FormRequest
     public function rules()
     {
         return [
+            'idAgente' => 'nullable',
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',
@@ -35,7 +36,7 @@ class UpdateClienteRequest extends FormRequest
             'morada' => 'required',
             'cidade' => 'required',
             'moradaResidencia' => 'required',
-            'passaportPaisEmi' => 'required',
+            'passaportePaisEmi' => 'required',
             'nomePai' => 'nullable',
             'telefonePai'  => 'nullable',
             'emailPai' => 'nullable',
@@ -53,10 +54,10 @@ class UpdateClienteRequest extends FormRequest
             'img_docOficial'=> 'nullable',
             'info_docOficial'=> 'nullable',
 
-            'img_Passaport'=> 'nullable',
-            'numPassaport'=> 'nullable',
+            'img_Passaporte'=> 'nullable',
+            'numPassaporte'=> 'nullable',
             'dataValidPP'=> 'nullable',
-            'passaportPaisEmi'=> 'nullable',
+            'passaportePaisEmi'=> 'nullable',
             'localEmissaoPP'=> 'nullable',
 
             'img_docAcademico'=> 'nullable',

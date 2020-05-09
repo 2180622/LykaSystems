@@ -20,8 +20,6 @@
 {{-- Page Content --}}
 @section('content')
 
-<a href="{{route('documento-pessoal.create',["matricula",4])}}">ssssssssssssssssssssss</a>
-
 <div class="container mt-2">
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -66,7 +64,7 @@
         <div class="card shadow-sm p-3" style="border-radius:10px">
             <div class="row font-weight-bold p-2" style="color:#6A74C9">
                 <div class="col col-md-12 text-center my-auto "
-                    style="min-width:195px; max-width:290px; max-height:295px; overflow:hidden">
+                    style="min-width:195px; max-width:230px; max-height:295px; overflow:hidden">
 
                     @if($client->fotografia)
                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
@@ -235,7 +233,7 @@
             {{-- Conteudo: Documentação --}}
             <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab">
 
-                {{-- DADOS DE PASSAPORTE --}}
+                {{-- DADOS DE Passaporte --}}
                 <div class="row mt-2 pl-2 ">
 
                     <div class="col mr-3">
@@ -243,22 +241,22 @@
                         <div class="text-secondary mb-2">Passaporte:</div>
 
                         <div class="border rounded bg-light p-3">
-                            {{-- numPassaport --}}
+                            {{-- numPassaporte --}}
                             <div><span class="text-secondary my-3">Número do passaporte:</span>
-                                {{$infosPassaport->numPassaport ?? ''}}</div>
+                                {{$infosPassaporte->numPassaporte ?? ''}}</div>
                             <br>
 
                             {{-- dataValidPP --}}
                             <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
-                                {{$infosPassaport->dataValidPP }}</div><br>
+                                {{$infosPassaporte->dataValidPP }}</div><br>
 
-                            {{-- passaportPaisEmi --}}
+                            {{-- passaportePaisEmi --}}
                             <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
-                                {{$infosPassaport->passaportPaisEmi ?? ''}}</div><br>
+                                {{$infosPassaporte->passaportePaisEmi ?? ''}}</div><br>
 
                             {{-- localEmissaoPP --}}
                             <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>
-                                {{$infosPassaport->localEmissaoPP ?? ''}}</div>
+                                {{$infosPassaporte->localEmissaoPP ?? ''}}</div>
 
                         </div>
 
@@ -284,51 +282,45 @@
 
                     </div>
 
-
+                    {{-- DOCUMENTOS PESSOAIS --}}
                     <div class="col" style="min-width:250px">
                         <div class="text-secondary mb-2">Ficheiros carregados:</div>
+                        @if ($documentosPessoais!=null)
+                            <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
+                                @foreach ($documentosPessoais as $docpessoal)
+                                    <li class="my-3">
+                                        <i class="far fa-address-card mr-2"></i>
+                                        <a class="name_link" target="_blank"
+                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+                                    </li>
+                                @endforeach
 
-                        <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
-
-                            {{-- Verifica se existe imagem para cartão de documento de id pessoal --}}
-                            @if ($client->img_docOficial)
-                            <li class="my-3">
-                                <i class="far fa-address-card mr-2"></i>
-                                <a class="name_link" target="_blank"
-                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$client->img_docOficial)}}">Documento
-                                    de identificação pessoal</a>
-                            </li>
-                            @else
-                            <li class="my-3 text-secondary"><small>Falta ficheiro de identificação pessoal</small></li>
-                            @endif
-
-                            {{-- Verifica se existe imagem para passaporte --}}
-                            @if ($client->img_Passaport)
-                            <li class="my-3">
-                                <i class="far fa-address-card mr-2"></i>
-                                <a class="name_link" target="_blank"
-                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$client->img_Passaport)}}">Passaporte</a>
-                            </li>
-                            @else
-                            <li class="my-3 text-secondary"><small>Falta ficheiro do passaporte</small></li>
-                            @endif
-
-
-                        </ul>
-
-                        {{-- Adicionar Documento --}}
-                        <div class="dropdown mt-4">
-                            <button class="top-button dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-plus mr-2"></i>Adicionar documento
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Cartão Cidadão</a>
-                                <a class="dropdown-item" href="#">Passaporte</a>
-                                <a class="dropdown-item" href="#">Carta Condução</a>
-                                <a class="dropdown-item" href="#">Doc. Oficial</a>
-                            </div>
+                            </ul>
+                        @else
+                        <div class="border rounded bg-light p-3">
+                            <div class="text-muted"><small>(sem registos)</small></div>
                         </div>
+                        @endif
+
+                        {{-- Adicionar Documento PESSOAL--}}
+                        @if($novosDocumentos)
+                            <div class="dropdown mt-4">
+                                <button class="top-button dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-plus mr-2"></i>Adicionar documento
+                                </button>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                        @foreach($novosDocumentos as $docPessoal)
+                                            @if($docPessoal->tipo=="Pessoal")
+                                                <a class="dropdown-item" href="{{route('documento-pessoal.create',["matricula",$docPessoal->idDocNecessario])}}">{{$docPessoal->tipoDocumento}}</a>
+                                            @endif
+                                        @endforeach
+                                </div>
+
+                            </div>
+                        @endif
 
                     </div>
 
@@ -349,7 +341,36 @@
                         <div class="text-secondary mb-2">Nível de estudos:</div>
 
                         <div class="border rounded bg-light p-3">
-                            {{$client->nivEstudoAtual}}
+                            @switch($client->nivEstudoAtual)
+                            @case(1)
+                                Secundário Incompleto
+                            @break
+
+                            @case(2)
+                                Secundário completo
+                            @break
+
+                            @case(3)
+                                Curso tecnologico
+                            @break
+
+                            @case(4)
+                                Estuda na universidade
+                            @break
+
+                            @case(5)
+                                Licenciado
+                            @break
+
+                            @case(6)
+                                Mestrado
+                            @break
+
+                            @default
+                            <span class="text-secondary"><small>(Aguarda dados...)</small></span>
+
+                        @endswitch
+
                         </div>
 
                         <br>
@@ -376,24 +397,45 @@
 
                     </div>
 
-                    <div class="col" style="min-width:225px">
-                        <div class="text-secondary mb-2">Documentos académicos:</div>
+                    {{-- DOCUMENTOS Académicos --}}
+                    <div class="col" style="min-width:250px">
+                        <div class="text-secondary mb-2">Ficheiros carregados:</div>
+                        @if ($documentosAcademicos!=null)
+                            <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
+                                @foreach ($documentosAcademicos as $docpessoal)
+                                    <li class="my-3">
+                                        <i class="far fa-address-card mr-2"></i>
+                                        <a class="name_link" target="_blank"
+                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+                                    </li>
+                                @endforeach
 
-                        <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
-                            @if($docsAcademicos)
+                            </ul>
+                        @else
+                        <div class="border rounded bg-light p-3">
+                            <div class="text-muted"><small>(sem registos)</small></div>
+                        </div>
+                        @endif
 
-                            @foreach($docsAcademicos as $docAcademico)
-                            <li class="my-3">
-                                <i class="fas fa-file-alt mr-2"></i>
-                                <a href="" class="name_link" target="_blank" href="#">{{$docAcademico->tipo}}</a>
-                            </li>
-                            @endforeach
+                        {{-- Adicionar Documento PESSOAL--}}
+                        @if($novosDocumentos)
+                            <div class="dropdown mt-4">
+                                <button class="top-button dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-plus mr-2"></i>Adicionar documento
+                                </button>
 
-                            @else
-                            <li class="text-muted my-3"><small>Sem documentos</small></li>
-                            @endif
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                        </ul>
+                                        @foreach($novosDocumentos as $docAcademico)
+                                            @if($docAcademico->tipo=="Academico")
+                                                <a class="dropdown-item" href="{{route('documento-pessoal.create',["matricula",$docAcademico->idDocNecessario])}}">{{$docAcademico->tipoDocumento}}</a>
+                                            @endif
+                                        @endforeach
+                                </div>
+
+                            </div>
+                        @endif
 
                     </div>
 

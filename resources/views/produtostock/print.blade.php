@@ -102,17 +102,17 @@
 
             <div class="col p-3 mr-3 ">
                 <h5><i class="fas fa-passport mr-2"></i>Passaporte</h5><br>
-                {{--  numPassaport --}}
+                {{--  numPassaporte --}}
                 <div><span class="text-secondary font-weight-bold">Número do passaporte:</span>
-                    {{$client->numPassaport}}</div>
+                    {{$client->numPassaporte}}</div>
 
                 {{--  dataValidPP --}}
                 <div><span class="text-secondary font-weight-bold">Data de validade do passaporte:</span>
                     {{$client->dataValidPP}}</div>
 
-                {{--  passaportPaisEmi --}}
+                {{--  passaportePaisEmi --}}
                 <div><span class="text-secondary font-weight-bold">Pais emissor do passaporte:</span>
-                    {{$client->passaportPaisEmi}}</div>
+                    {{$client->passaportePaisEmi}}</div>
 
                 {{--  localEmissaoPP --}}
                 <div><span class="text-secondary font-weight-bold">Local de emissão do passaporte:</span>

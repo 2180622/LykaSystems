@@ -19,13 +19,13 @@ class Cliente extends Model
     protected $primaryKey = 'idCliente';
 
     protected $fillable = [
-        'nome','apelido','genero','email','telefone1','telefone2','dataNasc',
+        'idAgente','nome','apelido','genero','email','telefone1','telefone2','dataNasc',
         'paisNaturalidade','morada',
         'cidade','moradaResidencia','nomePai','telefonePai',
         'emailPai','nomeMae','telefoneMae','emailMae','fotografia','NIF','IBAN',
         'nivEstudoAtual','nomeInstituicaoOrigem','cidadeInstituicaoOrigem',
         'obsPessoais','obsFinanceiras','obsAcademicas','num_docOficial','img_docOficial','info_docOficial',
-        'img_Passaport','info_Passaport','img_docAcademico','info_docAcademico'
+        'img_Passaporte','info_Passaporte','img_docAcademico','info_docAcademico'
         ];
 
 

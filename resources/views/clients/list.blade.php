@@ -47,9 +47,17 @@
         </div>
         <br>
 
+
+        @if($clients==null)
+            <div class="border rounded bg-light p-3">
+                <div class="text-muted"><small>(sem registos)</small></div>
+            </div>
+            <br>
+        @else
+
         <div class="row mt-3 mb-4">
             <div class="col">
-                Existem <strong>{{$totalestudantes}}</strong> registo(s) no sistema
+                Existem <strong>{{count($clients)}}</strong> registo(s) no sistema
             </div>
         </div>
 
@@ -142,6 +150,7 @@
             </table>
         </div>
 
+        @endif
 
 
     </div>

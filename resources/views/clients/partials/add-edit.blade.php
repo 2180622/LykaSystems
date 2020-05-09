@@ -3,37 +3,38 @@
         color: #6A74C9
     }
 
-
-    textarea, input[type="text"],input[type="date"],input[type="email"]{
-        border: none;
-        resize: none;
-        padding: 7px 12px;
-        border-radius: 5px;
-        background-color: #EAEAEA;
-        color: #747474;
-        font-weight: 600;
-
-    }
-
-    .select_style{
-        border: none;
-        resize: none;
-        padding: 7px 12px;
-        border-radius: 5px;
-        background-color: #EAEAEA;
-        color: #747474;
-        font-weight: 600;
-    }
-
-    label {
-    color: #747474;
-    font-weight: 700;
-}
-
 </style>
 
 
 <div class="alert alert-danger mb-3" id="warning_msg" style="display: none"><i class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos assinalados.</div>
+
+@if (Auth::user()->tipo == "admin")
+    <div class="bg-white shadow-sm mb-4 " style="border-radius: 10px;">
+
+        <div class="row">
+                <div class="col m-4 pb-2">
+                    <div class="mx-2">
+                        <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente / Subagente responsável:</label>
+                        <select class="form-control select_style ml-2" id="idAgente" name="idAgente" style="min-width: 200px">
+                            <option selected value="0">(selecione um agente)</option>
+                            @if($agents)
+                                @foreach($agents as $agent)
+                                    <option value="{{$agent->idAgente}}"  {{old('idAgente', $client->idAgente ) == $agent->idAgente ? "selected" : "" }}   >{{$agent->nome}} {{$agent->apelido}} ({{$agent->pais}})</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+
+                </div>
+        </div>
+
+    </div>
+@else
+
+    {{-- campo auxiliar --}}
+    <input type="hidden" id="idAgente" name="idAgente" value="{{old('idAgente', $client->idAgente )}}">
+
+@endif
 
 <div class="row nav nav-fill w-100 text-center mx-auto p-3">
 
@@ -344,9 +345,12 @@
                     <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
                     <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" required>
                         <option value="" selected hidden>Selecione nivel</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}}>1</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}}>2</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}}>3</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}} value="1">Secundário Incompleto</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}} value="2">Secundário completo</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}} value="3">Curso tecnologico</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='4'?"selected":""}} value="4">Estuda na universidade</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='5'?"selected":""}} value="5">Licenciado</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='6'?"selected":""}} value="6">Mestrado</option>
                     </select>
 
                     <br>

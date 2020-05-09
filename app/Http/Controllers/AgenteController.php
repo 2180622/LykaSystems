@@ -103,7 +103,7 @@ class AgenteController extends Controller
         $agent->create_at == date("Y-m-d",$t);
 
         /* Slugs */
-        $agent->slug = ExtraFunctionsController::post_slug($agent->nome.' '.$agent->apelido);
+        $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
 
         $agent->save();
 
@@ -133,9 +133,11 @@ class AgenteController extends Controller
 
         $user->tipo = "agente";
         $user->idAgente = $agent->idAgente;
+        $user->slug = ExtraFunctionsController::post_slug($agent->nome.' '.$agent->apelido);
         $user->auth_key = strtoupper(random_str(5));
         $password = random_str(64);
         $user->password = Hash::make($password);
+
         $user->save();
 
         /* Envia o e-mail para ativação */
@@ -295,7 +297,7 @@ class AgenteController extends Controller
 
 
 
-        
+
         // data em que foi modificado
         $t=time();
         $agent->updated_at == date("Y-m-d",$t);
@@ -311,7 +313,7 @@ class AgenteController extends Controller
 
 
         /* Update das slugs */
-        $agent->slug = ExtraFunctionsController::post_slug($agent->nome.' '.$agent->apelido);
+        $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
 
 
         /* update do user->email */

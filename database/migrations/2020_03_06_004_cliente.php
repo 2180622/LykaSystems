@@ -11,7 +11,11 @@ class Cliente extends Migration
         Schema::create('Cliente', function (Blueprint $table) {
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
+
             $table->bigIncrements('idCliente');
+
+            $table->unsignedBigInteger('idAgente')->nullable();
+
             $table->string('nome',255);
             $table->string('apelido',255);
             $table->enum('genero',['F','M']);
@@ -38,8 +42,8 @@ class Cliente extends Migration
             $table->string('num_docOficial',255)->unique();
             $table->string('img_docOficial',255)->nullable();
             $table->longText('info_docOficial')->nullable();
-            $table->string('img_Passaport',255)->nullable();
-            $table->longText('info_Passaport')->nullable();
+            $table->string('img_Passaporte',255)->nullable();
+            $table->longText('info_Passaporte')->nullable();
             $table->string('img_docAcademico',255)->nullable();
             $table->longText('info_docAcademico')->nullable();
             $table->longText('obsPessoais')->nullable();
