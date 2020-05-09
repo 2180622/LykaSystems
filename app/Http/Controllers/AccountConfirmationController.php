@@ -218,4 +218,15 @@ class AccountConfirmationController extends Controller
             return response()->json('NOK', 500);
         }
     }
+
+    public function loginVerification(Request $request, User $user){
+        $key = $request->input('key');
+
+        if ($user->auth_key == $key['key']) {
+            return redirect()->route('dashboard.index');
+        }else {
+            $error = "O código de autenticação que introduziu é inválido.";
+            return view('auth.login', compact('user', 'error'));
+        }
+    }
 }
