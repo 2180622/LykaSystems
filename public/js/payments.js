@@ -216,7 +216,7 @@ $('#modal').on('show.bs.modal', function(event) {
     if (infocliente == null) {
         console.log(infocliente);
     }else {
-
+        console.log('test');
     }
 
     modal.find('.modal-title').text('Responsabilidade de ' + button.data('nome') + ' - ' + button.data('fase') + ' (Visualização)');
