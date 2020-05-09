@@ -3,33 +3,6 @@
         color: #6A74C9
     }
 
-
-    textarea, input[type="text"],input[type="date"],input[type="email"]{
-        border: none;
-        resize: none;
-        padding: 7px 12px;
-        border-radius: 5px;
-        background-color: #EAEAEA;
-        color: #747474;
-        font-weight: 600;
-
-    }
-
-    .select_style{
-        border: none;
-        resize: none;
-        padding: 7px 12px;
-        border-radius: 5px;
-        background-color: #EAEAEA;
-        color: #747474;
-        font-weight: 600;
-    }
-
-    label {
-    color: #747474;
-    font-weight: 700;
-}
-
 </style>
 
 
@@ -286,16 +259,16 @@
 
                     <div class="row">
                         <div class="col">
-                            {{-- INUPUT numPassaporte --}}
-                            <label for="numPassaporte">Número do passaporte:</label><br>
-                            <input type="text" class="form-control" name="numPassaporte" id="numPassaporte"
-                                value="{{$infosPassaporte->numPassaporte ?? null }}" required maxlength="20" placeholder="Número do passaporte">
+                            {{-- INUPUT numPassaport --}}
+                            <label for="numPassaport">Número do passaporte:</label><br>
+                            <input type="text" class="form-control" name="numPassaport" id="numPassaport"
+                                value="{{$infosPassaport->numPassaport ?? null }}" required maxlength="20" placeholder="Número do passaporte">
                         </div>
                         <div class="col">
                             {{-- INUPUT dataValidPP --}}
                             <label for="dataValidPP">Data de validade do passaporte:</label><br>
                             <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                                value="{{$infosPassaporte->dataValidPP ?? null }}" required>
+                                value="{{$infosPassaport->dataValidPP ?? null }}" required>
                         </div>
                     </div>
 
@@ -303,11 +276,11 @@
 
                     <div class="row">
                         <div class="col">
-                            {{-- INUPUT passaportePaisEmi --}}
-                            <label for="passaportePaisEmi">Pais emissor do passaporte:</label><br>
-                            <input type="hidden" id="hidden_passaportePaisEmi"
-                                value="{{$infosPassaporte->passaportePaisEmi ?? null }}">
-                            <select id="passaportePaisEmi" name="passaportePaisEmi" style="width:100%" class="form-control select_style" required>
+                            {{-- INUPUT passaportPaisEmi --}}
+                            <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
+                            <input type="hidden" id="hidden_passaportPaisEmi"
+                                value="{{$infosPassaport->passaportPaisEmi ?? null }}">
+                            <select id="passaportPaisEmi" name="passaportPaisEmi" style="width:100%" class="form-control select_style" required>
                                 @include('clients.partials.countries');
                             </select>
                         </div>
@@ -315,7 +288,7 @@
                             {{-- INUPUT localEmissaoPP --}}
                             <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                             <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                                value="{{$infosPassaporte->localEmissaoPP ?? null }}" maxlength="30" required placeholder="Insira o local de emissão">
+                                value="{{$infosPassaport->localEmissaoPP ?? null }}" maxlength="30" required placeholder="Insira o local de emissão">
                         </div>
                     </div>
 
@@ -324,29 +297,29 @@
 
 
                 <div class="col text-center" style="max-width:380px;min-width:298px;">
-                    {{-- INPUT IMG Passaporte --}}
+                    {{-- INPUT IMG PASSAPORTE --}}
                     <div>
-                        <label for="img_Passaporte">Passaporte:</label>
-                        <input type='file' id="img_Passaporte" name="img_Passaporte" style="display:none"
+                        <label for="img_Passaport">Passaporte:</label>
+                        <input type='file' id="img_Passaport" name="img_Passaport" style="display:none"
                             accept="application/pdf, image/*" />
                     </div>
 
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ( $client->img_Passaporte!=null)
+                        @if ( $client->img_Passaport!=null)
                         <a href="#" title="Clique adicionar o passaporte" id="passport_preview" class="name_link">
                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                            <div id="name_passaporte_file" class="text-muted">
-                                {{old('img_Passaporte',$client->img_Passaporte)}}
+                            <div id="name_passaport_file" class="text-muted">
+                                {{old('img_Passaport',$client->img_Passaport)}}
                             </div>
                         </a>
                         @else
                         <a style="display:none;cursor:pointer" class="name_link" title="Clique adicionar o passaporte"
                             id="passport_preview">
                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                            <div id="name_passaporte_file" class="text-muted">
-                                {{old('img_Passaporte',$client->img_Passaporte)}}
+                            <div id="name_passaport_file" class="text-muted">
+                                {{old('img_Passaport',$client->img_Passaport)}}
                             </div>
                         </a>
                         <i id="passport_preview_file" class="fas fa-plus-circle mt-2"
@@ -374,8 +347,8 @@
                         <option value="" selected hidden>Selecione nivel</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}} value="1">Secundário Incompleto</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}} value="2">Secundário completo</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}} value="4">Curso tecnologico</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='4'?"selected":""}} value="5">Estuda na universidade</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}} value="3">Curso tecnologico</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='4'?"selected":""}} value="4">Estuda na universidade</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='5'?"selected":""}} value="5">Licenciado</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='6'?"selected":""}} value="6">Mestrado</option>
                     </select>

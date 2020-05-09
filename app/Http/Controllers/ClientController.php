@@ -136,7 +136,7 @@ class ClientController extends Controller
     /* Criação de documentos Pessoais */
 
         /* Documento de identificação */
-        $doc_id= new DocPessoal;
+        $doc_id = new DocPessoal;
         $doc_id->idCliente = $client->idCliente;
         $doc_id->tipo="Cartão Cidadão";
 
@@ -159,13 +159,11 @@ class ClientController extends Controller
         }
 
         /* Passaporte */
-        $passaporte= new DocPessoal;
-
+        $passaporte = new DocPessoal;
         $passaporte->idCliente = $client->idCliente;
         $passaporte->tipo="Passaporte";
         $passaporte->info= $passaporteInfoJSON;
         $passaporte->dataValidade= $requestClient->dataValidPP;
-
 
 
         if ($requestClient->hasFile('img_Passaporte')) {
@@ -310,11 +308,16 @@ class ClientController extends Controller
 
         /* Documentos pessoais */
         $documentosPessoais = DocPessoal::where("idCliente","=",$client->idCliente)->get();
+        if ($documentosPessoais->isEmpty()) {
+            $documentosPessoais=null;
+        }
 
 
         /* Documentos académicos */
         $documentosAcademicos = DocAcademico::where("idCliente","=",$client->idCliente)->get();
-
+        if ($documentosAcademicos->isEmpty()) {
+            $documentosAcademicos=null;
+        }
 
         /* Lista de Documentos Necessários */
         $novosDocumentos = DocNecessario::all();

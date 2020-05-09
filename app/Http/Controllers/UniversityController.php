@@ -130,7 +130,7 @@ class UniversityController extends Controller
         $university->updated_at == date("Y-m-d", $t);
 
         /* Update das slugs */
-        $university->slug = ExtraFunctionsController::post_slug($university->nome);
+        $university->slug =post_slug($university->nome);
 
         $university->save();
 
