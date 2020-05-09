@@ -28,32 +28,15 @@ class UpdateClienteRequest extends FormRequest
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',
-            'email' => 'required',
-            'telefone1' => 'nullable',
-            'telefone2' => 'nullable',
-            'dataNasc' => 'nullable',
             'paisNaturalidade' => 'nullable',
-            'morada' => 'nullable',
-            'cidade' => 'nullable',
-            'moradaResidencia' => 'nullable',
-
-
-            'nomePai' => 'nullable',
-            'telefonePai'  => 'nullable',
-            'emailPai' => 'nullable',
-            'nomeMae' => 'nullable',
-            'telefoneMae' => 'nullable',
-            'emailMae' => 'nullable',
+            'dataNasc' => 'nullable',
+            'obsPessoais' => 'nullable',
             'fotografia' => 'nullable',
-            'NIF' => 'nullable',
-            'IBAN' => 'nullable',
-            'nivEstudoAtual' => 'nullable',
-            'nomeInstituicaoOrigem' => 'nullable',
-            'cidadeInstituicaoOrigem' => 'nullable',
 
             'num_docOficial'=> 'required',
-            'validade_docOficial'=> 'nullable', /* data de validade */
+            'validade_docOficial'=> 'nullable', /* data de validade do CC */
             'img_docOficial'=> 'nullable',
+            'NIF' => 'nullable',
 
             'num_passaporte'=> 'required',
             'dataValidPP'=> 'nullable',
@@ -61,13 +44,27 @@ class UpdateClienteRequest extends FormRequest
             'localEmissaoPP'=> 'nullable',
             'img_Passaporte'=> 'nullable',
 
-
-            'img_docAcademico'=> 'nullable',
-            'info_docAcademico'=> 'nullable',
-
-            'obsPessoais' => 'nullable',
-            'obsFinanceiras' => 'nullable',
+            'nivEstudoAtual' => 'nullable',
+            'nomeInstituicaoOrigem' => 'nullable',
+            'cidadeInstituicaoOrigem' => 'nullable',
             'obsAcademicas' => 'nullable',
+
+            'telefone1' => 'nullable',
+            'telefone2' => 'nullable',
+            'email' => 'required',
+            'moradaResidencia' => 'nullable',
+            'morada' => 'nullable',
+            'cidade' => 'nullable',
+            'nomePai' => 'nullable',
+            'telefonePai'  => 'nullable',
+            'emailPai' => 'nullable',
+            'nomeMae' => 'nullable',
+            'telefoneMae' => 'nullable',
+            'emailMae' => 'nullable',
+
+
+            'IBAN' => 'nullable',
+            'obsFinanceiras' => 'nullable',
 
         ];
     }

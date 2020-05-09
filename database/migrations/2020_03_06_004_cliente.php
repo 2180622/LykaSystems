@@ -35,7 +35,7 @@ class Cliente extends Migration
             $table->string('fotografia',255)->nullable();
             $table->string('NIF',255)->unique()->default(null)->nullable();
             $table->string('IBAN',255)->nullable();
-            $table->integer('nivEstudoAtual')->default("0");
+            $table->integer('nivEstudoAtual')->default("0")->nullable();
             $table->string('nomeInstituicaoOrigem',255)->nullable();
             $table->string('cidadeInstituicaoOrigem',255)->nullable();
 
