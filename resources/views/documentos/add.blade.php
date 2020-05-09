@@ -95,8 +95,8 @@
                             <textarea name="observacoes" class="form-control" id="observacoes" rows="4" placeholder="Observações"></textarea>
                         </div>
                     </div>
-                @elseif(strtolower($tipo) == "passaport")
-                    <div class="row para-clone documento-passaport">
+                @elseif(strtolower($tipo) == "passaporte")
+                    <div class="row para-clone documento-passaporte">
                         <span class="num" style="display: none;">2</span>
 
                         <div class="col-md-6">
@@ -104,16 +104,16 @@
                             <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
                         </div>
                         <div class="col-md-6">
-                            <label for="numPassaport">Nº Passaport: </label>
-                            <input type="text" class="form-control" name="numPassaport" placeholder="Nº Passaport" autocomplete="off" required>
+                            <label for="numPassaporte">Nº Passaporte: </label>
+                            <input type="text" class="form-control" name="numPassaporte" placeholder="Nº Passaporte" autocomplete="off" required>
                         </div>
                         <div class="col-md-6">
                             <label for="dataValidPP">Data de validade: </label>
                             <input type="month" class="form-control" name="dataValidPP" value="" style="width:250px" required><br>
                         </div>
                         <div class="col-md-6">
-                            <label for="passaportPaisEmi">País de Emissão: </label>
-                            <input type="text" class="form-control" name="passaportPaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
+                            <label for="passaportePaisEmi">País de Emissão: </label>
+                            <input type="text" class="form-control" name="passaportePaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
                         </div>
                         <div class="col-md-6">
                             <label for="localEmissaoPP">Local de Emissão: </label>

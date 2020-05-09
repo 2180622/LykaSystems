@@ -74,9 +74,9 @@
         $('#paisNaturalidade').val(str_paisNaturalidade);
 
 
-        /* Definir passaportPaisEmi */
-        var str_passaportPaisEmi = $("#hidden_passaportPaisEmi").val();
-        $('#passaportPaisEmi').val(str_passaportPaisEmi);
+        /* Definir passaportePaisEmi */
+        var str_passaportePaisEmi = $("#hidden_passaportePaisEmi").val();
+        $('#passaportePaisEmi').val(str_passaportePaisEmi);
 
 
 
@@ -149,32 +149,32 @@
 
 
 
-        //Preview do PASSAPORTE +++++++++++++++
+        //Preview do Passaporte +++++++++++++++
 
         $('#passport_preview_file').on('click', function (e) {
             e.preventDefault();
-            $('#img_Passaport').trigger('click');
+            $('#img_Passaporte').trigger('click');
         });
 
         $('#passport_preview').on('click', function (e) {
             e.preventDefault();
-            $('#img_Passaport').trigger('click');
+            $('#img_Passaporte').trigger('click');
         });
 
-        function readPassaportURL(input) {
+        function readPassaporteURL(input) {
             if (input.files && input.files[0]) {
                 var passaporte = new FileReader();
 
                 passaporte.onload = function (e) {
-                    $('#name_passaport_file').text(input.files[0].name);
+                    $('#name_passaporte_file').text(input.files[0].name);
                 }
 
                 passaporte.readAsDataURL(input.files[0]);
             }
         }
 
-        $("#img_Passaport").change(function () {
-            readPassaportURL(this);
+        $("#img_Passaporte").change(function () {
+            readPassaporteURL(this);
             $('#passport_preview_file').hide();
             $('#passport_preview').show();
 
@@ -227,7 +227,7 @@
             $("#telefonePai").numbersOnly();
             $("#telefoneMae").numbersOnly();
             $("#num_docOficial").numbersOnly();
-            $("#numPassaport").numbersOnly();
+            $("#numPassaporte").numbersOnly();
             $("#IBAN").numbersOnly();
             $("#NIF").numbersOnly();
 
@@ -266,7 +266,7 @@
 
 
                             /* valida Campos dos documentos */
-                            if (($("#num_docOficial").val() == "") || ($("#numPassaport").val() == "") || ($("#dataValidPP").val() == "") || ($("#passaportPaisEmi").val() == "") || ($("#localEmissaoPP").val() == "")) {
+                            if (($("#num_docOficial").val() == "") || ($("#numPassaporte").val() == "") || ($("#dataValidPP").val() == "") || ($("#passaportePaisEmi").val() == "") || ($("#localEmissaoPP").val() == "")) {
                                 $("#wait_screen").hide();
                                 $("#documentation-tab").addClass("border-danger text-danger");
                                 $("#warning_msg").show();

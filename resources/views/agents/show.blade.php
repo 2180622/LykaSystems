@@ -216,7 +216,7 @@
             {{-- Clientes --}}
             <div class="tab-pane fade {{ $tipo_agent_atual == 'Subagente' ? 'show active' : '' }}" id="clients" role="tabpanel" aria-labelledby="clients-tab">
                 @if($clients)
-                <div class="row mt-3 mb-4">
+                <div class="row mx-1 p-3 border rounded bg-light">
                     <div class="col">
                         <span class="mr-2">Mostrar</span>
                         <select class="custom-select" id="records_per_page" style="width:80px">
@@ -236,7 +236,7 @@
                         </div>
                     </div>
                 </div>
-                <hr>
+                <br>
 
 
                 <div class="table-responsive " style="overflow:hidden">

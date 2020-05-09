@@ -24,7 +24,7 @@
               <div class="" id="tipopessoal">
                 <label for="">Documento Pessoal</label>
                 <select class="form-control" name="tipoPessoal">
-                  <option value="Passaport">Passaport</option>
+                  <option value="Passaporte">Passaporte</option>
                   <option value="Cartão Cidadão">Cartão de Cidadão</option>
                   <option value="Carta Condução">Carta de Condução</option>
                   <option value="Doc. Oficial">Documento Oficial</option>

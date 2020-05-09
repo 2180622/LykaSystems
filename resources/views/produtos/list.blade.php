@@ -126,8 +126,8 @@
                         {{-- numCCid --}}
                         <th class="align-middle">{{ $client->numCCid }}</th>
 
-                        {{-- numPassaport --}}
-                        <th class="align-middle">{{ $client->numPassaport }}</th>
+                        {{-- numPassaporte --}}
+                        <th class="align-middle">{{ $client->numPassaporte }}</th>
 
 
                         {{-- OPÇÔES --}}

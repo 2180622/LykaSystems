@@ -250,10 +250,10 @@
 
 
                 {{-- Lista de estudantes --}}
-                <div class="tab-pane fade" id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
+                <div class="tab-pane fade " id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
 
                     @if($clients)
-                    <div class="row mt-3 mb-4">
+                    <div class="row mx-1 p-3 border rounded bg-light">
                         <div class="col">
                             <span class="mr-2">Mostrar</span>
                             <select class="custom-select" id="records_per_page" style="width:80px">
@@ -273,8 +273,8 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
 
+                    <br>
 
                     <div class="table-responsive " style="overflow:hidden">
 

@@ -102,8 +102,8 @@
                             </textarea>
                         </div>
                     </div>
-                @elseif(strtolower($tipo) == "passaport")
-                    <div class="row para-clone documento-passaport">
+                @elseif(strtolower($tipo) == "passaporte")
+                    <div class="row para-clone documento-passaporte">
                         <span class="num" style="display: none;">2</span>
 
                         <div class="col-md-6">
@@ -111,16 +111,16 @@
                             <input value="{{old('idConta',$documento->img_doc)}}" type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*"/>
                         </div>
                         <div class="col-md-6">
-                            <label for="numPassaport">Nº Passaport: </label>
-                            <input value="{{old('idConta',$documento->numPassaport)}}" type="text" class="form-control" name="numPassaport" placeholder="Nº Passaport" autocomplete="off" required>
+                            <label for="numPassaporte">Nº Passaporte: </label>
+                            <input value="{{old('idConta',$documento->numPassaporte)}}" type="text" class="form-control" name="numPassaporte" placeholder="Nº Passaporte" autocomplete="off" required>
                         </div>
                         <div class="col-md-6">
                             <label for="dataValidPP">Data de validade: </label>
                             <input value="{{old('idConta',$documento->dataValidPP)}}" type="month" class="form-control" name="dataValidPP" value="{{date('Y-m', strtotime($documento->dataValidade))}}" style="width:250px" required><br>
                         </div>
                         <div class="col-md-6">
-                            <label for="passaportPaisEmi">País de Emissão: </label>
-                            <input value="{{old('idConta',$documento->passaportPaisEmi)}}" type="text" class="form-control" name="passaportPaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
+                            <label for="passaportePaisEmi">País de Emissão: </label>
+                            <input value="{{old('idConta',$documento->passaportePaisEmi)}}" type="text" class="form-control" name="passaportePaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
                         </div>
                         <div class="col-md-6">
                             <label for="localEmissaoPP">Local de Emissão: </label>
@@ -153,7 +153,7 @@
                             @endforeach
                         </div>
                         <div>
-                            <button id="passaport-button" type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
+                            <button id="passaporte-button" type="button" onclick="addCampo($(this).closest('.para-clone'))" class="top-button">Adicionar campo</button>
                         </div>
                     </div>
                 @else

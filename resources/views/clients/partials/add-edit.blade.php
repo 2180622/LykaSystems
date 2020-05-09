@@ -39,15 +39,16 @@
     <div class="bg-white shadow-sm mb-4 " style="border-radius: 10px;">
 
         <div class="row">
-
-                <div class="col m-4">
-                    <div >
-                        <i class="fas fa-user-tie active mr-2 ml-4"></i><label for="agent_responsavel">Agente responsável: </label>
-                        <select class="select_style" id="agente_responsavel" name="agente_responsavel" style="min-width: 200px">
-                            <option>dasd</option>
-                            <option>dasd</option>
-                            <option>dasd</option>
-                            <option>dasd</option>
+                <div class="col m-4 pb-2">
+                    <div class="mx-2">
+                        <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente / Subagente responsável:</label>
+                        <select class="form-control select_style ml-2" id="idAgente" name="idAgente" style="min-width: 200px">
+                            <option selected value="0">(selecione um agente)</option>
+                            @if($agents)
+                                @foreach($agents as $agent)
+                                    <option value="{{$agent->idAgente}}"  {{old('idAgente', $client->idAgente ) == $agent->idAgente ? "selected" : "" }}   >{{$agent->nome}} {{$agent->apelido}} ({{$agent->pais}})</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
 
@@ -55,6 +56,11 @@
         </div>
 
     </div>
+@else
+
+    {{-- campo auxiliar --}}
+    <input type="hidden" id="idAgente" name="idAgente" value="{{old('idAgente', $client->idAgente )}}">
+
 @endif
 
 <div class="row nav nav-fill w-100 text-center mx-auto p-3">
@@ -280,16 +286,16 @@
 
                     <div class="row">
                         <div class="col">
-                            {{-- INUPUT numPassaport --}}
-                            <label for="numPassaport">Número do passaporte:</label><br>
-                            <input type="text" class="form-control" name="numPassaport" id="numPassaport"
-                                value="{{$infosPassaport->numPassaport ?? null }}" required maxlength="20" placeholder="Número do passaporte">
+                            {{-- INUPUT numPassaporte --}}
+                            <label for="numPassaporte">Número do passaporte:</label><br>
+                            <input type="text" class="form-control" name="numPassaporte" id="numPassaporte"
+                                value="{{$infosPassaporte->numPassaporte ?? null }}" required maxlength="20" placeholder="Número do passaporte">
                         </div>
                         <div class="col">
                             {{-- INUPUT dataValidPP --}}
                             <label for="dataValidPP">Data de validade do passaporte:</label><br>
                             <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                                value="{{$infosPassaport->dataValidPP ?? null }}" required>
+                                value="{{$infosPassaporte->dataValidPP ?? null }}" required>
                         </div>
                     </div>
 
@@ -297,11 +303,11 @@
 
                     <div class="row">
                         <div class="col">
-                            {{-- INUPUT passaportPaisEmi --}}
-                            <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
-                            <input type="hidden" id="hidden_passaportPaisEmi"
-                                value="{{$infosPassaport->passaportPaisEmi ?? null }}">
-                            <select id="passaportPaisEmi" name="passaportPaisEmi" style="width:100%" class="form-control select_style" required>
+                            {{-- INUPUT passaportePaisEmi --}}
+                            <label for="passaportePaisEmi">Pais emissor do passaporte:</label><br>
+                            <input type="hidden" id="hidden_passaportePaisEmi"
+                                value="{{$infosPassaporte->passaportePaisEmi ?? null }}">
+                            <select id="passaportePaisEmi" name="passaportePaisEmi" style="width:100%" class="form-control select_style" required>
                                 @include('clients.partials.countries');
                             </select>
                         </div>
@@ -309,7 +315,7 @@
                             {{-- INUPUT localEmissaoPP --}}
                             <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                             <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                                value="{{$infosPassaport->localEmissaoPP ?? null }}" maxlength="30" required placeholder="Insira o local de emissão">
+                                value="{{$infosPassaporte->localEmissaoPP ?? null }}" maxlength="30" required placeholder="Insira o local de emissão">
                         </div>
                     </div>
 
@@ -318,29 +324,29 @@
 
 
                 <div class="col text-center" style="max-width:380px;min-width:298px;">
-                    {{-- INPUT IMG PASSAPORTE --}}
+                    {{-- INPUT IMG Passaporte --}}
                     <div>
-                        <label for="img_Passaport">Passaporte:</label>
-                        <input type='file' id="img_Passaport" name="img_Passaport" style="display:none"
+                        <label for="img_Passaporte">Passaporte:</label>
+                        <input type='file' id="img_Passaporte" name="img_Passaporte" style="display:none"
                             accept="application/pdf, image/*" />
                     </div>
 
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ( $client->img_Passaport!=null)
+                        @if ( $client->img_Passaporte!=null)
                         <a href="#" title="Clique adicionar o passaporte" id="passport_preview" class="name_link">
                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                            <div id="name_passaport_file" class="text-muted">
-                                {{old('img_Passaport',$client->img_Passaport)}}
+                            <div id="name_passaporte_file" class="text-muted">
+                                {{old('img_Passaporte',$client->img_Passaporte)}}
                             </div>
                         </a>
                         @else
                         <a style="display:none;cursor:pointer" class="name_link" title="Clique adicionar o passaporte"
                             id="passport_preview">
                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                            <div id="name_passaport_file" class="text-muted">
-                                {{old('img_Passaport',$client->img_Passaport)}}
+                            <div id="name_passaporte_file" class="text-muted">
+                                {{old('img_Passaporte',$client->img_Passaporte)}}
                             </div>
                         </a>
                         <i id="passport_preview_file" class="fas fa-plus-circle mt-2"
@@ -366,12 +372,12 @@
                     <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
                     <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" required>
                         <option value="" selected hidden>Selecione nivel</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}}>Secundário Incompleto</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}}>Secundário completo</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}}>Curso tecnologico</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='4'?"selected":""}}>Estuda na universidade</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='5'?"selected":""}}>Licenciado</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='6'?"selected":""}}>Mestrado</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}} value="1">Secundário Incompleto</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}} value="2">Secundário completo</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}} value="4">Curso tecnologico</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='4'?"selected":""}} value="5">Estuda na universidade</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='5'?"selected":""}} value="5">Licenciado</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='6'?"selected":""}} value="6">Mestrado</option>
                     </select>
 
                     <br>

@@ -103,7 +103,7 @@ class AgenteController extends Controller
         $agent->create_at == date("Y-m-d",$t);
 
         /* Slugs */
-        $agent->slug = ExtraFunctionsController::post_slug($agent->nome.' '.$agent->apelido);
+        $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
 
         $agent->save();
 
@@ -313,7 +313,7 @@ class AgenteController extends Controller
 
 
         /* Update das slugs */
-        $agent->slug = ExtraFunctionsController::post_slug($agent->nome.' '.$agent->apelido);
+        $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
 
 
         /* update do user->email */
