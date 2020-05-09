@@ -402,11 +402,11 @@
                         <div class="text-secondary mb-2">Ficheiros carregados:</div>
                         @if ($documentosAcademicos!=null)
                             <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
-                                @foreach ($documentosAcademicos as $docpessoal)
+                                @foreach ($documentosAcademicos as $docAcademico)
                                     <li class="my-3">
                                         <i class="far fa-address-card mr-2"></i>
                                         <a class="name_link" target="_blank"
-                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
                                     </li>
                                 @endforeach
 
