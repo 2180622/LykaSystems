@@ -149,38 +149,37 @@
 
 
 
-        //Preview do Passaporte +++++++++++++++
+        //Preview do Passporte+++++++++++++++
 
-        /*         $('#passport_preview_file').on('click', function (e) {
-                    e.preventDefault();
-                    $('#img_Passaporte').trigger('click');
-                });
+        $('#passport_preview_file').on('click', function (e) {
+            e.preventDefault();
+            $('#img_Passaporte').trigger('click');
+        });
 
-                $('#passport_preview').on('click', function (e) {
-                    e.preventDefault();
-                    $('#img_Passaporte').trigger('click');
-                });
+        $('#passport_preview').on('click', function (e) {
+            e.preventDefault();
+            $('#img_Passaporte').trigger('click');
+        });
 
-                function readPassaporteURL(input) {
-                    if (input.files && input.files[0]) {
-                        var passaporte = new FileReader();
 
-                        passaporte.onload = function (e) {
-                            $('#name_passaporte_file').text(input.files[0].name);
-                        }
-
-                        passaporte.readAsDataURL(input.files[0]);
-                    }
+        function readPassaporteImgURL(input) {
+            if (input.files && input.files[0]) {
+                var passaporte = new FileReader();
+                passaporte.onload = function (e) {
+                    passaporte.fileName = img_Passaporte.name;
+                    $('#name_passaporte_file').text(input.files[0].name);
                 }
 
-                $("#img_Passaporte").change(function () {
-                    readPassaporteURL(this);
-                    $('#passport_preview_file').hide();
-                    $('#passport_preview').show();
+                passaporte.readAsDataURL(input.files[0]);
+            }
+        }
 
-                }); */
+        $("#img_Passaporte").change(function () {
+            readPassaporteImgURL(this);
+            $('#passport_preview_file').hide();
+            $('#passport_preview').show();
 
-
+        });
 
 
 

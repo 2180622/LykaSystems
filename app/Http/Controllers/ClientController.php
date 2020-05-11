@@ -375,6 +375,13 @@ class ClientController extends Controller
             ->first();
 
 
+            $passaporte = DocPessoal::
+            where ("idCliente","=",$client->idCliente)
+            ->where("tipo","=","Passaporte")
+            ->first();
+
+
+
         /* Dados do passaporte JSON: numPassaporte dataValidPP passaportePaisEmi localEmissaoPP */
 /*         $infosPassaporte =new stdClass(); */
 
@@ -388,7 +395,7 @@ class ClientController extends Controller
             Arr::set($passaporteInfo, 'localEmissaoPP', null);
         } */
 
-            return view('clients.edit', compact('client','agents','cartaoCidadao'));
+            return view('clients.edit', compact('client','agents','cartaoCidadao','passaporte'));
         }else{
             /* não tem permissões */
             abort (401);

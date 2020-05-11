@@ -224,7 +224,7 @@
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ( isset($cartaoCidadao) && $cartaoCidadao!=null )
+                        @if ($cartaoCidadao )
                         <a href="#" title="Clique para modificar o documento de identificação" id="doc_id_preview"
                             class="name_link">
                                 @if ($cartaoCidadao->imagem == null)
@@ -310,35 +310,46 @@
                 </div>
 
 
-
+                {{-- INPUT IMG PASSAPORTE --}}
                 <div class="col text-center" style="max-width:380px;min-width:298px;">
-                    {{-- INPUT IMG PASSAPORTE --}}
                     <div>
-                        <label for="img_Passaport">Passaporte:</label>
-                        <input type='file' id="img_Passaport" name="img_Passaport" style="display:none"
+                        <label for="img_Passaporte">Passaporte:</label>
+                        <input type='file' id="img_Passaporte" name="img_Passaporte" style="display:none"
                             accept="application/pdf, image/*" />
                     </div>
 
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ( $client->img_Passaport!=null)
-                        <a href="#" title="Clique adicionar o passaporte" id="passport_preview" class="name_link">
-                            <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                            <div id="name_passaport_file" class="text-muted">
-                                {{old('img_Passaport',$client->img_Passaport)}}
-                            </div>
-                        </a>
+                        @if ( $passaporte )
+                            <a href="#" title="Clique para modificar o documento do passaporte" id="passporte_preview"
+                                class="name_link">
+                                    @if ($passaporte->imagem == null)
+                                        <div class="text-danger">
+                                            <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                                            <div id="name_passaporte_file">
+                                            <div>Sem imagem do documento</div>
+                                        </div>
+                                    @else
+                                        <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                                        <div id="name_passaporte_file">
+                                        <div>{{$passaporte->imagem}}</div>
+                                    @endif
+
+                                </div>
+                            </a>
                         @else
-                        <a style="display:none;cursor:pointer" class="name_link" title="Clique adicionar o passaporte"
-                            id="passport_preview">
-                            <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                            <div id="name_passaport_file" class="text-muted">
-                                {{old('img_Passaport',$client->img_Passaport)}}
-                            </div>
-                        </a>
-                        <i id="passport_preview_file" class="fas fa-plus-circle mt-2"
-                            style="font-size:60px;cursor:pointer" title="Clique adicionar o passaporte"></i>
+                            <a style="display:none;cursor:pointer"
+                                title="Clique para adicionar o documento do passaporte" id="passport_preview"
+                                class="name_link">
+                                <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                                <div id="name_passaporte_file" class="text-muted">
+
+                                </div>
+                            </a>
+                            <i id="passport_preview_file" class="fas fa-plus-circle mt-2"
+                                style="font-size:60px;cursor:pointer"
+                                title="Clique para adicionar o documento do passaporte"></i>
                         @endif
 
                     </div>
