@@ -24,7 +24,7 @@ class StoreClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'idAgente' => 'nullable',
+            'idAgente' => 'required',
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',
@@ -33,12 +33,12 @@ class StoreClientRequest extends FormRequest
             'obsPessoais' => 'nullable',
             'fotografia' => 'nullable',
 
-            'num_docOficial'=> 'required|unique:Cliente',
+            'num_docOficial'=> 'nullable|unique:Cliente',
             'validade_docOficial'=> 'nullable', /* data de validade do CC */
             'img_docOficial'=> 'nullable',
             'NIF' => 'nullable',
 
-            'num_passaporte'=> 'required',
+            'num_passaporte'=> 'nullable',
             'dataValidPP'=> 'nullable',
             'passaportePaisEmi'=> 'nullable',
             'localEmissaoPP'=> 'nullable',

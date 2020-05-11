@@ -475,7 +475,12 @@
                         <div class="text-secondary mb-2" style="min-width: 256px">Morada de residência em Portugal:
                         </div>
                         <div class="border rounded bg-light p-3">
-                            <div>{{$client->moradaResidencia}}</div>
+                            @if ($client->moradaResidencia==null)
+                            <span class="text-muted"><small>(sem dados para mostrar)</small></span>
+                            @else
+                            {{$client->moradaResidencia}}
+                            @endif
+                            <div></div>
                         </div>
                         <br>
                     </div>

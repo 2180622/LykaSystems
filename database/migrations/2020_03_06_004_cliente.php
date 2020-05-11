@@ -17,9 +17,9 @@ class Cliente extends Migration
 
             $table->string('nome',255);
             $table->string('apelido',255);
-            $table->enum('genero',['F','M']);
+            $table->enum('genero',['F','M'])->default('M');
             $table->string('email',255)->unique();
-            $table->string('telefone1',255);
+            $table->string('telefone1',255)->nullable();
             $table->string('telefone2',255)->nullable();
             $table->date('dataNasc')->nullable();
             $table->string('paisNaturalidade',255)->nullable();
@@ -40,11 +40,11 @@ class Cliente extends Migration
             $table->string('cidadeInstituicaoOrigem',255)->nullable();
 
 
-            $table->string('num_docOficial',255)->unique();
+            $table->string('num_docOficial',255)->unique()->nullable();
 /*             $table->string('img_docOficial',255)->nullable(); */
             $table->longText('validade_docOficial')->nullable(); /* data de validade */
 /*             $table->string('img_Passaporte',255)->nullable(); */
-            $table->longText('num_passaporte')->nullable();
+            $table->longText('num_passaporte')->nullable()->nullable();
 /*             $table->string('img_docAcademico',255)->nullable(); */
 /*             $table->longText('info_docAcademico')->nullable(); */
 

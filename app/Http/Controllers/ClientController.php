@@ -127,27 +127,47 @@ class ClientController extends Controller
 
 
 
+        /* Criação de cliente */
+        if ($requestClient->hasFile('fotografia')) {
+            $photo = $requestClient->file('fotografia');
+            $profileImg = $client->idCliente .'.'. $photo->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $photo, $profileImg);
+            $client->fotografia = $profileImg;
+            $client->save();
+        }
+        $client->slug = post_slug($client->nome.' '.$client->apelido); /*slugs */
+        $client->create_at == date("Y-m-d",$t);
+        $client->save();
+
+
+
+
+
         /* Criação de documentos Pessoais */
 
-        /* Documento de identificação Pessoal */
-        $doc_id = new DocPessoal;
-        $doc_id->idCliente = $client->idCliente;
-        $doc_id->tipo="Cartão Cidadão";
-        $doc_id->idFase="1";
-        $doc_id->info= $requestClient->num_docOficial;
-        $doc_id->dataValidade= $requestClient->validade_docOficial;
+
+        /* Documento de identificação pessoal */
+        if ( $requestClient->num_docOficial != ""){
+            $doc_id = new DocPessoal;
+            $doc_id->idCliente = $client->idCliente;
+            $doc_id->tipo = "Cartão Cidadão";
+            $doc_id->idFase = null;
+            $doc_id->info = $requestClient->num_docOficial;
+            $doc_id->dataValidade = $requestClient->validade_docOficial;
 
 
-        /* Imagem do documento de identificação Pessoal*/
-        if ($requestClient->hasFile('img_docOficial')) {
-            $img_doc = $requestClient->file('img_docOficial');
-            $nome_imgDocOff = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
-            $doc_id->imagem = $nome_imgDocOff;
+            /* Imagem do documento de identificação Pessoal*/
+            if ($requestClient->hasFile('img_docOficial')) {
+                $img_doc = $requestClient->file('img_docOficial');
+                $nome_imgDocOff = $client->idCliente . '_CC.' . $img_doc->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
+                $doc_id->imagem = $nome_imgDocOff;
+            }
+            /* Guarda documento de identificação Pessoal */
+            $doc_id->create_at == date("Y-m-d",$t);
+            $doc_id->save();
         }
-        /* Guarda documento de identificação Pessoal */
-        $doc_id->create_at == date("Y-m-d",$t);
-        $doc_id->save();
+
 
 
 
@@ -191,19 +211,7 @@ class ClientController extends Controller
 
 
 
-        /* Criação de cliente */
-        if ($requestClient->hasFile('fotografia')) {
-            $photo = $requestClient->file('fotografia');
-            $profileImg = $client->idCliente .'.'. $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $photo, $profileImg);
-            $client->fotografia = $profileImg;
-            $doc_id->imagem = $profileImg;
-            $client->save();
-        }
 
-        $client->slug = post_slug($client->nome.' '.$client->apelido); /*slugs */
-        $client->create_at == date("Y-m-d",$t);
-        $client->save();
 
 
 

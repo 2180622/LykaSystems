@@ -135,7 +135,7 @@
                         {{-- INPUT dataNasc --}}
                         <label for="dataNasc">Data de nascimento:</label><br>
                         <input type="date" class="form-control" name="dataNasc" id="dataNasc"
-                            value="{{old('dataNasc',$client->dataNasc)}}" style="width:100%" class="form-control select_style" required>
+                            value="{{old('dataNasc',$client->dataNasc)}}" style="width:100%" class="form-control select_style" >
                         </div>
                     </div>
 
@@ -192,7 +192,7 @@
                         <div class="col" style="min-width:300px">
                             <label for="num_docOficial">Número de identificação pessoal:</label><br>
                             <input type="text" class="form-control" name="num_docOficial" id="num_docOficial"
-                                value="{{old('num_docOficial',$client->num_docOficial)}}" placeholder="Número de identificação pessoal" required maxlength="20">
+                                value="{{old('num_docOficial',$client->num_docOficial)}}" placeholder="Número de identificação pessoal"  maxlength="20">
                         </div>
                         <div class="col">
                             <label for="validade_docOficial">Data de validade:</label><br>
@@ -222,7 +222,7 @@
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if (isset($cartaoCidadao) && $cartaoCidadao!=null )
+                        @if ( isset($cartaoCidadao) && $cartaoCidadao!=null  || isset($cartaoCidadao) && $cartaoCidadao->imagem==null )
                         <a href="#" title="Clique para modificar o documento de identificação" id="doc_id_preview"
                             class="name_link">
                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
@@ -264,7 +264,7 @@
                             {{-- INUPUT num_passaporte --}}
                             <label for="num_passaporte">Número do passaporte:</label><br>
                             <input type="text" class="form-control" name="num_passaporte" id="num_passaporte"
-                                value="{{$client->num_passaporte}}" required maxlength="20" placeholder="Número do passaporte">
+                                value="{{$client->num_passaporte}}" maxlength="20" placeholder="Número do passaporte">
                         </div>
                         <div class="col">
                             {{-- INUPUT dataValidPP --}}
@@ -345,7 +345,7 @@
                 <div class="col mr-3">
                     {{-- INPUT nivEstudoAtual --}}
                     <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
-                    <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" required>
+                    <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" >
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='0'?"selected":""}} value="0" value="0" selected hidden>Selecione nivel</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}} value="1">Secundário Incompleto</option>
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}} value="2">Secundário completo</option>
@@ -360,7 +360,7 @@
                     {{-- INPUT nivEstudoAtual --}}
                     <label for="nomeInstituicaoOrigem">Nome da instituição de origem:</label><br>
                     <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem"
-                        value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}" required
+                        value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}"
                         maxlength="50" placeholder="Insira nome da instituição de origem">
 
                     <br>
@@ -368,7 +368,7 @@
                     {{-- Cidade de Origem  --}}
                     <label for="morada">Cidade da Instituição de Origem:</label><br>
                     <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="cidadeInstituicaoOrigem"
-                        value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}" required
+                        value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}"
                         maxlength="50" placeholder="Insira o nome da cidade da Instituição">
                     <br>
                 </div>
@@ -395,7 +395,7 @@
                 <div class="col">
                     <label for="telefone1">Telefone pessoal(1):</label><br>
                     <input type="text" class="form-control" name="telefone1" id="telefone1"
-                        value="{{old('telefone1',$client->telefone1)}}" maxlength="20" required maxlength="20" placeholder="Insira o número de telefone" required><br>
+                        value="{{old('telefone1',$client->telefone1)}}" maxlength="20"  maxlength="20" placeholder="Insira o número de telefone" ><br>
                 </div>
                 <div class="col">
                     <label for="telefone2">Telefone pessoal(2):</label><br>

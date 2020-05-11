@@ -226,128 +226,107 @@
             $("#telefone2").numbersOnly();
             $("#telefonePai").numbersOnly();
             $("#telefoneMae").numbersOnly();
-            /*             $("#num_docOficial").numbersOnly();
-                        $("#numPassaporte").numbersOnly();
-                        $("#IBAN").numbersOnly(); */
+            /*$("#num_docOficial").numbersOnly();
+            $("#numPassaporte").numbersOnly();
+            $("#IBAN").numbersOnly(); */
             $("#NIF").numbersOnly();
 
         }
 
 
-        /* VALIDAÇÃO DO FORMULÁRIO */
-
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-
-                        /* mostrar div de espera */
-                        $("#wait_screen").show();
 
 
+        $('#form_client').on('submit', function () {
+
+            /* mostrar div de espera */
+            $("#wait_screen").show();
+
+            var validated = true;
+
+            /* valida Campos da informação pessoal */
+
+            /* Campo do nome */
+            if (($("#nome").val() == "")) {
+                $("#wait_screen").hide();
+                $("#nome").addClass("is-invalid");
+                $("#pessoal-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#pessoal-tab").removeClass("border-danger text-danger");
+                $("#nome").removeClass("is-invalid");
+            }
 
 
-
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-
-
-
-                            /* valida Campos da informação pessoal */
-                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#genero").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#pessoal-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#pessoal-tab").removeClass("border-danger text-danger");
-                            }
+            /* Campo do apelido */
+            if (($("#apelido").val() == "")) {
+                $("#wait_screen").hide();
+                $("#apelido").addClass("is-invalid");
+                $("#pessoal-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#pessoal-tab").removeClass("border-danger text-danger");
+                $("#apelido").removeClass("is-invalid");
+            }
 
 
-                            /* valida Campos dos documentos */
-                            if (($("#num_docOficial").val() == "") || ($("#num_passaporte").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#documentation-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#documentation-tab").removeClass("border-danger text-danger");
-
-                            }
-
-                            /* valida Campos dos dados académicos */
-                            /*if (($("#nivEstudoAtual").val() == "") ) {
-                                $("#wait_screen").hide();
-                                $("#academicos-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#academicos-tab").removeClass("border-danger text-danger");
-                            } */
+            /* Campo do apelido */
+            if (($("#genero").val() == "")) {
+                $("#wait_screen").hide();
+                $("#genero").addClass("is-invalid");
+                $("#pessoal-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#pessoal-tab").removeClass("border-danger text-danger");
+                $("#genero").removeClass("is-invalid");
+            }
 
 
 
-                            /* valida Campos dos contactos */
-                            if (($("#telefone1").val() == "") || ($("#email").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#contacts-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#contacts-tab").removeClass("border-danger text-danger");
+            /* Campo do e-mail  */
+            if (($("#email").val() == "")) {
+                $("#wait_screen").hide();
+                $("#email").addClass("is-invalid");
+                $("#contacts-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#contacts-tab").removeClass("border-danger text-danger");
+                $("#email").removeClass("is-invalid");
 
-                            }
-
-
-                            /* valida Campos das moradas */
-                            /*if (($("#moradaResidencia").val() == "") || ($("#morada").val() == "") || ($("#cidade").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#contacts-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#contacts-tab").removeClass("border-danger text-danger");
-                            } */
+            }
 
 
 
-                            /* valida Campos das finanças */
-                            /*if ($("#IBAN").val() == "") {
-                                $("#wait_screen").hide();
-                                $("#financas-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#financas-tab").removeClass("border-danger text-danger");
-                            } */
-
-                            /* Valida se tem agente associado */
-
-                            if ( $('#idAgente').val() == "0"){
-                                $("#wait_screen").hide();
-                                $("#div_agente").addClass("border border-danger text-danger ");
-                                $("#idAgente").removeClass("is-valid");
-                                $("#idAgente").addClass("is-invalid");
-                                $("#idAgente").css("background-image", "none");
-                                $("#warning_msg").show();
-
-
-                            }else{
-                                $("#div_agente").removeClass("border-danger text-danger");
-                            }
+            /* Valida se tem agente associado */
+            if ($('#idAgente').val() == "0") {
+                $("#wait_screen").hide();
+                $("#idAgente").addClass("is-invalid");
+                $("#div_agente").addClass("border border-danger text-danger ");
+                $("#idAgente").removeClass("is-valid");
+                $("#idAgente").addClass("is-invalid");
+                $("#idAgente").css("background-image", "none");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#div_agente").removeClass("border-danger text-danger");
+                $("#idAgente").removeClass("is-invalid");
+            }
 
 
 
-                        }
-                        window.scrollTo(0, 0);
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
 
+            if (validated==true) {
+                return true;
+            } else {
+                $("#wait_screen").hide();
+                window.scrollTo(0, 0);
+                return false;
+            }
 
-
+        });
 
 
 
