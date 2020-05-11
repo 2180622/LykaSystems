@@ -69,41 +69,41 @@ class ExtraFunctionsController extends Controller
         switch ($user) {
           case 'clientes':
               if (($name && $surname) != null) {
-                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
               }elseif ($name != null && $surname == null) {
-                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
               }elseif ($name == null && $surname != null) {
-                  $result = Cliente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+                  $result = Cliente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
               }else {
-                  return response()->json('NOK', 500);
+                  return response()->json("nok", 500);
               }
             break;
 
           case 'agentes':
               if (($name && $surname) != null) {
-                  $result = Agente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+                  $result = Agente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
               }elseif ($name != null && $surname == null) {
-                  $result = Agente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+                  $result = Agente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
               }elseif ($name == null && $surname != null) {
-                  $result = Agente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+                  $result = Agente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
               }else {
-                  return response()->json('NOK', 500);
+                  return response()->json("nok", 500);
               }
             break;
 
           case 'universidades':
               if ($name != null) {
-                  $result = Universidade::where('nome', 'like', '%'.$name.'%')->select('nome', 'morada', 'telefone', 'email')->get();
+                  $result = Universidade::where('nome', 'like', '%'.$name.'%')->select('nome', 'morada', 'telefone', 'email', 'slug')->get();
               }else {
-                  return response()->json('NOK', 500);
+                  return response()->json("nok", 500);
               }
             break;
 
           case 'fornecedores':
               if ($name != null) {
-                  $result = Fornecedor::where('nome', 'like', '%'.$name.'%')->select('nome', 'morada', 'contacto')->get();
+                  $result = Fornecedor::where('nome', 'like', '%'.$name.'%')->select('nome', 'morada', 'contacto', 'slug')->get();
               }else {
-                  return response()->json('NOK', 500);
+                  return response()->json("nok", 500);
               }
             break;
         }
@@ -111,7 +111,7 @@ class ExtraFunctionsController extends Controller
         if (count($result)) {
             return response()->json($result, 200);
         }else {
-            return response()->json('Não foi encontrado nenhum contacto', 404);
+            return response()->json("nok", 404);
         }
     }
 }
