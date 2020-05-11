@@ -62,31 +62,56 @@ class ExtraFunctionsController extends Controller
     /* Procura de contactos */
     public function searchcontact(Request $request)
     {
-        $usertype = $request->input('users');
+        $user = $request->input('user');
         $name = $request->input('name');
+        $surname = $request->input('surname');
 
-        switch ($usertype) {
+        switch ($user) {
           case 'clientes':
-              $result = Cliente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->first();
+              if (($name && $surname) != null) {
+                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+              }elseif ($name != null && $surname == null) {
+                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+              }elseif ($name == null && $surname != null) {
+                  $result = Cliente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+              }else {
+                  return response()->json('NOK', 500);
+              }
             break;
 
           case 'agentes':
-              $result = Agente::all();
+              if (($name && $surname) != null) {
+                  $result = Agente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+              }elseif ($name != null && $surname == null) {
+                  $result = Agente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+              }elseif ($name == null && $surname != null) {
+                  $result = Agente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email')->get();
+              }else {
+                  return response()->json('NOK', 500);
+              }
             break;
 
           case 'universidades':
-              $result = Universidade::all();
+              if ($name != null) {
+                  $result = Universidade::where('nome', 'like', '%'.$name.'%')->select('nome', 'morada', 'telefone', 'email')->get();
+              }else {
+                  return response()->json('NOK', 500);
+              }
             break;
 
           case 'fornecedores':
-              $result = Fornecedor::all();
+              if ($name != null) {
+                  $result = Fornecedor::where('nome', 'like', '%'.$name.'%')->select('nome', 'morada', 'contacto')->get();
+              }else {
+                  return response()->json('NOK', 500);
+              }
             break;
         }
 
-        if ($result == null) {
-            return response()->json('NOK', 500);
-        }else {
+        if (count($result)) {
             return response()->json($result, 200);
+        }else {
+            return response()->json('Não foi encontrado nenhum contacto', 404);
         }
     }
 }

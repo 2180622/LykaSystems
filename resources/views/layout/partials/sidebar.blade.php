@@ -15,8 +15,8 @@
                 </div>
                 <form id="form-contact" method="POST">
                     <div class="modal-body" id="modal-body-contact">
-                        <div class="row">
-                            <div class="col-md-4">
+                        <div class="row" id="contact-row">
+                            <div class="col-md-3">
                                 <label for="user-type">Tipo de utilizador:</label>
                                 <br>
                                 <select id="user-type">
@@ -26,11 +26,6 @@
                                     <option value="universidades">Universidades</option>
                                     <option value="fornecedores">Fornecedores</option>
                                 </select>
-                            </div>
-                            <div class="col-md-8">
-                                <label for="name">Nome do utilizador:</label>
-                                <br>
-                                <input id="name" type="text" name="name" placeholder="Inserir nome do utilizador">
                             </div>
                         </div>
                     </div>
@@ -137,4 +132,4 @@
                         });
                     }
                 </script>
-              @endsection
+                @endsection

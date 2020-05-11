@@ -49,7 +49,6 @@
 
         </div>
     </div>
-    {{-- Mensagem de carregamento / processamento --}}
     <!-- Structure and Navigation -->
     <div class="container-fluid ">
         <div class="row" style="min-height:100vh">
@@ -83,6 +82,40 @@
     @include('layout.partials.footer')
 
     <script type="text/javascript">
+        $("#user-type").change(function() {
+            value = $("#user-type").find(":selected").val();
+
+            switch (value) {
+                case "clientes":
+                    $("#first-div").remove();
+                    $("#second-div").remove();
+                    input = "<div class='col-md-4' id='first-div'><label for='name'>Nome do cliente:</label><br><input id='name' type='text' name='name' placeholder='Inserir nome do cliente'></div><div class='col-md-4' id='second-div'><label for='surname'>Apelido do cliente:</label><br><input id='surname' type='text' name='surname' placeholder='Inserir apelido do cliente'></div>";
+                    $("#contact-row").append(input);
+                    break;
+
+                case "agentes":
+                    $("#first-div").remove();
+                    $("#second-div").remove();
+                    input = "<div class='col-md-4' id='first-div'><label for='name'>Nome do agente:</label><br><input id='name' type='text' name='name' placeholder='Inserir nome do agente'></div><div class='col-md-4' id='second-div'><label for='surname'>Apelido do agente:</label><br><input id='surname' type='text' name='surname' placeholder='Inserir apelido do agente'></div>";
+                    $("#contact-row").append(input);
+                    break;
+
+                case "universidades":
+                    $("#first-div").remove();
+                    $("#second-div").remove();
+                    input = "<div class='col-md-4' id='first-div'><label for='name'>Nome da universidade:</label><br><input id='name' type='text' name='name' placeholder='Inserir nome da universidade'></div>";
+                    $("#contact-row").append(input);
+                    break;
+
+                case "fornecedores":
+                    $("#first-div").remove();
+                    $("#second-div").remove();
+                    input = "<div class='col-md-4' id='first-div'><label for='name'>Nome do fornecedor:</label><br><input id='name' type='text' name='name' placeholder='Inserir nome do fornecedor'></div>";
+                    $("#contact-row").append(input);
+                    break;
+            }
+        });
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': "{{csrf_token()}}"
@@ -92,8 +125,9 @@
         $('#form-contact').submit(function(event) {
             event.preventDefault();
             info = {
-                users: $("#user-type").find(":selected").val(),
-                name: $("#name").val()
+                user: $("#user-type").find(":selected").val(),
+                name: $("#name").val(),
+                surname: $("#surname").val()
             };
             $.ajax({
                 type: "post",
@@ -101,6 +135,7 @@
                 context: this,
                 data: info,
                 success: function(data) {
+                    // users = JSON.parse(data);
                     console.log(data);
                 },
                 error: function() {
