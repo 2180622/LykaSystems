@@ -133,7 +133,7 @@ class AgenteController extends Controller
 
         $user->tipo = "agente";
         $user->idAgente = $agent->idAgente;
-        $user->slug = ExtraFunctionsController::post_slug($agent->nome.' '.$agent->apelido);
+        $user->slug = post_slug($agent->nome.' '.$agent->apelido);
         $user->auth_key = strtoupper(random_str(5));
         $password = random_str(64);
         $user->password = Hash::make($password);

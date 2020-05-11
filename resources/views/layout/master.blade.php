@@ -37,7 +37,7 @@
 <body>
 
     {{-- Mensagem de carregamento / processamento --}}
-    <div id="wait_screen" style="display:none; position:absolute; top:0; left:0; width:100% ; height:100%; background-color:black; opacity:0.7;z-index:999;">
+    <div id="wait_screen" style="display:none; position:fixed; top:0; left:0; width:100% ; height:100%; background-color:black; opacity:0.7;z-index:999;">
         <div class="row" style="width: 100%; height:100%">
 
             <div class="col my-auto mx-auto text-center text-white">
@@ -50,6 +50,9 @@
 
         </div>
     </div>
+
+
+
     <!-- Structure and Navigation -->
     <div class="container-fluid ">
         <div class="row" style="min-height:100vh">

@@ -106,15 +106,28 @@ class DocPessoalController extends Controller
 
 
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  \App\Cliente  $client
-    * @return \Illuminate\Http\Response
-    */
-    public function show(DocPessoal $documento)
+    public function verify(DocPessoal $documento)
     {
-        return view('documentos.show',compact('documento'));
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)){
+            $infoDoc = (array)json_decode($documento->info);
+            $infoKeys = array_keys($infoDoc);
+            $tipoPAT = 'Pessoal';
+            $tipo = $documento->tipo;
+            return view('documentos.verify',compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
+        }else{
+            return redirect()->route('produtos.show',$documento->fase->produto);
+        }
+    }
+
+
+
+    public function verifica(DocPessoal $documento)
+    {
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)){
+            $documento->verificacao = true;
+            $documento->save();
+        }
+        return redirect()->route('produtos.show',$documento->fase->produto);
     }
 
 
