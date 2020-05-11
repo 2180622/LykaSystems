@@ -237,6 +237,22 @@
                 <div class="row mt-2 pl-2 ">
 
                     <div class="col mr-3">
+                        <div class="text-secondary mb-2">Documento de identificação pessoal:</div>
+
+                        <div class="border rounded bg-light p-3">
+                            {{-- CC IDENTIFICAÇÃO --}}
+                            <div><span class="text-secondary">Número de identificação pessoal:</span>
+                                {{$client->num_docOficial}}
+                            </div>
+                            <br>
+                            <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}
+                            </div>
+                            <br>
+                            <div><span class="text-secondary">Data de validade:</span> {{$client->validade_docOficial}}
+                            </div>
+                        </div>
+
+                        <br><br>
 
                         <div class="text-secondary mb-2">Passaporte:</div>
 
@@ -260,23 +276,6 @@
 
                         </div>
 
-                        <br><br>
-
-                        <div class="text-secondary mb-2">Documento de identificação pessoal:</div>
-
-                        <div class="border rounded bg-light p-3">
-                            {{-- CC IDENTIFICAÇÃO --}}
-                            <div><span class="text-secondary">Número de identificação pessoal:</span>
-                                {{$client->num_docOficial}}
-                            </div>
-                            <br>
-                            <div><span class="text-secondary">Número de identificação fiscal:</span> {{$client->NIF}}
-                            </div>
-                            <br>
-                            <div><span class="text-secondary">Data de validade:</span> {{$client->validade_docOficial}}
-                            </div>
-                        </div>
-
                         <br>
 
 
@@ -289,9 +288,14 @@
                             <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                                 @foreach ($documentosPessoais as $docpessoal)
                                     <li class="my-3">
-                                        <i class="far fa-address-card mr-2"></i>
-                                        <a class="name_link" target="_blank"
-                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+
+                                        @if ($docpessoal->imagem != null)
+                                            <i class="far fa-address-card mr-2"></i>
+                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+                                        @else
+                                            <i class="far fa-address-card mr-2"></i>{{$docpessoal->tipo}} <span class="text-danger">(sem imagem)</span>
+                                        @endif
+
                                     </li>
                                 @endforeach
 

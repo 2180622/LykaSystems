@@ -211,6 +211,8 @@
                 </div>
 
 
+
+
                 {{-- INPUT IMG DOCUMENTO identificação --}}
                 <div class="col text-center" style="max-width:380px;min-width:298px;">
                     <div>
@@ -222,12 +224,21 @@
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ( isset($cartaoCidadao) && $cartaoCidadao!=null  || isset($cartaoCidadao) && $cartaoCidadao->imagem==null )
+                        @if ( isset($cartaoCidadao) && $cartaoCidadao!=null )
                         <a href="#" title="Clique para modificar o documento de identificação" id="doc_id_preview"
                             class="name_link">
-                            <i class="far fa-id-card mt-2" style="font-size:50px"></i>
-                            <div id="name_doc_id_file" class="text-muted">
-                                {{$cartaoCidadao->imagem}}
+                                @if ($cartaoCidadao->imagem == null)
+                                    <div class="text-danger">
+                                        <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                                        <div id="name_doc_id_file">
+                                        <div>Sem imagem do documento</div>
+                                    </div>
+                                @else
+                                    <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                                    <div id="name_doc_id_file">
+                                    <div>{{$cartaoCidadao->imagem}}</div>
+                                @endif
+
                             </div>
                         </a>
                         @else
@@ -248,6 +259,8 @@
                     <small class="text-muted">(clique para mudar)</small>
 
                 </div>
+
+                
 
             </div>
 

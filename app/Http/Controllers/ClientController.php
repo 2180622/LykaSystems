@@ -213,12 +213,6 @@ class ClientController extends Controller
 
 
 
-
-
-
-
-
-
         /* Criação de utilizador */
 
         $user->tipo = "cliente";
@@ -269,6 +263,13 @@ class ClientController extends Controller
             }
 
         }
+
+
+        /* AGENTE RESPONSAVEL   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+        $agente = Agente::
+        where("idAgente","=",$client->idAgente)
+        ->first();
+
 
         /* Agentes associados */
         $agents = Agente::
