@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 {{-- Titulo da Página --}}
-@section('title', 'Edição de um fornecedor')
+@section('title', 'Edição de um documento')
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')

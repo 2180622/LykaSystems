@@ -12,6 +12,7 @@ use App\Responsabilidade;
 use App\Universidade;
 use App\RelFornResp;
 use App\DocNecessario;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -217,8 +218,8 @@ class ProdutoController extends Controller
     public function show(Produto $produto)
     {
         $Fases = $produto->fase;
-
-        return view('produtos.show',compact("produto",'Fases'));
+        $Today = (new DateTime)->format('Y-m-d');
+        return view('produtos.show',compact("produto",'Fases','Today'));
     }
 
 

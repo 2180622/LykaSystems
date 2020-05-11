@@ -107,6 +107,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::post('/documento-pessoal/store/{fase}/{docnecessario}', 'DocPessoalController@store')->name('documento-pessoal.store');
     Route::get('/documento-pessoal/{documento}/editar', 'DocPessoalController@edit')->name('documento-pessoal.edit');
     Route::put('/documento-pessoal/{documento}/update', 'DocPessoalController@update')->name('documento-pessoal.update');
+    Route::get('/documento-pessoal/{documento}/verifica', 'DocPessoalController@verify')->name('documento-pessoal.verify');
+    Route::put('/documento-pessoal/{documento}/verify', 'DocPessoalController@verifica')->name('documento-pessoal.verifica');
     Route::resource('/documento-pessoal', 'DocPessoalController')->only(['destroy','show']);
 
     /* Documentos Academicos */
@@ -114,6 +116,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::post('/documento-academico/store/{fase}/{docnecessario}', 'DocAcademicoController@store')->name('documento-academico.store');
     Route::get('/documento-academico/{documento}/editar', 'DocAcademicoController@edit')->name('documento-academico.edit');
     Route::put('/documento-academico/{documento}/update', 'DocAcademicoController@update')->name('documento-academico.update');
+    Route::get('/documento-academico/{documento}/verifica', 'DocAcademicoController@verify')->name('documento-academico.verify');
+    Route::put('/documento-academico/{documento}/verify', 'DocAcademicoController@verifica')->name('documento-academico.verifica');
     Route::resource('/documento-academico', 'DocAcademicoController')->only(['destroy','show']);
 
     /* Documentos Transações */

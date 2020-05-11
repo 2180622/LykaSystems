@@ -93,19 +93,29 @@ class DocAcademicoController extends Controller
 
 
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  \App\Cliente  $client
-    * @return \Illuminate\Http\Response
-    */
-    public function show(DocAcademico $documento)
+    public function verify(DocAcademico $documento)
     {
-        return view('documentos.show',compact('documento'));
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)){
+            $infoDoc = (array)json_decode($documento->info);
+            $infoKeys = array_keys($infoDoc);
+            $tipoPAT = 'Academico';
+            $tipo = $documento->tipo;
+            return view('documentos.verify',compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
+        }else{
+            return redirect()->route('produtos.show',$documento->fase->produto);
+        }
     }
 
 
 
+    public function verifica(DocAcademico $documento)
+    {
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)){
+            $documento->verificacao = true;
+            $documento->save();
+        }
+        return redirect()->route('produtos.show',$documento->fase->produto);
+    }
 
 
 

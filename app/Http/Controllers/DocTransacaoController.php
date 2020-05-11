@@ -21,7 +21,7 @@ class DocTransacaoController extends Controller
     */
     public function create(Fase $fase)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)/* || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)*/){
             
             $documento = new DocTransacao;
             $tipoPAT = 'Transacao';
@@ -90,26 +90,6 @@ class DocTransacaoController extends Controller
 
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\Cliente  $client
-    * @return \Illuminate\Http\Response
-    */
-    public function show(DocTransacao $documento)
-    {
-
-        return view('documentos.show',compact('documento'));
-    }
-
-
-
-
-
-
-
-
-
-    /**
     * Show the form for editing the specified resource.
     *
     * @param  \App\Cliente  $client
@@ -117,7 +97,7 @@ class DocTransacaoController extends Controller
     */
     public function edit(DocTransacao $documento)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)/* || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)*/){
 
             $tipoPAT = 'Transacao';
             $tipo = 'Transacao';
@@ -141,7 +121,7 @@ class DocTransacaoController extends Controller
 
     public function update(UpdateDocumentoRequest $request, DocTransacao $documento)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)/* || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)*/){
             
             $fields = $request->all();
             $documento->descricao=$fields['descricao'];
