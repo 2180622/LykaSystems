@@ -1,25 +1,85 @@
+<style media="screen">
+    select,
+    input {
+        width: 100%;
+        border: none;
+        color: #747474;
+        font-weight: 600;
+        appearance: none;
+        padding: 7px 12px;
+        border-radius: 5px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        background-color: #EAEAEA;
+        transition: 0.3s ease-in-out;
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    select:focus,
+    input:focus {
+        outline: 0;
+        color: #495057;
+        border-color: #80bdff;
+        background-color: #fff;
+        box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
+    }
+
+    #error {
+        color: #e3342f;
+        font-size: 10pt;
+        display: inherit;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .charge-div {
+        margin-top: 20px;
+        padding: 12px 10px;
+        border-radius: 10px;
+        background-color: rgb(234, 234, 234);
+    }
+
+    .white-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+    .white-circle img {
+        border-radius: 50%;
+    }
+</style>
+
 <div class="container-fluid " style="font-size:14px; height:70%">
 
     <div class="text-center" style="margin-top:26px;">
-        <a href="#" data-toggle="modal" data-target="#modalContacts" class="top-button-contact">procurar contacto</a>
+        <a href="#" class="top-button-contact">procurar contacto</a>
     </div>
 
     <div class="modal fade bd-example-modal-lg" id="modalContacts" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="padding-bottom:0px;">
                     <h5 class="modal-title text-center" id="modalLabel">Procura de contactos</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form-contact" method="POST">
+                <form id="form-contact" method="POST" class="mt-2">
                     <div class="modal-body" id="modal-body-contact">
                         <div class="row" id="contact-row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="user-type">Tipo de utilizador:</label>
                                 <br>
-                                <select id="user-type">
+                                <select id="user-type" name="usertype">
                                     <option disabled hidden selected>Escolher tipo de utilizador</option>
                                     <option value="clientes">Clientes</option>
                                     <option value="agentes">Agentes</option>

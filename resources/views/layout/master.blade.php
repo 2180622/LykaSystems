@@ -21,7 +21,8 @@
     <!-- CSS Link -->
     <link href="{{asset('/css/master.css')}}" rel="stylesheet">
 
-    <script src="https://unpkg.com/feather-icons"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
 
     @yield('styleLinks')
 
@@ -83,8 +84,8 @@
 
     <script type="text/javascript">
         $("#user-type").change(function() {
+            $("#error").remove();
             value = $("#user-type").find(":selected").val();
-
             switch (value) {
                 case "clientes":
                     $("#first-div").remove();
@@ -113,7 +114,22 @@
                     input = "<div class='col-md-4' id='first-div'><label for='name'>Nome do fornecedor:</label><br><input id='name' type='text' name='name' placeholder='Inserir nome do fornecedor'></div>";
                     $("#contact-row").append(input);
                     break;
+
+                default:
+                    $("#first-div").remove();
+                    $("#second-div").remove();
+                    break;
             }
+        });
+
+        $(".top-button-contact").click(function(event){
+            event.preventDefault();
+            $("#error").remove();
+            $("#first-div").remove();
+            $("#second-div").remove();
+            $("#length").remove();
+            $("#prepend-div").remove();
+            $("#modalContacts").modal("show");
         });
 
         $.ajaxSetup({
@@ -135,11 +151,44 @@
                 context: this,
                 data: info,
                 success: function(data) {
-                    // users = JSON.parse(data);
-                    console.log(data);
+                    $("#error").remove();
+                    $("#length").remove();
+
+                    if (data.length == 1) {
+                        length = "<div class='mt-4' id='length'><p>Foi encontrado "+data.length+" contacto no sistema.</p></div>";
+                    }else {
+                        length = "<div class='mt-4' id='length'><p>Foram encontrados "+data.length+" contactos no sistema.</p></div>";
+                    }
+
+                    div = "<div class='container mt-2' id='prepend-div'></div>";
+                    $("#modal-body-contact").append(div);
+
+                    $("#prepend-div").before(length);
+
+                    user = $("#user-type").find(":selected").val();
+
+
+
+                    for (var i = 0; i < data.length; i++) {
+                        html = "<a href='/clients/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+"</p></div><div class='col-md-2 align-self-center'><p class='text-truncate'>hey</p></div><div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate'>hey</p></div><div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate'>hey</p></div></div></a>";
+                        $("#prepend-div").append(html);
+                    }
+
                 },
-                error: function() {
-                    console.log('NOK');
+                error: function(error) {
+                    if (error.status == 500) {
+                        $("#error").remove();
+                        $("#length").remove();
+                        $("#prepend-div").remove();
+                        msg = "<strong id='error'>Preencha os campos disponíveis para realizar uma procura.</strong>";
+                        $("#modal-body-contact").prepend(msg);
+                    }else {
+                        $("#error").remove();
+                        $("#length").remove();
+                        $("#prepend-div").remove();
+                        msg = "<strong id='error'>Não foi encontrado nenhum contacto relacionado com o utilizador que inseriu.</strong>";
+                        $("#modal-body-contact").prepend(msg);
+                    }
                 }
             });
         });
