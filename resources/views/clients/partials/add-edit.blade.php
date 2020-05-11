@@ -15,7 +15,7 @@
         <div class="row">
                 <div class="col m-4 pb-2">
                     <div class="mx-2">
-                        <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente / Subagente responsável:</label>
+                        <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente responsável:</label>
                         <select class="form-control select_style ml-2" id="idAgente" name="idAgente" style="min-width: 200px" required>
                             <option selected value="0">(selecione um agente)</option>
                             @if($agents)
@@ -260,7 +260,7 @@
 
                 </div>
 
-                
+
 
             </div>
 

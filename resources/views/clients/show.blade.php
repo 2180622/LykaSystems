@@ -108,9 +108,9 @@
 
                     <div><span class="text-secondary">Observações pessoais:</span><br>
                         @if ($client->obsPessoais==null)
-                        <span class="text-muted"><small>(sem dados para mostrar)</small></span>
+                            <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                         @else
-                        {{ $client->obsPessoais }}
+                            {{ $client->obsPessoais }}
                         @endif
                     </div><br>
 
@@ -118,26 +118,29 @@
 
                     @if (Auth::user()->tipo == "admin")
 
-                    <div>
+                        @if ($agente!=null )
+                            <div class="text-secondary mb-2"><i class="fas fa-user-tie mr-1"></i> Agente: <a href="{{route('agents.show',$agente)}}" class="name_link">{{$agente->nome}} {{$agente->apelido}}</a> </div>
+                        @endif
+
+
                         @if ($agents!=null )
-                        <div class="text-secondary mb-2">Agente(s) associados:</div>
-                        @foreach ($agents as $agent)
-                        <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$agent)}}"
-                            class="name_link">{{$agent->nome}} {{$agent->apelido}}</a><br>
-                        @endforeach
+                            <div class="text-secondary mb-2"><i class="fas fa-user-tie mr-2"></i>Agente(s) associados:</div>
 
-                        @if ($subagents!=null )
-                        @foreach ($subagents as $subagent)
-                        <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$subagent)}}"
-                            class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
-                        @endforeach
-                        @endif
-                        @endif
-                    </div>
+                            @foreach ($agents as $agent)
+                                <a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a><br>
+                            @endforeach
 
-                    {{-- Adicionar produto --}}
-                    <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i
-                                class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
+                            @if ($subagents!=null )
+                                @foreach ($subagents as $subagent)
+                                    <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$subagent)}}" class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
+                                @endforeach
+                            @endif
+                        @endif
+
+
+                        {{-- Adicionar produto --}}
+                        <div class="mt-4"><a href="{{route('produtos.create',$client)}}" class="top-button"><i class="fas fa-plus mr-2"></i>Adicionar produto</a></div>
+
                     @endif
 
                 </div>
@@ -283,7 +286,7 @@
 
                     {{-- DOCUMENTOS PESSOAIS --}}
                     <div class="col" style="min-width:250px">
-                        <div class="text-secondary mb-2">Ficheiros carregados:</div>
+                        <div class="text-secondary mb-2">Ficheiros:</div>
                         @if ($documentosPessoais!=null)
                             <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                                 @foreach ($documentosPessoais as $docpessoal)
@@ -403,7 +406,7 @@
 
                     {{-- DOCUMENTOS Académicos --}}
                     <div class="col" style="min-width:250px">
-                        <div class="text-secondary mb-2">Ficheiros carregados:</div>
+                        <div class="text-secondary mb-2">Ficheiros:</div>
                         @if ($documentosAcademicos!=null)
                             <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                                 @foreach ($documentosAcademicos as $docAcademico)
