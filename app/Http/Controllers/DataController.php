@@ -121,6 +121,7 @@ class DataController extends Controller
 
         $cliente = new Cliente;
         $cliente->nome = 'Tiago';
+        $cliente->idAgente = 3;
         $cliente->apelido = 'Oliveira';
         $cliente->genero = 'M';
         $cliente->email = 'tiaveira@gmail.com';
@@ -141,20 +142,18 @@ class DataController extends Controller
         $cliente->NIF = 3490587685;
         $cliente->IBAN = 'FR76 123 4321 1345678901 72';
         $cliente->nivEstudoAtual = 3;
-        $cliente->nomeInstituicaoOrigem = 'Instituto Frances';
+        $cliente->nomeInstituicaoOrigem = 'Instituto Francês';
         $cliente->cidadeInstituicaoOrigem = 'Paris';
         $cliente->num_docOficial = '9845776436ZZ8';
-        $cliente->info_docOficial = date('Y-m-d',strtotime('27-01-1995'));
-        $cliente->info_Passaport = '{"numPassaport":"9453574976496","dataValidPP":"'.date('Y-m-d',strtotime('27-01-1995')).'",
-            "passaportPaisEmi":"França","localEmissaoPP":"Paris"}';
-        $cliente->info_docAcademico = '{"campo1":"Tipo","valor1":"Certificado",
-            "campo2":"Nota Final","valor2":16}';
+        $cliente->validade_docOficial = date('Y-m-d',strtotime('27-01-1995'));
+        $cliente->num_passaporte = "324234";
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
         $cliente->save();
 
         $cliente = new Cliente;
+        $cliente->idAgente = 1;
         $cliente->nome = 'Katherine';
         $cliente->apelido = 'Romaria';
         $cliente->genero = 'F';
@@ -180,10 +179,9 @@ class DataController extends Controller
         $cliente->cidadeInstituicaoOrigem = 'Cidade Russa';
         $cliente->cidadeInstituicaoOrigem = 'Paris';
         $cliente->num_docOficial = '61436534643DS4';
-        $cliente->info_docOficial = date('Y-m-d',strtotime('27-01-1993'));
-        $cliente->info_Passaport = '{"numPassaport":"9453574976496","dataValidPP":"'.date('Y-m-d',strtotime('27-01-1995')).'",
-            "passaportPaisEmi":"França","localEmissaoPP":"Paris"}';
-        $cliente->info_docAcademico = null;
+        $cliente->validade_docOficial = date('Y-m-d',strtotime('27-01-1993'));
+        $cliente->num_passaporte = "345345345";
+
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
@@ -302,7 +300,7 @@ class DataController extends Controller
 
         $docstock = new DocStock;
         $docstock->tipo = 'Pessoal';
-        $docstock->tipoDocumento = 'Passaport';
+        $docstock->tipoDocumento = 'Passaporte';
         $docstock->idFaseStock = 2;
         $docstock->save();
 
@@ -612,7 +610,7 @@ class DataController extends Controller
 
         $docnecessario = new DocNecessario;
         $docnecessario->tipo = 'Pessoal';
-        $docnecessario->tipoDocumento = 'Passaport';
+        $docnecessario->tipoDocumento = 'Passaporte';
         $docnecessario->idFase = 2;
         $docnecessario->save();
 

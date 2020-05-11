@@ -31,6 +31,8 @@ class DocPessoalController extends Controller
         }else{
             return redirect()->route('produtos.show',$fase->produto);
         }
+
+
     }
 
 
@@ -49,10 +51,10 @@ class DocPessoalController extends Controller
             $fields = $request->all();
             //dd($fields);
             $infoDoc = null;
-            if(strtolower($docnecessario->tipoDocumento) == "passaport"){
-                $infoDoc['numPassaport'] = $fields['numPassaport'];
+            if(strtolower($docnecessario->tipoDocumento) == "passaporte"){
+                $infoDoc['numPassaporte'] = $fields['numPassaporte'];
                 $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP']).'-1');
-                $infoDoc['passaportPaisEmi'] = $fields['passaportPaisEmi'];
+                $infoDoc['passaportePaisEmi'] = $fields['passaportePaisEmi'];
                 $infoDoc['localEmissaoPP'] = $fields['localEmissaoPP'];
             }
             for($i=1;$i<=500;$i++){
@@ -169,10 +171,10 @@ class DocPessoalController extends Controller
             //dd($documento);
 
             $infoDoc = null;
-            if(strtolower($documento->tipo) == "passaport"){
-                $infoDoc['numPassaport'] = $fields['numPassaport'];
+            if(strtolower($documento->tipo) == "passaporte"){
+                $infoDoc['numPassaporte'] = $fields['numPassaporte'];
                 $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP']).'-1');
-                $infoDoc['passaportPaisEmi'] = $fields['passaportPaisEmi'];
+                $infoDoc['passaportePaisEmi'] = $fields['passaportePaisEmi'];
                 $infoDoc['localEmissaoPP'] = $fields['localEmissaoPP'];
             }
             for($i=1;$i<=500;$i++){

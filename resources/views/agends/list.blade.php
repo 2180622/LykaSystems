@@ -57,35 +57,29 @@
                 @if($agends!=null)
                     <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
                            style="overflow:hidden;">
-
                         {{-- Cabeçalho da tabela --}}
                         <thead>
                         <tr>
                             <th style="width:10px">{{-- COR DO EVENTO --}}</th>
-                            <th>Título</th>
-                            <th>Início</th>
-                            <th>Fim</th>
+                            <th colspan="3">Todos os eventos agendados</th>
                         </tr>
                         </thead>
-
                         {{-- Corpo da tabela --}}
                         <tbody>
-
                         @foreach ($agends as $agend)
-                            <tr>
-                                <td style="width:10px"><span class="p-1 shadow-sm"
-                                                             style="background-color:{{$agend->cor}}"></span>
+                            <tr href="#">
+                                <td style="width:10px">
+                                    <span class="p-1 shadow-sm" style="background-color:{{$agend->cor}}"></span>
                                 </td>
 
                                 {{-- Título --}}
-                                <td><a class="name_link" href="#">{{$agend->titulo}}</td>
+                                <td><a class="name_link">{{$agend->titulo}}</td>
 
                                 {{-- Inicio --}}
-                                <td class="align-middle">{{ date('d-M-y', strtotime($agend->dataInicio)) }}</td>
+                                <td class="align-middle">{{ date('d-m-Y', strtotime($agend->dataInicio)) }}</td>
 
                                 {{-- Fim --}}
-                                <td class="align-middle">{{ date('d-M-y', strtotime($agend->dataFim)) }}</td>
-
+                                <td class="align-middle">{{ date('d-m-Y', strtotime($agend->dataFim)) }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -149,7 +143,6 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
                 },
-                dateToday,
                 locale: 'pt',
                 editable: true,
                 navLinks: true,
@@ -179,9 +172,6 @@
 
                     resetForm("#formEvent");
 
-                    console.log("event", element.event.extendedProps)
-
-                    $("#modalCalendar").modal('show');
                     $("#modalCalendar #titleModal").text('Alterar Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'flex');
 
@@ -197,34 +187,33 @@
                     let end = element.event.end;
                     $("#modalCalendar input[name='dataFim']").val(dealWithDate(end));
 
-                    console.log(dealWithDate(start))
-                    console.log(dealWithDate(end))
-
                     let color = element.event.backgroundColor;
                     $("#modalCalendar input[name='cor']").val(color);
 
                     let description = element.event.extendedProps.description;
                     $("#modalCalendar textarea[name='descricao']").val(description);
-                    console.log(description);
+
+                    $("#modalCalendar").modal('show');
+
+
                 },
 
                 select: function (element) {
 
                     resetForm("#formEvent");
-                    console.log(element);
+
                     $("#modalCalendar").modal('show');
                     $("#modalCalendar #titleModal").text('Novo Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'none');
 
                     let start = element.start;
-                    $("#modalCalendar input[name='dataInicio']").val(start);
 
-                    let end = element.end;
-                    $("#modalCalendar input[name='dataFim']").val(end);
+                    $("#modalCalendar input[name='dataInicio']").val(dealWithDate(start));
 
                     $("#modalCalendar input[name='cor']").val("#6A74C9");
 
                     calendar.unselect();
+
                 },
             });
 
@@ -232,11 +221,32 @@
         });
 
         $("#titleModalNew").click(function () {
+
             $(".limpar").each(function () {
                 $(".limpar").val("");
                 $("#color").val("#6A74C9");
+
             });
+
+            addDefaultFields();
+
+
         });
+
+        function addDefaultFields() {
+
+            var date = new Date();
+            string = ""
+
+            let month = date.getMonth() + 1;
+            string = date.getFullYear() + "-" + ("0" + month).slice(-2)
+                + "-" + ("0" + date.getDate()).slice(-2) + "T"
+                + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+
+            $("#modalCalendar input[name='dataInicio']").val(string)
+
+        }
+
     </script>
 
 @endsection

@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     var table = $('#dataTable').DataTable({
+        "pageLength": 50,
 
         "columnDefs": [{
                 "orderable": false,
@@ -117,9 +118,11 @@ $(document).ready(function () {
 
 
         /* Apenas numeros:  .numbersOnly();  */
-        $("#telefone1").numbersOnly();
-        $("#telefone2").numbersOnly();
-        $("#fax").numbersOnly();
+        if ($('#telefone1').length) {
+            $("#telefone1").numbersOnly();
+            $("#telefone2").numbersOnly();
+            $("#fax").numbersOnly();
+        }
 
 
         // Example starter JavaScript for disabling form submissions if there are invalid fields

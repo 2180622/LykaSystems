@@ -75,6 +75,8 @@
                                     <br>
                                     <a> <i class="fas fa-angle-right pb-2"></i> Como editar um
                                         Estudante?</a>
+                                    <br>
+                                    <a> [Mais]</a>
                                 </p>
                             </div>
                         </div>
@@ -87,15 +89,18 @@
                                     <br>
                                     <a> <i class="fas fa-angle-right pb-2"></i> Como ...?</a>
                                     <br>
+                                    <a> [Mais]</a>
                                 </p>
                             </div>
                         </div>
 
                         <div class="col-md-4 text-center card-help-info mb-5">
                             <div class="card shadow pb-3">
-                                <h5 class="card-title">Universidades</h5>
+                                <a><h5 class="card-title">Universidades</h5></a>
                                 <p class="card-text pl-4 text-left">
                                     <a> <i class="fas fa-angle-right pb-2"></i> Como criar um Universidade?</a>
+                                    <br>
+                                    <a> [Mais]</a>
                                     <br>
                                 </p>
                             </div>

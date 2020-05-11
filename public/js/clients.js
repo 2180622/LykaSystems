@@ -74,9 +74,9 @@
         $('#paisNaturalidade').val(str_paisNaturalidade);
 
 
-        /* Definir passaportPaisEmi */
-        var str_passaportPaisEmi = $("#hidden_passaportPaisEmi").val();
-        $('#passaportPaisEmi').val(str_passaportPaisEmi);
+        /* Definir passaportePaisEmi */
+        var str_passaportePaisEmi = $("#hidden_passaportePaisEmi").val();
+        $('#passaportePaisEmi').val(str_passaportePaisEmi);
 
 
 
@@ -149,36 +149,36 @@
 
 
 
-        //Preview do PASSAPORTE +++++++++++++++
+        //Preview do Passaporte +++++++++++++++
 
-        $('#passport_preview_file').on('click', function (e) {
-            e.preventDefault();
-            $('#img_Passaport').trigger('click');
-        });
+        /*         $('#passport_preview_file').on('click', function (e) {
+                    e.preventDefault();
+                    $('#img_Passaporte').trigger('click');
+                });
 
-        $('#passport_preview').on('click', function (e) {
-            e.preventDefault();
-            $('#img_Passaport').trigger('click');
-        });
+                $('#passport_preview').on('click', function (e) {
+                    e.preventDefault();
+                    $('#img_Passaporte').trigger('click');
+                });
 
-        function readPassaportURL(input) {
-            if (input.files && input.files[0]) {
-                var passaporte = new FileReader();
+                function readPassaporteURL(input) {
+                    if (input.files && input.files[0]) {
+                        var passaporte = new FileReader();
 
-                passaporte.onload = function (e) {
-                    $('#name_passaport_file').text(input.files[0].name);
+                        passaporte.onload = function (e) {
+                            $('#name_passaporte_file').text(input.files[0].name);
+                        }
+
+                        passaporte.readAsDataURL(input.files[0]);
+                    }
                 }
 
-                passaporte.readAsDataURL(input.files[0]);
-            }
-        }
+                $("#img_Passaporte").change(function () {
+                    readPassaporteURL(this);
+                    $('#passport_preview_file').hide();
+                    $('#passport_preview').show();
 
-        $("#img_Passaport").change(function () {
-            readPassaportURL(this);
-            $('#passport_preview_file').hide();
-            $('#passport_preview').show();
-
-        });
+                }); */
 
 
 
@@ -226,9 +226,9 @@
             $("#telefone2").numbersOnly();
             $("#telefonePai").numbersOnly();
             $("#telefoneMae").numbersOnly();
-            $("#num_docOficial").numbersOnly();
-            $("#numPassaport").numbersOnly();
-            $("#IBAN").numbersOnly();
+            /*$("#num_docOficial").numbersOnly();
+            $("#numPassaporte").numbersOnly();
+            $("#IBAN").numbersOnly(); */
             $("#NIF").numbersOnly();
 
         }
@@ -236,98 +236,99 @@
 
 
 
+        $('#form_client').on('submit', function () {
 
-        /* VALIDAÇÃO DO FORMULÁRIO */
+            /* mostrar div de espera */
+            $("#wait_screen").show();
 
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
+            var validated = true;
 
-                        /* mostrar div de espera */
-                        $("#wait_screen").show();
+            /* valida Campos da informação pessoal */
 
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-
-                            /* valida Campos da informação pessoal */
-                            if (($("#nome").val() == "") || ($("#apelido").val() == "") || ($("#paisNaturalidade").val() == "") || ($("#dataNasc").val() == "") || ($("#genero").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#pessoal-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#pessoal-tab").removeClass("border-danger text-danger");
-                            }
+            /* Campo do nome */
+            if (($("#nome").val() == "")) {
+                $("#wait_screen").hide();
+                $("#nome").addClass("is-invalid");
+                $("#pessoal-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#pessoal-tab").removeClass("border-danger text-danger");
+                $("#nome").removeClass("is-invalid");
+            }
 
 
-                            /* valida Campos dos documentos */
-                            if (($("#num_docOficial").val() == "") || ($("#numPassaport").val() == "") || ($("#dataValidPP").val() == "") || ($("#passaportPaisEmi").val() == "") || ($("#localEmissaoPP").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#documentation-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#documentation-tab").removeClass("border-danger text-danger");
-
-                            }
-
-                            /* valida Campos dos dados académicos */
-                            if (($("#nivEstudoAtual").val() == "") || ($("#nomeInstituicaoOrigem").val() == "") || ($("#cidadeInstituicaoOrigem").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#academicos-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#academicos-tab").removeClass("border-danger text-danger");
-                            }
+            /* Campo do apelido */
+            if (($("#apelido").val() == "")) {
+                $("#wait_screen").hide();
+                $("#apelido").addClass("is-invalid");
+                $("#pessoal-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#pessoal-tab").removeClass("border-danger text-danger");
+                $("#apelido").removeClass("is-invalid");
+            }
 
 
-
-                            /* valida Campos dos contactos */
-                            if (($("#telefone1").val() == "") || ($("#email").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#contacts-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#contacts-tab").removeClass("border-danger text-danger");
-
-                            }
-
-
-                            /* valida Campos das moradas */
-                            if (($("#moradaResidencia").val() == "") || ($("#morada").val() == "") || ($("#cidade").val() == "")) {
-                                $("#wait_screen").hide();
-                                $("#contacts-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#contacts-tab").removeClass("border-danger text-danger");
-                            }
+            /* Campo do apelido */
+            if (($("#genero").val() == "")) {
+                $("#wait_screen").hide();
+                $("#genero").addClass("is-invalid");
+                $("#pessoal-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#pessoal-tab").removeClass("border-danger text-danger");
+                $("#genero").removeClass("is-invalid");
+            }
 
 
 
-                            /* valida Campos das finanças */
-                            if ($("#IBAN").val() == "") {
-                                $("#wait_screen").hide();
-                                $("#financas-tab").addClass("border-danger text-danger");
-                                $("#warning_msg").show();
-                            } else {
-                                $("#financas-tab").removeClass("border-danger text-danger");
-                            }
+            /* Campo do e-mail  */
+            if (($("#email").val() == "")) {
+                $("#wait_screen").hide();
+                $("#email").addClass("is-invalid");
+                $("#contacts-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#contacts-tab").removeClass("border-danger text-danger");
+                $("#email").removeClass("is-invalid");
 
-                        }
+            }
 
-                        window.scrollTo(0, 0);
-                        form.classList.add('was-validated');
 
-                    }, false);
 
-                });
+            /* Valida se tem agente associado */
+            if ($('#idAgente').val() == "0") {
+                $("#wait_screen").hide();
+                $("#idAgente").addClass("is-invalid");
+                $("#div_agente").addClass("border border-danger text-danger ");
+                $("#idAgente").removeClass("is-valid");
+                $("#idAgente").addClass("is-invalid");
+                $("#idAgente").css("background-image", "none");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                $("#div_agente").removeClass("border-danger text-danger");
+                $("#idAgente").removeClass("is-invalid");
+            }
 
-            }, false);
 
-        })();
+
+
+            if (validated==true) {
+                return true;
+            } else {
+                $("#wait_screen").hide();
+                window.scrollTo(0, 0);
+                return false;
+            }
+
+        });
+
+
+
 
     });

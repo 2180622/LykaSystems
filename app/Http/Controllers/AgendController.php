@@ -22,7 +22,8 @@ class AgendController extends Controller
             abort (401);
         }
 
-        $agends = Agenda::all();
+        //$agends = Agenda::all();
+        $agends = Agenda::where('idUser', Auth::user()->idUser)->get();
 
         return view('agends.list', compact('agends'));
     }

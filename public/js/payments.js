@@ -51,21 +51,6 @@ function removeFile() {
     document.getElementById("addFileButton").innerHTML = 'Adicionar um ficheiro';
 }
 
-// Context Menu
-window.onclick = hideContextMenu;
-var contextMenu = document.getElementById("contextMenu");
-
-function showContextMenu() {
-    contextMenu.style.display = "inline-block";
-    contextMenu.style.left = event.clientX - '260' + 'px';
-    contextMenu.style.top = event.clientY + 'px';
-    return false;
-}
-
-function hideContextMenu() {
-    contextMenu.style.display = "none";
-}
-
 // Filters
 var closeButton = document.getElementById('close-icon-div');
 var filterButton = document.getElementById('filter-icon-div');
@@ -222,25 +207,26 @@ function selected() {
 }
 
 // Modal -> Resposanbilidades content
-$('#exampleModal').on('show.bs.modal', function(event) {
+$('#modal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget);
-    var name = button.data('nome');
-    var fase = button.data('fase');
-    var valorCliente = button.data('valorcliente');
-    var valorAgente = button.data('valoragente');
-    var valorSubAgente = button.data('valorsubagente');
-    var valorUni1 = button.data('valoruni1');
-    var valorUni2 = button.data('valoruni2');
-    var valorUni2 = button.data('valoruni2');
-
     var modal = $(this);
 
-    modal.find('.modal-title').text('Responsabilidade de ' + name + ' - ' + fase);
-    modal.find('#valor-cliente').val(valorCliente);
-    modal.find('#valor-agente').val(valorAgente);
-    modal.find('#valor-subagente').val(valorSubAgente);
-    modal.find('#valor-uni1').val(valorUni1);
-    modal.find('#valor-uni2').val(valorUni2);
+    infocliente = button.data('infocliente');
+
+    if (infocliente == null) {
+        console.log(infocliente);
+    }else {
+        console.log('test');
+    }
+
+    modal.find('.modal-title').text('Responsabilidade de ' + button.data('nome') + ' - ' + button.data('fase') + ' (Visualização)');
+    modal.find('.modal-body').append('Valor cliente: ' + button.data('infocliente'));
+
+    modal.find('#valor-cliente').val(infocliente);
+    modal.find('#valor-agente').val(button.data('valoragente'));
+    modal.find('#valor-subagente').val(button.data('valorsubagente'));
+    modal.find('#valor-uni1').val(button.data('valoruni1'));
+    modal.find('#valor-uni2').val(button.data('valoruni2'));
     modal.find("form").attr('action', '/pagamentos/' + button.data('id'));
 
 })

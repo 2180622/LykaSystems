@@ -24,47 +24,47 @@ class StoreClientRequest extends FormRequest
     public function rules()
     {
         return [
+            'idAgente' => 'required',
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',
-            'email' => 'required|unique:Cliente|unique:Agente',
-            'telefone1' => 'required',
+            'paisNaturalidade' => 'nullable',
+            'dataNasc' => 'nullable',
+            'obsPessoais' => 'nullable',
+            'fotografia' => 'nullable',
+
+            'num_docOficial'=> 'nullable|unique:Cliente',
+            'validade_docOficial'=> 'nullable', /* data de validade do CC */
+            'img_docOficial'=> 'nullable',
+            'NIF' => 'nullable',
+
+            'num_passaporte'=> 'nullable',
+            'dataValidPP'=> 'nullable',
+            'passaportePaisEmi'=> 'nullable',
+            'localEmissaoPP'=> 'nullable',
+            'img_Passaporte'=> 'nullable',
+
+            'nivEstudoAtual' => 'nullable',
+            'nomeInstituicaoOrigem' => 'nullable',
+            'cidadeInstituicaoOrigem' => 'nullable',
+            'obsAcademicas' => 'nullable',
+
+            'telefone1' => 'nullable',
             'telefone2' => 'nullable',
-            'dataNasc' => 'required',
-            'paisNaturalidade' => 'required',
-            'morada' => 'required',
-            'cidade' => 'required',
-            'moradaResidencia' => 'required',
-            'passaportPaisEmi' => 'required',
+            'email' => 'required|unique:Cliente|unique:Agente|unique:User',
+            'moradaResidencia' => 'nullable',
+            'morada' => 'nullable',
+            'cidade' => 'nullable',
             'nomePai' => 'nullable',
             'telefonePai'  => 'nullable',
             'emailPai' => 'nullable',
             'nomeMae' => 'nullable',
             'telefoneMae' => 'nullable',
             'emailMae' => 'nullable',
-            'fotografia' => 'nullable',
-            'NIF' => 'nullable',
-            'IBAN' => 'required',
-            'nivEstudoAtual' => 'required',
-            'nomeInstituicaoOrigem' => 'required',
-            'cidadeInstituicaoOrigem' => 'required',
 
-            'num_docOficial'=> 'required|unique:Cliente',
-            'img_docOficial'=> 'nullable',
-            'info_docOficial'=> 'nullable',
 
-            'img_Passaport'=> 'nullable',
-            'numPassaport'=> 'nullable',
-            'dataValidPP'=> 'nullable',
-            'passaportPaisEmi'=> 'nullable',
-            'localEmissaoPP'=> 'nullable',
-
-            'img_docAcademico'=> 'nullable',
-            'info_docAcademico'=> 'nullable',
-
-            'obsPessoais' => 'nullable',
+            'IBAN' => 'nullable',
             'obsFinanceiras' => 'nullable',
-            'obsAcademicas' => 'nullable',
 
         ];
     }
