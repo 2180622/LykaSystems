@@ -92,7 +92,7 @@
                         <td class="text-center align-middle">
                             <a href="{{route('users.show', $user)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                             <a href="{{route('users.edit', $user)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-                            <a href="" class="btn_delete" title="Eliminar agente" data-toggle="modal" data-target="#deleteModal" data-name="{{$user->admin->nome.' '.$user->admin->apelido}}" data-id="{{post_slug($user->admin->nome.' '.$user->admin->apelido)}}"><i class="fas fa-trash-alt"></i></a>
+                            <a href="" class="btn_delete" title="Eliminar agente" data-toggle="modal" data-target="#deleteModal" data-name="{{$user->admin->nome.' '.$user->admin->apelido}}" data-id="{{$user->slug}}"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                     @endforeach

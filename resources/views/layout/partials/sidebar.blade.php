@@ -43,7 +43,12 @@
         margin-top: 20px;
         padding: 12px 10px;
         border-radius: 10px;
-        background-color: rgb(234, 234, 234);
+        background-color: #fff;
+        transition: 0.1s ease-in-out;
+    }
+
+    .charge-div:hover {
+        background-color: rgb(235, 235, 235);
     }
 
     .white-circle {
@@ -55,6 +60,15 @@
 
     .white-circle img {
         border-radius: 50%;
+    }
+
+    a {
+        color: #747474;
+    }
+
+    a:hover {
+        color: #747474;
+        text-decoration: none;
     }
 </style>
 
