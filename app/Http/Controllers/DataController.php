@@ -356,7 +356,7 @@ class DataController extends Controller
         $user->password = Hash::make('teste1234');
         $user->auth_key = strtoupper(random_str(5));
         $user->estado = true;
-        $user->slug = post_slug('Neuza Cordeiro');
+        $user->slug = post_slug('Edgar Cordeiro');
         $user->idAdmin = 2;
         $user->idAgente = null;
         $user->idCliente = null;

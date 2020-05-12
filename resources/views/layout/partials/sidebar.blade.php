@@ -91,7 +91,7 @@
                     <div class="modal-body" id="modal-body-contact">
                         <div class="row" id="contact-row">
                             <div class="col-md-4">
-                                <label for="user-type">Tipo de utilizador:</label>
+                                <label for="user-type">Tipo de contacto:</label>
                                 <br>
                                 <select id="user-type" name="usertype">
                                     <option disabled hidden selected>Escolher tipo de utilizador</option>
