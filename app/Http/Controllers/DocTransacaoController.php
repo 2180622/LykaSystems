@@ -77,7 +77,7 @@ class DocTransacaoController extends Controller
                 /* $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro; */
             }
 
-            $documento->comprovativoPagamento = $$nomeficheiro;
+            $documento->comprovativoPagamento = $nomeficheiro;
             $documento->save();
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', 'Transação adicionado com sucesso');
