@@ -113,7 +113,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form" method="POST">
+                <form class="form" method="POST" action="{{route('users.destroy', $user)}}">
                     @csrf
                     @method('DELETE')
                     <p style="display:inline-block;">Prente eliminar o administrador: <p class="ml-1" id="text" style="font-weight:700; display:inline-block;"></p>?</p>

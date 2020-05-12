@@ -156,6 +156,7 @@ Route::get('/ativacao-conta/{user}', 'AccountConfirmationController@index')->nam
 Route::get('/ativacao-conta/{user}/confirmar-chave', 'AccountConfirmationController@keyconfirmation')->name('confirmation.key');
 Route::put('/ativacao-conta/{user}/confirmar-password', 'AccountConfirmationController@password')->name('confirmation.password');
 Route::get('/ativacao-conta/{user}/restaurar-conta', 'AccountConfirmationController@restore')->name('confirmation.restore');
+Route::get('/login-verification/{user}', 'AccountConfirmationController@loginVerification')->name('confirmation.loginVerification');
 
 /* Restore password */
 Route::get('/restaurar-password', 'AccountConfirmationController@mailrestorepassword')->name('mailrestore.password');
