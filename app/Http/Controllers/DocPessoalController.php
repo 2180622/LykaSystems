@@ -96,9 +96,9 @@ class DocPessoalController extends Controller
                 $tipoDoc = str_replace(".","_",str_replace(" ","",$documento->tipo));
                 $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_pessoal_'.$tipoDoc.'.'.$ficheiro->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
-                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+/*                 $source = $fase->produto->cliente->idCliente.'/'.$nomeficheiro; */
             }
-            $documento->imagem = $source;
+            $documento->imagem = $nomeficheiro;
             $documento->save();
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', $docnecessario->tipoDocumento.' adicionado com sucesso');
@@ -214,8 +214,8 @@ class DocPessoalController extends Controller
                     $tipoDoc = str_replace(".","_",str_replace(" ","",$documento->tipo));
                     $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_pessoal_'.$tipoDoc.'.'.$ficheiro->getClientOriginalExtension();
                     Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
-                    $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
-                    $documento->imagem = $source;
+                    /* $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro; */
+                    $documento->imagem = $nomeficheiro;
                 }
             }
             $documento->save();

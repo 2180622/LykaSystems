@@ -45,7 +45,7 @@ class DocAcademicoController extends Controller
     public function store(StoreDocumentoRequest $request,Fase $fase,DocNecessario $docnecessario){
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-            
+
             $fields = $request->all();
             $infoDoc = null;
 
@@ -85,9 +85,9 @@ class DocAcademicoController extends Controller
                 $tipoDoc = str_replace(".","_",str_replace(" ","",$documento->tipo));
                 $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_academico_'.$tipoDoc.'.'.$ficheiro->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
-                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+                /* $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro; */
             }
-            $documento->imagem = $source;
+            $documento->imagem = $nomeficheiro;
             $documento->save();
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', $docnecessario->tipoDocumento.' adicionado com sucesso');
@@ -136,7 +136,7 @@ class DocAcademicoController extends Controller
     public function edit(DocAcademico $documento)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
-            
+
             $infoDoc = (array)json_decode($documento->info);
             $infoKeys = array_keys($infoDoc);
             $tipoPAT = 'Academico';
@@ -181,14 +181,14 @@ class DocAcademicoController extends Controller
             }else{
                 return redirect()->back()->withErrors(['message'=>$documento->tipo.' tem de conter no minimo 1 campo']);
             }
-            
+
             if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
                 $documento->verificacao = true;
             }else{
                 $documento->verificacao = false;
             }
             $documento->nome = $fields['nome'];
-            
+
             if(array_key_exists('img_doc',$fields)){
                 $source = null;
 
@@ -197,9 +197,9 @@ class DocAcademicoController extends Controller
                     $tipoDoc = str_replace(".","_",str_replace(" ","",$documento->tipo));
                     $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_academico_'.$tipoDoc.'.'.$ficheiro->getClientOriginalExtension();
                     Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
-                    $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+/*                     $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro; */
                 }
-                $documento->imagem = $source;
+                $documento->imagem = $nomeficheiro;
             }
             $documento->save();
             return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do '.$documento->tipo.' editados com sucesso');
@@ -226,7 +226,7 @@ class DocAcademicoController extends Controller
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
             $tipo = $documento->tipo;
             $documento->delete();
-            
+
             return redirect()->route('produtos.show',$documento->fase->produto)->with('success', $tipo.' eliminado com sucesso');
         }else{
             return redirect()->route('produtos.show',$documento->fase->produto);
