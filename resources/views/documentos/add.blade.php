@@ -113,7 +113,10 @@
                         </div>
                         <div class="col-md-6">
                             <label for="passaportPaisEmi">País de Emissão: </label>
-                            <input type="text" class="form-control" name="passaportPaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
+                            <select name="passaportePaisEmi" id="passaportePaisEmi" class="form-control select_style" required>
+                                @include('layout.partials.countries');
+                            </select>
+                            {{-- <input type="text" class="form-control" name="passaportPaisEmi" placeholder="Tipo pagamento" autocomplete="off" required> --}}
                         </div>
                         <div class="col-md-6">
                             <label for="localEmissaoPP">Local de Emissão: </label>

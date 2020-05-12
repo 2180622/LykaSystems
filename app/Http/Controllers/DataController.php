@@ -458,7 +458,7 @@ class DataController extends Controller
         $responsabilidade->dataVencimentoAgente = date('Y-m-d H:i',strtotime('28-07-2020 23:59'));
 
         $responsabilidade->valorSubAgente = 10;
-        $responsabilidade->idSubAgente = 1;
+        $responsabilidade->idSubAgente = 3;
         $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->dataVencimentoSubAgente = date('Y-m-d H:i',strtotime('22-07-2020 23:59'));
 
