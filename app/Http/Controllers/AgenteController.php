@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Agente;
 use App\User;
 use App\Cliente;
+use App\Responsabilidade;
 use App\Produto;
 
 use Illuminate\Support\Facades\Auth;
@@ -168,6 +169,8 @@ class AgenteController extends Controller
         }
 
 
+
+
 /*       caso seja um sub-agente, obtem o agente que o adicionou */
         if($agent->tipo=="Subagente"){
             $mainAgent=Agente::
@@ -181,10 +184,12 @@ class AgenteController extends Controller
         $IBAN = $agent->IBAN;
 
 
+
+
         /* lista de alunos do agente */
 
 
-        $clients = Cliente::
+/*         $clients = Cliente::
         selectRaw("Cliente.*")
         ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
         ->where('Produto.idAgente', '=', $agent->idAgente)
@@ -196,9 +201,34 @@ class AgenteController extends Controller
 
         if ($clients->isEmpty()) {
             $clients=null;
+        } */
+
+        $clients = Cliente::
+        where('idAgente', '=', $agent->idAgente)
+        ->get();
+
+
+        if ($clients->isEmpty()) {
+            $clients=null;
         }
 
-        return view('agents.show',compact("agent" ,'listagents','mainAgent','telefone2','IBAN','clients'));
+
+
+        /* Valor total das comissões */
+
+        /* Caso seja do tipo Agente */
+        if ($agent->tipo=="Agente"){
+            $comissoes = Responsabilidade::
+            where('idAgente', '=', $agent->idAgente)
+            ->sum('valorAgente');
+
+        }elseif($agent->tipo=="Subagente"){
+            $comissoes = Responsabilidade::
+            where('idSubAgente', '=', $agent->idAgente)
+            ->sum('valorSubAgente');
+        }
+
+        return view('agents.show',compact("agent" ,'listagents','mainAgent','telefone2','IBAN','clients','comissoes'));
 
     }
 

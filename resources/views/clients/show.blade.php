@@ -294,7 +294,7 @@
 
                                         @if ($docpessoal->imagem != null)
                                             <i class="far fa-address-card mr-2"></i>
-                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url($client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
                                         @else
                                             <i class="far fa-address-card mr-2"></i>{{$docpessoal->tipo}} <span class="text-danger">(sem imagem)</span>
                                         @endif
