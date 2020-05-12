@@ -236,7 +236,7 @@
                                 @else
                                     <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                                     <div id="name_doc_id_file">
-                                    <div>{{$cartaoCidadao->imagem}}</div>
+                                    <div>Ficheiro guardado</div>
                                 @endif
 
                             </div>

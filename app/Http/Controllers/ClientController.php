@@ -161,8 +161,12 @@ class ClientController extends Controller
             /* Imagem do documento de identificação Pessoal*/
             if ($requestClient->hasFile('img_docOficial')) {
                 $img_doc = $requestClient->file('img_docOficial');
-                $nome_imgDocOff = 'client-documents/cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Cartao Cidadao'.'.'.$img_doc->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
+
+                /* client-documents/1/cliente_1_fase_2_documento_pessoal_CartãoCidadão.jpg */
+
+
+                $nome_imgDocOff = 'client-documents/cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_CartãoCidadão'.'.'.$img_doc->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs($client->idCliente.'/', $img_doc, $nome_imgDocOff);
                 $doc_id->imagem = $nome_imgDocOff;
             }
             /* Guarda documento de identificação Pessoal */
@@ -192,8 +196,8 @@ class ClientController extends Controller
             /* Imagem do passaporte*/
             if ($requestClient->hasFile('img_Passaporte')) {
                 $img_doc = $requestClient->file('img_Passaporte');
-                $nome_imgPassaporte = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Passaporte'.'.'.$img_doc->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgPassaporte);
+                $nome_imgPassaporte = 'client-documents/cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Passaporte'.'.'.$img_doc->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs($client->idCliente.'/', $img_doc, $nome_imgPassaporte);
                 $passaporte->imagem = $nome_imgPassaporte;
             }
             /* Guarda passaporte */
@@ -510,8 +514,9 @@ class ClientController extends Controller
 
             /* Imagem do documento de identificação Pessoal*/
             $img_doc = $request->file('img_docOficial');
-            $nome_imgDocOff = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Cartao Cidadao'.'.'.$img_doc->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
+
+            $nome_imgDocOff = 'client-documents/cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_CartãoCidadão'.'.'.$img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs($client->idCliente.'/', $img_doc, $nome_imgDocOff);
             $doc_id->imagem = $nome_imgDocOff;
             /* Guarda documento de identificação Pessoal */
             $doc_id->imagem = $nome_imgDocOff;
@@ -570,8 +575,10 @@ class ClientController extends Controller
                 }
                 /* Imagem do documento de identificação Pessoal*/
                 $img_passaport = $request->file('img_Passaporte');
-                $nome_imgPassaporte = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Passaporte'.'.'.$img_passaport->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_passaport, $nome_imgPassaporte);
+
+
+                $nome_imgPassaporte = 'client-documents/cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Passaporte'.'.'.$img_passaport->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs($client->idCliente.'/', $img_passaport, $nome_imgPassaporte);
                 $passaporte->imagem = $nome_imgPassaporte;
 
                 /* Guarda o passaporte */
