@@ -243,10 +243,8 @@
                 + "-" + ("0" + date.getDate()).slice(-2) + "T"
                 + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
 
-            $("#modalCalendar input[name='dataInicio']").val(string)
-
+            $("#modalCalendar input[name='dataInicio']").val(string);
         }
-
     </script>
 
 @endsection

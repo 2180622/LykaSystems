@@ -34,7 +34,7 @@
             <br>
 
             <div class="report-card shadow-sm">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="/searchHelper" method="POST" enctype="multipart/form-data">
 
                     <div class="row justify-content-md-center">
 
@@ -48,7 +48,7 @@
 
                         <div class="col-md-6 text-center">
                             <div class="search-bar-helper">
-                                <input class="shadow-sm" type="text" id="searchHelper" placeholder="Palavras-chaves"
+                                <input class="shadow-sm" type="search" id="searchHelper" placeholder="Palavras-chaves"
                                        aria-label="Procurar">
                                 <div class="search-button-helper">
                                     <ion-icon name="search-outline" class="search-icon-helper"></ion-icon>
@@ -70,13 +70,13 @@
                             <div class="card shadow pb-3">
                                 <h5 class="card-title">Estudantes</h5>
                                 <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como criar um
+                                    <a href="{{route('ajudaLista')}}"> <i class="fas fa-angle-right pb-2"></i> Como criar um
                                         Estudante?</a>
                                     <br>
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como editar um
+                                    <a href="{{route('ajudaLista')}}"> <i class="fas fa-angle-right pb-2"></i> Como editar um
                                         Estudante?</a>
                                     <br>
-                                    <a> [Mais]</a>
+                                    <a href="{{route('ajudaLista')}}"> [Mais]</a>
                                 </p>
                             </div>
                         </div>
@@ -85,11 +85,11 @@
                             <div class="card shadow pb-3">
                                 <h5 class="card-title">Produtos</h5>
                                 <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como adicionar Produto?</a>
+                                    <a href="{{route('ajudaLista')}}#collapseFour"> <i class="fas fa-angle-right pb-2"></i> Como adicionar Produto?</a>
                                     <br>
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como ...?</a>
+                                    <a href="{{route('ajudaLista')}}"> <i class="fas fa-angle-right pb-2"></i> Como ...?</a>
                                     <br>
-                                    <a> [Mais]</a>
+                                    <a href="{{route('ajudaLista')}}"> [Mais]</a>
                                 </p>
                             </div>
                         </div>
@@ -98,9 +98,9 @@
                             <div class="card shadow pb-3">
                                 <a><h5 class="card-title">Universidades</h5></a>
                                 <p class="card-text pl-4 text-left">
-                                    <a> <i class="fas fa-angle-right pb-2"></i> Como criar um Universidade?</a>
+                                    <a href="{{route('ajudaLista')}}"> <i class="fas fa-angle-right pb-2"></i> Como criar um Universidade?</a>
                                     <br>
-                                    <a> [Mais]</a>
+                                    <a href="{{route('ajudaLista')}}"> [Mais]</a>
                                     <br>
                                 </p>
                             </div>

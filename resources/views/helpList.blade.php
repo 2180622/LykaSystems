@@ -41,7 +41,7 @@
                             <h5 class="mb-0">
                                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
                                         aria-expanded="true" aria-controls="collapseOne">
-                                    <i class="fas fa-angle-right pb-2"></i> Como criar um Estudante?
+                                    <i class="fas fa-angle-right pb-2"></i> Como adicionar um Estudante?
                                 </button>
                             </h5>
                         </div>
@@ -49,9 +49,21 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                              data-parent="#accordion">
                             <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-                                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                <p> A adição de um Estudante deverá ser feita de acordo com os seguintes passos: </p>
+                                <br>
+                                <p style="padding-bottom:4px">- Escolher a opção "
+                                    <ion-icon name="person-circle-outline"
+                                              style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px;"></ion-icon>
+                                    Estudante" através do menu de navegação lateral
+                                </p>
+                                <br>
+                                <p>- Pressionar o botão "Adicionar Estudante"</p>
+                                <br>
+                                <p>- Preencher os campos obrigatórios, que estão devidamente assinalados com uma
+                                    <ion-icon name="close"
+                                              style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px"></ion-icon>
+                                </p>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -61,38 +73,144 @@
                                 <button class="btn btn-link collapsed" data-toggle="collapse"
                                         data-target="#collapseTwo" aria-expanded="false"
                                         aria-controls="collapseTwo">
-                                    <i class="fas fa-angle-right pb-2"></i> Como editar um Estudante?
+                                    <i class="fas fa-angle-right pb-2"></i> Como adicionar uma Universidade?
                                 </button>
                             </h5>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                              data-parent="#accordion">
                             <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-                                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                <p> A adição de uma Universidade deverá ser feita de acordo com os seguintes
+                                    passos: </p>
+                                <br>
+                                <p style="padding-bottom:4px">- Escolher a opção "<i class="fas fa-university mr-1"></i>
+                                    Universidade" através do menu de navegação lateral
+                                </p>
+                                <br>
+                                <p>- Pressionar o botão "Adicionar Universidade"</p>
+                                <br>
+                                <p>- Preencher os campos obrigatórios, que estão devidamente assinalados com uma
+                                    <ion-icon name="close"
+                                              style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px"></ion-icon>
+                                </p>
+                                <br>
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header" id="headingThree">
 
-                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                        data-target="#collapseThree" aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                    <i class="fas fa-angle-right pb-2"></i> Como editar um Estudante?
-                                </button>
+                            <button class="btn btn-link collapsed" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree" id="protudo">
+                                <i class="fas fa-angle-right pb-2" id="protudo"></i> Como adicionar um Agente?
+                            </button>
 
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                              data-parent="#accordion">
                             <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-                                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                <p> A adição de um Agente deverá ser feita de acordo com os seguintes passos: </p>
+                                <br>
+                                <p style="padding-bottom:4px">- Escolher a opção "<i class="fas fa-user-tie mr-1"></i>
+                                    Agente" através do menu de navegação lateral
+                                </p>
+                                <br>
+                                <p>- Pressionar o botão "Adicionar Agente"</p>
+                                <br>
+                                <p>- Preencher os campos obrigatórios, que estão devidamente assinalados com uma
+                                    <ion-icon name="close"
+                                              style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px"></ion-icon>
+                                </p>
+                                <br>
                             </div>
                         </div>
                     </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+
+                            <button class="btn btn-link collapsed" data-toggle="collapse"
+                                    data-target="#collapseFour" aria-expanded="false"
+                                    aria-controls="collapseFour" id="#produto">
+                                <i class="fas fa-angle-right pb-2"></i> Como criar um Produto?
+                            </button>
+
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                <p> A criação de um Produto deverá ser feita de acordo com os seguintes passos: </p>
+                                <br>
+                                <p>- Escolher a opção " <i class="fas fa-tools"></i> Diversos " através do menu de navegação lateral</p>
+                                <br>
+                                <p>- Escolher a opção "Produtos de Stock"</p>
+                                <br>
+                                <p>- Pressionar o botão "Adicionar Produtos de Stock"</p>
+                                <br>
+                                <p>- Preencher os campos obrigatórios, que estão devidamente assinalados com uma
+                                    <ion-icon name="close"
+                                              style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px"></ion-icon>
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+
+                            <button class="btn btn-link collapsed" data-toggle="collapse"
+                                    data-target="#collapseFive" aria-expanded="false"
+                                    aria-controls="collapseFive" id="#produto">
+                                <i class="fas fa-angle-right pb-2"></i> Como adicionar Fornecedor?
+                            </button>
+
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                <p> A adição de um Fornecedor deverá ser feita de acordo com os seguintes passos: </p>
+                                <br>
+                                <p>- Escolher a opção " <i class="fas fa-tools"></i> Diversos " através do menu de navegação lateral</p>
+                                <br>
+                                <p>- Escolher a opção "Fornecedor"</p>
+                                <br>
+                                <p>- Pressionar o botão "Adicionar Fornecedor"</p>
+                                <br>
+                                <p>- Preencher os campos obrigatórios, assinalados com asterisco &#10033;</p>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingSix">
+
+                            <button class="btn btn-link collapsed" data-toggle="collapse"
+                                    data-target="#collapseFive" aria-expanded="false"
+                                    aria-controls="collapseFive" id="#produto">
+                                <i class="fas fa-angle-right pb-2"></i> Como adicionar Fornecedor?
+                            </button>
+
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                <p> A adição de um Fornecedor deverá ser feita de acordo com os seguintes passos: </p>
+                                <br>
+                                <p>- Escolher a opção " <i class="fas fa-tools"></i> Diversos " através do menu de navegação lateral</p>
+                                <br>
+                                <p>- Escolher a opção "Fornecedor"</p>
+                                <br>
+                                <p>- Pressionar o botão "Adicionar Fornecedor"</p>
+                                <br>
+                                <p>- Preencher os campos obrigatórios, assinalados com asterisco &#10033;</p>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
