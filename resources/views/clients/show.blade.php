@@ -262,7 +262,7 @@
                         <div class="border rounded bg-light p-3">
                             {{-- numPassaporte --}}
                             <div><span class="text-secondary my-3">Número do passaporte:</span>
-                                {{$client->num_passaporte}}</div>
+                                {{$client->numPassaporte}}</div>
                             <br>
 
                             {{-- dataValidPP --}}
