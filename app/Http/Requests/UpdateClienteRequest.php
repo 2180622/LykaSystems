@@ -38,9 +38,9 @@ class UpdateClienteRequest extends FormRequest
             'img_docOficial'=> 'nullable',
             'NIF' => 'nullable',
 
-            'num_passaporte'=> 'nullable',
+            'numPassaporte'=> 'nullable',
             'dataValidPP'=> 'nullable',
-            'passaportePaisEmi'=> 'nullable',
+            'passaportPaisEmi'=> 'nullable',
             'localEmissaoPP'=> 'nullable',
             'img_Passaporte'=> 'nullable',
 

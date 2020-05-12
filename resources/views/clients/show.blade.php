@@ -244,7 +244,7 @@
 
                         <div class="border rounded bg-light p-3">
                             {{-- CC IDENTIFICAÇÃO --}}
-                            <div><span class="text-secondary">Número de identificação pessoal:</span>
+                            <div><span class="text-secondary">Número do documento:</span>
                                 {{$client->num_docOficial}}
                             </div>
                             <br>
@@ -269,9 +269,9 @@
                             <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
                                 {{-- {{$infosPassaporte->dataValidPP }} --}}</div><br>
 
-                            {{-- passaportePaisEmi --}}
+                            {{-- passaportPaisEmi --}}
                             <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
-                                {{-- {{$infosPassaporte->passaportePaisEmi ?? ''}} --}}</div><br>
+                                {{-- {{$infosPassaporte->passaportPaisEmi ?? ''}} --}}</div><br>
 
                             {{-- localEmissaoPP --}}
                             <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>
@@ -294,7 +294,7 @@
 
                                         @if ($docpessoal->imagem != null)
                                             <i class="far fa-address-card mr-2"></i>
-                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url($client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
                                         @else
                                             <i class="far fa-address-card mr-2"></i>{{$docpessoal->tipo}} <span class="text-danger">(sem imagem)</span>
                                         @endif

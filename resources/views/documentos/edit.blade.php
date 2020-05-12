@@ -120,7 +120,12 @@
                         </div>
                         <div class="col-md-6">
                             <label for="passaportePaisEmi">País de Emissão: </label>
-                            <input value="{{old('idConta',$documento->passaportePaisEmi)}}" type="text" class="form-control" name="passaportePaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
+
+{{--                        <select name="passaportePaisEmi" class="form-control select_style" required>
+                                @include('layout.partials.countries');
+                            </select> --}}
+
+                            <input value="{{old('idConta',$documento->passaportePaisEmi)}}" type="text" class="form-control" name="passaportePaisEmi" placeholder="País de emissão do passaporte" autocomplete="off" required>
                         </div>
                         <div class="col-md-6">
                             <label for="localEmissaoPP">Local de Emissão: </label>

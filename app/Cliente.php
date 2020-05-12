@@ -23,7 +23,7 @@ class Cliente extends Model
         'paisNaturalidade','morada','cidade','moradaResidencia','nomePai','telefonePai',
         'emailPai','nomeMae','telefoneMae','emailMae','fotografia','NIF','IBAN',
         'nivEstudoAtual','nomeInstituicaoOrigem','cidadeInstituicaoOrigem',
-        'num_docOficial','validade_docOficial','num_passaporte','obsPessoais','obsFinanceiras','obsAcademicas',
+        'num_docOficial','validade_docOficial','numPassaporte','obsPessoais','obsFinanceiras','obsAcademicas',
         ];
 
 

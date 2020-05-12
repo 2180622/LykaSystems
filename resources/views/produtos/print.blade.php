@@ -110,9 +110,9 @@
                 <div><span class="text-secondary font-weight-bold">Data de validade do passaporte:</span>
                     {{$client->dataValidPP}}</div>
 
-                {{--  passaportePaisEmi --}}
+                {{--  passaportPaisEmi --}}
                 <div><span class="text-secondary font-weight-bold">Pais emissor do passaporte:</span>
-                    {{$client->passaportePaisEmi}}</div>
+                    {{$client->passaportPaisEmi}}</div>
 
                 {{--  localEmissaoPP --}}
                 <div><span class="text-secondary font-weight-bold">Local de emissão do passaporte:</span>
