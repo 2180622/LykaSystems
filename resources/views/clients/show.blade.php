@@ -244,7 +244,7 @@
 
                         <div class="border rounded bg-light p-3">
                             {{-- CC IDENTIFICAÇÃO --}}
-                            <div><span class="text-secondary">Número de identificação pessoal:</span>
+                            <div><span class="text-secondary">Número do documento:</span>
                                 {{$client->num_docOficial}}
                             </div>
                             <br>
@@ -269,9 +269,9 @@
                             <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
                                 {{-- {{$infosPassaporte->dataValidPP }} --}}</div><br>
 
-                            {{-- passaportePaisEmi --}}
+                            {{-- passaportPaisEmi --}}
                             <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
-                                {{-- {{$infosPassaporte->passaportePaisEmi ?? ''}} --}}</div><br>
+                                {{-- {{$infosPassaporte->passaportPaisEmi ?? ''}} --}}</div><br>
 
                             {{-- localEmissaoPP --}}
                             <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>

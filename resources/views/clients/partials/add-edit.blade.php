@@ -190,7 +190,7 @@
 
                     <div class="row">
                         <div class="col" style="min-width:300px">
-                            <label for="num_docOficial">Número de identificação pessoal:</label><br>
+                            <label for="num_docOficial">Número do documento:</label><br>
                             <input type="text" class="form-control" name="num_docOficial" id="num_docOficial"
                                 value="{{old('num_docOficial',$client->num_docOficial)}}" placeholder="Número de identificação pessoal"  maxlength="20">
                         </div>
@@ -224,7 +224,7 @@
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ($cartaoCidadao )
+                        @if ( isset ($cartaoCidadao) )
                         <a href="#" title="Clique para modificar o documento de identificação" id="doc_id_preview"
                             class="name_link">
                                 @if ($cartaoCidadao->imagem == null)
@@ -274,10 +274,10 @@
 
                     <div class="row">
                         <div class="col">
-                            {{-- INUPUT num_passaporte --}}
-                            <label for="num_passaporte">Número do passaporte:</label><br>
-                            <input type="text" class="form-control" name="num_passaporte" id="num_passaporte"
-                                value="{{$client->num_passaporte}}" maxlength="20" placeholder="Número do passaporte">
+                            {{-- INUPUT numPassaporte --}}
+                            <label for="numPassaporte">Número do passaporte:</label><br>
+                            <input type="text" class="form-control" name="numPassaporte" id="numPassaporte"
+                                value="{{$client->numPassaporte}}" maxlength="20" placeholder="Número do passaporte">
                         </div>
                         <div class="col">
                             {{-- INUPUT dataValidPP --}}
@@ -321,7 +321,7 @@
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ( $passaporte )
+                        @if ( isset ($passaporte) )
                             <a href="#" title="Clique para modificar o documento do passaporte" id="passporte_preview"
                                 class="name_link">
                                     @if ($passaporte->imagem == null)
@@ -340,7 +340,7 @@
                             </a>
                         @else
                             <a style="display:none;cursor:pointer"
-                                title="Clique para adicionar o documento do passaporte" id="passport_preview"
+                                title="Clique para adicionar o documento do passaporte" id="passporte_preview"
                                 class="name_link">
                                 <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                                 <div id="name_passaporte_file" class="text-muted">

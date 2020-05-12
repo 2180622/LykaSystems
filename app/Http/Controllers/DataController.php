@@ -146,7 +146,7 @@ class DataController extends Controller
         $cliente->cidadeInstituicaoOrigem = 'Paris';
         $cliente->num_docOficial = '9845776436ZZ8';
         $cliente->validade_docOficial = date('Y-m-d',strtotime('27-01-1995'));
-        $cliente->num_passaporte = "324234";
+        $cliente->numPassaporte = "324234";
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
@@ -180,7 +180,7 @@ class DataController extends Controller
         $cliente->cidadeInstituicaoOrigem = 'Paris';
         $cliente->num_docOficial = '61436534643DS4';
         $cliente->validade_docOficial = date('Y-m-d',strtotime('27-01-1993'));
-        $cliente->num_passaporte = "345345345";
+        $cliente->numPassaporte = "345345345";
 
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;

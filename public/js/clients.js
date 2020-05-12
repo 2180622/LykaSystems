@@ -74,9 +74,9 @@
         $('#paisNaturalidade').val(str_paisNaturalidade);
 
 
-        /* Definir passaportePaisEmi */
-        var str_passaportePaisEmi = $("#hidden_passaportePaisEmi").val();
-        $('#passaportePaisEmi').val(str_passaportePaisEmi);
+        /* Definir passaportPaisEmi */
+        var str_passaportPaisEmi = $("#hidden_passaportPaisEmi").val();
+        $('#passaportPaisEmi').val(str_passaportPaisEmi);
 
 
 
@@ -150,36 +150,38 @@
 
 
         //Preview do Passporte+++++++++++++++
-
         $('#passport_preview_file').on('click', function (e) {
             e.preventDefault();
             $('#img_Passaporte').trigger('click');
         });
 
-        $('#passport_preview').on('click', function (e) {
+        $('#passporte_preview').on('click', function (e) {
             e.preventDefault();
             $('#img_Passaporte').trigger('click');
         });
 
 
-        function readPassaporteImgURL(input) {
+        function readPassaPortImgURL(input) {
             if (input.files && input.files[0]) {
-                var passaporte = new FileReader();
-                passaporte.onload = function (e) {
-                    passaporte.fileName = img_Passaporte.name;
+                var iddocumento = new FileReader();
+                iddocumento.onload = function (e) {
+                    iddocumento.fileName = img_Passaporte.name;
                     $('#name_passaporte_file').text(input.files[0].name);
                 }
 
-                passaporte.readAsDataURL(input.files[0]);
+                iddocumento.readAsDataURL(input.files[0]);
             }
         }
 
         $("#img_Passaporte").change(function () {
-            readPassaporteImgURL(this);
+            readPassaPortImgURL(this);
             $('#passport_preview_file').hide();
-            $('#passport_preview').show();
+            $('#passporte_preview').show();
 
         });
+
+
+
 
 
 
