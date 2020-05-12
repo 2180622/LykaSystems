@@ -112,8 +112,8 @@
                             <input type="month" class="form-control" name="dataValidPP" value="" style="width:250px" required><br>
                         </div>
                         <div class="col-md-6">
-                            <label for="passaportePaisEmi">País de Emissão: </label>
-                            <input type="text" class="form-control" name="passaportePaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
+                            <label for="passaportPaisEmi">País de Emissão: </label>
+                            <input type="text" class="form-control" name="passaportPaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
                         </div>
                         <div class="col-md-6">
                             <label for="localEmissaoPP">Local de Emissão: </label>

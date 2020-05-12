@@ -119,8 +119,8 @@
                             <input value="{{old('idConta',$documento->dataValidPP)}}" type="month" class="form-control" name="dataValidPP" value="{{date('Y-m', strtotime($documento->dataValidade))}}" style="width:250px" required><br>
                         </div>
                         <div class="col-md-6">
-                            <label for="passaportePaisEmi">País de Emissão: </label>
-                            <input value="{{old('idConta',$documento->passaportePaisEmi)}}" type="text" class="form-control" name="passaportePaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
+                            <label for="passaportPaisEmi">País de Emissão: </label>
+                            <input value="{{old('idConta',$documento->passaportPaisEmi)}}" type="text" class="form-control" name="passaportPaisEmi" placeholder="Tipo pagamento" autocomplete="off" required>
                         </div>
                         <div class="col-md-6">
                             <label for="localEmissaoPP">Local de Emissão: </label>

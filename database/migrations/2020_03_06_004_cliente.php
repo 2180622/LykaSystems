@@ -44,7 +44,7 @@ class Cliente extends Migration
 /*             $table->string('img_docOficial',255)->nullable(); */
             $table->longText('validade_docOficial')->nullable(); /* data de validade */
 /*             $table->string('img_Passaporte',255)->nullable(); */
-            $table->longText('num_passaporte')->nullable()->nullable();
+            $table->longText('numPassaporte')->nullable();
 /*             $table->string('img_docAcademico',255)->nullable(); */
 /*             $table->longText('info_docAcademico')->nullable(); */
 
