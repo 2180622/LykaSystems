@@ -69,11 +69,11 @@ class ExtraFunctionsController extends Controller
         switch ($user) {
           case 'clientes':
               if (($name && $surname) != null) {
-                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
+                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'email', 'fotografia', 'slug')->get();
               }elseif ($name != null && $surname == null) {
-                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
+                  $result = Cliente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'email', 'fotografia', 'slug')->get();
               }elseif ($name == null && $surname != null) {
-                  $result = Cliente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
+                  $result = Cliente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'email', 'fotografia', 'slug')->get();
               }else {
                   return response()->json("nok", 500);
               }
@@ -81,11 +81,11 @@ class ExtraFunctionsController extends Controller
 
           case 'agentes':
               if (($name && $surname) != null) {
-                  $result = Agente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
+                  $result = Agente::where('nome', 'like', '%'.$name.'%')->where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'email', 'fotografia', 'slug')->get();
               }elseif ($name != null && $surname == null) {
-                  $result = Agente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
+                  $result = Agente::where('nome', 'like', '%'.$name.'%')->select('nome', 'apelido', 'telefone1', 'email', 'fotografia', 'slug')->get();
               }elseif ($name == null && $surname != null) {
-                  $result = Agente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'telefone2', 'email', 'fotografia', 'slug')->get();
+                  $result = Agente::where('apelido', 'like', '%'.$surname.'%')->select('nome', 'apelido', 'telefone1', 'email', 'fotografia', 'slug')->get();
               }else {
                   return response()->json("nok", 500);
               }
@@ -93,7 +93,7 @@ class ExtraFunctionsController extends Controller
 
           case 'universidades':
               if ($name != null) {
-                  $result = Universidade::where('nome', 'like', '%'.$name.'%')->select('nome', 'morada', 'telefone', 'email', 'slug')->get();
+                  $result = Universidade::where('nome', 'like', '%'.$name.'%')->select('nome', 'telefone', 'email', 'slug')->get();
               }else {
                   return response()->json("nok", 500);
               }
