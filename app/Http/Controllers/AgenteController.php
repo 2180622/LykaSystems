@@ -186,10 +186,8 @@ class AgenteController extends Controller
 
 
 
-        /* lista de alunos do agente */
-
-
-/*         $clients = Cliente::
+        /* lista de alunos do agente Através de produtos  */
+/*       $clients = Cliente::
         selectRaw("Cliente.*")
         ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
         ->where('Produto.idAgente', '=', $agent->idAgente)
@@ -203,6 +201,8 @@ class AgenteController extends Controller
             $clients=null;
         } */
 
+
+        /* lista de alunos do agente associação na ficha de cliente  */
         $clients = Cliente::
         where('idAgente', '=', $agent->idAgente)
         ->get();
