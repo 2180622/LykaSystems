@@ -84,7 +84,6 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        dd($user);
         $user->admin->delete();
         User::where('idUser', $user->idUser)->update([
           'auth_key' => null,

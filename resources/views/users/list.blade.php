@@ -187,7 +187,7 @@
             var name = button.data('name');
             var modal = $(this);
             modal.find('#text').text(name);
-            modal.find("form").attr('action', '/utilizadores/' + button.data('slug'));
+            modal.find("form").attr('action', '/administradores/' + button.data('slug'));
         });
     });
 </script>
