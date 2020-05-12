@@ -60,6 +60,14 @@ class DocAcademicoController extends Controller
             }
 
             $documento = new DocAcademico;
+
+            if($infoDoc){
+                $documento->info = json_encode($infoDoc);
+            }else{
+                return redirect()->back()->withErrors(['message'=>$docnecessario->tipoDocumento.' tem de conter no minimo 1 campo']);
+            }
+
+
             $documento->tipo=$docnecessario->tipoDocumento;
             if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
                 $documento->verificacao = true;
@@ -80,8 +88,6 @@ class DocAcademicoController extends Controller
                 $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
             }
             $documento->imagem = $source;
-            
-            $documento->info = json_encode($infoDoc);
             $documento->save();
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', $docnecessario->tipoDocumento.' adicionado com sucesso');
@@ -168,6 +174,13 @@ class DocAcademicoController extends Controller
                     break;
                 }
             }
+
+
+            if($infoDoc){
+                $documento->info = json_encode($infoDoc);
+            }else{
+                return redirect()->back()->withErrors(['message'=>$documento->tipo.' tem de conter no minimo 1 campo']);
+            }
             
             if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
                 $documento->verificacao = true;
@@ -187,9 +200,6 @@ class DocAcademicoController extends Controller
                     $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
                 }
                 $documento->imagem = $source;
-            }
-            if($infoDoc){
-                $documento->info = json_encode($infoDoc);
             }
             $documento->save();
             return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do '.$documento->tipo.' editados com sucesso');
