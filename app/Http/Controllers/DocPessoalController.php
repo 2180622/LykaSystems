@@ -53,7 +53,7 @@ class DocPessoalController extends Controller
             $infoDoc = null;
             if(strtolower($docnecessario->tipoDocumento) == "passaporte"){
                 $infoDoc['numPassaporte'] = $fields['numPassaporte'];
-                $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP']).'-1');
+                $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP'].'-1'));
                 $infoDoc['passaportePaisEmi'] = $fields['passaportePaisEmi'];
                 $infoDoc['localEmissaoPP'] = $fields['localEmissaoPP'];
             }
@@ -177,7 +177,7 @@ class DocPessoalController extends Controller
             $infoDoc = null;
             if(strtolower($documento->tipo) == "passaporte"){
                 $infoDoc['numPassaporte'] = $fields['numPassaporte'];
-                $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP']).'-1');
+                $infoDoc['dataValidPP'] = date("Y-m-d",strtotime($fields['dataValidPP'].'-1'));
                 $infoDoc['passaportePaisEmi'] = $fields['passaportePaisEmi'];
                 $infoDoc['localEmissaoPP'] = $fields['localEmissaoPP'];
             }
