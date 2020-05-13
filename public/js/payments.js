@@ -205,28 +205,3 @@ function selected() {
         document.getElementById('universidades').setAttribute("disabled", "true");
     }
 }
-
-// Modal -> Resposanbilidades content
-$('#modal').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget);
-    var modal = $(this);
-
-    infocliente = button.data('infocliente');
-
-    if (infocliente == null) {
-        console.log(infocliente);
-    }else {
-        console.log('test');
-    }
-
-    modal.find('.modal-title').text('Responsabilidade de ' + button.data('nome') + ' - ' + button.data('fase') + ' (Visualização)');
-    modal.find('.modal-body').append('Valor cliente: ' + button.data('infocliente'));
-
-    modal.find('#valor-cliente').val(infocliente);
-    modal.find('#valor-agente').val(button.data('valoragente'));
-    modal.find('#valor-subagente').val(button.data('valorsubagente'));
-    modal.find('#valor-uni1').val(button.data('valoruni1'));
-    modal.find('#valor-uni2').val(button.data('valoruni2'));
-    modal.find("form").attr('action', '/pagamentos/' + button.data('id'));
-
-})

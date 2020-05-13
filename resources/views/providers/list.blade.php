@@ -12,10 +12,6 @@
 {{-- Conteúdo da Página --}}
 @section('content')
 
-@php
-use \App\Http\Controllers\ExtraFunctionsController;
-@endphp
-
 <div class="container mt-2 ">
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -62,7 +58,6 @@ use \App\Http\Controllers\ExtraFunctionsController;
                 <thead>
                     <tr style="border-bottom: 2px solid #dee2e6;">
                         <th>Nome</th>
-                        <th>Descrição</th>
                         <th>Morada</th>
                         <th>Contacto</th>
                         <th>Opções</th>
@@ -72,17 +67,13 @@ use \App\Http\Controllers\ExtraFunctionsController;
                     @foreach ($providers as $provider)
                     <tr>
                         <td class="align-middle">{{$provider->nome}}</td>
-                        <td class="align-middle">{{$provider->descricao}}</td>
                         <td class="align-middle">{{$provider->morada}}</td>
-                        <td class="align-middle">{{$provider->contacto}}</td>
+                        <td class="align-middle text-truncate">{{$provider->contacto}}</td>
 
-                        <td class="text-center align-middle">
+                        <td class="text-center align-middle" style="min-width: 120px;">
                             <a href="{{route('provider.show', $provider)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                             <a href="{{route('provider.edit', $provider)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-                            <?php
-                              $descricao = ExtraFunctionsController::post_slug($provider->descricao);
-                            ?>
-                            <button type="button" class="btn_delete" title="Eliminar fornecedor" data-toggle="modal" data-target="#deleteModal" data-name="{{$provider->nome}}" data-descricao="{{$descricao}}"><i class="fas fa-trash-alt"></i></button>
+                            <button type="button" class="btn_delete" title="Eliminar fornecedor" data-toggle="modal" data-target="#deleteModal" data-name="{{$provider->nome}}" data-descricao="{{post_slug($provider->descricao)}}"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                     @endforeach

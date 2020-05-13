@@ -1,6 +1,6 @@
 <style media="screen">
-    select,
-    input {
+    #modalContacts select,
+    #modalContacts input {
         width: 100%;
         border: none;
         color: #747474;
@@ -14,12 +14,12 @@
         transition: 0.3s ease-in-out;
     }
 
-    select {
+    #modalContacts select {
         cursor: pointer;
     }
 
-    select:focus,
-    input:focus {
+    #modalContacts select:focus,
+    #modalContacts input:focus {
         outline: 0;
         color: #495057;
         border-color: #80bdff;
@@ -27,19 +27,19 @@
         box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
     }
 
-    #error {
+    #modalContacts #error {
         color: #e3342f;
         font-size: 10pt;
         display: inherit;
         margin-bottom: 10px;
     }
 
-    p {
+    #modalContacts p {
         font-weight: 700;
         margin-bottom: 0;
     }
 
-    .charge-div {
+    #modalContacts .charge-div {
         margin-top: 20px;
         padding: 12px 10px;
         border-radius: 10px;
@@ -47,26 +47,26 @@
         transition: 0.1s ease-in-out;
     }
 
-    .charge-div:hover {
+    #modalContacts .charge-div:hover {
         background-color: rgb(235, 235, 235);
     }
 
-    .white-circle {
+    #modalContacts .white-circle {
         width: 40px;
         height: 40px;
         border-radius: 50%;
         background-color: white;
     }
 
-    .white-circle img {
+    #modalContacts .white-circle img {
         border-radius: 50%;
     }
 
-    a {
+    #modalContacts a {
         color: #747474;
     }
 
-    a:hover {
+    #modalContacts a:hover {
         color: #747474;
         text-decoration: none;
     }

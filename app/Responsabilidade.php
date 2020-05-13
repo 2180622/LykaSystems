@@ -14,10 +14,29 @@ class Responsabilidade extends Model
     protected $primaryKey = 'idResponsabilidade';
 
     protected $fillable = [
-        'valorCliente','valorAgente','valorSubAgente','valorUniversidade1',
-        'valorUniversidade2','verificacaoPagoCliente','verificacaoPagoAgente',
-        'verificacaoPagoSubAgente','verificacaoPagoUni1','verificacaoPagoUni2',
-        '$idAgente','$idSubAgente','$idCliente','$idUniversidade1','$idUniversidade2'
+        'valorCliente',
+        'valorAgente',
+        'valorSubAgente',
+        'valorUniversidade1',
+        'valorUniversidade2',
+        'verificacaoPagoCliente',
+        'verificacaoPagoAgente',
+        'verificacaoPagoSubAgente',
+        'verificacaoPagoUni1',
+        'verificacaoPagoUni2',
+        '$idAgente',
+        '$idSubAgente',
+        '$idCliente',
+        '$idUniversidade1',
+        '$idUniversidade2'
+    ];
+
+    protected $dates = [
+        'dataVencimentoCliente',
+        'dataVencimentoAgente',
+        'dataVencimentoSubAgente',
+        'dataVencimentoUni1',
+        'dataVencimentoUni2'
     ];
 
     public function cliente(){
