@@ -14,7 +14,7 @@ class LoginTest extends TestCase
 
     public function redirecionar_de_lista_cliente_para_login()
     {
-        $response = $this->get('/clients')->assertRedirect('/login');
+        $response = $this->get('/clientes')->assertRedirect('/login');
     }
     
     public function redirecionar_de_show_cliente_para_login()
