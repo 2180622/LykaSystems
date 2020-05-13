@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Auth;
+
 
 Auth::routes();
 
@@ -35,29 +37,78 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
 /*     Route::resource('/contacts', 'ContactoController', ['except' => ['create']]); */
 
+
+
     /* Universidades */
-    Route::resource('/universities', 'UniversityController');
+    Route::resource('/universidades', 'UniversityController')->parameters([
+        'universidades' => 'university'
+      ])->names([
+        'index' => 'universities.index',
+        'store' => 'universities.store',
+        'create' => 'universities.create',
+        'show' => 'universities.show',
+        'update' => 'universities.update',
+        'destroy' => 'universities.destroy',
+        'edit' => 'universities.edit',
+      ]);
+
+
 
     /* Estudantes */
-    Route::get('/clients/print/{client}', 'ClientController@print')->name('clients.print');
-    Route::resource('/clients', 'ClientController');
+    Route::get('/clientes/print/{client}', 'ClientController@print')->name('clients.print');
+    Route::resource('/clientes', 'ClientController')->parameters([
+        'clientes' => 'client'
+      ])->names([
+        'index' => 'clients.index',
+        'store' => 'clients.store',
+        'create' => 'clients.create',
+        'show' => 'clients.show',
+        'update' => 'clients.update',
+        'destroy' => 'clients.destroy',
+        'edit' => 'clients.edit',
+      ]);
+
+
 
     /* Agentes */
     Route::get('/agents/print/{agent}', 'AgenteController@print')->name('agents.print');
-    Route::resource('/agents', 'AgenteController');
+    Route::resource('/agentes', 'AgenteController')->parameters([
+        'agentes' => 'agent'
+      ])->names([
+        'index' => 'agents.index',
+        'store' => 'agents.store',
+        'create' => 'agents.create',
+        'show' => 'agents.show',
+        'update' => 'agents.update',
+        'destroy' => 'agents.destroy',
+        'edit' => 'agents.edit',
+      ]);
 
     /* Biblioteca */
-    Route::resource('/libraries', 'LibraryController');
+    Route::resource('/biblioteca', 'LibraryController')->parameters([
+        'biblioteca' => 'library'
+      ])->names([
+        'index' => 'libraries.index',
+        'store' => 'libraries.store',
+        'create' => 'libraries.create',
+        'show' => 'libraries.show',
+        'update' => 'libraries.update',
+        'destroy' => 'libraries.destroy',
+        'edit' => 'libraries.edit',
+      ]);
+
 
     /* Agenda */
     Route::resource('/agenda', 'AgendController');
     Route::post('/agenda', 'AgendController@store')->name('agend.store');
+
 
     /* Pagamentos */
     Route::get('/pagamentos', 'PaymentController@index')->name('payments.index');
     Route::post('/pagamentos/pesquisa', 'PaymentController@search')->name('payments.search');
     Route::post('/pagamentos/{responsabilidade}', 'PaymentController@create')->name('payments.create');
     Route::post('/pagamentos/{responsabilidade}/registar', 'PaymentController@store')->name('payments.store');
+
 
     /* Cobranças */
     Route::get('/cobrancas', 'ChargesController@index')->name('charges.index');
@@ -72,6 +123,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       Route::get('/cobrancas/{product}/{fase}/{document}/editar', 'ChargesController@edit')->name('charges.edit');
       Route::put('/cobrancas/{product}/{document}', 'ChargesController@update')->name('charges.update');
 
+
     /* Utilizadores */
     Route::resource('/administradores', 'UserController')->parameters([
       'administradores' => 'user'
@@ -85,6 +137,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       'edit' => 'users.edit',
     ]);
 
+    
     /* Produto Stock*/
     Route::resource('/produtostock', 'ProdutosstockController');
     Route::get('/produtostock/{fasestock}', 'ProdutosstockController@show')->name('produtostock.show');
