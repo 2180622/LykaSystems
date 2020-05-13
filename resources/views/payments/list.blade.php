@@ -92,10 +92,10 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div id="filter-icon-div" class="ml-auto" onclick="showCloseIcon()" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <div id="filter-icon-div" class="ml-auto" onclick="showCloseIcon()" data-toggle="collapse" href="#search-collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <ion-icon id="icon-funnel" name="funnel" title="Filtragem"></ion-icon>
                     </div>
-                    <div id="close-icon-div" class="ml-auto" onclick="showFunnelIcon()" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <div id="close-icon-div" class="ml-auto" onclick="showFunnelIcon()" data-toggle="collapse" href="#search-collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <ion-icon id="icon-close" name="close" title="Filtragem"></ion-icon>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="filters-div collapse" id="collapseExample">
+                    <div class="filters-div collapse" id="search-collapse">
                         <div class="payment-card shadow-sm">
                             <div id="div-options">
                                 <div class="row">
@@ -193,214 +193,216 @@
         </div>
         @endif
 
-        <div class="container">
-            @if (count($responsabilidades))
-            @foreach ($responsabilidades as $responsabilidade)
-
-            {{-- Pagamentos aos clientes --}}
-            @if ($responsabilidade->valorCliente != null)
-            <a href="#">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+        <div class="container" id="append-payment">
+            <div class="payments">
+                @if (count($responsabilidades))
+                @foreach ($responsabilidades as $responsabilidade)
+                {{-- Pagamentos aos CLIENTES --}}
+                @if ($responsabilidade->valorCliente != null)
+                <a href="#">
+                    <div class="row charge-div">
+                        <div class="col-md-1 align-self-center">
+                            <div class="white-circle">
+                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-truncate align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}">{{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center">
+                            <p class="text-truncate">{{number_format((float) $responsabilidade->valorCliente, 2, ',', '').'€'}}</p>
+                        </div>
+                        <div class="col-md-2 align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->dataVencimentoCliente->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoCliente))}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center ml-auto">
+                            <p class="text-truncate" @if($responsabilidade->verificacaoPagoCliente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoCliente == false &&
+                                    $responsabilidade->dataVencimentoCliente < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                        @if ($responsabilidade->verificacaoPagoCliente == false && $responsabilidade->dataVencimentoCliente
+                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoCliente == false && $responsabilidade->dataVencimentoCliente > date_create(date("d/m/Y")))
+                                        Pendente
+                                        @elseif ($responsabilidade->verificacaoPagoCliente == true)
+                                        Pago
+                                        @endif
+                            </p>
                         </div>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}">{{$responsabilidade->cliente->nome.' '.$responsabilidade->cliente->apelido}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center">
-                        <p class="text-truncate">{{number_format((float) $responsabilidade->valorCliente, 2, ',', '').'€'}}</p>
-                    </div>
-                    <div class="col-md-2 align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->dataVencimentoCliente->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoCliente))}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate" @if($responsabilidade->verificacaoPagoCliente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoCliente == false && $responsabilidade->dataVencimentoCliente < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
-                            @if ($responsabilidade->verificacaoPagoCliente == false && $responsabilidade->dataVencimentoCliente < date_create(date("d/m/Y")))
-                              Dívida
-                            @elseif ($responsabilidade->verificacaoPagoCliente == false && $responsabilidade->dataVencimentoCliente > date_create(date("d/m/Y")))
-                              Pendente
-                            @elseif ($responsabilidade->verificacaoPagoCliente == true)
-                              Pago
-                            @endif
-                        </p>
-                    </div>
-                </div>
-            </a>
-            @endif
+                </a>
+                @endif
 
-            {{-- Pagamentos aos agentes --}}
-            @if ($responsabilidade->valorAgente != null)
-            <a href="#">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                {{-- Pagamentos aos AGENTES --}}
+                @if ($responsabilidade->valorAgente != null)
+                <a href="#">
+                    <div class="row charge-div">
+                        <div class="col-md-1 align-self-center">
+                            <div class="white-circle">
+                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-truncate align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->agente->nome.' '.$responsabilidade->agente->apelido}}">{{$responsabilidade->agente->nome.' '.$responsabilidade->agente->apelido}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center">
+                            <p class="text-truncate">{{number_format((float) $responsabilidade->valorAgente, 2, ',', '').'€'}}</p>
+                        </div>
+                        <div class="col-md-2 align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->dataVencimentoAgente->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoAgente))}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center ml-auto">
+                            <p class="text-truncate" @if($responsabilidade->verificacaoPagoAgente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente <
+                                      date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                        @if ($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente
+                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente > date_create(date("d/m/Y")))
+                                        Pendente
+                                        @elseif ($responsabilidade->verificacaoPagoAgente == true)
+                                        Pago
+                                        @endif
+                            </p>
                         </div>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->agente->nome.' '.$responsabilidade->agente->apelido}}">{{$responsabilidade->agente->nome.' '.$responsabilidade->agente->apelido}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center">
-                        <p class="text-truncate">{{number_format((float) $responsabilidade->valorAgente, 2, ',', '').'€'}}</p>
-                    </div>
-                    <div class="col-md-2 align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->dataVencimentoAgente->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoAgente))}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate" @if($responsabilidade->verificacaoPagoAgente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
-                            @if ($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente < date_create(date("d/m/Y")))
-                              Dívida
-                            @elseif ($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente > date_create(date("d/m/Y")))
-                              Pendente
-                            @elseif ($responsabilidade->verificacaoPagoAgente == true)
-                              Pago
-                            @endif
-                        </p>
-                    </div>
-                </div>
-            </a>
-            @endif
+                </a>
+                @endif
 
-            {{-- Pagamentos aos subagentes --}}
-            @if ($responsabilidade->valorSubAgente != null)
-            <a href="#">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                {{-- Pagamentos aos SUBAGENTES --}}
+                @if ($responsabilidade->valorSubAgente != null)
+                <a href="#">
+                    <div class="row charge-div">
+                        <div class="col-md-1 align-self-center">
+                            <div class="white-circle">
+                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-truncate align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->subAgente->nome.' '.$responsabilidade->subAgente->apelido}}">{{$responsabilidade->subAgente->nome.' '.$responsabilidade->subAgente->apelido}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center">
+                            <p class="text-truncate">{{number_format((float) $responsabilidade->valorSubAgente, 2, ',', '').'€'}}</p>
+                        </div>
+                        <div class="col-md-2 align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->dataVencimentoSubAgente->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoSubAgente))}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center ml-auto">
+                            <p class="text-truncate" @if($responsabilidade->verificacaoPagoSubAgente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoSubAgente == false &&
+                                    $responsabilidade->dataVencimentoSubAgente < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                        @if ($responsabilidade->verificacaoPagoSubAgente == false && $responsabilidade->dataVencimentoSubAgente
+                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoSubAgente == false && $responsabilidade->dataVencimentoSubAgente > date_create(date("d/m/Y")))
+                                        Pendente
+                                        @elseif ($responsabilidade->verificacaoPagoSubAgente == true)
+                                        Pago
+                                        @endif
+                            </p>
                         </div>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->subAgente->nome.' '.$responsabilidade->subAgente->apelido}}">{{$responsabilidade->subAgente->nome.' '.$responsabilidade->subAgente->apelido}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center">
-                        <p class="text-truncate">{{number_format((float) $responsabilidade->valorSubAgente, 2, ',', '').'€'}}</p>
-                    </div>
-                    <div class="col-md-2 align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->dataVencimentoSubAgente->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoSubAgente))}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate" @if($responsabilidade->verificacaoPagoSubAgente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoSubAgente == false && $responsabilidade->dataVencimentoSubAgente < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
-                            @if ($responsabilidade->verificacaoPagoSubAgente == false && $responsabilidade->dataVencimentoSubAgente < date_create(date("d/m/Y")))
-                              Dívida
-                            @elseif ($responsabilidade->verificacaoPagoSubAgente == false && $responsabilidade->dataVencimentoSubAgente > date_create(date("d/m/Y")))
-                              Pendente
-                            @elseif ($responsabilidade->verificacaoPagoSubAgente == true)
-                              Pago
-                            @endif
-                        </p>
-                    </div>
-                </div>
-            </a>
-            @endif
+                </a>
+                @endif
 
-            {{-- Pagamentos as universidades --}}
-            @if ($responsabilidade->valorUniversidade1 != null)
-            <a href="#">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                {{-- Pagamentos as UNIVERSIDADES --}}
+                @if ($responsabilidade->valorUniversidade1 != null)
+                <a href="#">
+                    <div class="row charge-div">
+                        <div class="col-md-1 align-self-center">
+                            <div class="white-circle">
+                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-truncate align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->universidade1->nome}}">{{$responsabilidade->universidade1->nome}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center">
+                            <p class="text-truncate">{{number_format((float) $responsabilidade->valorUniversidade1, 2, ',', '').'€'}}</p>
+                        </div>
+                        <div class="col-md-2 align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->dataVencimentoUni1->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoUni1))}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center ml-auto">
+                            <p class="text-truncate" @if($responsabilidade->verificacaoPagoUni1 == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 <
+                                      date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                        @if ($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1
+                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 > date_create(date("d/m/Y")))
+                                        Pendente
+                                        @elseif ($responsabilidade->verificacaoPagoUni1 == true)
+                                        Pago
+                                        @endif
+                            </p>
                         </div>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->universidade1->nome}}">{{$responsabilidade->universidade1->nome}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center">
-                        <p class="text-truncate">{{number_format((float) $responsabilidade->valorUniversidade1, 2, ',', '').'€'}}</p>
-                    </div>
-                    <div class="col-md-2 align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->dataVencimentoUni1->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoUni1))}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate" @if($responsabilidade->verificacaoPagoUni1 == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
-                            @if ($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 < date_create(date("d/m/Y")))
-                              Dívida
-                            @elseif ($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 > date_create(date("d/m/Y")))
-                              Pendente
-                            @elseif ($responsabilidade->verificacaoPagoUni1 == true)
-                              Pago
-                            @endif
-                        </p>
-                    </div>
-                </div>
-            </a>
-            @endif
+                </a>
+                @endif
 
-            {{-- Pagamentos as universidades secundárias --}}
-            @if ($responsabilidade->valorUniversidade2 != null)
-            <a href="#">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                {{-- Pagamentos as UNIVERSIDADES SECUNDÁRIAS --}}
+                @if ($responsabilidade->valorUniversidade2 != null)
+                <a href="#">
+                    <div class="row charge-div">
+                        <div class="col-md-1 align-self-center">
+                            <div class="white-circle">
+                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-truncate align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->universidade2->nome}}">{{$responsabilidade->universidade2->nome}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center">
+                            <p class="text-truncate">{{number_format((float) $responsabilidade->valorUniversidade2, 2, ',', '').'€'}}</p>
+                        </div>
+                        <div class="col-md-2 align-self-center ml-4">
+                            <p class="text-truncate" title="{{$responsabilidade->dataVencimentoUni2->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoUni2))}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center ml-auto">
+                            <p class="text-truncate" @if($responsabilidade->verificacaoPagoUni2 == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2 <
+                                      date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                        @if ($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2
+                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2 > date_create(date("d/m/Y")))
+                                        Pendente
+                                        @elseif ($responsabilidade->verificacaoPagoUni2 == true)
+                                        Pago
+                                        @endif
+                            </p>
                         </div>
                     </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->universidade2->nome}}">{{$responsabilidade->universidade2->nome}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center">
-                        <p class="text-truncate">{{number_format((float) $responsabilidade->valorUniversidade2, 2, ',', '').'€'}}</p>
-                    </div>
-                    <div class="col-md-2 align-self-center ml-4">
-                        <p class="text-truncate" title="{{$responsabilidade->dataVencimentoUni2->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoUni2))}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate" @if($responsabilidade->verificacaoPagoUni2 == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2 < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
-                            @if ($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2 < date_create(date("d/m/Y")))
-                              Dívida
-                            @elseif ($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2 > date_create(date("d/m/Y")))
-                              Pendente
-                            @elseif ($responsabilidade->verificacaoPagoUni2 == true)
-                              Pago
-                            @endif
-                        </p>
-                    </div>
-                </div>
-            </a>
-            @endif
+                </a>
+                @endif
 
-            @foreach ($responsabilidade->relacao as $relacao)
-              <a href="#">
-                  <div class="row charge-div">
-                      <div class="col-md-1 align-self-center">
-                          <div class="white-circle">
-                              <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                          </div>
-                      </div>
-                      <div class="col-md-3 text-truncate align-self-center ml-4">
-                          <p class="text-truncate" title="{{$relacao->fornecedor->nome}}">{{$relacao->fornecedor->nome}}</p>
-                      </div>
-                      <div class="col-md-2 text-truncate align-self-center">
-                          <p class="text-truncate">{{number_format((float) $relacao->valor, 2, ',', '').'€'}}</p>
-                      </div>
-                      <div class="col-md-2 align-self-center ml-4">
-                          <p class="text-truncate" title="{{$relacao->dataVencimento->format('d/m/Y')}}">{{date('d/m/Y', strtotime($relacao->dataVencimento))}}</p>
-                      </div>
-                      <div class="col-md-2 text-truncate align-self-center ml-auto">
-                          <p class="text-truncate" @if($relacao->verificacaoPago == true) style="color:#47BC00;" @elseif($relacao->verificacaoPago == false && $relacao->estado == "Dívida") style="color:#FF3D00;" @endif>
-                              @if ($relacao->verificacaoPago == false && $relacao->estado == "Dívida")
-                                Dívida
-                              @elseif ($relacao->verificacaoPago == false && $relacao->estado == "Pendente")
-                                Pendente
-                              @elseif ($relacao->verificacaoPago == true)
-                                Pago
-                              @endif
-                          </p>
-                      </div>
-                  </div>
-              </a>
-            @endforeach
-            @endforeach
-            @else
-            <div class="row" style="padding: 0px 18px;">
-                <div class="container no-data-div text-center mt-3">
-                    <p style="color:#252525;">Não existem pagamentos registados.</p>
+                {{-- Pagamentos aos FORNECEDORES EXTERNOS --}}
+                @foreach ($responsabilidade->relacao as $relacao)
+                <a href="#">
+                    <div class="row charge-div">
+                        <div class="col-md-1 align-self-center">
+                            <div class="white-circle">
+                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-truncate align-self-center ml-4">
+                            <p class="text-truncate" title="{{$relacao->fornecedor->nome}}">{{$relacao->fornecedor->nome}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center">
+                            <p class="text-truncate">{{number_format((float) $relacao->valor, 2, ',', '').'€'}}</p>
+                        </div>
+                        <div class="col-md-2 align-self-center ml-4">
+                            <p class="text-truncate" title="{{$relacao->dataVencimento->format('d/m/Y')}}">{{date('d/m/Y', strtotime($relacao->dataVencimento))}}</p>
+                        </div>
+                        <div class="col-md-2 text-truncate align-self-center ml-auto">
+                            <p class="text-truncate" @if($relacao->verificacaoPago == true) style="color:#47BC00;" @elseif($relacao->verificacaoPago == false && $relacao->estado == "Dívida") style="color:#FF3D00;" @endif>
+                                        @if ($relacao->verificacaoPago == false && $relacao->estado == "Dívida")
+                                        Dívida
+                                        @elseif ($relacao->verificacaoPago == false && $relacao->estado == "Pendente")
+                                        Pendente
+                                        @elseif ($relacao->verificacaoPago == true)
+                                        Pago
+                                        @endif
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+                @endforeach
+                @else
+                <div class="row" style="padding: 0px 18px;">
+                    <div class="container no-data-div text-center mt-3">
+                        <p style="color:#252525;">Não existem pagamentos registados.</p>
+                    </div>
                 </div>
+                @endif
             </div>
-            @endif
         </div>
     </div>
 </div>

@@ -229,7 +229,39 @@ $('#search-form').submit(function(event) {
         context: this,
         data: info,
         success: function(data) {
-            console.log('OK');
+            $(".payments").remove();
+            div = "<div class='payments'><div>";
+            $("#append-payment").append(div);
+
+            for (var i = 0; i < data.length; i++) {
+                // Pagamentos aos CLIENTES
+                if (data[i].valorCliente != null) {
+                    // Formato da DATA DE VENCIMENTO
+                    const d = new Date(data[i].dataVencimentoCliente);
+                    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+                    const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+                    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+                    date = `${da}/${mo}/${ye}`;
+
+                    // Seleções de CORES _ Estado de PAGAMENTOS
+                    if (data[i].verificacaoPagoCliente == true) {
+                        status = "Pago";
+                        color = "#47BC00"; // VERDE
+                    }else if (data[i].verificacaoPagoCliente == false && data[i].dataVencimentoCliente < date) {
+                        status = "Dívida";
+                        color = "#FF3D00"; // VERMELHO
+                    }else if (data[i].verificacaoPagoCliente == false && data[i].dataVencimentoCliente > date) {
+                        status = "Pendente";
+                        color = "#747474"; // CINZENTO (DEFAULT)
+                    }
+
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+data[i].cliente.nome+"'>"+ data[i].cliente.nome + ' ' + data[i].cliente.apelido +"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ data[i].valorCliente.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                    $(".payments").append(html);
+                }
+            }
+
+            window.location.assign("http://lykasystems.test/pagamentos#append-payment");
+            history.pushState("", document.title, window.location.pathname);
         },
         error: function() {
             console.log('NOK');
