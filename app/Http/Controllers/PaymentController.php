@@ -22,7 +22,7 @@ class PaymentController extends Controller
     public function index()
     {
       $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")
-      ->with(['cliente', 'agente', 'universidade1'])
+      ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"])
       ->get();
 
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
@@ -136,16 +136,16 @@ class PaymentController extends Controller
         }elseif ($responsabilidadeDivida->verificacaoPagoUni2 == 1 && $responsabilidadeDivida->valorUniversidade2 != null) {
           $valorTotalPago++;
         }
+      }
 
-        if (count($relacoes)) {
-          foreach ($relacoes as $relacao) {
-            if ($relacao->estado == 'Dívida' && $relacao->verificacaoPago == 0) {
-              $valorTotalDivida++;
-            }elseif($relacao->verificacaoPago == 1) {
-              $valorTotalPago++;
-            }else {
-              $valorTotalPendente++;
-            }
+      if (count($relacoes)) {
+        foreach ($relacoes as $relacao) {
+          if ($relacao->estado == 'Dívida' && $relacao->verificacaoPago == 0) {
+            $valorTotalDivida++;
+          }elseif($relacao->verificacaoPago == 1) {
+            $valorTotalPago++;
+          }else {
+            $valorTotalPendente++;
           }
         }
       }
@@ -154,20 +154,17 @@ class PaymentController extends Controller
 
     public function search(Request $request)
     {
-      $fields = $request->all();
-      // Escolha de estudantes, agentes, etc...
-      $idEstudante = (isset($fields['estudante']) ? $fields['estudante'] : null);
-      $idAgente = (isset($fields['agente']) ? $fields['agente'] : null);
-      $idUniversidade = (isset($fields['universidade']) ? $fields['universidade'] : null);
-      $idFornecedor = (isset($fields['fornecedor']) ? $fields['fornecedor'] : null);
-      // Intervalo de datas escolhidas
-      $dataInicio = (isset($fields['dataInicio']) ? $fields['dataInicio'] : null);
-      $dataFim = (isset($fields['dataFim']) ? $fields['dataFim'] : null);
+      $idEstudante = ($request->input('estudante') != 'default') ? $request->input('estudante') : null;
+      $idAgente = ($request->input('agente') != 'default') ? $request->input('agente') : null;
+      $idUniversidade = ($request->input('universidade') != 'default') ? $request->input('universidade') : null;
+      $idFornecedor = ($request->input('fornecedor') != 'default') ? $request->input('fornecedor') : null;
+      $dataInicio = $request->input('datainicio');
+      $dataFim = $request->input('datafim');
 
       // Pesquisa de estudantes
       if ($idEstudante != null) {
         if ($idEstudante == 'todos') {
-          $responsabilidades = Responsabilidade::select();
+          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimentoCliente', '>=', $dataInicio);
           }
@@ -175,7 +172,7 @@ class PaymentController extends Controller
             $responsabilidades->where('dataVencimentoCliente', '<=', $dataFim);
           }
       }else {
-        $responsabilidades = Responsabilidade::where('idCliente', $idEstudante)->select();
+        $responsabilidades = Responsabilidade::where('idCliente', $idEstudante)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
           $responsabilidades->where('dataVencimentoCliente', '>=', $dataInicio);
         }
@@ -183,14 +180,12 @@ class PaymentController extends Controller
           $responsabilidades->where('dataVencimentoCliente', '<=', $dataFim);
         }
       }
-      $responsabilidades->get()->dd();
-      return view('payments.list', compact('responsabilidades'));
       }
 
       // Pesquisa de agentes
       if ($idAgente != null) {
         if ($idAgente == 'todos') {
-          $responsabilidades = Responsabilidade::select();
+          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
           $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio)->orWhere('dataVencimentoSubAgente', '>=', $dataInicio);
         }
@@ -198,7 +193,7 @@ class PaymentController extends Controller
           $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim)->orWhere('dataVencimentoSubAgente', '<=', $dataFim);
         }
       }else {
-        $responsabilidades = Responsabilidade::where('idAgente', $idAgente)->select();
+        $responsabilidades = Responsabilidade::where('idAgente', $idAgente)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
           $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio)->orWhere('dataVencimentoSubAgente', '>=', $dataInicio);
         }
@@ -206,14 +201,12 @@ class PaymentController extends Controller
           $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim)->orWhere('dataVencimentoSubAgente', '<=', $dataFim);
         }
       }
-      $responsabilidades->get()->dd();
-      return view('payments.list', compact('responsabilidades'));
       }
 
       // Pesquisa de universidades
       if ($idUniversidade != null) {
         if ($idUniversidade == 'todos') {
-          $responsabilidades = Responsabilidade::select();
+          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
           $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio)->orWhere('dataVencimentoUni2', '>=', $idUniversidade);
         }
@@ -221,7 +214,7 @@ class PaymentController extends Controller
           $responsabilidades->where('dataVencimentoUni1', '<=', $dataFim)->orWhere('dataVencimentoUni2', '<=', $idUniversidade);
         }
       }else {
-        $responsabilidades = Responsabilidade::where('idUniversidade1', $idUniversidade)->orWhere('idUniversidade2', $idUniversidade)->select();
+        $responsabilidades = Responsabilidade::where('idUniversidade1', $idUniversidade)->orWhere('idUniversidade2', $idUniversidade)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
           $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio)->orWhere('dataVencimentoUni2', '>=', $idUniversidade);
         }
@@ -229,15 +222,14 @@ class PaymentController extends Controller
           $responsabilidades>where('dataVencimentoUni1', '<=', $dataFim)->orWhere('dataVencimentoUni2', '<=', $idUniversidade);
         }
       }
-      $responsabilidades->get()->dd();
-      return view('payments.list', compact('responsabilidades'));
       }
 
       // Pesquisa de fornecedores
       if ($idFornecedor != null) {
         if ($idFornecedor == 'todos') {
           $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
-          ->where('idFornecedor', '!=', null);
+          ->where('idFornecedor', '!=', null)
+          ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimento', '>=', $dataInicio);
           }
@@ -246,7 +238,8 @@ class PaymentController extends Controller
           }
         }else{
           $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
-          ->where('idFornecedor', $idFornecedor);
+          ->where('idFornecedor', $idFornecedor)
+          ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', 'relacao', 'relacao.fornecedor']);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimento', '>=', $dataInicio);
           }
@@ -254,9 +247,15 @@ class PaymentController extends Controller
             $responsabilidades->where('dataVencimento', '<=', $dataFim);
           }
         }
-        $responsabilidades->get()->dd();
-        return view('payments.list', compact('responsabilidades'));
-      }
+        }
+
+        $responsabilidades = $responsabilidades->get();
+
+        if (count($responsabilidades)) {
+            return response()->json($responsabilidades, 200);
+        }else {
+            return response()->json('NOK', 404);
+        }
     }
 
     public function create(Responsabilidade $responsabilidade)

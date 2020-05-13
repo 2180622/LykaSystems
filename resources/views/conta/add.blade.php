@@ -45,25 +45,12 @@
                         </div>
                         <label for="descricao">Descrição da conta *</label>
                         <br>
-                        <input type="text" name="descricao" placeholder="Inserir uma descrição" autocomplete="off" required>
+                        <input type="text" name="descricao" placeholder="Inserir uma descrição" autocomplete="off" required value="{{old('descricao', $conta->descricao)}}">
                     </div>
                     <div class="col-md-6">
                         <label for="instituicao">Nome da instituição *</label>
                         <br>
-                        <input type="text" name="instituicao" placeholder="Inserir o nome da instituição" autocomplete="off" required>
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="titular">Nome do titular *</label>
-                        <br>
-                        <input type="text" name="titular" placeholder="Inserir o nome do titular" autocomplete="off" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="morada">Morada da instituição *</label>
-                        <br>
-                        <input type="text" name="morada" placeholder="Inserir a morada da instituição" autocomplete="off" required>
+                        <input type="text" name="instituicao" placeholder="Inserir o nome da instituição" autocomplete="off" required value="{{old('instituicao', $conta->instituicao)}}">
                     </div>
                 </div>
                 <br><br>
@@ -71,12 +58,12 @@
                     <div class="col-md-6">
                         <label for="numConta">Número de conta *</label>
                         <br>
-                        <input type="text" name="numConta" placeholder="Inserir o número de conta" autocomplete="off" required>
+                        <input type="text" name="numConta" placeholder="Inserir o número de conta" autocomplete="off" value="{{old('numConta', $conta->numConta)}}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="IBAN">Código IBAN *</label>
                         <br>
-                        <input type="text" name="IBAN" placeholder="Inserir o código IBAN" autocomplete="off" required>
+                        <input type="text" name="IBAN" placeholder="Inserir o código IBAN" autocomplete="off" value="{{old('IBAN', $conta->IBAN)}}" required>
                     </div>
                 </div>
                 <br><br>
@@ -84,25 +71,20 @@
                     <div class="col-md-6">
                         <label for="SWIFT">Código SWIFT *</label>
                         <br>
-                        <input type="text" name="SWIFT" placeholder="Inserir o código SWIFT" autocomplete="off" required>
+                        <input type="text" name="SWIFT" placeholder="Inserir o código SWIFT" autocomplete="off" value="{{old('SWIFT', $conta->SWIFT)}}" required>
                     </div>
                     <div class="col-md-6">
-                      <div class="help-button" id="tooltipContacto" data-toggle="tooltip" data-placement="top" title="Neste secção pode inserir qualquer tipo de contacto que identifique a instituição que está a adicionar.">
-                          <span>
-                              ?
-                          </span>
-                      </div>
                         <label for="contacto">Contacto da instituição</label>
                         <br>
-                        <input type="text" name="contacto" placeholder="Inserir um contacto da instituição" autocomplete="off">
+                        <input type="text" name="contacto" placeholder="Inserir um contacto da instituição" autocomplete="off" value="{{old('contacto', $conta->contacto)}}">
                     </div>
                 </div>
                 <br><br>
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col">
                         <label for="obsConta">Observações da conta</label>
                         <br>
-                        <textarea name="obsConta" rows="5"></textarea>
+                        <textarea name="obsConta" rows="5" value="{{old('obsConta', $conta->obsConta)}}"></textarea>
                     </div>
                 </div>
         </div>
@@ -112,7 +94,6 @@
             <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
         </div>
         </form>
-        <br>
     </div>
 </div>
 

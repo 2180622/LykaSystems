@@ -119,7 +119,7 @@
                             <input value="{{old('idConta',$documento->dataValidPP)}}" type="month" class="form-control" name="dataValidPP" value="{{date('Y-m', strtotime($documento->dataValidade))}}" style="width:250px" required><br>
                         </div>
                         <div class="col-md-6">
-                            <label for="passaportePaisEmi">País de Emissão: </label>
+                            <label for="passaportPaisEmi">País de Emissão: </label>
 
 {{--                        <select name="passaportePaisEmi" id="passaportePaisEmi" class="form-control select_style" required>
                                 @include('layout.partials.countries');

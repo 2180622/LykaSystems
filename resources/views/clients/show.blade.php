@@ -32,9 +32,8 @@
     </div>
     <div class="float-right">
         <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
-        @if (Auth::user()->tipo == "admin")
+
         <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
-        @endif
 
         <a href="{{route('clients.print',$client)}}" target="_blank" class="top-button">Imprimir</a>
 

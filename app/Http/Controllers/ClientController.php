@@ -71,7 +71,6 @@ class ClientController extends Controller
 
 
         /* mostra a lista */
-        $totalestudantes = $clients->count();
         return view('clients.list', compact('clients'));
 
     }

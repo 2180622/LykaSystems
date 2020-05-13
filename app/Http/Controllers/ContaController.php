@@ -11,46 +11,46 @@ class ContaController extends Controller
 {
     public function index()
     {
-      $contums = Conta::all();
-      return view('conta.list', compact('contums'));
+      $contas = Conta::all();
+      return view('conta.list', compact('contas'));
     }
 
     public function create()
     {
-      $contum = new Conta;
-      return view('conta.add', compact('contum'));
+      $conta = new Conta;
+      return view('conta.add', compact('conta'));
     }
 
     public function store(StoreContaRequest $contaRequest)
     {
       $fields = $contaRequest->validated();
-      $contum = new Conta;
-      $contum->fill($fields);
-      $contum->save();
-      return redirect()->route('conta.index')->with('success', 'Nova conta bancária criada com sucesso.');
+      $conta = new Conta;
+      $conta->fill($fields);
+      $conta->save();
+      return redirect()->route('conta.index')->with('success', 'Conta bancária adicionada com sucesso.');
     }
 
-    public function show(Conta $contum)
+    public function show(Conta $conta)
     {
-      return view('conta.show', compact('contum'));
+      return view('conta.show', compact('conta'));
     }
 
-    public function edit(Conta $contum)
+    public function edit(Conta $conta)
     {
-      return view('conta.edit', compact('contum'));
+      return view('conta.edit', compact('conta'));
     }
 
-    public function update(UpdateContaRequest $contaRequest, Conta $contum)
+    public function update(UpdateContaRequest $contaRequest, Conta $conta)
     {
       $fields = $contaRequest->validated();
-      $contum->fill($fields);
-      $contum->save();
+      $conta->fill($fields);
+      $conta->save();
       return redirect()->route('conta.index')->with('success', 'Conta bancária editada com sucesso.');
     }
 
-    public function destroy(Conta $contum)
+    public function destroy(Conta $conta)
     {
-      $contum->delete();
-      return redirect()->route('conta.index')->with('success', 'Conta bancária eliminada com sucesso');
+      $conta->delete();
+      return redirect()->route('conta.index')->with('success', 'Conta bancária eliminada com sucesso.');
     }
 }

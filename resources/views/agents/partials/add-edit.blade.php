@@ -274,7 +274,7 @@
                     {{-- INPUT NIF --}}
                     <label for="NIF">NIF:</label><br>
                     <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$agent->NIF)}}"
-                        placeholder="Insira o NIF" maxlength="20">
+                        placeholder="Insira o NIF" maxlength="20" required>
                 </div>
 
 

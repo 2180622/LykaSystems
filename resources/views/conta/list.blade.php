@@ -6,6 +6,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('/css/conta.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteúdo da Página --}}
@@ -29,52 +30,55 @@
     <br><br>
 
     <div class="cards-navigation">
-        <div class="title">
-            <h6>Listagem de contas bancárias</h6>
+        <div class="title row">
+            <div class="col-md-6">
+                <h6>Listagem de contas bancárias</h6>
+            </div>
+            <div class="col-md-6" style="bottom:5px; height:32px;">
+                <div class="input-group pl-0 float-right search-section" style="width:250px">
+                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
+                    <div class="search-button input-group-append">
+                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
-        <div class="row mt-2">
-            <div class="col">
-                @if (count($contums) == 1)
-                Existe <strong>{{count($contums)}}</strong> conta registada no sistema.
+        <div class="row mt-2 mb-4">
+            <div class="col-md-6">
+                @if (count($contas) == 1)
+                Existe <strong>{{count($contas)}}</strong> conta registada no sistema.
                 @else
-                Existem <strong>{{count($contums)}}</strong> contas registadas no sistema.
+                Existem <strong>{{count($contas)}}</strong> contas registadas no sistema.
                 @endif
             </div>
         </div>
-        <br>
-        <div class="container">
-            @foreach ($contums as $contum)
-            <a href="{{route('conta.show', $contum)}}" oncontextmenu="return showContextMenu();">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            <ion-icon name="cube" id="icon"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$contum->descricao}}">{{$contum->descricao}}</p>
-                    </div>
-                    <div class="col-md-4 align-self-center">
-                        <p class="text-truncate" title="{{$contum->instituicao}}">{{$contum->instituicao}}</p>
-                    </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate" title="{{$contum->contacto}}">{{$contum->contacto}}</p>
-                    </div>
-                </div>
-            </a>
+        <div class="table-responsive" style="overflow:hidden">
+            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #dee2e6;">
+                        <th>Descrição</th>
+                        <th>Instituição</th>
+                        <th>Contacto</th>
+                        <th class="text-center">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($contas as $conta)
+                    <tr>
+                        <td class="align-middle">{{$conta->descricao}}</td>
+                        <td class="align-middle">{{$conta->instituicao}}</td>
+                        <td class="align-middle text-truncate">{{$conta->contacto}}</td>
 
-            <div class="custom-cm" id="contextMenu">
-                <div class="custom-cm-item">
-                    <a href="{{route('conta.edit', $contum)}}">Editar</a>
-                </div>
-                <div class="custom-cm-item">
-                    <p data-toggle="modal" data-target="#deleteModal" data-name="{{$contum->descricao}}" data-id="{{$contum->idConta}}">Remover</p>
-                </div>
-                <div class="custom-cm-divider"></div>
-                <div class="custom-cm-item">Cancelar</div>
-            </div>
-            @endforeach
+                        <td class="text-center align-middle" style="min-width: 120px;">
+                            <a href="{{route('conta.show', $conta)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                            <a href="{{route('conta.edit', $conta)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                            <button type="button" class="btn_delete" title="Eliminar conta bancária" data-toggle="modal" data-target="#deleteModal" data-name="{{$conta->descricao}}" data-slug="{{$conta->slug}}"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -96,13 +100,12 @@
                     <p id="text"></p>
                     <br>
                     <p style="font-weight:500;">Ao clicar "Sim, eliminar conta", irá eliminar a conta definitivamente e perder todos os dados associados.</p>
-                    <input type="hidden" id="conta_delete_id" name="id">
-                  </div>
-                    <div class="modal-footer">
-                        <button class="top-button btn_submit bg-danger" type="submit"><i class="far fa-trash-alt mr-2"></i>Sim, eliminar conta</button>
-                        <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="top-button btn_submit bg-danger" type="submit"><i class="far fa-trash-alt mr-2"></i>Sim, eliminar conta</button>
+                <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -114,8 +117,7 @@
         var name = button.data('name');
         var modal = $(this);
         modal.find('#text').text('Pretende eliminar a conta bancária ' + name + '?');
-        modal.find('#conta_delete_id').val(button.data('id'));
-        modal.find("form").attr('action', '/conta/' + button.data('id'));
+        modal.find("form").attr('action', '/conta-bancaria/' + button.data('slug'));
     });
 
     // Context Menu

@@ -6,6 +6,7 @@ html, body {
     background-color: #EAEAEA;
     font-family: 'Nunito', sans-serif;
     transition: all 0.3 ease;
+    scroll-behavior: smooth;
 }
 
 .top-button {
