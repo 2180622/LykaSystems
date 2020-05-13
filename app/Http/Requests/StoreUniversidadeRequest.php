@@ -30,7 +30,6 @@ class StoreUniversidadeRequest extends FormRequest
             'email' => 'required|max:255',
             'NIF' => 'required|unique:Universidade',
             'IBAN' => 'nullable',
-            'contactos' => 'nullable',
             'obsContactos' => 'nullable',
             'obsCursos' => 'nullable',
             'obsCandidaturas' => 'nullable',

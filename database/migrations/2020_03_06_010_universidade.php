@@ -23,7 +23,6 @@ class Universidade extends Migration
             $table->string('email',255);
             $table->string('NIF',255)->unique();
             $table->string('IBAN',255)->nullable();
-            $table->json('contactos')->nullable();
             $table->longText('obsContactos')->nullable();
             $table->longText('obsCursos')->nullable();
             $table->longText('obsCandidaturas')->nullable();
