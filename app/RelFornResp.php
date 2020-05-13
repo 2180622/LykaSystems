@@ -12,7 +12,16 @@ class RelFornResp extends Model
     protected $primaryKey = 'idRelacao';
 
     protected $fillable = [
-        'valor','verificacaoPago','$idResponsabilidade','$idFornecedor','$idConta'
+        'valor',
+        'verificacaoPago',
+        'estado',
+        '$idResponsabilidade',
+        '$idFornecedor',
+        '$idConta'
+    ];
+
+    protected $dates = [
+        'dataVencimento'
     ];
 
     public function fornecedor(){

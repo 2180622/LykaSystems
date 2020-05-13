@@ -22,7 +22,7 @@ class PaymentController extends Controller
     public function index()
     {
       $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")
-      ->with(['cliente', 'agente', 'universidade1'])
+      ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"])
       ->get();
 
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
@@ -136,16 +136,16 @@ class PaymentController extends Controller
         }elseif ($responsabilidadeDivida->verificacaoPagoUni2 == 1 && $responsabilidadeDivida->valorUniversidade2 != null) {
           $valorTotalPago++;
         }
+      }
 
-        if (count($relacoes)) {
-          foreach ($relacoes as $relacao) {
-            if ($relacao->estado == 'Dívida' && $relacao->verificacaoPago == 0) {
-              $valorTotalDivida++;
-            }elseif($relacao->verificacaoPago == 1) {
-              $valorTotalPago++;
-            }else {
-              $valorTotalPendente++;
-            }
+      if (count($relacoes)) {
+        foreach ($relacoes as $relacao) {
+          if ($relacao->estado == 'Dívida' && $relacao->verificacaoPago == 0) {
+            $valorTotalDivida++;
+          }elseif($relacao->verificacaoPago == 1) {
+            $valorTotalPago++;
+          }else {
+            $valorTotalPendente++;
           }
         }
       }
