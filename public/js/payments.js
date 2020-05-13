@@ -70,7 +70,7 @@ function showFunnelIcon() {
 // Valor dos inputs -> Bloquear inputs -> .setAttribute("disabled", "true");
 
 function selected() {
-    var defaultValue = "defeito";
+    var defaultValue = "default";
     // Input estudantes
     var estudanteInput = document.getElementById('estudantes');
     var valueEstudante = estudanteInput.options[estudanteInput.selectedIndex].value;
@@ -205,3 +205,34 @@ function selected() {
         document.getElementById('universidades').setAttribute("disabled", "true");
     }
 }
+
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': "{{csrf_token()}}"
+    }
+});
+
+$('#search-form').submit(function(event) {
+    event.preventDefault();
+    info = {
+        estudante: $("#estudantes").find(":selected").val(),
+        agente: $("#agentes").find(":selected").val(),
+        universidade: $("#universidades").find(":selected").val(),
+        fornecedor: $("#fornecedores").find(":selected").val(),
+        datainicio: $("#dataInicio").val(),
+        datafim: $("#dataFim").val()
+    };
+    $.ajax({
+        type: "post",
+        url: "/pagamentos/pesquisa",
+        context: this,
+        data: info,
+        success: function(data) {
+            console.log('OK');
+        },
+        error: function() {
+            console.log('NOK');
+        }
+    });
+});

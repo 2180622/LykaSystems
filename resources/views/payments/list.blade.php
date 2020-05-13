@@ -118,14 +118,13 @@
                                     </div>
                                 </div>
                                 <br>
-                                <form action="{{route('payments.search')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
+                                <form method="post" id="search-form">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="estudante">Estudantes</label>
                                             <br>
                                             <select name="estudante" id="estudantes" onchange="selected()">
-                                                <option selected disabled hidden class="text-truncate" value="defeito">Selecionar estudante</option>
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar estudante</option>
                                                 <option class="text-truncate" value="todos">(Todos)</option>
                                                 @foreach ($estudantes as $estudante)
                                                 <option class="text-truncate" value="{{$estudante->idCliente}}">{{$estudante->nome.' '.$estudante->apelido}}</option>
@@ -136,7 +135,7 @@
                                             <label for="agente">Agentes</label>
                                             <br>
                                             <select name="agente" id="agentes" onchange="selected()">
-                                                <option selected disabled hidden class="text-truncate" value="defeito">Selecionar agente</option>
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar agente</option>
                                                 <option class="text-truncate" value="todos">(Todos)</option>
                                                 @foreach ($agentes as $agente)
                                                 <option class="text-truncate" value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido}}</option>
@@ -147,7 +146,7 @@
                                             <label for="universidade">Universidades</label>
                                             <br>
                                             <select name="universidade" id="universidades" onchange="selected()">
-                                                <option selected disabled hidden class="text-truncate" value="defeito">Selecionar universidade</option>
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar universidade</option>
                                                 <option class="text-truncate" value="todos">(Todas)</option>
                                                 @foreach ($universidades as $universidade)
                                                 <option class="text-truncate" value="{{$universidade->idUniversidade}}">{{$universidade->nome}}</option>
@@ -161,7 +160,7 @@
                                             <label for="fornecedor">Fornecedores</label>
                                             <br>
                                             <select name="fornecedor" id="fornecedores" onchange="selected()">
-                                                <option selected disabled hidden class="text-truncate" value="defeito">Selecionar fornecedor</option>
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar fornecedor</option>
                                                 <option class="text-truncate" value="todos">(Todos)</option>
                                                 @foreach ($fornecedores as $fornecedor)
                                                 <option class="text-truncate" value="{{$fornecedor->idFornecedor}}">{{$fornecedor->nome}}</option>
@@ -171,12 +170,12 @@
                                         <div class="col-md-4">
                                             <label for="dataInicio">De (Data de início)</label>
                                             <br>
-                                            <input type="date" name="dataInicio">
+                                            <input id="dataInicio" type="date" name="dataInicio">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="dataFim">Até (Data de fim)</label>
                                             <br>
-                                            <input type="date" name="dataFim">
+                                            <input id="dataFim" type="date" name="dataFim">
                                         </div>
                                     </div>
                                     <br>
