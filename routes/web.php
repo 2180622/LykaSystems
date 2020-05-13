@@ -131,7 +131,17 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/documento-transacao', 'DocTransacaoController')->only(['destroy','show']);
 
     /* Conta */
-    Route::resource('/conta', 'ContaController');
+    Route::resource('/conta-bancaria', 'ContaController')->parameters([
+      'conta-bancaria' => 'conta'
+    ])->names([
+      'index' => 'conta.index',
+      'store' => 'conta.store',
+      'create' => 'conta.create',
+      'show' => 'conta.show',
+      'update' => 'conta.update',
+      'destroy' => 'conta.destroy',
+      'edit' => 'conta.edit',
+    ]);
 
     /* Fonecedores */
     Route::resource('/fornecedores', 'ProviderController')->parameters([

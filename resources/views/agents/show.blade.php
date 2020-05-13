@@ -88,6 +88,8 @@
 
                 <div class="col p-2" style="min-width:280px !important">
 
+
+
                     {{-- Informações Pessoais --}}
                     <div><span class="text-secondary ">Nome: </span>{{$agent->nome}} {{$agent->apelido}}</div><br>
 
@@ -106,15 +108,15 @@
                     <br>
 
                     <div><span class="text-secondary ">Data de nascimento: </span>
-                        {{ date('d-M-y', strtotime($agent->dataNasc)) }}</div><br>
+                        {{ date('d-M-y', strtotime($agent->dataNasc)) }}</div>
 
-                    @if ($agent->tipo=="Subagente")
-                    <br>
-                    <div class="text-muted">Subagente de: <a class="agent_link"
-                            href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a>
-                    </div>
-                    <br>
-                    @endif
+                        @if ($tipo_agent_atual=="Subagente")
+                        <br>
+                        <div class="text-muted">Subagente de: <a class="name_link"
+                                href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a>
+                        </div>
+                        <br>
+                        @endif
 
                 </div>
 
@@ -451,6 +453,23 @@
                             </div>
 
                             <br>
+
+
+
+
+                            <div class="text-secondary mb-2">Total de comissões:</div>
+
+                            <div class="border rounded bg-light p-3">
+                                <div>
+                                    @if ($comissoes)
+                                        {{$comissoes}}€
+                                    @else
+                                        <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                                    @endif
+                                </div>
+                            </div>
+
+
 
                         </div>
 

@@ -244,7 +244,7 @@
 
                         <div class="border rounded bg-light p-3">
                             {{-- CC IDENTIFICAÇÃO --}}
-                            <div><span class="text-secondary">Número de identificação pessoal:</span>
+                            <div><span class="text-secondary">Número do documento:</span>
                                 {{$client->num_docOficial}}
                             </div>
                             <br>
@@ -262,16 +262,16 @@
                         <div class="border rounded bg-light p-3">
                             {{-- numPassaporte --}}
                             <div><span class="text-secondary my-3">Número do passaporte:</span>
-                                {{$client->num_passaporte}}</div>
+                                {{$client->numPassaporte}}</div>
                             <br>
 
                             {{-- dataValidPP --}}
                             <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
                                 {{-- {{$infosPassaporte->dataValidPP }} --}}</div><br>
 
-                            {{-- passaportePaisEmi --}}
+                            {{-- passaportPaisEmi --}}
                             <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
-                                {{-- {{$infosPassaporte->passaportePaisEmi ?? ''}} --}}</div><br>
+                                {{-- {{$infosPassaporte->passaportPaisEmi ?? ''}} --}}</div><br>
 
                             {{-- localEmissaoPP --}}
                             <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>
@@ -294,9 +294,9 @@
 
                                         @if ($docpessoal->imagem != null)
                                             <i class="far fa-address-card mr-2"></i>
-                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
-                                        @else
-                                            <i class="far fa-address-card mr-2"></i>{{$docpessoal->tipo}} <span class="text-danger">(sem imagem)</span>
+                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+{{--                                         @else
+                                            <i class="far fa-address-card mr-2"></i>{{$docpessoal->tipo}} <span class="text-danger"><small>(sem ficheiro)</small></span> --}}
                                         @endif
 
                                     </li>
@@ -410,11 +410,13 @@
                         @if ($documentosAcademicos!=null)
                             <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                                 @foreach ($documentosAcademicos as $docAcademico)
-                                    <li class="my-3">
-                                        <i class="far fa-address-card mr-2"></i>
-                                        <a class="name_link" target="_blank"
-                                    href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
-                                    </li>
+                                    @if ($docAcademico->imagem != null)
+                                        <li class="my-3">
+                                            <i class="far fa-address-card mr-2"></i>
+                                            <a class="name_link" target="_blank"
+                                        href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
+                                        </li>
+                                    @endif
                                 @endforeach
 
                             </ul>

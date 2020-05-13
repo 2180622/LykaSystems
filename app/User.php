@@ -15,7 +15,12 @@ class User extends Authenticatable
     protected $primaryKey = 'idUser';
 
     protected $fillable = [
-        'email', 'tipo', 'password', '$idAdmin', '$idAgente', '$idCliente', 'admin'
+        'email',
+        'tipo',
+        'password',
+        '$idAdmin',
+        '$idAgente',
+        '$idCliente',
     ];
 
     public function admin(){
