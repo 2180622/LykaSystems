@@ -458,7 +458,7 @@ class DataController extends Controller
         $responsabilidade->dataVencimentoAgente = date('Y-m-d H:i',strtotime('28-07-2020 23:59'));
 
         $responsabilidade->valorSubAgente = 10;
-        $responsabilidade->idSubAgente = 1;
+        $responsabilidade->idSubAgente = 3;
         $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->dataVencimentoSubAgente = date('Y-m-d H:i',strtotime('22-07-2020 23:59'));
 
@@ -647,18 +647,24 @@ class DataController extends Controller
 
         /*****************          Docs Pessoais          *****************/
 
-        /*$docpessoal = new DocPessoal;
-        $docpessoal->nome = '';
-        $docpessoal->apelido = '';
-        $docpessoal->tipo = '';
-        $docpessoal->imagem = '';
-        $docpessoal->numDoc = '';
-        $docpessoal->dataValidade = '';
-        $docpessoal->pais = '';
-        $docpessoal->morada = '';
-        $docpessoal->verificacao = '';
-        $docpessoal->idFase = '';
-        $docpessoal->save();*/
+        $docpessoal = new DocPessoal;
+        $docpessoal->idCliente = 1;
+        $docpessoal->tipo = "Cartão Cidadão";
+        $docpessoal->imagem ="cliente_1_fase_2_documento_pessoal_CartãoCidadão.JPG";
+        $docpessoal->info = '{"numDoc":"9845776436ZZ8"}' ;
+        $docpessoal->dataValidade = "2021-01-27";
+        $docpessoal->idFase = '2';
+        $docpessoal->save();
+
+
+        $docpessoal = new DocPessoal;
+        $docpessoal->idCliente = 1;
+        $docpessoal->tipo = "Passaporte";
+        $docpessoal->imagem ="cliente_1_fase_2_documento_pessoal_Passaporte.JPG";
+        $docpessoal->info = '{"numPassaporte":"324234","dataValidPP":"2021-01-27","passaportPaisEmi":"França","localEmissaoPP":"Paris"}' ;
+        $docpessoal->dataValidade = "2021-01-27";
+        $docpessoal->idFase = '2';
+        $docpessoal->save();
 
         /****************          Docs Transacoes          ****************/
 

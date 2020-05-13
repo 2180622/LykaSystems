@@ -290,7 +290,7 @@
                                             <div><span class="text-secondary">{{$documento->tipoDocumento}}: </span>
                                             @foreach($DocsPessoais as $docpessoal)
                                                 @if($documento->tipoDocumento == $docpessoal->tipo && !$existe)
-                                                    <a class="" onclick="window.open('../../storage/{{$docpessoal->imagem}}', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;" href="../../storage/{{$documento->imagem}}" id="yui_3_17_2_1_1589215110643_49">
+                                                    <a class="" onclick="window.open('{{Storage::disk('public')->url('client-documents/'.$docpessoal->idCliente .'/'. $docpessoal->imagem)}}', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;" href="{{Storage::disk('public')->url('client-documents/'.$docpessoal->idCliente .'/'. $docpessoal->imagem)}}" id="yui_3_17_2_1_1589215110643_49">
                                                         <img src="../../storage/default-photos/pdf.png" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true">
                                                         <span class="instancename">Abrir {{$docpessoal->tipo}}</span>
                                                     </a></div><br>
@@ -362,7 +362,7 @@
                                             <div><span class="text-secondary">{{$documento->tipoDocumento}}: </span>
                                             @foreach($DocsAcademicos as $docacademico)
                                                 @if($documento->tipoDocumento == $docacademico->tipo && !$existe)
-                                                    <a class="" onclick="window.open('../../storage/{{$docacademico->imagem}}', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;" href="../../storage/{{$documento->imagem}}" id="yui_3_17_2_1_1589215110643_49">
+                                                    <a class="" onclick="window.open('{{Storage::disk('public')->url('client-documents/'.$docacademico->idCliente .'/'. $docacademico->imagem)}}', '', 'width=620,height=450,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes'); return false;" href="{{Storage::disk('public')->url('client-documents/'.$documento->idCliente .'/'. $docacademico->imagem)}}" id="yui_3_17_2_1_1589215110643_49">
                                                         <img src="../../storage/default-photos/pdf.png" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true">
                                                         <span class="instancename">Abrir {{$docacademico->tipo}}</span>
                                                     </a></div><br>
