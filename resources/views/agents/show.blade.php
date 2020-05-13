@@ -288,12 +288,12 @@
                                 <td class="text-center align-middle">
                                     <a href="{{route('clients.show',$client)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                                     <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-
+{{--
                                     <form method="POST" role="form" id="{{ $client->idCliente }}" action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
+                                    </form> --}}
 
                                 </td>
                             </tr>
