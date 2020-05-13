@@ -235,12 +235,12 @@ $('#search-form').submit(function(event) {
 
             for (var i = 0; i < data.length; i++) {
                 // Pagamentos aos CLIENTES
-                if (data[i].valorCliente != null) {
+                if (data[i].valorCliente != null && $("#estudantes").find(":selected").val() != 'default') {
                     // Formato da DATA DE VENCIMENTO
                     const d = new Date(data[i].dataVencimentoCliente);
-                    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-                    const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-                    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+                    const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
                     date = `${da}/${mo}/${ye}`;
 
                     // Seleções de CORES _ Estado de PAGAMENTOS
@@ -255,9 +255,87 @@ $('#search-form').submit(function(event) {
                         color = "#747474"; // CINZENTO (DEFAULT)
                     }
 
-                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+data[i].cliente.nome+"'>"+ data[i].cliente.nome + ' ' + data[i].cliente.apelido +"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ data[i].valorCliente.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+ data[i].cliente.nome + ' ' + data[i].cliente.apelido +"'>"+ data[i].cliente.nome + ' ' + data[i].cliente.apelido +"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ data[i].valorCliente.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
                     $(".payments").append(html);
                 }
+
+                // Pagamentos aos AGENTES
+                if (data[i].valorAgente != null && $("#agentes").find(":selected").val() != 'default') {
+                    // Formato da DATA DE VENCIMENTO
+                    const d = new Date(data[i].dataVencimentoAgente);
+                    const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
+                    date = `${da}/${mo}/${ye}`;
+
+                    // Seleções de CORES _ Estado de PAGAMENTOS
+                    if (data[i].verificacaoPagoAgente == true) {
+                        status = "Pago";
+                        color = "#47BC00"; // VERDE
+                    }else if (data[i].verificacaoPagoAgente == false && data[i].dataVencimentoAgente < date) {
+                        status = "Dívida";
+                        color = "#FF3D00"; // VERMELHO
+                    }else if (data[i].verificacaoPagoAgente == false && data[i].dataVencimentoAgente > date) {
+                        status = "Pendente";
+                        color = "#747474"; // CINZENTO (DEFAULT)
+                    }
+
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+data[i].agente.nome + ' ' + data[i].cliente.apelido +"'>"+ data[i].agente.nome + ' ' + data[i].cliente.apelido +"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ data[i].valorAgente.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                    $(".payments").append(html);
+                }
+
+                // Pagamentos as UNIVERSIDADES
+                if (data[i].valorUniversidade1 != null && $("#universidades").find(":selected").val() != 'default') {
+                    // Formato da DATA DE VENCIMENTO
+                    const d = new Date(data[i].dataVencimentoUni1);
+                    const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
+                    date = `${da}/${mo}/${ye}`;
+
+                    // Seleções de CORES _ Estado de PAGAMENTOS
+                    if (data[i].verificacaoPagoUni1 == true) {
+                        status = "Pago";
+                        color = "#47BC00"; // VERDE
+                    }else if (data[i].verificacaoPagoUni1 == false && data[i].dataVencimentoUni1 < date) {
+                        status = "Dívida";
+                        color = "#FF3D00"; // VERMELHO
+                    }else if (data[i].verificacaoPagoUni1 == false && data[i].dataVencimentoUni1 > date) {
+                        status = "Pendente";
+                        color = "#747474"; // CINZENTO (DEFAULT)
+                    }
+
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+data[i].universidade1.nome+"'>"+data[i].universidade1.nome+"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ data[i].valorUniversidade1.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                    $(".payments").append(html);
+                }
+
+                // Pagamentos aos FORNECEDORES
+                if ($("#fornecedores").find(":selected").val() != 'default') {
+                    var relacao = data[i].relacao;
+                    for (var j = 0; j < relacao.length; j++) {
+                        // Formato da DATA DE VENCIMENTO
+                        const d = new Date(relacao[j].dataVencimentoUni1);
+                        const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
+                        const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
+                        const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
+                        date = `${da}/${mo}/${ye}`;
+
+                        // Seleções de CORES _ Estado de PAGAMENTOS
+                        if (relacao[j].verificacaoPago == true) {
+                            status = "Pago";
+                            color = "#47BC00"; // VERDE
+                        }else if (relacao[j].verificacaoPago == false && relacao[j].dataVencimento < date) {
+                            status = "Dívida";
+                            color = "#FF3D00"; // VERMELHO
+                        }else if (relacao[j].verificacaoPago == false && relacao[j].dataVencimento > date) {
+                            status = "Pendente";
+                            color = "#747474"; // CINZENTO (DEFAULT)
+                        }
+
+                        html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+relacao[j].fornecedor.nome+"'>"+relacao[j].fornecedor.nome+"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ relacao[j].valor.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                        $(".payments").append(html);
+                    }
+                    }
             }
 
             window.location.assign("http://lykasystems.test/pagamentos#append-payment");

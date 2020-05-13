@@ -96,7 +96,7 @@
                         <ion-icon id="icon-funnel" name="funnel" title="Filtragem"></ion-icon>
                     </div>
                     <div id="close-icon-div" class="ml-auto" onclick="showFunnelIcon()" data-toggle="collapse" href="#search-collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <ion-icon id="icon-close" name="close" title="Filtragem"></ion-icon>
+                        <ion-icon id="icon-close" name="close" title="Fechar filtragem"></ion-icon>
                     </div>
                 </div>
             </div>
