@@ -97,7 +97,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Pagamentos */
     Route::get('/pagamentos', 'PaymentController@index')->name('payments.index');
     Route::post('/pagamentos/pesquisa', 'PaymentController@search')->name('payments.search');
-    Route::get('/pagamentos/cliente/{cliente}/fase/{fase}/{responsabilidade}', 'PaymentController@create')->name('payments.client');
+    Route::get('/pagamentos/cliente/{cliente}/fase/{fase}/{responsabilidade}', 'PaymentController@createcliente')->name('payments.client');
     // Route::post('/pagamentos/agente/{user}', 'PaymentController@create')->name('create.agent');
     Route::post('/pagamentos/{responsabilidade}/registar', 'PaymentController@store')->name('payments.store');
 

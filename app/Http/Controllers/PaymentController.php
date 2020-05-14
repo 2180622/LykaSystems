@@ -301,9 +301,10 @@ class PaymentController extends Controller
         }
     }
 
-    public function create(Cliente $cliente, Fase $fase, Responsabilidade $responsabilidade)
+    public function createcliente(Cliente $cliente, Fase $fase, Responsabilidade $responsabilidade)
     {
-        dd($fase->with("responsabilidade")->where('idResponsabilidade', $responsabilidade->idResponsabilidade)->get());
+        $contas = Conta::all();
+        return view('payments.add', compact('cliente', 'fase', 'responsabilidade', 'contas'));
     }
 
     public function store(Request $request, Responsabilidade $responsabilidade)
