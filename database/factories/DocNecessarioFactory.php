@@ -7,8 +7,9 @@ use Faker\Generator as Faker;
 
 $factory->define(Model::class, function (Faker $faker) {
     return [
-        'tipo' => $faker->company,
-        'tipoDocumento' => $faker->company,
-        'idFase' => $faker->company,
+        'tipo' => $faker->randomElement($array = array ('Pessoal','Academico')),
+        'tipoDocumento' => $faker->randomElement($array = array ('Diploma','Doc. Oficial')),
+
+        /*  'idFase'  */
     ];
 });

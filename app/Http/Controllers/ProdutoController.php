@@ -109,34 +109,34 @@ class ProdutoController extends Controller
                     $valorRelacoes = 0;
                     $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
                     if($fields['resp-data-cliente-fase'.$i]){
-                        $responsabilidade->dataVencimentoPagamentoCliente = date("Y-m-d",strtotime($fields['resp-data-cliente-fase'.$i]));
+                        $responsabilidade->dataVencimentoCliente = date("Y-m-d",strtotime($fields['resp-data-cliente-fase'.$i]));
                     }else{
-                        $responsabilidade->dataVencimentoPagamentoCliente = null;
+                        $responsabilidade->dataVencimentoCliente = null;
                     }
                     $responsabilidade->valorAgente = $fields['resp-agente-fase'.$i];
                     if($fields['resp-data-agente-fase'.$i]){
-                        $responsabilidade->dataVencimentoPagamentoAgente = date("Y-m-d",strtotime($fields['resp-data-agente-fase'.$i]));
+                        $responsabilidade->dataVencimentoAgente = date("Y-m-d",strtotime($fields['resp-data-agente-fase'.$i]));
                     }else{
-                        $responsabilidade->dataVencimentoPagamentoAgente = null;
+                        $responsabilidade->dataVencimentoAgente = null;
                     }
                     $responsabilidade->valorSubAgente = null;
-                    $responsabilidade->dataVencimentoPagamentoSubAgente = null;
+                    $responsabilidade->dataVencimentoSubAgente = null;
                     $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$i];
                     if($fields['resp-data-uni1-fase'.$i]){
-                        $responsabilidade->dataVencimentoPagamentoUni1 = date("Y-m-d",strtotime($fields['resp-data-uni1-fase'.$i]));
+                        $responsabilidade->dataVencimentoUni1 = date("Y-m-d",strtotime($fields['resp-data-uni1-fase'.$i]));
                     }else{
-                        $responsabilidade->dataVencimentoPagamentoUni1 = null;
+                        $responsabilidade->dataVencimentoUni1 = null;
                     }
                     if($produto->idUniversidade2){
                         $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$i];
                         if($fields['resp-data-uni2-fase'.$i]){
-                            $responsabilidade->dataVencimentoPagamentoUni2 = date("Y-m-d",strtotime($fields['resp-data-uni2-fase'.$i]));
+                            $responsabilidade->dataVencimentoUni2 = date("Y-m-d",strtotime($fields['resp-data-uni2-fase'.$i]));
                         }else{
-                            $responsabilidade->dataVencimentoPagamentoUni2 = null;
+                            $responsabilidade->dataVencimentoUni2 = null;
                         }
                     }else{
                         $responsabilidade->valorUniversidade2 = null;
-                        $responsabilidade->dataVencimentoPagamentoUni2 = null;
+                        $responsabilidade->dataVencimentoUni2 = null;
                     }
                     $responsabilidade->verificacaoPagoCliente = false;
                     $responsabilidade->verificacaoPagoAgente = false;
@@ -307,9 +307,9 @@ class ProdutoController extends Controller
                 $valorRelacoes = 0;
                 $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$fase->idFase];
                 if($fields['resp-data-cliente-fase'.$fase->idFase]){
-                    $responsabilidade->dataVencimentoPagamentoCliente = date("Y-m-d",strtotime($fields['resp-data-cliente-fase'.$fase->idFase]));
+                    $responsabilidade->dataVencimentoCliente = date("Y-m-d",strtotime($fields['resp-data-cliente-fase'.$fase->idFase]));
                 }else{
-                    $responsabilidade->dataVencimentoPagamentoCliente = null;
+                    $responsabilidade->dataVencimentoCliente = null;
                 }
                 $responsabilidade->verificacaoPagoCliente = false;
 
@@ -318,9 +318,9 @@ class ProdutoController extends Controller
 
                 $responsabilidade->valorAgente = $fields['resp-agente-fase'.$fase->idFase];
                 if($fields['resp-data-agente-fase'.$fase->idFase]){
-                    $responsabilidade->dataVencimentoPagamentoAgente = date("Y-m-d",strtotime($fields['resp-data-agente-fase'.$fase->idFase]));
+                    $responsabilidade->dataVencimentoAgente = date("Y-m-d",strtotime($fields['resp-data-agente-fase'.$fase->idFase]));
                 }else{
-                    $responsabilidade->dataVencimentoPagamentoAgente = null;
+                    $responsabilidade->dataVencimentoAgente = null;
                 }
                 $responsabilidade->verificacaoPagoAgente = false;
 
@@ -339,18 +339,18 @@ class ProdutoController extends Controller
                         $responsabilidade->verificacaoPagoSubAgente = false;
                     }
                     if($fields['resp-data-subagente-fase'.$fase->idFase]){
-                        $responsabilidade->dataVencimentoPagamentoSubAgente = date("Y-m-d",strtotime($fields['resp-data-subagente-fase'.$fase->idFase]));
+                        $responsabilidade->dataVencimentoSubAgente = date("Y-m-d",strtotime($fields['resp-data-subagente-fase'.$fase->idFase]));
                     }else{
-                        $responsabilidade->dataVencimentoPagamentoSubAgente = null;
+                        $responsabilidade->dataVencimentoSubAgente = null;
                     }
                 }
 
                 if($responsabilidade->valorUniversidade1 != $fields['resp-uni1-fase'.$fase->idFase]){
                     $responsabilidade->valorUniversidade1 = $fields['resp-uni1-fase'.$fase->idFase];
                     if($fields['resp-data-uni1-fase'.$fase->idFase]){
-                        $responsabilidade->dataVencimentoPagamentoUni1 = date("Y-m-d",strtotime($fields['resp-data-uni1-fase'.$fase->idFase]));
+                        $responsabilidade->dataVencimentoUni1 = date("Y-m-d",strtotime($fields['resp-data-uni1-fase'.$fase->idFase]));
                     }else{
-                        $responsabilidade->dataVencimentoPagamentoUni1 = null;
+                        $responsabilidade->dataVencimentoUni1 = null;
                     }
                     $responsabilidade->verificacaoPagoUni1 = false;
                 }
@@ -358,9 +358,9 @@ class ProdutoController extends Controller
                 if($produto->idUniversidade2 && $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$fase->idFase]){
                     $responsabilidade->valorUniversidade2 = $fields['resp-uni2-fase'.$fase->idFase];
                     if($fields['resp-data-uni2-fase'.$fase->idFase]){
-                        $responsabilidade->dataVencimentoPagamentoUni2 = date("Y-m-d",strtotime($fields['resp-data-uni2-fase'.$fase->idFase]));
+                        $responsabilidade->dataVencimentoUni2 = date("Y-m-d",strtotime($fields['resp-data-uni2-fase'.$fase->idFase]));
                     }else{
-                        $responsabilidade->dataVencimentoPagamentoUni2 = null;
+                        $responsabilidade->dataVencimentoUni2 = null;
                     }
                     $responsabilidade->verificacaoPagoUni2 = false;
                 }
