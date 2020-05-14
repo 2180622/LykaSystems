@@ -203,8 +203,10 @@
                                             <input id="dataFim" type="date" name="dataFim">
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="row mt-3">
                                         <div class="col text-right">
+                                            <button class="mr-2" id="cleanButton">limpar</button>
                                             <button type="submit" name="button" id="searchButton">filtrar</button>
                                         </div>
                                     </div>
