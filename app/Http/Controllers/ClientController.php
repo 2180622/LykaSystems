@@ -147,8 +147,8 @@ class ClientController extends Controller
         /* Documento de identificação pessoal */
             $doc_id = new DocPessoal;
             $doc_id->idCliente = $client->idCliente;
-            $doc_id->tipo = "Cartão Cidadão";
-            $doc_id->idFase = 2;
+            $doc_id->tipo = "Doc. Oficial";
+            $doc_id->idFase = 1;
             $doc_id->dataValidade = $requestClient->validade_docOficial;
 
             /* Constroi a informação adicional para documento de ID */
@@ -160,11 +160,7 @@ class ClientController extends Controller
             /* Imagem do documento de identificação Pessoal*/
             if ($requestClient->hasFile('img_docOficial')) {
                 $img_doc = $requestClient->file('img_docOficial');
-
-                /* client-documents/1/cliente_1_fase_2_documento_pessoal_CartãoCidadão.jpg */
-
-
-                $nome_imgDocOff = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_CartãoCidadão'.'.'.$img_doc->getClientOriginalExtension();
+                $nome_imgDocOff = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Doc_Oficial'.'.'.$img_doc->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
                 $doc_id->imagem = $nome_imgDocOff;
             }
@@ -388,9 +384,9 @@ class ClientController extends Controller
 
             $agents = Agente::all();
 
-            $cartaoCidadao = DocPessoal::
+            $docOfficial = DocPessoal::
             where("idCliente","=",$client->idCliente)
-            ->where("tipo","=","Cartão Cidadão")
+            ->where("tipo","=","Doc. Oficial")
             ->first();
 
 
@@ -405,7 +401,7 @@ class ClientController extends Controller
                 $passaporteData = json_decode($passaporte->info);
             }
 
-            return view('clients.edit', compact('client','agents','cartaoCidadao','passaporte','passaporteData'));
+            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData'));
         }else{
             /* não tem permissões */
             abort (401);
@@ -461,10 +457,10 @@ class ClientController extends Controller
 
         /* Documento de identificação pessoal*/
 
-        /* Obtem o DOCpessoal do tipo "cartão de cidadão"  */
+        /* Obtem o DOCpessoal do tipo "Doc. Oficial"  */
         $doc_id = DocPessoal::
         where("idCliente","=",$client->idCliente)
-        ->where("tipo","=","Cartão Cidadão")
+        ->where("tipo","=","Doc. Oficial")
         ->first();
 
 
@@ -476,7 +472,7 @@ class ClientController extends Controller
         if ($doc_id==null){
             $doc_id = new DocPessoal;
             $doc_id->idCliente = $client->idCliente;
-            $doc_id->tipo = "Cartão Cidadão";
+            $doc_id->tipo = "Doc. Oficial";
             $doc_id->idFase = 2;
             $doc_id->info = json_encode($infoDocId);
             $doc_id->dataValidade = $request->validade_docOficial;
@@ -484,8 +480,8 @@ class ClientController extends Controller
             $doc_id->save();
         }else{
             $doc_id->idCliente = $client->idCliente;
-            $doc_id->tipo = "Cartão Cidadão";
-            $doc_id->idFase = 2;
+            $doc_id->tipo = "Doc. Oficial";
+            $doc_id->idFase = 1;
             $doc_id->info = json_encode($infoDocId);
             $doc_id->dataValidade = $request->validade_docOficial;
             $doc_id->updated_at == date("Y-m-d",$t);
@@ -505,7 +501,7 @@ class ClientController extends Controller
             /* Imagem do documento de identificação Pessoal*/
             $img_doc = $request->file('img_docOficial');
 
-            $nome_imgDocOff = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_CartãoCidadão'.'.'.$img_doc->getClientOriginalExtension();
+            $nome_imgDocOff = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Doc_Oficial'.'.'.$img_doc->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
             $doc_id->imagem = $nome_imgDocOff;
             /* Guarda documento de identificação Pessoal */

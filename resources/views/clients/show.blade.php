@@ -299,8 +299,13 @@
                                         @if ($docpessoal->imagem != null)
                                             <i class="far fa-address-card mr-2"></i>
                                             <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
-{{--                                         @else
-                                            <i class="far fa-address-card mr-2"></i>{{$docpessoal->tipo}} <span class="text-danger"><small>(sem ficheiro)</small></span> --}}
+
+                                            @if($docpessoal->verificacao==0)
+                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-2"></i></small></span>
+                                            @else
+                                                <span class="text-success"><small><i class="fas fa-check ml-2"></i></small></span>
+                                            @endif
+
                                         @endif
 
                                     </li>

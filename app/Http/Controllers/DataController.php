@@ -649,11 +649,11 @@ class DataController extends Controller
 
         $docpessoal = new DocPessoal;
         $docpessoal->idCliente = 1;
-        $docpessoal->tipo = "Cartão Cidadão";
+        $docpessoal->tipo = "Doc. Oficial";
         $docpessoal->imagem =null;
         $docpessoal->info = '{"numDoc":"9845776436ZZ8"}' ;
         $docpessoal->dataValidade = "2021-01-27";
-        $docpessoal->idFase = '2';
+        $docpessoal->idFase = '1';
         $docpessoal->save();
 
 
