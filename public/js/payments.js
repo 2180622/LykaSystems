@@ -297,7 +297,7 @@ function selected() {
 }
 
 $("select").change(function() {
-    $("#error").remove();
+    $("#error500").remove();
 });
 
 $.ajaxSetup({
@@ -524,22 +524,24 @@ $('#search-form').submit(function(event) {
             history.pushState("", document.title, window.location.pathname);
         },
         error: function(data) {
-            if ($('#error').text() != '') {
-                $('#error').remove();
+            if ($('#error404').text() != '' || $('#error500').text() != '') {
+                $('#error404').remove();
+                $('#error500').remove();
             }
             if (data.status == 404) {
                 $(".payments").remove();
                 div = "<div class='payments'><div>";
                 $("#append-payment").append(div);
-                error = "<div class='row' id='error' style='padding: 0px 18px;'><div class='container no-data-div text-center mt-3'><p style='color:#e3342f;'>Não existem pagamentos registados no sistema perante a sua pesquisa.</p></div></div>";
+                error = "<div class='row' id='error404' style='padding: 0px 18px;'><div class='container no-data-div text-center mt-3'><p style='color:#e3342f;'>Não existem pagamentos registados no sistema perante a sua pesquisa.</p></div></div>";
                 $(".payments").append(error);
                 window.location.assign("http://lykasystems.test/pagamentos#append-payment");
                 history.pushState("", document.title, window.location.pathname);
             } else {
-                if ($('#error').text() != '') {
-                    $('#error').remove();
+                if ($('#error404').text() != '' || $('#error500').text() != '') {
+                    $('#error404').remove();
+                    $('#error500').remove();
                 }
-                error = "<div id='error'><strong style='color: #e3342f;'>Preencha os campos necessários para a realização de uma filtragem.</strong><br><br></div>";
+                error = "<div id='error500'><strong style='color: #e3342f;'>Preencha os campos necessários para a realização de uma filtragem.</strong><br><br></div>";
                 $("#search-form").before(error);
             }
         }
