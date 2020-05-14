@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\DocPessoal;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(DocPessoal::class, function (Faker $faker) {
     return [
         'tipo' => $faker->randomElement($array = array ('Doc. Pessoal','Passaport')),
         'imagem' => 'default-photos/university.png',

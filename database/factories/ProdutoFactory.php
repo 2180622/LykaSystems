@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Produto;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Produto::class, function (Faker $faker) {
     return [
         'descricao' => $faker->sentence($nbWords = 2, $variableNbWords = true),
         'tipo' => $faker->randomElement($array = array ('Licenciatura','Mestrado','Curso de Verão')),

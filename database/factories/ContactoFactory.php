@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Contacto;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Contacto::class, function (Faker $faker) {
     return [
         'nome' => $faker->firstNameFemale,
         'fotografia' => null,

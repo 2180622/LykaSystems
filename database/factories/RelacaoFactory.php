@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\RelFornResp;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(RelFornResp::class, function (Faker $faker) {
     return [
         'valor' => $faker->numberBetween($min = 10, $max = 100),
         'verificacaoPago' => false,

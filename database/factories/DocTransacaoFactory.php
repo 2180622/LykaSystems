@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\DocTransacao;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(DocTransacao::class, function (Faker $faker) {
     return [
         'descricao' => $faker->sentence($nbWords = 5, $variableNbWords = true),
         'valorRecebido' => null,

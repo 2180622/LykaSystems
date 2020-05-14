@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Responsabilidade;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Responsabilidade::class, function (Faker $faker) {
     return [
         'valorCliente' => $faker->numberBetween($min = 100, $max = 500),
         'valorAgente' => $faker->numberBetween($min = 100, $max = 500),
