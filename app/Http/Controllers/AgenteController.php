@@ -186,8 +186,10 @@ class AgenteController extends Controller
 
 
 
+
+
         /* lista de alunos do agente Através de produtos  */
-/*       $clients = Cliente::
+       $clients = Cliente::
         selectRaw("Cliente.*")
         ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
         ->where('Produto.idAgente', '=', $agent->idAgente)
@@ -196,22 +198,17 @@ class AgenteController extends Controller
         ->orderBy('Cliente.idCliente','asc')
         ->get();
 
-
         if ($clients->isEmpty()) {
-            $clients=null;
-        } */
-
-
         /* lista de alunos do agente associação na ficha de cliente  */
         $clients = Cliente::
         where('idAgente', '=', $agent->idAgente)
         ->get();
+        }
 
 
         if ($clients->isEmpty()) {
             $clients=null;
         }
-
 
 
         /* Valor total das comissões */

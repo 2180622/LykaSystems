@@ -118,12 +118,12 @@
                     @if (Auth::user()->tipo == "admin")
 
                         @if ($agente!=null )
-                            <div class="text-secondary mb-2"><i class="fas fa-user-tie mr-1"></i> Agente: <a href="{{route('agents.show',$agente)}}" class="name_link">{{$agente->nome}} {{$agente->apelido}}</a> </div>
+                            <div class="text-secondary mb-3">Agente: <a href="{{route('agents.show',$agente)}}" class="name_link">{{$agente->nome}} {{$agente->apelido}}</a> </div>
                         @endif
 
 
                         @if ($agents!=null )
-                            <div class="text-secondary mb-2"><i class="fas fa-user-tie mr-2"></i>Agente(s) associados:</div>
+                            <div class="text-secondary mb-2">Agente(s) associados:</div>
 
                             @foreach ($agents as $agent)
                                 <a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a><br>
@@ -131,7 +131,7 @@
 
                             @if ($subagents!=null )
                                 @foreach ($subagents as $subagent)
-                                    <i class="fas fa-user-tie mr-2"></i><a href="{{route('agents.show',$subagent)}}" class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
+                                    <a href="{{route('agents.show',$subagent)}}" class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
                                 @endforeach
                             @endif
                         @endif
@@ -300,7 +300,6 @@
 
                                     </li>
                                 @endforeach
-
                             </ul>
                         @else
                         <div class="border rounded bg-light p-3">
@@ -317,6 +316,7 @@
                                 </button>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
 
                                         @foreach($novosDocumentos as $docPessoal)
                                             @if($docPessoal->tipo=="Pessoal")
