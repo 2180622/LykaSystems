@@ -159,7 +159,7 @@
                                         <div class="col-md-4">
                                             <label for="universidade">Universidade principal</label>
                                             <br>
-                                            <select name="universidade" id="universidades" onchange="selected()">
+                                            <select name="universidade" id="universidades" onchange="selected()" class="text-truncate">
                                                 <option selected disabled hidden class="text-truncate" value="default">Selecionar universidade</option>
                                                 <option class="text-truncate" value="todos">(Todas)</option>
                                                 @foreach ($universidades as $universidade)
@@ -181,7 +181,7 @@
                                         <div class="col-md-4">
                                             <label for="fornecedor">Fornecedores</label>
                                             <br>
-                                            <select name="fornecedor" id="fornecedores" onchange="selected()">
+                                            <select name="fornecedor" id="fornecedores" onchange="selected()" class="text-truncate">
                                                 <option selected disabled hidden class="text-truncate" value="default">Selecionar fornecedor</option>
                                                 <option class="text-truncate" value="todos">(Todos)</option>
                                                 @foreach ($fornecedores as $fornecedor)

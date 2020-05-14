@@ -487,36 +487,33 @@ $('#search-form').submit(function(event) {
 
                 // Pagamentos aos FORNECEDORES
                 if ($("#fornecedores").find(":selected").val() != 'default') {
-                    var relacao = data[i].relacao;
-                    for (var j = 0; j < relacao.length; j++) {
-                        // Formato da DATA DE VENCIMENTO
-                        const d = new Date(relacao[j].dataVencimentoUni1);
-                        const da = new Intl.DateTimeFormat('pt', {
-                            day: '2-digit'
-                        }).format(d);
-                        const mo = new Intl.DateTimeFormat('pt', {
-                            month: '2-digit'
-                        }).format(d);
-                        const ye = new Intl.DateTimeFormat('pt', {
-                            year: 'numeric'
-                        }).format(d);
-                        date = `${da}/${mo}/${ye}`;
+                    // Formato da DATA DE VENCIMENTO
+                    const d = new Date(data[i].dataVencimento);
+                    const da = new Intl.DateTimeFormat('pt', {
+                        day: '2-digit'
+                    }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', {
+                        month: '2-digit'
+                    }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', {
+                        year: 'numeric'
+                    }).format(d);
+                    date = `${da}/${mo}/${ye}`;
 
-                        // Seleções de CORES _ Estado de PAGAMENTOS
-                        if (relacao[j].verificacaoPago == true) {
-                            status = "Pago";
-                            color = "#47BC00"; // VERDE
-                        } else if (relacao[j].verificacaoPago == false && relacao[j].dataVencimento < date) {
-                            status = "Dívida";
-                            color = "#FF3D00"; // VERMELHO
-                        } else if (relacao[j].verificacaoPago == false && relacao[j].dataVencimento > date) {
-                            status = "Pendente";
-                            color = "#747474"; // CINZENTO (DEFAULT)
-                        }
-
-                        html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='" + relacao[j].fornecedor.nome + "'>" + relacao[j].fornecedor.nome + "</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>" + relacao[j].valor.split('.').join(',') + "€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='" + date + "'>" + date + "</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:" + color + ";'>" + status + "</p></div> </div></a>";
-                        $(".payments").append(html);
+                    // Seleções de CORES _ Estado de PAGAMENTOS
+                    if (data[i].verificacaoPago == true) {
+                        status = "Pago";
+                        color = "#47BC00"; // VERDE
+                    } else if (data[i].verificacaoPago == false && data[i].dataVencimento < date) {
+                        status = "Dívida";
+                        color = "#FF3D00"; // VERMELHO
+                    } else if (data[i].verificacaoPago == false && data[i].dataVencimento > date) {
+                        status = "Pendente";
+                        color = "#747474"; // CINZENTO (DEFAULT)
                     }
+
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='" + data[i].fornecedor.nome + "'>" + data[i].fornecedor.nome + "</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>" + data[i].valor.split('.').join(',') + "€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='" + date + "'>" + date + "</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:" + color + ";'>" + status + "</p></div> </div></a>";
+                    $(".payments").append(html);
                 }
             }
 

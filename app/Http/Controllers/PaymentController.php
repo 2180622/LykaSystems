@@ -272,9 +272,8 @@ class PaymentController extends Controller
       // Pesquisa de FORNECEDORES
       if ($idFornecedor != null) {
         if ($idFornecedor == 'todos') {
-          $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
-          ->where('idFornecedor', '!=', null)
-          ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+          $responsabilidades = RelFornResp::where('idFornecedor', '!=', null)
+          ->with(["responsabilidade", "fornecedor"]);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimento', '>=', $dataInicio);
           }
@@ -282,9 +281,8 @@ class PaymentController extends Controller
             $responsabilidades->where('dataVencimento', '<=', $dataFim);
           }
         }else{
-          $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
-          ->where('idFornecedor', $idFornecedor)
-          ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', 'relacao', 'relacao.fornecedor']);
+          $responsabilidades = RelFornResp::where('idFornecedor', $idFornecedor)
+          ->with(["responsabilidade", "fornecedor"]);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimento', '>=', $dataInicio);
           }
