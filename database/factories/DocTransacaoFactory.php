@@ -2,20 +2,20 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\DocTransacao;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(DocTransacao::class, function (Faker $faker) {
     return [
-        'descricao' => $faker->company,
-        'valorRecebido' => $faker->company,
-        'tipoPagamento' => $faker->company,
-        'dataOperacao' => $faker->company,
-        'dataRecebido' => $faker->company,
-        'observacoes' => $faker->company,
-        'comprovativoPagamento' => $faker->company,
-        'verificacao' => $faker->company,
-        'idConta' => $faker->company,
-        'idFase' => $faker->company,
+        'descricao' => $faker->sentence($nbWords = 5, $variableNbWords = true),
+        'valorRecebido' => null,
+        'tipoPagamento' => $faker->randomElement($array = array ('Transferencia Bancaria','Paypal')),
+        'dataOperacao' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'dataRecebido' => null,
+        'observacoes' => null,
+        'comprovativoPagamento' => 'default-photos/university.png',
+        'verificacao' => false,
+
+        /*  'idConta'  'idFase'  */
     ];
 });

@@ -2,15 +2,15 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\RelatorioProblema;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(RelatorioProblema::class, function (Faker $faker) {
     return [
-        'nome' => $faker->company,
-        'email' => $faker->company,
-        'telemovel' => $faker->company,
-        'screenshot' => $faker->company,
-        'relatorio' => $faker->company,
+        'nome' => $faker->firstNameMale.' '.$faker->lastName,
+        'email' => $faker->freeEmail,
+        'telemovel' => $faker->mobileNumber,
+        'screenshot' => 'default-photos/university.png',
+        'relatorio' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
     ];
 });

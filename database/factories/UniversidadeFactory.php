@@ -12,7 +12,7 @@ $factory->define(Universidade::class, function (Faker $faker) {
         'telefone' => $faker->p,
         'email' => $faker->companyEmail,
         'NIF' => $faker->unique()->idNumber,
-        'IBAN' => $faker->bankAccountNumber,
+        'IBAN' => $faker->iban($countryCode),
         'obsContactos' => $faker->realText($maxNbChars = 200, $indexSize = 2),
         'obsCursos' => $faker->realText($maxNbChars = 200, $indexSize = 2),
         'obsCandidaturas' => $faker->realText($maxNbChars = 200, $indexSize = 2)

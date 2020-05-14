@@ -190,7 +190,7 @@
 
                     <div class="row">
                         <div class="col" style="min-width:300px">
-                            <label for="num_docOficial">Número do documento:</label><br>
+                            <label for="num_docOficial">Número de identificação pessoal:</label><br>
                             <input type="text" class="form-control" name="num_docOficial" id="num_docOficial"
                                 value="{{old('num_docOficial',$client->num_docOficial)}}" placeholder="Número de identificação pessoal"  maxlength="20">
                         </div>
@@ -224,10 +224,10 @@
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
                         style="width:80%;min-width:118px;min-height:120px">
 
-                        @if ( isset ($cartaoCidadao) )
+                        @if ( isset ($docOfficial) )
                         <a href="#" title="Clique para modificar o documento de identificação" id="doc_id_preview"
                             class="name_link">
-                                @if ($cartaoCidadao->imagem == null)
+                                @if ($docOfficial->imagem == null)
                                     <div class="text-danger">
                                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                                         <div id="name_doc_id_file">
@@ -277,13 +277,13 @@
                             {{-- INUPUT numPassaporte --}}
                             <label for="numPassaporte">Número do passaporte:</label><br>
                             <input type="text" class="form-control" name="numPassaporte" id="numPassaporte"
-                                value="{{$passaporteData->numPassaporte}}" maxlength="20" placeholder="Número do passaporte">
+                                value="{{$passaporteData->numPassaporte ?? ''}}" maxlength="20" placeholder="Número do passaporte">
                         </div>
                         <div class="col">
                             {{-- INUPUT dataValidPP --}}
                             <label for="dataValidPP">Data de validade do passaporte:</label><br>
                             <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                                value="{{$passaporteData->dataValidPP}}" >
+                                value="{{$passaporteData->dataValidPP ?? ''}}" >
                         </div>
                     </div>
 
@@ -294,7 +294,7 @@
                             {{-- INUPUT passaportPaisEmi --}}
                             <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
                             <input type="hidden" id="hidden_passaportPaisEmi"
-                                value="{{$passaporteData->passaportPaisEmi}}">
+                                value="{{$passaporteData->passaportPaisEmi ?? ''}}">
                             <select id="passaportPaisEmi" name="passaportPaisEmi" style="width:100%" class="form-control select_style" >
                                 @include('clients.partials.countries');
                             </select>
@@ -303,7 +303,7 @@
                             {{-- INUPUT localEmissaoPP --}}
                             <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                             <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                                value="{{$passaporteData->localEmissaoPP }}" maxlength="30"  placeholder="Insira o local de emissão">
+                                value="{{$passaporteData->localEmissaoPP ?? ''}}" maxlength="30"  placeholder="Insira o local de emissão">
                         </div>
                     </div>
 

@@ -2,16 +2,16 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\RelFornResp;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(RelFornResp::class, function (Faker $faker) {
     return [
-        'valor' => $faker->company,
-        'verificacaoPago' => $faker->company,
-        'dataVencimento' => $faker->company,
-        'estado' => $faker->company,
-        'idResponsabilidade' => $faker->company,
-        'idFornecedor' => $faker->company,
+        'valor' => $faker->numberBetween($min = 10, $max = 100),
+        'verificacaoPago' => false,
+        'dataVencimento' => $faker->date($format = 'Y-m-d', $max = '+1 month'),
+        'estado' => $faker->randomElement($array = array ('Pendente','Pago', 'Dívida', 'Crédito')),
+
+        /*  'idResponsabilidade'  'idFornecedor'  */
     ];
 });

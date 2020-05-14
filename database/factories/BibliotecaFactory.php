@@ -2,15 +2,15 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Biblioteca;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Biblioteca::class, function (Faker $faker) {
     return [
-        'acesso' => $faker->company,
-        'descricao' => $faker->company,
-        'ficheiro' => $faker->company,
-        'tipo' => $faker->company,
-        'tamanho' => $faker->company,
+        'acesso' => 'Privado',
+        'descricao' => $faker->sentence($nbWords = 4, $variableNbWords = true),
+        'ficheiro' => $faker->file($sourceDir, $targetDir, false),
+        'tipo' => 'jpg',
+        'tamanho' => '246',
     ];
 });
