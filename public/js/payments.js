@@ -71,7 +71,7 @@ function showFunnelIcon() {
 
 function selected() {
     var defaultValue = "default";
-    // Input estudantes
+    // Input ESTUDANTES
     var estudanteInput = document.getElementById('estudantes');
     var valueEstudante = estudanteInput.options[estudanteInput.selectedIndex].value;
 
@@ -96,17 +96,21 @@ function selected() {
                 }
             }
             document.getElementById('agentes').removeAttribute("disabled");
+            document.getElementById('subagentes').removeAttribute("disabled");
             document.getElementById('universidades').removeAttribute("disabled");
+            document.getElementById('universidadesec').removeAttribute("disabled");
             document.getElementById('fornecedores').removeAttribute("disabled");
         });
         document.getElementById('agentes').setAttribute("disabled", "true");
+        document.getElementById('subagentes').setAttribute("disabled", "true");
         document.getElementById('universidades').setAttribute("disabled", "true");
+        document.getElementById('universidadesec').setAttribute("disabled", "true");
         document.getElementById('fornecedores').setAttribute("disabled", "true");
     }
 
 
 
-    // Input agentes
+    // Input AGENTES
     var agenteInput = document.getElementById('agentes');
     var valueAgente = agenteInput.options[agenteInput.selectedIndex].value;
 
@@ -131,15 +135,56 @@ function selected() {
                 }
             }
             document.getElementById('estudantes').removeAttribute("disabled");
+            document.getElementById('subagentes').removeAttribute("disabled");
             document.getElementById('universidades').removeAttribute("disabled");
+            document.getElementById('universidadesec').removeAttribute("disabled");
             document.getElementById('fornecedores').removeAttribute("disabled");
         });
         document.getElementById('estudantes').setAttribute("disabled", "true");
+        document.getElementById('subagentes').setAttribute("disabled", "true");
         document.getElementById('universidades').setAttribute("disabled", "true");
+        document.getElementById('universidadesec').setAttribute("disabled", "true");
         document.getElementById('fornecedores').setAttribute("disabled", "true");
     }
 
-    // Input universidades
+    // Input SUBAGENTES
+    var subagenteInput = document.getElementById('subagentes');
+    var valueSubagente = subagenteInput.options[subagenteInput.selectedIndex].value;
+
+    if (valueSubagente != defaultValue) {
+        var span = document.createElement("span");
+        span.id = "closeSubagente";
+        span.className = "closeButton"
+
+        var x = document.createTextNode("x");
+        span.appendChild(x);
+
+        var parentDiv = subagenteInput.parentElement;
+        parentDiv.appendChild(span);
+
+        span.addEventListener("click", function() {
+            var options = subagenteInput.options;
+            for (var i = 0; options = options[i]; i++) {
+                if (options.value == defaultValue) {
+                    subagenteInput.selectedIndex = i;
+                    span.style.display = "none";
+                    break;
+                }
+            }
+            document.getElementById('estudantes').removeAttribute("disabled");
+            document.getElementById('agentes').removeAttribute("disabled");
+            document.getElementById('universidades').removeAttribute("disabled");
+            document.getElementById('universidadesec').removeAttribute("disabled");
+            document.getElementById('fornecedores').removeAttribute("disabled");
+        });
+        document.getElementById('estudantes').setAttribute("disabled", "true");
+        document.getElementById('agentes').setAttribute("disabled", "true");
+        document.getElementById('universidades').setAttribute("disabled", "true");
+        document.getElementById('universidadesec').setAttribute("disabled", "true");
+        document.getElementById('fornecedores').setAttribute("disabled", "true");
+    }
+
+    // Input UNIVERSIDADE PRINCIPAL
     var universidadeInput = document.getElementById('universidades');
     var valueUni = universidadeInput.options[universidadeInput.selectedIndex].value;
 
@@ -165,14 +210,55 @@ function selected() {
             }
             document.getElementById('estudantes').removeAttribute("disabled");
             document.getElementById('agentes').removeAttribute("disabled");
+            document.getElementById('subagentes').removeAttribute("disabled");
+            document.getElementById('universidadesec').removeAttribute("disabled");
             document.getElementById('fornecedores').removeAttribute("disabled");
         });
         document.getElementById('estudantes').setAttribute("disabled", "true");
         document.getElementById('agentes').setAttribute("disabled", "true");
+        document.getElementById('subagentes').setAttribute("disabled", "true");
+        document.getElementById('universidadesec').setAttribute("disabled", "true");
         document.getElementById('fornecedores').setAttribute("disabled", "true");
     }
 
-    // Input fornecedores
+    // Input UNIVERSIDADE SECUNDÁRIA
+    var universidadeSecInput = document.getElementById('universidadesec');
+    var valueUniSec = universidadeSecInput.options[universidadeSecInput.selectedIndex].value;
+
+    if (valueUniSec != defaultValue) {
+        var span = document.createElement("span");
+        span.id = "closeUni";
+        span.className = "closeButton"
+
+        var x = document.createTextNode("x");
+        span.appendChild(x);
+
+        var parentDiv = universidadeSecInput.parentElement;
+        parentDiv.appendChild(span);
+
+        span.addEventListener("click", function() {
+            var options = universidadeSecInput.options;
+            for (var i = 0; options = options[i]; i++) {
+                if (options.value == defaultValue) {
+                    universidadeSecInput.selectedIndex = i;
+                    span.style.display = "none";
+                    break;
+                }
+            }
+            document.getElementById('estudantes').removeAttribute("disabled");
+            document.getElementById('agentes').removeAttribute("disabled");
+            document.getElementById('subagentes').removeAttribute("disabled");
+            document.getElementById('universidades').removeAttribute("disabled");
+            document.getElementById('fornecedores').removeAttribute("disabled");
+        });
+        document.getElementById('estudantes').setAttribute("disabled", "true");
+        document.getElementById('agentes').setAttribute("disabled", "true");
+        document.getElementById('subagentes').setAttribute("disabled", "true");
+        document.getElementById('universidades').setAttribute("disabled", "true");
+        document.getElementById('fornecedores').setAttribute("disabled", "true");
+    }
+
+    // Input FORNECEDORES
     var fornecedorInput = document.getElementById('fornecedores');
     var valueFornecedor = fornecedorInput.options[fornecedorInput.selectedIndex].value;
 
@@ -198,14 +284,21 @@ function selected() {
             }
             document.getElementById('estudantes').removeAttribute("disabled");
             document.getElementById('agentes').removeAttribute("disabled");
+            document.getElementById('subagentes').removeAttribute("disabled");
             document.getElementById('universidades').removeAttribute("disabled");
+            document.getElementById('universidadesec').removeAttribute("disabled");
         });
         document.getElementById('estudantes').setAttribute("disabled", "true");
         document.getElementById('agentes').setAttribute("disabled", "true");
+        document.getElementById('subagentes').setAttribute("disabled", "true");
         document.getElementById('universidades').setAttribute("disabled", "true");
+        document.getElementById('universidadesec').setAttribute("disabled", "true");
     }
 }
 
+$("select").change(function() {
+    $("#error").remove();
+});
 
 $.ajaxSetup({
     headers: {
@@ -218,7 +311,9 @@ $('#search-form').submit(function(event) {
     info = {
         estudante: $("#estudantes").find(":selected").val(),
         agente: $("#agentes").find(":selected").val(),
+        subagente: $("#subagentes").find(":selected").val(),
         universidade: $("#universidades").find(":selected").val(),
+        universidadesec: $("#universidadesec").find(":selected").val(),
         fornecedor: $("#fornecedores").find(":selected").val(),
         datainicio: $("#dataInicio").val(),
         datafim: $("#dataFim").val()
@@ -229,6 +324,7 @@ $('#search-form').submit(function(event) {
         context: this,
         data: info,
         success: function(data) {
+            $("#error").remove();
             $(".payments").remove();
             div = "<div class='payments'><div>";
             $("#append-payment").append(div);
@@ -238,24 +334,30 @@ $('#search-form').submit(function(event) {
                 if (data[i].valorCliente != null && $("#estudantes").find(":selected").val() != 'default') {
                     // Formato da DATA DE VENCIMENTO
                     const d = new Date(data[i].dataVencimentoCliente);
-                    const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
-                    const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
-                    const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
+                    const da = new Intl.DateTimeFormat('pt', {
+                        day: '2-digit'
+                    }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', {
+                        month: '2-digit'
+                    }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', {
+                        year: 'numeric'
+                    }).format(d);
                     date = `${da}/${mo}/${ye}`;
 
                     // Seleções de CORES _ Estado de PAGAMENTOS
                     if (data[i].verificacaoPagoCliente == true) {
                         status = "Pago";
                         color = "#47BC00"; // VERDE
-                    }else if (data[i].verificacaoPagoCliente == false && data[i].dataVencimentoCliente < date) {
+                    } else if (data[i].verificacaoPagoCliente == false && data[i].dataVencimentoCliente < date) {
                         status = "Dívida";
                         color = "#FF3D00"; // VERMELHO
-                    }else if (data[i].verificacaoPagoCliente == false && data[i].dataVencimentoCliente > date) {
+                    } else if (data[i].verificacaoPagoCliente == false && data[i].dataVencimentoCliente > date) {
                         status = "Pendente";
                         color = "#747474"; // CINZENTO (DEFAULT)
                     }
 
-                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+ data[i].cliente.nome + ' ' + data[i].cliente.apelido +"'>"+ data[i].cliente.nome + ' ' + data[i].cliente.apelido +"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ data[i].valorCliente.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='" + data[i].cliente.nome + ' ' + data[i].cliente.apelido + "'>" + data[i].cliente.nome + ' ' + data[i].cliente.apelido + "</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>" + data[i].valorCliente.split('.').join(',') + "€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='" + date + "'>" + date + "</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:" + color + ";'>" + status + "</p></div> </div></a>";
                     $(".payments").append(html);
                 }
 
@@ -263,49 +365,123 @@ $('#search-form').submit(function(event) {
                 if (data[i].valorAgente != null && $("#agentes").find(":selected").val() != 'default') {
                     // Formato da DATA DE VENCIMENTO
                     const d = new Date(data[i].dataVencimentoAgente);
-                    const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
-                    const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
-                    const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
+                    const da = new Intl.DateTimeFormat('pt', {
+                        day: '2-digit'
+                    }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', {
+                        month: '2-digit'
+                    }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', {
+                        year: 'numeric'
+                    }).format(d);
                     date = `${da}/${mo}/${ye}`;
 
                     // Seleções de CORES _ Estado de PAGAMENTOS
                     if (data[i].verificacaoPagoAgente == true) {
                         status = "Pago";
                         color = "#47BC00"; // VERDE
-                    }else if (data[i].verificacaoPagoAgente == false && data[i].dataVencimentoAgente < date) {
+                    } else if (data[i].verificacaoPagoAgente == false && data[i].dataVencimentoAgente < date) {
                         status = "Dívida";
                         color = "#FF3D00"; // VERMELHO
-                    }else if (data[i].verificacaoPagoAgente == false && data[i].dataVencimentoAgente > date) {
+                    } else if (data[i].verificacaoPagoAgente == false && data[i].dataVencimentoAgente > date) {
                         status = "Pendente";
                         color = "#747474"; // CINZENTO (DEFAULT)
                     }
 
-                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+data[i].agente.nome + ' ' + data[i].cliente.apelido +"'>"+ data[i].agente.nome + ' ' + data[i].cliente.apelido +"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ data[i].valorAgente.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='" + data[i].agente.nome + ' ' + data[i].agente.apelido + "'>" + data[i].agente.nome + ' ' + data[i].agente.apelido + "</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>" + data[i].valorAgente.split('.').join(',') + "€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='" + date + "'>" + date + "</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:" + color + ";'>" + status + "</p></div> </div></a>";
                     $(".payments").append(html);
                 }
 
-                // Pagamentos as UNIVERSIDADES
+                // Pagamentos aos SUBAGENTES
+                if (data[i].valorSubAgente != null && $("#subagentes").find(":selected").val() != 'default') {
+                    // Formato da DATA DE VENCIMENTO
+                    const d = new Date(data[i].dataVencimentoAgente);
+                    const da = new Intl.DateTimeFormat('pt', {
+                        day: '2-digit'
+                    }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', {
+                        month: '2-digit'
+                    }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', {
+                        year: 'numeric'
+                    }).format(d);
+                    date = `${da}/${mo}/${ye}`;
+
+                    // Seleções de CORES _ Estado de PAGAMENTOS
+                    if (data[i].verificacaoPagoSubAgente == true) {
+                        status = "Pago";
+                        color = "#47BC00"; // VERDE
+                    } else if (data[i].verificacaoPagoSubAgente == false && data[i].dataVencimentoSubAgente < date) {
+                        status = "Dívida";
+                        color = "#FF3D00"; // VERMELHO
+                    } else if (data[i].verificacaoPagoSubAgente == false && data[i].dataVencimentoSubAgente > date) {
+                        status = "Pendente";
+                        color = "#747474"; // CINZENTO (DEFAULT)
+                    }
+
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='" + data[i].sub_agente.nome + ' ' + data[i].sub_agente.apelido + "'>" + data[i].sub_agente.nome + ' ' + data[i].sub_agente.apelido + "</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>" + data[i].valorSubAgente.split('.').join(',') + "€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='" + date + "'>" + date + "</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:" + color + ";'>" + status + "</p></div> </div></a>";
+                    $(".payments").append(html);
+                }
+
+                // Pagamentos as UNIVERSIDADES PRINCIPAIS
                 if (data[i].valorUniversidade1 != null && $("#universidades").find(":selected").val() != 'default') {
                     // Formato da DATA DE VENCIMENTO
                     const d = new Date(data[i].dataVencimentoUni1);
-                    const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
-                    const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
-                    const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
+                    const da = new Intl.DateTimeFormat('pt', {
+                        day: '2-digit'
+                    }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', {
+                        month: '2-digit'
+                    }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', {
+                        year: 'numeric'
+                    }).format(d);
                     date = `${da}/${mo}/${ye}`;
 
                     // Seleções de CORES _ Estado de PAGAMENTOS
                     if (data[i].verificacaoPagoUni1 == true) {
                         status = "Pago";
                         color = "#47BC00"; // VERDE
-                    }else if (data[i].verificacaoPagoUni1 == false && data[i].dataVencimentoUni1 < date) {
+                    } else if (data[i].verificacaoPagoUni1 == false && data[i].dataVencimentoUni1 < date) {
                         status = "Dívida";
                         color = "#FF3D00"; // VERMELHO
-                    }else if (data[i].verificacaoPagoUni1 == false && data[i].dataVencimentoUni1 > date) {
+                    } else if (data[i].verificacaoPagoUni1 == false && data[i].dataVencimentoUni1 > date) {
                         status = "Pendente";
                         color = "#747474"; // CINZENTO (DEFAULT)
                     }
 
-                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+data[i].universidade1.nome+"'>"+data[i].universidade1.nome+"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ data[i].valorUniversidade1.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='" + data[i].universidade1.nome + "'>" + data[i].universidade1.nome + "</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>" + data[i].valorUniversidade1.split('.').join(',') + "€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='" + date + "'>" + date + "</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:" + color + ";'>" + status + "</p></div> </div></a>";
+                    $(".payments").append(html);
+                }
+
+                // Pagamentos as UNIVERSIDADES SECUNDÁRIAS
+                if (data[i].valorUniversidade2 != null && $("#universidadesec").find(":selected").val() != 'default') {
+                    // Formato da DATA DE VENCIMENTO
+                    const d = new Date(data[i].dataVencimentoUni2);
+                    const da = new Intl.DateTimeFormat('pt', {
+                        day: '2-digit'
+                    }).format(d);
+                    const mo = new Intl.DateTimeFormat('pt', {
+                        month: '2-digit'
+                    }).format(d);
+                    const ye = new Intl.DateTimeFormat('pt', {
+                        year: 'numeric'
+                    }).format(d);
+                    date = `${da}/${mo}/${ye}`;
+
+                    // Seleções de CORES _ Estado de PAGAMENTOS
+                    if (data[i].verificacaoPagoUni2 == true) {
+                        status = "Pago";
+                        color = "#47BC00"; // VERDE
+                    } else if (data[i].verificacaoPagoUni2 == false && data[i].dataVencimentoUni2 < date) {
+                        status = "Dívida";
+                        color = "#FF3D00"; // VERMELHO
+                    } else if (data[i].verificacaoPagoUni2 == false && data[i].dataVencimentoUni2 > date) {
+                        status = "Pendente";
+                        color = "#747474"; // CINZENTO (DEFAULT)
+                    }
+
+                    html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='" + data[i].universidade2.nome + "'>" + data[i].universidade2.nome + "</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>" + data[i].valorUniversidade2.split('.').join(',') + "€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='" + date + "'>" + date + "</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:" + color + ";'>" + status + "</p></div> </div></a>";
                     $(".payments").append(html);
                 }
 
@@ -315,34 +491,57 @@ $('#search-form').submit(function(event) {
                     for (var j = 0; j < relacao.length; j++) {
                         // Formato da DATA DE VENCIMENTO
                         const d = new Date(relacao[j].dataVencimentoUni1);
-                        const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
-                        const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
-                        const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
+                        const da = new Intl.DateTimeFormat('pt', {
+                            day: '2-digit'
+                        }).format(d);
+                        const mo = new Intl.DateTimeFormat('pt', {
+                            month: '2-digit'
+                        }).format(d);
+                        const ye = new Intl.DateTimeFormat('pt', {
+                            year: 'numeric'
+                        }).format(d);
                         date = `${da}/${mo}/${ye}`;
 
                         // Seleções de CORES _ Estado de PAGAMENTOS
                         if (relacao[j].verificacaoPago == true) {
                             status = "Pago";
                             color = "#47BC00"; // VERDE
-                        }else if (relacao[j].verificacaoPago == false && relacao[j].dataVencimento < date) {
+                        } else if (relacao[j].verificacaoPago == false && relacao[j].dataVencimento < date) {
                             status = "Dívida";
                             color = "#FF3D00"; // VERMELHO
-                        }else if (relacao[j].verificacaoPago == false && relacao[j].dataVencimento > date) {
+                        } else if (relacao[j].verificacaoPago == false && relacao[j].dataVencimento > date) {
                             status = "Pendente";
                             color = "#747474"; // CINZENTO (DEFAULT)
                         }
 
-                        html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='"+relacao[j].fornecedor.nome+"'>"+relacao[j].fornecedor.nome+"</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>"+ relacao[j].valor.split('.').join(',') +"€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='"+ date +"'>"+ date +"</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:"+color+";'>"+status+"</p></div> </div></a>";
+                        html = "<a href='#'><div class='row charge-div'> <div class='col-md-1 align-self-center'><div class='white-circle'><img src='http://lykasystems.test/storage/default-photos/M.jpg' width='100%' class='mx-auto'></div></div> <div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate' title='" + relacao[j].fornecedor.nome + "'>" + relacao[j].fornecedor.nome + "</p></div> <div class='col-md-2 text-truncate align-self-center'><p class='text-truncate'>" + relacao[j].valor.split('.').join(',') + "€</p></div> <div class='col-md-2 align-self-center ml-4'><p class='text-truncate' title='" + date + "'>" + date + "</p></div> <div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate' style='color:" + color + ";'>" + status + "</p></div> </div></a>";
                         $(".payments").append(html);
                     }
-                    }
+                }
             }
 
             window.location.assign("http://lykasystems.test/pagamentos#append-payment");
             history.pushState("", document.title, window.location.pathname);
         },
-        error: function() {
-            console.log('NOK');
+        error: function(data) {
+            if ($('#error').text() != '') {
+                $('#error').remove();
+            }
+            if (data.status == 404) {
+                $(".payments").remove();
+                div = "<div class='payments'><div>";
+                $("#append-payment").append(div);
+                error = "<div class='row' id='error' style='padding: 0px 18px;'><div class='container no-data-div text-center mt-3'><p style='color:#e3342f;'>Não existem pagamentos registados no sistema perante a sua pesquisa.</p></div></div>";
+                $(".payments").append(error);
+                window.location.assign("http://lykasystems.test/pagamentos#append-payment");
+                history.pushState("", document.title, window.location.pathname);
+            } else {
+                if ($('#error').text() != '') {
+                    $('#error').remove();
+                }
+                error = "<div id='error'><strong style='color: #e3342f;'>Preencha os campos necessários para a realização de uma filtragem.</strong><br><br></div>";
+                $("#search-form").before(error);
+            }
         }
     });
 });
