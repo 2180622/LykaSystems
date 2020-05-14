@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\DocAcademico;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(DocAcademico::class, function (Faker $faker) {
     return [
         'nome' => $faker->sentence($nbWords = 2, $variableNbWords = true),
         'tipo' => $faker->randomElement($array = array ('Certificado','Diploma')),

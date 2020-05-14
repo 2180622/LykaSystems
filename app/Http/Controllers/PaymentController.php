@@ -167,7 +167,7 @@ class PaymentController extends Controller
       // Pesquisa de ESTUDANTES
       if ($idEstudante != null) {
         if ($idEstudante == 'todos') {
-          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+          $responsabilidades = Responsabilidade::select()->with(['cliente', 'fase']);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimentoCliente', '>=', $dataInicio);
           }
@@ -175,7 +175,7 @@ class PaymentController extends Controller
             $responsabilidades->where('dataVencimentoCliente', '<=', $dataFim);
           }
       }else {
-        $responsabilidades = Responsabilidade::where('idCliente', $idEstudante)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        $responsabilidades = Responsabilidade::where('idCliente', $idEstudante)->select()->with(['cliente', 'cliente.user', 'fase']);
         if ($dataInicio != null) {
           $responsabilidades->where('dataVencimentoCliente', '>=', $dataInicio);
         }
@@ -301,40 +301,39 @@ class PaymentController extends Controller
         }
     }
 
-    public function create(Responsabilidade $responsabilidade)
+    public function create(Cliente $cliente, Fase $fase, Responsabilidade $responsabilidade)
     {
-      $contas = Conta::all();
-      return view('payments.add', compact('responsabilidade', 'contas'));
+        dd($fase->with("responsabilidade")->where('idResponsabilidade', $responsabilidade->idResponsabilidade)->get());
     }
 
     public function store(Request $request, Responsabilidade $responsabilidade)
     {
-      $fields = $request->all();
-      // Campos de CLIENTE
-      $valorCliente = (isset($fields['valorPagoCliente']) ? $fields['valorPagoCliente'] : null);
-      $comprovativoCliente = (isset($fields['comprovativoPagamentoCliente']) ? $fields['comprovativoPagamentoCliente'] : null);
-      $dataCliente = (isset($fields['dataCliente']) ? $fields['dataCliente'] : null);
-      $contaCliente = (isset($fields['contaCliente']) ? $fields['contaCliente'] : null);
-      // Campos de AGENTE
-      $valorAgente = (isset($fields['valorPagoAgente']) ? $fields['valorPagoAgente'] : null);
-      $comprovativoAgente = (isset($fields['comprovativoPagamentoAgente']) ? $fields['comprovativoPagamentoAgente'] : null);
-      $dataAgente = (isset($fields['dataAgente']) ? $fields['dataAgente'] : null);
-      $contaAgente = (isset($fields['contaAgente']) ? $fields['contaAgente'] : null);
-      // Campos de SUBAGENTE
-      $valorSubAgente = (isset($fields['valorPagoSubAgente']) ? $fields['valorPagoSubAgente'] : null);
-      $comprovativoSubAgente = (isset($fields['comprovativoPagamentoSubAgente']) ? $fields['comprovativoPagamentoSubAgente'] : null);
-      $dataSubAgente = (isset($fields['dataSubAgente']) ? $fields['dataSubAgente'] : null);
-      $contaSubAgente = (isset($fields['contaSubAgente']) ? $fields['contaSubAgente'] : null);
-      // Campos de UNIVERSIDADE1
-      $valorUni1 = (isset($fields['valorPagoUni1']) ? $fields['valorPagoUni1'] : null);
-      $comprovativoUni1 = (isset($fields['comprovativoPagamentoUni1']) ? $fields['comprovativoPagamentoUni1'] : null);
-      $dataUni1 = (isset($fields['dataUni1']) ? $fields['dataUni1'] : null);
-      $contaUni1 = (isset($fields['contaUni1']) ? $fields['contaUni1'] : null);
-      // Campos de UNIVERSIDADE2
-      $valorUni2 = (isset($fields['valorPagoUni2']) ? $fields['valorPagoUni2'] : null);
-      $comprovativoUni2 = (isset($fields['comprovativoPagamentoUni2']) ? $fields['comprovativoPagamentoUni2'] : null);
-      $dataUni2 = (isset($fields['dataUni2']) ? $fields['dataUni2'] : null);
-      $contaUni2 = (isset($fields['contaUni2']) ? $fields['contaUni2'] : null);
+        $fields = $request->all();
+        // Campos de CLIENTE
+        $valorCliente = (isset($fields['valorPagoCliente']) ? $fields['valorPagoCliente'] : null);
+        $comprovativoCliente = (isset($fields['comprovativoPagamentoCliente']) ? $fields['comprovativoPagamentoCliente'] : null);
+        $dataCliente = (isset($fields['dataCliente']) ? $fields['dataCliente'] : null);
+        $contaCliente = (isset($fields['contaCliente']) ? $fields['contaCliente'] : null);
+        // Campos de AGENTE
+        $valorAgente = (isset($fields['valorPagoAgente']) ? $fields['valorPagoAgente'] : null);
+        $comprovativoAgente = (isset($fields['comprovativoPagamentoAgente']) ? $fields['comprovativoPagamentoAgente'] : null);
+        $dataAgente = (isset($fields['dataAgente']) ? $fields['dataAgente'] : null);
+        $contaAgente = (isset($fields['contaAgente']) ? $fields['contaAgente'] : null);
+        // Campos de SUBAGENTE
+        $valorSubAgente = (isset($fields['valorPagoSubAgente']) ? $fields['valorPagoSubAgente'] : null);
+        $comprovativoSubAgente = (isset($fields['comprovativoPagamentoSubAgente']) ? $fields['comprovativoPagamentoSubAgente'] : null);
+        $dataSubAgente = (isset($fields['dataSubAgente']) ? $fields['dataSubAgente'] : null);
+        $contaSubAgente = (isset($fields['contaSubAgente']) ? $fields['contaSubAgente'] : null);
+        // Campos de UNIVERSIDADE1
+        $valorUni1 = (isset($fields['valorPagoUni1']) ? $fields['valorPagoUni1'] : null);
+        $comprovativoUni1 = (isset($fields['comprovativoPagamentoUni1']) ? $fields['comprovativoPagamentoUni1'] : null);
+        $dataUni1 = (isset($fields['dataUni1']) ? $fields['dataUni1'] : null);
+        $contaUni1 = (isset($fields['contaUni1']) ? $fields['contaUni1'] : null);
+        // Campos de UNIVERSIDADE2
+        $valorUni2 = (isset($fields['valorPagoUni2']) ? $fields['valorPagoUni2'] : null);
+        $comprovativoUni2 = (isset($fields['comprovativoPagamentoUni2']) ? $fields['comprovativoPagamentoUni2'] : null);
+        $dataUni2 = (isset($fields['dataUni2']) ? $fields['dataUni2'] : null);
+        $contaUni2 = (isset($fields['contaUni2']) ? $fields['contaUni2'] : null);
 
       if ($valorCliente != null) {
         $pagoResponsabilidade = new PagoResponsabilidade;

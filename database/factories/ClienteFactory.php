@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Cliente;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Cliente::class, function (Faker $faker) {
     $gender = $faker->randomElement($array = array('F','M'));
     $nome=null;
     if($gender == "F"){

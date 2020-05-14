@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Fornecedor;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Fornecedor::class, function (Faker $faker) {
     return [
         'nome' => $faker->firstNameFemale.' '.$faker->lastName,
         'morada' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,

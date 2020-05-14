@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Biblioteca;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Biblioteca::class, function (Faker $faker) {
     return [
         'acesso' => 'Privado',
         'descricao' => $faker->sentence($nbWords = 4, $variableNbWords = true),

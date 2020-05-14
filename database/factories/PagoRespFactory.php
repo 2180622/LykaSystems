@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\PagoResponsabilidade;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(PagoResponsabilidade::class, function (Faker $faker) {
     return [
         'beneficiario' => $faker->randomElement($array = array ('Agente','Cliente','Universidade')),
         'valorPago' => $faker->numberBetween($min = 10, $max = 1000),
