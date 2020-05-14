@@ -259,7 +259,7 @@
                         <div class="text-secondary mb-2">Passaporte:</div>
 
                         <div class="border rounded bg-light p-3">
-                            @if ($passaporteData)
+                            @if ( isset($passaporteData) && $passaporteData!=null)
                                 {{-- numPassaporte --}}
                                 <div><span class="text-secondary my-3">Número do passaporte:</span>
                                     {{$passaporteData->numPassaporte}}</div>
@@ -277,7 +277,7 @@
                                 <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>
                                     {{$passaporteData->localEmissaoPP}}</div>
                             @else
-                                <small>(sem informação)</small>
+                                <div class="text-secondary"><small>(sem informação)</small></div>
                             @endif
 
 
@@ -301,9 +301,9 @@
                                             <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
 
                                             @if($docpessoal->verificacao==0)
-                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-2"></i></small></span>
+                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-2" title="Aguarda validação"></i></small></span>
                                             @else
-                                                <span class="text-success"><small><i class="fas fa-check ml-2"></i></small></span>
+                                                <span class="text-success"><small><i class="fas fa-check ml-2" title="Ficheiro validado"></i></small></span>
                                             @endif
 
                                         @endif
@@ -448,6 +448,13 @@
                                         @foreach($novosDocumentos as $docAcademico)
                                             @if($docAcademico->tipo=="Academico")
                                                 <a class="dropdown-item" href="{{route('documento-pessoal.create',["matricula",$docAcademico->idDocNecessario])}}">{{$docAcademico->tipoDocumento}}</a>
+
+                                                @if($docAcademico->verificacao==0)
+                                                    <span class="text-danger"><small><i class="fas fa-exclamation ml-2" title="Aguarda validação"></i></small></span>
+                                                @else
+                                                    <span class="text-success"><small><i class="fas fa-check ml-2" title="Ficheiro validado"></i></small></span>
+                                                @endif
+
                                             @endif
                                         @endforeach
                                 </div>
