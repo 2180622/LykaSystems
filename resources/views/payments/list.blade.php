@@ -143,7 +143,21 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="universidade">Universidades</label>
+                                            <label for="agente">SubAgentes</label>
+                                            <br>
+                                            <select name="subagente" id="subagentes" onchange="selected()">
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar subagente</option>
+                                                <option class="text-truncate" value="todos">(Todos)</option>
+                                                @foreach ($subagentes as $subagente)
+                                                <option class="text-truncate" value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="universidade">Universidade principal</label>
                                             <br>
                                             <select name="universidade" id="universidades" onchange="selected()">
                                                 <option selected disabled hidden class="text-truncate" value="default">Selecionar universidade</option>
@@ -153,9 +167,17 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                    </div>
-                                    <br><br>
-                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="universidade">Universidade secundária</label>
+                                            <br>
+                                            <select name="universidadesec" id="universidadesec" onchange="selected()">
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar universidade</option>
+                                                <option class="text-truncate" value="todos">(Todas)</option>
+                                                @foreach ($universidades as $universidade)
+                                                <option class="text-truncate" value="{{$universidade->idUniversidade}}">{{$universidade->nome}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="col-md-4">
                                             <label for="fornecedor">Fornecedores</label>
                                             <br>
@@ -167,6 +189,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <label for="dataInicio">De (Data de início)</label>
                                             <br>
@@ -178,7 +203,6 @@
                                             <input id="dataFim" type="date" name="dataFim">
                                         </div>
                                     </div>
-                                    <br>
                                     <div class="row mt-3">
                                         <div class="col text-right">
                                             <button type="submit" name="button" id="searchButton">filtrar</button>

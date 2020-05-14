@@ -32,7 +32,8 @@ class PaymentController extends Controller
       $relacoes = RelFornResp::all();
       $estudantes = Cliente::all();
       $universidades = Universidade::all();
-      $agentes = Agente::where('tipo', '=', 'Agente')->get();
+      $agentes = Agente::where('tipo', 'Agente')->get();
+      $subagentes = Agente::where('tipo', 'Subagente')->get();
       $fornecedores = Fornecedor::all();
 
       $valorTotalPendente = 0;
@@ -149,19 +150,21 @@ class PaymentController extends Controller
           }
         }
       }
-      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'universidades', 'fornecedores'));
+      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores'));
     }
 
     public function search(Request $request)
     {
       $idEstudante = ($request->input('estudante') != 'default') ? $request->input('estudante') : null;
       $idAgente = ($request->input('agente') != 'default') ? $request->input('agente') : null;
+      $idSubagente = ($request->input('subagente') != 'default') ? $request->input('subagente') : null;
       $idUniversidade = ($request->input('universidade') != 'default') ? $request->input('universidade') : null;
+      $idUniversidadeSec = ($request->input('universidadesec') != 'default') ? $request->input('universidadesec') : null;
       $idFornecedor = ($request->input('fornecedor') != 'default') ? $request->input('fornecedor') : null;
       $dataInicio = $request->input('datainicio');
       $dataFim = $request->input('datafim');
 
-      // Pesquisa de estudantes
+      // Pesquisa de ESTUDANTES
       if ($idEstudante != null) {
         if ($idEstudante == 'todos') {
           $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
@@ -182,49 +185,91 @@ class PaymentController extends Controller
       }
       }
 
-      // Pesquisa de agentes
+      // Pesquisa de AGENTES
       if ($idAgente != null) {
         if ($idAgente == 'todos') {
           $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
-          $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio)->orWhere('dataVencimentoSubAgente', '>=', $dataInicio);
+          $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim)->orWhere('dataVencimentoSubAgente', '<=', $dataFim);
+          $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim);
         }
       }else {
         $responsabilidades = Responsabilidade::where('idAgente', $idAgente)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
-          $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio)->orWhere('dataVencimentoSubAgente', '>=', $dataInicio);
+          $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim)->orWhere('dataVencimentoSubAgente', '<=', $dataFim);
+          $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim);
         }
       }
       }
 
-      // Pesquisa de universidades
+      // Pesquisa de SUBAGENTES
+      if ($idSubagente != null) {
+        if ($idSubagente == 'todos') {
+          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        if ($dataInicio != null) {
+          $responsabilidades->where('dataVencimentoSubAgente', '>=', $dataInicio);
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('dataVencimentoSubAgente', '<=', $dataFim);
+        }
+      }else {
+        $responsabilidades = Responsabilidade::where('idSubAgente', $idSubagente)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        if ($dataInicio != null) {
+          $responsabilidades->where('dataVencimentoSubAgente', '>=', $dataInicio);
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('dataVencimentoSubAgente', '<=', $dataFim);
+        }
+      }
+      }
+
+      // Pesquisa de UNIVERSIDADE PRINCIPAL
       if ($idUniversidade != null) {
         if ($idUniversidade == 'todos') {
           $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
-          $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio)->orWhere('dataVencimentoUni2', '>=', $idUniversidade);
+          $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $responsabilidades->where('dataVencimentoUni1', '<=', $dataFim)->orWhere('dataVencimentoUni2', '<=', $idUniversidade);
+          $responsabilidades->where('dataVencimentoUni1', '<=', $dataFim);
         }
       }else {
-        $responsabilidades = Responsabilidade::where('idUniversidade1', $idUniversidade)->orWhere('idUniversidade2', $idUniversidade)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        $responsabilidades = Responsabilidade::where('idUniversidade1', $idUniversidade)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
         if ($dataInicio != null) {
-          $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio)->orWhere('dataVencimentoUni2', '>=', $idUniversidade);
+          $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $responsabilidades>where('dataVencimentoUni1', '<=', $dataFim)->orWhere('dataVencimentoUni2', '<=', $idUniversidade);
+          $responsabilidades>where('dataVencimentoUni1', '<=', $dataFim);
         }
       }
       }
 
-      // Pesquisa de fornecedores
+      // Pesquisa de UNIVERSIDADE SECUNDÁRIA
+      if ($idUniversidadeSec != null) {
+        if ($idUniversidadeSec == 'todos') {
+          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        if ($dataInicio != null) {
+          $responsabilidades->where('dataVencimentoUni2', '>=', $idUniversidadeSec);
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('dataVencimentoUni2', '<=', $idUniversidadeSec);
+        }
+      }else {
+        $responsabilidades = Responsabilidade::where('idUniversidade2', $idUniversidadeSec)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        if ($dataInicio != null) {
+          $responsabilidades->where('dataVencimentoUni2', '>=', $idUniversidadeSec);
+        }
+        if ($dataFim != null) {
+          $responsabilidades>where('dataVencimentoUni2', '<=', $idUniversidadeSec);
+        }
+      }
+      }
+
+      // Pesquisa de FORNECEDORES
       if ($idFornecedor != null) {
         if ($idFornecedor == 'todos') {
           $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
