@@ -277,13 +277,13 @@
                             {{-- INUPUT numPassaporte --}}
                             <label for="numPassaporte">Número do passaporte:</label><br>
                             <input type="text" class="form-control" name="numPassaporte" id="numPassaporte"
-                                value="{{$client->numPassaporte}}" maxlength="20" placeholder="Número do passaporte">
+                                value="{{$passaporteData->numPassaporte}}" maxlength="20" placeholder="Número do passaporte">
                         </div>
                         <div class="col">
                             {{-- INUPUT dataValidPP --}}
                             <label for="dataValidPP">Data de validade do passaporte:</label><br>
                             <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
-                                value="{{-- {{$infosPassaport->dataValidPP ?? null }} --}}" >
+                                value="{{$passaporteData->dataValidPP}}" >
                         </div>
                     </div>
 
@@ -294,7 +294,7 @@
                             {{-- INUPUT passaportPaisEmi --}}
                             <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
                             <input type="hidden" id="hidden_passaportPaisEmi"
-                                value="{{$infosPassaport->passaportPaisEmi ?? null }}">
+                                value="{{$passaporteData->passaportPaisEmi}}">
                             <select id="passaportPaisEmi" name="passaportPaisEmi" style="width:100%" class="form-control select_style" >
                                 @include('clients.partials.countries');
                             </select>
@@ -303,7 +303,7 @@
                             {{-- INUPUT localEmissaoPP --}}
                             <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                             <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
-                                value="{{-- {{$infosPassaport->localEmissaoPP ?? null }} --}}" maxlength="30"  placeholder="Insira o local de emissão">
+                                value="{{$passaporteData->localEmissaoPP }}" maxlength="30"  placeholder="Insira o local de emissão">
                         </div>
                     </div>
 

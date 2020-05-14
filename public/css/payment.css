@@ -268,11 +268,30 @@ select[disabled="true"] {
     border: none;
     color: white;
     font-weight: 700;
-    padding: 10px 30px;
+    padding: 10px 27px;
     font-size: 0.7rem;
     border-radius: 5px;
     text-transform: uppercase;
     background-color: #6A74C9;
+}
+
+#cleanButton {
+    border: none;
+    color: #A9A9A9;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 9px 27px;
+    border-radius: 5px;
+    border: 2px solid #A9A9A9;
+    text-transform: uppercase;
+    transition: 0.3s ease-in-out;
+    background-color: transparent;
+}
+
+#cleanButton:hover {
+    color: white;
+    background-color: #A9A9A9;
 }
 
 .collapse-charge {
@@ -318,7 +337,7 @@ select[disabled="true"] {
     border-radius: 0px;
 }
 
-#submit-button:focus{
+#submit-button:focus {
     box-shadow: none;
     border-radius: 0px;
 }
