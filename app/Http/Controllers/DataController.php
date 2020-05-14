@@ -121,7 +121,7 @@ class DataController extends Controller
 
         $cliente = new Cliente;
         $cliente->nome = 'Tiago';
-        $cliente->idAgente = 3;
+        $cliente->idAgente = 1;
         $cliente->apelido = 'Oliveira';
         $cliente->genero = 'M';
         $cliente->email = 'tiaveira@gmail.com';
@@ -153,7 +153,7 @@ class DataController extends Controller
         $cliente->save();
 
         $cliente = new Cliente;
-        $cliente->idAgente = 1;
+        $cliente->idAgente = 2;
         $cliente->nome = 'Katherine';
         $cliente->apelido = 'Romaria';
         $cliente->genero = 'F';
@@ -410,7 +410,7 @@ class DataController extends Controller
         $produto->valorTotalAgente = 300;
         $produto->valorTotalSubAgente = null;
         $produto->idAgente = 1;
-        $produto->idSubAgente = null;
+        $produto->idSubAgente = 3;
         $produto->idCliente = 2;
         $produto->idUniversidade1 = 2;
         $produto->idUniversidade2 = 1;
@@ -650,7 +650,7 @@ class DataController extends Controller
         $docpessoal = new DocPessoal;
         $docpessoal->idCliente = 1;
         $docpessoal->tipo = "Cartão Cidadão";
-        $docpessoal->imagem ="cliente_1_fase_2_documento_pessoal_CartãoCidadão.JPG";
+        $docpessoal->imagem =null;
         $docpessoal->info = '{"numDoc":"9845776436ZZ8"}' ;
         $docpessoal->dataValidade = "2021-01-27";
         $docpessoal->idFase = '2';
@@ -660,7 +660,7 @@ class DataController extends Controller
         $docpessoal = new DocPessoal;
         $docpessoal->idCliente = 1;
         $docpessoal->tipo = "Passaporte";
-        $docpessoal->imagem ="cliente_1_fase_2_documento_pessoal_Passaporte.JPG";
+        $docpessoal->imagem =null;
         $docpessoal->info = '{"numPassaporte":"324234","dataValidPP":"2021-01-27","passaportPaisEmi":"França","localEmissaoPP":"Paris"}' ;
         $docpessoal->dataValidade = "2021-01-27";
         $docpessoal->idFase = '2';

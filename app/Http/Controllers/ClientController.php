@@ -281,6 +281,7 @@ class ClientController extends Controller
             $agents=null;
         }
 
+        
         /* Subagentes associados */
         $subagents = Agente::
         whereIn('idAgente', function ($query) use ($client) {
@@ -291,23 +292,14 @@ class ClientController extends Controller
             ->distinct('idSubAgente');
         })->get();
 
+
         if ($subagents->isEmpty()) {
             $subagents=null;
         }
 
 
         /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
-/*         $infosPassaporte = new stdClass(); */
 
-/*         if($client->info_Passaporte){
-            $infosPassaporte= json_decode($client->info_Passaporte);
-        }else{
-            $passaporteInfo =[];
-            Arr::set($passaporteInfo, 'numPassaporte',null);
-            Arr::set($passaporteInfo, 'dataValidPP', null);
-            Arr::set($passaporteInfo, 'passaportPaisEmi', null);
-            Arr::set($passaporteInfo, 'localEmissaoPP', null);
-        } */
 
 
         /* Documentos pessoais */
