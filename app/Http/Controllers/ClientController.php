@@ -144,7 +144,9 @@ class ClientController extends Controller
     /* Criação de documentos Pessoais */
 
 
-        /* Documento de identificação pessoal */
+        /* Cria Documento de identificação pessoal se Existir ficheiro para Upload*/
+        if ($requestClient->hasFile('img_docOficial')) {
+
             $doc_id = new DocPessoal;
             $doc_id->idCliente = $client->idCliente;
             $doc_id->tipo = "Doc. Oficial";
@@ -156,22 +158,21 @@ class ClientController extends Controller
             $infoDocId['numDoc'] = $requestClient->num_docOficial;
             $doc_id->info = json_encode($infoDocId);
 
-
             /* Imagem do documento de identificação Pessoal*/
-            if ($requestClient->hasFile('img_docOficial')) {
-                $img_doc = $requestClient->file('img_docOficial');
-                $nome_imgDocOff = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Doc_Oficial'.'.'.$img_doc->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
-                $doc_id->imagem = $nome_imgDocOff;
-            }
+            $img_doc = $requestClient->file('img_docOficial');
+            $nome_imgDocOff = 'cliente_'.$client->idCliente. '_fase_2'. '_documento_pessoal_Doc_Oficial'.'.'.$img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
+            $doc_id->imagem = $nome_imgDocOff;
+
             /* Guarda documento de identificação Pessoal */
             $doc_id->create_at == date("Y-m-d",$t);
             $doc_id->save();
+        }
 
 
 
-
-        /* Passaporte */
+        /* Cria Passaporte se Existir ficheiro para Upload*/
+        if ($requestClient->hasFile('img_Passaporte')) {
             $passaporte = new DocPessoal;
             $passaporte->idCliente = $client->idCliente;
             $passaporte->tipo = "Passaporte";
@@ -189,17 +190,16 @@ class ClientController extends Controller
 
 
             /* Imagem do passaporte*/
-            if ($requestClient->hasFile('img_Passaporte')) {
-                $img_doc = $requestClient->file('img_Passaporte');
-                $nome_imgPassaporte = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Passaporte'.'.'.$img_doc->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgPassaporte);
-                $passaporte->imagem = $nome_imgPassaporte;
-            }
+
+            $img_doc = $requestClient->file('img_Passaporte');
+            $nome_imgPassaporte = 'cliente_'.$client->idCliente. '_fase_2'. '_documento_pessoal_Passaporte'.'.'.$img_doc->getClientOriginalExtension();
+            Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgPassaporte);
+            $passaporte->imagem = $nome_imgPassaporte;
+
             /* Guarda passaporte */
             $passaporte->create_at == date("Y-m-d",$t);
             $passaporte->save();
-
-
+        }
 
 
 
@@ -353,18 +353,17 @@ class ClientController extends Controller
         }
 
 
-        /* Dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
-/*         $infosPassaporte =new stdClass(); */
+        /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
 
-/*         if($client->info_Passaporte){
-            $infosPassaporte= json_decode($client->info_Passaporte);
-        }else{
-            $passaporteInfo =[];
-            Arr::set($passaporteInfo, 'numPassaporte',null);
-            Arr::set($passaporteInfo, 'dataValidPP', null);
-            Arr::set($passaporteInfo, 'passaportPaisEmi', null);
-            Arr::set($passaporteInfo, 'localEmissaoPP', null);
-        } */
+        $passaporte = DocPessoal::
+        where ("idCliente","=",$client->idCliente)
+        ->where("tipo","=","Passaporte")
+        ->first();
+
+        if($passaporte!=null){
+            $infosPassaporte = json_decode($passaporte->info);
+        }
+
 
         return view('clients.print',compact("client","produtos","infosPassaporte"));
     }
@@ -380,7 +379,7 @@ class ClientController extends Controller
     */
     public function edit(Cliente $client)
     {
-        if (Auth::user()->tipo == "admin"){
+        if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente"){
 
             $agents = Agente::all();
 
@@ -473,7 +472,7 @@ class ClientController extends Controller
             $doc_id = new DocPessoal;
             $doc_id->idCliente = $client->idCliente;
             $doc_id->tipo = "Doc. Oficial";
-            $doc_id->idFase = 2;
+/*             $doc_id->idFase = 2; */
             $doc_id->info = json_encode($infoDocId);
             $doc_id->dataValidade = $request->validade_docOficial;
             $doc_id->create_at == date("Y-m-d",$t);
@@ -481,7 +480,7 @@ class ClientController extends Controller
         }else{
             $doc_id->idCliente = $client->idCliente;
             $doc_id->tipo = "Doc. Oficial";
-            $doc_id->idFase = 1;
+/*             $doc_id->idFase = 1; */
             $doc_id->info = json_encode($infoDocId);
             $doc_id->dataValidade = $request->validade_docOficial;
             $doc_id->updated_at == date("Y-m-d",$t);
@@ -491,7 +490,7 @@ class ClientController extends Controller
         /* Documento de identificação pessoal: Tem imagem?? */
         if ($request->hasFile('img_docOficial')) {
 
-            /* Verifica se já existe DocPessoal e respectiva imagem */
+            /* Verifica se já existe DocPessoal e respectiva imagem. Se existir ficheiro novo, apaga o antigo*/
             if ($doc_id){
                 if(Storage::disk('public')->exists('client-documents/'.$client->idCliente.'/'. $doc_id->imagem)){
                     Storage::disk('public')->delete('client-documents/'.$client->idCliente.'/'. $doc_id->imagem);
@@ -501,7 +500,7 @@ class ClientController extends Controller
             /* Imagem do documento de identificação Pessoal*/
             $img_doc = $request->file('img_docOficial');
 
-            $nome_imgDocOff = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Doc_Oficial'.'.'.$img_doc->getClientOriginalExtension();
+            $nome_imgDocOff = 'cliente_'.$client->idCliente. '_fase_2'. '_documento_pessoal_Doc_Oficial'.'.'.$img_doc->getClientOriginalExtension();
             Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_doc, $nome_imgDocOff);
             $doc_id->imagem = $nome_imgDocOff;
             /* Guarda documento de identificação Pessoal */
@@ -510,7 +509,6 @@ class ClientController extends Controller
             $doc_id->save();
 
         }
-
 
 
 
@@ -553,7 +551,7 @@ class ClientController extends Controller
             /* Tem imagem do passaporte ?? */
             if ($request->hasFile('img_Passaporte')) {
 
-                /* Verifica se já existe DocPessoal e respectiva imagem */
+                /* Verifica se já existe DocPessoal:passaporte e respectiva imagem. Se existir ficheiro novo, apaga o antigo*/
                 if ($passaporte){
                     if(Storage::disk('public')->exists('client-documents/'.$client->idCliente.'/'. $passaporte->imagem)){
                         Storage::disk('public')->delete('client-documents/'.$client->idCliente.'/'. $passaporte->imagem);
@@ -563,7 +561,7 @@ class ClientController extends Controller
                 $img_passaport = $request->file('img_Passaporte');
 
 
-                $nome_imgPassaporte = 'cliente_'.$client->idCliente.'_fase_2'.'_documento_pessoal_Passaporte'.'.'.$img_passaport->getClientOriginalExtension();
+                $nome_imgPassaporte = 'cliente_'.$client->idCliente. '_fase_2'.'_documento_pessoal_Passaporte'.'.'.$img_passaport->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('client-documents/'.$client->idCliente.'/', $img_passaport, $nome_imgPassaporte);
                 $passaporte->imagem = $nome_imgPassaporte;
 
@@ -593,16 +591,19 @@ class ClientController extends Controller
 
     public function destroy(Cliente $client)
     {
-        /* "Apaga" dos clientes */
-        $client->delete();
 
+        if (Auth::user()->tipo == "admin" ){
 
-        /* "Apaga" dos utilizadores */
-        DB::table('User')
-        ->where('idCliente', $client->idCliente)
-        ->update(['deleted_at' => $client->deleted_at]);
+            /* "Apaga" dos clientes */
+            $client->delete();
 
+            /* "Apaga" dos utilizadores */
+            DB::table('User')
+            ->where('idCliente', $client->idCliente)
+            ->update(['deleted_at' => $client->deleted_at]);
 
-        return redirect()->route('clients.index')->with('success', 'Estudante eliminado com sucesso');
+            return redirect()->route('clients.index')->with('success', 'Estudante eliminado com sucesso');
+        }
+
     }
 }

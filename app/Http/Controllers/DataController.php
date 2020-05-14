@@ -216,6 +216,7 @@ class DataController extends Controller
         /*******************          Contactos          *******************/
 
         $contacto = new Contacto;
+        $contacto->idUser = 1;
         $contacto->nome = 'Pedro Costa';
         $contacto->fotografia = null;
         $contacto->telefone1 = null;
@@ -227,6 +228,7 @@ class DataController extends Controller
         $contacto->save();
 
         $contacto = new Contacto;
+        $contacto->idUser = 1;
         $contacto->nome = 'Maria Pedro';
         $contacto->fotografia = null;
         $contacto->telefone1 = 915642453;
