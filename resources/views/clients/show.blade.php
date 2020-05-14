@@ -259,22 +259,27 @@
                         <div class="text-secondary mb-2">Passaporte:</div>
 
                         <div class="border rounded bg-light p-3">
-                            {{-- numPassaporte --}}
-                            <div><span class="text-secondary my-3">Número do passaporte:</span>
-                                {{$client->numPassaporte}}</div>
-                            <br>
+                            @if ($passaporteData)
+                                {{-- numPassaporte --}}
+                                <div><span class="text-secondary my-3">Número do passaporte:</span>
+                                    {{$passaporteData->numPassaporte}}</div>
+                                <br>
 
-                            {{-- dataValidPP --}}
-                            <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
-                                {{-- {{$infosPassaporte->dataValidPP }} --}}</div><br>
+                                {{-- dataValidPP --}}
+                                <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
+                                    {{$passaporteData->dataValidPP}}</div><br>
 
-                            {{-- passaportPaisEmi --}}
-                            <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
-                                {{-- {{$infosPassaporte->passaportPaisEmi ?? ''}} --}}</div><br>
+                                {{-- passaportPaisEmi --}}
+                                <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
+                                    {{$passaporteData->passaportPaisEmi}}</div><br>
 
-                            {{-- localEmissaoPP --}}
-                            <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>
-                                {{-- {{$infosPassaporte->localEmissaoPP ?? ''}} --}}</div>
+                                {{-- localEmissaoPP --}}
+                                <div><span class="text-secondary my-3">Local de emissão do passaporte:</span>
+                                    {{$passaporteData->localEmissaoPP}}</div>
+                            @else
+                                <small>(sem informação)</small>
+                            @endif
+
 
                         </div>
 

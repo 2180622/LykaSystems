@@ -281,7 +281,7 @@ class ClientController extends Controller
             $agents=null;
         }
 
-        
+
         /* Subagentes associados */
         $subagents = Agente::
         whereIn('idAgente', function ($query) use ($client) {
@@ -299,6 +299,16 @@ class ClientController extends Controller
 
 
         /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
+
+            $passaporte = DocPessoal::
+            where ("idCliente","=",$client->idCliente)
+            ->where("tipo","=","Passaporte")
+            ->first();
+
+            if($passaporte!=null){
+                $passaporteData = json_decode($passaporte->info);
+            }
+
 
 
 
@@ -320,7 +330,7 @@ class ClientController extends Controller
 
 
 
-        return view('clients.show',compact("client","agente","agents","subagents","produtos","totalprodutos","infosPassaporte",'documentosPessoais','documentosAcademicos','novosDocumentos'));
+        return view('clients.show',compact("client","agente","agents","subagents","produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
     }
 
 
@@ -384,27 +394,18 @@ class ClientController extends Controller
             ->first();
 
 
+
+            // Dados do passaporte
             $passaporte = DocPessoal::
             where ("idCliente","=",$client->idCliente)
             ->where("tipo","=","Passaporte")
             ->first();
 
+            if($passaporte!=null){
+                $passaporteData = json_decode($passaporte->info);
+            }
 
-
-        /* Dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
-/*         $infosPassaporte =new stdClass(); */
-
-/*         if($client->info_Passaporte){
-            $infosPassaporte= json_decode($client->info_Passaporte);
-        }else{
-            $passaporteInfo =[];
-            Arr::set($passaporteInfo, 'numPassaporte',null);
-            Arr::set($passaporteInfo, 'dataValidPP', null);
-            Arr::set($passaporteInfo, 'passaportPaisEmi', null);
-            Arr::set($passaporteInfo, 'localEmissaoPP', null);
-        } */
-
-            return view('clients.edit', compact('client','agents','cartaoCidadao','passaporte'));
+            return view('clients.edit', compact('client','agents','cartaoCidadao','passaporte','passaporteData'));
         }else{
             /* não tem permissões */
             abort (401);
@@ -458,7 +459,6 @@ class ClientController extends Controller
 
 
 
-
         /* Documento de identificação pessoal*/
 
         /* Obtem o DOCpessoal do tipo "cartão de cidadão"  */
@@ -471,7 +471,6 @@ class ClientController extends Controller
         /* Constroi a informação adicional para documento de ID */
         $infoDocId = null;
         $infoDocId['numDoc'] = $request->num_docOficial;
-
 
         /* Se o Documento de identificação pessoal ainda nao foi criado, cria um novo */
         if ($doc_id==null){
