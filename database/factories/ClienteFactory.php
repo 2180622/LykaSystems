@@ -6,36 +6,45 @@ use App\Model;
 use Faker\Generator as Faker;
 
 $factory->define(Model::class, function (Faker $faker) {
+    $gender = $faker->randomElement($array = array('F','M'));
+    $nome=null;
+    if($gender == "F"){
+        $nome = $faker->firstNameFemale;
+    }else{
+        $nome = $faker->firstNameMale;
+    }
+    $apelido = $faker->lastName;
     return [
-        'idAgente' => $faker->company,
-        'nome' => $faker->company,
-        'apelido' => $faker->company,
-        'genero' => $faker->company,
-        'email' => $faker->unique()->company,
-        'telefone1' => $faker->company,
-        'telefone2' => $faker->company,
-        'dataNasc' => $faker->company,
-        'paisNaturalidade' => $faker->company,
-        'morada' => $faker->company,
-        'cidade' => $faker->company,
-        'moradaResidencia' => $faker->company,
-        'nomePai' => $faker->company,
-        'telefonePai' => $faker->company,
-        'emailPai' => $faker->company,
-        'nomeMae' => $faker->company,
-        'telefoneMae' => $faker->company,
-        'emailMae' => $faker->company,
-        'fotografia' => $faker->company,
-        'NIF' => $faker->unique()->company,
-        'IBAN' => $faker->company,
-        'nivEstudoAtual' => $faker->company,
+        'nome' => $nome,
+        'apelido' => $apelido,
+        'genero' => $gender,
+        'email' => $faker->unique()->freeEmail,
+        'telefone1' => $faker->mobileNumber,
+        'telefone2' => $faker->mobileNumber,
+        'dataNasc' => $faker->date($format = 'Y-m-d', $max = '-20 years'),
+        'paisNaturalidade' => $faker->country,
+        'morada' => $faker->streetAddress.' '.$faker->streetName,
+        'cidade' => $faker->city,
+        'moradaResidencia' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,
+        'nomePai' => $faker->firstNameMale.' '.$apelido,
+        'telefonePai' => $faker->mobileNumber,
+        'emailPai' => $faker->freeEmail,
+        'nomeMae' => $faker->firstNameFemale.' '.$apelido,
+        'telefoneMae' => $faker->mobileNumber,
+        'emailMae' => $faker->freeEmail,
+        'fotografia' => null,
+        'NIF' => $faker->unique()->idNumber,
+        'IBAN' => $faker->iban($countryCode),
+        'nivEstudoAtual' => '0',
         'nomeInstituicaoOrigem' => $faker->company,
-        'cidadeInstituicaoOrigem' => $faker->company,
-        'num_docOficial' => $faker->unique()->company,
-        'validade_docOficial' => $faker->company,
-        'numPassaporte' => $faker->company,
-        'obsPessoais' => $faker->company,
-        'obsFinanceiras' => $faker->company,
-        'obsAcademicas' => $faker->company,
+        'cidadeInstituicaoOrigem' => $faker->city,
+        'num_docOficial' => $faker->unique()->nationalIdNumber,
+        'validade_docOficial' => $faker->date($format = 'Y-m-d', $max = '+5 years'),
+        'numPassaporte' => $faker->nationalIdNumber,
+        'obsPessoais' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+        'obsFinanceiras' => null,
+        'obsAcademicas' => null,
+
+        /*  'idAgente'  */
     ];
 });

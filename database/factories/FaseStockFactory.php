@@ -7,6 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Model::class, function (Faker $faker) {
     return [
-        'descricao' => $faker->company,
+        'descricao' => $faker->randomElement($array = array ('Inscricao','Matricula', 'Final')),
+
+        /*  'idProdutoStock'  */
     ];
 });

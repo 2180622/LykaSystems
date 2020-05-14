@@ -19,14 +19,11 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'email' => $faker->unique()->company,
-        'tipo' => $faker->company,
-        'password' => $faker->company,
-        'auth_key' => $faker->company,
-        'loginCount' => $faker->company,
-        'estado' => $faker->company,
-        'idAdmin' => $faker->company,
-        'idAgente' => $faker->company,
-        'idCliente' => $faker->company,
+        'password' => Hash::make('teste1234'),
+        'auth_key' => strtoupper(random_str(5)),
+        'loginCount' => 0,
+        'estado' => true,
+
+        /*  'email'  'tipo'  'idAdmin'  'idAgente'  'idCliente'  */
     ];
 });
