@@ -81,7 +81,7 @@
 
                             <label for="agente">Agente:</label><br>
                             <select id="agente" name="agente" class="form-control" required>
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 @foreach($Agentes as $agente)
                                     <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
                                 @endforeach
@@ -97,7 +97,7 @@
                             --}}
                             <label for="uni1">Universidade Principal:</label><br>
                             <select id="uni1" name="uni1" class="form-control" required>
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 @foreach($Universidades as $uni)
                                     <option {{old('idUniversidade1',$produto->idUniversidade1)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
                                 @endforeach
@@ -105,7 +105,7 @@
 
                             <label for="uni2">Universidade Secundária:</label><br>
                             <select id="uni2" name="uni2" class="form-control">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 @foreach($Universidades as $uni)
                                     <option {{old('idUniversidade2',$produto->idUniversidade2)}} value="{{$uni->idUniversidade}}">{{$uni->nome.' -> '.$uni->email}}</option>
                                 @endforeach
@@ -275,12 +275,12 @@
 			$('select', clone).attr('id','fornecedor'+numF+'-fase'+idFase);
 			$('select', clone).attr('name','fornecedor'+numF+'-fase'+idFase);
 			$('#label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+idFase);
-			$('#valor-fornecedor-fase'+idFase, clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
 			$('#valor-fornecedor-fase'+idFase, clone).attr('name','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#valor-fornecedor-fase'+idFase, clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
 			$('#label3', clone).text('Data de vencimento do pagamento ao fornecedor'+numF+':');
 			$('#label3', clone).attr('for','data-fornecedor'+numF+'-fase'+idFase);
-			$('#data-fornecedor-fase'+idFase, clone).attr('id','data-fornecedor'+numF+'-fase'+idFase);
 			$('#data-fornecedor-fase'+idFase, clone).attr('name','data-fornecedor'+numF+'-fase'+idFase);
+			$('#data-fornecedor-fase'+idFase, clone).attr('id','data-fornecedor'+numF+'-fase'+idFase);
 			$('button', clone).attr('onclick','removerFornecedor('+numF+','+idFase+',$(this).closest("#div-fornecedor'+numF+'-fase'+idFase+'"))');
 			$('button', clone).text('Remover fornecedor '+numF);
 	        closest.find('.fornecedor').first().append(clone);

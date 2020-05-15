@@ -15,6 +15,7 @@ class RelFornResp extends Model
         'valor',
         'verificacaoPago',
         'estado',
+        'dataVencimento',
         '$idResponsabilidade',
         '$idFornecedor',
         '$idConta'

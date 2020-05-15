@@ -400,12 +400,12 @@
 			$('select', clone).attr('id','fornecedor'+numF+'-fase'+idFase);
 			$('select', clone).attr('name','fornecedor'+numF+'-fase'+idFase);
 			$('#label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+idFase);
-			$('#valor-fornecedor-fase'+idFase, clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
 			$('#valor-fornecedor-fase'+idFase, clone).attr('name','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#valor-fornecedor-fase'+idFase, clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
 			$('#label3', clone).text('Data de vencimento do pagamento ao fornecedor'+numF+':');
 			$('#label3', clone).attr('for','data-fornecedor'+numF+'-fase'+idFase);
-			$('#data-fornecedor-fase'+idFase, clone).attr('id','data-fornecedor'+numF+'-fase'+idFase);
 			$('#data-fornecedor-fase'+idFase, clone).attr('name','data-fornecedor'+numF+'-fase'+idFase);
+			$('#data-fornecedor-fase'+idFase, clone).attr('id','data-fornecedor'+numF+'-fase'+idFase);
 			$('button', clone).attr('onclick','removerFornecedor('+numF+','+idFase+',$(this).closest("#div-fornecedor'+numF+'-fase'+idFase+'"))');
 			$('button', clone).text('Remover fornecedor '+numF);
 	        closest.find('.fornecedor').first().append(clone);
