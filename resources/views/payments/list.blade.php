@@ -143,13 +143,13 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="universidade">Universidades</label>
+                                            <label for="agente">SubAgentes</label>
                                             <br>
-                                            <select name="universidade" id="universidades" onchange="selected()">
-                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar universidade</option>
-                                                <option class="text-truncate" value="todos">(Todas)</option>
-                                                @foreach ($universidades as $universidade)
-                                                <option class="text-truncate" value="{{$universidade->idUniversidade}}">{{$universidade->nome}}</option>
+                                            <select name="subagente" id="subagentes" onchange="selected()">
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar subagente</option>
+                                                <option class="text-truncate" value="todos">(Todos)</option>
+                                                @foreach ($subagentes as $subagente)
+                                                <option class="text-truncate" value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -157,9 +157,31 @@
                                     <br><br>
                                     <div class="row">
                                         <div class="col-md-4">
+                                            <label for="universidade">Universidade principal</label>
+                                            <br>
+                                            <select name="universidade" id="universidades" onchange="selected()" class="text-truncate">
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar universidade</option>
+                                                <option class="text-truncate" value="todos">(Todas)</option>
+                                                @foreach ($universidades as $universidade)
+                                                <option class="text-truncate" value="{{$universidade->idUniversidade}}">{{$universidade->nome}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="universidade">Universidade secundária</label>
+                                            <br>
+                                            <select name="universidadesec" id="universidadesec" onchange="selected()">
+                                                <option selected disabled hidden class="text-truncate" value="default">Selecionar universidade</option>
+                                                <option class="text-truncate" value="todos">(Todas)</option>
+                                                @foreach ($universidades as $universidade)
+                                                <option class="text-truncate" value="{{$universidade->idUniversidade}}">{{$universidade->nome}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
                                             <label for="fornecedor">Fornecedores</label>
                                             <br>
-                                            <select name="fornecedor" id="fornecedores" onchange="selected()">
+                                            <select name="fornecedor" id="fornecedores" onchange="selected()" class="text-truncate">
                                                 <option selected disabled hidden class="text-truncate" value="default">Selecionar fornecedor</option>
                                                 <option class="text-truncate" value="todos">(Todos)</option>
                                                 @foreach ($fornecedores as $fornecedor)
@@ -167,6 +189,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <label for="dataInicio">De (Data de início)</label>
                                             <br>
@@ -181,6 +206,7 @@
                                     <br>
                                     <div class="row mt-3">
                                         <div class="col text-right">
+                                            <button class="mr-2" id="cleanButton">limpar</button>
                                             <button type="submit" name="button" id="searchButton">filtrar</button>
                                         </div>
                                     </div>
@@ -199,7 +225,7 @@
                 @foreach ($responsabilidades as $responsabilidade)
                 {{-- Pagamentos aos CLIENTES --}}
                 @if ($responsabilidade->valorCliente != null)
-                <a href="#">
+                <a href="{{route('payments.cliente', [$responsabilidade->cliente, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -232,7 +258,7 @@
 
                 {{-- Pagamentos aos AGENTES --}}
                 @if ($responsabilidade->valorAgente != null)
-                <a href="#">
+                <a href="{{route('payments.agente', [$responsabilidade->agente, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -265,7 +291,7 @@
 
                 {{-- Pagamentos aos SUBAGENTES --}}
                 @if ($responsabilidade->valorSubAgente != null)
-                <a href="#">
+                <a href="{{route('payments.subagente', [$responsabilidade->subAgente, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -296,9 +322,9 @@
                 </a>
                 @endif
 
-                {{-- Pagamentos as UNIVERSIDADES --}}
+                {{-- Pagamentos as UNIVERSIDADES PRINCIPAIS--}}
                 @if ($responsabilidade->valorUniversidade1 != null)
-                <a href="#">
+                <a href="{{route('payments.uni1', [$responsabilidade->universidade1, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -331,7 +357,7 @@
 
                 {{-- Pagamentos as UNIVERSIDADES SECUNDÁRIAS --}}
                 @if ($responsabilidade->valorUniversidade2 != null)
-                <a href="#">
+                <a href="{{route('payments.uni2', [$responsabilidade->universidade2, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -364,7 +390,7 @@
 
                 {{-- Pagamentos aos FORNECEDORES EXTERNOS --}}
                 @foreach ($responsabilidade->relacao as $relacao)
-                <a href="#">
+                <a href="{{route('payments.fornecedor', [$relacao->fornecedor, $relacao->responsabilidade->fase, $relacao])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">

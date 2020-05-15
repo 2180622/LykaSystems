@@ -219,14 +219,20 @@ class AccountConfirmationController extends Controller
         }
     }
 
-    public function loginVerification(Request $request, User $user){
-        $key = $request->input('key');
+    public function loginVerificationView(User $user){
 
-        if ($user->auth_key == $key['key']) {
-            return redirect()->route('dashboard.index');
+        return view('auth.login-verification', compact('user'));
+
+    }
+
+    public function loginVerification(Request $request, User $user){
+        $code = $request->input('code');
+
+        if ($code == $user->login_key) {
+            return redirect()->route('dashboard');
         }else {
             $error = "O código de autenticação que introduziu é inválido.";
-            return view('auth.login', compact('user', 'error'));
+            return view('auth.login-verification', compact('user', 'error'));
         }
     }
 }

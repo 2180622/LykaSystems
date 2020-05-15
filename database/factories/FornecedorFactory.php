@@ -2,15 +2,15 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Fornecedor;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Fornecedor::class, function (Faker $faker) {
     return [
-        'nome' => $faker->company,
-        'morada' => $faker->company,
-        'contacto' => $faker->company,
-        'descricao' => $faker->company,
-        'observacoes' => $faker->company,
+        'nome' => $faker->firstNameFemale.' '.$faker->lastName,
+        'morada' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,
+        'contacto' => $faker->mobileNumber,
+        'descricao' => $faker->sentence($nbWords = 7, $variableNbWords = true),
+        'observacoes' => null,
     ];
 });

@@ -16,7 +16,11 @@ class Fornecedor extends Model
     protected $primaryKey = 'idFornecedor';
 
     protected $fillable = [
-      'nome', 'morada', 'contacto', 'descricao', 'observacoes'
+      'nome',
+      'morada',
+      'contacto',
+      'descricao',
+      'observacoes'
     ];
 
     public function relacao(){

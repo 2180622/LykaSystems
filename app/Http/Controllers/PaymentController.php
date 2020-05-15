@@ -22,7 +22,7 @@ class PaymentController extends Controller
     public function index()
     {
       $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")
-      ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"])
+      ->with(["cliente", "agente", "subAgente", "universidade1", "universidade2", "relacao", "relacao.fornecedor", "fase"])
       ->get();
 
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
@@ -32,7 +32,8 @@ class PaymentController extends Controller
       $relacoes = RelFornResp::all();
       $estudantes = Cliente::all();
       $universidades = Universidade::all();
-      $agentes = Agente::where('tipo', '=', 'Agente')->get();
+      $agentes = Agente::where('tipo', 'Agente')->get();
+      $subagentes = Agente::where('tipo', 'Subagente')->get();
       $fornecedores = Fornecedor::all();
 
       $valorTotalPendente = 0;
@@ -149,22 +150,24 @@ class PaymentController extends Controller
           }
         }
       }
-      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'universidades', 'fornecedores'));
+      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores'));
     }
 
     public function search(Request $request)
     {
       $idEstudante = ($request->input('estudante') != 'default') ? $request->input('estudante') : null;
       $idAgente = ($request->input('agente') != 'default') ? $request->input('agente') : null;
+      $idSubagente = ($request->input('subagente') != 'default') ? $request->input('subagente') : null;
       $idUniversidade = ($request->input('universidade') != 'default') ? $request->input('universidade') : null;
+      $idUniversidadeSec = ($request->input('universidadesec') != 'default') ? $request->input('universidadesec') : null;
       $idFornecedor = ($request->input('fornecedor') != 'default') ? $request->input('fornecedor') : null;
       $dataInicio = $request->input('datainicio');
       $dataFim = $request->input('datafim');
 
-      // Pesquisa de estudantes
+      // Pesquisa de ESTUDANTES
       if ($idEstudante != null) {
         if ($idEstudante == 'todos') {
-          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+          $responsabilidades = Responsabilidade::select()->with(['cliente', 'fase']);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimentoCliente', '>=', $dataInicio);
           }
@@ -172,7 +175,7 @@ class PaymentController extends Controller
             $responsabilidades->where('dataVencimentoCliente', '<=', $dataFim);
           }
       }else {
-        $responsabilidades = Responsabilidade::where('idCliente', $idEstudante)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        $responsabilidades = Responsabilidade::where('idCliente', $idEstudante)->select()->with(['cliente', 'cliente.user', 'fase']);
         if ($dataInicio != null) {
           $responsabilidades->where('dataVencimentoCliente', '>=', $dataInicio);
         }
@@ -182,54 +185,95 @@ class PaymentController extends Controller
       }
       }
 
-      // Pesquisa de agentes
+      // Pesquisa de AGENTES
       if ($idAgente != null) {
         if ($idAgente == 'todos') {
-          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+          $responsabilidades = Responsabilidade::select()->with(["agente", "fase"]);
         if ($dataInicio != null) {
-          $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio)->orWhere('dataVencimentoSubAgente', '>=', $dataInicio);
+          $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim)->orWhere('dataVencimentoSubAgente', '<=', $dataFim);
+          $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim);
         }
       }else {
-        $responsabilidades = Responsabilidade::where('idAgente', $idAgente)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        $responsabilidades = Responsabilidade::where('idAgente', $idAgente)->select()->with(["agente", "fase"]);
         if ($dataInicio != null) {
-          $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio)->orWhere('dataVencimentoSubAgente', '>=', $dataInicio);
+          $responsabilidades->where('dataVencimentoAgente', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim)->orWhere('dataVencimentoSubAgente', '<=', $dataFim);
+          $responsabilidades->where('dataVencimentoAgente', '<=', $dataFim);
         }
       }
       }
 
-      // Pesquisa de universidades
+      // Pesquisa de SUBAGENTES
+      if ($idSubagente != null) {
+        if ($idSubagente == 'todos') {
+          $responsabilidades = Responsabilidade::select()->with(["subAgente", "fase"]);
+        if ($dataInicio != null) {
+          $responsabilidades->where('dataVencimentoSubAgente', '>=', $dataInicio);
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('dataVencimentoSubAgente', '<=', $dataFim);
+        }
+      }else {
+        $responsabilidades = Responsabilidade::where('idSubAgente', $idSubagente)->select()->with(["subAgente", "fase"]);
+        if ($dataInicio != null) {
+          $responsabilidades->where('dataVencimentoSubAgente', '>=', $dataInicio);
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('dataVencimentoSubAgente', '<=', $dataFim);
+        }
+      }
+      }
+
+      // Pesquisa de UNIVERSIDADE PRINCIPAL
       if ($idUniversidade != null) {
         if ($idUniversidade == 'todos') {
-          $responsabilidades = Responsabilidade::select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+          $responsabilidades = Responsabilidade::select()->with(["universidade1", "fase"]);
         if ($dataInicio != null) {
-          $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio)->orWhere('dataVencimentoUni2', '>=', $idUniversidade);
+          $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $responsabilidades->where('dataVencimentoUni1', '<=', $dataFim)->orWhere('dataVencimentoUni2', '<=', $idUniversidade);
+          $responsabilidades->where('dataVencimentoUni1', '<=', $dataFim);
         }
       }else {
-        $responsabilidades = Responsabilidade::where('idUniversidade1', $idUniversidade)->orWhere('idUniversidade2', $idUniversidade)->select()->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+        $responsabilidades = Responsabilidade::where('idUniversidade1', $idUniversidade)->select()->with(["universidade1", "fase"]);
         if ($dataInicio != null) {
-          $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio)->orWhere('dataVencimentoUni2', '>=', $idUniversidade);
+          $responsabilidades->where('dataVencimentoUni1', '>=', $dataInicio);
         }
         if ($dataFim != null) {
-          $responsabilidades>where('dataVencimentoUni1', '<=', $dataFim)->orWhere('dataVencimentoUni2', '<=', $idUniversidade);
+          $responsabilidades>where('dataVencimentoUni1', '<=', $dataFim);
         }
       }
       }
 
-      // Pesquisa de fornecedores
+      // Pesquisa de UNIVERSIDADE SECUNDÁRIA
+      if ($idUniversidadeSec != null) {
+        if ($idUniversidadeSec == 'todos') {
+          $responsabilidades = Responsabilidade::select()->with(["universidade2", "fase"]);
+        if ($dataInicio != null) {
+          $responsabilidades->where('dataVencimentoUni2', '>=', $idUniversidadeSec);
+        }
+        if ($dataFim != null) {
+          $responsabilidades->where('dataVencimentoUni2', '<=', $idUniversidadeSec);
+        }
+      }else {
+        $responsabilidades = Responsabilidade::where('idUniversidade2', $idUniversidadeSec)->select()->with(["universidade2", "fase"]);
+        if ($dataInicio != null) {
+          $responsabilidades->where('dataVencimentoUni2', '>=', $idUniversidadeSec);
+        }
+        if ($dataFim != null) {
+          $responsabilidades>where('dataVencimentoUni2', '<=', $idUniversidadeSec);
+        }
+      }
+      }
+
+      // Pesquisa de FORNECEDORES
       if ($idFornecedor != null) {
         if ($idFornecedor == 'todos') {
-          $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
-          ->where('idFornecedor', '!=', null)
-          ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"]);
+          $responsabilidades = RelFornResp::where('idFornecedor', '!=', null)
+          ->with(["fornecedor", "responsabilidade", "responsabilidade.fase"]);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimento', '>=', $dataInicio);
           }
@@ -237,9 +281,8 @@ class PaymentController extends Controller
             $responsabilidades->where('dataVencimento', '<=', $dataFim);
           }
         }else{
-          $responsabilidades = Responsabilidade::join('RelFornResp', 'RelFornResp.idResponsabilidade', '=', 'Responsabilidade.idResponsabilidade')
-          ->where('idFornecedor', $idFornecedor)
-          ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', 'relacao', 'relacao.fornecedor']);
+          $responsabilidades = RelFornResp::where('idFornecedor', $idFornecedor)
+          ->with(["fornecedor", "responsabilidade", "responsabilidade.fase"]);
           if ($dataInicio != null) {
             $responsabilidades->where('dataVencimento', '>=', $dataInicio);
           }
@@ -258,40 +301,70 @@ class PaymentController extends Controller
         }
     }
 
-    public function create(Responsabilidade $responsabilidade)
+    public function createcliente(Cliente $cliente, Fase $fase, Responsabilidade $responsabilidade)
     {
-      $contas = Conta::all();
-      return view('payments.add', compact('responsabilidade', 'contas'));
+        $contas = Conta::all();
+        return view('payments.add', compact('cliente', 'fase', 'responsabilidade', 'contas'));
+    }
+
+    public function createagente(Agente $agente, Fase $fase, Responsabilidade $responsabilidade)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('agente', 'fase', 'responsabilidade', 'contas'));
+    }
+
+    public function createsubagente(Agente $subagente, Fase $fase, Responsabilidade $responsabilidade)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('subagente', 'fase', 'responsabilidade', 'contas'));
+    }
+
+    public function createuni1(Universidade $universidade1, Fase $fase, Responsabilidade $responsabilidade)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('universidade1', 'fase', 'responsabilidade', 'contas'));
+    }
+
+    public function createfornecedor(Fornecedor $fornecedor, Fase $fase, RelFornResp $relacao)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('fornecedor', 'fase', 'contas', 'relacao'));
+    }
+
+    public function createuni2(Universidade $universidade2, Fase $fase, Responsabilidade $responsabilidade)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('universidade2', 'fase', 'responsabilidade', 'contas'));
     }
 
     public function store(Request $request, Responsabilidade $responsabilidade)
     {
-      $fields = $request->all();
-      // Campos de CLIENTE
-      $valorCliente = (isset($fields['valorPagoCliente']) ? $fields['valorPagoCliente'] : null);
-      $comprovativoCliente = (isset($fields['comprovativoPagamentoCliente']) ? $fields['comprovativoPagamentoCliente'] : null);
-      $dataCliente = (isset($fields['dataCliente']) ? $fields['dataCliente'] : null);
-      $contaCliente = (isset($fields['contaCliente']) ? $fields['contaCliente'] : null);
-      // Campos de AGENTE
-      $valorAgente = (isset($fields['valorPagoAgente']) ? $fields['valorPagoAgente'] : null);
-      $comprovativoAgente = (isset($fields['comprovativoPagamentoAgente']) ? $fields['comprovativoPagamentoAgente'] : null);
-      $dataAgente = (isset($fields['dataAgente']) ? $fields['dataAgente'] : null);
-      $contaAgente = (isset($fields['contaAgente']) ? $fields['contaAgente'] : null);
-      // Campos de SUBAGENTE
-      $valorSubAgente = (isset($fields['valorPagoSubAgente']) ? $fields['valorPagoSubAgente'] : null);
-      $comprovativoSubAgente = (isset($fields['comprovativoPagamentoSubAgente']) ? $fields['comprovativoPagamentoSubAgente'] : null);
-      $dataSubAgente = (isset($fields['dataSubAgente']) ? $fields['dataSubAgente'] : null);
-      $contaSubAgente = (isset($fields['contaSubAgente']) ? $fields['contaSubAgente'] : null);
-      // Campos de UNIVERSIDADE1
-      $valorUni1 = (isset($fields['valorPagoUni1']) ? $fields['valorPagoUni1'] : null);
-      $comprovativoUni1 = (isset($fields['comprovativoPagamentoUni1']) ? $fields['comprovativoPagamentoUni1'] : null);
-      $dataUni1 = (isset($fields['dataUni1']) ? $fields['dataUni1'] : null);
-      $contaUni1 = (isset($fields['contaUni1']) ? $fields['contaUni1'] : null);
-      // Campos de UNIVERSIDADE2
-      $valorUni2 = (isset($fields['valorPagoUni2']) ? $fields['valorPagoUni2'] : null);
-      $comprovativoUni2 = (isset($fields['comprovativoPagamentoUni2']) ? $fields['comprovativoPagamentoUni2'] : null);
-      $dataUni2 = (isset($fields['dataUni2']) ? $fields['dataUni2'] : null);
-      $contaUni2 = (isset($fields['contaUni2']) ? $fields['contaUni2'] : null);
+        $fields = $request->all();
+        // Campos de CLIENTE
+        $valorCliente = (isset($fields['valorPagoCliente']) ? $fields['valorPagoCliente'] : null);
+        $comprovativoCliente = (isset($fields['comprovativoPagamentoCliente']) ? $fields['comprovativoPagamentoCliente'] : null);
+        $dataCliente = (isset($fields['dataCliente']) ? $fields['dataCliente'] : null);
+        $contaCliente = (isset($fields['contaCliente']) ? $fields['contaCliente'] : null);
+        // Campos de AGENTE
+        $valorAgente = (isset($fields['valorPagoAgente']) ? $fields['valorPagoAgente'] : null);
+        $comprovativoAgente = (isset($fields['comprovativoPagamentoAgente']) ? $fields['comprovativoPagamentoAgente'] : null);
+        $dataAgente = (isset($fields['dataAgente']) ? $fields['dataAgente'] : null);
+        $contaAgente = (isset($fields['contaAgente']) ? $fields['contaAgente'] : null);
+        // Campos de SUBAGENTE
+        $valorSubAgente = (isset($fields['valorPagoSubAgente']) ? $fields['valorPagoSubAgente'] : null);
+        $comprovativoSubAgente = (isset($fields['comprovativoPagamentoSubAgente']) ? $fields['comprovativoPagamentoSubAgente'] : null);
+        $dataSubAgente = (isset($fields['dataSubAgente']) ? $fields['dataSubAgente'] : null);
+        $contaSubAgente = (isset($fields['contaSubAgente']) ? $fields['contaSubAgente'] : null);
+        // Campos de UNIVERSIDADE1
+        $valorUni1 = (isset($fields['valorPagoUni1']) ? $fields['valorPagoUni1'] : null);
+        $comprovativoUni1 = (isset($fields['comprovativoPagamentoUni1']) ? $fields['comprovativoPagamentoUni1'] : null);
+        $dataUni1 = (isset($fields['dataUni1']) ? $fields['dataUni1'] : null);
+        $contaUni1 = (isset($fields['contaUni1']) ? $fields['contaUni1'] : null);
+        // Campos de UNIVERSIDADE2
+        $valorUni2 = (isset($fields['valorPagoUni2']) ? $fields['valorPagoUni2'] : null);
+        $comprovativoUni2 = (isset($fields['comprovativoPagamentoUni2']) ? $fields['comprovativoPagamentoUni2'] : null);
+        $dataUni2 = (isset($fields['dataUni2']) ? $fields['dataUni2'] : null);
+        $contaUni2 = (isset($fields['contaUni2']) ? $fields['contaUni2'] : null);
 
       if ($valorCliente != null) {
         $pagoResponsabilidade = new PagoResponsabilidade;

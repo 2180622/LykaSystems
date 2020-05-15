@@ -17,6 +17,7 @@ class User extends Migration
             $table->string('password',255)->nullable();
             $table->string('auth_key', 5)->nullable();
             $table->bigInteger('loginCount')->default(0);
+            $table->string('login_key')->nullable();
             $table->boolean('estado')->default(false);
             $table->string('slug')->nullable();
 
