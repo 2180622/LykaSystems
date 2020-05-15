@@ -57,18 +57,20 @@
             @csrf
             @method("PUT")
             @include('clients.partials.add-edit')
-{{--             <div class="row">
+            <div class="row">
+
+                @if (Auth::user()->tipo == "admin")
+                    <div class="col">
+                        <a href="{{route('clients.sendActivationEmail', $client)}}" class="top-button">Enviar e-mail para ativção de conta</a>
+                    </div>
+                @endif
 
                 <div class="col">
-                    <button type="button" class="top-button mr-2" name="enviarEmail"></i>Enviar e-mail para ativaão de conta</button>
-                </div>
-
-                <div class="col"> --}}
                     <div class="form-group text-right" style="min-width:285px">
                         <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
                         <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
-{{--                     </div>
-                </div> --}}
+                    </div>
+                </div>
             </div>
 
         </form>
