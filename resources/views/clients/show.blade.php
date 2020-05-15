@@ -338,7 +338,6 @@
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-
                                         @foreach($novosDocumentos as $docPessoal)
                                             @if($docPessoal->tipo=="Pessoal")
                                                 <a class="dropdown-item" href="{{route('documento-pessoal.create',["matricula",$docPessoal->idDocNecessario])}}">{{$docPessoal->tipoDocumento}}</a>
@@ -432,9 +431,19 @@
                                 @foreach ($documentosAcademicos as $docAcademico)
                                     @if ($docAcademico->imagem != null)
                                         <li class="my-3">
+
+                                            @if ($docAcademico->imagem != null)
                                             <i class="far fa-address-card mr-2"></i>
-                                            <a class="name_link" target="_blank"
-                                        href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
+                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
+
+                                            @if($docAcademico->verificacao==0)
+                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-2" title="Aguarda validação"></i></small></span>
+                                            @else
+                                                <span class="text-success"><small><i class="fas fa-check ml-2" title="Ficheiro validado"></i></small></span>
+                                            @endif
+
+                                        @endif
+
                                         </li>
                                     @endif
                                 @endforeach
@@ -446,7 +455,7 @@
                         </div>
                         @endif
 
-                        {{-- Adicionar Documento PESSOAL--}}
+                        {{-- Adicionar Documento Academico --}}
                         @if($novosDocumentos)
                             <div class="dropdown mt-4">
                                 <button class="top-button dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -459,13 +468,6 @@
                                         @foreach($novosDocumentos as $docAcademico)
                                             @if($docAcademico->tipo=="Academico")
                                                 <a class="dropdown-item" href="{{route('documento-pessoal.create',["matricula",$docAcademico->idDocNecessario])}}">{{$docAcademico->tipoDocumento}}</a>
-
-                                                @if($docAcademico->verificacao==0)
-                                                    <span class="text-danger"><small><i class="fas fa-exclamation ml-2" title="Aguarda validação"></i></small></span>
-                                                @else
-                                                    <span class="text-success"><small><i class="fas fa-check ml-2" title="Ficheiro validado"></i></small></span>
-                                                @endif
-
                                             @endif
                                         @endforeach
                                 </div>

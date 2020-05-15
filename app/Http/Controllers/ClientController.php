@@ -56,30 +56,53 @@ class ClientController extends Controller
         if (Auth::user()->tipo == "admin"){
             $clients = Cliente::all();
 
-
         }else{
 
-            /* Lista de clientes caso seja agente
-            /* Lista todos os produtos registados em nome do agente que está logado */
-/*          $clients = Cliente::
-            selectRaw("Cliente.*")
-            ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
-            ->where('Produto.idAgente', '=', Auth::user()->agente->idAgente)
-            ->groupBy('Cliente.idCliente')
-            ->orderBy('Cliente.idCliente','asc')
-            ->get(); */
+            /* Lista para Agentes */
+            if (Auth::user()->agente->tipo== "Agente"){
+                $clients_associados = Cliente::
+                where('idAgente', '=', Auth::user()->agente->idAgente)
+                ->get();
 
-            $clients = Cliente::
+                /* Lista todos os produtos registados em nome do agente que está logado */
+                $clients_produto = Cliente::
+                selectRaw("Cliente.*")
+                ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
+                ->where('Produto.idAgente', '=', Auth::user()->agente->idAgente)
+                ->groupBy('Cliente.idCliente')
+                ->orderBy('Cliente.idCliente','asc')
+                ->get();
+
+                /* Junta as duas listas */
+                $clients = $clients_associados->merge($clients_produto);
+                /* $clients = $clients->unique(); */
+            }
+
+            /* Lista para SubAgentes */
+            if (Auth::user()->agente->tipo== "Subagente"){
+            $clients_associados = Cliente::
             where('idAgente', '=', Auth::user()->agente->idAgente)
             ->get();
 
-            if ($clients->isEmpty()) {
-                $clients=null;
-            }
+            /* Lista todos os produtos registados em nome do agente que está logado */
+            $clients_produto = Cliente::
+            selectRaw("Cliente.*")
+            ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
+            ->where('Produto.idSubAgente', '=', Auth::user()->agente->idAgente)
+            ->groupBy('Cliente.idCliente')
+            ->orderBy('Cliente.idCliente','asc')
+            ->get();
 
+            /* Junta as duas listas */
+            $clients = $clients_associados->merge($clients_produto);
+            /* $clients = $clients->unique(); */
+            }
 
         }
 
+        if ($clients->isEmpty()) {
+            $clients=null;
+        }
 
         /* mostra a lista */
         return view('clients.list', compact('clients'));
