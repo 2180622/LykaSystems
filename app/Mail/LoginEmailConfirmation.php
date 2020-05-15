@@ -1,22 +1,21 @@
 <?php
-
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\User;
 
 class LoginEmailConfirmation extends Mailable
 {
-    public $key;
     public $name;
 
-    public function __construct(string $name)
+    public function __construct(string $name, User $user)
     {
         $this->name = $name;
         $key = rand(10000 , 99999);
-        $this->key = $key;
+        $user->login_key = $key;
     }
 
     public function build()
