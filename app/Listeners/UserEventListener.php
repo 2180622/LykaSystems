@@ -9,12 +9,14 @@ class UserEventListener
 {
     public function handle(LoginVerification $event)
     {
-        $user = $event->user;
-        $user->loginCount++;
+        if($user->loginCount >= 0 && $user->loginCount <3){
+            $user = $event->user;
+            $user->loginCount++;
+        }
 
         if($user->loginCount == 3){
-            Mail::to($user->email)->send(new LoginEmailConfirmation($user->slug));
-            $user->loginCount = 0;
+            Mail::to($user->email)->send(new LoginEmailConfirmation($user->slug, $user));
+            Auth::logout();
         }
 
         $user->save();

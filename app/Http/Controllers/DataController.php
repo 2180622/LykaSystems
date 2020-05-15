@@ -216,6 +216,7 @@ class DataController extends Controller
         /*******************          Contactos          *******************/
 
         $contacto = new Contacto;
+        $contacto->idUser = 1;
         $contacto->nome = 'Pedro Costa';
         $contacto->fotografia = null;
         $contacto->telefone1 = null;
@@ -227,6 +228,7 @@ class DataController extends Controller
         $contacto->save();
 
         $contacto = new Contacto;
+        $contacto->idUser = 1;
         $contacto->nome = 'Maria Pedro';
         $contacto->fotografia = null;
         $contacto->telefone1 = 915642453;
@@ -396,7 +398,7 @@ class DataController extends Controller
         $produto->valorTotalAgente = 300;
         $produto->valorTotalSubAgente = null;
         $produto->idAgente = 1;
-        $produto->idSubAgente = null;
+        $produto->idSubAgente = 3;
         $produto->idCliente = 1;
         $produto->idUniversidade1 = 1;
         $produto->idUniversidade2 = null;
@@ -409,9 +411,9 @@ class DataController extends Controller
         $produto->valorTotal = 1900;
         $produto->valorTotalAgente = 300;
         $produto->valorTotalSubAgente = null;
-        $produto->idAgente = 1;
-        $produto->idSubAgente = 3;
-        $produto->idCliente = 2;
+        $produto->idAgente = 2;
+        $produto->idSubAgente = null;
+        $produto->idCliente = 1;
         $produto->idUniversidade1 = 2;
         $produto->idUniversidade2 = 1;
         $produto->save();

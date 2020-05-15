@@ -225,7 +225,7 @@
                 @foreach ($responsabilidades as $responsabilidade)
                 {{-- Pagamentos aos CLIENTES --}}
                 @if ($responsabilidade->valorCliente != null)
-                <a href="#">
+                <a href="{{route('payments.cliente', [$responsabilidade->cliente, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -258,7 +258,7 @@
 
                 {{-- Pagamentos aos AGENTES --}}
                 @if ($responsabilidade->valorAgente != null)
-                <a href="#">
+                <a href="{{route('payments.agente', [$responsabilidade->agente, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -291,7 +291,7 @@
 
                 {{-- Pagamentos aos SUBAGENTES --}}
                 @if ($responsabilidade->valorSubAgente != null)
-                <a href="#">
+                <a href="{{route('payments.subagente', [$responsabilidade->subAgente, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -322,9 +322,9 @@
                 </a>
                 @endif
 
-                {{-- Pagamentos as UNIVERSIDADES --}}
+                {{-- Pagamentos as UNIVERSIDADES PRINCIPAIS--}}
                 @if ($responsabilidade->valorUniversidade1 != null)
-                <a href="#">
+                <a href="{{route('payments.uni1', [$responsabilidade->universidade1, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -357,7 +357,7 @@
 
                 {{-- Pagamentos as UNIVERSIDADES SECUNDÁRIAS --}}
                 @if ($responsabilidade->valorUniversidade2 != null)
-                <a href="#">
+                <a href="{{route('payments.uni2', [$responsabilidade->universidade2, $responsabilidade->fase, $responsabilidade])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
@@ -390,7 +390,7 @@
 
                 {{-- Pagamentos aos FORNECEDORES EXTERNOS --}}
                 @foreach ($responsabilidade->relacao as $relacao)
-                <a href="#">
+                <a href="{{route('payments.fornecedor', [$relacao->fornecedor, $relacao->responsabilidade->fase, $relacao])}}">
                     <div class="row charge-div">
                         <div class="col-md-1 align-self-center">
                             <div class="white-circle">
