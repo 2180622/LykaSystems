@@ -246,7 +246,7 @@
                                             <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
                                             <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
                                             value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"
-                                            onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'), {{$responsabilidade->valorAgente + , {{$responsabilidade->valorSubAgente}}}})"><br>
+                                            onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'), {{$responsabilidade->valorAgente + $responsabilidade->valorSubAgente}})"><br>
                                         
                                             <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao subagente:</label><br>
                                             <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
@@ -400,12 +400,12 @@
 			$('select', clone).attr('id','fornecedor'+numF+'-fase'+idFase);
 			$('select', clone).attr('name','fornecedor'+numF+'-fase'+idFase);
 			$('#label2', clone).attr('for','valor-fornecedor'+numF+'-fase'+idFase);
-			$('#valor-fornecedor-fase'+idFase, clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
 			$('#valor-fornecedor-fase'+idFase, clone).attr('name','valor-fornecedor'+numF+'-fase'+idFase);
+			$('#valor-fornecedor-fase'+idFase, clone).attr('id','valor-fornecedor'+numF+'-fase'+idFase);
 			$('#label3', clone).text('Data de vencimento do pagamento ao fornecedor'+numF+':');
 			$('#label3', clone).attr('for','data-fornecedor'+numF+'-fase'+idFase);
-			$('#data-fornecedor-fase'+idFase, clone).attr('id','data-fornecedor'+numF+'-fase'+idFase);
 			$('#data-fornecedor-fase'+idFase, clone).attr('name','data-fornecedor'+numF+'-fase'+idFase);
+			$('#data-fornecedor-fase'+idFase, clone).attr('id','data-fornecedor'+numF+'-fase'+idFase);
 			$('button', clone).attr('onclick','removerFornecedor('+numF+','+idFase+',$(this).closest("#div-fornecedor'+numF+'-fase'+idFase+'"))');
 			$('button', clone).text('Remover fornecedor '+numF);
 	        closest.find('.fornecedor').first().append(clone);
