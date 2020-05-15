@@ -1,11 +1,12 @@
 <div class="cards-navigation">
     <div class="title">
-        <h6>Secção de pagamento - {{$cliente->nome.' '.$cliente->apelido.' ('.$fase->descricao.')'}}</h6>
+        <h6>Secção de pagamento: {{$cliente->nome.' '.$cliente->apelido.' ('.$fase->descricao.')'}}</h6>
     </div>
     <br>
+    {{-- Apresentar as relações que este pagamento têm -> Qual é fase, etc... --}}
     <div class="payment-card shadow-sm">
-        <p style="margin-left: 0px !important; font-weight:600;">Valor total:</p>
-        <p style="margin-left: 0px !important;">&nbsp;{{$responsabilidade->valorCliente}}</p>
+        <p style="margin-left: 0px !important; font-weight:600;">valor a pagar:</p>
+        <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}</p>
         <hr>
         <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
             @csrf
@@ -44,7 +45,7 @@
     </div>
     <div class="form-group text-right">
         <br>
-        <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">confirmar pagamento</button>
+        <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">registar pagamento</button>
         <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
     </div>
     </form>

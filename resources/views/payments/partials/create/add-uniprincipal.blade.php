@@ -1,17 +1,17 @@
 <div class="cards-navigation">
     <div class="title">
-        <h6>Secção de pagamento - {{$universidade1->nome.' ('.$fase->descricao.')'}}</h6>
+        <h6>Secção de pagamento: {{$universidade1->nome.' ('.$fase->descricao.')'}}</h6>
     </div>
     <br>
     <div class="payment-card shadow-sm">
-        <p style="margin-left: 0px !important; font-weight:600;">Valor total:</p>
-        <p style="margin-left: 0px !important;">&nbsp;{{$responsabilidade->valorUniversidade1}}</p>
+        <p style="margin-left: 0px !important; font-weight:600;">Valor a pagar:</p>
+        <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€'}}</p>
         <hr>
         <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-4">
-                    <label for="valorPagoCliente">Valor pago ao cliente</label>
+                    <label for="valorPagoCliente">Valor pago a universidade</label>
                     <br>
                     <input type="text" name="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€'}}">
                 </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="form-group text-right">
         <br>
-        <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">confirmar pagamento</button>
+        <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">registar pagamento</button>
         <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
     </div>
     </form>
