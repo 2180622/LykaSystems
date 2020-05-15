@@ -229,7 +229,7 @@ class AccountConfirmationController extends Controller
         $code = $request->input('code');
 
         if ($code == $user->login_key) {
-            return redirect()->route('dashboard.index');
+            return redirect()->route('dashboard');
         }else {
             $error = "O código de autenticação que introduziu é inválido.";
             return view('auth.login-verification', compact('user', 'error'));

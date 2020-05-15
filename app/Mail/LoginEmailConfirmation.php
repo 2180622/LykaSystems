@@ -10,12 +10,13 @@ use App\User;
 class LoginEmailConfirmation extends Mailable
 {
     public $name;
+    public $login_key;
 
-    public function __construct(string $name, User $user)
+    public function __construct(string $name, string $login_key, User $user)
     {
         $this->name = $name;
-        $key = rand(10000 , 99999);
-        $user->login_key = $key;
+        $login_key = rand(10000 , 99999);
+        $user->login_key = $login_key;
     }
 
     public function build()
@@ -25,7 +26,7 @@ class LoginEmailConfirmation extends Mailable
             ->markdown('mails.loginverification')
             ->with([
                 'name' => $this->name,
-                'key' => $this->key,
+                'key' => $this->login_key,
                 'link' => url('/').'/login-verification/'.post_slug($this->name)
             ]);
     }

@@ -3,7 +3,7 @@ Olá **{{$name}}**,
 
 Aqui está o seu código de verificação de Login:
 
-**{{$key}}**
+**{{$login_key}}**
 
 
 Para inserir o código basta clicar no seguinte link.
