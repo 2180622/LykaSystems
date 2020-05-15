@@ -246,7 +246,7 @@
                                             <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
                                             <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
                                             value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"
-                                            onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'), {{$responsabilidade->valorAgente + , {{$responsabilidade->valorSubAgente}}}})"><br>
+                                            onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'), {{$responsabilidade->valorAgente + $responsabilidade->valorSubAgente}})"><br>
                                         
                                             <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao subagente:</label><br>
                                             <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
