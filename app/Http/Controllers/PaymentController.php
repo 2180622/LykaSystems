@@ -22,7 +22,7 @@ class PaymentController extends Controller
     public function index()
     {
       $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")
-      ->with(['cliente', 'agente', 'subAgente', 'universidade1', 'universidade2', "relacao"])
+      ->with(["cliente", "agente", "subAgente", "universidade1", "universidade2", "relacao", "relacao.fornecedor", "fase"])
       ->get();
 
       $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
@@ -305,6 +305,36 @@ class PaymentController extends Controller
     {
         $contas = Conta::all();
         return view('payments.add', compact('cliente', 'fase', 'responsabilidade', 'contas'));
+    }
+
+    public function createagente(Agente $agente, Fase $fase, Responsabilidade $responsabilidade)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('agente', 'fase', 'responsabilidade', 'contas'));
+    }
+
+    public function createsubagente(Agente $subagente, Fase $fase, Responsabilidade $responsabilidade)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('subagente', 'fase', 'responsabilidade', 'contas'));
+    }
+
+    public function createuni1(Universidade $universidade1, Fase $fase, Responsabilidade $responsabilidade)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('universidade1', 'fase', 'responsabilidade', 'contas'));
+    }
+
+    public function createfornecedor(Fornecedor $fornecedor, Fase $fase, RelFornResp $relacao)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('fornecedor', 'fase', 'contas', 'relacao'));
+    }
+
+    public function createuni2(Universidade $universidade2, Fase $fase, Responsabilidade $responsabilidade)
+    {
+        $contas = Conta::all();
+        return view('payments.add', compact('universidade2', 'fase', 'responsabilidade', 'contas'));
     }
 
     public function store(Request $request, Responsabilidade $responsabilidade)

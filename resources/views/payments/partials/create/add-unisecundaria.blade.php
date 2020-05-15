@@ -1,11 +1,11 @@
 <div class="cards-navigation">
     <div class="title">
-        <h6>Secção de pagamento - {{$agente->nome.' '.$agente->apelido.' ('.$fase->descricao.')'}}</h6>
+        <h6>Secção de pagamento - {{$universidade2->nome.' ('.$fase->descricao.')'}}</h6>
     </div>
     <br>
     <div class="payment-card shadow-sm">
         <p style="margin-left: 0px !important; font-weight:600;">Valor total:</p>
-        <p style="margin-left: 0px !important;">&nbsp;{{$responsabilidade->valorAgente}}</p>
+        <p style="margin-left: 0px !important;">&nbsp;{{$responsabilidade->valorUniversidade2}}</p>
         <hr>
         <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
             @csrf
@@ -13,7 +13,7 @@
                 <div class="col-md-4">
                     <label for="valorPagoCliente">Valor pago ao cliente</label>
                     <br>
-                    <input type="text" name="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorAgente, 2, ',', '').'€'}}">
+                    <input type="text" name="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€'}}">
                 </div>
                 <div class="col-md-4" oncontextmenu="return showContextMenu();">
                     <label for="comprovativoPagamentoCliente">Comp. de pagamento</label>

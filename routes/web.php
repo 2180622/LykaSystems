@@ -97,8 +97,18 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     /* Pagamentos */
     Route::get('/pagamentos', 'PaymentController@index')->name('payments.index');
     Route::post('/pagamentos/pesquisa', 'PaymentController@search')->name('payments.search');
-    Route::get('/pagamentos/cliente/{cliente}/fase/{fase}/{responsabilidade}', 'PaymentController@createcliente')->name('payments.client');
-    // Route::post('/pagamentos/agente/{user}', 'PaymentController@create')->name('create.agent');
+        // Registar pagamento CLIENTE
+        Route::get('/pagamentos/cliente/{cliente}/fase/{fase}/{responsabilidade}', 'PaymentController@createcliente')->name('payments.cliente');
+        // Registar pagamento AGENTE
+        Route::get('/pagamentos/agente/{agente}/fase/{fase}/{responsabilidade}', 'PaymentController@createagente')->name('payments.agente');
+        // Registar pagamento SUBAGENTE
+        Route::get('/pagamentos/subagente/{subagente}/fase/{fase}/{responsabilidade}', 'PaymentController@createsubagente')->name('payments.subagente');
+        // Registar pagamento UNIVERSIDADE PRINCIPAL
+        Route::get('/pagamentos/universidade-principal/{universidade1}/fase/{fase}/{responsabilidade}', 'PaymentController@createuni1')->name('payments.uni1');
+        // Registar pagamento UNIVERSIDADE SECUNDÁRIA
+        Route::get('/pagamentos/universidade-secundaria/{universidade2}/fase/{fase}/{responsabilidade}', 'PaymentController@createuni2')->name('payments.uni2');
+        // Registar pagamento FORNECEDOR
+        Route::get('/pagamentos/fornecedor/{fornecedor}/fase/{fase}/{relacao}', 'PaymentController@createfornecedor')->name('payments.fornecedor');
     Route::post('/pagamentos/{responsabilidade}/registar', 'PaymentController@store')->name('payments.store');
 
     /* Cobranças */
