@@ -40,11 +40,20 @@
             @csrf
             @method("PUT")
             @include('clients.partials.add-edit')
-            <div class="form-group text-right" style="min-width:285px">
+{{--             <div class="row">
 
-                <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
-                <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
+                <div class="col">
+                    <button type="button" class="top-button mr-2" name="enviarEmail"></i>Enviar e-mail para ativaão de conta</button>
+                </div>
+
+                <div class="col"> --}}
+                    <div class="form-group text-right" style="min-width:285px">
+                        <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
+                        <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
+{{--                     </div>
+                </div> --}}
             </div>
+
         </form>
 
 

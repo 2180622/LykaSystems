@@ -10,30 +10,59 @@
 
 @if (Auth::user()->tipo == "admin")
 <br>
-    <div id="div_agente" style="border-radius: 10px;" class="bg-white shadow-sm mb-4" >
+    <div id="div_agente" style="border-radius: 10px;" class="mb-4" >
 
         <div class="row">
-                <div class="col m-4 pb-2">
-                    <div class="mx-2">
+                <div class="col m-3 py-4 bg-white shadow-sm rounded">
+                    <div class="mx-2 my-auto">
                         <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente responsável:</label>
-                        <select class="form-control select_style ml-2" id="idAgente" name="idAgente" style="min-width: 200px" required>
-                            <option selected value="0">(selecione um agente)</option>
-                            @if($agents)
-                                @foreach($agents as $agent)
-                                    <option value="{{$agent->idAgente}}"  {{old('idAgente', $client->idAgente ) == $agent->idAgente ? "selected" : "" }}   >{{$agent->nome}} {{$agent->apelido}} ({{$agent->pais}})</option>
-                                @endforeach
-                            @endif
-                        </select>
+                        <div class="mr-3">
+                            <select class="form-control select_style ml-2" id="idAgente" name="idAgente" style="min-width: 200px" required>
+                                <option selected value="0">(selecione um agente)</option>
+                                @if($agents)
+                                    @foreach($agents as $agent)
+                                        <option value="{{$agent->idAgente}}"  {{old('idAgente', $client->idAgente ) == $agent->idAgente ? "selected" : "" }}   >{{$agent->nome}} {{$agent->apelido}} ({{$agent->pais}})</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
                     </div>
 
+                </div>
+
+                <div class="col m-3 py-4 bg-white shadow-sm rounded" style="min-width: 412px">
+                    <div class="mx-2 my-auto">
+                        <div class="row">
+                            <div class="col">
+                                <i class="fas fa-traffic-light active mr-3 ml-3"></i><label for="estado">Estado do cliente:</label>
+                                <div class="mr-3">
+                                    <select class="form-control select_style ml-2" id="estado" name="estado" style="min-width: 200px" required>
+                                        <option {{old('idAgente', $client->estado ) == "Inativo" ? "selected" : "" }} value="Inativo">Inativo</option>
+                                        <option {{old('idAgente', $client->estado ) == "Ativo" ? "selected" : "" }} value="Ativo">Ativo</option>
+                                        <option {{old('idAgente', $client->estado ) == "Proponente" ? "selected" : "" }} value="Proponente">Proponente</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4 text-center" style="max-width: 250px">
+                                <div class="bg-lighth h-100 rounded border shadow-sm">
+                                    <div class=" p-3">
+                                        <i class="fas fa-lock-open text-success my-auto" style="font-size: 35px"></i>
+                                        {{-- <i class="fas fa-lock  text-danger"></i> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
         </div>
 
     </div>
 @else
 
-    {{-- campo auxiliar --}}
+    {{-- campos auxiliares --}}
     <input type="hidden" id="idAgente" name="idAgente" value="{{old('idAgente', $client->idAgente )}}">
+    <input type="hidden" id="estado" value="{{old('estado', $client->estado )}}">
 
 @endif
 

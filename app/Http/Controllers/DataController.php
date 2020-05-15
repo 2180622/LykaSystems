@@ -150,6 +150,8 @@ class DataController extends Controller
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
+        $cliente->estado = "Inativo";
+        $cliente->editavel= true;
         $cliente->save();
 
         $cliente = new Cliente;
@@ -181,10 +183,11 @@ class DataController extends Controller
         $cliente->num_docOficial = '61436534643DS4';
         $cliente->validade_docOficial = date('Y-m-d',strtotime('27-01-1993'));
         $cliente->numPassaporte = "345345345";
-
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
+        $cliente->estado = "Inativo";
+        $cliente->editavel= true;
         $cliente->save();
 
         /********************          Contas          *********************/
