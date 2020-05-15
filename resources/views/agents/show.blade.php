@@ -88,6 +88,8 @@
 
                 <div class="col p-2" style="min-width:280px !important">
 
+
+
                     {{-- Informações Pessoais --}}
                     <div><span class="text-secondary ">Nome: </span>{{$agent->nome}} {{$agent->apelido}}</div><br>
 
@@ -106,15 +108,15 @@
                     <br>
 
                     <div><span class="text-secondary ">Data de nascimento: </span>
-                        {{ date('d-M-y', strtotime($agent->dataNasc)) }}</div><br>
+                        {{ date('d-M-y', strtotime($agent->dataNasc)) }}</div>
 
-                    @if ($agent->tipo=="Subagente")
-                    <br>
-                    <div class="text-muted">Subagente de: <a class="agent_link"
-                            href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a>
-                    </div>
-                    <br>
-                    @endif
+                        @if ($tipo_agent_atual=="Subagente")
+                        <br>
+                        <div class="text-muted">Subagente de: <a class="name_link"
+                                href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a>
+                        </div>
+                        <br>
+                        @endif
 
                 </div>
 
@@ -286,12 +288,12 @@
                                 <td class="text-center align-middle">
                                     <a href="{{route('clients.show',$client)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                                     <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-
+{{--
                                     <form method="POST" role="form" id="{{ $client->idCliente }}" action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
+                                    </form> --}}
 
                                 </td>
                             </tr>
@@ -451,6 +453,23 @@
                             </div>
 
                             <br>
+
+
+
+
+                            <div class="text-secondary mb-2">Total de comissões:</div>
+
+                            <div class="border rounded bg-light p-3">
+                                <div>
+                                    @if ($comissoes)
+                                        {{$comissoes}}€
+                                    @else
+                                        <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                                    @endif
+                                </div>
+                            </div>
+
+
 
                         </div>
 

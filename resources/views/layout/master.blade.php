@@ -176,28 +176,28 @@
                     switch (user) {
                       case 'clientes':
                           for (var i = 0; i < data.length; i++) {
-                              html = "<a href='/clients/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+' '+data[i].apelido+"</p></div><div class='col-md-2 align-self-center'><p class='text-truncate'>"+data[i].telefone1+"</p></div><div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate'>"+data[i].email+"</p></div></div></a>";
+                              html = "<a href='/clients/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+' '+data[i].apelido+"</p></div><div class='col-md-3 align-self-center'><p class='text-truncate'>"+data[i].telefone1+"</p></div><div class='col-md-4 text-truncate align-self-center ml-2'><p class='text-truncate'>"+data[i].email+"</p></div></div></a>";
                               $("#prepend-div").append(html);
                           }
                         break;
 
                       case 'agentes':
                           for (var i = 0; i < data.length; i++) {
-                              html = "<a href='/agents/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+' '+data[i].apelido+"</p></div><div class='col-md-2 align-self-center'><p class='text-truncate'>"+data[i].telefone1+"</p></div><div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate'>"+data[i].email+"</p></div></div></a>";
+                              html = "<a href='/agents/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+' '+data[i].apelido+"</p></div><div class='col-md-3 align-self-center'><p class='text-truncate'>"+data[i].telefone1+"</p></div><div class='col-md-4 text-truncate align-self-center ml-2'><p class='text-truncate'>"+data[i].email+"</p></div></div></a>";
                               $("#prepend-div").append(html);
                           }
                         break;
 
                       case 'universidades':
                           for (var i = 0; i < data.length; i++) {
-                              html = "<a href='/universities/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+"</p></div><div class='col-md-2 align-self-center'><p class='text-truncate'>"+data[i].telefone+"</p></div><div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate'>"+data[i].email+"</p></div></div></a>";
+                              html = "<a href='/universities/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+"</p></div><div class='col-md-3 align-self-center'><p class='text-truncate'>"+data[i].telefone+"</p></div><div class='col-md-4 text-truncate align-self-center ml-2'><p class='text-truncate'>"+data[i].email+"</p></div></div></a>";
                               $("#prepend-div").append(html);
                           }
                         break;
 
                         case 'fornecedores':
                             for (var i = 0; i < data.length; i++) {
-                                html = "<a href='/fornecedores/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+"</p></div><div class='col-md-2 align-self-center'><p class='text-truncate'>"+data[i].contacto+"</p></div><div class='col-md-2 text-truncate align-self-center ml-auto'><p class='text-truncate'>"+data[i].morada+"</p></div></div></a>";
+                                html = "<a href='/fornecedores/"+data[i].slug+"'><div class='row charge-div'><div class='col-md-1 align-self-center'><div class='white-circle'><img src='{{Storage::disk('public')->url('default-photos/M.jpg')}}' width='100%' class='mx-auto'></div></div><div class='col-md-3 text-truncate align-self-center ml-4'><p class='text-truncate'>"+data[i].nome+"</p></div><div class='col-md-3 align-self-center'><p class='text-truncate'>"+data[i].contacto+"</p></div><div class='col-md-4 text-truncate align-self-center ml-2'><p class='text-truncate'>"+data[i].morada+"</p></div></div></a>";
                                 $("#prepend-div").append(html);
                             }
                           break;

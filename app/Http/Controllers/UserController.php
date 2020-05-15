@@ -91,7 +91,7 @@ class UserController extends Controller
         ]);
 
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'Administrador eliminado com sucesso');
+        return redirect()->route('users.index')->with('success', 'Administrador eliminado com sucesso.');
     }
 
     public function print(User $user)

@@ -121,7 +121,7 @@ class DataController extends Controller
 
         $cliente = new Cliente;
         $cliente->nome = 'Tiago';
-        $cliente->idAgente = 3;
+        $cliente->idAgente = 1;
         $cliente->apelido = 'Oliveira';
         $cliente->genero = 'M';
         $cliente->email = 'tiaveira@gmail.com';
@@ -153,7 +153,7 @@ class DataController extends Controller
         $cliente->save();
 
         $cliente = new Cliente;
-        $cliente->idAgente = 1;
+        $cliente->idAgente = 2;
         $cliente->nome = 'Katherine';
         $cliente->apelido = 'Romaria';
         $cliente->genero = 'F';
@@ -216,6 +216,7 @@ class DataController extends Controller
         /*******************          Contactos          *******************/
 
         $contacto = new Contacto;
+        $contacto->idUser = 1;
         $contacto->nome = 'Pedro Costa';
         $contacto->fotografia = null;
         $contacto->telefone1 = null;
@@ -227,6 +228,7 @@ class DataController extends Controller
         $contacto->save();
 
         $contacto = new Contacto;
+        $contacto->idUser = 1;
         $contacto->nome = 'Maria Pedro';
         $contacto->fotografia = null;
         $contacto->telefone1 = 915642453;
@@ -356,7 +358,7 @@ class DataController extends Controller
         $user->password = Hash::make('teste1234');
         $user->auth_key = strtoupper(random_str(5));
         $user->estado = true;
-        $user->slug = post_slug('Neuza Cordeiro');
+        $user->slug = post_slug('Edgar Cordeiro');
         $user->idAdmin = 2;
         $user->idAgente = null;
         $user->idCliente = null;
@@ -410,7 +412,7 @@ class DataController extends Controller
         $produto->valorTotalAgente = 300;
         $produto->valorTotalSubAgente = null;
         $produto->idAgente = 1;
-        $produto->idSubAgente = null;
+        $produto->idSubAgente = 3;
         $produto->idCliente = 2;
         $produto->idUniversidade1 = 2;
         $produto->idUniversidade2 = 1;
@@ -458,7 +460,7 @@ class DataController extends Controller
         $responsabilidade->dataVencimentoAgente = date('Y-m-d H:i',strtotime('28-07-2020 23:59'));
 
         $responsabilidade->valorSubAgente = 10;
-        $responsabilidade->idSubAgente = 1;
+        $responsabilidade->idSubAgente = 3;
         $responsabilidade->verificacaoPagoSubAgente = false;
         $responsabilidade->dataVencimentoSubAgente = date('Y-m-d H:i',strtotime('22-07-2020 23:59'));
 
@@ -647,18 +649,24 @@ class DataController extends Controller
 
         /*****************          Docs Pessoais          *****************/
 
-        /*$docpessoal = new DocPessoal;
-        $docpessoal->nome = '';
-        $docpessoal->apelido = '';
-        $docpessoal->tipo = '';
-        $docpessoal->imagem = '';
-        $docpessoal->numDoc = '';
-        $docpessoal->dataValidade = '';
-        $docpessoal->pais = '';
-        $docpessoal->morada = '';
-        $docpessoal->verificacao = '';
-        $docpessoal->idFase = '';
-        $docpessoal->save();*/
+        $docpessoal = new DocPessoal;
+        $docpessoal->idCliente = 1;
+        $docpessoal->tipo = "Doc. Oficial";
+        $docpessoal->imagem =null;
+        $docpessoal->info = '{"numDoc":"9845776436ZZ8"}' ;
+        $docpessoal->dataValidade = "2021-01-27";
+        $docpessoal->idFase = '1';
+        $docpessoal->save();
+
+
+        $docpessoal = new DocPessoal;
+        $docpessoal->idCliente = 1;
+        $docpessoal->tipo = "Passaporte";
+        $docpessoal->imagem =null;
+        $docpessoal->info = '{"numPassaporte":"324234","dataValidPP":"2021-01-27","passaportPaisEmi":"França","localEmissaoPP":"Paris"}' ;
+        $docpessoal->dataValidade = "2021-01-27";
+        $docpessoal->idFase = '2';
+        $docpessoal->save();
 
         /****************          Docs Transacoes          ****************/
 

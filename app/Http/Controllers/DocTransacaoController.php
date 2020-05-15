@@ -22,12 +22,12 @@ class DocTransacaoController extends Controller
     public function create(Fase $fase)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)/* || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)*/){
-            
+
             $documento = new DocTransacao;
             $tipoPAT = 'Transacao';
             $tipo = 'Transacao';
             $Contas = Conta::all();
-            
+
             return view('documentos.add',compact('fase','tipoPAT','tipo','documento','Contas'));
         }else{
             return redirect()->route('produtos.show',$fase->produto);
@@ -48,7 +48,7 @@ class DocTransacaoController extends Controller
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
 
             $documento = new DocTransacao;
-            
+
             $fields = $request->all();
             $documento->descricao=$fields['descricao'];
             if($fields['valorRecebido'] && $fields['valorRecebido']!=0){
@@ -65,7 +65,7 @@ class DocTransacaoController extends Controller
             $source = null;
 
             $documento->comprovativoPagamento = $source;
-            
+
             $documento->idFase = $fase->idFase;
             $documento->save();
 
@@ -74,10 +74,10 @@ class DocTransacaoController extends Controller
                 $ficheiro = $fields['img_doc'];
                 $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
-                $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
+                /* $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro; */
             }
 
-            $documento->comprovativoPagamento = $source;
+            $documento->comprovativoPagamento = $nomeficheiro;
             $documento->save();
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', 'Transação adicionado com sucesso');
@@ -122,7 +122,7 @@ class DocTransacaoController extends Controller
     public function update(UpdateDocumentoRequest $request, DocTransacao $documento)
     {
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)/* || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)*/){
-            
+
             $fields = $request->all();
             $documento->descricao=$fields['descricao'];
             if($fields['valorRecebido'] && $fields['valorRecebido']!=0){
@@ -149,8 +149,7 @@ class DocTransacaoController extends Controller
                     $ficheiro = $fields['img_doc'];
                     $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
                     Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
-                    $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro;
-                    $documento->comprovativoPagamento = $source;
+                    $documento->comprovativoPagamento = $nomeficheiro;
                 }
             }
             $documento->save();
