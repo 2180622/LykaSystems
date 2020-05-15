@@ -150,7 +150,7 @@ class DataController extends Controller
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
-        $cliente->estado = "Inativo";
+        $cliente->estado = "Ativo";
         $cliente->editavel= true;
         $cliente->save();
 

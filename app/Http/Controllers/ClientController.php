@@ -9,20 +9,15 @@ use App\User;
 use App\DocPessoal;
 use App\DocAcademico;
 use App\DocNecessario;
-use App\Fase;
-
-use App\Produto;
-
-use Illuminate\Support\Arr;
-
 
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-/* use Illuminate\Http\Request; */
+
 
 use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
@@ -379,28 +374,51 @@ class ClientController extends Controller
     */
     public function edit(Cliente $client)
     {
-        if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente"){
 
+        /* Obtem as informações sobre os documentos */
+
+        $docOfficial = DocPessoal::
+        where("idCliente","=",$client->idCliente)
+        ->where("tipo","=","Doc. Oficial")
+        ->first();
+
+        // Dados do passaporte
+        $passaporte = DocPessoal::
+        where ("idCliente","=",$client->idCliente)
+        ->where("tipo","=","Passaporte")
+        ->first();
+
+        if($passaporte!=null){
+            $passaporteData = json_decode($passaporte->info);
+        }
+
+        /* Se for o administrador a editar */
+        if (Auth::user()->tipo == "admin"){
             $agents = Agente::all();
 
-            $docOfficial = DocPessoal::
-            where("idCliente","=",$client->idCliente)
-            ->where("tipo","=","Doc. Oficial")
-            ->first();
+            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData'));
+
+        }
 
 
+        /* Se for o agente a editar */
+        if (Auth::user()->tipo == "agente"){
 
-            // Dados do passaporte
-            $passaporte = DocPessoal::
-            where ("idCliente","=",$client->idCliente)
-            ->where("tipo","=","Passaporte")
-            ->first();
-
-            if($passaporte!=null){
-                $passaporteData = json_decode($passaporte->info);
+            if ($client->editavel == 1){
+                /* SE TIVER PERMISSÔES para alterar informação */
+                return view('clients.edit', compact('client','docOfficial','passaporte','passaporteData'));
+            }else{
+                /* SE NÃO TIVER PERMISSÕES para alterar informação */
+                return Redirect::route('clients.show',$client);
             }
 
-            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData'));
+        }
+
+
+
+        if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente"){
+
+
         }else{
             /* não tem permissões */
             abort (401);

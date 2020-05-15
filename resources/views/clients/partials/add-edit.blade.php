@@ -34,20 +34,23 @@
                     <div class="mx-2 my-auto">
                         <div class="row">
                             <div class="col">
+                                {{-- Estado do cliente --}}
                                 <i class="fas fa-traffic-light active mr-3 ml-3"></i><label for="estado">Estado do cliente:</label>
-                                <div class="mr-3">
                                     <select class="form-control select_style ml-2" id="estado" name="estado" style="min-width: 200px" required>
                                         <option {{old('idAgente', $client->estado ) == "Inativo" ? "selected" : "" }} value="Inativo">Inativo</option>
                                         <option {{old('idAgente', $client->estado ) == "Ativo" ? "selected" : "" }} value="Ativo">Ativo</option>
                                         <option {{old('idAgente', $client->estado ) == "Proponente" ? "selected" : "" }} value="Proponente">Proponente</option>
                                     </select>
-                                </div>
                             </div>
-                            <div class="col-4 text-center" style="max-width: 250px">
-                                <div class="bg-lighth h-100 rounded border shadow-sm">
-                                    <div class=" p-3">
-                                        <i class="fas fa-lock-open text-success my-auto" style="font-size: 35px"></i>
-                                        {{-- <i class="fas fa-lock  text-danger"></i> --}}
+
+                            <div class="col text-center" style="max-width: 100px">
+
+                                {{-- Permitir/negar edição --}}
+                                <div id="btn_editavel" class="bg-lighth h-100 border shadow-sm" style="cursor:pointer; border-radius:10px">
+                                    <div class="p-3">
+                                        <input name="editavel" id="editavel" type="hidden" value="{{old('editavel', $client->editavel )}} ">
+                                        <i id="editavel_sim" class="fas fa-lock-open text-success my-auto" style="font-size: 25px; display:none" title="Os agentes podem modificar as informações"></i>
+                                        <i id="editavel_nao" class="fas fa-lock text-danger" style="font-size: 25px; display:none" title="Os agentes NÃO podem modificar as informações"></i>
                                     </div>
                                 </div>
                             </div>
