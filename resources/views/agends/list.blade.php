@@ -52,8 +52,6 @@
 
             <br><br>
 
-
-
         </div>
     </div>
 @endsection
@@ -160,8 +158,6 @@
                     $("#modalCalendar textarea[name='descricao']").val(description);
 
                     $("#modalCalendar").modal('show');
-
-
                 },
 
                 select: function (element) {
@@ -172,17 +168,19 @@
                     $("#modalCalendar #titleModal").text('Novo Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'none');
 
-                    let start = new Date();
+                    //let start = new Date();
+                    let start = element.start;
                     $("#modalCalendar input[name='dataInicio']").val(dealWithDate(start));
 
                     $("#modalCalendar input[name='cor']").val("#6A74C9");
 
                     calendar.unselect();
-
                 },
             });
 
             calendar.render();
         });
+
+
     </script>
 @endsection

@@ -65,9 +65,9 @@
                             <label>Perguntas Frequentes</label>
                         </div>
 
-                        <br><br><br>
+                        <br>
 
-                        <div id="accordion">
+                        <div id="accordion" class="report-card">
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">

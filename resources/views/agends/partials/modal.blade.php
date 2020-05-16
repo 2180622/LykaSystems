@@ -17,22 +17,19 @@
                             src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
                     </div>
 
-
-
                     {{-- Para utilização apartir da página show da universidade --}}
                     @if ( isset($university))
                         <div class="row mb-2">
                             <div class="col">
                                 <div class="form-group">
                                     {{-- Id da Universidade --}}
-                                    <div class="card rounded text-center p-3"><strong><span class="text-muted">{{$university->nome}}</span></strong></div>
+                                    <div class="card rounded text-center p-3"><strong><span
+                                                class="text-muted">{{$university->nome}}</span></strong></div>
                                     <input type="hidden" name="idUniversidade" value="{{$university->idUniversidade}}">
                                 </div>
                             </div>
                         </div>
                     @endif
-
-
 
                     <input type="hidden" name="idAgenda">
                     <div class="row">
@@ -41,7 +38,7 @@
                                 <i class="fas fa-pen mr-2" style="color: #6A74C9;"></i>
                                 <label for="title">Titulo</label>
                                 <input type="text" class="form-control limpar" id="title" name="titulo"
-                                    maxlength="100" placeholder="Insira o Titulo do evento." required>
+                                       maxlength="100" placeholder="Insira o Titulo do evento." required>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -55,14 +52,16 @@
                             <div class="form-group">
                                 <i class="far fa-calendar-alt mr-2" style="color: #6A74C9;"></i>
                                 <label for="startDate">Data/Hora Inicial</label>
-                                <input type="datetime-local" class="form-control limpar" id="startDate" name="dataInicio" required>
+                                <input type="datetime-local" class="form-control limpar" id="startDate"
+                                       name="dataInicio" required>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <i class="far fa-calendar-alt mr-2" style="color: #6A74C9;"></i>
                                 <label for="endDate">Data/Hora Final</label>
-                                <input type="datetime-local" class="form-control limpar" id="endDate" name="dataFim" required>
+                                <input type="datetime-local" class="form-control limpar" id="endDate" name="dataFim"
+                                       required>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -71,15 +70,21 @@
                                 <label for="description">Descrição</label>
                                 <textarea class="form-control limpar" name="descricao" id="description" rows="2"
                                           style="resize: none"
-                                          maxlength="150" placeholder="Insira a Descrição do evento." required fixed></textarea>
+                                          maxlength="150" placeholder="Insira a Descrição do evento." required
+                                          fixed></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="action" value="save" class="top-button mr-2" id="buttonSubmit">Guardar</button>
-                    <button type="submit" name="action" value="delete" class="top-button btn_submit bg-danger deleteEvent" style="display: none">Eliminar</button>
-                    <button type="button" class="top-button bg-secondary mr-2" id="btnFechar" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" name="action" value="save" class="top-button mr-2" id="buttonSubmit">Guardar
+                    </button>
+                    <button type="submit" name="action" value="delete"
+                            class="top-button btn_submit bg-danger deleteEvent" style="display: none">Eliminar
+                    </button>
+                    <button type="button" class="top-button bg-secondary mr-2" id="btnFechar" data-dismiss="modal">
+                        Cancelar
+                    </button>
                 </div>
             </form>
         </div>

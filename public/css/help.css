@@ -87,20 +87,3 @@ input, select, textarea {
     float: right;
     bottom: 100%;
 }
-
-div h5.card-title {
-    border: none;
-    color: white;
-    font-weight: 600;
-    font-size: 17px;
-    padding: 8px 20px;
-    border-radius: 5px;
-    background-color: #6A74C9;
-    margin-top: -20px;
-    margin-left: 0;
-}
-
-.card{
-    border: 0;
-    background-color: rgba(0,0,0,0.2);
-}
