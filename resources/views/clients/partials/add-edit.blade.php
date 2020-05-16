@@ -10,10 +10,10 @@
 
 @if (Auth::user()->tipo == "admin")
 <br>
-    <div id="div_agente" style="border-radius: 10px;" class="mb-4" >
+    <div style="border-radius: 10px;" class="mb-4" >
 
         <div class="row">
-                <div class="col m-3 py-4 bg-white shadow-sm rounded">
+                <div id="div_agente" class="col m-3 py-4 bg-white shadow-sm rounded">
                     <div class="mx-2 my-auto">
                         <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente responsável:</label>
                         <div class="mr-3">
@@ -464,7 +464,7 @@
                 <div class="col">
                     <label for="email">E-mail pessoal:</label><br>
                     <input type="email" class="form-control" name="email" id="email"
-                        value="{{old('email',$client->email)}}" required maxlength="250" placeholder="Insira o endereço de e-mail"><br>
+                        value="{{old('email',$client->email)}}" maxlength="250" placeholder="Insira o endereço de e-mail"><br>
                 </div>
             </div>
 

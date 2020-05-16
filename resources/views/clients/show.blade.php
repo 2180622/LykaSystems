@@ -133,18 +133,13 @@
                         @endif
 
 
-                        @if ($agents!=null )
+                        @if ($associados!=null )
                             <div class="text-secondary mb-2">Agente(s) associados:</div>
 
-                            @foreach ($agents as $agent)
-                                <a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a><br>
+                            @foreach ($associados as $agent)
+                                <a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a>, 
                             @endforeach
 
-                            @if ($subagents!=null )
-                                @foreach ($subagents as $subagent)
-                                    <a href="{{route('agents.show',$subagent)}}" class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
-                                @endforeach
-                            @endif
                         @endif
 
 

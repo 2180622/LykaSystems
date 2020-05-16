@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
-use App\Http\Requests\StoreUserRequest;
 
 use App\Jobs\SendWelcomeEmail;
 
@@ -31,15 +30,39 @@ class ClientController extends Controller
 
     public function sendActivationEmail(Cliente $client){
 
+
         $user = User::where('idCliente', '=', $client->idCliente)->first();
 
-        /* Envia o e-mail para ativação */
-        $name = $client->nome .' '. $client->apelido;
-        $email = $client->email;
-        $auth_key = $user->auth_key;
-        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
+        /* Cria o UTILIZADOR se ainda não existir */
 
-        return back()->with('success', 'E-mail de ativação enviado com sucesso');
+        if ( !$user ){
+            /* obtem os dados para criar o utilizador */
+            $user = new User;
+            $user->idCliente = $client->idCliente;
+            $user->email = $client->email;
+            $user->tipo = "cliente";
+            $password = random_str(64);
+            $user->password = Hash::make($password);
+            $user->auth_key = strtoupper(random_str(5));
+            $user->estado = true;
+            $user->slug = post_slug($client->nome.' '.$client->apelido);
+            $user->idAdmin = null;
+            $user->idAgente = null;
+            $user->save();
+
+            /* Envia o e-mail para ativação */
+            $name = $client->nome .' '. $client->apelido;
+            $email = $client->email;
+            $auth_key = $user->auth_key;
+            dispatch(new SendWelcomeEmail($email, $name, $auth_key));
+
+            return back()->with('success', 'E-mail de ativação enviado com sucesso');
+
+        }else{
+
+            return back()->with('error', 'O utilizador já existe');
+
+        }
 
     }
 
@@ -141,7 +164,7 @@ class ClientController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreClientRequest $requestClient, StoreUserRequest $requestUser){
+    public function store(StoreClientRequest $requestClient){
 
         $t=time(); /*  data atual */
 
@@ -150,11 +173,6 @@ class ClientController extends Controller
         $fields = $requestClient->validated();
         $client->fill($fields);
         $client->save();
-
-        /* obtem os dados para criar o utilizador */
-        $user = new User;
-        $fieldsUser = $requestUser->validated();
-        $user->fill($fieldsUser);
 
 
 
@@ -169,9 +187,6 @@ class ClientController extends Controller
         $client->slug = post_slug($client->nome.' '.$client->apelido); /*slugs */
         $client->create_at == date("Y-m-d",$t);
         $client->save();
-
-
-
 
 
     /* Criação de documentos Pessoais */
@@ -235,16 +250,6 @@ class ClientController extends Controller
         }
 
 
-        /* Criação de utilizador */
-
-        $user->tipo = "cliente";
-        $user->idCliente = $client->idCliente;
-        $user->slug = post_slug($client->nome.' '.$client->apelido);
-        $user->auth_key = strtoupper(random_str(5));
-        $password = random_str(64);
-        $user->password = Hash::make($password);
-        $user->save();
-
         return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }
 
@@ -280,42 +285,46 @@ class ClientController extends Controller
         }
 
 
-        /* AGENTE RESPONSAVEL   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+        /* AGENTE RESPONSAVEL   +++++++++++++++++++++++++ */
         $agente = Agente::
         where("idAgente","=",$client->idAgente)
         ->first();
 
 
-
-        /* Agentes associados */
+        /* Agentes associados: apartir da tabela dos produtos */
         $agents = Agente::
         whereIn('idAgente', function ($query) use ($client) {
             $query->select('idAgente')
             ->from('Produto')
-            ->where('idAgente','<>',$client->idAgente)
-            ->where('idCliente', $client->idCliente)
-            ->distinct('idAgente');
+            ->where('idCliente', $client->idCliente);
+/*             ->where('idAgente','!=',$client->idAgente) */
+/*             ->distinct('idAgente'); */
         })->get();
-
-        if ($agents->isEmpty()) {
+/*         if ($agents->isEmpty()) {
             $agents=null;
-        }
+        } */
 
 
-        /* Subagentes associados */
+        /* Subagentes associados: : apartir da tabela dos produtos */
         $subagents = Agente::
         whereIn('idAgente', function ($query) use ($client) {
             $query->select('idSubAgente')
             ->from('Produto')
-            ->where('idAgente','<>',$client->idAgente)
-            ->where('idCliente', $client->idCliente)
-            ->distinct('idSubAgente');
+            ->where('idCliente', $client->idCliente);
+/*             ->where('idSubAgente','!=',$client->idAgente)
+            ->distinct('idSubAgente'); */
         })->get();
-
-
-        if ($subagents->isEmpty()) {
+/*         if ($subagents->isEmpty()) {
             $subagents=null;
-        }
+        } */
+
+
+        /* Junta as duas listas */
+/*         dd($agents,$subagents); */
+
+        $associados = $agents->merge($subagents);
+/*      $associados = $associados->unique(); */
+
 
 
         /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
@@ -350,7 +359,7 @@ class ClientController extends Controller
 
 
 
-        return view('clients.show',compact("client","agente","agents","subagents","produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
+        return view('clients.show',compact("client","agente","associados",/* "agents","subagents", */"produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
     }
 
 

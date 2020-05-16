@@ -178,11 +178,21 @@
 
 
         /* Permitir/negar edição */
+
+
+
         /* Estado inicial */
+        /* Para novo cliente */
+        if( $('#editavel').val() ){
+            $('#editavel').val("1");
+        }
+
+        /* Caso a edição seja permitida */
         if( $('#editavel').val()==1 ){
             $("#editavel_sim").show();
             $("#editavel_nao").hide();
         }else{
+        /* Caso a edição NÃO seja permitida */
             $("#editavel_sim").hide();
             $("#editavel_nao").show();
         }
@@ -300,7 +310,7 @@
 
 
             /* Campo do e-mail  */
-            if (($("#email").val() == "")) {
+/*             if (($("#email").val() == "")) {
                 $("#wait_screen").hide();
                 $("#email").addClass("is-invalid");
                 $("#contacts-tab").addClass("border-danger text-danger");
@@ -310,7 +320,7 @@
                 $("#contacts-tab").removeClass("border-danger text-danger");
                 $("#email").removeClass("is-invalid");
 
-            }
+            } */
 
 
 

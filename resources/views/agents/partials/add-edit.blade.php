@@ -259,9 +259,6 @@
 
             <div class="row">
                 <div class="col">
-                    {{-- INFO_DOC CAMPO ESCONDIDO: NÃO UTILIZADO --}}
-                    <input type="hidden" name="info_doc" name="info_doc" value="">
-
 
                     {{-- INPUT DOC ID --}}
                     <label for="num_doc">Número de identificação pessoal:</label><br>

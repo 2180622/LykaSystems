@@ -26,7 +26,6 @@ $factory->define(Agente::class, function (Faker $faker) {
         'NIF' => $faker->unique()->idNumber,
         'num_doc' => $faker->unique()->nationalIdNumber,
         'img_doc' => null,
-        'info_doc' => null,
         'telefone1' => $faker->mobileNumber,
         'telefone2' => $faker->mobileNumber,
         'IBAN' => $faker->iban($countryCode),
