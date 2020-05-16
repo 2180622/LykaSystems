@@ -137,7 +137,7 @@
                             <div class="text-secondary mb-2">Agente(s) associados:</div>
 
                             @foreach ($associados as $agent)
-                                <a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a>, 
+                                <a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a>,
                             @endforeach
 
                         @endif

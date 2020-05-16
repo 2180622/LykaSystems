@@ -131,7 +131,7 @@
                                 <div class="col p-3 m-2 bg-light border rounded" style="min-width: 280px">
                                     <div><strong>O subagente:</strong></div>
                                     <div class="my-3">- Apenas tem acesso à lista dos seus clientes</div>
-                                    <div class="my-3">- Tem acesso à página de perfil do seu superior</div>
+{{--                                     <div class="my-3">- Tem acesso à página de perfil do seu superior</div> --}}
                                 </div>
 
                             </div>
