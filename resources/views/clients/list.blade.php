@@ -95,8 +95,8 @@
                     <tr>
                         <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
-                        <th>E-mail</th>
                         <th>Naturalidade</th>
+                        <th>Estado</th>
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -124,11 +124,21 @@
                         {{-- Nome e Apelido --}}
                         <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
 
-                        {{-- email --}}
-                         <td class="align-middle">{{ $client->email }}</td>
-
                         {{-- paisNaturalidade --}}
-                         <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+                        <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+
+                        {{-- Estado de cliente --}}
+                         <td class="align-middle">
+
+                            @if ( $client->estado == "Ativo")
+                                <span class="text-success">Ativo</span>
+                            @elseif( $client->estado == "Inativo")
+                                <span class="text-danger">Inativo</span>
+                            @else
+                                <span class="text-info">Proponente</span>
+                            @endif
+
+                        </td>
 
 
                         {{-- OPÇÔES --}}

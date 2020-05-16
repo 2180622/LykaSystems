@@ -131,7 +131,7 @@
                                 <div class="col p-3 m-2 bg-light border rounded" style="min-width: 280px">
                                     <div><strong>O subagente:</strong></div>
                                     <div class="my-3">- Apenas tem acesso à lista dos seus clientes</div>
-                                    <div class="my-3">- Tem acesso à página de perfil do seu superior</div>
+{{--                                     <div class="my-3">- Tem acesso à página de perfil do seu superior</div> --}}
                                 </div>
 
                             </div>
@@ -259,9 +259,6 @@
 
             <div class="row">
                 <div class="col">
-                    {{-- INFO_DOC CAMPO ESCONDIDO: NÃO UTILIZADO --}}
-                    <input type="hidden" name="info_doc" name="info_doc" value="">
-
 
                     {{-- INPUT DOC ID --}}
                     <label for="num_doc">Número de identificação pessoal:</label><br>

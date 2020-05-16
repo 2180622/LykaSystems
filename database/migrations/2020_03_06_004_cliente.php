@@ -18,7 +18,7 @@ class Cliente extends Migration
             $table->string('nome',255);
             $table->string('apelido',255);
             $table->enum('genero',['F','M'])->default('M');
-            $table->string('email',255)->unique();
+            $table->string('email',255)->nullable()->unique();
             $table->string('telefone1',255)->nullable();
             $table->string('telefone2',255)->nullable();
             $table->date('dataNasc')->nullable();

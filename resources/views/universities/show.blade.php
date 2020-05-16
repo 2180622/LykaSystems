@@ -397,8 +397,8 @@
 
                     <div class="text-secondary mb-2">Observação dos Contactos:</div>
                     <div class="border rounded bg-light p-3">
-                        @if ($university->obsContactos)
-                            {{$university->obsContactos}}
+                        @if ($university->observacoes)
+                            {{$university->observacoes}}
                         @else
                             <div class="text-muted"><small>(sem contactos para mostrar)</small></div>
                         @endif

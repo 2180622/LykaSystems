@@ -67,7 +67,7 @@
 
                 <div class="col">
                     <div class="form-group text-right" style="min-width:285px">
-                        <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
+                        <button type="submit" class="top-button mr-2" name="submit"></i>Guardar informações</button>
                         <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
                     </div>
                 </div>
