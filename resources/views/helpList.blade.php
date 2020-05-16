@@ -103,7 +103,7 @@
                             <button class="btn btn-link collapsed" data-toggle="collapse"
                                     data-target="#collapseThree" aria-expanded="false"
                                     aria-controls="collapseThree" id="protudo">
-                                <i class="fas fa-angle-right pb-2" id="protudo"></i> Como adicionar um Agente?
+                                <i class="fas fa-angle-right pb-2"></i> Como adicionar um Agente?
                             </button>
 
                         </div>
@@ -132,7 +132,7 @@
 
                             <button class="btn btn-link collapsed" data-toggle="collapse"
                                     data-target="#collapseFour" aria-expanded="false"
-                                    aria-controls="collapseFour" id="#produto">
+                                    aria-controls="collapseFour">
                                 <i class="fas fa-angle-right pb-2"></i> Como criar um Produto?
                             </button>
 
@@ -162,7 +162,7 @@
 
                             <button class="btn btn-link collapsed" data-toggle="collapse"
                                     data-target="#collapseFive" aria-expanded="false"
-                                    aria-controls="collapseFive" id="#produto">
+                                    aria-controls="collapseFive">
                                 <i class="fas fa-angle-right pb-2"></i> Como adicionar Fornecedor?
                             </button>
 
@@ -183,34 +183,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card-header" id="headingSix">
-
-                            <button class="btn btn-link collapsed" data-toggle="collapse"
-                                    data-target="#collapseFive" aria-expanded="false"
-                                    aria-controls="collapseFive" id="#produto">
-                                <i class="fas fa-angle-right pb-2"></i> Como adicionar Fornecedor?
-                            </button>
-
-                        </div>
-                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
-                             data-parent="#accordion">
-                            <div class="card-body">
-                                <p> A adição de um Fornecedor deverá ser feita de acordo com os seguintes passos: </p>
-                                <br>
-                                <p>- Escolher a opção " <i class="fas fa-tools"></i> Diversos " através do menu de navegação lateral</p>
-                                <br>
-                                <p>- Escolher a opção "Fornecedor"</p>
-                                <br>
-                                <p>- Pressionar o botão "Adicionar Fornecedor"</p>
-                                <br>
-                                <p>- Preencher os campos obrigatórios, assinalados com asterisco &#10033;</p>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

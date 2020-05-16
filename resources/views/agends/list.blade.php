@@ -52,42 +52,8 @@
 
             <br><br>
 
-            {{-- Conteudo: Eventos --}}
-            <div>
-                @if($agends!=null)
-                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                           style="overflow:hidden;">
-                        {{-- Cabeçalho da tabela --}}
-                        <thead>
-                        <tr>
-                            <th style="width:10px">{{-- COR DO EVENTO --}}</th>
-                            <th colspan="3">Todos os eventos agendados</th>
-                        </tr>
-                        </thead>
-                        {{-- Corpo da tabela --}}
-                        <tbody>
-                        @foreach ($agends as $agend)
-                            <tr href="#">
-                                <td style="width:10px">
-                                    <span class="p-1 shadow-sm" style="background-color:{{$agend->cor}}"></span>
-                                </td>
 
-                                {{-- Título --}}
-                                <td><a class="name_link">{{$agend->titulo}}</td>
 
-                                {{-- Inicio --}}
-                                <td class="align-middle">{{ date('d-m-Y', strtotime($agend->dataInicio)) }}</td>
-
-                                {{-- Fim --}}
-                                <td class="align-middle">{{ date('d-m-Y', strtotime($agend->dataFim)) }}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-            </div>
-            @else
-                <small class="text-muted">(Sem eventos marcados)</small>
-            @endif
         </div>
     </div>
 @endsection
@@ -106,11 +72,10 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <script src="{{asset('/js/agends.js')}}"></script>
+    <script src="{{asset('/js/newEventModalDefault.js')}}"></script>
 
     {{-- script permite definir se um input recebe só numeros OU so letras --}}
     <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
@@ -125,6 +90,7 @@
 
         /**
          *  Dealing with data to be shown in datetime-local type input
+         *  "2020-05-30T01:00"
          * */
         function dealWithDate(value) {
             let month = value.getMonth() + 1;
@@ -206,8 +172,7 @@
                     $("#modalCalendar #titleModal").text('Novo Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'none');
 
-                    let start = element.start;
-
+                    let start = new Date();
                     $("#modalCalendar input[name='dataInicio']").val(dealWithDate(start));
 
                     $("#modalCalendar input[name='cor']").val("#6A74C9");
@@ -219,32 +184,5 @@
 
             calendar.render();
         });
-
-        $("#titleModalNew").click(function () {
-
-            $(".limpar").each(function () {
-                $(".limpar").val("");
-                $("#color").val("#6A74C9");
-
-            });
-
-            addDefaultFields();
-
-
-        });
-
-        function addDefaultFields() {
-
-            var date = new Date();
-            string = ""
-
-            let month = date.getMonth() + 1;
-            string = date.getFullYear() + "-" + ("0" + month).slice(-2)
-                + "-" + ("0" + date.getDate()).slice(-2) + "T"
-                + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
-
-            $("#modalCalendar input[name='dataInicio']").val(string);
-        }
     </script>
-
 @endsection
