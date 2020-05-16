@@ -30,7 +30,7 @@ class UpdateUniversidadeRequest extends FormRequest
             'email' => 'required|max:255',
             'NIF' => 'required',
             'IBAN' => 'nullable',
-            'obsContactos' => 'nullable',
+            'observacoes' => 'nullable',
             'obsCursos' => 'nullable',
             'obsCandidaturas' => 'nullable',
 

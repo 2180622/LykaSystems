@@ -100,8 +100,6 @@ class UniversityController extends Controller
             $contacts=null;
         }
 
-
-
         return view('universities.show', compact('university','eventos','clients','contacts'));
     }
 
@@ -134,7 +132,7 @@ class UniversityController extends Controller
 
         $university->save();
 
-        return redirect()->route('universities.index')->with('success', 'Universidade Editada com Sucesso!');
+        return redirect()->route('universities.show',$university)->with('success', 'Universidade Editada com Sucesso!');
 
     }
 

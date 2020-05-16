@@ -19,7 +19,7 @@ class Universidade extends Model
     protected $primaryKey = 'idUniversidade';
 
     protected $fillable = [
-        'nome', 'morada', 'telefone', 'email', 'NIF', 'IBAN', 'obsContactos', 'obsCursos', 'obsCandidaturas',
+        'nome', 'morada', 'telefone', 'email', 'NIF', 'IBAN', 'observacoes', 'obsCursos', 'obsCandidaturas',
     ];
 
     public function user()

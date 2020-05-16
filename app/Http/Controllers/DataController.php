@@ -330,7 +330,7 @@ class DataController extends Controller
         $universidade->email = 'estg.ipleiria.pt';
         $universidade->NIF = 7846575487;
         $universidade->IBAN = 'PT50 6573 4321 1345678901 72';
-        $universidade->obsContactos = null;
+        $universidade->observacoes = null;
         $universidade->obsCursos = null;
         $universidade->obsCandidaturas = null;
         $universidade->save();
@@ -342,7 +342,7 @@ class DataController extends Controller
         $universidade->email = 'aveiro@uni.pt';
         $universidade->NIF = 5478236541;
         $universidade->IBAN = 'PT50 8651 2364 0901678901 12';
-        $universidade->obsContactos = null;
+        $universidade->observacoes = null;
         $universidade->obsCursos = null;
         $universidade->obsCandidaturas = null;
         $universidade->save();
