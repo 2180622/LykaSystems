@@ -160,6 +160,11 @@ class ProdutoController extends Controller
                                 $relacao->idResponsabilidade = $responsabilidade->idResponsabilidade;
                                 $relacao->valor = $fields["valor-fornecedor".$numF."-fase".$i];
                                 $relacao->create_at == date("Y-m-d",$t);
+                                if($fields["data-fornecedor".$numF."-fase".$i]){
+                                    $relacao->dataVencimento = date("Y-m-d",strtotime($fields["data-fornecedor".$numF."-fase".$i]));
+                                }else{
+                                    $relacao->dataVencimento = null;
+                                }
                                 $relacao->save();
 
                                 $valorRelacoes = $valorRelacoes + $relacao->valor;
@@ -181,8 +186,7 @@ class ProdutoController extends Controller
                     foreach($docsStock as $doc){
                         $documento = new DocNecessario;
                         $documento->tipo = $doc->tipo;
-                        $documento->tipoPessoal = $doc->tipoPessoal;
-                        $documento->tipoAcademico = $doc->tipoAcademico;
+                        $documento->tipoDocumento = $doc->tipoDocumento;
                         $documento->idFase = $fase->idFase;
                         $documento->save();
                     }
@@ -381,6 +385,11 @@ class ProdutoController extends Controller
                             if(array_key_exists("fornecedor".$i."-fase".$fase->idFase, $fields)){
                                 if($fields["fornecedor".$i."-fase".$fase->idFase]==$relacao->idFornecedor){
                                     $relacao->valor = $fields["valor-fornecedor".$i."-fase".$fase->idFase];
+                                    if($fields["data-fornecedor".$numF."-fase".$i]){
+                                        $relacao->dataVencimento = date("Y-m-d",strtotime($fields["data-fornecedor".$numF."-fase".$i]));
+                                    }else{
+                                        $relacao->dataVencimento = null;
+                                    }
                                     $relacao->save();
                                     $existe = true;
                                 }

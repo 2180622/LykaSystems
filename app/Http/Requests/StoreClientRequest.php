@@ -62,9 +62,12 @@ class StoreClientRequest extends FormRequest
             'telefoneMae' => 'nullable',
             'emailMae' => 'nullable',
 
-
             'IBAN' => 'nullable',
             'obsFinanceiras' => 'nullable',
+
+
+            'estado' => 'required',
+            'editavel' => 'required',
 
         ];
     }

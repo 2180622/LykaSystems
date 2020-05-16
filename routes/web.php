@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Estudantes */
     Route::get('/clientes/print/{client}', 'ClientController@print')->name('clients.print');
+    Route::get('/clientes/sendActivationEmail/{client}', 'ClientController@sendActivationEmail')->name('clients.sendActivationEmail');
     Route::resource('/clientes', 'ClientController')->parameters([
         'clientes' => 'client'
     ])->names([

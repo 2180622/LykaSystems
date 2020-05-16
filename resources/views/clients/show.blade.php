@@ -33,7 +33,11 @@
     <div class="float-right">
         <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
 
-        <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
+
+        {{-- Permissões para editar --}}
+        @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" && $client->editavel == 1)
+            <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
+        @endif
 
         <a href="{{route('clients.print',$client)}}" target="_blank" class="top-button">Imprimir</a>
 
@@ -47,6 +51,13 @@
             <div class="col">
                 <div class="title">
                     <h6>Ficha de estudante</h6>
+                        @if ( $client->estado == "Ativo")
+                            <div><small>Estado do cliente: <strong><span class="text-success">ATIVO</span></small></strong></div>
+                        @elseif( $client->estado == "Inativo")
+                            <div><small>Estado do cliente: <strong><span class="text-danger">INATIVO</span></small></strong></div>
+                        @else
+                            <div><small>Estado do cliente: <strong><span class="text-info">PROPONENTE</span></small></strong></div>
+                        @endif
                 </div>
             </div>
             <div class="col text-right">

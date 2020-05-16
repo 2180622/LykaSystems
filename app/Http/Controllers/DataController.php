@@ -150,6 +150,8 @@ class DataController extends Controller
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
+        $cliente->estado = "Ativo";
+        $cliente->editavel= true;
         $cliente->save();
 
         $cliente = new Cliente;
@@ -181,10 +183,11 @@ class DataController extends Controller
         $cliente->num_docOficial = '61436534643DS4';
         $cliente->validade_docOficial = date('Y-m-d',strtotime('27-01-1993'));
         $cliente->numPassaporte = "345345345";
-
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
+        $cliente->estado = "Inativo";
+        $cliente->editavel= true;
         $cliente->save();
 
         /********************          Contas          *********************/
@@ -398,7 +401,7 @@ class DataController extends Controller
         $produto->valorTotalAgente = 300;
         $produto->valorTotalSubAgente = null;
         $produto->idAgente = 1;
-        $produto->idSubAgente = null;
+        $produto->idSubAgente = 3;
         $produto->idCliente = 1;
         $produto->idUniversidade1 = 1;
         $produto->idUniversidade2 = null;
@@ -411,9 +414,9 @@ class DataController extends Controller
         $produto->valorTotal = 1900;
         $produto->valorTotalAgente = 300;
         $produto->valorTotalSubAgente = null;
-        $produto->idAgente = 1;
-        $produto->idSubAgente = 3;
-        $produto->idCliente = 2;
+        $produto->idAgente = 2;
+        $produto->idSubAgente = null;
+        $produto->idCliente = 1;
         $produto->idUniversidade1 = 2;
         $produto->idUniversidade2 = 1;
         $produto->save();

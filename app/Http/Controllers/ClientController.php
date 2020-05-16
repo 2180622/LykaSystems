@@ -9,20 +9,15 @@ use App\User;
 use App\DocPessoal;
 use App\DocAcademico;
 use App\DocNecessario;
-use App\Fase;
-
-use App\Produto;
-
-use Illuminate\Support\Arr;
-
 
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-/* use Illuminate\Http\Request; */
+
 
 use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
@@ -32,8 +27,24 @@ use App\Jobs\SendWelcomeEmail;
 
 class ClientController extends Controller
 {
-    public function index()
-    {
+
+
+    public function sendActivationEmail(Cliente $client){
+
+        $user = User::where('idCliente', '=', $client->idCliente)->first();
+
+        /* Envia o e-mail para ativação */
+        $name = $client->nome .' '. $client->apelido;
+        $email = $client->email;
+        $auth_key = $user->auth_key;
+        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
+
+        return back()->with('success', 'E-mail de ativação enviado com sucesso');
+
+    }
+
+
+    public function index(){
 
         /* Permissões */
         if (Auth::user()->tipo == "cliente" ){
@@ -83,8 +94,7 @@ class ClientController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function create()
-    {
+    public function create(){
 
         if (Auth::user()->tipo == "admin"){
             $client = new Cliente;
@@ -202,8 +212,6 @@ class ClientController extends Controller
         }
 
 
-
-
         /* Criação de utilizador */
 
         $user->tipo = "cliente";
@@ -213,12 +221,6 @@ class ClientController extends Controller
         $password = random_str(64);
         $user->password = Hash::make($password);
         $user->save();
-
-        /* Envia o e-mail para ativação */
-        $name = $client->nome .' '. $client->apelido;
-        $email = $client->email;
-        $auth_key = $user->auth_key;
-        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
         return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }
@@ -232,8 +234,7 @@ class ClientController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function show(Cliente $client)
-    {
+    public function show(Cliente $client){
 
        /* Permissões */
         if (Auth::user()->tipo == "cliente" ){
@@ -338,8 +339,7 @@ class ClientController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function print(Cliente $client)
-    {
+    public function print(Cliente $client){
        /* Permissões */
        if (Auth::user()->tipo == "cliente" ){
         abort (401);
@@ -377,30 +377,52 @@ class ClientController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function edit(Cliente $client)
-    {
-        if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente"){
+    public function edit(Cliente $client){
 
+        /* Obtem as informações sobre os documentos */
+
+        $docOfficial = DocPessoal::
+        where("idCliente","=",$client->idCliente)
+        ->where("tipo","=","Doc. Oficial")
+        ->first();
+
+        // Dados do passaporte
+        $passaporte = DocPessoal::
+        where ("idCliente","=",$client->idCliente)
+        ->where("tipo","=","Passaporte")
+        ->first();
+
+        if($passaporte!=null){
+            $passaporteData = json_decode($passaporte->info);
+        }
+
+        /* Se for o administrador a editar */
+        if (Auth::user()->tipo == "admin"){
             $agents = Agente::all();
 
-            $docOfficial = DocPessoal::
-            where("idCliente","=",$client->idCliente)
-            ->where("tipo","=","Doc. Oficial")
-            ->first();
+            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData'));
+
+        }
 
 
+        /* Se for o agente a editar */
+        if (Auth::user()->tipo == "agente"){
 
-            // Dados do passaporte
-            $passaporte = DocPessoal::
-            where ("idCliente","=",$client->idCliente)
-            ->where("tipo","=","Passaporte")
-            ->first();
-
-            if($passaporte!=null){
-                $passaporteData = json_decode($passaporte->info);
+            if ($client->editavel == 1){
+                /* SE TIVER PERMISSÔES para alterar informação */
+                return view('clients.edit', compact('client','docOfficial','passaporte','passaporteData'));
+            }else{
+                /* SE NÃO TIVER PERMISSÕES para alterar informação */
+                return Redirect::route('clients.show',$client);
             }
 
-            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData'));
+        }
+
+
+
+        if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente"){
+
+
         }else{
             /* não tem permissões */
             abort (401);
@@ -418,8 +440,7 @@ class ClientController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function update(UpdateClienteRequest $request, Cliente $client)
-    {
+    public function update(UpdateClienteRequest $request, Cliente $client){
 
         $t=time(); /*  data atual */
 
@@ -589,8 +610,7 @@ class ClientController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function destroy(Cliente $client)
-    {
+    public function destroy(Cliente $client){
 
         if (Auth::user()->tipo == "admin" ){
 

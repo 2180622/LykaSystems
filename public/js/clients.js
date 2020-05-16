@@ -83,12 +83,6 @@
 
 
         //Preview da fotografia++++++++++++++++++
-        /*         $('#search_btn').on('click', function (e) {
-                    e.preventDefault();
-                    $('#fotografia').trigger('click');
-                }); */
-
-
         $('#preview').on('click', function (e) {
             e.preventDefault();
             $('#fotografia').trigger('click');
@@ -183,10 +177,29 @@
 
 
 
+        /* Permitir/negar edição */
+        /* Estado inicial */
+        if( $('#editavel').val()==1 ){
+            $("#editavel_sim").show();
+            $("#editavel_nao").hide();
+        }else{
+            $("#editavel_sim").hide();
+            $("#editavel_nao").show();
+        }
 
+        /* Mudança de estado */
+        $('#btn_editavel').click(function(){
+            if ( $('#editavel').val()==1 ){
+                $("#editavel_sim").hide();
+                $("#editavel_nao").show();
+                $('#editavel').val(0);
+            }else{
+                $("#editavel_sim").show();
+                $("#editavel_nao").hide();
+                $('#editavel').val(1);
+            }
 
-
-
+        });
 
 
 
