@@ -18,7 +18,7 @@ class Cliente extends Migration
             $table->string('nome',255);
             $table->string('apelido',255);
             $table->enum('genero',['F','M'])->default('M');
-            $table->string('email',255)->unique();
+            $table->string('email',255)->nullable()->unique();
             $table->string('telefone1',255)->nullable();
             $table->string('telefone2',255)->nullable();
             $table->date('dataNasc')->nullable();
@@ -49,6 +49,9 @@ class Cliente extends Migration
             $table->longText('obsPessoais')->nullable();
             $table->longText('obsFinanceiras')->nullable();
             $table->longText('obsAcademicas')->nullable();
+
+            $table->enum('estado',['Inativo','Ativo', 'Proponente'])->default('Inativo');
+            $table->boolean('editavel')->default(true);
 
             $table->string('slug')->nullable();
             $table->timestamps();

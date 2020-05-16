@@ -83,12 +83,6 @@
 
 
         //Preview da fotografia++++++++++++++++++
-        /*         $('#search_btn').on('click', function (e) {
-                    e.preventDefault();
-                    $('#fotografia').trigger('click');
-                }); */
-
-
         $('#preview').on('click', function (e) {
             e.preventDefault();
             $('#fotografia').trigger('click');
@@ -183,10 +177,39 @@
 
 
 
+        /* Permitir/negar edição */
 
 
 
+        /* Estado inicial */
+        /* Para novo cliente */
+        if( $('#editavel').val() ){
+            $('#editavel').val("1");
+        }
 
+        /* Caso a edição seja permitida */
+        if( $('#editavel').val()==1 ){
+            $("#editavel_sim").show();
+            $("#editavel_nao").hide();
+        }else{
+        /* Caso a edição NÃO seja permitida */
+            $("#editavel_sim").hide();
+            $("#editavel_nao").show();
+        }
+
+        /* Mudança de estado */
+        $('#btn_editavel').click(function(){
+            if ( $('#editavel').val()==1 ){
+                $("#editavel_sim").hide();
+                $("#editavel_nao").show();
+                $('#editavel').val(0);
+            }else{
+                $("#editavel_sim").show();
+                $("#editavel_nao").hide();
+                $('#editavel').val(1);
+            }
+
+        });
 
 
 
@@ -287,7 +310,7 @@
 
 
             /* Campo do e-mail  */
-            if (($("#email").val() == "")) {
+/*             if (($("#email").val() == "")) {
                 $("#wait_screen").hide();
                 $("#email").addClass("is-invalid");
                 $("#contacts-tab").addClass("border-danger text-danger");
@@ -297,7 +320,7 @@
                 $("#contacts-tab").removeClass("border-danger text-danger");
                 $("#email").removeClass("is-invalid");
 
-            }
+            } */
 
 
 

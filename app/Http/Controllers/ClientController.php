@@ -9,31 +9,65 @@ use App\User;
 use App\DocPessoal;
 use App\DocAcademico;
 use App\DocNecessario;
-use App\Fase;
-
-use App\Produto;
-
-use Illuminate\Support\Arr;
-
 
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-/* use Illuminate\Http\Request; */
+
 
 use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
-use App\Http\Requests\StoreUserRequest;
 
 use App\Jobs\SendWelcomeEmail;
 
 class ClientController extends Controller
 {
-    public function index()
-    {
+
+
+    public function sendActivationEmail(Cliente $client){
+
+
+        $user = User::where('idCliente', '=', $client->idCliente)->first();
+
+        /* Cria o UTILIZADOR se ainda não existir */
+
+        if ( !$user ){
+            /* obtem os dados para criar o utilizador */
+            $user = new User;
+            $user->idCliente = $client->idCliente;
+            $user->email = $client->email;
+            $user->tipo = "cliente";
+            $password = random_str(64);
+            $user->password = Hash::make($password);
+            $user->auth_key = strtoupper(random_str(5));
+            $user->estado = true;
+            $user->slug = post_slug($client->nome.' '.$client->apelido);
+            $user->idAdmin = null;
+            $user->idAgente = null;
+            $user->save();
+
+            /* Envia o e-mail para ativação */
+            $name = $client->nome .' '. $client->apelido;
+            $email = $client->email;
+            $auth_key = $user->auth_key;
+            dispatch(new SendWelcomeEmail($email, $name, $auth_key));
+
+            return back()->with('success', 'E-mail de ativação enviado com sucesso');
+
+        }else{
+
+            return back()->with('error', 'O utilizador já existe');
+
+        }
+
+    }
+
+
+    public function index(){
 
         /* Permissões */
         if (Auth::user()->tipo == "cliente" ){
@@ -45,30 +79,53 @@ class ClientController extends Controller
         if (Auth::user()->tipo == "admin"){
             $clients = Cliente::all();
 
-
         }else{
 
-            /* Lista de clientes caso seja agente
-            /* Lista todos os produtos registados em nome do agente que está logado */
-/*          $clients = Cliente::
-            selectRaw("Cliente.*")
-            ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
-            ->where('Produto.idAgente', '=', Auth::user()->agente->idAgente)
-            ->groupBy('Cliente.idCliente')
-            ->orderBy('Cliente.idCliente','asc')
-            ->get(); */
+            /* Lista para Agentes */
+            if (Auth::user()->agente->tipo== "Agente"){
+                $clients_associados = Cliente::
+                where('idAgente', '=', Auth::user()->agente->idAgente)
+                ->get();
 
-            $clients = Cliente::
+                /* Lista todos os produtos registados em nome do agente que está logado */
+                $clients_produto = Cliente::
+                selectRaw("Cliente.*")
+                ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
+                ->where('Produto.idAgente', '=', Auth::user()->agente->idAgente)
+                ->groupBy('Cliente.idCliente')
+                ->orderBy('Cliente.idCliente','asc')
+                ->get();
+
+                /* Junta as duas listas */
+                $clients = $clients_associados->merge($clients_produto);
+                /* $clients = $clients->unique(); */
+            }
+
+            /* Lista para SubAgentes */
+            if (Auth::user()->agente->tipo== "Subagente"){
+            $clients_associados = Cliente::
             where('idAgente', '=', Auth::user()->agente->idAgente)
             ->get();
 
-            if ($clients->isEmpty()) {
-                $clients=null;
-            }
+            /* Lista todos os produtos registados em nome do agente que está logado */
+            $clients_produto = Cliente::
+            selectRaw("Cliente.*")
+            ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
+            ->where('Produto.idSubAgente', '=', Auth::user()->agente->idAgente)
+            ->groupBy('Cliente.idCliente')
+            ->orderBy('Cliente.idCliente','asc')
+            ->get();
 
+            /* Junta as duas listas */
+            $clients = $clients_associados->merge($clients_produto);
+            /* $clients = $clients->unique(); */
+            }
 
         }
 
+        if ($clients->isEmpty()) {
+            $clients=null;
+        }
 
         /* mostra a lista */
         return view('clients.list', compact('clients'));
@@ -83,8 +140,7 @@ class ClientController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function create()
-    {
+    public function create(){
 
         if (Auth::user()->tipo == "admin"){
             $client = new Cliente;
@@ -108,7 +164,7 @@ class ClientController extends Controller
     * @return \Illuminate\Http\Response
     * @param  \App\User  $user
     */
-    public function store(StoreClientRequest $requestClient, StoreUserRequest $requestUser){
+    public function store(StoreClientRequest $requestClient){
 
         $t=time(); /*  data atual */
 
@@ -117,11 +173,6 @@ class ClientController extends Controller
         $fields = $requestClient->validated();
         $client->fill($fields);
         $client->save();
-
-        /* obtem os dados para criar o utilizador */
-        $user = new User;
-        $fieldsUser = $requestUser->validated();
-        $user->fill($fieldsUser);
 
 
 
@@ -136,9 +187,6 @@ class ClientController extends Controller
         $client->slug = post_slug($client->nome.' '.$client->apelido); /*slugs */
         $client->create_at == date("Y-m-d",$t);
         $client->save();
-
-
-
 
 
     /* Criação de documentos Pessoais */
@@ -202,24 +250,6 @@ class ClientController extends Controller
         }
 
 
-
-
-        /* Criação de utilizador */
-
-        $user->tipo = "cliente";
-        $user->idCliente = $client->idCliente;
-        $user->slug = post_slug($client->nome.' '.$client->apelido);
-        $user->auth_key = strtoupper(random_str(5));
-        $password = random_str(64);
-        $user->password = Hash::make($password);
-        $user->save();
-
-        /* Envia o e-mail para ativação */
-        $name = $client->nome .' '. $client->apelido;
-        $email = $client->email;
-        $auth_key = $user->auth_key;
-        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
-
         return redirect()->route('clients.show',$client)->with('success', 'Ficha de estudante criada com sucesso');
     }
 
@@ -232,8 +262,7 @@ class ClientController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function show(Cliente $client)
-    {
+    public function show(Cliente $client){
 
        /* Permissões */
         if (Auth::user()->tipo == "cliente" ){
@@ -256,42 +285,46 @@ class ClientController extends Controller
         }
 
 
-        /* AGENTE RESPONSAVEL   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+        /* AGENTE RESPONSAVEL   +++++++++++++++++++++++++ */
         $agente = Agente::
         where("idAgente","=",$client->idAgente)
         ->first();
 
 
-
-        /* Agentes associados */
+        /* Agentes associados: apartir da tabela dos produtos */
         $agents = Agente::
         whereIn('idAgente', function ($query) use ($client) {
             $query->select('idAgente')
             ->from('Produto')
-            ->where('idAgente','<>',$client->idAgente)
-            ->where('idCliente', $client->idCliente)
-            ->distinct('idAgente');
+            ->where('idCliente', $client->idCliente);
+/*             ->where('idAgente','!=',$client->idAgente) */
+/*             ->distinct('idAgente'); */
         })->get();
-
-        if ($agents->isEmpty()) {
+/*         if ($agents->isEmpty()) {
             $agents=null;
-        }
+        } */
 
 
-        /* Subagentes associados */
+        /* Subagentes associados: : apartir da tabela dos produtos */
         $subagents = Agente::
         whereIn('idAgente', function ($query) use ($client) {
             $query->select('idSubAgente')
             ->from('Produto')
-            ->where('idAgente','<>',$client->idAgente)
-            ->where('idCliente', $client->idCliente)
-            ->distinct('idSubAgente');
+            ->where('idCliente', $client->idCliente);
+/*             ->where('idSubAgente','!=',$client->idAgente)
+            ->distinct('idSubAgente'); */
         })->get();
-
-
-        if ($subagents->isEmpty()) {
+/*         if ($subagents->isEmpty()) {
             $subagents=null;
-        }
+        } */
+
+
+        /* Junta as duas listas */
+/*         dd($agents,$subagents); */
+
+        $associados = $agents->merge($subagents);
+/*      $associados = $associados->unique(); */
+
 
 
         /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
@@ -326,7 +359,7 @@ class ClientController extends Controller
 
 
 
-        return view('clients.show',compact("client","agente","agents","subagents","produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
+        return view('clients.show',compact("client","agente","associados",/* "agents","subagents", */"produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
     }
 
 
@@ -338,8 +371,7 @@ class ClientController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function print(Cliente $client)
-    {
+    public function print(Cliente $client){
        /* Permissões */
        if (Auth::user()->tipo == "cliente" ){
         abort (401);
@@ -377,30 +409,52 @@ class ClientController extends Controller
     * @param  \App\Cliente  $client
     * @return \Illuminate\Http\Response
     */
-    public function edit(Cliente $client)
-    {
-        if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente"){
+    public function edit(Cliente $client){
 
+        /* Obtem as informações sobre os documentos */
+
+        $docOfficial = DocPessoal::
+        where("idCliente","=",$client->idCliente)
+        ->where("tipo","=","Doc. Oficial")
+        ->first();
+
+        // Dados do passaporte
+        $passaporte = DocPessoal::
+        where ("idCliente","=",$client->idCliente)
+        ->where("tipo","=","Passaporte")
+        ->first();
+
+        if($passaporte!=null){
+            $passaporteData = json_decode($passaporte->info);
+        }
+
+        /* Se for o administrador a editar */
+        if (Auth::user()->tipo == "admin"){
             $agents = Agente::all();
 
-            $docOfficial = DocPessoal::
-            where("idCliente","=",$client->idCliente)
-            ->where("tipo","=","Doc. Oficial")
-            ->first();
+            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData'));
+
+        }
 
 
+        /* Se for o agente a editar */
+        if (Auth::user()->tipo == "agente"){
 
-            // Dados do passaporte
-            $passaporte = DocPessoal::
-            where ("idCliente","=",$client->idCliente)
-            ->where("tipo","=","Passaporte")
-            ->first();
-
-            if($passaporte!=null){
-                $passaporteData = json_decode($passaporte->info);
+            if ($client->editavel == 1){
+                /* SE TIVER PERMISSÔES para alterar informação */
+                return view('clients.edit', compact('client','docOfficial','passaporte','passaporteData'));
+            }else{
+                /* SE NÃO TIVER PERMISSÕES para alterar informação */
+                return Redirect::route('clients.show',$client);
             }
 
-            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData'));
+        }
+
+
+
+        if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente"){
+
+
         }else{
             /* não tem permissões */
             abort (401);
@@ -418,8 +472,7 @@ class ClientController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function update(UpdateClienteRequest $request, Cliente $client)
-    {
+    public function update(UpdateClienteRequest $request, Cliente $client){
 
         $t=time(); /*  data atual */
 
@@ -589,8 +642,7 @@ class ClientController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    public function destroy(Cliente $client)
-    {
+    public function destroy(Cliente $client){
 
         if (Auth::user()->tipo == "admin" ){
 
