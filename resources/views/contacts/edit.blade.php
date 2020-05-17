@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-
+<link href="{{asset('css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -40,7 +40,7 @@
                 @method("PUT")
                 @include('contacts.partials.add-edit')
                 <div class="form-group text-right">
-                    <br><br>
+                    <br>
                     <button type="submit" class="top-button mr-2" name="submit"></i>Guardar dados</button>
                     <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
                 </div>
