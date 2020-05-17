@@ -395,7 +395,7 @@
                 {{-- Observações --}}
                 <div class="tab-pane fade" id="observacoes" role="tabpanel" aria-labelledby="observacoes-tab">
 
-                    <div class="text-secondary mb-2">Observação dos Contactos:</div>
+                    <div class="text-secondary mb-2">Observações gerais:</div>
                     <div class="border rounded bg-light p-3">
                         @if ($university->observacoes)
                             {{$university->observacoes}}
