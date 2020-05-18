@@ -474,7 +474,7 @@ class PaymentController extends Controller
             $pagoResponsabilidade->valorPago = $valorUni2;
             $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->universidade2->nome;
                 // Comprovativo de pagamento
-                $ficheiroPagamento = $comprovativoUni1;
+                $ficheiroPagamento = $comprovativoUni2;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->universidade2->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;

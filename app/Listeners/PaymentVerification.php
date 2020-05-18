@@ -12,27 +12,31 @@ class PaymentVerification
     public function handle(StorePayment $event)
     {
         $responsabilidade = $event->responsabilidade;
-        // Verificar se os valores da responsabilidade não são nulos ou 0
-        if ($responsabilidade->valorCliente != '0.00') {
+
+        if ($responsabilidade->valorCliente != null) {
             $verificacaoPagoCliente = $responsabilidade->verificacaoPagoCliente;
         }else {
             $verificacaoPagoCliente = 1;
         }
-        if ($responsabilidade->valorAgente != '0.00') {
+
+        if ($responsabilidade->valorAgente != null) {
             $verificacaoPagoAgente = $responsabilidade->verificacaoPagoAgente;
         }else {
             $verificacaoPagoAgente = 1;
         }
+
         if ($responsabilidade->valorSubAgente != null) {
             $verificacaoPagoSubAgente = $responsabilidade->verificacaoPagoSubAgente;
         }else {
             $verificacaoPagoSubAgente = 1;
         }
-        if ($responsabilidade->valorUniversidade1 != '0.00') {
+
+        if ($responsabilidade->valorUniversidade1 != null) {
             $verificacaoPagoUni1 = $responsabilidade->verificacaoPagoUni1;
         }else {
             $verificacaoPagoUni1 = 1;
         }
+
         if ($responsabilidade->valorUniversidade2 != null) {
             $verificacaoPagoUni2 = $responsabilidade->verificacaoPagoUni2;
         }else {
@@ -40,10 +44,10 @@ class PaymentVerification
         }
 
         switch ([$verificacaoPagoCliente, $verificacaoPagoAgente, $verificacaoPagoSubAgente, $verificacaoPagoUni1, $verificacaoPagoUni2]) {
-          case $verificacaoPagoCliente == 1 && $verificacaoPagoAgente == 1 && $verificacaoPagoSubAgente == 1 && $verificacaoPagoUni1 == 1 && $verificacaoPagoUni2 == 1:
-            Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
-            ->update(['estado' => 'pago']);
-            break;
+            case $verificacaoPagoCliente == 1 && $verificacaoPagoAgente == 1 && $verificacaoPagoSubAgente == 1 && $verificacaoPagoUni1 == 1 && $verificacaoPagoUni2 == 1:
+                Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
+                ->update(['estado' => 'pago']);
+                break;
         }
     }
 }

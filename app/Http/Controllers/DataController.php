@@ -410,7 +410,7 @@ class DataController extends Controller
         $produto->idSubAgente = 3;
         $produto->idCliente = 1;
         $produto->idUniversidade1 = 1;
-        $produto->idUniversidade2 = null;
+        $produto->idUniversidade2 = 2;
         $produto->save();
 
         $produto = new Produto;
