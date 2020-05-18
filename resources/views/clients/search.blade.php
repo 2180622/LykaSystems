@@ -48,7 +48,7 @@
 
 
             <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm active "
-                id="pesquisaContactos-tab" data-toggle="tab" href="#" role="tab" aria-controls="pesquisaContactos"
+                id="pesquisaContactos-tab" data-toggle="tab" href="{{route('clients.searchIndex')}}" role="tab" aria-controls="pesquisaContactos"
                 aria-selected="true">
                 <div class="col"><i class="fas fa-search mr-2"></i>Pesquisar Base de Dados</div>
             </a>
@@ -58,13 +58,12 @@
 
 
 
-        <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px; margin-top:-30px">
+        <div class="bg-white shadow-sm  mb-4 p-4 " style="border-radius:10px; margin-top:-30px">
 
-            <div class="tab-content p-2 mt-3 " id="myTabContent">
+            <div class="tab-content" id="myTabContent">
 
                 {{-- Conteudo: Pesquisa --}}
-                <div class="tab-pane fade text-secondary show active" id="pesquisaContactos" role="tabpanel"
-                    aria-labelledby="pesquisaContactos-tab">
+                <div class="tab-pane fade text-secondary show active" id="pesquisaContactos" role="tabpanel"  aria-labelledby="pesquisaContactos-tab">
                     {{-- Formulário de pesquisa --}}
 
                     <form method="POST" action="{{route('clients.searchResults')}}" class="form-group" enctype="multipart/form-data">
@@ -115,12 +114,12 @@
                                     <span>Selecione a Cidade de Origem:</span>
                                     <select id="cidade" name="cidade" class="custom-select select_style mt-2" style="width:100%">
                                         @if(!empty($cidadesOrigem) )
-                                        <option selected hidden>Selecione a cidade de origem</option>
+                                            <option selected hidden>Selecione a cidade de origem</option>
                                         @foreach ($cidadesOrigem as $cidade)
-                                        <option value="{{$cidade}}">{{$cidade}}</option>
+                                            <option value="{{$cidade}}">{{$cidade}}</option>
                                         @endforeach
                                         @else
-                                        <option selected hidden value="0">Sem registos</option>
+                                            <option selected hidden value="0">Sem registos</option>
                                         @endif
                                     </select>
                                 </div>
@@ -131,10 +130,10 @@
                                     <span>Selecione a Instituição de Origem:</span>
                                     <select id="nomeInstituicaoOrigem" name="nomeInstituicaoOrigem"
                                         class="custom-select select_style mt-2 " style="width:100%">
-                                        @if(!empty($cidadesOrigem) )
+                                        @if(!empty($instituicoesOrigem) )
                                         <option selected hidden>Selecione a Instituição de origem</option>
                                         @foreach ($instituicoesOrigem as $instituição)
-                                        <option value={{$instituição}}>{{$instituição}}</option>
+                                        <option value="{{$instituição}}">{{$instituição}}</option>
                                         @endforeach
                                         @else
                                         <option selected hidden value="0">Sem registos</option>
@@ -210,7 +209,7 @@
 
                             <div class="col col-2 text-right align-self-center " style="width: 80px; min-width: 100px;">
 
-                                <input type="submit" value="Pesquisar" class="top-button mt-4 ">
+                                <input type="submit" value="Pesquisar" class="top-button mt-4 " style="width: 100%">
 
                             </div>
 
@@ -226,18 +225,24 @@
 
 
 
-
-
                 @if ( isset($clients)  )
+
+
 
                     @if ($clients)
 
-                        <hr>
-                        <div class="mx-2 text-center my-2">A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}} </strong>" encontrou <strong>{{count($clients)}}</strong> registo(s) no sistema</div>
+
+                        <div class="row">
+                            <div class="col border rounded bg-light p-3 mx-4 text-center">
+                                <div class="text-muted">
+                                    A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}} </strong>" encontrou <strong>{{count($clients)}}</strong> registo(s) no sistema
+                                </div>
+                            </div>
+                        </div>
 
 
-                        <div class="row mt-3 mb-4 row mx-1 p-3 border rounded bg-light">
-                            <div class="col">
+                        <div class="row mt-3 mb-4 row mx-1 p-3 ">
+{{--                             <div class="col">
                                 <span class="mr-2">Mostrar</span>
                                 <select class="custom-select" id="records_per_page" style="width:80px">
                                     <option selected>10</option>
@@ -246,9 +251,9 @@
                                     <option>100</option>
                                 </select>
                                 <span class="ml-2">por página</span>
-                            </div>
-                            <div class="col py-2">
-                                <div class="input-group pl-0 float-right search-section" style="width:250px">
+                            </div> --}}
+                            <div class="col text-center mb-3">
+                                <div class="input-group pl-0  search-section mx-auto" style="width:50%">
                                     <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura"
                                         aria-label="Procurar">
                                     <div class="search-button input-group-append">
@@ -367,7 +372,9 @@
 
                         <div class="row px-3">
                             <div class="col border rounded bg-light p-3 mx-4">
-                                <div class="text-muted"><i class="fas fa-info-circle mr-2"></i>A pesquisa não obteve resultados</div>
+                                <div class="text-muted text-center">
+                                    A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}} </strong>" não encontrou nenhum registo no sistema
+                                </div>
                             </div>
                         </div>
 

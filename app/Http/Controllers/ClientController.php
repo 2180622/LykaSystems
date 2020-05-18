@@ -747,7 +747,7 @@ class ClientController extends Controller
 
         /* Se não encontrar resultados */
         if ( !isset($clients) || $clients->isEmpty() ) {
-            $clients=null;
+            $clients=0;
         }
 
         /* dd($clients); */
