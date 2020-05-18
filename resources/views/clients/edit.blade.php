@@ -30,21 +30,49 @@
     <br><br>
 
     <div class="cards-navigation">
-        <div class="title">
-            <h6>Editar informações do Estudante</h6>
-        </div>
+        <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h6>Editar informações do estudante {{$client->nome}} {{$client->apelido}}</h6>
+                        @if ( $client->estado == "Ativo")
+                            <div><small>Estado do cliente: <strong><span class="text-success">ATIVO</span></small></strong></div>
+                        @elseif( $client->estado == "Inativo")
+                            <div><small>Estado do cliente: <strong><span class="text-danger">INATIVO</span></small></strong></div>
+                        @else
+                            <div><small>Estado do cliente: <strong><span class="text-info">PROPONENTE</span></small></strong></div>
+                        @endif
+                </div>
+            </div>
+            <div class="col text-right">
+                <div class="text-muted"><small>Adicionado em:
+                        {{ date('d-M-y', strtotime($client->created_at)) }}</small></div>
 
+                <div class="text-muted"><small>Ultima atualização:
+                        {{ date('d-M-y', strtotime($client->updated_at)) }}</small></div>
+            </div>
+        </div>
 
 
         <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
             @csrf
             @method("PUT")
             @include('clients.partials.add-edit')
-            <div class="form-group text-right" style="min-width:285px">
+            <div class="row">
 
-                <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
-                <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
+                @if (Auth::user()->tipo == "admin")
+                    <div class="col">
+                        <a href="{{route('clients.sendActivationEmail', $client)}}" class="top-button">Enviar e-mail para ativção de conta</a>
+                    </div>
+                @endif
+
+                <div class="col">
+                    <div class="form-group text-right" style="min-width:285px">
+                        <button type="submit" class="top-button mr-2" name="submit"></i>Guardar informações</button>
+                        <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
+                    </div>
+                </div>
             </div>
+
         </form>
 
 

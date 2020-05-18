@@ -10,30 +10,62 @@
 
 @if (Auth::user()->tipo == "admin")
 <br>
-    <div id="div_agente" style="border-radius: 10px;" class="bg-white shadow-sm mb-4" >
+    <div style="border-radius: 10px;" class="mb-4" >
 
         <div class="row">
-                <div class="col m-4 pb-2">
-                    <div class="mx-2">
+                <div id="div_agente" class="col m-3 py-4 bg-white shadow-sm rounded">
+                    <div class="mx-2 my-auto">
                         <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente responsável:</label>
-                        <select class="form-control select_style ml-2" id="idAgente" name="idAgente" style="min-width: 200px" required>
-                            <option selected value="0">(selecione um agente)</option>
-                            @if($agents)
-                                @foreach($agents as $agent)
-                                    <option value="{{$agent->idAgente}}"  {{old('idAgente', $client->idAgente ) == $agent->idAgente ? "selected" : "" }}   >{{$agent->nome}} {{$agent->apelido}} ({{$agent->pais}})</option>
-                                @endforeach
-                            @endif
-                        </select>
+                        <div class="mr-3">
+                            <select class="form-control select_style ml-2" id="idAgente" name="idAgente" style="min-width: 200px" required>
+                                <option selected value="0">(selecione um agente)</option>
+                                @if($agents)
+                                    @foreach($agents as $agent)
+                                        <option value="{{$agent->idAgente}}"  {{old('idAgente', $client->idAgente ) == $agent->idAgente ? "selected" : "" }}   >{{$agent->nome}} {{$agent->apelido}} ({{$agent->pais}})</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
                     </div>
 
+                </div>
+
+                <div class="col m-3 py-4 bg-white shadow-sm rounded" style="min-width: 412px">
+                    <div class="mx-2 my-auto">
+                        <div class="row">
+                            <div class="col">
+                                {{-- Estado do cliente --}}
+                                <i class="fas fa-traffic-light active mr-3 ml-3"></i><label for="estado">Estado do cliente:</label>
+                                    <select class="form-control select_style ml-2" id="estado" name="estado" style="min-width: 200px" required>
+                                        <option {{old('idAgente', $client->estado ) == "Inativo" ? "selected" : "" }} value="Inativo">Inativo</option>
+                                        <option {{old('idAgente', $client->estado ) == "Ativo" ? "selected" : "" }} value="Ativo">Ativo</option>
+                                        <option {{old('idAgente', $client->estado ) == "Proponente" ? "selected" : "" }} value="Proponente">Proponente</option>
+                                    </select>
+                            </div>
+
+                            <div class="col text-center" style="max-width: 100px">
+
+                                {{-- Permitir/negar edição --}}
+                                <div id="btn_editavel" class="bg-lighth h-100 border shadow-sm" style="cursor:pointer; border-radius:10px">
+                                    <div class="p-3">
+                                        <input name="editavel" id="editavel" type="hidden" value="{{old('editavel', $client->editavel )}} ">
+                                        <i id="editavel_sim" class="fas fa-lock-open text-success my-auto" style="font-size: 25px; display:none" title="Os agentes podem modificar as informações"></i>
+                                        <i id="editavel_nao" class="fas fa-lock text-danger" style="font-size: 25px; display:none" title="Os agentes NÃO podem modificar as informações"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
         </div>
 
     </div>
 @else
 
-    {{-- campo auxiliar --}}
+    {{-- campos auxiliares --}}
     <input type="hidden" id="idAgente" name="idAgente" value="{{old('idAgente', $client->idAgente )}}">
+    <input type="hidden" id="estado" value="{{old('estado', $client->estado )}}">
 
 @endif
 
@@ -389,7 +421,7 @@
 
                     <br>
 
-                    {{-- Cidade de Origem  --}}
+                    {{--cidadeInstituicaoOrigem  --}}
                     <label for="morada">Cidade da Instituição de Origem:</label><br>
                     <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="cidadeInstituicaoOrigem"
                         value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}"
@@ -432,7 +464,7 @@
                 <div class="col">
                     <label for="email">E-mail pessoal:</label><br>
                     <input type="email" class="form-control" name="email" id="email"
-                        value="{{old('email',$client->email)}}" required maxlength="250" placeholder="Insira o endereço de e-mail"><br>
+                        value="{{old('email',$client->email)}}" maxlength="250" placeholder="Insira o endereço de e-mail"><br>
                 </div>
             </div>
 

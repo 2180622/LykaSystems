@@ -15,4 +15,10 @@ class HelpController extends Controller
     {
         return view('help');
     }
+
+    public function search(Request $request)
+    {
+        $search =  $request->get('search');
+
+    }
 }

@@ -73,8 +73,6 @@ class DataController extends Controller
         $agente->pais = 'Portugal';
         $agente->NIF = 123456789;
         $agente->num_doc = 123456789;
-        $agente->info_doc = '{"campo1":"NIF","valor1":123456789,
-            "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefone1 = 932354453;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
@@ -91,8 +89,6 @@ class DataController extends Controller
         $agente->pais = 'Portugal';
         $agente->NIF = '213455767';
         $agente->num_doc = 321654987;
-        $agente->info_doc = '{"campo1":"NIF","valor1":321654987,
-            "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefone1 = 932355555;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
@@ -109,8 +105,6 @@ class DataController extends Controller
         $agente->pais = 'Portugal';
         $agente->NIF = '987654321';
         $agente->num_doc = 789456123;
-        $agente->info_doc = '{"campo1":"NIF","valor1":789456123,
-            "campo2":"Data Validade","valor2":"09/12/2025"}';
         $agente->telefone1 = 963423423;
         $agente->telefone2 = null;
         $agente->tipo = 'Subagente';
@@ -150,6 +144,8 @@ class DataController extends Controller
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
+        $cliente->estado = "Ativo";
+        $cliente->editavel= true;
         $cliente->save();
 
         $cliente = new Cliente;
@@ -181,10 +177,11 @@ class DataController extends Controller
         $cliente->num_docOficial = '61436534643DS4';
         $cliente->validade_docOficial = date('Y-m-d',strtotime('27-01-1993'));
         $cliente->numPassaporte = "345345345";
-
         $cliente->obsPessoais = null;
         $cliente->obsFinanceiras = null;
         $cliente->obsAcademicas = null;
+        $cliente->estado = "Inativo";
+        $cliente->editavel= true;
         $cliente->save();
 
         /********************          Contas          *********************/
@@ -333,7 +330,7 @@ class DataController extends Controller
         $universidade->email = 'estg.ipleiria.pt';
         $universidade->NIF = 7846575487;
         $universidade->IBAN = 'PT50 6573 4321 1345678901 72';
-        $universidade->obsContactos = null;
+        $universidade->observacoes = null;
         $universidade->obsCursos = null;
         $universidade->obsCandidaturas = null;
         $universidade->save();
@@ -345,7 +342,7 @@ class DataController extends Controller
         $universidade->email = 'aveiro@uni.pt';
         $universidade->NIF = 5478236541;
         $universidade->IBAN = 'PT50 8651 2364 0901678901 12';
-        $universidade->obsContactos = null;
+        $universidade->observacoes = null;
         $universidade->obsCursos = null;
         $universidade->obsCandidaturas = null;
         $universidade->save();
@@ -377,6 +374,18 @@ class DataController extends Controller
         $user->save();
 
         $user = new User;
+        $user->email = 'gama.jonh@hotmail.com';
+        $user->tipo = 'agente';
+        $user->password = Hash::make('teste1234');
+        $user->auth_key = strtoupper(random_str(5));
+        $user->estado = true;
+        $user->slug = post_slug('João Gama');
+        $user->idAdmin = null;
+        $user->idAgente = 3;
+        $user->idCliente = null;
+        $user->save();
+
+        $user = new User;
         $user->email = 'tiaveira@gmail.com';
         $user->tipo = 'cliente';
         $user->password = Hash::make('teste1234');
@@ -401,7 +410,7 @@ class DataController extends Controller
         $produto->idSubAgente = 3;
         $produto->idCliente = 1;
         $produto->idUniversidade1 = 1;
-        $produto->idUniversidade2 = null;
+        $produto->idUniversidade2 = 2;
         $produto->save();
 
         $produto = new Produto;
@@ -649,7 +658,7 @@ class DataController extends Controller
 
         /*****************          Docs Pessoais          *****************/
 
-        $docpessoal = new DocPessoal;
+/*         $docpessoal = new DocPessoal;
         $docpessoal->idCliente = 1;
         $docpessoal->tipo = "Doc. Oficial";
         $docpessoal->imagem =null;
@@ -666,7 +675,7 @@ class DataController extends Controller
         $docpessoal->info = '{"numPassaporte":"324234","dataValidPP":"2021-01-27","passaportPaisEmi":"França","localEmissaoPP":"Paris"}' ;
         $docpessoal->dataValidade = "2021-01-27";
         $docpessoal->idFase = '2';
-        $docpessoal->save();
+        $docpessoal->save(); */
 
         /****************          Docs Transacoes          ****************/
 

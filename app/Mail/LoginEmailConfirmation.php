@@ -26,7 +26,7 @@ class LoginEmailConfirmation extends Mailable
             ->markdown('mails.loginverification')
             ->with([
                 'name' => $this->name,
-                'key' => $this->login_key,
+                'login_key' => $this->login_key,
                 'link' => url('/').'/login-verification/'.post_slug($this->name)
             ]);
     }

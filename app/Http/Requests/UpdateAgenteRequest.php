@@ -37,7 +37,6 @@ class UpdateAgenteRequest extends FormRequest
             'NIF' => 'required',
             'num_doc'=> 'required',
             'img_doc' => 'nullable',
-            'info_doc' => 'nullable',
             'telefone1' => 'required',
             'telefone2' => 'nullable',
             'IBAN' => 'nullable',

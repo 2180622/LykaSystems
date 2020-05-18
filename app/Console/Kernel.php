@@ -15,10 +15,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('payment:update')
-        ->daily();
+        ->hourly();
 
         $schedule->command('account:verification')
-        ->daily();
+        ->hourly();
     }
 
     protected function commands()

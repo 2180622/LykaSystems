@@ -28,7 +28,6 @@ class StoreAgenteRequest extends FormRequest
         'NIF' => 'required|unique:Agente',
         'num_doc'=> 'required|unique:Agente',
         'img_doc' => 'nullable',
-        'info_doc' => 'nullable',
         'telefone1' => 'required',
         'telefone2' => 'nullable',
         'IBAN' => 'nullable',

@@ -33,7 +33,11 @@
     <div class="float-right">
         <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
 
-        <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
+
+        {{-- Permissões para editar --}}
+        @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" && $client->editavel == 1)
+            <a href="{{route('clients.edit',$client)}}" class="top-button mr-2">Editar informação</a>
+        @endif
 
         <a href="{{route('clients.print',$client)}}" target="_blank" class="top-button">Imprimir</a>
 
@@ -47,6 +51,13 @@
             <div class="col">
                 <div class="title">
                     <h6>Ficha de estudante</h6>
+                        @if ( $client->estado == "Ativo")
+                            <div><small>Estado do cliente: <strong><span class="text-success">ATIVO</span></small></strong></div>
+                        @elseif( $client->estado == "Inativo")
+                            <div><small>Estado do cliente: <strong><span class="text-danger">INATIVO</span></small></strong></div>
+                        @else
+                            <div><small>Estado do cliente: <strong><span class="text-info">PROPONENTE</span></small></strong></div>
+                        @endif
                 </div>
             </div>
             <div class="col text-right">
@@ -122,18 +133,13 @@
                         @endif
 
 
-                        @if ($agents!=null )
+                        @if ($associados!=null )
                             <div class="text-secondary mb-2">Agente(s) associados:</div>
 
-                            @foreach ($agents as $agent)
-                                <a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a><br>
+                            @foreach ($associados as $agent)
+                                <a href="{{route('agents.show',$agent)}}" class="name_link">{{$agent->nome}} {{$agent->apelido}}</a>,
                             @endforeach
 
-                            @if ($subagents!=null )
-                                @foreach ($subagents as $subagent)
-                                    <a href="{{route('agents.show',$subagent)}}" class="name_link">{{$subagent->nome}} {{$subagent->apelido}}</a><br>
-                                @endforeach
-                            @endif
                         @endif
 
 
@@ -297,13 +303,17 @@
                                     <li class="my-3">
 
                                         @if ($docpessoal->imagem != null)
+
                                             <i class="far fa-address-card mr-2"></i>
+
                                             <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
 
+                                            <span class="text-secondary"><small>({{ date('d-M-y', strtotime($docpessoal->created_at)) }})</small></span>
+
                                             @if($docpessoal->verificacao==0)
-                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-2" title="Aguarda validação"></i></small></span>
+                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-1 mr-2" title="Aguarda validação"></i></small></span>
                                             @else
-                                                <span class="text-success"><small><i class="fas fa-check ml-2" title="Ficheiro validado"></i></small></span>
+                                                <span class="text-success"><small><i class="fas fa-check ml-1 mr-1" title="Ficheiro validado"></i></small></span>
                                             @endif
 
                                         @endif
@@ -326,7 +336,6 @@
                                 </button>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
 
                                         @foreach($novosDocumentos as $docPessoal)
                                             @if($docPessoal->tipo=="Pessoal")
@@ -421,9 +430,21 @@
                                 @foreach ($documentosAcademicos as $docAcademico)
                                     @if ($docAcademico->imagem != null)
                                         <li class="my-3">
+
+                                            @if ($docAcademico->imagem != null)
                                             <i class="far fa-address-card mr-2"></i>
-                                            <a class="name_link" target="_blank"
-                                        href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/'.$docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
+                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
+
+                                            <span class="text-secondary"><small>({{ date('d-M-y', strtotime($docAcademico->created_at)) }})</small></span>
+
+                                            @if($docAcademico->verificacao==0)
+                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-1 mr-2" title="Aguarda validação"></i></small></span>
+                                            @else
+                                                <span class="text-success"><small><i class="fas fa-check ml-1 mr-1" title="Ficheiro validado"></i></small></span>
+                                            @endif
+
+                                        @endif
+
                                         </li>
                                     @endif
                                 @endforeach
@@ -435,7 +456,7 @@
                         </div>
                         @endif
 
-                        {{-- Adicionar Documento PESSOAL--}}
+                        {{-- Adicionar Documento Academico --}}
                         @if($novosDocumentos)
                             <div class="dropdown mt-4">
                                 <button class="top-button dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -448,13 +469,6 @@
                                         @foreach($novosDocumentos as $docAcademico)
                                             @if($docAcademico->tipo=="Academico")
                                                 <a class="dropdown-item" href="{{route('documento-pessoal.create',["matricula",$docAcademico->idDocNecessario])}}">{{$docAcademico->tipoDocumento}}</a>
-
-                                                @if($docAcademico->verificacao==0)
-                                                    <span class="text-danger"><small><i class="fas fa-exclamation ml-2" title="Aguarda validação"></i></small></span>
-                                                @else
-                                                    <span class="text-success"><small><i class="fas fa-check ml-2" title="Ficheiro validado"></i></small></span>
-                                                @endif
-
                                             @endif
                                         @endforeach
                                 </div>

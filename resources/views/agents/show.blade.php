@@ -15,10 +15,6 @@
 {{-- Page Content --}}
 @section('content')
 
-@php
-    $tipo_agent_atual=$agent->tipo;
-@endphp
-
 <div class="container mt-2">
     {{-- Navegação --}}
     <div class="float-left buttons">
@@ -31,10 +27,13 @@
     </div>
     <div class="float-right">
         <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
-        @if ( Auth::user()->tipo == "admin")
-        <a href="{{route('agents.edit',$agent)}}" class="top-button mr-2">Editar informação</a>
-        <a href="{{route('agents.print',$agent)}}" target="_blank" class="top-button">Imprimir</a>
+
+        @if (Auth::user()->tipo == "admin")
+            <a href="{{route('agents.edit',$agent)}}" class="top-button mr-2">Editar informação</a>
         @endif
+        
+        <a href="{{route('agents.print',$agent)}}" target="_blank" class="top-button">Imprimir</a>
+
     </div>
 
     <br><br>
@@ -110,10 +109,16 @@
                     <div><span class="text-secondary ">Data de nascimento: </span>
                         {{ date('d-M-y', strtotime($agent->dataNasc)) }}</div>
 
-                        @if ($tipo_agent_atual=="Subagente")
+                        @if ($agent->tipo=="Subagente")
                         <br>
-                        <div class="text-muted">Subagente de: <a class="name_link"
-                                href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a>
+                        <div class="text-muted">Subagente de:
+                            {{-- Apenas cria o link para o perfil do agente SE for o administrador a consultar --}}
+                            @if (Auth::user()->tipo == "admin")
+                                <a class="name_link" href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a>
+                            @else
+                                <span class="active">{{$mainAgent->nome}} {{$mainAgent->apelido}}</span>
+                            @endif
+
                         </div>
                         <br>
                         @endif
@@ -138,7 +143,7 @@
             @endif
 
 
-            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link {{ $tipo_agent_atual == "Subagente" ? 'active' : '' }}" id="clients-tab"
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link {{ $agent->tipo == "Subagente" ? 'active' : '' }}" id="clients-tab"
                 data-toggle="tab" href="#clients" role="tab" aria-controls="clients" aria-selected="false">
                 <div class="col"><ion-icon name="person-circle-outline" class="mr-2" style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 0px;"></ion-icon>Estudantes
                 </div>
@@ -162,6 +167,7 @@
                 <div class="col"><i class="fas fa-chart-pie mr-2"></i>Financeiro</div>
             </a>
 
+
         </div>
 
 
@@ -173,7 +179,7 @@
             <div class="tab-content p-2 mt-3" id="myTabContent">
 
 
-                @if ( Auth::user()->tipo == "admin" || Auth::user()->agente->tipo == "Agente" )
+
                     @if ($agent->tipo == "Agente")
                     {{-- SUB AGENTES --}}
                     <div class="tab-pane fade show active" id="subagentes-type" role="tabpanel" aria-labelledby="subagentes-type-tab" >
@@ -185,15 +191,15 @@
                                     <br>
                                 @else
                                     <div class="row mx-auto" style="max-height:1000px; overflow:auto ">
-                                        @foreach ($listagents as $agent)
-                                            <a class="name_link text-center m-2" href="{{route('agents.show',$agent)}}">
+                                        @foreach ($listagents as $agentx)
+                                            <a class="name_link text-center m-2" href="{{route('agents.show',$agentx)}}">
                                                 <div class="col">
                                                     <div style="width: 200px; height:210px; overflow:hidden">
-                                                        @if($agent->fotografia)
+                                                        @if($agentx->fotografia)
                                                             <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                                src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}"
+                                                                src="{{Storage::disk('public')->url('agent-documents/'.$agentx->idAgente.'/').$agentx->fotografia}}"
                                                                 style="width:100%; height:auto">
-                                                            @elseif($agent->genero == 'F')
+                                                            @elseif($agentx->genero == 'F')
                                                             <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                                                 src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
                                                             @else
@@ -201,8 +207,8 @@
                                                                 src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
                                                         @endif
                                                     </div>
-                                                    <div class="mt-1">{{$agent->nome}} {{$agent->apelido}}</div>
-                                                    <div style="margin-top:-7px"><small>({{$agent->pais}})</small></div>
+                                                    <div class="mt-1">{{$agentx->nome}} {{$agentx->apelido}}</div>
+                                                    <div style="margin-top:-7px"><small>({{$agentx->pais}})</small></div>
                                                 </div>
                                             </a>
                                         @endforeach
@@ -210,13 +216,12 @@
                                 @endif
                     </div>
                     @endif
-                @endif
 
 
 
 
             {{-- Clientes --}}
-            <div class="tab-pane fade {{ $tipo_agent_atual == 'Subagente' ? 'show active' : '' }}" id="clients" role="tabpanel" aria-labelledby="clients-tab">
+            <div class="tab-pane fade {{ $agent->tipo == 'Subagente' ? 'show active' : '' }}" id="clients" role="tabpanel" aria-labelledby="clients-tab">
                 @if($clients)
                 <div class="row mx-1 p-3 border rounded bg-light">
                     <div class="col">
@@ -342,7 +347,6 @@
 
                     {{-- Documento de identificação --}}
                     <div class="col text-center" style="min-width: 240px">
-                        @if (Auth::user()->tipo == "admin")
                             <div class="card rounded shadow-sm m-2 p-3 h-100">
                                 @if ($agent->img_doc)
                                     <a class="name_link my-auto" target="_blank" href="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->img_doc}}">
@@ -357,7 +361,6 @@
                                     </a>
                                 @endif
                             </div>
-                        @endif
                     </div>
 
                 </div>

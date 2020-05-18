@@ -159,6 +159,13 @@ class AgenteController extends Controller
     public function show(Agente $agent)
     {
 
+        /* Só os administradores podem ver os perfis dos agentes */
+        /* Cada agente só pode ver o seu perfil */
+        if(Auth::user()->tipo == "agente" && Auth::user()->idAgente != $agent->idAgente){
+            abort(401);
+        }
+
+
         /* Lista de sub-agentes do $agente */
         $listagents = Agente::
         where('idAgenteAssociado', '=',$agent->idAgente)
@@ -167,8 +174,6 @@ class AgenteController extends Controller
         if ($listagents->isEmpty()) {
             $listagents=null;
         }
-
-
 
 
 /*       caso seja um sub-agente, obtem o agente que o adicionou */
@@ -182,9 +187,6 @@ class AgenteController extends Controller
 
         $telefone2 = $agent->telefone2;
         $IBAN = $agent->IBAN;
-
-
-
 
 
 
@@ -238,10 +240,6 @@ class AgenteController extends Controller
     */
     public function print(Agente $agent)
     {
-       /* Permissões */
-       if (Auth::user()->tipo != "admin" ){
-        abort (401);
-      }
         return view('agents.print',compact("agent"));
     }
 

@@ -51,7 +51,7 @@ class UpdateClienteRequest extends FormRequest
 
             'telefone1' => 'nullable',
             'telefone2' => 'nullable',
-            'email' => 'required',
+            'email' => 'nullable',
             'moradaResidencia' => 'nullable',
             'morada' => 'nullable',
             'cidade' => 'nullable',
@@ -65,6 +65,9 @@ class UpdateClienteRequest extends FormRequest
 
             'IBAN' => 'nullable',
             'obsFinanceiras' => 'nullable',
+
+            'estado' => 'nullable',
+            'editavel' => 'nullable',
 
         ];
     }

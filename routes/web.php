@@ -50,7 +50,10 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     ]);
 
     /* Estudantes */
+    Route::get('/clientes/search', 'ClientController@searchIndex')->name('clients.searchIndex');
+
     Route::get('/clientes/print/{client}', 'ClientController@print')->name('clients.print');
+    Route::get('/clientes/sendActivationEmail/{client}', 'ClientController@sendActivationEmail')->name('clients.sendActivationEmail');
     Route::resource('/clientes', 'ClientController')->parameters([
         'clientes' => 'client'
     ])->names([
@@ -110,6 +113,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
         // Registar pagamento FORNECEDOR
         Route::get('/pagamentos/fornecedor/{fornecedor}/fase/{fase}/{relacao}', 'PaymentController@createfornecedor')->name('payments.fornecedor');
     Route::post('/pagamentos/{responsabilidade}/registar', 'PaymentController@store')->name('payments.store');
+    Route::get('/pagamentos/nota-pagamento', 'PaymentController@pdf')->name('payments.download');
 
     /* Cobranças */
     Route::get('/cobrancas', 'ChargesController@index')->name('charges.index');
@@ -212,7 +216,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Ajuda */
     Route::get('/ajuda', 'HelpController@show')->name('ajuda');
-    Route::resource('/ajuda/lista', 'HelpController');
+    Route::get('/ajuda/lista', 'HelpController@index')->name('ajudaLista');
 });
 
 /* Account Confirmation */

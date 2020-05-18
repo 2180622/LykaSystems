@@ -3,6 +3,14 @@
         <h6>Secção de pagamento: {{$universidade1->nome.' ('.$fase->descricao.')'}}</h6>
     </div>
     <br>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p style="font-weight:500;">
+            Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>, que têm como cliente <strong>{{$fase->produto->cliente->nome.' '.$fase->produto->cliente->apelido}}</strong> e agente <strong>{{$fase->produto->agente->nome.' '.$fase->produto->agente->apelido}}</strong>.
+        </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="payment-card shadow-sm">
         <p style="margin-left: 0px !important; font-weight:600;">Valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€'}}</p>
@@ -11,28 +19,28 @@
             @csrf
             <div class="row">
                 <div class="col-md-4">
-                    <label for="valorPagoCliente">Valor pago a universidade</label>
+                    <label for="valorPagoUni1">Valor pago a universidade</label>
                     <br>
-                    <input type="text" name="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€'}}">
+                    <input type="text" name="valorPagoUni1" id="valorPagoUni1" value="{{number_format((float)$responsabilidade->valorUniversidade1, 2, ',', '').'€'}}">
                 </div>
                 <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                    <label for="comprovativoPagamentoCliente">Comp. de pagamento</label>
+                    <label for="comprovativoPagamentoUni1">Comp. de pagamento</label>
                     <br>
-                    <input type="file" name="comprovativoPagamentoCliente" id="upfileCliente" onchange="sub(this)">
+                    <input type="file" name="comprovativoPagamentoUni1" id="upfileCliente" onchange="sub(this)">
                     <div class="input-file-div text-truncate" id="addFileButtonCliente" onclick="getFileCliente()">Adicionar um ficheiro</div>
                 </div>
                 <div class="col-md-4">
-                    <label for="dataCliente">Data de pagamento</label>
+                    <label for="dataUni1">Data de pagamento</label>
                     <br>
-                    <input name="dataCliente" type="date">
+                    <input name="dataUni1" id="dataUni1" type="date">
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="contaCliente">Associar conta bancária</label>
+                    <label for="contaUni1">Associar conta bancária</label>
                     <br>
-                    <select name="contaCliente">
+                    <select name="contaUni1" id="contaUni1">
                         @foreach ($contas as $conta)
                         <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
                         @endforeach

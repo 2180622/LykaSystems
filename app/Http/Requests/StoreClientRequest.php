@@ -51,7 +51,7 @@ class StoreClientRequest extends FormRequest
 
             'telefone1' => 'nullable',
             'telefone2' => 'nullable',
-            'email' => 'required|unique:Cliente|unique:Agente|unique:User',
+            'email' => 'nullable|unique:Cliente|unique:Agente|unique:User',
             'moradaResidencia' => 'nullable',
             'morada' => 'nullable',
             'cidade' => 'nullable',
@@ -62,9 +62,12 @@ class StoreClientRequest extends FormRequest
             'telefoneMae' => 'nullable',
             'emailMae' => 'nullable',
 
-
             'IBAN' => 'nullable',
             'obsFinanceiras' => 'nullable',
+
+
+            'estado' => 'required',
+            'editavel' => 'required',
 
         ];
     }
