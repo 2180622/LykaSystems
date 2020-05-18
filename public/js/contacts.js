@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     var table = $('#dataTable').DataTable({
-        "pageLength": 50,
+        "pageLength": 100,
 
         "columnDefs": [{
                 "orderable": false,

@@ -9,8 +9,8 @@ $factory->define(Contacto::class, function (Faker $faker) {
     return [
         'nome' => $faker->firstNameFemale,
         'fotografia' => null,
-        'telefone1' => $faker->mobileNumber,
-        'telefone2' => $faker->mobileNumber,
+        'telefone1' => $faker->numberBetween($min = 100000000, $max = 999999999),
+        'telefone2' => $faker->numberBetween($min = 100000000, $max = 999999999),
         'email' => $faker->freeEmail,
         'fax' => null,
         'observacao' => null,

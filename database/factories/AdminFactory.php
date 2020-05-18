@@ -3,9 +3,11 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Administrador;
+use Faker\Provider\en_HK\Phone;
 use Faker\Generator as Faker;
 
 $factory->define(Administrador::class, function (Faker $faker) {
+
     $gender = $faker->randomElement($array = array('F','M'));
     $nome=null;
     if($gender == "F"){
@@ -20,8 +22,8 @@ $factory->define(Administrador::class, function (Faker $faker) {
         'email' => $faker->unique()->freeEmail,
         'dataNasc' => $faker->date($format = 'Y-m-d', $max = '-30 years'),
         'fotografia' => null,
-        'telefone1' => $faker->mobileNumber,
-        'telefone2' => $faker->mobileNumber,
+        'telefone1' => $faker->numberBetween($min = 100000000, $max = 999999999),
+        'telefone2' => $faker->numberBetween($min = 100000000, $max = 999999999),
         'superAdmin' => 0,
     ];
 });

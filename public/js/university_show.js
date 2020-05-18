@@ -2,6 +2,8 @@ $(document).ready(function () {
 
     var table = $('#dataTable').DataTable({
 
+        "pageLength": 100,
+
         "columnDefs": [{
                 "orderable": false,
                 "width": "60px",
