@@ -3,9 +3,17 @@
         <h6>Secção de pagamento - {{$universidade2->nome.' ('.$fase->descricao.')'}}</h6>
     </div>
     <br>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p style="font-weight:500;">
+            Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>, que têm como cliente <strong>{{$fase->produto->cliente->nome.' '.$fase->produto->cliente->apelido}}</strong> e agente <strong>{{$fase->produto->agente->nome.' '.$fase->produto->agente->apelido}}</strong>.
+        </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="payment-card shadow-sm">
         <p style="margin-left: 0px !important; font-weight:600;">Valor total:</p>
-        <p style="margin-left: 0px !important;">&nbsp;{{$responsabilidade->valorUniversidade2}}</p>
+        <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€'}}</p>
         <hr>
         <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
             @csrf

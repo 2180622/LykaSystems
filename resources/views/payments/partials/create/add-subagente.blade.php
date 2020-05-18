@@ -3,6 +3,14 @@
         <h6>Secção de pagamento: {{$subagente->nome.' '.$subagente->apelido.' ('.$fase->descricao.')'}}</h6>
     </div>
     <br>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p style="font-weight:500;">
+            Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>, que têm como cliente <strong>{{$fase->produto->cliente->nome.' '.$fase->produto->cliente->apelido}}</strong> e universidade <strong>{{$fase->produto->universidade1->nome}}</strong>.
+        </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="payment-card shadow-sm">
         <p style="margin-left: 0px !important; font-weight:600;">Valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorSubAgente, 2, ',', '').'€'}}</p>
