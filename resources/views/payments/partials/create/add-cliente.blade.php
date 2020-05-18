@@ -4,6 +4,14 @@
     </div>
     <br>
     {{-- Apresentar as relações que este pagamento têm -> Qual é fase, etc... --}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p style="font-weight:500;">
+            <strong>Nota:</strong> Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>.
+        </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="payment-card shadow-sm">
         <p style="margin-left: 0px !important; font-weight:600;">valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}</p>

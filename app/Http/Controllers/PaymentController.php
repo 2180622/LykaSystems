@@ -304,6 +304,7 @@ class PaymentController extends Controller
     public function createcliente(Cliente $cliente, Fase $fase, Responsabilidade $responsabilidade)
     {
         $contas = Conta::all();
+        $fase = Fase::where('idFase', $fase->idFase)->with(["produto"])->first();
         return view('payments.add', compact('cliente', 'fase', 'responsabilidade', 'contas'));
     }
 
@@ -377,7 +378,7 @@ class PaymentController extends Controller
           Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
           $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
         $pagoResponsabilidade->dataPagamento = $dataCliente;
-        $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
+        $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
         $pagoResponsabilidade->idConta = $contaCliente;
         $pagoResponsabilidade->save();
 
@@ -398,7 +399,7 @@ class PaymentController extends Controller
           Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
           $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
         $pagoResponsabilidade->dataPagamento = $dataAgente;
-        $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
+        $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
         $pagoResponsabilidade->idConta = $contaAgente;
         $pagoResponsabilidade->save();
 
@@ -419,7 +420,7 @@ class PaymentController extends Controller
           Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
           $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
         $pagoResponsabilidade->dataPagamento = $dataSubAgente;
-        $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
+        $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
         $pagoResponsabilidade->idConta = $contaSubAgente;
         $pagoResponsabilidade->save();
 
@@ -440,7 +441,7 @@ class PaymentController extends Controller
           Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
           $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
         $pagoResponsabilidade->dataPagamento = $dataUni1;
-        $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
+        $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
         $pagoResponsabilidade->idConta = $contaUni1;
         $pagoResponsabilidade->save();
 
@@ -461,7 +462,7 @@ class PaymentController extends Controller
           Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
           $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
         $pagoResponsabilidade->dataPagamento = $dataUni2;
-        $pagoResponsabilidade->idFase = $responsabilidade->fase->idFase;
+        $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
         $pagoResponsabilidade->idConta = $contaUni2;
         $pagoResponsabilidade->save();
 
