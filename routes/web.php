@@ -113,7 +113,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
         // Registar pagamento FORNECEDOR
         Route::get('/pagamentos/fornecedor/{fornecedor}/fase/{fase}/{relacao}', 'PaymentController@createfornecedor')->name('payments.fornecedor');
     Route::post('/pagamentos/{responsabilidade}/registar', 'PaymentController@store')->name('payments.store');
-    Route::get('/pagamentos/nota-pagamento', 'PaymentController@pdf')->name('payments.download');
+    Route::get('/pagamentos/nota-pagamento/{responsabilidade}/criar-pdf', 'PaymentController@createpdf')->name('payments.createpdf');
 
     /* Cobranças */
     Route::get('/cobrancas', 'ChargesController@index')->name('charges.index');
