@@ -374,6 +374,13 @@
     </div>
 </div>
 
+
+
+<?php
+
+phpinfo();
+?>
+
 @endsection
 
 {{-- Scripts --}}

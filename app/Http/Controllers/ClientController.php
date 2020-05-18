@@ -334,6 +334,8 @@ class ClientController extends Controller
 
             if($passaporte!=null){
                 $passaporteData = json_decode($passaporte->info);
+            }else{
+                $passaporteData=null;
             }
 
 
@@ -424,6 +426,8 @@ class ClientController extends Controller
 
         if($passaporte!=null){
             $passaporteData = json_decode($passaporte->info);
+        }else{
+            $passaporteData=null;
         }
 
         /* Se for o administrador a editar */
@@ -688,6 +692,7 @@ class ClientController extends Controller
         strtolower($valor);
 
         dd( $request, $nomeCampo, $valor);
+
 
 
         return view('clients.search',compact('clients'));

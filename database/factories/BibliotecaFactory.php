@@ -11,6 +11,6 @@ $factory->define(Biblioteca::class, function (Faker $faker) {
         'descricao' => $faker->sentence($nbWords = 4, $variableNbWords = true),
         'ficheiro' => 'default-photos/university.png',
         'tipo' => 'png',
-        'tamanho' => '246',
+        'tamanho' => '246 KB',
     ];
 });
