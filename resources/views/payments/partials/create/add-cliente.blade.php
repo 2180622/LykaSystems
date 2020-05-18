@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                     <label for="valorPagoCliente">Valor pago ao cliente</label>
                     <br>
-                    <input type="text" name="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}">
+                    <input type="text" name="valorPagoCliente" id="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}">
                 </div>
                 <div class="col-md-4" oncontextmenu="return showContextMenu();">
                     <label for="comprovativoPagamentoCliente">Comp. de pagamento</label>
@@ -32,7 +32,7 @@
                 <div class="col-md-4">
                     <label for="dataCliente">Data de pagamento</label>
                     <br>
-                    <input name="dataCliente" type="date">
+                    <input name="dataCliente" id="dataCliente" type="date">
                 </div>
             </div>
             <br>
@@ -40,7 +40,7 @@
                 <div class="col-md-4">
                     <label for="contaCliente">Associar conta bancária</label>
                     <br>
-                    <select name="contaCliente">
+                    <select name="contaCliente" id="contaCliente">
                         @foreach ($contas as $conta)
                         <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
                         @endforeach
@@ -48,7 +48,7 @@
                     </select>
                 </div>
             </div>
-            <br><br>
+            <br>
     </div>
     <div class="form-group text-right">
         <br>

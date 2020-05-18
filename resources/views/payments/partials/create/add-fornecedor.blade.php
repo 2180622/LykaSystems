@@ -15,32 +15,32 @@
         <p style="margin-left: 0px !important; font-weight:600;">Valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$relacao->valor, 2, ',', '').'€'}}</p>
         <hr>
-        <form action="" method="post" class="mt-4" enctype="multipart/form-data">
+        <form action="{{route('payments.store', $relacao->responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-4">
-                    <label for="valorPagoCliente">Valor pago ao fornecedor</label>
+                    <label for="valorPagoFornecedor">Valor pago ao fornecedor</label>
                     <br>
-                    <input type="text" name="valorPagoCliente" value="{{number_format((float)$relacao->valor, 2, ',', '').'€'}}">
+                    <input type="text" name="valorPagoFornecedor" id="valorPagoFornecedor" value="{{number_format((float)$relacao->valor, 2, ',', '').'€'}}">
                 </div>
                 <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                    <label for="comprovativoPagamentoCliente">Comp. de pagamento</label>
+                    <label for="comprovativoPagamentoForn">Comp. de pagamento</label>
                     <br>
-                    <input type="file" name="comprovativoPagamentoCliente" id="upfileCliente" onchange="sub(this)">
+                    <input type="file" name="comprovativoPagamentoForn" id="upfileCliente" onchange="sub(this)">
                     <div class="input-file-div text-truncate" id="addFileButtonCliente" onclick="getFileCliente()">Adicionar um ficheiro</div>
                 </div>
                 <div class="col-md-4">
-                    <label for="dataCliente">Data de pagamento</label>
+                    <label for="dataFornecedor">Data de pagamento</label>
                     <br>
-                    <input name="dataCliente" type="date">
+                    <input name="dataFornecedor" id="dataFornecedor" type="date">
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="contaCliente">Associar conta bancária</label>
+                    <label for="contaFornecedor">Associar conta bancária</label>
                     <br>
-                    <select name="contaCliente">
+                    <select name="contaFornecedor" id="contaFornecedor">
                         @foreach ($contas as $conta)
                         <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
                         @endforeach
@@ -48,7 +48,9 @@
                     </select>
                 </div>
             </div>
-            <br><br>
+            <br>
+            <input type="text" name="nomeFornecedor" value="{{$fornecedor->nome}}" hidden="true">
+            <input type="text" name="relacaoFornecedor" value="{{$relacao->idRelacao}}" hidden="true">
     </div>
     <div class="form-group text-right">
         <br>

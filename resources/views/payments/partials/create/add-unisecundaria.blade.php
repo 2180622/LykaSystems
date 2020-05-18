@@ -12,35 +12,35 @@
         </button>
     </div>
     <div class="payment-card shadow-sm">
-        <p style="margin-left: 0px !important; font-weight:600;">Valor total:</p>
+        <p style="margin-left: 0px !important; font-weight:600;">Valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€'}}</p>
         <hr>
         <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-4">
-                    <label for="valorPagoCliente">Valor pago ao cliente</label>
+                    <label for="valorPagoUni2">Valor pago a universidade</label>
                     <br>
-                    <input type="text" name="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€'}}">
+                    <input type="text" name="valorPagoUni2" id="valorPagoUni2" value="{{number_format((float)$responsabilidade->valorUniversidade2, 2, ',', '').'€'}}">
                 </div>
                 <div class="col-md-4" oncontextmenu="return showContextMenu();">
-                    <label for="comprovativoPagamentoCliente">Comp. de pagamento</label>
+                    <label for="comprovativoPagamentoUni2">Comp. de pagamento</label>
                     <br>
-                    <input type="file" name="comprovativoPagamentoCliente" id="upfileCliente" onchange="sub(this)">
+                    <input type="file" name="comprovativoPagamentoUni2" id="upfileCliente" onchange="sub(this)">
                     <div class="input-file-div text-truncate" id="addFileButtonCliente" onclick="getFileCliente()">Adicionar um ficheiro</div>
                 </div>
                 <div class="col-md-4">
-                    <label for="dataCliente">Data de pagamento</label>
+                    <label for="dataUni2">Data de pagamento</label>
                     <br>
-                    <input name="dataCliente" type="date">
+                    <input name="dataUni2" id="dataUni2" type="date">
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="contaCliente">Associar conta bancária</label>
+                    <label for="contaUni2">Associar conta bancária</label>
                     <br>
-                    <select name="contaCliente">
+                    <select name="contaUni2" id="contaUni2">
                         @foreach ($contas as $conta)
                         <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
                         @endforeach
