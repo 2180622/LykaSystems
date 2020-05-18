@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                     <label for="valorPagoCliente">Valor pago ao cliente</label>
                     <br>
-                    <input type="text" name="valorPagoCliente" id="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}">
+                    <input type="text" name="valorPagoCliente" id="valorPagoCliente" required="required" value="{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}">
                 </div>
                 <div class="col-md-4" oncontextmenu="return showContextMenu();">
                     <label for="comprovativoPagamentoCliente">Comp. de pagamento</label>
@@ -53,6 +53,7 @@
     <div class="form-group text-right">
         <br>
         <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">registar pagamento</button>
+        <a href="{{route('payments.download')}}" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
         <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
     </div>
     </form>

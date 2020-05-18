@@ -29,6 +29,15 @@ input, textarea, select {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
+    transition: 0.2s ease-in-out;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: 0;
+    color: #495057;
+    border-color: #80bdff;
+    background-color: #fff;
+    box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
 }
 
 label {

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App;
+use PDF;
 use App\Fase;
 use App\Conta;
 use App\Agente;
@@ -517,5 +519,11 @@ class PaymentController extends Controller
         $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->first();
         event(new StorePayment($responsabilidade));
         return redirect()->route('payments.index')->with('success', 'Pagamento registado com sucesso!');
+    }
+
+    public function pdf()
+    {
+        $pdf = PDF::loadView('payments.pdf.nota-pagamento');
+        return $pdf->stream();
     }
 }
