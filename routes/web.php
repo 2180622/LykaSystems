@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Estudantes */
     Route::get('/clientes/pesquisa', 'ClientController@searchIndex')->name('clients.searchIndex');
-    Route::get('/clientes/resultados/{nomeCampo}/{valor}', 'ClientController@searchResults')->name('clients.searchResults');
+    Route::post('/clientes/resultados','ClientController@searchResults')->name('clients.searchResults');
 
     Route::get('/clientes/print/{client}', 'ClientController@print')->name('clients.print');
     Route::get('/clientes/sendActivationEmail/{client}', 'ClientController@sendActivationEmail')->name('clients.sendActivationEmail');

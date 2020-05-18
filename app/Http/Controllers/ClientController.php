@@ -670,15 +670,14 @@ class ClientController extends Controller
 
         /* Coloca os dados dos campos num array e elimina os duplicados */
 
+        $paises = array_unique(Cliente::pluck('paisNaturalidade')->toArray());
         $cidadesOrigem = array_unique(Cliente::pluck('cidade')->toArray());
         $instituicoesOrigem = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
 
         $agents= Agente::where("tipo","=","Agente")->get();
         $universidades = Universidade::all();
 
-
-
-        return view('clients.search',compact('cidadesOrigem','instituicoesOrigem','agents','universidades'));
+        return view('clients.search',compact('paises','cidadesOrigem','instituicoesOrigem','agents','universidades'));
 
     }
 
@@ -686,16 +685,82 @@ class ClientController extends Controller
 
     /* Search Form */
 
-    public function searchResults(Request $request, $nomeCampo=null, $valor=null){
+    public function searchResults(Request $request){
 
-        strtolower($nomeCampo);
-        strtolower($valor);
+        request()->all();
 
-        dd( $request, $nomeCampo, $valor);
+        $nomeCampo= $request->search_options;
+
+        /* dd( $request); */
+        /* dd($nomeCampo, $valor); */
+
+        switch ($nomeCampo) {
+            case "País de origem":
+                $clients= Cliente::where("paisNaturalidade","=",$request->paisNaturalidade)->get();
+                $valor=$request->paisNaturalidade;
+            break;
+
+
+            case "Cidade de origem":
+                $clients= Cliente::where("cidade","=",$request->cidade)->get();
+                $valor=$request->cidade;
+            break;
+
+
+            case "Instituição de origem":
+                $clients= Cliente::where("nomeInstituicaoOrigem","=",$request->nomeInstituicaoOrigem)->get();
+                $valor=$request->nomeInstituicaoOrigem;
+            break;
+
+
+            case "Agente":
+                $clients= Cliente::where("idAgente","=",$request->agente)->get();
+                $valor=$request->agente;
+            break;
+
+
+            case "Universidade":
+                $clients = Cliente::distinct('Cliente.idCliente')
+                ->join('Produto', 'Produto.idCliente', '=', 'Cliente.idCliente')
+                ->where('Produto.idUniversidade1', '=',$request->universidade )
+                ->orWhere('Produto.idUniversidade2', '=',$request->universidade)
+                ->select('Cliente.*')
+                ->get();
+                $valor=$request->universidade;
+            break;
+
+
+            case "Nível de estudos":
+                $clients= Cliente::where("nivEstudoAtual","=",$request->nivelEstudos)->get();
+                $valor=$request->nivelEstudos;
+            break;
+
+
+            case "Estado de cliente":
+                $clients= Cliente::where("estado","=",$request->estado)->get();
+                $valor=$request->estado;
+            break;
+        }
 
 
 
-        return view('clients.search',compact('clients'));
+
+        /* Se não encontrar resultados */
+        if ( !isset($clients) || $clients->isEmpty() ) {
+            $clients=null;
+        }
+
+        /* dd($clients); */
+
+        $paises = array_unique(Cliente::pluck('paisNaturalidade')->toArray());
+        $cidadesOrigem = array_unique(Cliente::pluck('cidade')->toArray());
+        $instituicoesOrigem = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
+        $agents= Agente::where("tipo","=","Agente")->get();
+        $universidades = Universidade::all();
+
+
+
+        return view('clients.search',compact('clients','nomeCampo','valor','paises','cidadesOrigem','instituicoesOrigem','agents','universidades'));
 
     }
 
