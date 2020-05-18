@@ -53,7 +53,7 @@
     <div class="form-group text-right">
         <br>
         <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">registar pagamento</button>
-        <a href="{{route('payments.download')}}" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
+        <a href="{{route('payments.createpdf', $responsabilidade)}}" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
         <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
     </div>
     </form>

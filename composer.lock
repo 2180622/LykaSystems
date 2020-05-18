@@ -2514,25 +2514,25 @@
         },
         {
             "name": "spatie/laravel-sluggable",
-            "version": "2.4.2",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-sluggable.git",
-                "reference": "707265d4a29523a387e280e77f85071f04892540"
+                "reference": "b711700bacdf5382d8f4ed896b38e22102d27821"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/707265d4a29523a387e280e77f85071f04892540",
-                "reference": "707265d4a29523a387e280e77f85071f04892540",
+                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/b711700bacdf5382d8f4ed896b38e22102d27821",
+                "reference": "b711700bacdf5382d8f4ed896b38e22102d27821",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^7.0",
-                "illuminate/support": "^7.0",
-                "php": "^7.4"
+                "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+                "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0",
+                "php": "^7.2"
             },
             "require-dev": {
-                "orchestra/testbench": "^5.0"
+                "orchestra/testbench": "~3.6.0|~3.7.0|~3.8.0|^4.0|^5.0"
             },
             "type": "library",
             "autoload": {
@@ -2558,7 +2558,7 @@
                 "laravel-sluggable",
                 "spatie"
             ],
-            "time": "2020-04-20T19:10:09+00:00"
+            "time": "2020-04-06T14:31:18+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

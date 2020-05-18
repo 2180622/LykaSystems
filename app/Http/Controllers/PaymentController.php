@@ -521,9 +521,11 @@ class PaymentController extends Controller
         return redirect()->route('payments.index')->with('success', 'Pagamento registado com sucesso!');
     }
 
-    public function pdf()
+    public function createpdf(Responsabilidade $responsabilidade)
     {
-        $pdf = PDF::loadView('payments.pdf.nota-pagamento');
-        return $pdf->stream();
+        $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->with(["cliente", "fase"])->first();
+        $pdf = PDF::loadView('payments.pdf.nota-pagamento', ['responsabilidade' => $responsabilidade])->setPaper('a4', 'portrait');
+        $file = post_slug($responsabilidade->cliente->nome.' '.$responsabilidade->fase->descricao);
+        return $pdf->stream('nota-pagamento-'.$file.'.pdf');
     }
 }

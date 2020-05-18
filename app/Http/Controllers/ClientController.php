@@ -334,6 +334,8 @@ class ClientController extends Controller
 
             if($passaporte!=null){
                 $passaporteData = json_decode($passaporte->info);
+            }else{
+                $passaporteData=null;
             }
 
 
@@ -424,6 +426,8 @@ class ClientController extends Controller
 
         if($passaporte!=null){
             $passaporteData = json_decode($passaporte->info);
+        }else{
+            $passaporteData=null;
         }
 
         /* Se for o administrador a editar */
@@ -670,12 +674,11 @@ class ClientController extends Controller
         $instituicoesOrigem = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
 
         $agents= Agente::where("tipo","=","Agente")->get();
-        $subagents= Agente::where("tipo","=","Subagente")->get();
         $universidades = Universidade::all();
 
 
 
-        return view('clients.search',compact('cidadesOrigem','instituicoesOrigem','agents','subagents','universidades'));
+        return view('clients.search',compact('cidadesOrigem','instituicoesOrigem','agents','universidades'));
 
     }
 
@@ -685,9 +688,11 @@ class ClientController extends Controller
 
     public function searchResults(Request $request, $nomeCampo=null, $valor=null){
 
-
         strtolower($nomeCampo);
         strtolower($valor);
+
+        dd( $request, $nomeCampo, $valor);
+
 
 
         return view('clients.search',compact('clients'));

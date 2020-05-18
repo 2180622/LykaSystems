@@ -11,13 +11,8 @@
     display: inline-block;
 }
 
-a {
-    color: #212529;
-}
-
-a:hover {
-    color: #212529;
-    text-decoration: none;
+div.panel-body{
+    padding-left:20px ;
 }
 
 input, textarea, select {
@@ -31,7 +26,7 @@ input, textarea, select {
 label {
     color: #747474;
     font-weight: 700;
-    text-align: center!important;
+    text-align: center !important;
 }
 
 input, select, textarea {
@@ -43,11 +38,6 @@ input, select, textarea {
     background-color: #EAEAEA;
 }
 
-.card-body h5 {
-    border: 0;
-    color: gray;
-    font-weight: bold;
-}
 
 .search-bar-helper {
     width: 100%;
@@ -86,4 +76,22 @@ input, select, textarea {
     position: relative;
     float: right;
     bottom: 100%;
+}
+
+.card-header h5 {
+    border: 0;
+    color: gray;
+    font-weight: bold;
+}
+
+.card-header{
+    border-bottom:none!important;
+}
+
+
+.btn-link {
+    font-weight: 400;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1rem;
 }
