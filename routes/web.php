@@ -217,7 +217,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 
     /* Ajuda */
     Route::get('/ajuda', 'HelpController@show')->name('ajuda');
-    Route::get('/ajuda/lista', 'HelpController@index')->name('ajudaLista');
 });
 
 /* Account Confirmation */

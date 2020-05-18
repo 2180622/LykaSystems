@@ -9,7 +9,7 @@ $factory->define(RelatorioProblema::class, function (Faker $faker) {
     return [
         'nome' => $faker->firstNameMale.' '.$faker->lastName,
         'email' => $faker->freeEmail,
-        'telemovel' => $faker->mobileNumber,
+        'telemovel' => $faker->numberBetween($min = 100000000, $max = 999999999),
         'screenshot' => 'default-photos/university.png',
         'relatorio' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
     ];
