@@ -16,9 +16,4 @@ class StorePayment
     {
         $this->responsabilidade = $responsabilidade;
     }
-
-    public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name');
-    }
 }

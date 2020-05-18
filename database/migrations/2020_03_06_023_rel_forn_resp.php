@@ -14,8 +14,8 @@ class RelFornResp extends Migration
             $table->bigIncrements('idRelacao');
             $table->decimal('valor', 18, 2);
             $table->boolean('verificacaoPago')->default(false);
-            $table->dateTime('dataVencimento')->nullable();
             $table->enum('estado', ['Pendente', 'Pago', 'Dívida'])->default('Pendente');
+            $table->dateTime('dataVencimento')->nullable();
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->unsignedBigInteger('idFornecedor');

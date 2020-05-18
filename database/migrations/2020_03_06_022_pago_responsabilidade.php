@@ -16,8 +16,8 @@ class PagoResponsabilidade extends Migration
             $table->decimal('valorPago', 18, 2);
             $table->string('comprovativoPagamento',255);
             $table->date('dataPagamento');
-            $table->unsignedBigInteger('idFase');
-                $table->foreign('idFase')->references('idFase')->on('Fase');
+            $table->unsignedBigInteger('idResponsabilidade');
+                $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->unsignedBigInteger('idConta');
                 $table->foreign('idConta')->references('idConta')->on('Conta');
             $table->timestamps();

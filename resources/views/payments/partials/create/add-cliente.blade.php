@@ -3,7 +3,14 @@
         <h6>Secção de pagamento: {{$cliente->nome.' '.$cliente->apelido.' ('.$fase->descricao.')'}}</h6>
     </div>
     <br>
-    {{-- Apresentar as relações que este pagamento têm -> Qual é fase, etc... --}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p style="font-weight:500;">
+            Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>, que têm como agente <strong>{{$fase->produto->agente->nome.' '.$fase->produto->agente->apelido}}</strong> e universidade <strong>{{$fase->produto->universidade1->nome}}</strong>.
+        </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="payment-card shadow-sm">
         <p style="margin-left: 0px !important; font-weight:600;">valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}</p>
@@ -14,7 +21,7 @@
                 <div class="col-md-4">
                     <label for="valorPagoCliente">Valor pago ao cliente</label>
                     <br>
-                    <input type="text" name="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}">
+                    <input type="text" name="valorPagoCliente" id="valorPagoCliente" value="{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}">
                 </div>
                 <div class="col-md-4" oncontextmenu="return showContextMenu();">
                     <label for="comprovativoPagamentoCliente">Comp. de pagamento</label>
@@ -25,7 +32,7 @@
                 <div class="col-md-4">
                     <label for="dataCliente">Data de pagamento</label>
                     <br>
-                    <input name="dataCliente" type="date">
+                    <input name="dataCliente" id="dataCliente" type="date">
                 </div>
             </div>
             <br>
@@ -33,7 +40,7 @@
                 <div class="col-md-4">
                     <label for="contaCliente">Associar conta bancária</label>
                     <br>
-                    <select name="contaCliente">
+                    <select name="contaCliente" id="contaCliente">
                         @foreach ($contas as $conta)
                         <option value="{{$conta->idConta}}">{{$conta->descricao}}</option>
                         @endforeach
@@ -41,7 +48,7 @@
                     </select>
                 </div>
             </div>
-            <br><br>
+            <br>
     </div>
     <div class="form-group text-right">
         <br>
