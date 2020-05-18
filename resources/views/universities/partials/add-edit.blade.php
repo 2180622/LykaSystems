@@ -89,7 +89,7 @@
         {{-- Conteudo: Observações --}}
         <div class="tab-pane fade" id="observacoes" role="tabpanel" aria-labelledby="observacoes-tab">
 
-            <label for="inputObservacoes" style="font-weight: 700!important;">Observações de Contactos</label>
+            <label for="inputObservacoes" style="font-weight: 700!important;">Observações gerais</label>
             <textarea name="observacoes" id="inputObservacoes" rows="4"
                 class="form-control select_style">{{old('observacoes',$university->observacoes)}}</textarea>
 

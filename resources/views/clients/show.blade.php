@@ -303,13 +303,17 @@
                                     <li class="my-3">
 
                                         @if ($docpessoal->imagem != null)
+
                                             <i class="far fa-address-card mr-2"></i>
+
                                             <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
 
+                                            <span class="text-secondary"><small>({{ date('d-M-y', strtotime($docpessoal->created_at)) }})</small></span>
+
                                             @if($docpessoal->verificacao==0)
-                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-2" title="Aguarda validação"></i></small></span>
+                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-1 mr-2" title="Aguarda validação"></i></small></span>
                                             @else
-                                                <span class="text-success"><small><i class="fas fa-check ml-2" title="Ficheiro validado"></i></small></span>
+                                                <span class="text-success"><small><i class="fas fa-check ml-1 mr-1" title="Ficheiro validado"></i></small></span>
                                             @endif
 
                                         @endif
@@ -431,10 +435,12 @@
                                             <i class="far fa-address-card mr-2"></i>
                                             <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
 
+                                            <span class="text-secondary"><small>({{ date('d-M-y', strtotime($docAcademico->created_at)) }})</small></span>
+
                                             @if($docAcademico->verificacao==0)
-                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-2" title="Aguarda validação"></i></small></span>
+                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-1 mr-2" title="Aguarda validação"></i></small></span>
                                             @else
-                                                <span class="text-success"><small><i class="fas fa-check ml-2" title="Ficheiro validado"></i></small></span>
+                                                <span class="text-success"><small><i class="fas fa-check ml-1 mr-1" title="Ficheiro validado"></i></small></span>
                                             @endif
 
                                         @endif
