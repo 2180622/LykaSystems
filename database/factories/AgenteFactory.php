@@ -23,12 +23,12 @@ $factory->define(Agente::class, function (Faker $faker) {
         'fotografia' => null,
         'morada' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,
         'pais' => $faker->country,
-        'NIF' => $faker->unique()->idNumber,
-        'num_doc' => $faker->unique()->nationalIdNumber,
+        'NIF' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'num_doc' => $faker->unique()->phoneNumber,
         'img_doc' => null,
-        'telefone1' => $faker->mobileNumber,
-        'telefone2' => $faker->mobileNumber,
-        'IBAN' => $faker->iban($countryCode),
+        'telefone1' => $faker->numberBetween($min = 100000000, $max = 999999999),
+        'telefone2' => $faker->numberBetween($min = 100000000, $max = 999999999),
+        'IBAN' => $faker->iban('351'),
 
         /*  'idAgenteAssociado'  */
     ];

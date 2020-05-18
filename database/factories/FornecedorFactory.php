@@ -9,7 +9,7 @@ $factory->define(Fornecedor::class, function (Faker $faker) {
     return [
         'nome' => $faker->firstNameFemale.' '.$faker->lastName,
         'morada' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,
-        'contacto' => $faker->mobileNumber,
+        'contacto' => $faker->numberBetween($min = 100000000, $max = 999999999),
         'descricao' => $faker->sentence($nbWords = 7, $variableNbWords = true),
         'observacoes' => null,
     ];

@@ -35,6 +35,7 @@ class FactoryTest extends TestCase
 {
     use DatabaseMigrations;
     use RefreshDatabase;
+/*
     private $user = null;
     private $fase = null;
     private $conta = null;
@@ -57,260 +58,400 @@ class FactoryTest extends TestCase
     private $docNecessario = null;
     private $responsabilidade = null;
     private $relatorioProblema = null;
-    private $pagoResponsabilidade = null;
+    private $pagoResponsabilidade = null;*/
 
 
     /** @test */
     public function Factory_Administrador_Test()
     {
-        $this->administrador = factory(Administrador::class)->make();
+        $administrador = factory(Administrador::class)->make();
 
-        $this->assertNotEmpty($this->administrador);
+        $this->assertNotEmpty($administrador);
     }
 
 
     /** @test */
     public function Factory_Agente_Test()
     {
-        $this->agente = factory(Agente::class)->make();
+        $agente = factory(Agente::class)->make();
 
-        $this->assertNotEmpty($this->agente);
+        $this->assertNotEmpty($agente);
     }
 
 
     /** @test */
     public function Factory_Biblioteca_Test()
     {
-        $this->biblioteca = factory(Biblioteca::class)->make();
+        $biblioteca = factory(Biblioteca::class)->make();
 
-        $this->assertNotEmpty($this->biblioteca);
+        $this->assertNotEmpty($biblioteca);
     }
 
 
     /** @test */
     public function Factory_Cliente_Test()
     {
-        $this->cliente = factory(Cliente::class)->make();
+        $cliente = factory(Cliente::class)->make();
 
-        $this->assertNotEmpty($this->cliente);
+        $this->assertNotEmpty($cliente);
     }
 
 
     /** @test */
     public function Factory_Conta_Test()
     {
-        $this->Conta = factory(Conta::class)->make();
+        $conta = factory(Conta::class)->make();
 
-        $this->assertNotEmpty($this->Conta);
+        $this->assertNotEmpty($conta);
     }
 
 
     /** @test */
     public function Factory_Fornecedor_Test()
     {
-        $this->fornecedor = factory(Fornecedor::class)->make();
+        $fornecedor = factory(Fornecedor::class)->make();
 
-        $this->assertNotEmpty($this->fornecedor);
+        $this->assertNotEmpty($fornecedor);
     }
 
 
     /** @test */
     public function Factory_Produto_Stock_Test()
     {
-        $this->produtoStock = factory(ProdutoStock::class)->make();
+        $produtoStock = factory(ProdutoStock::class)->make();
 
-        $this->assertNotEmpty($this->produtoStock);
+        $this->assertNotEmpty($produtoStock);
     }
 
 
     /** @test */
     public function Factory_Fase_Stock_Test()
     {
-        $this->faseStock = factory(FaseStock::class)->make([
-            'idProdutoStock' => $this->produtoStock->idProdutoStock,
+        $produtoStock = factory(ProdutoStock::class)->make();
+
+        $faseStock = factory(FaseStock::class)->make([
+            'idProdutoStock' => $produtoStock->idProdutoStock,
         ]);
 
-        $this->assertNotEmpty($this->faseStock);
+        $this->assertNotEmpty($faseStock);
     }
 
 
     /** @test */
     public function Factory_Doc_Stock_Test()
     {
-        $this->docStock = factory(DocStock::class)->make([
-            'idFaseStock' => $this->faseStock->idFaseStock,
+        $produtoStock = factory(ProdutoStock::class)->make();
+        $faseStock = factory(FaseStock::class)->make([
+            'idProdutoStock' => $produtoStock->idProdutoStock,
         ]);
 
-        $this->assertNotEmpty($this->docStock);
+        $docStock = factory(DocStock::class)->make([
+            'idFaseStock' => $faseStock->idFaseStock,
+        ]);
+
+        $this->assertNotEmpty($docStock);
     }
 
 
     /** @test */
     public function Factory_Universidade_Test()
     {
-        $this->universidade = factory(Universidade::class)->make();
+        $universidade = factory(Universidade::class)->make();
 
-        $this->assertNotEmpty($this->universidade);
+        $this->assertNotEmpty($universidade);
     }
 
 
     /** @test */
     public function Factory_User_Test()
     {
-        $this->user = factory(User::class)->make([
-            'email' => $this->administrador->email,
+        $administrador = factory(Administrador::class)->make();
+
+        $user = factory(User::class)->make([
+            'email' => $administrador->email,
             'tipo' => 'admin',
-            'idAdmin' => $this->administrador->idAdmin,
+            'idAdmin' => $administrador->idAdmin,
         ]);
 
-        $this->assertNotEmpty($this->user);
+        $this->assertNotEmpty($user);
     }
 
 
     /** @test */
     public function Factory_Contacto_Test()
     {
-        $this->contacto = factory(Contacto::class)->make();
+        $contacto = factory(Contacto::class)->make();
 
-        $this->assertNotEmpty($this->contacto);
+        $this->assertNotEmpty($contacto);
     }
 
 
     /** @test */
     public function Factory_Agenda_Test()
     {
-        $this->agenda = factory(Agenda::class)->make([
-            'idUser' => $this->user->idUser,
+        $administrador = factory(Administrador::class)->make();
+        $user = factory(User::class)->make([
+            'email' => $administrador->email,
+            'tipo' => 'admin',
+            'idAdmin' => $administrador->idAdmin,
         ]);
 
-        $this->assertNotEmpty($this->agenda);
+        $agenda = factory(Agenda::class)->make([
+            'idUser' => $user->idUser,
+        ]);
+
+        $this->assertNotEmpty($agenda);
     }
 
 
     /** @test *//*
     public function Factory_Notificacao_Test()
     {
-        $this->notificacao = factory(Notificacao::class)->make();
+        $notificacao = factory(Notificacao::class)->make();
 
-        $this->assertNotEmpty($this->notificacao);
+        $this->assertNotEmpty($notificacao);
     }/**/
 
 
     /** @test */
     public function Factory_Produto_Test()
     {
-        $this->produto = factory(Produto::class)->make([
-            'idAgente' => $this->Agente->idAgente,
-            'idCliente' => $this->Cliente->idCliente,
-            'idUniversidade1' => $this->Universidade->idUniversidade1,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
         ]);
 
-        $this->assertNotEmpty($this->produto);
+        $this->assertNotEmpty($produto);
     }
 
 
     /** @test */
     public function Factory_Responsabilidade_Test()
     {
-        $this->responsabilidade = factory(Responsabilidade::class)->make([
-            'idAgente' => $this->Agente->idAgente,
-            'idCliente' => $this->Cliente->idCliente,
-            'idUniversidade1' => $this->Universidade->idUniversidade1,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
         ]);
 
-        $this->assertNotEmpty($this->responsabilidade);
+        $this->assertNotEmpty($responsabilidade);
     }
 
 
     /** @test */
     public function Factory_Fase_Test()
     {
-        $this->fase = factory(Fase::class)->make([
-            'idProduto' => $this->Produto->idProduto,
-            'idResponsabilidade' => $this->Responsabilidade->idResponsabilidade,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
         ]);
 
-        $this->assertNotEmpty($this->fase);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $this->assertNotEmpty($fase);
     }
 
 
     /** @test */
     public function Factory_Doc_Necessario_Test()
     {
-        $this->docNecessario = factory(DocNecessario::class)->make([
-            'idFase' => $this->Fase->idFase,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
         ]);
 
-        $this->assertNotEmpty($this->docNecessario);
+        $docNecessario = factory(DocNecessario::class)->make([
+            'idFase' => $fase->idFase,
+        ]);
+
+        $this->assertNotEmpty($docNecessario);
     }
 
 
     /** @test */
     public function Factory_Doc_Academico_Test()
     {
-        $this->docNecessario = factory(DocAcademico::class)->make([
-            'idFase' => $this->Fase->idFase,
-            'idCliente' => $this->Cliente->idCliente,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
         ]);
 
-        $this->assertNotEmpty($this->docAcademico);
+        $docAcademico = factory(DocAcademico::class)->make([
+            'idFase' => $fase->idFase,
+            'idCliente' => $cliente->idCliente,
+        ]);
+
+        $this->assertNotEmpty($docAcademico);
     }
 
 
     /** @test */
     public function Factory_Doc_Pessoal_Test()
     {
-        $this->docPessoal = factory(DocPessoal::class)->make([
-            'idFase' => $this->Fase->idFase,
-            'idCliente' => $this->Cliente->idCliente,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
         ]);
 
-        $this->assertNotEmpty($this->docPessoal);
+        $docPessoal = factory(DocPessoal::class)->make([
+            'idFase' => $fase->idFase,
+            'idCliente' => $cliente->idCliente,
+        ]);
+
+        $this->assertNotEmpty($docPessoal);
     }
 
 
     /** @test */
     public function Factory_Doc_Transacao_Test()
     {
-        $this->docTransacao = factory(DocTransacao::class)->make([
-            'idFase' => $this->Fase->idFase,
-            'idConta' => $this->Conta->idConta,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+        $conta = factory(Conta::class)->make();
+
+        $docTransacao = factory(DocTransacao::class)->make([
+            'idFase' => $fase->idFase,
+            'idConta' => $conta->idConta,
         ]);
 
-        $this->assertNotEmpty($this->docTransacao);
+        $this->assertNotEmpty($docTransacao);
     }
 
 
     /** @test */
     public function Factory_Pago_Responsabilidade_Test()
     {
-        $this->pagoResponsabilidade = factory(PagoResponsabilidade::class)->make([
-            'idFase' => $this->Fase->idFase,
-            'idConta' => $this->Conta->idConta,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+        $conta = factory(Conta::class)->make();
+
+        $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make([
+            'idFase' => $fase->idFase,
+            'idConta' => $conta->idConta,
         ]);
 
-        $this->assertNotEmpty($this->pagoResponsabilidade);
+        $this->assertNotEmpty($pagoResponsabilidade);
     }
 
 
     /** @test */
     public function Factory_Relacao_Fornecedor_Responsabilidade_Test()
     {
-        $this->relFornResp = factory(RelFornResp::class)->make([
-            'idResponsabilidade' => $this->Responsabilidade->idResponsabilidade,
-            'idFornecedor' => $this->Fornecedor->idFornecedor,
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $fornecedor = factory(Fornecedor::class)->make();
+
+        $relFornResp = factory(RelFornResp::class)->make([
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+            'idFornecedor' => $fornecedor->idFornecedor,
         ]);
 
-        $this->assertNotEmpty($this->relFornResp);
+        $this->assertNotEmpty($relFornResp);
     }
 
 
     /** @test */
     public function Factory_Relatorio_Problema_Test()
     {
-        $this->relatorioProblema = factory(RelatorioProblema::class)->make();
+        $relatorioProblema = factory(RelatorioProblema::class)->make();
 
-        $this->assertNotEmpty($this->relatorioProblema);
+        $this->assertNotEmpty($relatorioProblema);
     }
 
 
