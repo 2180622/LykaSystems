@@ -5,20 +5,18 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use App\Agente;
 use App\User;
-
+use App\Universidade;
 use App\DocPessoal;
 use App\DocAcademico;
 use App\DocNecessario;
 
-use Illuminate\Support\Facades\Hash;
-
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
-
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateClienteRequest;
 use App\Http\Requests\StoreClientRequest;
 
@@ -658,4 +656,54 @@ class ClientController extends Controller
         }
 
     }
+
+
+
+
+    /* Search Form */
+
+    public function searchIndex(){
+
+        /* Coloca os dados dos campos num array e elimina os duplicados */
+
+        $cidadesOrigem = array_unique(Cliente::pluck('cidade')->toArray());
+        $instituicoesOrigem = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
+
+        $agents= Agente::where("tipo","=","Agente")->get();
+        $subagents= Agente::where("tipo","=","Subagente")->get();
+        $universidades = Universidade::all();
+
+
+
+        return view('clients.search',compact('cidadesOrigem','instituicoesOrigem','agents','subagents','universidades'));
+
+    }
+
+
+
+    /* Search Form */
+
+    public function searchResults(Request $request, $nomeCampo=null, $valor=null){
+
+
+        strtolower($nomeCampo);
+        strtolower($valor);
+
+
+        return view('clients.search',compact('clients'));
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
