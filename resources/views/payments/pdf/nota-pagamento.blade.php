@@ -13,7 +13,8 @@
 <body>
     <style media="screen">
         body {
-            padding: 5px 30px;
+            padding: 3px 33px;
+            font-family: 'Lato', sans-serif;
         }
 
         img {
@@ -23,12 +24,16 @@
         #text-beneficiario {
             font-size: 10pt;
             color: #5B5B5B;
-            font-family: 'Lato', sans-serif;
+        }
+
+        #text-beneficiario .marginb {
+            margin-bottom: -5px;
         }
 
         #nome {
             color: #171717 !important;
             font-size: 11pt;
+            font-weight: 700;
         }
 
         table {
@@ -38,12 +43,86 @@
 
         table thead tr th {
             text-transform: uppercase !important;
-            font-size: 11pt;
+            font-size: 10pt;
         }
 
         table thead th {
             padding: 10px 5px !important;
-            border-bottom: 2px black solid;
+            border-bottom: 1px solid black;
+        }
+
+        table {
+            border-bottom: 2px solid rgb(0, 0, 0, 0.7);
+        }
+
+        table tr td {
+            padding: 8px 15px;
+            font-size: 10pt;
+            font-weight: 700;
+            border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+        }
+
+        table tr .y-border {
+            border-right: 1px solid black;
+        }
+
+        table .none td {
+            padding: 30px 0;
+        }
+
+        table .descricao {
+            font-size: 9pt;
+            font-weight: 400;
+        }
+
+        .values {
+            font-size: 10pt;
+        }
+
+        .values #subtotal p,
+        #total p {
+            float: right;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .values #taxa p {
+            float: right;
+            display: inline-block;
+        }
+
+        .values #taxa {
+            left: 40%;
+            position: relative;
+        }
+
+        .values #assinatura {
+            text-align: right;
+        }
+
+        .values #assinatura #ep{
+            color: #5B5B5B !important;
+        }
+
+        #hl {
+            left: 55%;
+            width: 45%;
+            height: 2px;
+            position: relative;
+            background-color: rgb(0, 0, 0, 0.7);
+        }
+
+        .info {
+            font-size: 10pt;
+            margin-bottom: -50px;
+        }
+
+        .info .marginb {
+            margin-bottom: -5px;
+        }
+
+        .info .title {
+            font-size: 12pt;
         }
     </style>
     <br>
@@ -53,57 +132,90 @@
         </div>
         <div class="col-md-6">
             <div class="text-right" id="text-beneficiario">
-                <p class="mb-1" id="nome">Tiago Oliveira</p>
-                <p class="mb-0">Rua das Oliveiras Verdes</p>
-                <p class="mb-0">Edifício Amarelo, Nº13</p>
-                <p class="mb-0">3100-231 - Leiria</p>
+                <p class="mb-0" id="nome">Tiago Oliveira</p>
+                <p class="marginb">Rua das Oliveiras Verdes</p>
+                <p class="marginb">Edifício Amarelo, Nº13</p>
+                <p>3100-231 - Leiria</p>
             </div>
         </div>
     </div>
 
-    <table class="mt-3">
+    <table class="mt-2">
         <thead>
             <tr>
-                <th id="hey">Descrição do pagamento</th>
-                <th>Data de pagamento</th>
-                <th>Valor</th>
+                <th class="ml-2">Descrição do pagamento</th>
+                <th class="ml-2">Data de pagamento</th>
+                <th class="ml-2">Valor</th>
             </tr>
         </thead>
         <tr>
-            <td>Propinas</td>
-            <td>15/05/2020</td>
-            <td>500,00€</td>
+            <td class="y-border">Propinas <br>
+                <p class="descricao mb-1">Nulla tempora voluptatem nam aperiam.</p>
+            </td>
+            <td class="y-border">15/05/2020</td>
+            <td>500,00&euro;</td>
         </tr>
         <tr>
-            <td>Matrícula</td>
-            <td>12/05/2020</td>
-            <td>75,00€</td>
+            <td class="y-border">Matrícula <br>
+                <p class="descricao mb-1">Nulla tempora voluptatem nam aperiam.</p>
+            </td>
+            <td class="y-border">12/05/2020</td>
+            <td>75,00&euro;</td>
         </tr>
         <tr>
-            <td>Outras importâncias</td>
-            <td>02/05/2020</td>
-            <td>625,00€</td>
+            <td class="y-border">Outras importâncias <br>
+                <p class="descricao mb-1">Nulla tempora voluptatem nam aperiam.</p>
+            </td>
+            <td class="y-border">02/05/2020</td>
+            <td>625,00&euro;</td>
+        </tr>
+        <tr class="none">
+            <td class="y-border"></td>
+            <td class="y-border"></td>
+            <td></td>
+        </tr>
+        <tr class="none">
+            <td class="y-border"></td>
+            <td class="y-border"></td>
+            <td></td>
         </tr>
     </table>
+    <br>
+    <div class="values">
+        <div id="subtotal">
+            <p>1200,00&euro;</p>
+            <p style="margin-right:9rem;">Sub Total</p>
+        </div>
+        <br>
+        <div id="taxa" class="mt-2">
+            <p>N/A</p>
+            <p style="margin-right:8.5rem;">Taxas adicionais</p>
+        </div>
+        <br><br><br>
+        <div id="hl"></div>
+        <div id="total" class="mt-2">
+            <p>1200,00&euro;</p>
+            <p style="margin-right:8.5rem;">Valor total</p>
+        </div>
+        <br><br><br>
+        <div id="assinatura" class="mt-3">
+            <p class="font-weight-bold mb-0" style="font-size:11pt">Senhor Administrador</p>
+            <p class="mb-0" id="ep">Estudar Portugal</p>
+        </div>
+    </div>
 
-    <div class="info mt-5">
+    <div class="info">
         <div>
-            <p class="font-weight-bold">Informações</p>
-            <p class="mb-1">Pagamento: 236584</p>
-            <p class="mb-1">Data de emissão: 16/05/2020</p>
+            <p class="font-weight-bold mb-1 title">Informações</p>
+            <p class="marginb">Pagamento: 236584</p>
+            <p class="marginb">Data de emissão: 16/05/2020</p>
         </div>
         <br>
         <div>
-            <p class="font-weight-bold">Contactos</p>
-            <p class="mb-1">Rua de Leiria, 3000-241, Leiria</p>
-            <p class="mb-1">+351 244 523 698 | estudarportugal
-                @gmail.com</p>
-                <p class="mb-1">www.estudarportugal.com</p>
-        </div>
-        <br>
-        <div>
-            <p class="font-weight-bold">Termos e condições</p>
-            <p>Aque repellat quo cum tenetur sit ullam ut dolore impedit sint non.</p>
+            <p class="font-weight-bold mb-1 title">Contactos</p>
+            <p class="marginb">Rua de Leiria, 3000-241, Leiria</p>
+            <p class="marginb">+351 244 523 698 | estudarportugal@gmail.com</p>
+            <p class="marginb">www.estudarportugal.com</p>
         </div>
     </div>
 </body>
