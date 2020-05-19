@@ -392,23 +392,20 @@ class PaymentController extends Controller
             $pagoResponsabilidade->descricao = $descricaoCliente;
             $pagoResponsabilidade->observacoes = $observacoesCliente;
             $pagoResponsabilidade->dataPagamento = $dataCliente;
-
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoCliente;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-
                 // Nota de pagamento
                 $pdf = PDF::loadView('payments.pdf.nota-pagamento')->setPaper('a4', 'portrait');
                 $content = $pdf->download()->getOriginalContent();
                 $nomeNotaPagamento = "nota-pagamento-".post_slug($responsabilidade->cliente->nome.' '.$responsabilidade->fase->descricao).".pdf";
                 Storage::put("public/nota-pagamento/".$nomeNotaPagamento, $content);
-
             $pagoResponsabilidade->notaPagamento = $nomeNotaPagamento;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaCliente;
-            $pagoResponsabilidade->save();
+            // $pagoResponsabilidade->save();
 
         if ($valorCliente >= $responsabilidade->valorCliente) {
             Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
@@ -531,7 +528,7 @@ class PaymentController extends Controller
 
         $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->first();
         event(new StorePayment($responsabilidade));
-        return response()->json('Adicionado com sucesso', 200);
+        return response()->json($pagoResponsabilidade, 200);
     }
 
     public function clientepdf(Cliente $cliente, Responsabilidade $responsabilidade)

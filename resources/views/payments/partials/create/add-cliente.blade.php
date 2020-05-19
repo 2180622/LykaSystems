@@ -49,6 +49,11 @@
                     </select>
                 </div>
                 <div class="col-md-8">
+                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="A descrição que inserir será colocada na nota de pagamento como descrição do mesmo.">
+                        <span>
+                            ?
+                        </span>
+                    </div>
                     <label for="descricaoCliente">Descrição do pagamento</label>
                     <br>
                     <input type="text" name="descricaoCliente" id="descricaoCliente" required="required" placeholder="Adicionar uma descrição" maxlength="150">
@@ -59,7 +64,7 @@
                 <div class="col">
                     <label for="observacoes">Observações</label>
                     <br>
-                    <textarea name="observacoes" rows="3"></textarea>
+                    <textarea name="observacoes" rows="3" placeholder="Adicionar uma observação"></textarea>
                 </div>
             </div>
             <br>
@@ -72,4 +77,23 @@
     </div>
     </form>
     <br>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pagamento registado com sucesso.</h5>
+            </div>
+            <div class="modal-body">
+                Foi gerado uma nota de pagamento relativo ao pagamento que acabou de registar. Se pretender transferí-lo, basta clicar no botão "Transferir", abaixo disponível.
+                <br>
+                Se não quiser ter acesso ao documento neste momento, pode sempre transferí-lo mais tarde, sendo apenas necessário voltar a página que se encontra e clicar no botão "Nota de pagamento".
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="submit-button-modal" type="button" class="text-center">Transferir</a>
+                <a href="#" type="button" class="text-center">Entendido!</a>
+            </div>
+        </div>
+    </div>
 </div>
