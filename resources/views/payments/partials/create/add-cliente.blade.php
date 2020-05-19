@@ -5,7 +5,8 @@
     <br>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <p style="font-weight:500;">
-            Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>, que têm como agente <strong>{{$fase->produto->agente->nome.' '.$fase->produto->agente->apelido}}</strong> e universidade <strong>{{$fase->produto->universidade1->nome}}</strong>.
+            Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>, que têm como agente
+            <strong>{{$fase->produto->agente->nome.' '.$fase->produto->agente->apelido}}</strong> e universidade <strong>{{$fase->produto->universidade1->nome}}</strong>.
         </p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -15,8 +16,8 @@
         <p style="margin-left: 0px !important; font-weight:600;">valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}</p>
         <hr>
-        <form method="post" id="registar-pagamento-cliente" class="mt-4" enctype="multipart/form-data">
-            <input type="text" id="idResp" value="{{$responsabilidade->idResponsabilidade}}" hidden="true">
+        <form id="registar-pagamento-form" class="mt-4">
+            <input type="text" id="idResp" name="idResp" value="{{$responsabilidade->idResponsabilidade}}" hidden="true">
             <div class="row">
                 <div class="col-md-4">
                     <label for="valorPagoCliente">Valor pago ao cliente</label>
@@ -46,6 +47,19 @@
                         @endforeach
                         <option selected disabled hidden>Escolher conta bancária</option>
                     </select>
+                </div>
+                <div class="col-md-8">
+                    <label for="descricaoCliente">Descrição do pagamento</label>
+                    <br>
+                    <input type="text" name="descricaoCliente" id="descricaoCliente" required="required" placeholder="Adicionar uma descrição" maxlength="150">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="observacoes">Observações</label>
+                    <br>
+                    <textarea name="observacoes" rows="3"></textarea>
                 </div>
             </div>
             <br>

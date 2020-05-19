@@ -8,17 +8,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PagoResponsabilidade extends Model
 {
     use SoftDeletes;
-    
+
     protected $table = 'PagoResponsabilidade';
 
     protected $primaryKey = 'idPagoResp';
 
     protected $fillable = [
-      'beneficiario', 'comprovativoPagamento', 'dataPagamento', '$idFase', '$idConta'
+        'beneficiario',
+        'valorPago',
+        'descricao',
+        'comprovativoPagamento',
+        'notaPagamento',
+        'observacoes',
+        '$idResponsabilidade',
+        '$idConta'
     ];
 
-    public function fase(){
-        return $this->belongsTo("App\Fase","idFase","idFase")->withTrashed();
+    protected $dates = [
+        'dataPagamento'
+    ];
+
+    public function responsabilidade(){
+        return $this->belongsTo("App\Responsabilidade","idResponsabilidade","idResponsabilidade")->withTrashed();
     }
 
     public function conta(){

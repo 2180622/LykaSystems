@@ -47,10 +47,6 @@ class Fase extends Model
         return $this->hasMany("App\DocPessoal","idFase","idFase");
     }
 
-    public function pagoResponsabilidade(){
-        return $this->belongsTo("App\PagoResponsabilidade","idFase","idFase")->withTrashed();
-    }
-
     public function docNecessario(){
         return $this->hasMany("App\DocNecessario","idFase","idFase")->withTrashed();
     }

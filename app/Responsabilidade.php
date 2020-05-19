@@ -66,4 +66,8 @@ class Responsabilidade extends Model
     public function relacao(){
         return $this->hasMany("App\RelFornResp","idResponsabilidade","idResponsabilidade");
     }
+
+    public function pagoResponsabilidade(){
+        return $this->belongsTo("App\PagoResponsabilidade","idResponsabilidade","idResponsabilidade")->withTrashed();
+    }
 }

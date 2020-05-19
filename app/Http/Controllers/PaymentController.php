@@ -348,11 +348,12 @@ class PaymentController extends Controller
     public function store(Request $request, Responsabilidade $responsabilidade)
     {
         // Campos de CLIENTE
-        $valorCliente = ($request->input('valorCliente') != null ? $request->input('valorCliente') : null);
-        $comprovativoCliente = ($request->input('comprovativoCliente') != null ? $request->input('comprovativoCliente') : null);
+        $valorCliente = ($request->input('valorPagoCliente') != null ? $request->input('valorPagoCliente') : null);
+        $comprovativoCliente = ($request->file('comprovativoPagamentoCliente') != null ? $request->file('comprovativoPagamentoCliente') : null);
         $dataCliente = ($request->input('dataCliente') != null ? $request->input('dataCliente') : null);
         $contaCliente = ($request->input('contaCliente') != null ? $request->input('contaCliente') : null);
         $descricaoCliente = ($request->input('descricaoCliente') != null ? $request->input('descricaoCliente') : null);
+        $observacoesCliente = ($request->input('observacoes') != null ? $request->input('observacoes') : null);
         // Campos de AGENTE
         $valorAgente = (isset($fields['valorPagoAgente']) ? $fields['valorPagoAgente'] : null);
         $comprovativoAgente = (isset($fields['comprovativoPagamentoAgente']) ? $fields['comprovativoPagamentoAgente'] : null);
@@ -387,12 +388,15 @@ class PaymentController extends Controller
             $valorCliente = number_format((float) $valorCliente,2 ,'.' ,'');
             $pagoResponsabilidade->valorPago = $valorCliente;
             $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->produto->cliente->apelido;
+            $pagoResponsabilidade->descricao = $descricaoCliente;
+            $pagoResponsabilidade->observacoes = $observacoesCliente;
+            $pagoResponsabilidade->dataPagamento = $dataCliente;
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoCliente;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-            $pagoResponsabilidade->dataPagamento = $dataCliente;
+            $pagoResponsabilidade->notaPagamento = 'test';
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaCliente;
             $pagoResponsabilidade->save();
@@ -518,7 +522,7 @@ class PaymentController extends Controller
 
         $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->first();
         event(new StorePayment($responsabilidade));
-        return redirect()->route('payments.index')->with('success', 'Pagamento registado com sucesso!');
+        return response()->json('Adicionado com sucesso', 200);
     }
 
     public function clientepdf(Cliente $cliente, Responsabilidade $responsabilidade)

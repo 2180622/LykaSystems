@@ -546,22 +546,19 @@ $('#search-form').submit(function(event) {
     });
 });
 
-// Formulário para registar um PAGAMENTO DE UM CLIENTE
-$('#registar-pagamento-cliente').submit(function(event) {
+// Formulário para registar um PAGAMENTO
+$('#registar-pagamento-form').submit(function(event) {
     event.preventDefault();
-    info = {
-        valorCliente: $("#valorPagoCliente").val(),
-        comprovativoCliente: $("#upfileCliente").val(),
-        dataCliente: $("#dataCliente").val(),
-        contaCliente: $("#contaCliente").val(),
-        descricaoCliente: $("#valorPagoCliente").val(),
-        responsabilidadeCliente: $("#idResp").val()
-    };
+    var id = $("#idResp").val();
+    var info = new FormData(this);
     $.ajax({
         type: "post",
-        url: "/pagamentos/"+info.responsabilidadeCliente+"/registar",
-        context: this,
+        enctype: 'multipart/form-data',
+        url: "/pagamentos/"+id+"/registar",
         data: info,
+        context: this,
+        processData: false,
+        contentType: false,
         success: function(data) {
             console.log("OK");
         }
