@@ -270,8 +270,10 @@ class ClientController extends Controller
         // Produtos adquiridos pelo cliente
         $produtos = $client->produtoSaved;
 
+
         if ($produtos->isEmpty()) {
             $produtos=null;
+            $totalprodutos=null;
         }else{
 
             /* Soma do valor total dos produtos */
