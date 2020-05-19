@@ -15,8 +15,8 @@
         <p style="margin-left: 0px !important; font-weight:600;">valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}</p>
         <hr>
-        <form action="{{route('payments.store', $responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
-            @csrf
+        <form method="post" id="registar-pagamento-cliente" class="mt-4" enctype="multipart/form-data">
+            <input type="text" id="idResp" value="{{$responsabilidade->idResponsabilidade}}" hidden="true">
             <div class="row">
                 <div class="col-md-4">
                     <label for="valorPagoCliente">Valor pago ao cliente</label>
@@ -53,7 +53,7 @@
     <div class="form-group text-right">
         <br>
         <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">registar pagamento</button>
-        <a href="{{route('payments.createpdf', $responsabilidade)}}" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
+        <a href="{{route('payments.clientepdf', [$cliente, $responsabilidade])}}" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
         <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
     </div>
     </form>
