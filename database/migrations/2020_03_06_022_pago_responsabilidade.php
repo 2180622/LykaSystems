@@ -14,8 +14,9 @@ class PagoResponsabilidade extends Migration
             $table->bigIncrements('idPagoResp');
             $table->string('beneficiario',255);
             $table->decimal('valorPago', 18, 2);
-            $table->string('comprovativoPagamento',255);
             $table->date('dataPagamento');
+            $table->string('comprovativoPagamento',255);
+            $table->string('notaPagamento',255);
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->unsignedBigInteger('idConta');

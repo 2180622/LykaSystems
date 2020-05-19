@@ -306,6 +306,7 @@ $.ajaxSetup({
     }
 });
 
+// Formulário de FILTRAGEM DE PAGAMENTOS
 $('#search-form').submit(function(event) {
     event.preventDefault();
     info = {
@@ -541,6 +542,28 @@ $('#search-form').submit(function(event) {
                 error = "<div id='error500'><strong style='color: #e3342f;'>Preencha os campos necessários para a realização de uma filtragem.</strong><br><br></div>";
                 $("#search-form").before(error);
             }
+        }
+    });
+});
+
+// Formulário para registar um PAGAMENTO DE UM CLIENTE
+$('#registar-pagamento-cliente').submit(function(event) {
+    event.preventDefault();
+    info = {
+        valorCliente: $("#valorPagoCliente").val(),
+        comprovativoCliente: $("#upfileCliente").val(),
+        dataCliente: $("#dataCliente").val(),
+        contaCliente: $("#contaCliente").val(),
+        descricaoCliente: $("#valorPagoCliente").val(),
+        responsabilidadeCliente: $("#idResp").val()
+    };
+    $.ajax({
+        type: "post",
+        url: "/pagamentos/"+info.responsabilidadeCliente+"/registar",
+        context: this,
+        data: info,
+        success: function(data) {
+            console.log("OK");
         }
     });
 });
