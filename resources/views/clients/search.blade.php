@@ -66,7 +66,7 @@
                 <div class="tab-pane fade text-secondary show active" id="pesquisaContactos" role="tabpanel"  aria-labelledby="pesquisaContactos-tab">
                     {{-- Formulário de pesquisa --}}
 
-                    <form method="POST" action="{{route('clients.searchResults')}}" class="form-group" enctype="multipart/form-data">
+                    <form method="POST" id="searchForm" action="{{route('clients.searchResults')}}" class="form-group" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mx-1 p-3">
@@ -182,12 +182,12 @@
                                     <select id="nivelEstudos" name="nivelEstudos" class="custom-select select_style mt-2"
                                         style="width:100%">
                                         <option value="0" value="0" selected hidden>Selecione Nível de Estudos</option>
-                                        <option value="1">Secundário Incompleto</option>
-                                        <option value="2">Secundário completo</option>
-                                        <option value="3">Curso tecnologico</option>
-                                        <option value="4">Estuda na universidade</option>
-                                        <option value="5">Licenciado</option>
-                                        <option value="6">Mestrado</option>
+                                        <option value="Secundário Incompleto">Secundário Incompleto</option>
+                                        <option value="Secundário Completo">Secundário Completo</option>
+                                        <option value="Curso Tecnológico">Curso Tecnológico</option>
+                                        <option value="Estuda na Universidade">Estuda na Universidade</option>
+                                        <option value="Licenciado">Licenciado</option>
+                                        <option value="Mestrado">Mestrado</option>
                                     </select>
                                 </div>
 
@@ -207,9 +207,9 @@
 
                             </div>
 
-                            <div class="col col-2 text-right align-self-center " style="width: 80px; min-width: 100px;">
+                            <div class="col col-2 align-self-center " style="width: 80px; min-width: 100px;">
 
-                                <input type="submit" value="Pesquisar" class="top-button mt-4 " style="width: 100%">
+                                <input type="submit" value="Pesquisar" class="top-button mt-4 " style="width: 100%; min-width:100px">
 
                             </div>
 

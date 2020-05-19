@@ -366,35 +366,12 @@
                         <div class="text-secondary mb-2">Nível de estudos:</div>
 
                         <div class="border rounded bg-light p-3">
-                            @switch($client->nivEstudoAtual)
-                            @case(1)
-                                Secundário Incompleto
-                            @break
 
-                            @case(2)
-                                Secundário completo
-                            @break
-
-                            @case(3)
-                                Curso tecnologico
-                            @break
-
-                            @case(4)
-                                Estuda na universidade
-                            @break
-
-                            @case(5)
-                                Licenciado
-                            @break
-
-                            @case(6)
-                                Mestrado
-                            @break
-
-                            @default
-                            <span class="text-secondary"><small>(Aguarda dados...)</small></span>
-
-                        @endswitch
+                            @if ($client->nivEstudoAtual !=null)
+                                {{$client->nivEstudoAtual}}
+                            @else
+                                <span class="text-secondary"><small>(Aguarda dados...)</small></span>
+                            @endif
 
                         </div>
 

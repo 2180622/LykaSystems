@@ -135,7 +135,7 @@ class DataController extends Controller
         $cliente->fotografia = null;
         $cliente->NIF = 3490587685;
         $cliente->IBAN = 'FR76 123 4321 1345678901 72';
-        $cliente->nivEstudoAtual = 3;
+        $cliente->nivEstudoAtual = "Estuda na Universidade";
         $cliente->nomeInstituicaoOrigem = 'Instituto Francês';
         $cliente->cidadeInstituicaoOrigem = 'Paris';
         $cliente->num_docOficial = '9845776436ZZ8';
@@ -170,7 +170,7 @@ class DataController extends Controller
         $cliente->fotografia = null;
         $cliente->NIF = 759456385645;
         $cliente->IBAN = 'RU76 123 4321 1345678901 72';
-        $cliente->nivEstudoAtual = 3;
+        $cliente->nivEstudoAtual = "Curso Tecnológico";
         $cliente->nomeInstituicaoOrigem = 'Instituto Russo';
         $cliente->cidadeInstituicaoOrigem = 'Cidade Russa';
         $cliente->cidadeInstituicaoOrigem = 'Paris';
