@@ -231,15 +231,14 @@
 
                     @if ($clients)
 
-
-                        <div class="row">
-                            <div class="col border rounded bg-light p-3 mx-4 text-center">
-                                <div class="text-muted">
-                                    A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}} </strong>" encontrou <strong>{{count($clients)}}</strong> registo(s) no sistema
-                                </div>
-                            </div>
+                    <hr>
+                    <br>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center text-secondary"><small>A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}} </strong>" encontrou <strong>{{count($clients)}}</strong> registo(s) no sistema</small></div>
                         </div>
-
+                    </div>
 
                         <div class="row mt-3 p-3 ">
 {{--                             <div class="col">
