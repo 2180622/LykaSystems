@@ -35,30 +35,6 @@ class FactoryTest extends TestCase
 {
     use DatabaseMigrations;
     use RefreshDatabase;
-/*
-    private $user = null;
-    private $fase = null;
-    private $conta = null;
-    private $agente = null;
-    private $agenda = null;
-    private $produto = null;
-    private $cliente = null;
-    private $contacto = null;
-    private $docStock = null;
-    private $faseStock = null;
-    private $fornecedor = null;
-    private $biblioteca = null;
-    private $docPessoal = null;
-    private $relFornResp = null;
-    private $docAcademico = null;
-    private $produtoStock = null;
-    private $docTransacao = null;
-    private $universidade = null;
-    private $administrador = null;
-    private $docNecessario = null;
-    private $responsabilidade = null;
-    private $relatorioProblema = null;
-    private $pagoResponsabilidade = null;*/
 
 
     /** @test */
