@@ -125,16 +125,20 @@
 
 
 
+        /* OPÇÃO DE APAGAR */
+        var formToSubmit //Variavel para indicar o forumulário a submeter
 
-        $('#test_link').click(function(){
-
-            var cidade = $('#cidade').val();
-            let url = "{{ route('clients.searchResults'," + cidade +") }}";
-/*             url = url.replace(':cidade', cidade); */
-            /* alert(url); */
-             document.location.href=url;
+        $(".form_client_id").submit(function (e) {
+            e.preventDefault();
+            formToSubmit = this;
+            $("#student_name").text($(this).attr("data"));
+            return false;
         });
 
+        //click sim na modal
+        $(".btn_submit").click(function (e) {
+            formToSubmit.submit();
+        });
 
 
 

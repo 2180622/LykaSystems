@@ -621,5 +621,5 @@
 
 {{-- Scripts --}}
 @section('scripts')
-<script src="{{asset('/js/show_client_details.js')}}"></script>
+{{-- <script src="{{asset('/js/show_client_details.js')}}"></script> --}}
 @endsection

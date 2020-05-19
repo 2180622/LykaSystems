@@ -11,7 +11,7 @@
 
 {{-- Page Content --}}
 @section('content')
-
+@include('clients.partials.modal')
 
 
 <div class="container mt-2">
