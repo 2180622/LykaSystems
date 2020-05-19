@@ -95,9 +95,9 @@
 
                 <div><span class="text-secondary font-weight-bold">E-mail:</span> {{$agent->email}}</div><br>
 
-                <div><span class="text-secondary font-weight-bold">Número de identificação pessoal:</span> {{$agent->NIF}} {{$agent->num_doc}}</div>
+                <div><span class="text-secondary font-weight-bold">Número de identificação pessoal:</span> {{$agent->num_doc}}</div>
 
-                <div><span class="text-secondary font-weight-bold">NIF:</span> {{$agent->NIF}} {{$agent->NIF}}</div><br>
+                <div><span class="text-secondary font-weight-bold">NIF:</span> {{$agent->NIF}}</div><br>
 
                 <div><span class="text-secondary font-weight-bold">Adicionado em:
                     </span>{{ date('d-M-y', strtotime($agent->created_at)) }}</div><br>

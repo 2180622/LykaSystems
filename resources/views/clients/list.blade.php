@@ -87,10 +87,15 @@
                         <br>
                     @else
 
-                    <div class="col">Existem <strong>{{count($clients)}}</strong> registo(s) no sistema</div>
-
-                    <div class="row mt-3 mb-4 row mx-1 p-3 border rounded bg-light">
+                    <div class="row mt-3 mb-3">
                         <div class="col">
+                            <div class="text-center"><small>Existe <strong>{{count($clients)}}</strong> registo(s) no sistema</small></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row p-3 ">
+{{--                              <div class="col">
                             <span class="mr-2">Mostrar</span>
                             <select class="custom-select" id="records_per_page" style="width:80px">
                                 <option selected>10</option>
@@ -99,9 +104,9 @@
                                 <option>100</option>
                             </select>
                             <span class="ml-2">por página</span>
-                        </div>
-                        <div class="col ">
-                            <div class="input-group pl-0 float-right search-section" style="width:250px">
+                        </div> --}}
+                        <div class="col text-center mb-3">
+                            <div class="input-group pl-0  search-section mx-auto" style="width:50%">
                                 <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura"
                                     aria-label="Procurar">
                                 <div class="search-button input-group-append">
@@ -110,6 +115,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <br>
                     <hr>
 
 

@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::post('/pagamentos/pesquisa', 'PaymentController@search')->name('payments.search');
         // Registar pagamento CLIENTE
         Route::get('/pagamentos/cliente/{cliente}/fase/{fase}/{responsabilidade}', 'PaymentController@createcliente')->name('payments.cliente');
+        Route::get('/pagamentos/nota-pagamento/cliente/{cliente}/{responsabilidade}', 'PaymentController@clientepdf')->name('payments.clientepdf');
         // Registar pagamento AGENTE
         Route::get('/pagamentos/agente/{agente}/fase/{fase}/{responsabilidade}', 'PaymentController@createagente')->name('payments.agente');
         // Registar pagamento SUBAGENTE
@@ -114,7 +115,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
         // Registar pagamento FORNECEDOR
         Route::get('/pagamentos/fornecedor/{fornecedor}/fase/{fase}/{relacao}', 'PaymentController@createfornecedor')->name('payments.fornecedor');
     Route::post('/pagamentos/{responsabilidade}/registar', 'PaymentController@store')->name('payments.store');
-    Route::get('/pagamentos/nota-pagamento/{responsabilidade}', 'PaymentController@createpdf')->name('payments.createpdf');
 
     /* Cobranças */
     Route::get('/cobrancas', 'ChargesController@index')->name('charges.index');

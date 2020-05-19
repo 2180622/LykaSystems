@@ -306,6 +306,7 @@ $.ajaxSetup({
     }
 });
 
+// Formulário de FILTRAGEM DE PAGAMENTOS
 $('#search-form').submit(function(event) {
     event.preventDefault();
     info = {
@@ -541,6 +542,25 @@ $('#search-form').submit(function(event) {
                 error = "<div id='error500'><strong style='color: #e3342f;'>Preencha os campos necessários para a realização de uma filtragem.</strong><br><br></div>";
                 $("#search-form").before(error);
             }
+        }
+    });
+});
+
+// Formulário para registar um PAGAMENTO
+$('#registar-pagamento-form').submit(function(event) {
+    event.preventDefault();
+    var id = $("#idResp").val();
+    var info = new FormData(this);
+    $.ajax({
+        type: "post",
+        enctype: 'multipart/form-data',
+        url: "/pagamentos/"+id+"/registar",
+        data: info,
+        context: this,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+            alert("OK");
         }
     });
 });

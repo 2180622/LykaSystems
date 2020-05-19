@@ -47,28 +47,28 @@
         <br>
 
 
+        @if($files==null)
+            <div class="border rounded bg-light p-3 text-muted"><small>(sem ficheiros disponiveis)</small></div>
+        @else
 
-        <div class="row mt-3 mb-4">
+        <div class="row mb-3">
             <div class="col">
-                <span class="mr-2">Mostrar</span>
-                <select class="custom-select" id="records_per_page" style="width:80px">
-                    <option selected>10</option>
-                    <option>25</option>
-                    <option>50</option>
-                    <option>100</option>
-                </select>
-                <span class="ml-2">por página</span>
+                <div class="text-center text-secondary"><small>Existe <strong>{{count($files)}} ficheiros(s)</strong> listados</small></div>
             </div>
-            <div class="col ">
-                <div class="input-group pl-0 float-right search-section" style="width:250px">
-                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura"
-                        aria-label="Procurar">
+        </div>
+
+        <div class="row p-3 ">
+            <div class="col text-center mb-3">
+                <div class="input-group pl-0  search-section mx-auto" style="width:50%">
+                    <input class="shadow-sm" type="text" id="customSearchBox"
+                        placeholder="Secção de procura" aria-label="Procurar">
                     <div class="search-button input-group-append">
                         <ion-icon name="search-outline" class="search-icon"></ion-icon>
                     </div>
                 </div>
             </div>
         </div>
+        <br>
         <hr>
 
 
@@ -141,6 +141,10 @@
                 </tbody>
             </table>
         </div>
+
+        @endif
+
+
 
 
 
