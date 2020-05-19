@@ -402,18 +402,19 @@
                     {{-- INPUT nivEstudoAtual --}}
                     <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
                     <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" >
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='0'?"selected":""}} value="0" value="0" selected hidden>Selecione nivel</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='1'?"selected":""}} value="1">Secundário Incompleto</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='2'?"selected":""}} value="2">Secundário completo</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='3'?"selected":""}} value="3">Curso tecnologico</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='4'?"selected":""}} value="4">Estuda na universidade</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='5'?"selected":""}} value="5">Licenciado</option>
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='6'?"selected":""}} value="6">Mestrado</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)==null?"selected":""}} value="0" value="0" selected hidden>Selecione nivel</option>
+                        <option value="Secundário Incompleto">Secundário Incompleto</option>
+                        <option value="Secundário Completo">Secundário Completo</option>
+                        <option value="Curso Tecnológico">Curso Tecnológico</option>
+                        <option value="Estuda na Universidade">Estuda na Universidade</option>
+                        <option value="Licenciado">Licenciado</option>
+                        <option value="Mestrado">Mestrado</option>
+
                     </select>
 
                     <br>
 
-                    {{-- INPUT nivEstudoAtual --}}
+                    {{-- INPUT Nome da instituição de origem --}}
                     <label for="nomeInstituicaoOrigem">Nome da instituição de origem:</label><br>
                     <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem"
                         value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}"

@@ -35,7 +35,7 @@ $factory->define(Cliente::class, function (Faker $faker) {
         'fotografia' => null,
         'NIF' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'IBAN' => $faker->iban('351'),
-        'nivEstudoAtual' => '0',
+        'nivEstudoAtual' => null,
         'nomeInstituicaoOrigem' => $faker->company,
         'cidadeInstituicaoOrigem' => $faker->city,
         'num_docOficial' => $faker->unique()->phoneNumber,
@@ -44,6 +44,8 @@ $factory->define(Cliente::class, function (Faker $faker) {
         'obsPessoais' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         'obsFinanceiras' => null,
         'obsAcademicas' => null,
+        'estado' => 'Ativo',
+        'editavel' => 1
 
         /*  'idAgente'  */
     ];

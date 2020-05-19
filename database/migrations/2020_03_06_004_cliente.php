@@ -35,7 +35,9 @@ class Cliente extends Migration
             $table->string('fotografia',255)->nullable();
             $table->string('NIF',255)->unique()->default(null)->nullable();
             $table->string('IBAN',255)->nullable();
-            $table->integer('nivEstudoAtual')->default("0")->nullable();
+
+            $table->enum('nivEstudoAtual',['Secundário Incompleto','Secundário Completo','Curso Tecnológico','Estuda na Universidade','Licenciado','Mestrado'])->nullable()->default(null);
+
             $table->string('nomeInstituicaoOrigem',255)->nullable();
             $table->string('cidadeInstituicaoOrigem',255)->nullable();
 

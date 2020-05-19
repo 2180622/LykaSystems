@@ -66,10 +66,20 @@
 
         /* FIM configs DATATABLES */
 
+        /* Variavel para permitir/negar pesquisa */
+        var pesquisaOk = 0 ;
 
-
+        /* Inicialmente, esconde todos os DIV's dentro do div "searchfields", exepto "divPaisOrigem" */
         $('#searchfields div:not(#divPaisOrigem)').hide();
 
+
+        /* Quando os dados da pesquisa são alterados */
+        $('#searchfields :input').on('change', function() {
+            pesquisaOk++;
+        });
+
+
+        /* Quando os Campos da pesquisa são alterados */
         $('#search_options').on('change', function() {
 
 
@@ -117,24 +127,37 @@
                     $("#divEstadoCliente").show();
                 }
 
+                pesquisaOk ++;
 
         });
 
 
 
 
+        /* Verifica se os campos de pesquisa foram modificados. Se sim, permite a pesquisa */
+        $( "#searchForm" ).submit(function( event ) {
+            if ( pesquisaOk >= 2 ) {
+                return;
+            }
+              event.preventDefault();
+          });
 
 
 
-        $('#test_link').click(function(){
+        /* OPÇÃO DE APAGAR */
+        var formToSubmit //Variavel para indicar o forumulário a submeter
 
-            var cidade = $('#cidade').val();
-            let url = "{{ route('clients.searchResults'," + cidade +") }}";
-/*             url = url.replace(':cidade', cidade); */
-            /* alert(url); */
-             document.location.href=url;
+        $(".form_client_id").submit(function (e) {
+            e.preventDefault();
+            formToSubmit = this;
+            $("#student_name").text($(this).attr("data"));
+            return false;
         });
 
+        //click sim na modal
+        $(".btn_submit").click(function (e) {
+            formToSubmit.submit();
+        });
 
 
 

@@ -196,7 +196,7 @@ class ClientController extends Controller
             $doc_id = new DocPessoal;
             $doc_id->idCliente = $client->idCliente;
             $doc_id->tipo = "Doc. Oficial";
-            $doc_id->idFase = 1;
+            $doc_id->idFase = null;
             $doc_id->dataValidade = $requestClient->validade_docOficial;
 
             /* Constroi a informação adicional para documento de ID */
@@ -222,7 +222,7 @@ class ClientController extends Controller
             $passaporte = new DocPessoal;
             $passaporte->idCliente = $client->idCliente;
             $passaporte->tipo = "Passaporte";
-            $passaporte->idFase = 2;
+            $passaporte->idFase = null;
             $passaporte->dataValidade = $requestClient->dataValidPP;
 
             /* Constroi a informação adicional para o passaporte */
@@ -527,7 +527,7 @@ class ClientController extends Controller
             $doc_id = new DocPessoal;
             $doc_id->idCliente = $client->idCliente;
             $doc_id->tipo = "Doc. Oficial";
-/*             $doc_id->idFase = 2; */
+            $doc_id->idFase = null;
             $doc_id->info = json_encode($infoDocId);
             $doc_id->dataValidade = $request->validade_docOficial;
             $doc_id->create_at == date("Y-m-d",$t);
@@ -535,7 +535,7 @@ class ClientController extends Controller
         }else{
             $doc_id->idCliente = $client->idCliente;
             $doc_id->tipo = "Doc. Oficial";
-/*             $doc_id->idFase = 1; */
+            $doc_id->idFase = null;
             $doc_id->info = json_encode($infoDocId);
             $doc_id->dataValidade = $request->validade_docOficial;
             $doc_id->updated_at == date("Y-m-d",$t);
