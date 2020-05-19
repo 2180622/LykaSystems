@@ -560,7 +560,7 @@ $('#registar-pagamento-form').submit(function(event) {
         processData: false,
         contentType: false,
         success: function(data) {
-            console.log("OK");
+            alert("OK");
         }
     });
 });
