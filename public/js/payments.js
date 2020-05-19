@@ -562,6 +562,7 @@ $('#registar-pagamento-form').submit(function(event) {
         success: function(data) {
             console.log(data);
             $("#modal").modal("show");
+            $("#anchor-stream").attr("href", "/pagamentos/nota-pagamento/"+data.idPagoResp+"/transferir")
         }
     });
 });

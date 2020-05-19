@@ -72,7 +72,6 @@
     <div class="form-group text-right">
         <br>
         <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">registar pagamento</button>
-        <a href="{{route('payments.clientepdf', [$cliente, $responsabilidade])}}" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
         <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
     </div>
     </form>
@@ -91,8 +90,8 @@
                 Se não quiser ter acesso ao documento neste momento, pode sempre transferí-lo mais tarde, sendo apenas necessário voltar a página que se encontra e clicar no botão "Nota de pagamento".
             </div>
             <div class="modal-footer">
-                <a href="#" id="submit-button-modal" type="button" class="text-center">Transferir</a>
-                <a href="#" type="button" class="text-center">Entendido!</a>
+                <a id="anchor-stream" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
+                <a href="{{route('dashboard')}}" type="button" class="text-center">Entendido!</a>
             </div>
         </div>
     </div>

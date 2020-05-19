@@ -115,6 +115,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
         // Registar pagamento FORNECEDOR
         Route::get('/pagamentos/fornecedor/{fornecedor}/fase/{fase}/{relacao}', 'PaymentController@createfornecedor')->name('payments.fornecedor');
     Route::post('/pagamentos/{responsabilidade}/registar', 'PaymentController@store')->name('payments.store');
+    Route::get('/pagamentos/nota-pagamento/{pagoresponsabilidade}/transferir', 'PaymentController@download')->name('payments.download');
 
     /* Cobranças */
     Route::get('/cobrancas', 'ChargesController@index')->name('charges.index');
@@ -129,7 +130,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       Route::get('/cobrancas/{product}/{fase}/{document}/editar', 'ChargesController@edit')->name('charges.edit');
       Route::put('/cobrancas/{product}/{document}', 'ChargesController@update')->name('charges.update');
 
-
     /* Utilizadores */
     Route::resource('/administradores', 'UserController')->parameters([
       'administradores' => 'user'
@@ -142,7 +142,6 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
       'destroy' => 'users.destroy',
       'edit' => 'users.edit',
     ]);
-
 
     /* Produto Stock*/
     Route::resource('/produtostock', 'ProdutosstockController');
