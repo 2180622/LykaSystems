@@ -7,7 +7,7 @@
     <title> @yield('title') - Lyka Systems</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/media/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/media/favicon.png')}}" type="image/x-icon">
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
