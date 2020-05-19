@@ -53,7 +53,7 @@
 
         <div class="row mb-3">
             <div class="col">
-                <div class="text-center text-secondary"><small>Existem <strong>{{count($contacts)}} contacto(s)</strong> registados</small></div>
+                <div class="text-center text-secondary"><small>Existe <strong>{{count($contacts)}} contacto(s)</strong> registados</small></div>
             </div>
         </div>
 
