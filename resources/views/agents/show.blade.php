@@ -236,7 +236,7 @@
 
                     <div class="row mb-3">
                         <div class="col">
-                            <div class="text-center text-secondary"><small>Existem <strong>{{count($clients)}} estudante(s)</strong> associados a este agente</small></div>
+                            <div class="text-center text-secondary"><small>Existe <strong>{{count($clients)}} estudante(s)</strong> associados a este agente</small></div>
                         </div>
                     </div>
 
