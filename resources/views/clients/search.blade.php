@@ -241,7 +241,7 @@
                         </div>
 
 
-                        <div class="row mt-3 mb-4 row mx-1 p-3 ">
+                        <div class="row mt-3 p-3 ">
 {{--                             <div class="col">
                                 <span class="mr-2">Mostrar</span>
                                 <select class="custom-select" id="records_per_page" style="width:80px">
@@ -262,6 +262,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <br>
                         <hr>
 
 

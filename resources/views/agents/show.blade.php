@@ -6,8 +6,8 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
 
-    <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
-    <link href="{{asset('css/inputs.css')}}" rel="stylesheet">
+<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('css/inputs.css')}}" rel="stylesheet">
 
 @endsection
 
@@ -29,9 +29,9 @@
         <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
 
         @if (Auth::user()->tipo == "admin")
-            <a href="{{route('agents.edit',$agent)}}" class="top-button mr-2">Editar informação</a>
+        <a href="{{route('agents.edit',$agent)}}" class="top-button mr-2">Editar informação</a>
         @endif
-        
+
         <a href="{{route('agents.print',$agent)}}" target="_blank" class="top-button">Imprimir</a>
 
     </div>
@@ -109,19 +109,20 @@
                     <div><span class="text-secondary ">Data de nascimento: </span>
                         {{ date('d-M-y', strtotime($agent->dataNasc)) }}</div>
 
-                        @if ($agent->tipo=="Subagente")
-                        <br>
-                        <div class="text-muted">Subagente de:
-                            {{-- Apenas cria o link para o perfil do agente SE for o administrador a consultar --}}
-                            @if (Auth::user()->tipo == "admin")
-                                <a class="name_link" href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}} {{$mainAgent->apelido}}</a>
-                            @else
-                                <span class="active">{{$mainAgent->nome}} {{$mainAgent->apelido}}</span>
-                            @endif
-
-                        </div>
-                        <br>
+                    @if ($agent->tipo=="Subagente")
+                    <br>
+                    <div class="text-muted">Subagente de:
+                        {{-- Apenas cria o link para o perfil do agente SE for o administrador a consultar --}}
+                        @if (Auth::user()->tipo == "admin")
+                        <a class="name_link" href="{{route('agents.show',$mainAgent)}}">{{$mainAgent->nome}}
+                            {{$mainAgent->apelido}}</a>
+                        @else
+                        <span class="active">{{$mainAgent->nome}} {{$mainAgent->apelido}}</span>
                         @endif
+
+                    </div>
+                    <br>
+                    @endif
 
                 </div>
 
@@ -135,17 +136,21 @@
 
 
             @if ( $agent->tipo == "Agente" )
-                <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link"
-                    id="subagentes-type-tab" data-toggle="tab" href="#subagentes-type" role="tab" aria-controls="agent_type"
-                    aria-selected="true">
-                    <div class="col"><i class="fas fa-share-alt mr-2"></i>Subagentes</div>
-                </a>
+            <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link"
+                id="subagentes-type-tab" data-toggle="tab" href="#subagentes-type" role="tab" aria-controls="agent_type"
+                aria-selected="true">
+                <div class="col"><i class="fas fa-share-alt mr-2"></i>Subagentes</div>
+            </a>
             @endif
 
 
-            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link {{ $agent->tipo == "Subagente" ? 'active' : '' }}" id="clients-tab"
-                data-toggle="tab" href="#clients" role="tab" aria-controls="clients" aria-selected="false">
-                <div class="col"><ion-icon name="person-circle-outline" class="mr-2" style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 0px;"></ion-icon>Estudantes
+            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link {{ $agent->tipo == "Subagente" ? 'active' : '' }}"
+                id="clients-tab" data-toggle="tab" href="#clients" role="tab" aria-controls="clients"
+                aria-selected="false">
+                <div class="col">
+                    <ion-icon name="person-circle-outline" class="mr-2"
+                        style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 0px;">
+                    </ion-icon>Estudantes
                 </div>
             </a>
 
@@ -180,191 +185,211 @@
 
 
 
-                    @if ($agent->tipo == "Agente")
-                    {{-- SUB AGENTES --}}
-                    <div class="tab-pane fade show active" id="subagentes-type" role="tabpanel" aria-labelledby="subagentes-type-tab" >
+                @if ($agent->tipo == "Agente")
+                {{-- SUB AGENTES --}}
+                <div class="tab-pane fade show active" id="subagentes-type" role="tabpanel"
+                    aria-labelledby="subagentes-type-tab">
 
-                                @if($listagents==null)
-                                    <div class="border rounded bg-light p-3">
-                                        <div class="text-muted"><small>(sem registos)</small></div>
-                                    </div>
-                                    <br>
-                                @else
-                                    <div class="row mx-auto" style="max-height:1000px; overflow:auto ">
-                                        @foreach ($listagents as $agentx)
-                                            <a class="name_link text-center m-2" href="{{route('agents.show',$agentx)}}">
-                                                <div class="col">
-                                                    <div style="width: 200px; height:210px; overflow:hidden">
-                                                        @if($agentx->fotografia)
-                                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                                src="{{Storage::disk('public')->url('agent-documents/'.$agentx->idAgente.'/').$agentx->fotografia}}"
-                                                                style="width:100%; height:auto">
-                                                            @elseif($agentx->genero == 'F')
-                                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                                src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" style="width:100%">
-                                                            @else
-                                                            <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                                src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:100%">
-                                                        @endif
-                                                    </div>
-                                                    <div class="mt-1">{{$agentx->nome}} {{$agentx->apelido}}</div>
-                                                    <div style="margin-top:-7px"><small>({{$agentx->pais}})</small></div>
-                                                </div>
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                @endif
+                    @if($listagents==null)
+                    <div class="border rounded bg-light p-3">
+                        <div class="text-muted"><small>(sem registos)</small></div>
+                    </div>
+                    <br>
+                    @else
+                    <div class="row mx-auto" style="max-height:1000px; overflow:auto ">
+                        @foreach ($listagents as $agentx)
+                        <a class="name_link text-center m-2" href="{{route('agents.show',$agentx)}}">
+                            <div class="col">
+                                <div style="width: 200px; height:210px; overflow:hidden">
+                                    @if($agentx->fotografia)
+                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                        src="{{Storage::disk('public')->url('agent-documents/'.$agentx->idAgente.'/').$agentx->fotografia}}"
+                                        style="width:100%; height:auto">
+                                    @elseif($agentx->genero == 'F')
+                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                        src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
+                                        style="width:100%">
+                                    @else
+                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
+                                        src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                        style="width:100%">
+                                    @endif
+                                </div>
+                                <div class="mt-1">{{$agentx->nome}} {{$agentx->apelido}}</div>
+                                <div style="margin-top:-7px"><small>({{$agentx->pais}})</small></div>
+                            </div>
+                        </a>
+                        @endforeach
                     </div>
                     @endif
+                </div>
+                @endif
 
 
 
 
-            {{-- Clientes --}}
-            <div class="tab-pane fade {{ $agent->tipo == 'Subagente' ? 'show active' : '' }}" id="clients" role="tabpanel" aria-labelledby="clients-tab">
-                @if($clients)
-                <div class="row mx-1 p-3 border rounded bg-light">
-                    <div class="col">
-                        <span class="mr-2">Mostrar</span>
-                        <select class="custom-select" id="records_per_page" style="width:80px">
-                            <option selected>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                            <option>100</option>
-                        </select>
-                        <span class="ml-2">por página</span>
+                {{-- Clientes --}}
+                <div class="tab-pane fade {{ $agent->tipo == 'Subagente' ? 'show active' : '' }}" id="clients"
+                    role="tabpanel" aria-labelledby="clients-tab">
+
+                    @if($clients)
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="text-center text-secondary"><small>Existem <strong>{{count($clients)}} estudante(s)</strong> associados a este agente</small></div>
+                        </div>
                     </div>
-                    <div class="col ">
-                        <div class="input-group pl-0 float-right search-section" style="width:250px">
-                            <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
-                            <div class="search-button input-group-append">
-                                <ion-icon name="search-outline" class="search-icon"></ion-icon>
+
+                    <div class="row p-3 ">
+                        <div class="col text-center mb-3">
+                            <div class="input-group pl-0  search-section mx-auto" style="width:50%">
+                                <input class="shadow-sm" type="text" id="customSearchBox"
+                                    placeholder="Secção de procura" aria-label="Procurar">
+                                <div class="search-button input-group-append">
+                                    <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <br>
+                    <br>
+                    <hr>
 
 
-                <div class="table-responsive " style="overflow:hidden">
+                    <div class="table-responsive " style="overflow:hidden">
 
 
-                    <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+                        <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
+                            style="overflow:hidden;">
 
-                        {{-- Cabeçalho da tabela --}}
-                        <thead>
-                            <tr>
-                                <th class="text-center align-content-center ">Foto</th>
-                                <th>Nome</th>
-                                <th>Naturalidade</th>
-                                <th class="text-center">Opções</th>
-                            </tr>
-                        </thead>
+                            {{-- Cabeçalho da tabela --}}
+                            <thead>
+                                <tr>
+                                    <th class="text-center align-content-center ">Foto</th>
+                                    <th>Nome</th>
+                                    <th>Naturalidade</th>
+                                    <th class="text-center">Opções</th>
+                                </tr>
+                            </thead>
 
-                        {{-- Corpo da tabela --}}
-                        <tbody>
+                            {{-- Corpo da tabela --}}
+                            <tbody>
 
-                            @foreach ($clients as $client)
-                            <tr>
-                                <td >
-                                    <div class="align-middle mx-auto shadow-sm rounded bg-white" style="overflow:hidden; width:50px; height:50px">
-                                        <a class="name_link" href="{{route('clients.show',$client)}}">
-                                            @if($client->fotografia)
-                                                <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}" width="100%" class="mx-auto">
+                                @foreach ($clients as $client)
+                                <tr>
+                                    <td>
+                                        <div class="align-middle mx-auto shadow-sm rounded bg-white"
+                                            style="overflow:hidden; width:50px; height:50px">
+                                            <a class="name_link" href="{{route('clients.show',$client)}}">
+                                                @if($client->fotografia)
+                                                <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
+                                                    width="100%" class="mx-auto">
                                                 @elseif($client->genero == 'F')
-                                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                                    @else
-                                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                                    @endif
-                                        </a>
-                                    </div>
+                                                <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
+                                                    width="100%" class="mx-auto">
+                                                @else
+                                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
+                                                    width="100%" class="mx-auto">
+                                                @endif
+                                            </a>
+                                        </div>
 
-                                </td>
+                                    </td>
 
-                                {{-- Nome e Apelido --}}
-                                <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a></td>
-
-
-                                {{-- paisNaturalidade --}}
-                                 <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+                                    {{-- Nome e Apelido --}}
+                                    <td class="align-middle"><a class="name_link"
+                                            href="{{route('clients.show',$client)}}">{{ $client->nome }}
+                                            {{ $client->apelido }}</a></td>
 
 
-                                {{-- OPÇÔES --}}
-                                <td class="text-center align-middle">
-                                    <a href="{{route('clients.show',$client)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                    <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-{{--
-                                    <form method="POST" role="form" id="{{ $client->idCliente }}" action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
+                                    {{-- paisNaturalidade --}}
+                                    <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+
+
+                                    {{-- OPÇÔES --}}
+                                    <td class="text-center align-middle">
+                                        <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
+                                            title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                        <a href="{{route('clients.edit',$client)}}"
+                                            class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                                class="fas fa-pencil-alt mr-2"></i></a>
+                                        {{--
+                                    <form method="POST" role="form" id="{{ $client->idCliente }}"
+                                        action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }}
+                                        {{ $client->apelido }}" class="d-inline-block form_client_id">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                    </form> --}}
+                                        <button type="submit" class="btn_delete" title="Eliminar estudante"
+                                            data-toggle="modal" data-target="#deleteModal"><i
+                                                class="fas fa-trash-alt"></i></button>
+                                        </form> --}}
 
-                                </td>
-                            </tr>
-                            @endforeach
+                                    </td>
+                                </tr>
+                                @endforeach
 
-                        </tbody>
-                    </table>
-                </div>
-                @else
-                <div class="border rounded bg-light p-3">
-                    <div class="text-muted"><small>(sem registos)</small></div>
-                </div>
-                <br>
-                @endif
-            </div>
-
-
-
-
-
-            {{-- Dados pessoais --}}
-            <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
-
-                <div class="row">
-
-                    <div class="col">
-
-
-                        <div class="text-secondary mb-2">Número de identificação pessoal:</div>
-
-                        <div class="border rounded bg-light p-3">
-                            <div>{{$agent->num_doc}}</div>
-                        </div>
-
-                        <br>
-
-                        <div class="text-secondary mb-2">Número de identificação fiscal:</div>
-
-                        <div class="border rounded bg-light p-3">
-                            <div>{{$agent->NIF}}</div>
-                        </div>
-
-                        <br>
-
+                            </tbody>
+                        </table>
                     </div>
+                    @else
+                    <div class="border rounded bg-light p-3">
+                        <div class="text-muted"><small>(sem registos)</small></div>
+                    </div>
+                    <br>
+                    @endif
+                </div>
 
-                    {{-- Documento de identificação --}}
-                    <div class="col text-center" style="min-width: 240px">
+
+
+
+
+                {{-- Dados pessoais --}}
+                <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+
+                    <div class="row">
+
+                        <div class="col">
+
+
+                            <div class="text-secondary mb-2">Número de identificação pessoal:</div>
+
+                            <div class="border rounded bg-light p-3">
+                                <div>{{$agent->num_doc}}</div>
+                            </div>
+
+                            <br>
+
+                            <div class="text-secondary mb-2">Número de identificação fiscal:</div>
+
+                            <div class="border rounded bg-light p-3">
+                                <div>{{$agent->NIF}}</div>
+                            </div>
+
+                            <br>
+
+                        </div>
+
+                        {{-- Documento de identificação --}}
+                        <div class="col text-center" style="min-width: 240px">
                             <div class="card rounded shadow-sm m-2 p-3 h-100">
                                 @if ($agent->img_doc)
-                                    <a class="name_link my-auto" target="_blank" href="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->img_doc}}">
+                                <a class="name_link my-auto" target="_blank"
+                                    href="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->img_doc}}">
 
-                                            <i class="far fa-id-card" style="font-size:40px"></i><br>
-                                            <div>Ver documento de identificação</div>
-                                    </a>
+                                    <i class="far fa-id-card" style="font-size:40px"></i><br>
+                                    <div>Ver documento de identificação</div>
+                                </a>
                                 @else
-                                    <a href="{{route('agents.edit',$agent)}}" class="mt-2 name_link my-auto"><small class="text-danger mt-2">
-                                            <i class="far fa-id-card" style="font-size:40px"></i><br>
-                                            <strong>Sem documento de identificação</strong></small>
-                                    </a>
+                                <a href="{{route('agents.edit',$agent)}}" class="mt-2 name_link my-auto"><small
+                                        class="text-danger mt-2">
+                                        <i class="far fa-id-card" style="font-size:40px"></i><br>
+                                        <strong>Sem documento de identificação</strong></small>
+                                </a>
                                 @endif
                             </div>
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
 
 
 
@@ -422,12 +447,12 @@
                             <br>
 
                             @if ($telefone2)
-                                <div class="text-secondary mb-2">Telefone alternativo:</div>
+                            <div class="text-secondary mb-2">Telefone alternativo:</div>
 
-                                <div class="border rounded bg-light p-3">
-                                    <div>{{$telefone2}}</div>
-                                </div>
-                                <br>
+                            <div class="border rounded bg-light p-3">
+                                <div>{{$telefone2}}</div>
+                            </div>
+                            <br>
                             @endif
 
                         </div>
@@ -448,9 +473,9 @@
                             <div class="border rounded bg-light p-3">
                                 <div>
                                     @if ($IBAN)
-                                        {{$IBAN}}
+                                    {{$IBAN}}
                                     @else
-                                        <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                                    <div class="text-muted"><small>(sem dados para mostrar)</small></div>
                                     @endif
                                 </div>
                             </div>
@@ -465,9 +490,9 @@
                             <div class="border rounded bg-light p-3">
                                 <div>
                                     @if ($comissoes)
-                                        {{$comissoes}}€
+                                    {{$comissoes}}€
                                     @else
-                                        <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                                    <div class="text-muted"><small>(sem dados para mostrar)</small></div>
                                     @endif
                                 </div>
                             </div>
