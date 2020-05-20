@@ -83,6 +83,8 @@
         $('#search_options').on('change', function() {
 
 
+            pesquisaOk=0;
+
                 /* Pais de origem */
                 if($('#search_options').val()=="País de origem" ){
                     $('#searchfields div:not(#divPaisOrigem)').hide();
