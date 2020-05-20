@@ -75,7 +75,7 @@
                             <thead>
                             @foreach ($todayAgends as $agend)
                                 <tr>
-                                    <th colspan="2">Todos os eventos {{ date('d/m/Y', strtotime($agend->dataInicio)) }}</th>
+                                    <th colspan="2">Todos os eventos {{ date('d/m/Y', strtotime($agend->Date.now())) }}</th>
                                 </tr>
                             </thead>
                             {{-- Corpo da tabela --}}
