@@ -746,14 +746,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/pagamentos'.'/'.$pagoResponsabilidade->slug)->assertRedirect('/login');
     }
     
-    /** @test */
-    public function redirecionar_de_create_pago_responsabilidade_para_login()
-    {
-
-        $response = $this->get('/pagamentos/criar')->assertRedirect('/login');
-    }
-    
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_pago_responsabilidade_para_login()
     {
         $cliente = factory(Cliente::class)->make();
@@ -780,37 +773,37 @@ class PermissionTest extends TestCase
             'idConta' => $conta->idConta,
         ]);
 
-        $response = $this->get('/pagamentos'.'/'.$pagoResponsabilidade->slug.'/editar')->assertRedirect('/login');
+        $response = $this->get('/pagamentos'.'/'.$pagoResponsabilidade->idPagoResp.'/editar')->assertRedirect('/login');
     }
 
     /********************************************************************************************************** */
 
-    /** @test */
+    /** @teste */
     public function redirecionar_de_lista_relatorio_problema_para_login()
     {
         $response = $this->get('/reportar-problema')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_show_relatorio_problema_para_login()
     {
         $relatorioProblema = factory(RelatorioProblema::class)->make();
 
-        $response = $this->get('/reportar-problema'.'/'.$relatorioProblema->slug)->assertRedirect('/login');
+        $response = $this->get('/reportar-problema'.'/'.$relatorioProblema->idRelatorioProblema)->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_create_relatorio_problema_para_login()
     {
 
         $response = $this->get('/reportar-problema/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_relatorio_problema_para_login()
     {
         $relatorioProblema = factory(RelatorioProblema::class)->make();
 
-        $response = $this->get('/reportar-problema'.'/'.$relatorioProblema->slug.'/editar')->assertRedirect('/login');
+        $response = $this->get('/reportar-problema'.'/'.$relatorioProblema->idRelatorioProblema.'/editar')->assertRedirect('/login');
     }
 }
