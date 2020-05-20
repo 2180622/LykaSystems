@@ -15,6 +15,7 @@ $factory->define(Cliente::class, function (Faker $faker) {
     }
     $apelido = $faker->lastName;
     return [
+        'idCliente' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'nome' => $nome,
         'apelido' => $apelido,
         'genero' => $gender,
@@ -45,8 +46,9 @@ $factory->define(Cliente::class, function (Faker $faker) {
         'obsFinanceiras' => null,
         'obsAcademicas' => null,
         'estado' => 'Ativo',
-        'editavel' => 1
+        'editavel' => 1,
 
+        'slug' => $nome,
         /*  'idAgente'  */
     ];
 });

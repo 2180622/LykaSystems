@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Universidade::class, function (Faker $faker) {
     return [
+        'idUniversidade' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'nome' => $faker->company,
         'morada' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,
         'telefone' => $faker->numberBetween($min = 100000000, $max = 999999999),
@@ -15,6 +16,7 @@ $factory->define(Universidade::class, function (Faker $faker) {
         'IBAN' => $faker->iban('351'),
         'observacoes' => $faker->realText($maxNbChars = 200, $indexSize = 2),
         'obsCursos' => $faker->realText($maxNbChars = 200, $indexSize = 2),
-        'obsCandidaturas' => $faker->realText($maxNbChars = 200, $indexSize = 2)
+        'obsCandidaturas' => $faker->realText($maxNbChars = 200, $indexSize = 2),
+        'slug' => 'universidade',
     ];
 });

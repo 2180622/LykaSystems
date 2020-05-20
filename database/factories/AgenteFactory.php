@@ -14,6 +14,7 @@ $factory->define(Agente::class, function (Faker $faker) {
         $nome = $faker->firstNameMale;
     }
     return [
+        'idAgente' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'nome' => $nome,
         'apelido' => $faker->lastName,
         'genero' => $gender,
@@ -30,6 +31,7 @@ $factory->define(Agente::class, function (Faker $faker) {
         'telefone2' => $faker->numberBetween($min = 100000000, $max = 999999999),
         'IBAN' => $faker->iban('351'),
 
+        'slug' => $nome,
         /*  'idAgenteAssociado'  */
     ];
 });
