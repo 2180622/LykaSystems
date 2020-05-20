@@ -3,12 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PagoResponsabilidade extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'PagoResponsabilidade';
 
     protected $primaryKey = 'idPagoResp';

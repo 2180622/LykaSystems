@@ -405,7 +405,7 @@ class PaymentController extends Controller
             $pagoResponsabilidade->notaPagamento = $nomeNotaPagamento;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaCliente;
-            // $pagoResponsabilidade->save();
+            $pagoResponsabilidade->save();
 
         if ($valorCliente >= $responsabilidade->valorCliente) {
             Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
@@ -529,6 +529,15 @@ class PaymentController extends Controller
         $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->first();
         event(new StorePayment($responsabilidade));
         return response()->json($pagoResponsabilidade, 200);
+    }
+
+    public function download(PagoResponsabilidade $pagoresponsabilidade)
+    {
+        $file = Storage::disk('public')->path('nota-pagamento/'.$pagoresponsabilidade->notaPagamento);
+        return response()->file($file, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$pagoresponsabilidade->notaPagamento.'"'
+        ]);
     }
 
     public function clientepdf(Cliente $cliente, Responsabilidade $responsabilidade)
