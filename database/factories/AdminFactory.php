@@ -16,6 +16,7 @@ $factory->define(Administrador::class, function (Faker $faker) {
         $nome = $faker->firstNameMale;
     }
     return [
+        'idAdmin' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'nome' => $nome,
         'apelido' => $faker->lastName,
         'genero' => $gender,

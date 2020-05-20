@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Produto::class, function (Faker $faker) {
     return [
+        'idProduto' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'descricao' => $faker->sentence($nbWords = 2, $variableNbWords = true),
         'tipo' => $faker->randomElement($array = array ('Licenciatura','Mestrado','Curso de Verão')),
         'anoAcademico' => '2020/21',
@@ -15,6 +16,7 @@ $factory->define(Produto::class, function (Faker $faker) {
         'valorTotalSubAgente' => $faker->numberBetween($min = 100, $max = 500),
         'estado' => $faker->randomElement($array = array ('Pendente','Pago', 'Dívida', 'Crédito')),
 
+        'slug' => 'produto',
         /*  'idAgente'  'idSubAgente'  'idCliente'  'idUniversidade1'  'idUniversidade2'  */
     ];
 });

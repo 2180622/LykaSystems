@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Contacto::class, function (Faker $faker) {
     return [
+        'idContacto' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'nome' => $faker->firstNameFemale,
         'fotografia' => null,
         'telefone1' => $faker->numberBetween($min = 100000000, $max = 999999999),
@@ -17,6 +18,7 @@ $factory->define(Contacto::class, function (Faker $faker) {
         'favorito' => false,
         'visibilidade' => true,
 
+        'slug' => 'contacto',
         /*  'idUser'  'idUniversidade'  */
     ];
 });
