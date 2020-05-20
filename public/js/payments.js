@@ -557,11 +557,23 @@ $('#registar-pagamento-form').submit(function(event) {
         url: "/pagamentos/"+id+"/registar",
         data: info,
         context: this,
+        cache: false,
         processData: false,
         contentType: false,
+        beforeSend: function(){
+            $('#loader-background').css({
+                "display": "block",
+                "opacity": "1"
+            });
+        },
+        complete: function(){
+            $('#loader-background').css("opacity", 0);
+            setTimeout(function(){
+                $('#loader').remove();
+            }, 0500);
+        },
         success: function(data) {
-            console.log(data);
-            $("#modal").modal("show");
+            $("#modal-success").modal("show");
             $("#anchor-stream").attr("href", "/pagamentos/nota-pagamento/"+data.idPagoResp+"/transferir")
         }
     });

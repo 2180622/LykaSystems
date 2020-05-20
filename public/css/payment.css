@@ -411,3 +411,36 @@ select[disabled="true"] {
     box-shadow: none;
     border-radius: 0px;
 }
+
+#loader-background {
+    z-index: 5;
+    opacity: 0;
+    width: 88%;
+    height: 50%;
+    display: none;
+    position: absolute;
+    transition: 0.5s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#loader {
+    top: 36%;
+    left: 44%;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    border-radius: 50%;
+    border: 8px solid #d5d5d5;
+    border-top: 8px solid #6A74C9;
+    animation: spin 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

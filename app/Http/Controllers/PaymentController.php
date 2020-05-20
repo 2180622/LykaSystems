@@ -405,7 +405,7 @@ class PaymentController extends Controller
             $pagoResponsabilidade->notaPagamento = $nomeNotaPagamento;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaCliente;
-            $pagoResponsabilidade->save();
+            // $pagoResponsabilidade->save();
 
         if ($valorCliente >= $responsabilidade->valorCliente) {
             Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)

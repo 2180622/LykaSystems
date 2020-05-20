@@ -13,6 +13,9 @@
         </button>
     </div>
     <div class="payment-card shadow-sm">
+        <div id="loader-background">
+            <div id="loader"></div>
+        </div>
         <p style="margin-left: 0px !important; font-weight:600;">valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$responsabilidade->valorCliente, 2, ',', '').'€'}}</p>
         <hr>
@@ -78,12 +81,11 @@
     <br>
 </div>
 
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+<div class="modal fade" id="modal-success" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <ion-icon id="checkmark-icon" name="checkmark" size="large"></ion-icon>
-                {{-- <ion-icon name="checkmark-circle-outline"></ion-icon> --}}
             </div>
             <div class="modal-body text-center">
                 <p id="title-modal">Registo feito com sucesso!</p>
