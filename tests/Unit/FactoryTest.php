@@ -28,13 +28,11 @@ use App\RelatorioProblema;
 use App\PagoResponsabilidade;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class FactoryTest extends TestCase
 {
     use DatabaseMigrations;
-    use RefreshDatabase;
 
 
     /** @test */
