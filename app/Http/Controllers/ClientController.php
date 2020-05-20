@@ -689,7 +689,7 @@ class ClientController extends Controller
         $cidadesOrigem = array_unique(Cliente::pluck('cidade')->toArray());
         $instituicoesOrigem = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
 
-        $agents= Agente::where("tipo","=","Agente")->get();
+        $agents= Agente::all();
         $universidades = Universidade::all();
 
         return view('clients.search',compact('paises','cidadesOrigem','instituicoesOrigem','agents','universidades'));
@@ -730,7 +730,8 @@ class ClientController extends Controller
 
             case "Agente":
                 $clients= Cliente::where("idAgente","=",$request->agente)->get();
-                $valor=$request->agente;
+                $valor = Agente:: where("idAgente","=",$request->agente)->first();
+                $valor = $valor->nome.' '.$valor->apelido;
             break;
 
 
@@ -770,7 +771,7 @@ class ClientController extends Controller
         $paises = array_unique(Cliente::pluck('paisNaturalidade')->toArray());
         $cidadesOrigem = array_unique(Cliente::pluck('cidade')->toArray());
         $instituicoesOrigem = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
-        $agents= Agente::where("tipo","=","Agente")->get();
+        $agents= Agente::all();
         $universidades = Universidade::all();
 
 
