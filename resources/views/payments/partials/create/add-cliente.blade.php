@@ -49,6 +49,11 @@
                     </select>
                 </div>
                 <div class="col-md-8">
+                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="A descrição que inserir será colocada na nota de pagamento como descrição do mesmo.">
+                        <span>
+                            ?
+                        </span>
+                    </div>
                     <label for="descricaoCliente">Descrição do pagamento</label>
                     <br>
                     <input type="text" name="descricaoCliente" id="descricaoCliente" required="required" placeholder="Adicionar uma descrição" maxlength="150">
@@ -59,7 +64,7 @@
                 <div class="col">
                     <label for="observacoes">Observações</label>
                     <br>
-                    <textarea name="observacoes" rows="3"></textarea>
+                    <textarea name="observacoes" rows="3" placeholder="Adicionar uma observação"></textarea>
                 </div>
             </div>
             <br>
@@ -67,9 +72,33 @@
     <div class="form-group text-right">
         <br>
         <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">registar pagamento</button>
-        <a href="{{route('payments.clientepdf', [$cliente, $responsabilidade])}}" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
         <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
     </div>
     </form>
     <br>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <ion-icon id="checkmark-icon" name="checkmark" size="large"></ion-icon>
+                {{-- <ion-icon name="checkmark-circle-outline"></ion-icon> --}}
+            </div>
+            <div class="modal-body text-center">
+                <p id="title-modal">Registo feito com sucesso!</p>
+                <p id="text-info-modal" class="mt-3">Pretende transferir a nota de pagamento que comprova o pagamento registado?</p>
+            </div>
+            <div class="modal-footer mt-2">
+                <div class="row text-center">
+                    <div class="col-6">
+                        <a id="cancel-button" href="{{route("payments.index")}}">Voltar</a>
+                    </div>
+                    <div class="col-6">
+                        <a id="anchor-stream" target="_blank">Transferir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

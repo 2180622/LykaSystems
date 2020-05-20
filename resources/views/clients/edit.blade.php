@@ -96,4 +96,7 @@
 {{-- script permite definir se um input recebe só numeros OU so letras --}}
 <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 
+
+<script src="{{asset('/js/editable_comboBox.js')}}"></script>
+
 @endsection

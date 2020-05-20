@@ -185,7 +185,10 @@
 
         /* Estado inicial */
         /* Para novo cliente */
-        if( $('#editavel').val() ){
+
+
+
+        if( $('#editavel').val().length<=1){
             $('#editavel').val("1");
         }
 
@@ -198,6 +201,7 @@
             $("#editavel_sim").hide();
             $("#editavel_nao").show();
         }
+
 
         /* Mudança de estado */
         $('#btn_editavel').click(function(){
@@ -261,6 +265,12 @@
 
 
 
+        /* Quando um input é modificado remove a validação do bootstrap */
+        $("input, select").change(function(){
+            $(this).removeClass("is-invalid");
+          });
+
+
 
         $('#form_client').on('submit', function () {
 
@@ -272,41 +282,59 @@
             /* valida Campos da informação pessoal */
 
             /* Campo do nome */
-            if (($("#nome").val() == "")) {
+            if ($("#nome").val() == "") {
                 $("#wait_screen").hide();
                 $("#nome").addClass("is-invalid");
                 $("#pessoal-tab").addClass("border-danger text-danger");
                 $("#warning_msg").show();
                 validated = false;
             } else {
-                $("#pessoal-tab").removeClass("border-danger text-danger");
+                /* $("#pessoal-tab").removeClass("border-danger text-danger"); */
                 $("#nome").removeClass("is-invalid");
             }
 
 
             /* Campo do apelido */
-            if (($("#apelido").val() == "")) {
+            if ($("#apelido").val() == "") {
                 $("#wait_screen").hide();
                 $("#apelido").addClass("is-invalid");
                 $("#pessoal-tab").addClass("border-danger text-danger");
                 $("#warning_msg").show();
                 validated = false;
             } else {
-                $("#pessoal-tab").removeClass("border-danger text-danger");
+                /* $("#pessoal-tab").removeClass("border-danger text-danger"); */
                 $("#apelido").removeClass("is-invalid");
             }
 
 
-            /* Campo do apelido */
-            if (($("#genero").val() == "")) {
+            /* Campo do genero */
+            if ($("#genero").val() == "") {
                 $("#wait_screen").hide();
                 $("#genero").addClass("is-invalid");
                 $("#pessoal-tab").addClass("border-danger text-danger");
                 $("#warning_msg").show();
                 validated = false;
             } else {
-                $("#pessoal-tab").removeClass("border-danger text-danger");
+                /* $("#pessoal-tab").removeClass("border-danger text-danger"); */
                 $("#genero").removeClass("is-invalid");
+            }
+
+
+            /* Campo do paisNaturalidade */
+            if ($("#paisNaturalidade").val() == "") {
+                $("#wait_screen").hide();
+                $("#paisNaturalidade").addClass("is-invalid");
+                $("#pessoal-tab").addClass("border-danger text-danger");
+                $("#warning_msg").show();
+                validated = false;
+            } else {
+                /* $("#pessoal-tab").removeClass("border-danger text-danger"); */
+                $("#paisNaturalidade").removeClass("is-invalid");
+            }
+
+
+            if( $("#nome").val() != "" && $("#apelido").val() != "" && $("#paisNaturalidade").val() != "" && $("#genero").val() != ""  ){
+                $("#pessoal-tab").removeClass("border-danger text-danger");
             }
 
 
