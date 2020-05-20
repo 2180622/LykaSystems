@@ -379,8 +379,8 @@
 
                         <div class="text-secondary mb-2">Instituição de origem</div>
                         <div class="border rounded bg-light p-3">
-                            <div><span class="text-secondary">Nome: </span>@if ($client->nomeInstituicaoOrigem=="") <span class="text-muted"><small>(sem dados para mostrar)</span></small>@else {{$client->nomeInstituicaoOrigem}}@endif</div><br>
-                            <div><span class="text-secondary">Local: </span>@if ($client->cidadeInstituicaoOrigem=="") <span class="text-muted"><small>(sem dados para mostrar)</span></small>@else {{$client->cidadeInstituicaoOrigem}}@endif</div>
+                            <div><span class="text-secondary">Nome: </span>{{$client->nomeInstituicaoOrigem}}</div><br>
+                            <div><span class="text-secondary">Local: </span>{{$client->cidadeInstituicaoOrigem}}</div>
                         </div>
 
                         <br>

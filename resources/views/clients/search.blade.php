@@ -5,8 +5,8 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -233,7 +233,7 @@
 
                     <hr>
                     <br>
-                    
+
                     <div class="row">
                         <div class="col">
                             <div class="text-center text-secondary"><small>A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}} </strong>" encontrou <strong>{{count($clients)}}</strong> registo(s) no sistema</small></div>
