@@ -273,9 +273,6 @@ class ClientController extends Controller
     */
     public function show(Cliente $client){
 
-
-
-
        /* Permissões */
         if (Auth::user()->tipo == "cliente" ){
          abort (401);

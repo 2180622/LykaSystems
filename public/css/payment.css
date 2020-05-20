@@ -315,12 +315,12 @@ select[disabled="true"] {
 }
 
 /* MODAL STYLE */
-.modal-content {
+.message-modal .modal-content {
     border: none !important;
     border-top: 5px solid #6A74C9 !important;
 }
 
-.modal-content #checkmark-icon {
+.message-modal .modal-content #checkmark-icon {
     width: 50px;
     height: 50px;
     color: #747474;
@@ -329,37 +329,46 @@ select[disabled="true"] {
     --ionicon-stroke-width: 30px;
 }
 
-.modal-header {
+.message-modal .modal-content #close-icon {
+    width: 50px;
+    height: 50px;
+    color: #747474;
+    margin-top: 10px;
+    position: relative;
+    --ionicon-stroke-width: 30px;
+}
+
+.message-modal .modal-header {
     padding-bottom: 10px;
 }
 
-.modal-header, .modal-footer {
+.message-modal .modal-header, .modal-footer {
     display: block;
     border: 0px !important;
     border-radius: 0px !important;
     justify-content: normal;
 }
 
-.modal-body {
+.message-modal .modal-body {
     padding-top: 10px;
 }
 
-.modal-body #title-modal {
+.message-modal .modal-body #title-modal {
     font-size: 1.1rem;
     font-weight: 700;
 }
 
-.modal-body #text-info-modal {
+.message-modal .modal-body #text-info-modal {
     color: #747474;
     padding: 0 50px;
     font-weight: 600;
 }
 
-.modal-footer {
+.message-modal .modal-footer {
     padding-bottom: 45px;
 }
 
-.modal-footer #anchor-stream {
+.message-modal .modal-footer #anchor-stream {
     color: white;
     cursor: pointer;
     padding: 8px 25px;
@@ -369,7 +378,7 @@ select[disabled="true"] {
     background-color: #6A74C9;
 }
 
-.modal-footer #cancel-button {
+.message-modal .modal-footer #cancel-button {
     color: #A9A9A9;
     cursor: pointer;
     font-weight: 600;
@@ -381,7 +390,7 @@ select[disabled="true"] {
     transition: 0.2s ease-in-out;
 }
 
-.modal-footer #cancel-button:hover {
+.message-modal .modal-footer #cancel-button:hover {
     color: white;
     background-color: #A9A9A9;
 }
@@ -410,4 +419,37 @@ select[disabled="true"] {
 #submit-button:focus {
     box-shadow: none;
     border-radius: 0px;
+}
+
+#loader-background {
+    z-index: 5;
+    opacity: 0;
+    width: 88%;
+    height: 50%;
+    display: none;
+    position: absolute;
+    transition: 0.5s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#loader {
+    top: 38%;
+    left: 45%;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border-radius: 50%;
+    border: 7px solid #d5d5d5;
+    border-top: 7px solid #6A74C9;
+    animation: spin 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

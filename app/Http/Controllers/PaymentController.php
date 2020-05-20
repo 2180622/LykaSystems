@@ -347,7 +347,7 @@ class PaymentController extends Controller
 
     public function store(Request $request, Responsabilidade $responsabilidade)
     {
-        $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->with(["cliente", "fase"])->first();
+        $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->with(["cliente", "agente", "subAgente", "universidade1", "universidade2", "fase"])->first();
         // Campos de CLIENTE
         $valorCliente = ($request->input('valorPagoCliente') != null ? $request->input('valorPagoCliente') : null);
         $comprovativoCliente = ($request->file('comprovativoPagamentoCliente') != null ? $request->file('comprovativoPagamentoCliente') : null);
@@ -356,10 +356,12 @@ class PaymentController extends Controller
         $descricaoCliente = ($request->input('descricaoCliente') != null ? $request->input('descricaoCliente') : null);
         $observacoesCliente = ($request->input('observacoes') != null ? $request->input('observacoes') : null);
         // Campos de AGENTE
-        $valorAgente = (isset($fields['valorPagoAgente']) ? $fields['valorPagoAgente'] : null);
-        $comprovativoAgente = (isset($fields['comprovativoPagamentoAgente']) ? $fields['comprovativoPagamentoAgente'] : null);
-        $dataAgente = (isset($fields['dataAgente']) ? $fields['dataAgente'] : null);
-        $contaAgente = (isset($fields['contaAgente']) ? $fields['contaAgente'] : null);
+        $valorAgente = ($request->input('valorPagoAgente') != null ? $request->input('valorPagoAgente') : null);
+        $comprovativoAgente = ($request->file('comprovativoPagamentoAgente') != null ? $request->file('comprovativoPagamentoAgente') : null);
+        $dataAgente = ($request->input('dataAgente') != null ? $request->input('dataAgente') : null);
+        $contaAgente = ($request->input('contaAgente') != null ? $request->input('contaAgente') : null);
+        $descricaoAgente = ($request->input('descricaoAgente') != null ? $request->input('descricaoAgente') : null);
+        $observacoesAgente = ($request->input('observacoes') != null ? $request->input('observacoes') : null);
         // Campos de SUBAGENTE
         $valorSubAgente = (isset($fields['valorPagoSubAgente']) ? $fields['valorPagoSubAgente'] : null);
         $comprovativoSubAgente = (isset($fields['comprovativoPagamentoSubAgente']) ? $fields['comprovativoPagamentoSubAgente'] : null);
@@ -395,14 +397,8 @@ class PaymentController extends Controller
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoCliente;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
+                Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-                // Nota de pagamento
-                $pdf = PDF::loadView('payments.pdf.nota-pagamento')->setPaper('a4', 'portrait');
-                $content = $pdf->download()->getOriginalContent();
-                $nomeNotaPagamento = "nota-pagamento-".post_slug($responsabilidade->cliente->nome.' '.$responsabilidade->fase->descricao).".pdf";
-                Storage::put("public/nota-pagamento/".$nomeNotaPagamento, $content);
-            $pagoResponsabilidade->notaPagamento = $nomeNotaPagamento;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaCliente;
             $pagoResponsabilidade->save();
@@ -419,12 +415,14 @@ class PaymentController extends Controller
             $valorAgente = number_format((float) $valorAgente,2 ,'.' ,'');
             $pagoResponsabilidade->valorPago = $valorAgente;
             $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->agente->nome.' '.$responsabilidade->fase->produto->agente->apelido;
+            $pagoResponsabilidade->dataPagamento = $dataAgente;
+            $pagoResponsabilidade->descricao = $descricaoAgente;
+            $pagoResponsabilidade->observacoes = $observacoesAgente;
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoAgente;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->agente->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
+                Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-            $pagoResponsabilidade->dataPagamento = $dataAgente;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaAgente;
             $pagoResponsabilidade->save();
@@ -444,7 +442,7 @@ class PaymentController extends Controller
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoSubAgente;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->subAgente->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
+                Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
             $pagoResponsabilidade->dataPagamento = $dataSubAgente;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
@@ -466,7 +464,7 @@ class PaymentController extends Controller
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoUni1;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->universidade1->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
+                Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
             $pagoResponsabilidade->dataPagamento = $dataUni1;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
@@ -488,7 +486,7 @@ class PaymentController extends Controller
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoUni2;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->universidade2->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
+                Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
             $pagoResponsabilidade->dataPagamento = $dataUni2;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
@@ -511,7 +509,7 @@ class PaymentController extends Controller
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoFornecedor;
                 $nomeFicheiro = post_slug($nomeFornecedor.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
+                Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
             $pagoResponsabilidade->dataPagamento = $dataFornecedor;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
@@ -533,18 +531,9 @@ class PaymentController extends Controller
 
     public function download(PagoResponsabilidade $pagoresponsabilidade)
     {
-        $file = Storage::disk('public')->path('nota-pagamento/'.$pagoresponsabilidade->notaPagamento);
-        return response()->file($file, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="'.$pagoresponsabilidade->notaPagamento.'"'
-        ]);
-    }
-
-    public function clientepdf(Cliente $cliente, Responsabilidade $responsabilidade)
-    {
-        $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->with(["cliente", "fase"])->first();
-        $pdf = PDF::loadView('payments.pdf.nota-pagamento', ['responsabilidade' => $responsabilidade])->setPaper('a4', 'portrait');
-        $file = post_slug($responsabilidade->cliente->nome.' '.$responsabilidade->fase->descricao);
+        $pagoresponsabilidade = PagoResponsabilidade::where("idPagoResp", $pagoresponsabilidade->idPagoResp)->with(["responsabilidade", "responsabilidade.cliente"])->first();
+        $pdf = PDF::loadView('payments.pdf.nota-pagamento', ['pagoresponsabilidade' => $pagoresponsabilidade])->setPaper('a4', 'portrait');
+        $file = post_slug($pagoresponsabilidade->responsabilidade->cliente->nome.' '.$pagoresponsabilidade->responsabilidade->fase->descricao);
         return $pdf->stream('nota-pagamento-'.$file.'.pdf');
     }
 }

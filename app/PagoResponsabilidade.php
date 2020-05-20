@@ -15,7 +15,6 @@ class PagoResponsabilidade extends Model
         'valorPago',
         'descricao',
         'comprovativoPagamento',
-        'notaPagamento',
         'observacoes',
         '$idResponsabilidade',
         '$idConta'
