@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Agenda;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Mail;
 use App\Agente;
 use App\Cliente;
@@ -70,7 +73,20 @@ class DashboardController extends Controller{
 
        $size = formatSize (folderSize(storage_path('app')));
 
-        return view('dashboard.index', compact('agentes', 'clientes', 'universidades','size'));
+
+        //$agends = Agenda::all();
+        $agends = Agenda::where('idUser', Auth::user()->idUser)->get();
+        /*whereDate('dataInicio', '<=',Carbon::today())->
+            whereDate('dataFim', '>=',Carbon::today())->*/
+        $todayAgends = Agenda:: whereDate('dataInicio', '<=',Carbon::now())->
+        whereDate('dataFim', '>=',Carbon::now())
+            ->get();
+
+        if ($agends->isEmpty()) {
+            $agends=null;
+        }
+
+        return view('dashboard.index', compact('agentes', 'clientes', 'universidades', 'size', 'agends','todayAgends'));
     }
 
 

@@ -7,6 +7,7 @@
 @section('styleLinks')
 
     <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+
     <link href="{{asset('css/agends.css')}}" rel="stylesheet"/>
 
     <link href="{{asset('vendor/fullcalendar/core/main.css')}}" rel='stylesheet'/>
@@ -164,11 +165,12 @@
 
                     resetForm("#formEvent");
 
+                    $("#modalCalendar input[name='idAgenda']").val("");
+
                     $("#modalCalendar").modal('show');
                     $("#modalCalendar #titleModal").text('Novo Evento');
                     $("#modalCalendar button.deleteEvent").css('display', 'none');
 
-                    //let start = new Date();
                     let start = element.start;
                     $("#modalCalendar input[name='dataInicio']").val(dealWithDate(start));
 
@@ -183,4 +185,6 @@
 
 
     </script>
+
+
 @endsection

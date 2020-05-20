@@ -6,6 +6,7 @@ use App\Agenda;
 use App\User;
 use App\Universidade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AgendController extends Controller
@@ -24,8 +25,13 @@ class AgendController extends Controller
 
         //$agends = Agenda::all();
         $agends = Agenda::where('idUser', Auth::user()->idUser)->get();
+        /*whereDate('dataInicio', '<=',Carbon::today())->
+            whereDate('dataFim', '>=',Carbon::today())->*/
+        $todayAgends = Agenda:: whereDate('dataInicio', '<=',Carbon::now())->
+            whereDate('dataFim', '>=',Carbon::now())
+            ->get();
 
-        return view('agends.list', compact('agends'));
+        return view('agends.list', compact('agends', 'todayAgends'));
     }
 
     /**
