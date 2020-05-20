@@ -27,13 +27,11 @@ use App\RelatorioProblema;
 use App\PagoResponsabilidade;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PermissionTest extends TestCase
 {
     use DatabaseMigrations;
-    use RefreshDatabase;
 
     /** @test */
     public function redirecionar_de_dashboard_para_login()
@@ -64,11 +62,11 @@ class PermissionTest extends TestCase
         $response = $this->get('/administradores/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_administrador_para_login()
     {
         $administrador = factory(Administrador::class)->make();
-
+        
         $response = $this->get('/administradores'.'/'.$administrador->slug.'/editar')->assertRedirect('/login');
     }
 
@@ -95,7 +93,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/agentes/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_agentes_para_login()
     {
         $agente = factory(Agente::class)->make();
@@ -118,7 +116,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/biblioteca/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_biblioteca_para_login()
     {
         $biblioteca = factory(Biblioteca::class)->make();
@@ -149,7 +147,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/clientes/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_cliente_para_login()
     {
         $cliente = factory(Cliente::class)->make();
@@ -179,7 +177,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/conta-bancaria/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_conta_para_login()
     {
         $conta = factory(Conta::class)->make();
@@ -210,7 +208,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/fornecedores/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_fornecedor_para_login()
     {
         $fornecedor = factory(Fornecedor::class)->make();
@@ -241,7 +239,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/produtostock/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_produto_stock_para_login()
     {
         $produtoStock = factory(ProdutoStock::class)->make();
@@ -276,7 +274,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/fasestock/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_fase_stock_para_login()
     {
         $produtoStock = factory(ProdutoStock::class)->make();
@@ -318,7 +316,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/documentostock/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_doc_stock_para_login()
     {
         $produtoStock = factory(ProdutoStock::class)->make();
@@ -356,7 +354,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/universidades/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_universidade_para_login()
     {
         $universidade = factory(Universidade::class)->make();
@@ -369,7 +367,7 @@ class PermissionTest extends TestCase
     /** @test */
     public function redirecionar_de_lista_contacto_para_login()
     {
-        $response = $this->get('/contacts')->assertRedirect('/login');
+        $response = $this->get('/contactos')->assertRedirect('/login');
     }
     
     /** @test */
@@ -377,22 +375,22 @@ class PermissionTest extends TestCase
     {
         $contacto = factory(Contacto::class)->make();
 
-        $response = $this->get('/contacts'.'/'.$contacto->slug)->assertRedirect('/login');
+        $response = $this->get('/contactos'.'/'.$contacto->slug)->assertRedirect('/login');
     }
     
     /** @test */
     public function redirecionar_de_create_contacto_para_login()
     {
 
-        $response = $this->get('/contacts/criar')->assertRedirect('/login');
+        $response = $this->get('/contactos/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_contacto_para_login()
     {
         $contacto = factory(Contacto::class)->make();
 
-        $response = $this->get('/contacts'.'/'.$contacto->slug.'/editar')->assertRedirect('/login');
+        $response = $this->get('/contactos'.'/'.$contacto->slug.'/editar')->assertRedirect('/login');
     }
 
     /********************************************************************************************************** */
@@ -427,7 +425,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/agenda/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_agenda_para_login()
     {
         $administrador = factory(Administrador::class)->make();
@@ -445,12 +443,6 @@ class PermissionTest extends TestCase
     }
 
     /********************************************************************************************************** */
-
-    /** @test */
-    public function redirecionar_de_lista_produto_para_login()
-    {
-        $response = $this->get('/produtos')->assertRedirect('/login');
-    }
     
     /** @test */
     public function redirecionar_de_show_produto_para_login()
@@ -484,7 +476,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/produtos/criar/'.$cliente->slug)->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_produto_para_login()
     {
         $cliente = factory(Cliente::class)->make();
@@ -544,7 +536,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/documento-academico/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_doc_academico_para_login()
     {
         $cliente = factory(Cliente::class)->make();
@@ -617,7 +609,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/documento-pessoal/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_doc_pessoal_para_login()
     {
         $cliente = factory(Cliente::class)->make();
@@ -691,7 +683,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/documento-transacao/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_doc_transacao_para_login()
     {
         $cliente = factory(Cliente::class)->make();
@@ -766,7 +758,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/pagamentos/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_pago_responsabilidade_para_login()
     {
         $cliente = factory(Cliente::class)->make();
@@ -819,7 +811,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/reportar-problema/criar')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste */
     public function redirecionar_de_edit_relatorio_problema_para_login()
     {
         $relatorioProblema = factory(RelatorioProblema::class)->make();

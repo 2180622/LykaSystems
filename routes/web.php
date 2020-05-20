@@ -29,10 +29,10 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::put('/contacts/{contact}', 'ContactoController@update')->name('contacts.update');
     Route::delete('/contacts/{contact}', 'ContactoController@destroy')->name('contacts.destroy'); */
 
-    Route::get('/contacts/new/{university?}', 'ContactoController@create')->name('contacts.create');
-    Route::get('/contacts/show/{contact}/{university?}', 'ContactoController@show')->name('contacts.show');
-    Route::get('/contacts/edit/{contact}/{university?}', 'ContactoController@edit')->name('contacts.edit');
-    Route::resource('/contacts', 'ContactoController')->only(['index','destroy', 'update','store']);
+    Route::get('/contactos/criar/{university?}', 'ContactoController@create')->name('contacts.create');
+    Route::get('/contactos/show/{contact}/{university?}', 'ContactoController@show')->name('contacts.show');
+    Route::get('/contactos/editar/{contact}/{university?}', 'ContactoController@edit')->name('contacts.edit');
+    Route::resource('/contactos', 'ContactoController')->only(['index','destroy', 'update','store']);
 
 /*     Route::resource('/contacts', 'ContactoController', ['except' => ['create']]); */
 
@@ -159,10 +159,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/documentostock/{docstock}', 'DocumentostockController@show')->name('documentostock.show');
 
     /* Produtos */
-    Route::get('/produtos/create/{client}', 'ProdutoController@create')->name('produtos.create');
+    Route::get('/produtos/criar/{client}', 'ProdutoController@create')->name('produtos.create');
     Route::post('/produtos/store/{produtoStock}', 'ProdutoController@store')->name('produtos.store');
-    Route::get('/produtos/print/{produto}', 'ProdutoController@print')->name('produtos.print');
-    Route::resource('/produtos', 'ProdutoController')->only(['destroy', 'update','show','edit']);
+    Route::resource('/produtos', 'ProdutoController')->only(['destroy','update','show','edit']);
 
     /* Documentos Pessoais */
     Route::get('/documento-pessoal/create/{fase}/{docnecessario}', 'DocPessoalController@create')->name('documento-pessoal.create');
