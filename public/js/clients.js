@@ -185,7 +185,10 @@
 
         /* Estado inicial */
         /* Para novo cliente */
-        if( $('#editavel').val() ){
+
+
+
+        if( $('#editavel').val().length<=1){
             $('#editavel').val("1");
         }
 
@@ -198,6 +201,7 @@
             $("#editavel_sim").hide();
             $("#editavel_nao").show();
         }
+
 
         /* Mudança de estado */
         $('#btn_editavel').click(function(){

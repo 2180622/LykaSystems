@@ -48,7 +48,7 @@
                                 {{-- Permitir/negar edição --}}
                                 <div id="btn_editavel" class="bg-lighth h-100 border shadow-sm" style="cursor:pointer; border-radius:10px">
                                     <div class="p-3">
-                                        <input name="editavel" id="editavel" type="hidden" value="{{old('editavel', $client->editavel )}} ">
+                                        <input name="editavel" id="editavel" type="hidden" value="{{$client->editavel}} ">
                                         <i id="editavel_sim" class="fas fa-lock-open text-success my-auto" style="font-size: 25px; display:none" title="Os agentes podem modificar as informações"></i>
                                         <i id="editavel_nao" class="fas fa-lock text-danger" style="font-size: 25px; display:none" title="Os agentes NÃO podem modificar as informações"></i>
                                     </div>
@@ -324,7 +324,7 @@
                     <div class="row">
                         <div class="col">
                             {{-- INUPUT passaportPaisEmi --}}
-                            <label for="passaportPaisEmi">Pais emissor do passaporte:</label><br>
+                            <label for="passaportPaisEmi">País emissor do passaporte:</label><br>
                             <input type="hidden" id="hidden_passaportPaisEmi"
                                 value="{{$passaporteData->passaportPaisEmi ?? ''}}">
                             <select id="passaportPaisEmi" name="passaportPaisEmi" style="width:100%" class="form-control select_style" >
@@ -398,11 +398,11 @@
         {{-- Conteudo: Dados académicos --}}
         <div class="tab-pane fade" id="school" role="tabpanel" aria-labelledby="school-tab">
             <div class="row">
-                <div class="col mr-3">
+                <div class="col mr-3" style="min-width: 330px !important">
                     {{-- INPUT nivEstudoAtual --}}
-                    <label for="nivEstudoAtual">Nivel de estudos(atual):</label><br>
+                    <label for="nivEstudoAtual">Nível de estudos(atual):</label><br>
                     <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" >
-                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)==null?"selected":""}} value="0" value="0" selected hidden>Selecione nivel</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)==null?"selected":""}} value="0" selected hidden>Selecione nível</option>
                         <option value="Secundário Incompleto">Secundário Incompleto</option>
                         <option value="Secundário Completo">Secundário Completo</option>
                         <option value="Curso Tecnológico">Curso Tecnológico</option>
@@ -414,19 +414,44 @@
 
                     <br>
 
+
+
+
                     {{-- INPUT Nome da instituição de origem --}}
                     <label for="nomeInstituicaoOrigem">Nome da instituição de origem:</label><br>
+
+
+                    {{-- ComboBox Editavel: Instituições --}}
+                    <select id="nomeInstituicaoOrigem" name="nomeInstituicaoOrigem" class="form-control select_style" style="width:100%" maxlength="50" placeholder="Insira nome da instituição de origem">
+                        @if(!empty($instituicoes) )
+                            @foreach ($instituicoes as $instituicao)
+                                <option {{old('nomeInstituicaoOrigem', $client->nomeInstituicaoOrigem ) == $instituicao ? "selected" : "" }} value="{{$instituicao}}" >{{$instituicao}}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+{{--
                     <input type="text" class="form-control" name="nomeInstituicaoOrigem" id="nomeInstituicaoOrigem"
                         value="{{old('nomeInstituicaoOrigem',$client->nomeInstituicaoOrigem)}}"
-                        maxlength="50" placeholder="Insira nome da instituição de origem">
+                        maxlength="50" placeholder="Insira nome da instituição de origem"> --}}
 
                     <br>
 
                     {{--cidadeInstituicaoOrigem  --}}
                     <label for="morada">Cidade da Instituição de Origem:</label><br>
-                    <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="cidadeInstituicaoOrigem"
+
+                    {{-- ComboBox Editavel: Cidade da Instituição de Origem --}}
+                    <select id="cidadeInstituicaoOrigem" class="form-control select_style" style="width:100%" name="cidadeInstituicaoOrigem" maxlength="50" placeholder="Insira nome da instituição de origem">
+                        @if(!empty($cidadesInstituicoes) )
+                            @foreach ($cidadesInstituicoes as $cidadesInstituicao)
+                                <option {{old('cidadeInstituicaoOrigem', $client->cidadeInstituicaoOrigem ) == $cidadesInstituicao ? "selected" : "" }} value="{{$cidadesInstituicao}}" >{{$cidadesInstituicao}}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+{{--                     <input type="text" class="form-control" name="cidadeInstituicaoOrigem" id="cidadeInstituicaoOrigem"
                         value="{{old('cidadeInstituicaoOrigem',$client->cidadeInstituicaoOrigem)}}"
-                        maxlength="50" placeholder="Insira o nome da cidade da Instituição">
+                        maxlength="50" placeholder="Insira o nome da cidade da Instituição"> --}}
                     <br>
                 </div>
 

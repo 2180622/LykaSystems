@@ -144,7 +144,12 @@ class ClientController extends Controller
             $client = new Cliente;
             $agents = Agente::all();
 
-            return view('clients.add',compact('client','agents'));
+
+            $instituicoes = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
+            $cidadesInstituicoes = array_unique(Cliente::pluck('cidadeInstituicaoOrigem')->toArray());
+
+
+            return view('clients.add',compact('client','agents','instituicoes','cidadesInstituicoes'));
         }else{
             /* não tem permissões */
             abort (401);
@@ -170,6 +175,12 @@ class ClientController extends Controller
         $client = new Cliente;
         $fields = $requestClient->validated();
         $client->fill($fields);
+
+        /* (Tratamento de strings, casos especificos) */
+        $client->nomeInstituicaoOrigem = ucwords(strtolower($requestClient->nomeInstituicaoOrigem));
+        $client->cidadeInstituicaoOrigem = ucwords(strtolower($requestClient->cidadeInstituicaoOrigem));
+
+
         $client->save();
 
 
@@ -261,6 +272,9 @@ class ClientController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function show(Cliente $client){
+
+
+
 
        /* Permissões */
         if (Auth::user()->tipo == "cliente" ){
@@ -432,11 +446,17 @@ class ClientController extends Controller
             $passaporteData=null;
         }
 
+
+        /* listas de campos especificos disponiveis */
+        $instituicoes = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
+        $cidadesInstituicoes = array_unique(Cliente::pluck('cidadeInstituicaoOrigem')->toArray());
+
+
         /* Se for o administrador a editar */
         if (Auth::user()->tipo == "admin"){
             $agents = Agente::all();
 
-            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData'));
+            return view('clients.edit', compact('client','agents','docOfficial','passaporte','passaporteData','instituicoes','cidadesInstituicoes'));
 
         }
 
@@ -446,22 +466,12 @@ class ClientController extends Controller
 
             if ($client->editavel == 1){
                 /* SE TIVER PERMISSÔES para alterar informação */
-                return view('clients.edit', compact('client','docOfficial','passaporte','passaporteData'));
+                return view('clients.edit', compact('client','docOfficial','passaporte','passaporteData','instituicoes','cidadesInstituicoes'));
             }else{
                 /* SE NÃO TIVER PERMISSÕES para alterar informação */
                 return Redirect::route('clients.show',$client);
             }
 
-        }
-
-
-
-        if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente"){
-
-
-        }else{
-            /* não tem permissões */
-            abort (401);
         }
 
     }
@@ -482,6 +492,11 @@ class ClientController extends Controller
 
         $fields = $request->validated();
         $client->fill($fields);
+
+        /* (Tratamento de strings, casos especificos) */
+        $client->nomeInstituicaoOrigem = ucwords(strtolower($request->nomeInstituicaoOrigem));
+        $client->cidadeInstituicaoOrigem = ucwords(strtolower($request->cidadeInstituicaoOrigem));
+
 
         /* Verifica se existem ficheiros antigos e apaga do storage*/
         $oldfile=Cliente::where('idCliente', '=',$client->idCliente)->first();
