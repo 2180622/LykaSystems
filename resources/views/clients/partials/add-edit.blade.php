@@ -305,13 +305,13 @@
                 <div class="col">
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style="min-width: 285px!important">
                             {{-- INUPUT numPassaporte --}}
                             <label for="numPassaporte">Número do passaporte:</label><br>
                             <input type="text" class="form-control" name="numPassaporte" id="numPassaporte"
                                 value="{{$passaporteData->numPassaporte ?? ''}}" maxlength="20" placeholder="Número do passaporte">
                         </div>
-                        <div class="col">
+                        <div class="col" style="min-width: 285px!important">
                             {{-- INUPUT dataValidPP --}}
                             <label for="dataValidPP">Data de validade do passaporte:</label><br>
                             <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
@@ -322,7 +322,7 @@
                     <br>
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style="min-width: 285px!important">
                             {{-- INUPUT passaportPaisEmi --}}
                             <label for="passaportPaisEmi">País emissor do passaporte:</label><br>
                             <input type="hidden" id="hidden_passaportPaisEmi"
@@ -331,7 +331,7 @@
                                 @include('clients.partials.countries');
                             </select>
                         </div>
-                        <div class="col">
+                        <div class="col" style="min-width: 285px!important">
                             {{-- INUPUT localEmissaoPP --}}
                             <label for="localEmissaoPP">Local de emissão do passaporte:</label><br>
                             <input type="text" class="form-control" name="localEmissaoPP" id="localEmissaoPP"
