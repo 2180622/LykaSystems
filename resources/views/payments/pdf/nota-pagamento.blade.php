@@ -207,7 +207,7 @@
     <div class="info">
         <div>
             <p class="font-weight-bold mb-1 title">Informações</p>
-            <p class="marginb">Pagamento: {{$pagoresponsabilidade->idPagoResp}}</p>
+            <p class="marginb">Pagamento: #{{$pagoresponsabilidade->idPagoResp}}</p>
             <p class="marginb">Data de emissão: {{date("d/m/Y")}}</p>
         </div>
         <br>

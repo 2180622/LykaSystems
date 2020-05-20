@@ -57,7 +57,7 @@
                             ?
                         </span>
                     </div>
-                    <label for="descricaoCliente">Descrição do pagamento</label>
+                    <label for="descricaoAgente">Descrição do pagamento</label>
                     <br>
                     <input type="text" name="descricaoAgente" id="descricaoAgente" required="required" placeholder="Adicionar uma descrição" maxlength="150">
                 </div>

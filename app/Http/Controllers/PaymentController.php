@@ -363,27 +363,35 @@ class PaymentController extends Controller
         $descricaoAgente = ($request->input('descricaoAgente') != null ? $request->input('descricaoAgente') : null);
         $observacoesAgente = ($request->input('observacoes') != null ? $request->input('observacoes') : null);
         // Campos de SUBAGENTE
-        $valorSubAgente = (isset($fields['valorPagoSubAgente']) ? $fields['valorPagoSubAgente'] : null);
-        $comprovativoSubAgente = (isset($fields['comprovativoPagamentoSubAgente']) ? $fields['comprovativoPagamentoSubAgente'] : null);
-        $dataSubAgente = (isset($fields['dataSubAgente']) ? $fields['dataSubAgente'] : null);
-        $contaSubAgente = (isset($fields['contaSubAgente']) ? $fields['contaSubAgente'] : null);
+        $valorSubAgente = ($request->input('valorPagoSubAgente') != null ? $request->input('valorPagoSubAgente') : null);
+        $comprovativoSubAgente = ($request->file('comprovativoPagamentoSubAgente') != null ? $request->file('comprovativoPagamentoSubAgente') : null);
+        $dataSubAgente = ($request->input('dataSubAgente') != null ? $request->input('dataSubAgente') : null);
+        $contaSubAgente = ($request->input('contaSubAgente') != null ? $request->input('contaSubAgente') : null);
+        $descricaoSubAgente = ($request->input('descricaoSubAgente') != null ? $request->input('descricaoSubAgente') : null);
+        $observacoesSubAgente = ($request->input('observacoes') != null ? $request->input('observacoes') : null);
         // Campos de UNIVERSIDADE1
-        $valorUni1 = (isset($fields['valorPagoUni1']) ? $fields['valorPagoUni1'] : null);
-        $comprovativoUni1 = (isset($fields['comprovativoPagamentoUni1']) ? $fields['comprovativoPagamentoUni1'] : null);
-        $dataUni1 = (isset($fields['dataUni1']) ? $fields['dataUni1'] : null);
-        $contaUni1 = (isset($fields['contaUni1']) ? $fields['contaUni1'] : null);
+        $valorUni1 = ($request->input('valorPagoUni1') != null ? $request->input('valorPagoUni1') : null);
+        $comprovativoUni1 = ($request->file('comprovativoPagamentoUni1') != null ? $request->file('comprovativoPagamentoUni1') : null);
+        $dataUni1 = ($request->input('dataUni1') != null ? $request->input('dataUni1') : null);
+        $contaUni1 = ($request->input('contaUni1') != null ? $request->input('contaUni1') : null);
+        $descricaoUni1 = ($request->input('descricaoUni1') != null ? $request->input('descricaoUni1') : null);
+        $observacoesUni1 = ($request->input('observacoes') != null ? $request->input('observacoes') : null);
         // Campos de UNIVERSIDADE2
-        $valorUni2 = (isset($fields['valorPagoUni2']) ? $fields['valorPagoUni2'] : null);
-        $comprovativoUni2 = (isset($fields['comprovativoPagamentoUni2']) ? $fields['comprovativoPagamentoUni2'] : null);
-        $dataUni2 = (isset($fields['dataUni2']) ? $fields['dataUni2'] : null);
-        $contaUni2 = (isset($fields['contaUni2']) ? $fields['contaUni2'] : null);
+        $valorUni2 = ($request->input('valorPagoUni2') != null ? $request->input('valorPagoUni2') : null);
+        $comprovativoUni2 = ($request->file('comprovativoPagamentoUni2') != null ? $request->file('comprovativoPagamentoUni2') : null);
+        $dataUni2 = ($request->input('dataUni2') != null ? $request->input('dataUni2') : null);
+        $contaUni2 = ($request->input('contaUni2') != null ? $request->input('contaUni2') : null);
+        $descricaoUni2 = ($request->input('descricaoUni2') != null ? $request->input('descricaoUni2') : null);
+        $observacoesUni2 = ($request->input('observacoes') != null ? $request->input('observacoes') : null);
         // Campos de FORNECEDOR
-        $idRelacao = (isset($fields['relacaoFornecedor']) ? $fields['relacaoFornecedor'] : null);
-        $nomeFornecedor = (isset($fields['nomeFornecedor']) ? $fields['nomeFornecedor'] : null);
-        $valorFornecedor = (isset($fields['valorPagoFornecedor']) ? $fields['valorPagoFornecedor'] : null);
-        $comprovativoFornecedor = (isset($fields['comprovativoPagamentoForn']) ? $fields['comprovativoPagamentoForn'] : null);
-        $dataFornecedor = (isset($fields['dataFornecedor']) ? $fields['dataFornecedor'] : null);
-        $contaFornecedor = (isset($fields['contaFornecedor']) ? $fields['contaFornecedor'] : null);
+        $valorFornecedor = ($request->input('valorPagoFornecedor') != null ? $request->input('valorPagoFornecedor') : null);
+        $comprovativoFornecedor = ($request->file('comprovativoPagamentoForn') != null ? $request->file('comprovativoPagamentoForn') : null);
+        $dataFornecedor = ($request->input('dataFornecedor') != null ? $request->input('dataFornecedor') : null);
+        $contaFornecedor = ($request->input('contaFornecedor') != null ? $request->input('contaFornecedor') : null);
+        $descricaoFornecedor = ($request->input('descricaoFornecedor') != null ? $request->input('descricaoFornecedor') : null);
+        $observacoesFornecedor = ($request->input('observacoes') != null ? $request->input('observacoes') : null);
+        $idRelacao = ($request->input('idRelacao') != null ? $request->input('idRelacao') : null);
+        $nomeFornecedor = ($request->input('nomeFornecedor') != null ? $request->input('nomeFornecedor') : null);
 
         if ($valorCliente != null) {
             $pagoResponsabilidade = new PagoResponsabilidade;
@@ -439,12 +447,14 @@ class PaymentController extends Controller
             $valorSubAgente = number_format((float) $valorSubAgente,2 ,'.' ,'');
             $pagoResponsabilidade->valorPago = $valorSubAgente;
             $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->subAgente->nome.' '.$responsabilidade->fase->produto->subAgente->apelido;
+            $pagoResponsabilidade->dataPagamento = $dataSubAgente;
+            $pagoResponsabilidade->descricao = $descricaoSubAgente;
+            $pagoResponsabilidade->observacoes = $observacoesSubAgente;
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoSubAgente;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->subAgente->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-            $pagoResponsabilidade->dataPagamento = $dataSubAgente;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaSubAgente;
             $pagoResponsabilidade->save();
@@ -461,12 +471,14 @@ class PaymentController extends Controller
             $valorUni1 = number_format((float) $valorUni1,2 ,'.' ,'');
             $pagoResponsabilidade->valorPago = $valorUni1;
             $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->universidade1->nome;
+            $pagoResponsabilidade->dataPagamento = $dataUni1;
+            $pagoResponsabilidade->descricao = $descricaoUni1;
+            $pagoResponsabilidade->observacoes = $observacoesUni1;
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoUni1;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->universidade1->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-            $pagoResponsabilidade->dataPagamento = $dataUni1;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaUni1;
             $pagoResponsabilidade->save();
@@ -483,12 +495,14 @@ class PaymentController extends Controller
             $valorUni2 = number_format((float) $valorUni2,2 ,'.' ,'');
             $pagoResponsabilidade->valorPago = $valorUni2;
             $pagoResponsabilidade->beneficiario = $responsabilidade->fase->produto->universidade2->nome;
+            $pagoResponsabilidade->dataPagamento = $dataUni2;
+            $pagoResponsabilidade->descricao = $descricaoUni2;
+            $pagoResponsabilidade->observacoes = $observacoesUni2;
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoUni2;
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->universidade2->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-            $pagoResponsabilidade->dataPagamento = $dataUni2;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaUni2;
             $pagoResponsabilidade->save();
@@ -506,12 +520,14 @@ class PaymentController extends Controller
             $valorFornecedor = number_format((float) $valorFornecedor,2 ,'.' ,'');
             $pagoResponsabilidade->valorPago = $valorFornecedor;
             $pagoResponsabilidade->beneficiario = $nomeFornecedor;
+            $pagoResponsabilidade->dataPagamento = $dataFornecedor;
+            $pagoResponsabilidade->descricao = $descricaoFornecedor;
+            $pagoResponsabilidade->observacoes = $observacoesFornecedor;
                 // Comprovativo de pagamento
                 $ficheiroPagamento = $comprovativoFornecedor;
                 $nomeFicheiro = post_slug($nomeFornecedor.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-            $pagoResponsabilidade->dataPagamento = $dataFornecedor;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaFornecedor;
             $pagoResponsabilidade->save();
