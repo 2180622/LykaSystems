@@ -19,10 +19,12 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
+        'idUser' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'password' => Hash::make('teste1234'),
         'auth_key' => strtoupper(random_str(5)),
         'loginCount' => 0,
         'estado' => true,
+        'slug' => 'user',
 
         /*  'email'  'tipo'  'idAdmin'  'idAgente'  'idCliente'  */
     ];

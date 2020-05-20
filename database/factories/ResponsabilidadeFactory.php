@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Responsabilidade::class, function (Faker $faker) {
     return [
+        'idResponsabilidade' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
         'valorCliente' => $faker->numberBetween($min = 100, $max = 500),
         'valorAgente' => $faker->numberBetween($min = 100, $max = 500),
         'valorSubAgente' => null,

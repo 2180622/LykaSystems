@@ -61,7 +61,7 @@ class ChargesController extends Controller
       if ($requestCharge->hasFile('comprovativoPagamento')) {
           $fileproof = $requestCharge->file('comprovativoPagamento');
           $imgproof = strtolower($docTrasancao->descricao).'_comprovativo_'.$docTrasancao->idDocTransacao.'.' . $fileproof->getClientOriginalExtension();
-          Storage::disk('public')->putFileAs('payment-proof/', $fileproof, $imgproof);
+          Storage::disk('public')->putFileAs('comprovativos-pagamento/', $fileproof, $imgproof);
           $docTrasancao->comprovativoPagamento = $imgproof;
           $docTrasancao->save();
       }
@@ -110,9 +110,9 @@ class ChargesController extends Controller
           $fileproof = $requestCharge->file('comprovativoPagamento');
           $imgproof = strtolower(preg_replace('/\s+/', '_', $document->descricao)) . '_comprovativo_'. $document->idDocTransacao .'.' . $fileproof->getClientOriginalExtension();
           if (!empty($document->comprovativoPagamento)) {
-              Storage::disk('public')->delete('payment-proof/'.$document->comprovativoPagamento);
+              Storage::disk('public')->delete('comprovativos-pagamento/'.$document->comprovativoPagamento);
           }
-          Storage::disk('public')->putFileAs('payment-proof/', $fileproof, $imgproof);
+          Storage::disk('public')->putFileAs('comprovativos-pagamento/', $fileproof, $imgproof);
           $document->comprovativoPagamento = $imgproof;
       }
 
@@ -129,6 +129,6 @@ class ChargesController extends Controller
 
     public function download(DocTransacao $document)
     {
-      return Storage::disk('public')->download('payment-proof/'.$document->comprovativoPagamento);
+      return Storage::disk('public')->download('comprovativos-pagamento/'.$document->comprovativoPagamento);
     }
 }

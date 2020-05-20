@@ -239,7 +239,7 @@
                             <p class="text-truncate">{{number_format((float) $responsabilidade->valorCliente, 2, ',', '').'€'}}</p>
                         </div>
                         <div class="col-md-2 align-self-center ml-4">
-                            <p class="text-truncate" title="{{$responsabilidade->dataVencimentoCliente->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoCliente))}}</p>
+                            <p class="text-truncate" title="{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoCliente))}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoCliente))}}</p>
                         </div>
                         <div class="col-md-2 text-truncate align-self-center ml-auto">
                             <p class="text-truncate" @if($responsabilidade->verificacaoPagoCliente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoCliente == false &&
@@ -272,7 +272,7 @@
                             <p class="text-truncate">{{number_format((float) $responsabilidade->valorAgente, 2, ',', '').'€'}}</p>
                         </div>
                         <div class="col-md-2 align-self-center ml-4">
-                            <p class="text-truncate" title="{{$responsabilidade->dataVencimentoAgente->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoAgente))}}</p>
+                            <p class="text-truncate" title="{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoAgente))}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoAgente))}}</p>
                         </div>
                         <div class="col-md-2 text-truncate align-self-center ml-auto">
                             <p class="text-truncate" @if($responsabilidade->verificacaoPagoAgente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente <

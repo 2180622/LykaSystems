@@ -132,7 +132,7 @@
         </div>
         <div class="col-md-6">
             <div class="text-right" id="text-beneficiario">
-                <p class="mb-0" id="nome">Tiago Oliveira</p>
+                <p class="mb-0" id="nome">{{$pagoresponsabilidade->beneficiario}}</p>
                 <p class="marginb">Rua das Oliveiras Verdes</p>
                 <p class="marginb">Edifício Amarelo, Nº13</p>
                 <p>3100-231 - Leiria</p>
@@ -149,11 +149,11 @@
             </tr>
         </thead>
         <tr>
-            <td class="y-border">Propinas <br>
-                <p class="descricao mb-1">Nulla tempora voluptatem nam aperiam.</p>
+            <td class="y-border">{{$pagoresponsabilidade->responsabilidade->fase->descricao}} <br>
+                <p class="descricao mb-1">{{$pagoresponsabilidade->descricao}}</p>
             </td>
-            <td class="y-border">15/05/2020</td>
-            <td>500,00&euro;</td>
+            <td class="y-border">{{date('d/m/Y', strtotime($pagoresponsabilidade->dataPagamento))}}</td>
+            <td>{{number_format((float)$pagoresponsabilidade->valorPago, 2, ',', '')}}&euro;</td>
         </tr>
         <tr>
             <td class="y-border">Matrícula <br>
@@ -199,7 +199,7 @@
         </div>
         <br><br><br>
         <div id="assinatura" class="mt-3">
-            <p class="font-weight-bold mb-0" style="font-size:11pt">Senhor Administrador</p>
+            <p class="font-weight-bold mb-0" style="font-size:11pt">{{Auth()->user()->admin->nome.' '.Auth()->user()->admin->apelido}}</p>
             <p class="mb-0" id="ep">Estudar Portugal</p>
         </div>
     </div>
@@ -207,8 +207,8 @@
     <div class="info">
         <div>
             <p class="font-weight-bold mb-1 title">Informações</p>
-            <p class="marginb">Pagamento: 236584</p>
-            <p class="marginb">Data de emissão: 16/05/2020</p>
+            <p class="marginb">Pagamento: #{{$pagoresponsabilidade->idPagoResp}}</p>
+            <p class="marginb">Data de emissão: {{date("d/m/Y")}}</p>
         </div>
         <br>
         <div>

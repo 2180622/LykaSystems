@@ -5,18 +5,25 @@
     <br>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <p style="font-weight:500;">
-            Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>, que têm como cliente <strong>{{$fase->produto->cliente->nome.' '.$fase->produto->cliente->apelido}}</strong>, agente <strong>{{$fase->produto->agente->nome.' '.$fase->produto->agente->apelido}}</strong> e universidade <strong>{{$fase->produto->universidade1->nome}}</strong>.
+            Este pagamento está associado à fase <strong>{{$fase->descricao}}</strong> do produto <strong>{{$fase->produto->descricao}}</strong>, que têm como cliente
+            <strong>{{$fase->produto->cliente->nome.' '.$fase->produto->cliente->apelido}}</strong>, agente <strong>{{$fase->produto->agente->nome.' '.$fase->produto->agente->apelido}}</strong> e universidade
+            <strong>{{$fase->produto->universidade1->nome}}</strong>.
         </p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="payment-card shadow-sm">
+        <div id="loader-background">
+            <div id="loader"></div>
+        </div>
         <p style="margin-left: 0px !important; font-weight:600;">Valor a pagar:</p>
         <p style="margin-left: 0px !important;">{{number_format((float)$relacao->valor, 2, ',', '').'€'}}</p>
         <hr>
-        <form action="{{route('payments.store', $relacao->responsabilidade)}}" method="post" class="mt-4" enctype="multipart/form-data">
-            @csrf
+        <form id="registar-pagamento-form" class="mt-4">
+            <input type="text" id="idResp" name="idResp" value="{{$relacao->responsabilidade->idResponsabilidade}}" hidden="true">
+            <input type="text" name="idRelacao" value="{{$relacao->idRelacao}}" hidden="true">
+            <input type="text" name="nomeFornecedor" value="{{$fornecedor->nome}}" hidden="true">
             <div class="row">
                 <div class="col-md-4">
                     <label for="valorPagoFornecedor">Valor pago ao fornecedor</label>
@@ -47,10 +54,26 @@
                         <option selected disabled hidden>Escolher conta bancária</option>
                     </select>
                 </div>
+                <div class="col-md-8">
+                    <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top" title="A descrição que inserir será colocada na nota de pagamento como descrição do mesmo.">
+                        <span>
+                            ?
+                        </span>
+                    </div>
+                    <label for="descricaoFornecedor">Descrição do pagamento</label>
+                    <br>
+                    <input type="text" name="descricaoFornecedor" id="descricaoFornecedor" required="required" placeholder="Adicionar uma descrição" maxlength="150">
+                </div>
             </div>
             <br>
-            <input type="text" name="nomeFornecedor" value="{{$fornecedor->nome}}" hidden="true">
-            <input type="text" name="relacaoFornecedor" value="{{$relacao->idRelacao}}" hidden="true">
+            <div class="row">
+                <div class="col">
+                    <label for="observacoes">Observações</label>
+                    <br>
+                    <textarea name="observacoes" rows="3" placeholder="Adicionar uma observação"></textarea>
+                </div>
+            </div>
+            <br>
     </div>
     <div class="form-group text-right">
         <br>

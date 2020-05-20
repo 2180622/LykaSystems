@@ -48,6 +48,9 @@
         @include('payments.partials.create.add-fornecedor')
     @endif
 
+    {{-- Mensagens informativas - MODAL --}}
+    @include('payments.partials.modal.modal-success')
+    @include('payments.partials.modal.modal-error')
 </div>
 
 <div class="custom-cm" id="contextMenu">

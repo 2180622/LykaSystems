@@ -18,7 +18,6 @@ class PagoResponsabilidade extends Migration
             $table->text('observacoes')->nullable();
             $table->date('dataPagamento');
             $table->string('comprovativoPagamento',255);
-            $table->string('notaPagamento',255);
             $table->unsignedBigInteger('idResponsabilidade');
                 $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->unsignedBigInteger('idConta');
