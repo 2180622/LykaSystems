@@ -21,15 +21,6 @@ use App\Http\Requests\StoreProdutoRequest;
 
 class ProdutoController extends Controller
 {
-    public function index()
-    {
-        $produtos = Produto::all();
-        $totalprodutos = $produtos->count();
-
-        return view('produtos.list', compact('produtos', 'totalprodutos'));
-    }
-
-
 
 
     /**
