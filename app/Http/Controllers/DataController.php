@@ -576,7 +576,7 @@ class DataController extends Controller
         $fase->save();
 
         $fase = new Fase;
-        $fase->descricao = 'Matricula';
+        $fase->descricao = 'Matrícula';
         $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
         $fase->valorFase = 300;
         $fase->verificacaoPago = false;

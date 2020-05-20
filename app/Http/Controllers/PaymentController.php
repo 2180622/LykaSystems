@@ -397,15 +397,9 @@ class PaymentController extends Controller
                 $nomeFicheiro = post_slug($responsabilidade->fase->produto->cliente->nome.' '.$responsabilidade->fase->descricao).'-comprovativo-'.post_slug($responsabilidade->fase->idFase).'.'.$ficheiroPagamento->getClientOriginalExtension();
                 Storage::disk('public')->putFileAs('payment-proof/', $ficheiroPagamento, $nomeFicheiro);
                 $pagoResponsabilidade->comprovativoPagamento = $nomeFicheiro;
-                // Nota de pagamento
-                $pdf = PDF::loadView('payments.pdf.nota-pagamento')->setPaper('a4', 'portrait');
-                $content = $pdf->download()->getOriginalContent();
-                $nomeNotaPagamento = "nota-pagamento-".post_slug($responsabilidade->cliente->nome.' '.$responsabilidade->fase->descricao).".pdf";
-                Storage::put("public/nota-pagamento/".$nomeNotaPagamento, $content);
-            $pagoResponsabilidade->notaPagamento = $nomeNotaPagamento;
             $pagoResponsabilidade->idResponsabilidade = $responsabilidade->idResponsabilidade;
             $pagoResponsabilidade->idConta = $contaCliente;
-            // $pagoResponsabilidade->save();
+            $pagoResponsabilidade->save();
 
         if ($valorCliente >= $responsabilidade->valorCliente) {
             Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)
@@ -533,18 +527,9 @@ class PaymentController extends Controller
 
     public function download(PagoResponsabilidade $pagoresponsabilidade)
     {
-        $file = Storage::disk('public')->path('nota-pagamento/'.$pagoresponsabilidade->notaPagamento);
-        return response()->file($file, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="'.$pagoresponsabilidade->notaPagamento.'"'
-        ]);
-    }
-
-    public function clientepdf(Cliente $cliente, Responsabilidade $responsabilidade)
-    {
-        $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->with(["cliente", "fase"])->first();
-        $pdf = PDF::loadView('payments.pdf.nota-pagamento', ['responsabilidade' => $responsabilidade])->setPaper('a4', 'portrait');
-        $file = post_slug($responsabilidade->cliente->nome.' '.$responsabilidade->fase->descricao);
+        $pagoresponsabilidade = PagoResponsabilidade::where("idPagoResp", $pagoresponsabilidade->idPagoResp)->with(["responsabilidade", "responsabilidade.cliente"])->first();
+        $pdf = PDF::loadView('payments.pdf.nota-pagamento', ['pagoresponsabilidade' => $pagoresponsabilidade])->setPaper('a4', 'portrait');
+        $file = post_slug($pagoresponsabilidade->responsabilidade->cliente->nome.' '.$pagoresponsabilidade->responsabilidade->fase->descricao);
         return $pdf->stream('nota-pagamento-'.$file.'.pdf');
     }
 }
