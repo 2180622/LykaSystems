@@ -81,17 +81,23 @@
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Pagamento registado com sucesso.</h5>
+            <div class="modal-header text-center">
+                <ion-icon id="checkmark-icon" name="checkmark" size="large"></ion-icon>
+                {{-- <ion-icon name="checkmark-circle-outline"></ion-icon> --}}
             </div>
-            <div class="modal-body">
-                Foi gerado uma nota de pagamento relativo ao pagamento que acabou de registar. Se pretender transferí-lo, basta clicar no botão "Transferir", abaixo disponível.
-                <br>
-                Se não quiser ter acesso ao documento neste momento, pode sempre transferí-lo mais tarde, sendo apenas necessário voltar a página que se encontra e clicar no botão "Nota de pagamento".
+            <div class="modal-body text-center">
+                <p id="title-modal">Registo feito com sucesso!</p>
+                <p id="text-info-modal" class="mt-3">Pretende transferir a nota de pagamento que comprova o pagamento registado?</p>
             </div>
-            <div class="modal-footer">
-                <a id="anchor-stream" class="cancel-button mr-2" target="_blank">nota de pagamento</a>
-                <a href="{{route('dashboard')}}" type="button" class="text-center">Entendido!</a>
+            <div class="modal-footer mt-2">
+                <div class="row text-center">
+                    <div class="col-6">
+                        <a id="cancel-button" href="{{route("payments.index")}}">Voltar</a>
+                    </div>
+                    <div class="col-6">
+                        <a id="anchor-stream" target="_blank">Transferir</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
