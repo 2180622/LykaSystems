@@ -201,13 +201,26 @@
                 </div>
             </div>
 
+            {{-- Campo de Observações para o admin --}}
+            @if (Auth::user()->tipo == "admin")
+                <div class="row">
+                    <div class="col-md-12">
+                        {{-- INPUT obsPessoais --}}
+                        <label for="obsPessoais">Observações pessoais:</label><br>
+                        <textarea name="obsPessoais" id="obsPessoais" rows="5" style="width:100%">{{old('obsPessoais',$client->obsPessoais)}}</textarea>
+                    </div>
+                </div>
+            @endif
+
+            {{-- Campo de Observações para o admin --}}
             <div class="row">
                 <div class="col-md-12">
-                    {{-- INPUT obsPessoais --}}
+                    {{-- INPUT PARA O AGENTE obsAgente --}}
                     <label for="obsPessoais">Observações pessoais:</label><br>
-                    <textarea name="obsPessoais" id="obsPessoais" rows="5" style="width:100%">{{old('obsPessoais',$client->obsPessoais)}}</textarea>
+                    <textarea name="obsAgente" id="obsAgente" rows="5" style="width:100%">{{old('obsAgente',$client->obsAgente)}}</textarea>
                 </div>
             </div>
+
         </div>
 
 

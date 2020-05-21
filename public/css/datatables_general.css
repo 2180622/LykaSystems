@@ -32,15 +32,6 @@ table {
     background-color: white;
 }
 
-.name_link {
-    color: gray;
-}
-
-.name_link:hover {
-    color: #6A74C9;
-    text-decoration: none;
-}
-
 .btn_list_opt {
     color: gray;
 }

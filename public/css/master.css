@@ -8,6 +8,15 @@ html, body {
     transition: all 0.3 ease;
     scroll-behavior: smooth;
 }
+.name_link {
+    color: gray;
+}
+
+.name_link:hover {
+    color: #6A74C9;
+    text-decoration: none;
+}
+
 
 .top-button {
     border: none;

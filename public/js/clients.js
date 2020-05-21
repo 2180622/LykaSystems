@@ -187,9 +187,10 @@
         /* Para novo cliente */
 
 
-
-        if( $('#editavel').val().length<=1){
-            $('#editavel').val("1");
+        if ($('#editavel').length) {
+            if( $('#editavel').val().length<=1){
+                $('#editavel').val("1");
+            }
         }
 
         /* Caso a edição seja permitida */
