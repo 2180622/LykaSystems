@@ -111,7 +111,7 @@
                                 <div class="row">
                                     <p>Secção de filtragem &nbsp;</p>
                                     <div class="help-button" id="tooltipValor" data-toggle="tooltip" data-placement="top"
-                                      title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade. Apenas pode fazer a pesquisa usando um elemento e a escolha de um intervalo de datas.">
+                                        title="Nesta secção pode filtrar as suas pesquisas mediante a sua vontade e necessidade. Apenas pode fazer a pesquisa usando um elemento e a escolha de um intervalo de datas.">
                                         <span>
                                             ?
                                         </span>
@@ -243,9 +243,9 @@
                         </div>
                         <div class="col-md-2 text-truncate align-self-center ml-auto">
                             <p class="text-truncate" @if($responsabilidade->verificacaoPagoCliente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoCliente == false &&
-                                    $responsabilidade->dataVencimentoCliente < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                    $responsabilidade->dataVencimentoCliente < $currentdate) style="color:#FF3D00;" @endif>
                                         @if ($responsabilidade->verificacaoPagoCliente == false && $responsabilidade->dataVencimentoCliente
-                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoCliente == false && $responsabilidade->dataVencimentoCliente > date_create(date("d/m/Y")))
+                                        < $currentdate) Dívida @elseif ($responsabilidade->verificacaoPagoCliente == false && $responsabilidade->dataVencimentoCliente > $currentdate)
                                         Pendente
                                         @elseif ($responsabilidade->verificacaoPagoCliente == true)
                                         Pago
@@ -276,9 +276,9 @@
                         </div>
                         <div class="col-md-2 text-truncate align-self-center ml-auto">
                             <p class="text-truncate" @if($responsabilidade->verificacaoPagoAgente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente <
-                                      date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                        $currentdate) style="color:#FF3D00;" @endif>
                                         @if ($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente
-                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente > date_create(date("d/m/Y")))
+                                        < $currentdate) Dívida @elseif ($responsabilidade->verificacaoPagoAgente == false && $responsabilidade->dataVencimentoAgente > $currentdate)
                                         Pendente
                                         @elseif ($responsabilidade->verificacaoPagoAgente == true)
                                         Pago
@@ -309,9 +309,9 @@
                         </div>
                         <div class="col-md-2 text-truncate align-self-center ml-auto">
                             <p class="text-truncate" @if($responsabilidade->verificacaoPagoSubAgente == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoSubAgente == false &&
-                                    $responsabilidade->dataVencimentoSubAgente < date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                    $responsabilidade->dataVencimentoSubAgente < $currentdate) style="color:#FF3D00;" @endif>
                                         @if ($responsabilidade->verificacaoPagoSubAgente == false && $responsabilidade->dataVencimentoSubAgente
-                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoSubAgente == false && $responsabilidade->dataVencimentoSubAgente > date_create(date("d/m/Y")))
+                                        < $currentdate) Dívida @elseif ($responsabilidade->verificacaoPagoSubAgente == false && $responsabilidade->dataVencimentoSubAgente > $currentdate)
                                         Pendente
                                         @elseif ($responsabilidade->verificacaoPagoSubAgente == true)
                                         Pago
@@ -342,9 +342,9 @@
                         </div>
                         <div class="col-md-2 text-truncate align-self-center ml-auto">
                             <p class="text-truncate" @if($responsabilidade->verificacaoPagoUni1 == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 <
-                                      date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                        $currentdate) style="color:#FF3D00;" @endif>
                                         @if ($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1
-                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 > date_create(date("d/m/Y")))
+                                        < $currentdate) Dívida @elseif ($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 > $currentdate)
                                         Pendente
                                         @elseif ($responsabilidade->verificacaoPagoUni1 == true)
                                         Pago
@@ -375,9 +375,9 @@
                         </div>
                         <div class="col-md-2 text-truncate align-self-center ml-auto">
                             <p class="text-truncate" @if($responsabilidade->verificacaoPagoUni2 == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2 <
-                                      date_create(date("d/m/Y"))) style="color:#FF3D00;" @endif>
+                                        $currentdate) style="color:#FF3D00;" @endif>
                                         @if ($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2
-                                        < date_create(date("d/m/Y"))) Dívida @elseif ($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2 > date_create(date("d/m/Y")))
+                                        < $currentdate) Dívida @elseif ($responsabilidade->verificacaoPagoUni2 == false && $responsabilidade->dataVencimentoUni2 > $currentdate)
                                         Pendente
                                         @elseif ($responsabilidade->verificacaoPagoUni2 == true)
                                         Pago

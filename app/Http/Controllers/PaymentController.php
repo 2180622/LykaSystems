@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use PDF;
+use DateTime;
 use App\Fase;
 use App\Conta;
 use App\Agente;
@@ -37,6 +38,7 @@ class PaymentController extends Controller
       $agentes = Agente::where('tipo', 'Agente')->get();
       $subagentes = Agente::where('tipo', 'Subagente')->get();
       $fornecedores = Fornecedor::all();
+      $currentdate = new DateTime();
 
       $valorTotalPendente = 0;
       $valorTotalPago = 0;
@@ -152,7 +154,7 @@ class PaymentController extends Controller
           }
         }
       }
-      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores'));
+      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores', 'currentdate'));
     }
 
     public function search(Request $request)
