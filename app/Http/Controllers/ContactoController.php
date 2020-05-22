@@ -134,6 +134,13 @@ class ContactoController extends Controller
 
 
         if ($request->hasFile('fotografia')) {
+        /* Verifica se o ficheiro antigo existe e apaga do storage*/
+        $oldfile=Contacto::where('idContacto', '=',$contact->idContacto)->first();
+
+        if(Storage::disk('public')->exists('contact-photos/'. $oldfile->fotografia)){
+            Storage::disk('public')->delete('contact-photos/'. $oldfile->fotografia);
+        }
+
             $photo = $request->file('fotografia');
             $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             if (!empty($contact->fotografia)) {
