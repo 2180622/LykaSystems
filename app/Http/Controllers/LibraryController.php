@@ -30,11 +30,6 @@ class LibraryController extends Controller
             $files = Biblioteca::all();
         }
 
-        /* Se não encontrar resultados */
-        if ( $files->isEmpty() ) {
-            $files=null;
-        }
-
 
         return view('libraries.list', compact('files'));
 

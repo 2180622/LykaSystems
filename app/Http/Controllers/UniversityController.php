@@ -23,6 +23,8 @@ class UniversityController extends Controller
       }
 
         $universities = Universidade::all();
+
+
         return view('universities.list', compact('universities'));
 
 

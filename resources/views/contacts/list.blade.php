@@ -8,7 +8,8 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 
 
 @endsection
@@ -42,41 +43,38 @@
 
     <div class="cards-navigation">
         <div class="title">
-            <h6>Lista telefónica</h6>
+            <h6>Lista Telefónica</h6>
         </div>
+
+
         <br>
 
+        <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px;">
+            @if($contacts!=null || !empty($contacts))
 
-        @if($contacts==null)
-            <div class="border rounded bg-light p-3 text-muted"><small>(sem registos)</small></div>
-        @else
 
-        <div class="row mb-3">
-            <div class="col">
-                <div class="text-center text-secondary"><small>Existe <strong>{{count($contacts)}} contacto(s)</strong> registados</small></div>
+            <div class="row mx-1">
+                <div class="col col-2" style="max-width: 120px">
+                    <i class="far fa-address-book active" style="font-size:80px"></i>
+                </div>
+                <div class="col">
+                    <div class="text-secondary"><strong>Existe {{count($contacts)}} contacto(s) registados</strong></div>
+                    <br>
+            {{-- Input de procura nos resultados da dataTable --}}
+
+                    <div style="width: 100%; border-radius:10px;">
+                        <input type="text" class="shadow-sm" id="customSearchBox"
+                            placeholder="Procurar nos resultados..." aria-label="Procurar">
+
             </div>
-        </div>
-
-        <div class="row p-3 ">
-            <div class="col text-center mb-3">
-                <div class="input-group pl-0  search-section mx-auto" style="width:50%">
-                    <input class="shadow-sm" type="text" id="customSearchBox"
-                        placeholder="Secção de procura" aria-label="Procurar">
-                    <div class="search-button input-group-append">
-                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                    </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <hr>
 
 
-            <div class="table-responsive " style="overflow:hidden">
+            <br>
 
-
-                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                    style="overflow:hidden;">
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
 
                     {{-- Cabeçalho da tabela --}}
                     <thead>
@@ -95,80 +93,88 @@
 
                     {{-- Corpo da tabela --}}
                     <tbody>
-                            @foreach ($contacts as $contact)
-                                <tr>
-                                    <td>
-                                        <div class="align-middle mx-auto shadow-sm rounded bg-white"
-                                            style="overflow:hidden; width:50px; height:50px">
-                                            <a class="name_link" href="{{route('contacts.show',$contact)}}">
-                                                @if($contact->fotografia)
-                                                <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}"
-                                                    width="100%" class="mx-auto"">
+                        @foreach ($contacts as $contact)
+                        <tr>
+                            <td>
+                                <div class="align-middle mx-auto shadow-sm rounded bg-white"
+                                    style="overflow:hidden; width:50px; height:50px">
+                                    <a class="name_link" href="{{route('contacts.show',$contact)}}">
+                                        @if($contact->fotografia)
+                                        <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}"
+                                            width="100%" class="mx-auto"">
                                                         @else
-                                                            <img src=" {{Storage::disk('public')->url('default-photos/M.jpg')}}"
-                                                    width="100%" class="mx-auto">
-                                                @endif
-                                            </a>
-                                        </div>
-
-                                    </td>
-
-                                    {{-- Nome e Apelido --}}
-                                    <td class="align-middle">
-                                        @if($contact->favorito)
-                                        <i class="fas fa-star text-warning mr-2" title="Contacto favorito"
-                                            style="font-size:12px"></i>
+                                                            <img src="
+                                            {{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
+                                            class="mx-auto">
                                         @endif
+                                    </a>
+                                </div>
 
-                                        <a class="name_link" href="{{route('contacts.show',$contact)}}">
-                                            {{$contact->nome}}</a>
-                                    </td>
+                            </td>
 
-                                    {{-- e-mail --}}
-                                    <td class="align-middle">
-                                        @if ($contact->email==null)
-                                        <span class="text-muted" style="font-weight:normal"><small>(sem informação)</small><span>
-                                                @else
-                                                {{$contact->email}}
-                                                @endif
-                                    </td>
+                            {{-- Nome e Apelido --}}
+                            <td class="align-middle">
+                                @if($contact->favorito)
+                                <i class="fas fa-star text-warning mr-2" title="Contacto favorito"
+                                    style="font-size:12px"></i>
+                                @endif
 
-                                    {{-- Telefone(1) --}}
-                                    <td class="align-middle">
-                                        @if ($contact->telefone1==null)
-                                        <span class="text-muted" style="font-weight:normal"><small>(sem informação)</small><span>
-                                                @else
-                                                {{$contact->telefone1}}
-                                                @endif
-                                    </td>
+                                <a class="name_link" href="{{route('contacts.show',$contact)}}">
+                                    {{$contact->nome}}</a>
+                            </td>
+
+                            {{-- e-mail --}}
+                            <td class="align-middle">
+                                @if ($contact->email==null)
+                                <span class="text-muted" style="font-weight:normal"><small>(sem
+                                        informação)</small><span>
+                                        @else
+                                        {{$contact->email}}
+                                        @endif
+                            </td>
+
+                            {{-- Telefone(1) --}}
+                            <td class="align-middle">
+                                @if ($contact->telefone1==null)
+                                <span class="text-muted" style="font-weight:normal"><small>(sem
+                                        informação)</small><span>
+                                        @else
+                                        {{$contact->telefone1}}
+                                        @endif
+                            </td>
 
 
-                                    {{-- OPÇÔES --}}
-                                    <td class="text-center align-middle">
-                                        <a href="{{route('contacts.show',$contact)}}" class="btn_list_opt "
-                                            title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                        <a href="{{route('contacts.edit',$contact)}}" class="btn_list_opt btn_list_opt_edit"
-                                            title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                            {{-- OPÇÔES --}}
+                            <td class="text-center align-middle">
+                                <a href="{{route('contacts.show',$contact)}}" class="btn_list_opt "
+                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="{{route('contacts.edit',$contact)}}" class="btn_list_opt btn_list_opt_edit"
+                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
-                                        <form method="POST" role="form" id="{{ $contact->idContacto }}"
-                                            action="{{route('contacts.destroy',$contact)}}" data="{{ $contact->nome }}"
-                                            class="d-inline-block form_contact_id">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn_delete" title="Eliminar contacto" data-toggle="modal"
-                                                data-target="#staticBackdrop"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                <form method="POST" role="form" id="{{ $contact->idContacto }}"
+                                    action="{{route('contacts.destroy',$contact)}}" data="{{ $contact->nome }}"
+                                    class="d-inline-block form_contact_id">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn_delete" title="Eliminar contacto"
+                                        data-toggle="modal" data-target="#staticBackdrop"><i
+                                            class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </td>
+                        </tr>
 
-                            @endforeach
+                        @endforeach
 
 
                     </tbody>
                 </table>
 
             </div>
-        @endif
+            @endif
+        </div>
+
+
+
     </div>
 
 

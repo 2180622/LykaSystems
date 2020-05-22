@@ -5,7 +5,7 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
 <link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
@@ -37,358 +37,309 @@
         <br>
 
 
-        {{-- Menu de navegação --}}
-
-        <div class="row nav nav-fill w-100 text-center mx-auto p-3 ">
-
-            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="allcontacts-tab"
-                href="{{route('clients.index')}}">
-                <div class="col"><i class="fas fa-users mr-2"></i>Lista de estudantes</div>
-            </a>
+        <div class="bg-white shadow-sm  mb-4 p-4 " style="border-radius:10px">
 
 
-            <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm active "
-                id="pesquisaContactos-tab" data-toggle="tab" href="{{route('clients.searchIndex')}}" role="tab" aria-controls="pesquisaContactos"
-                aria-selected="true">
-                <div class="col"><i class="fas fa-search mr-2"></i>Pesquisar Base de Dados</div>
-            </a>
+            {{-- Formulário de pesquisa --}}
 
-        </div>
+            <form method="POST" id="searchForm" action="{{route('clients.searchResults')}}" class="form-group"
+                enctype="multipart/form-data">
+                @csrf
+
+                <div class="row mx-1">
+
+                    <div class="col" style="max-width: 120px">
+                        <i class="far fa-list-alt active" style="font-size:80px"></i>
+                    </div>
+
+                    <div class="col" style="min-width:220px">
+                        <div>Pesquisar estudante por:</div>
+                        <select id="search_options" name="search_options" class="custom-select select_style mt-2">
+                            <option value="País de origem" selected>País de origem</option>
+                            <option value="Cidade de origem">Cidade de origem</option>
+                            <option value="Instituição de origem">Instituição de origem</option>
+                            <option value="Agente">Agente</option>
+                            <option value="Universidade">Universidade</option>
+                            <option value="Nível de estudos">Nível de estudos</option>
+                            <option value="Estado de cliente">Estado de cliente</option>
+                        </select>
+
+                        <br><br>
 
 
 
+                        <div id="searchfields" style="min-width: 295px">
 
-        <div class="bg-white shadow-sm  mb-4 p-4 " style="border-radius:10px; margin-top:-30px">
+                            {{-- Pesquisa por País de origem --}}
+                            <div id="divPaisOrigem">
+                                <span>Selecione o País de Origem:</span>
+                                <select id="paisNaturalidade" name="paisNaturalidade"
+                                    class="custom-select select_style mt-2" style="width:100%">
+                                    @if(!empty($paises) )
+                                    <option selected hidden>Selecione o País de Origem</option>
+                                    @foreach ($paises as $pais)
+                                    <option value="{{$pais}}">{{$pais}}</option>
+                                    @endforeach
+                                    @else
+                                    <option selected hidden value="0">Sem registos</option>
+                                    @endif
+                                </select>
+                            </div>
 
-            <div class="tab-content" id="myTabContent">
 
-                {{-- Conteudo: Pesquisa --}}
-                <div class="tab-pane fade text-secondary show active" id="pesquisaContactos" role="tabpanel"  aria-labelledby="pesquisaContactos-tab">
-                    {{-- Formulário de pesquisa --}}
+                            {{-- Pesquisa por cidade de origem --}}
+                            <div id="divCidade" style="display: none">
+                                <span>Selecione a Cidade de Origem:</span>
+                                <select id="cidade" name="cidade" class="custom-select select_style mt-2"
+                                    style="width:100%">
+                                    @if(!empty($cidadesOrigem) )
+                                    <option selected hidden>Selecione a cidade de origem</option>
+                                    @foreach ($cidadesOrigem as $cidade)
+                                    <option value="{{$cidade}}">{{$cidade}}</option>
+                                    @endforeach
+                                    @else
+                                    <option selected hidden value="0">Sem registos</option>
+                                    @endif
+                                </select>
+                            </div>
 
-                    <form method="POST" id="searchForm" action="{{route('clients.searchResults')}}" class="form-group" enctype="multipart/form-data">
-                        @csrf
 
-                        <div class="row mx-1 p-3">
+                            {{-- Pesquisa por Instituição de origem --}}
+                            <div id="divInstituicaoOrigem" {{--  style="display: none" --}}>
+                                <span>Selecione a Instituição de Origem:</span>
+                                <select id="nomeInstituicaoOrigem" name="nomeInstituicaoOrigem"
+                                    class="custom-select select_style mt-2 " style="width:100%">
+                                    @if(!empty($instituicoesOrigem) )
+                                    <option selected hidden>Selecione a Instituição de origem</option>
+                                    @foreach ($instituicoesOrigem as $instituição)
+                                    <option value="{{$instituição}}">{{$instituição}}</option>
+                                    @endforeach
+                                    @else
+                                    <option selected hidden value="0">Sem registos</option>
+                                    @endif
+                                </select>
+                            </div>
 
-                            <div class="col col-3 p-2 mr-2" style="width:220px!important; min-width:220px">
-                                <div>Pesquisar estudante por:</div>
-                                <select id="search_options" name="search_options" class="custom-select select_style mt-2">
-                                    <option value="País de origem" selected>País de origem</option>
-                                    <option value="Cidade de origem">Cidade de origem</option>
-                                    <option value="Instituição de origem">Instituição de origem</option>
-                                    <option value="Agente">Agente</option>
-                                    <option value="Universidade">Universidade</option>
-                                    <option value="Nível de estudos">Nível de estudos</option>
-                                    <option value="Estado de cliente">Estado de cliente</option>
+
+                            {{-- Pesquisa por Agente --}}
+                            <div id="divAgents" style="display: none">
+                                <span>Selecione o Agente:</span>
+                                <select id="agente" name="agente" class="custom-select select_style mt-2"
+                                    style="width:100%">
+                                    @if( $agents )
+                                    <option selected hidden>Selecione o Agente</option>
+                                    @foreach ($agents as $agent)
+                                    <option value="{{$agent->idAgente}}">{{$agent->nome}} {{$agent->apelido}}
+                                        ({{$agent->pais}})</option>
+                                    @endforeach
+                                    @else
+                                    <option selected hidden value="0">Sem registos</option>
+                                    @endif
+                                </select>
+                            </div>
+
+                            {{-- Pesquisa por Universidades --}}
+                            <div id="divUniversidades" style="display: none">
+                                <span>Selecione a Universidade:</span>
+                                <select id="universidade" name="universidade" class="custom-select select_style mt-2"
+                                    style="width:100%">
+                                    @if( $universidades )
+                                    <option selected hidden>Selecione a Universidade</option>
+                                    @foreach ($universidades as $universidade)
+                                    <option value="{{$universidade->idUniversidade}}">{{$universidade->nome}}
+                                    </option>
+                                    @endforeach
+                                    @else
+                                    <option selected hidden value="0">Sem registos</option>
+                                    @endif
+                                </select>
+                            </div>
+
+
+                            {{-- Pesquisa por Nivel de estudos --}}
+                            <div id="divNivelEstudos" style="display: none">
+                                <span>Selecione o Nível de Estudos:</span>
+                                <select id="nivelEstudos" name="nivelEstudos" class="custom-select select_style mt-2"
+                                    style="width:100%">
+                                    <option value="0" value="0" selected hidden>Selecione Nível de Estudos</option>
+                                    <option value="Secundário Incompleto">Secundário Incompleto</option>
+                                    <option value="Secundário Completo">Secundário Completo</option>
+                                    <option value="Curso Tecnológico">Curso Tecnológico</option>
+                                    <option value="Estuda na Universidade">Estuda na Universidade</option>
+                                    <option value="Licenciado">Licenciado</option>
+                                    <option value="Mestrado">Mestrado</option>
                                 </select>
                             </div>
 
 
 
 
-
-                            {{-- A pesquisa por filtro só esta disponivel para os admins --}}
-
-                            <div class="col p-2" id="searchfields" style="min-width: 295px">
-
-                                {{-- Pesquisa por País de origem --}}
-                                <div id="divPaisOrigem">
-                                    <span>Selecione o País de Origem:</span>
-                                    <select id="paisNaturalidade" name="paisNaturalidade" class="custom-select select_style mt-2"
-                                        style="width:100%">
-                                        @if(!empty($paises) )
-                                        <option selected hidden>Selecione o País de Origem</option>
-                                        @foreach ($paises as $pais)
-                                        <option value="{{$pais}}">{{$pais}}</option>
-                                        @endforeach
-                                        @else
-                                        <option selected hidden value="0">Sem registos</option>
-                                        @endif
-                                    </select>
-                                </div>
-
-
-                                {{-- Pesquisa por cidade de origem --}}
-                                <div id="divCidade" style="display: none">
-                                    <span>Selecione a Cidade de Origem:</span>
-                                    <select id="cidade" name="cidade" class="custom-select select_style mt-2" style="width:100%">
-                                        @if(!empty($cidadesOrigem) )
-                                            <option selected hidden>Selecione a cidade de origem</option>
-                                        @foreach ($cidadesOrigem as $cidade)
-                                            <option value="{{$cidade}}">{{$cidade}}</option>
-                                        @endforeach
-                                        @else
-                                            <option selected hidden value="0">Sem registos</option>
-                                        @endif
-                                    </select>
-                                </div>
-
-
-                                {{-- Pesquisa por Instituição de origem --}}
-                                <div id="divInstituicaoOrigem" {{--  style="display: none" --}}>
-                                    <span>Selecione a Instituição de Origem:</span>
-                                    <select id="nomeInstituicaoOrigem" name="nomeInstituicaoOrigem"
-                                        class="custom-select select_style mt-2 " style="width:100%">
-                                        @if(!empty($instituicoesOrigem) )
-                                        <option selected hidden>Selecione a Instituição de origem</option>
-                                        @foreach ($instituicoesOrigem as $instituição)
-                                        <option value="{{$instituição}}">{{$instituição}}</option>
-                                        @endforeach
-                                        @else
-                                        <option selected hidden value="0">Sem registos</option>
-                                        @endif
-                                    </select>
-                                </div>
-
-
-                                {{-- Pesquisa por Agente --}}
-                                <div id="divAgents" style="display: none">
-                                    <span>Selecione o Agente:</span>
-                                    <select id="agente" name="agente" class="custom-select select_style mt-2" style="width:100%">
-                                        @if( $agents )
-                                        <option selected hidden>Selecione o Agente</option>
-                                        @foreach ($agents as $agent)
-                                        <option value="{{$agent->idAgente}}">{{$agent->nome}} {{$agent->apelido}}
-                                            ({{$agent->pais}})</option>
-                                        @endforeach
-                                        @else
-                                        <option selected hidden value="0">Sem registos</option>
-                                        @endif
-                                    </select>
-                                </div>
-
-                                {{-- Pesquisa por Universidades --}}
-                                <div id="divUniversidades" style="display: none">
-                                    <span>Selecione a Universidade:</span>
-                                    <select id="universidade" name="universidade" class="custom-select select_style mt-2"
-                                        style="width:100%">
-                                        @if( $universidades )
-                                        <option selected hidden>Selecione a Universidade</option>
-                                        @foreach ($universidades as $universidade)
-                                        <option value="{{$universidade->idUniversidade}}">{{$universidade->nome}}
-                                        </option>
-                                        @endforeach
-                                        @else
-                                        <option selected hidden value="0">Sem registos</option>
-                                        @endif
-                                    </select>
-                                </div>
-
-
-                                {{-- Pesquisa por Nivel de estudos --}}
-                                <div id="divNivelEstudos" style="display: none">
-                                    <span>Selecione o Nível de Estudos:</span>
-                                    <select id="nivelEstudos" name="nivelEstudos" class="custom-select select_style mt-2"
-                                        style="width:100%">
-                                        <option value="0" value="0" selected hidden>Selecione Nível de Estudos</option>
-                                        <option value="Secundário Incompleto">Secundário Incompleto</option>
-                                        <option value="Secundário Completo">Secundário Completo</option>
-                                        <option value="Curso Tecnológico">Curso Tecnológico</option>
-                                        <option value="Estuda na Universidade">Estuda na Universidade</option>
-                                        <option value="Licenciado">Licenciado</option>
-                                        <option value="Mestrado">Mestrado</option>
-                                    </select>
-                                </div>
-
-
-
-
-                                {{-- Pesquisa Estado de cliente --}}
-                                <div id="divEstadoCliente" style="display: none">
-                                    <span>Selecione o estado do cliente:</span>
-                                    <select id="estado" name="estado" class="custom-select select_style mt-2" style="width:100%">
-                                        <option hidden value="0">Selecione o Estado do Cliente</option>
-                                        <option value="Ativo">Ativo</option>
-                                        <option value="Inativo">Inativo</option>
-                                        <option value="Proponente">Proponente</option>
-                                    </select>
-                                </div>
-
+                            {{-- Pesquisa Estado de cliente --}}
+                            <div id="divEstadoCliente" style="display: none">
+                                <span>Selecione o estado do cliente:</span>
+                                <select id="estado" name="estado" class="custom-select select_style mt-2"
+                                    style="width:100%">
+                                    <option hidden value="0">Selecione o Estado do Cliente</option>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Inativo">Inativo</option>
+                                    <option value="Proponente">Proponente</option>
+                                </select>
                             </div>
 
-                            <div class="col col-2 align-self-center " style="width: 80px; min-width: 100px;">
 
-                                <input type="submit" value="Pesquisar" class="top-button mt-4 " style="width: 100%; min-width:100px">
 
-                            </div>
+                            <input type="submit" value="Pesquisar" class="top-button mt-4 "
+                            style="width: 100%; min-width:100px">
+
 
                         </div>
 
-
-                    </form>
+                    </div>
 
 
                 </div>
 
-            </div>
 
+            </form>
 
-
-                @if ( isset($clients)  )
-
-
-
-                    @if ($clients)
-
-                    <hr>
-                    <br>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center text-secondary"><small>A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}} </strong>" encontrou <strong>{{count($clients)}}</strong> registo(s) no sistema</small></div>
-                        </div>
-                    </div>
-
-                        <div class="row mt-3 p-3 ">
-{{--                             <div class="col">
-                                <span class="mr-2">Mostrar</span>
-                                <select class="custom-select" id="records_per_page" style="width:80px">
-                                    <option selected>10</option>
-                                    <option>25</option>
-                                    <option>50</option>
-                                    <option>100</option>
-                                </select>
-                                <span class="ml-2">por página</span>
-                            </div> --}}
-                            <div class="col text-center mb-3">
-                                <div class="input-group pl-0  search-section mx-auto" style="width:50%">
-                                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura"
-                                        aria-label="Procurar">
-                                    <div class="search-button input-group-append">
-                                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br>
-                        <hr>
-
-
-                        <div class="table-responsive " style="overflow:hidden">
-
-
-                            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                                style="overflow:hidden;">
-
-                                {{-- Cabeçalho da tabela --}}
-                                <thead>
-                                    <tr>
-                                        <th class="text-center align-content-center ">Foto</th>
-                                        <th>Nome</th>
-                                        <th>N.º Passaporte</th>
-                                        <th>Estado</th>
-                                        <th class="text-center">Opções</th>
-                                    </tr>
-                                </thead>
-
-                                {{-- Corpo da tabela --}}
-                                <tbody>
-
-                                    @foreach ($clients as $client)
-                                    <tr>
-                                        <td>
-                                            <div class="align-middle mx-auto shadow-sm rounded bg-white"
-                                                style="overflow:hidden; width:50px; height:50px">
-                                                <a class="name_link" href="{{route('clients.show',$client)}}">
-                                                    @if($client->fotografia)
-                                                    <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
-                                                        width="100%" class="mx-auto">
-                                                    @elseif($client->genero == 'F')
-                                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
-                                                        class="mx-auto">
-                                                    @else
-                                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
-                                                        class="mx-auto">
-                                                    @endif
-                                                </a>
-                                            </div>
-
-                                        </td>
-
-                                        {{-- Nome e Apelido --}}
-                                        <td class="align-middle"><a class="name_link"
-                                                href="{{route('clients.show',$client)}}">{{ $client->nome }}
-                                                {{ $client->apelido }}</a>
-                                        </td>
-
-                                        {{-- numPassaporte --}}
-                                        <td class="align-middle">{{ $client->numPassaporte }}</td>
-
-                                        {{-- Estado de cliente --}}
-                                        <td class="align-middle">
-
-                                            @if ( $client->estado == "Ativo")
-                                            <span class="text-success">Ativo</span>
-                                            @elseif( $client->estado == "Inativo")
-                                            <span class="text-danger">Inativo</span>
-                                            @else
-                                            <span class="text-info">Proponente</span>
-                                            @endif
-
-                                        </td>
-
-
-                                        {{-- OPÇÔES --}}
-                                        <td class="text-center align-middle">
-                                            <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
-                                                title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-
-
-                                            {{-- Permissões para editar --}}
-                                            @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" &&
-                                            $client->editavel ==
-                                            1)
-                                            <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
-                                                title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-                                            @endif
-
-
-                                            @if (Auth::user()->tipo == "admin")
-                                            <form method="POST" role="form" id="{{ $client->idCliente }}"
-                                                action="{{route('clients.destroy',$client)}}"
-                                                data="{{ $client->nome }} {{ $client->apelido }}"
-                                                class="d-inline-block form_client_id">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn_delete" title="Eliminar estudante"
-                                                    data-toggle="modal" data-target="#deleteModal"><i
-                                                        class="fas fa-trash-alt"></i></button>
-                                            </form>
-                                            @endif
-
-                                        </td>
-                                    </tr>
-                                    @endforeach
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
-
-
-                    @else
-
-                        <div class="row px-3">
-                            <div class="col border rounded bg-light p-3 mx-4">
-                                <div class="text-muted text-center">
-                                    A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}} </strong>" não encontrou nenhum registo no sistema
-                                </div>
-                            </div>
-                        </div>
-
-                    @endif
-
-                @endif
 
         </div>
 
+    </div>
 
+
+
+    @if ( isset($clients) )
+
+    <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px">
+
+
+        @if ( !$clients )
+        <div class="row px-3">
+            <div class="col border rounded bg-light p-3 mx-4">
+                <div class="text-muted text-center">
+                    A pesquisa de estudantes por " <strong>{{$valor}}</strong> " no campo " <strong> {{$nomeCampo}}
+                    </strong>" não encontrou nenhum registo no sistema
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="row">
+
+            <div class="col text-center">
+                <div class="text-secondary"><strong>A pesquisa de estudantes por " {{$valor}} " no campo " {{$nomeCampo}} " encontrou {{count($clients)}} registo(s) no sistema</strong></div>
+                <div class="mx-auto" style="width: 60%; border-radius:10px;"><br>
+                    {{-- procura nos resultados --}}
+                    <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..." aria-label="Procurar">
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
+
+                {{-- Cabeçalho da tabela --}}
+                <thead>
+                    <tr>
+                        <th class="text-center align-content-center ">Foto</th>
+                        <th>Nome</th>
+                        <th>N.º Passaporte</th>
+                        <th>Estado</th>
+                        <th class="text-center">Opções</th>
+                    </tr>
+                </thead>
+
+                {{-- Corpo da tabela --}}
+                <tbody>
+
+                    @foreach ($clients as $client)
+                    <tr>
+                        <td>
+                            <div class="align-middle mx-auto shadow-sm rounded bg-white"
+                                style="overflow:hidden; width:50px; height:50px">
+                                <a class="name_link" href="{{route('clients.show',$client)}}">
+                                    @if($client->fotografia)
+                                    <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
+                                        width="100%" class="mx-auto">
+                                    @elseif($client->genero == 'F')
+                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
+                                        class="mx-auto">
+                                    @else
+                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
+                                        class="mx-auto">
+                                    @endif
+                                </a>
+                            </div>
+
+                        </td>
+
+                        {{-- Nome e Apelido --}}
+                        <td class="align-middle"><a class="name_link"
+                                href="{{route('clients.show',$client)}}">{{ $client->nome }}
+                                {{ $client->apelido }}</a>
+                        </td>
+
+                        {{-- numPassaporte --}}
+                        <td class="align-middle">{{ $client->numPassaporte }}</td>
+
+                        {{-- Estado de cliente --}}
+                        <td class="align-middle">
+
+                            @if ( $client->estado == "Ativo")
+                            <span class="text-success">Ativo</span>
+                            @elseif( $client->estado == "Inativo")
+                            <span class="text-danger">Inativo</span>
+                            @else
+                            <span class="text-info">Proponente</span>
+                            @endif
+
+                        </td>
+
+
+                        {{-- OPÇÔES --}}
+                        <td class="text-center align-middle">
+                            <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
+                                title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+
+
+                            {{-- Permissões para editar --}}
+                            @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" &&
+                            $client->editavel ==
+                            1)
+                            <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
+                                title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                            @endif
+
+
+                            @if (Auth::user()->tipo == "admin")
+                            <form method="POST" role="form" id="{{ $client->idCliente }}"
+                                action="{{route('clients.destroy',$client)}}"
+                                data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
+                                    data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                            @endif
+
+                        </td>
+                    </tr>
+                    @endforeach
+
+                </tbody>
+
+            </table>
+
+        </div>
+        @endif
 
 
     </div>
+
+    @endif {{-- ( if isset clientes ) --}}
+
 </div>
 
 @endsection

@@ -8,6 +8,8 @@ html, body {
     transition: all 0.3 ease;
     scroll-behavior: smooth;
 }
+
+
 .name_link {
     color: gray;
 }
@@ -16,6 +18,7 @@ html, body {
     color: #6A74C9;
     text-decoration: none;
 }
+
 
 
 .top-button {

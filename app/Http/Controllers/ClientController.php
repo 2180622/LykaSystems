@@ -121,9 +121,7 @@ class ClientController extends Controller
 
         }
 
-        if ($clients->isEmpty()) {
-            $clients=null;
-        }
+
 
         /* mostra a lista */
         return view('clients.list', compact('clients'));
@@ -706,6 +704,7 @@ class ClientController extends Controller
     public function searchResults(Request $request){
 
         request()->all();
+        $clients= null;
 
         $nomeCampo= $request->search_options;
 
@@ -765,10 +764,10 @@ class ClientController extends Controller
 
 
         /* Se não encontrar resultados */
-        if ( !isset($clients) || $clients->isEmpty() ) {
-            $clients=0;
+/*         if ( !isset($clients) || $clients->isEmpty() ) {
+            $clients=[];
         }
-
+ */
         /* dd($clients); */
 
         $paises = array_unique(Cliente::pluck('paisNaturalidade')->toArray());
