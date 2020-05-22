@@ -401,15 +401,18 @@ class ClientController extends Controller
 
         /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
 
+        $infosPassaporte=null;
+
         $passaporte = DocPessoal::
         where ("idCliente","=",$client->idCliente)
         ->where("tipo","=","Passaporte")
         ->first();
 
-        if($passaporte!=null){
+        if($passaporte!=null || !isEmpty($passaporte)){
             $infosPassaporte = json_decode($passaporte->info);
+        }else{
+            $infosPassaporte=null;
         }
-
 
         return view('clients.print',compact("client","produtos","infosPassaporte"));
     }

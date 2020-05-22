@@ -161,7 +161,7 @@
                             {{-- Tab das ObsPessoais (ADMINS ONLY) --}}
                             <div class="tab-content text-secondary" id="ObsTabs">
                                 <div class="tab-pane fade active show mt-1" id="obsPessoais" role="tabpanel" aria-labelledby="obsPessoais-tab">
-                                    <div class="border bg-light p-2" style="height:140px; overflow: auto">
+                                    <div class="border bg-light p-2" style="height:155px; overflow: auto">
                                         @if ($client->obsPessoais==null)
                                             <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                                         @else
@@ -173,7 +173,7 @@
 
                                 {{-- Tab das Obs dos Agentes --}}
                                 <div class="tab-pane fade mt-1" id="obsAgentes" role="tabpanel" aria-labelledby="obsAgentes-tab">
-                                    <div class="border bg-light p-2" style="height:140px; overflow: auto">
+                                    <div class="border bg-light p-2" style="height:155px; overflow: auto">
                                         @if ($client->obsAgente==null)
                                             <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                                         @else
