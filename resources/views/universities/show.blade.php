@@ -258,7 +258,7 @@
 
                         <div class="row mb-3">
                             <div class="col">
-                                <div class="text-center text-secondary">Existe{{count($clients)}} estudante(s) associados a esta Universidade</div>
+                                <div class="text-center text-secondary">Existe {{count($clients)}} estudante(s) associados a esta Universidade</div>
                             </div>
                         </div>
 
@@ -283,6 +283,7 @@
                                     <tr>
                                         <th class="text-center align-content-center ">Foto</th>
                                         <th>Nome</th>
+                                        <th>N.º Passaporte</th>
                                         <th>Naturalidade</th>
                                         <th class="text-center">Opções</th>
                                     </tr>
@@ -319,6 +320,9 @@
                                             <td class="align-middle"><a class="name_link"
                                                                         href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a>
                                             </td>
+
+                                            {{-- paisNaturalidade --}}
+                                            <td class="align-middle">{{ $client->numPassaporte }}</td>
 
 
                                             {{-- paisNaturalidade --}}

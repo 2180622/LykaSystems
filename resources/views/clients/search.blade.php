@@ -49,10 +49,10 @@
                 <div class="row mx-1">
 
                     <div class="col" style="max-width: 120px">
-                        <i class="far fa-list-alt active" style="font-size:80px"></i>
+                        <i class="fas fa-search active pt-4" style="font-size:80px"></i>
                     </div>
 
-                    <div class="col" style="min-width:220px">
+                    <div class="col text-secondary font-weight-bold" style="min-width:220px">
                         <div>Pesquisar estudante por:</div>
                         <select id="search_options" name="search_options" class="custom-select select_style mt-2">
                             <option value="País de origem" selected>País de origem</option>
@@ -186,14 +186,11 @@
                                 </select>
                             </div>
 
-
-
-                            <input type="submit" value="Pesquisar" class="top-button mt-4 "
-                            style="width: 100%; min-width:100px">
-
-
                         </div>
 
+                        <div class="row">
+                            <div class="col text-right"><input type="submit" value="Pesquisar" class="top-button mt-4 "  style="width: 150px; min-width:150px"></div>
+                        </div>
                     </div>
 
 

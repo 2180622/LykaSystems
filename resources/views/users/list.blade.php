@@ -6,7 +6,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
-{{-- <link href="{{asset('/css/payment.css')}}" rel="stylesheet"> --}}
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
@@ -32,37 +32,34 @@
                 <h6>Listagem de administradores</h6>
             </div>
         </div>
+
+
         <br>
 
-        <div class="row mt-3 mb-4">
-            <div class="col">
-                Estão registados no sistema <strong>{{$users->count()}}</strong> administradores
-            </div>
-        </div>
 
-        <div class="row mt-3 mb-4">
-            <div class="col">
-                <span class="mr-2">Mostrar</span>
-                <select class="custom-select" id="records_per_page" style="width:80px">
-                    <option selected>10</option>
-                    <option>25</option>
-                    <option>50</option>
-                    <option>100</option>
-                </select>
-                <span class="ml-2">por página</span>
+        <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px;">
+            <div class="row mx-1">
+                <div class="col col-2" style="max-width: 120px">
+                    <i class="fas fa-user-cog active" style="font-size:80px"></i>
+                </div>
+                <div class="col">
+                    <div class="text-secondary"><strong>Estão registados no sistema {{$users->count()}} administradores</strong></div>
+                    <br>
+            {{-- Input de procura nos resultados da dataTable --}}
+
+                    <div style="width: 100%; border-radius:10px;">
+                        <input type="text" class="shadow-sm" id="customSearchBox"
+                            placeholder="Procurar nos resultados..." aria-label="Procurar">
+
             </div>
-            <div class="col ">
-                <div class="input-group pl-0 float-right search-section" style="width:250px">
-                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
-                    <div class="search-button input-group-append">
-                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                    </div>
                 </div>
             </div>
-        </div>
-        <hr>
-        <div class="table-responsive " style="overflow:hidden">
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+
+
+            <br>
+
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
                 <thead>
                     <tr>
                         <th class="text-center align-content-center">Foto</th>
@@ -99,6 +96,11 @@
                 </tbody>
             </table>
         </div>
+        </div>
+
+
+
+
     </div>
 </div>
 

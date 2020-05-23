@@ -52,20 +52,21 @@
         <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px;">
             @if($contacts!=null || !empty($contacts))
 
+
             <div class="row mx-1">
                 <div class="col col-2" style="max-width: 120px">
                     <i class="far fa-address-book active" style="font-size:80px"></i>
                 </div>
                 <div class="col">
-                    <div class="text-secondary"><strong>Existe {{count($contacts)}} contacto(s) registados</strong></div>
+                    <div class="text-secondary"><strong>Existe {{count($contacts)}} contacto(s) registados</strong>
+                    </div>
                     <br>
-            {{-- Input de procura nos resultados da dataTable --}}
+                    {{-- Input de procura nos resultados da dataTable --}}
 
                     <div style="width: 100%; border-radius:10px;">
                         <input type="text" class="shadow-sm" id="customSearchBox"
                             placeholder="Procurar nos resultados..." aria-label="Procurar">
-
-            </div>
+                    </div>
                 </div>
             </div>
 

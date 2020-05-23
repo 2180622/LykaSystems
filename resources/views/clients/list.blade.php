@@ -71,6 +71,7 @@
 
                     </div>
                 </div>
+                @if (Auth::user()->tipo == "admin")
                 <div class="col col-2 text-center" style="max-width: 130px">
                     <a class="name_link " href="{{route('clients.searchIndex')}}">
                         <div class="bg-light border shadow-sm p-2">
@@ -79,6 +80,7 @@
                         </div>
                     </a>
                 </div>
+                @endif
             </div>
 
             <br>

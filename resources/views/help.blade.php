@@ -6,6 +6,8 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
     <link href="{{asset('/css/help.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -39,30 +41,18 @@
 
                     <br>
 
-                    <div class="col-md-12 text-center">
-                        <label>Qual é a sua dúvida?</label>
-                    </div>
-
-                    <br> <br>
-
-                    <div class="col-md-6 text-center">
-                        <div class="search-bar-helper">
-
-                            <input class="shadow-sm" type="search" id="searchHelper" placeholder="Palavras-chaves"
-                                   aria-label="Procurar" value="" onkeyup="this.setAttribute('value', this.value);" style="cursor: pointer">
-
-                            <div class="search-button-helper">
-                                <ion-icon name="search-outline"  class="search-icon-helper"></ion-icon>
-                            </div>
+                    <div class="col-md-12 text-center font-weight-bold">
+                        <div class="mt-2 mb-2 text-secondary">Qual é a sua dúvida?</div>
+                        <div class="mx-auto p-1" style="width: 60%; border-radius:10px;">
+                            <input type="text" class="shadow-sm" id="customSearchBox"
+                                placeholder="Procurar Palavras-chaves..." aria-label="Procurar" value="" onkeyup="this.setAttribute('value', this.value);">
 
                         </div>
                     </div>
-
-                    <br><br><br>
                 </div>
 
 
-                <div class="row">
+                <div class="row mt-4">
 
                     <div class="panel-group report-card" id="accordion" role="tablist" aria-multiselectable="true">
 

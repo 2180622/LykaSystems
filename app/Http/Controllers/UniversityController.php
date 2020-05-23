@@ -67,7 +67,7 @@ class UniversityController extends Controller
         /* Obtem os eventos da universidade */
         $eventos = Agenda::
         where('idUniversidade', $university->idUniversidade)
-        ->orderBy('dataInicio')
+        ->orderBy('dataInicio', 'desc')
         ->get();
 
         if ($eventos->isEmpty()) {

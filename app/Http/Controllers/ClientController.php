@@ -31,6 +31,7 @@ class ClientController extends Controller
 
         $user = User::where('idCliente', '=', $client->idCliente)->first();
 
+
         /* Cria o UTILIZADOR se ainda não existir */
 
         if ( !$user ){
@@ -54,11 +55,16 @@ class ClientController extends Controller
             $auth_key = $user->auth_key;
             dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
+
+            if ($client->email==""){
+                return back()->with('success', 'É necessário inserir um e-mail válido');
+            }
+
             return back()->with('success', 'E-mail de ativação enviado com sucesso');
 
         }else{
 
-            return back()->with('error', 'O utilizador já existe');
+            return back()->with('success', 'A conta para este utilizador já existe');
 
         }
 
