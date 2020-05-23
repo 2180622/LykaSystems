@@ -52,7 +52,6 @@
         <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px;">
             @if($contacts!=null || !empty($contacts))
 
-
             <div class="row mx-1">
                 <div class="col col-2" style="max-width: 120px">
                     <i class="far fa-address-book active" style="font-size:80px"></i>

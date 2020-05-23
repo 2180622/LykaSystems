@@ -56,7 +56,7 @@
                     <i class="far fa-address-book active" style="font-size:80px"></i>
                 </div>
                 <div class="col">
-                    <div class="text-secondary"><strong>Existe {{count($files)}} ficheiro(s) no sistema</strong></div>
+                    <div class="text-secondary"><strong>Existe {{count($files)}} ficheiro(s) disponíveis no sistema</strong></div>
                     <br>
             {{-- Input de procura nos resultados da dataTable --}}
 

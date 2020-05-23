@@ -215,8 +215,9 @@
             {{-- Campo de Observações para o admin --}}
             <div class="row">
                 <div class="col-md-12">
+                    <br>
                     {{-- INPUT PARA O AGENTE obsAgente --}}
-                    <label for="obsPessoais">Observações pessoais:</label><br>
+                    <label for="obsPessoais">Observações @if (Auth::user()->tipo == "admin")(do agente)@endif:</label><br>
                     <textarea name="obsAgente" id="obsAgente" rows="5" style="width:100%">{{old('obsAgente',$client->obsAgente)}}</textarea>
                 </div>
             </div>
@@ -322,7 +323,7 @@
                             {{-- INUPUT numPassaporte --}}
                             <label for="numPassaporte">Número do passaporte:</label><br>
                             <input type="text" class="form-control" name="numPassaporte" id="numPassaporte"
-                                value="{{$passaporteData->numPassaporte ?? ''}}" maxlength="20" placeholder="Número do passaporte">
+                                value="{{old('numPassaporte',$client->numPassaporte)}}" maxlength="20" placeholder="Número do passaporte">
                         </div>
                         <div class="col" style="min-width: 285px!important">
                             {{-- INUPUT dataValidPP --}}

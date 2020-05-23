@@ -7,6 +7,10 @@ $(document).ready(function () {
         "columnDefs": [
             {
                 "orderable": false,
+                "targets": 2
+            },
+            {
+                "orderable": false,
                 "width": "130px",
                 "targets": 3
             },
@@ -59,42 +63,15 @@ $(document).ready(function () {
 
 
 
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var name = button.data('name');
+        var modal = $(this);
+        modal.find('#text').text('Pretende eliminar o fornecedor ' + name + '?');
+        modal.find('#provider-delete-descricao').val(button.data('descricao'));
+        modal.find("form").attr('action', '/fornecedores/' + button.data('descricao'));
+    });
 
-
-
-
-    /* Isto é utilizado??? */
-
-    var clones = $('.clonar').clone();
-    $('.fases').html('');
-    function AtualizaProduto(Produtos){
-        var idproduto = new Array;
-        $("select.toolbar-escolha#produto").each(function () {
-            idproduto.push(this.value);
-        });
-        var filtros = null;
-        var i;
-        for (i = 0; i < Produtos.length; i++) {
-            filtros = filtros + filtroCB[i] + "_" + checkbox[i] + "__";
-            if(Produtos[i].idProduto == idproduto){
-                var clone = clones.clone();
-                $('#fases-tab', clone).attr('href','fase-'+Produtos[i].idProduto);
-                $('#fases-tab', clone).attr('aria-controls','fase-'+Produtos[i].idProduto);
-                $('#fases-tab', clone).attr('id','fase'+Produtos[i].idProduto+'-tab');
-                $('.fases').append(clone);
-            }
-        }
-    }
 
 
 });
-
-
-
-
-
-
-
-
-
-

@@ -67,7 +67,8 @@
         /* FIM configs DATATABLES */
 
         /* Variavel para permitir/negar pesquisa */
-        var pesquisaOk = 0 ;
+        var pesquisaOk = 1 ;
+        console.log('Inicial: '+pesquisaOk);
 
         /* Inicialmente, esconde todos os DIV's dentro do div "searchfields", exepto "divPaisOrigem" */
         $('#searchfields div:not(#divPaisOrigem)').hide();
@@ -75,15 +76,17 @@
 
         /* Quando os dados da pesquisa são alterados */
         $('#searchfields :input').on('change', function() {
-            pesquisaOk++;
+            if (pesquisaOk==1){
+                pesquisaOk++;
+            }
+            
+            console.log('searchFields: '+pesquisaOk);
         });
 
 
         /* Quando os Campos da pesquisa são alterados */
         $('#search_options').on('change', function() {
 
-
-            pesquisaOk=0;
 
                 /* Pais de origem */
                 if($('#search_options').val()=="País de origem" ){
@@ -129,7 +132,8 @@
                     $("#divEstadoCliente").show();
                 }
 
-                pesquisaOk ++;
+                pesquisaOk = 1 ;
+                console.log('Campos: '+pesquisaOk);
 
         });
 
