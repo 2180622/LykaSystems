@@ -52,7 +52,7 @@
                     <i class="fas fa-sliders-h active" style="font-size:80px"></i>
                 </div>
                 <div class="col">
-                    <div class="text-secondary">Estão registados no sistema <strong>{{$totalprodutostock}}</strong> produtos stock, <strong>{{$totalfasestock}}</strong> fases stock e <strong>{{$totaldocstock}}</strong> documentos stock.</div>
+                    <div class="text-secondary font-weight-bold">Estão registados no sistema {{$totalprodutostock}} produtos stock, {{$totalfasestock}} fases stock e {{$totaldocstock}} documentos stock.</div>
                     <br>
             {{-- Input de procura nos resultados da dataTable --}}
 

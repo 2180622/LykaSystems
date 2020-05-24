@@ -12,7 +12,7 @@ $(document).ready(function () {
             {
                 "orderable": false,
                 "width": "130px",
-                "targets": 4
+                "targets": -1
             },
 
         ],

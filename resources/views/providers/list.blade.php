@@ -45,14 +45,10 @@
                         <i class="fas fa-cogs active" style="font-size:80px"></i>
                     </div>
                     <div class="col">
-                        @if (count($providers) == 1)
-                            <div>Está registado <strong>{{count($providers)}}</strong> pagamento pendente.</div>
-                        @else
-                            <div>Estão registados <strong>{{count($providers)}}</strong> pagamentos pendentes.</div>
-                        @endif
+                            <div class="text-secondary font-weight-bold">Existe {{count($providers)}} registo(s) no sistema</div>
                         <br>
-                        {{-- Input de procura nos resultados da dataTable --}}
 
+                        {{-- Input de procura nos resultados da dataTable --}}
                         <div style="width: 100%; border-radius:10px;">
                             <input type="text" class="shadow-sm" id="customSearchBox"
                                 placeholder="Procurar nos resultados..." aria-label="Procurar">
@@ -77,7 +73,8 @@
                         <tbody>
                             @foreach ($providers as $provider)
                             <tr>
-                                <td class="align-middle">{{$provider->nome}}</td>
+                                <td class="align-middle"> <a href="{{route('provider.show', $provider)}}" class="name_link"
+                                    title="Ver ficha completa">{{$provider->nome}}</a></td>
                                 <td class="align-middle">{{$provider->morada}}</td>
                                 <td class="align-middle text-truncate">{{$provider->contacto}}</td>
 
