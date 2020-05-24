@@ -126,6 +126,16 @@
 
                 </div>
 
+                @if (Auth::user()->tipo == "admin")
+                    <div class="col" style="min-width: 320px">
+                        <div class="font-weight-bold text-secondary">Observacões:</div>
+                        <div class="border rounded bg-light p-2 mt-2 active" style="height:155px; width:100%; overflow: auto">
+                            {{ $agent->observacoes}}
+                        </div>
+
+                    </div>
+                @endif
+
             </div>
         </div>
 

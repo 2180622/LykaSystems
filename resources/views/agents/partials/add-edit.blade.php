@@ -158,6 +158,13 @@
 
                     </div>
 
+                    <div class="row">
+                        <div class="col">
+                            <label for="observacoes">Observacões:</label><br>
+                            <textarea name="observacoes" id="observacoes" rows="5" style="width:100%">{{old('observacoes',$agent->observacoes)}}</textarea>
+                        </div>
+                    </div>
+
                     <br>
 
                 </div>

@@ -20,7 +20,7 @@ class Agente extends Model
 
     protected $fillable = [
 
-        'idAgenteAssociado','nome','apelido','genero','tipo','email','dataNasc','fotografia','morada','pais','NIF','num_doc','img_doc','telefone1','telefone2','IBAN'
+        'idAgenteAssociado','nome','apelido','genero','tipo','email','dataNasc','fotografia','morada','pais','NIF','num_doc','img_doc','telefone1','telefone2','IBAN','observacoes'
         ];
 
     public function user(){

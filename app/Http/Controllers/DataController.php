@@ -76,6 +76,7 @@ class DataController extends Controller
         $agente->telefone1 = 932354453;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
+        $agente->observacoes ="Lorem Ipsum Tuli creme";
         $agente->save();
 
         $agente = new Agente;
@@ -92,6 +93,7 @@ class DataController extends Controller
         $agente->telefone1 = 932355555;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
+        $agente->observacoes ="Gosta de pão com manteiga";
         $agente->save();
 
         $agente = new Agente;
@@ -109,6 +111,7 @@ class DataController extends Controller
         $agente->telefone2 = null;
         $agente->tipo = 'Subagente';
         $agente->idAgenteAssociado = 1;
+        $agente->observacoes ="Tem como hoby contar os riscos da estrada";
         $agente->save();
 
         /*******************          Clientes          ********************/
