@@ -189,7 +189,8 @@
                         </div>
 
                         <div class="row">
-                            <div class="col text-right"><input type="submit" value="Pesquisar" class="top-button mt-4 "  style="width: 150px; min-width:150px"></div>
+                            <div class="col text-right"><input type="submit" value="Pesquisar" class="top-button mt-4 "
+                                    style="width: 150px; min-width:150px"></div>
                         </div>
                     </div>
 
@@ -224,15 +225,49 @@
         <div class="row">
 
             <div class="col text-center">
-                <div class="text-secondary"><strong>A pesquisa de estudantes por " {{$valor}} " no campo " {{$nomeCampo}} " encontrou {{count($clients)}} registo(s) no sistema</strong></div>
+                <div class="text-secondary"><strong>A pesquisa de estudantes por " {{$valor}} " no campo "
+                        {{$nomeCampo}} " encontrou {{count($clients)}} registo(s) no sistema</strong></div>
                 <div class="mx-auto" style="width: 60%; border-radius:10px;"><br>
                     {{-- procura nos resultados --}}
-                    <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..." aria-label="Procurar">
+                    <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..."
+                        aria-label="Procurar">
                 </div>
+
+
+                {{-- CheckBox: campos disponiveis --}}
+                <div class=" border rounded bg-light mt-4 p-3">
+                    {{-- numPassaporte paisNaturalidade cidade nomeInstituicaoOrigem nivEstudoAtual estado --}}
+
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="check_numPassaporte">
+                        <label class="custom-control-label" for="check_numPassaporte">N.º Passaporte</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="check_paisNaturalidade">
+                        <label class="custom-control-label" for="check_paisNaturalidade">País</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="check_cidade">
+                        <label class="custom-control-label" for="check_cidade">Cidade</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="check_nomeInstituicaoOrigem">
+                        <label class="custom-control-label" for="check_nomeInstituicaoOrigem">Instituicão de
+                            Origem</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="check_nivEstudoAtual">
+                        <label class="custom-control-label" for="check_nivEstudoAtual">Nível de Estudos</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="check_Estado">
+                        <label class="custom-control-label" for="check_Estado">Estado</label>
+                    </div>
+
+                </div>
+
             </div>
         </div>
-
-        <br>
 
         <div class="table-responsive">
             <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
@@ -240,9 +275,14 @@
                 {{-- Cabeçalho da tabela --}}
                 <thead>
                     <tr>
+                        {{-- numPassaporte paisNaturalidade cidade nomeInstituicaoOrigem nivEstudoAtual estado --}}
                         <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
                         <th>N.º Passaporte</th>
+                        <th>País</th>
+                        <th>Cidade</th>
+                        <th>Instituição</th>
+                        <th>Nív.Estudos</th>
                         <th>Estado</th>
                         <th class="text-center">Opções</th>
                     </tr>
@@ -280,6 +320,18 @@
 
                         {{-- numPassaporte --}}
                         <td class="align-middle">{{ $client->numPassaporte }}</td>
+
+                        {{-- paisNaturalidade --}}
+                        <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+
+                        {{-- cidade --}}
+                        <td class="align-middle">{{ $client->cidade }}</td>
+
+                        {{-- nomeInstituicaoOrigem --}}
+                        <td class="align-middle">{{ $client->nomeInstituicaoOrigem }}</td>
+
+                        {{-- nivEstudoAtual --}}
+                        <td class="align-middle">{{ $client->nivEstudoAtual }}</td>
 
                         {{-- Estado de cliente --}}
                         <td class="align-middle">

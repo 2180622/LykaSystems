@@ -83,7 +83,7 @@
                             </div>
                         </td>
 
-                        <td class="align-middle">{{$user->admin->nome.' '.$user->admin->apelido}}</td>
+                        <td class="align-middle"><a href="{{route('users.show', $user)}}" class="name_link " title="Ver ficha completa">{{$user->admin->nome.' '.$user->admin->apelido}}</a></td>
                         <td class="align-middle">@if($user->estado == true) Ativo @else Inativo @endif</td>
 
                         <td class="text-center align-middle">

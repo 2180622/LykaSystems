@@ -16,8 +16,8 @@
                 },
                 {
                     "orderable": false,
-                    "width": "130px",
-                    "targets": 4
+                    "width": "120px",
+                    "targets": -1
                 },
 
             ],

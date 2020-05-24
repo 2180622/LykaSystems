@@ -143,10 +143,6 @@
 
 
 
-
-
-
-
                     {{-- <div class="text-secondary">Observações: <a href="#">Pessoais</a> | <a href="#">Dos Agentes</a> </div> --}}
 
                     @if (Auth::user()->tipo == "admin")
@@ -161,7 +157,7 @@
                             {{-- Tab das ObsPessoais (ADMINS ONLY) --}}
                             <div class="tab-content text-secondary" id="ObsTabs">
                                 <div class="tab-pane fade active show mt-1" id="obsPessoais" role="tabpanel" aria-labelledby="obsPessoais-tab">
-                                    <div class="border bg-light p-2" style="height:155px; overflow: auto">
+                                    <div class="border rounded bg-light p-2" style="height:155px; overflow: auto">
                                         @if ($client->obsPessoais==null)
                                             <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                                         @else
@@ -173,7 +169,7 @@
 
                                 {{-- Tab das Obs dos Agentes --}}
                                 <div class="tab-pane fade mt-1" id="obsAgentes" role="tabpanel" aria-labelledby="obsAgentes-tab">
-                                    <div class="border bg-light p-2" style="height:155px; overflow: auto">
+                                    <div class="border rounded bg-light p-2" style="height:155px; overflow: auto">
                                         @if ($client->obsAgente==null)
                                             <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                                         @else
@@ -184,7 +180,7 @@
                             </div>
                     @else
                         <div class="nav text-secondary">Observações:</div>
-                        <div class="border bg-light p-2 " style="height:100%; overflow: auto">
+                        <div class="border rounded bg-light p-2 " style="height:100%; overflow: auto">
                             @if ($client->obsAgente==null)
                                 <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                             @else
@@ -247,6 +243,9 @@
 
                     @if($produtos)
 
+
+
+
                     <div class="row mt-2 pl-2">
 
 
@@ -273,19 +272,47 @@
 
                         @endforeach
 
+
+
                     </div>
 
-                    <div class="row ">
-                        <div class="col border rounded bg-light p-3 m-3">
+                    {{-- Total dos produtos --}}
+                    <div class="row border rounded bg-light p-3 mx-auto mt-3">
+{{--                         <div class="col">
+                            Produtos registados: <span class="active">{{count($produtos)}}</span>
+                        </div> --}}
+                        <div class="col ">
                             Total dos protudos: <span class="active">{{$totalprodutos}}€</span>
                         </div>
                     </div>
 
                     @else
 
-                    <div class="row ">
+                    {{-- Sem produtos --}}
+{{--                     <div class="row ">
                         <div class="col border rounded bg-light p-3 m-3">
                             <div class="text-muted"><small>(sem registos)</small></div>
+                        </div>
+                    </div> --}}
+
+
+                    @if (Auth::user()->tipo == "admin")
+                    <div class="row mt-2 pl-2">
+                        {{-- Botão para adicionar novo produto --}}
+
+                            <a class="name_link text-center m-2" href="{{route('produtos.create',$client)}}">
+                                <div class="col bg-light border border-info rounded shadow-sm p-4" style="height:143px; min-width: 160px">
+                                    <div style="font-size:80px; line-height:60px "><strong>+</strong></div>
+                                    <div class="mt-1">Adicionar Produto</div>
+                                </div>
+                            </a>
+
+                    </div>
+                    @endif
+
+                    <div class="row ">
+                        <div class="col border rounded bg-light p-3 m-3">
+                            Total dos protudos: <span class="active">0 €</span>
                         </div>
                     </div>
 
@@ -355,28 +382,24 @@
                         {{-- DOCUMENTOS PESSOAIS --}}
                         <div class="col" style="min-width:250px">
                             <div class="text-secondary mb-2">Ficheiros:</div>
-                            @if ($documentosPessoais!=null)
+                            @if ($documentosPessoais!=null )
                             <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                                 @foreach ($documentosPessoais as $docpessoal)
                                 <li class="my-3">
 
                                     @if ($docpessoal->imagem != null)
 
-                                    <i class="far fa-address-card mr-2"></i>
+                                        <i class="far fa-address-card mr-2"></i>
 
-                                    <a class="name_link" target="_blank"
-                                        href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
+                                        <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docpessoal->imagem)}}">{{$docpessoal->tipo}}</a>
 
-                                    <span
-                                        class="text-secondary"><small>({{ date('d-M-y', strtotime($docpessoal->created_at)) }})</small></span>
+                                        <span class="text-secondary"><small>({{ date('d-M-y', strtotime($docpessoal->created_at)) }})</small></span>
 
-                                    @if($docpessoal->verificacao==0)
-                                    <span class="text-danger"><small><i class="fas fa-exclamation ml-1 mr-2"
-                                                title="Aguarda validação"></i></small></span>
-                                    @else
-                                    <span class="text-success"><small><i class="fas fa-check ml-1 mr-1"
-                                                title="Ficheiro validado"></i></small></span>
-                                    @endif
+                                        @if($docpessoal->verificacao==0)
+                                            <span class="text-danger"><small><i class="fas fa-exclamation ml-1 mr-2" title="Aguarda validação"></i></small></span>
+                                        @else
+                                            <span class="text-success"><small><i class="fas fa-check ml-1 mr-1" title="Ficheiro validado"></i></small></span>
+                                        @endif
 
                                     @endif
 
