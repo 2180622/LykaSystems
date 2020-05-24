@@ -284,7 +284,7 @@
                                         <th class="text-center align-content-center ">Foto</th>
                                         <th>Nome</th>
                                         <th>N.º Passaporte</th>
-                                        <th>Naturalidade</th>
+                                        <th>País</th>
                                         <th class="text-center">Opções</th>
                                     </tr>
                                     </thead>
@@ -321,7 +321,7 @@
                                                                         href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a>
                                             </td>
 
-                                            {{-- paisNaturalidade --}}
+                                            {{-- numPassaporte --}}
                                             <td class="align-middle">{{ $client->numPassaporte }}</td>
 
 

@@ -31,6 +31,7 @@
         </a>
     </div>
 
+
     <div class="float-right">
         <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
         @if (Auth::user()->tipo == "admin")
@@ -42,8 +43,21 @@
 
 
     <div class="cards-navigation">
-        <div class="title">
-            <h6>Biblioteca</h6>
+  <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h6>Biblioteca
+                    </h6>
+                </div>
+            </div>
+
+            @if (Auth::user()->tipo == "admin")
+            {{-- Espaço oucupado em armazenamento --}}
+                <div class="col text-right">
+                <div class="text-muted"><small><strong>Espaço ocupado: {{$size}}</strong></small></div>
+                </div>
+            @endif
+
         </div>
         <br>
 
@@ -53,7 +67,7 @@
 
             <div class="row mx-1">
                 <div class="col col-2" style="max-width: 120px">
-                    <i class="far fa-address-book active" style="font-size:80px"></i>
+                    <i class="fas fa-download active" style="font-size:80px"></i>
                 </div>
                 <div class="col">
                     <div class="text-secondary"><strong>Existe {{count($files)}} ficheiro(s) disponíveis no sistema</strong></div>
@@ -79,6 +93,7 @@
                     <tr>
                         <th class="align-content-center ">Descrição do ficheiro</th>
                         <th class="align-content-center">Tamanho</th>
+                        <th class="align-content-center">Tipo</th>
                         <th class="align-content-center">Data</th>
                         <th class="text-center">Opções</th>
                     </tr>
@@ -101,6 +116,9 @@
 
                     {{-- Tamanho --}}
                     <td>{{ $library->tamanho }} </td>
+
+                    {{-- tipo de ficheiro --}}
+                    <td>{{ $library->tipo }} </td>
 
 
                     {{-- Data de criação --}}

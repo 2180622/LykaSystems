@@ -20,8 +20,13 @@
                     "targets": 2
                 },
                 {
+                    "orderable": true,
+                    "width": "100",
+                    "targets": 3
+                },
+                {
                     "orderable": false,
-                    "width": "130px",
+                    "width": "120px",
                     "targets": -1
                 },
 
@@ -208,6 +213,10 @@
               // Loop over them and prevent submission
               var validation = Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
+
+                    /* mostrar div de espera */
+                    $("#wait_screen").show();
+
                   if (form.checkValidity() === false) {
                     event.preventDefault();
                     event.stopPropagation();
@@ -215,6 +224,7 @@
 
 
                     if ( $('#aux_file_name').val()==""){
+                        $("#wait_screen").hide();
                         $('#file_frame').addClass("border-danger");
                         $('#warning-file').show();
                         return;
@@ -222,6 +232,7 @@
 
                     /* É obrigatório ter uma descrição */
                     if ( $("#descricao").val()=="" ){
+                        $("#wait_screen").hide();
                         $("#descricao").addClass("is-invalid");
                         $("#descricao").addClass(":invalid");
                         $('#descricao').focus();

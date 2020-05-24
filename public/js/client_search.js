@@ -165,6 +165,8 @@
         /* Verifica se os campos de pesquisa foram modificados. Se sim, permite a pesquisa */
         $( "#searchForm" ).submit(function( event ) {
             if ( pesquisaOk >= 2 ) {
+                /* mostrar div de espera */
+                $("#wait_screen").show();
                 return;
             }
               event.preventDefault();
@@ -182,7 +184,7 @@
             return false;
         });
 
-        //click sim na modal
+        //click sim
         $(".btn_submit").click(function (e) {
             formToSubmit.submit();
         });
