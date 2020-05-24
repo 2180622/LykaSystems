@@ -17,7 +17,7 @@
                 {
                     "orderable": false,
                     "width": "130px",
-                    "targets": 3
+                    "targets": 4
                 },
 
             ],
@@ -79,7 +79,7 @@
             if (pesquisaOk==1){
                 pesquisaOk++;
             }
-            
+
             console.log('searchFields: '+pesquisaOk);
         });
 

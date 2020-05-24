@@ -189,7 +189,7 @@
         }
 
         if ($("#tipo").val() == "Agente") {
-            $("#div_subagente").hide();
+/*             $("#div_subagente").hide(); */
             $("#idAgenteAssociado").prop("disabled", true);
             $("#idAgenteAssociado").val(null);
         }
@@ -198,14 +198,14 @@
         /* mudança de tipo de agente */
         $('#tipo').change(function () {
             if ($("#tipo").val() == "Subagente") {
-                $("#div_subagente").show();
+/*                 $("#div_subagente").show(); */
                 $("#idAgenteAssociado").prop("disabled", false);
                 $("#idAgenteAssociado").val(null);
                 $("#idAgenteAssociado").focus();
 
             } else {
 
-                $("#div_subagente").hide();
+/*                 $("#div_subagente").hide(); */
                 $("#idAgenteAssociado").prop("disabled", true);
                 $("#idAgenteAssociado").val(null);
                 $("#idAgenteAssociado").prop("disabled", true);
