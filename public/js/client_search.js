@@ -16,7 +16,7 @@
                 },
                 {
                     "orderable": false,
-                    "width": "120px",
+                    "width": "100px",
                     "targets": -1
                 },
 
@@ -68,7 +68,7 @@
 
         /* Variavel para permitir/negar pesquisa */
         var pesquisaOk = 1 ;
-        console.log('Inicial: '+pesquisaOk);
+       /*  console.log('Inicial: '+pesquisaOk); */
 
         /* Inicialmente, esconde todos os DIV's dentro do div "searchfields", exepto "divPaisOrigem" */
         $('#searchfields div:not(#divPaisOrigem)').hide();
@@ -80,7 +80,7 @@
                 pesquisaOk++;
             }
 
-            console.log('searchFields: '+pesquisaOk);
+            /* console.log('searchFields: '+pesquisaOk); */
         });
 
 
@@ -133,9 +133,31 @@
                 }
 
                 pesquisaOk = 1 ;
-                console.log('Campos: '+pesquisaOk);
+                /* console.log('Campos: '+pesquisaOk); */
 
         });
+
+
+
+
+        /* Opções de campos visiveis na ListeningStateChangedEvent( checkbox) */
+        $(function () {
+            var $chk = $("#grpChkBox input:checkbox");
+            var $tbl = $("#dataTable");
+            var $tblhead = $("#dataTable th");
+
+
+            $chk.click(function () {
+                var colToHide = $tblhead.filter("." + $(this).attr("name"));
+                var index = $(colToHide).index();
+                $tbl.find('tr :nth-child(' + (index + 1) + ')').not(".btn_delete").toggle();
+            });
+        });
+
+
+
+
+
 
 
 

@@ -235,35 +235,14 @@
 
 
                 {{-- CheckBox: campos disponiveis --}}
-                <div class=" border rounded bg-light mt-4 p-3">
+                <div id="grpChkBox"class="border rounded bg-light mt-4 pt-3 pb-2 ">
                     {{-- numPassaporte paisNaturalidade cidade nomeInstituicaoOrigem nivEstudoAtual estado --}}
-
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="check_numPassaporte">
-                        <label class="custom-control-label" for="check_numPassaporte">N.º Passaporte</label>
-                    </div>
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="check_paisNaturalidade">
-                        <label class="custom-control-label" for="check_paisNaturalidade">País</label>
-                    </div>
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="check_cidade">
-                        <label class="custom-control-label" for="check_cidade">Cidade</label>
-                    </div>
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="check_nomeInstituicaoOrigem">
-                        <label class="custom-control-label" for="check_nomeInstituicaoOrigem">Instituicão de
-                            Origem</label>
-                    </div>
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="check_nivEstudoAtual">
-                        <label class="custom-control-label" for="check_nivEstudoAtual">Nível de Estudos</label>
-                    </div>
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="check_Estado">
-                        <label class="custom-control-label" for="check_Estado">Estado</label>
-                    </div>
-
+                        <label class="checkbox-inline mx-2"><input type="checkbox" checked name="check_numPassaporte" class="mr-1">N.º Passaporte</label>
+                        <label class="checkbox-inline mx-2"><input type="checkbox" checked name="check_paisNaturalidade" class="mr-1">País</label>
+                        <label class="checkbox-inline mx-2"><input type="checkbox" name="check_cidade" class="mr-1">Cidade</label>
+                        <label class="checkbox-inline mx-2"><input type="checkbox" name="check_nomeInstituicaoOrigem" class="mr-1">Instituicão de Origem</label>
+                        <label class="checkbox-inline mx-2"><input type="checkbox" name="check_nivEstudoAtual" class="mr-1">Nível de Estudos</label>
+                        <label class="checkbox-inline mx-2"><input type="checkbox" checked name="check_Estado" class="mr-1">Estado</label>
                 </div>
 
             </div>
@@ -278,12 +257,12 @@
                         {{-- numPassaporte paisNaturalidade cidade nomeInstituicaoOrigem nivEstudoAtual estado --}}
                         <th class="text-center align-content-center ">Foto</th>
                         <th>Nome</th>
-                        <th>N.º Passaporte</th>
-                        <th>País</th>
-                        <th>Cidade</th>
-                        <th>Instituição</th>
-                        <th>Nív.Estudos</th>
-                        <th>Estado</th>
+                        <th class="check_numPassaporte">N.º Passaporte</th>
+                        <th class="check_paisNaturalidade">País</th>
+                        <th class="check_cidade" style="display: none">Cidade</th>
+                        <th class="check_nomeInstituicaoOrigem" style="display: none">Instituição</th>
+                        <th class="check_nivEstudoAtual" style="display: none">Nív.Estudos</th>
+                        <th class="check_Estado">Estado</th>
                         <th class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -319,22 +298,22 @@
                         </td>
 
                         {{-- numPassaporte --}}
-                        <td class="align-middle">{{ $client->numPassaporte }}</td>
+                        <td class="align-middle check_numPassaporte">{{ $client->numPassaporte }}</td>
 
                         {{-- paisNaturalidade --}}
-                        <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+                        <td class="align-middle check_paisNaturalidade">{{ $client->paisNaturalidade }}</td>
 
                         {{-- cidade --}}
-                        <td class="align-middle">{{ $client->cidade }}</td>
+                        <td class="align-middle check_cidade" style="display: none">{{ $client->cidade }}</td>
 
                         {{-- nomeInstituicaoOrigem --}}
-                        <td class="align-middle">{{ $client->nomeInstituicaoOrigem }}</td>
+                        <td class="align-middle check_nomeInstituicaoOrigem" style="display: none">{{ $client->nomeInstituicaoOrigem }}</td>
 
                         {{-- nivEstudoAtual --}}
-                        <td class="align-middle">{{ $client->nivEstudoAtual }}</td>
+                        <td class="align-middle check_nivEstudoAtual" style="display: none">{{ $client->nivEstudoAtual }}</td>
 
                         {{-- Estado de cliente --}}
-                        <td class="align-middle">
+                        <td class="align-middle check_Estado">
 
                             @if ( $client->estado == "Ativo")
                             <span class="text-success">Ativo</span>
@@ -349,20 +328,16 @@
 
                         {{-- OPÇÔES --}}
                         <td class="text-center align-middle">
-                            <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
+
+                                <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
                                 title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
 
 
                             {{-- Permissões para editar --}}
-                            @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" &&
-                            $client->editavel ==
-                            1)
+
                             <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit"
                                 title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-                            @endif
 
-
-                            @if (Auth::user()->tipo == "admin")
                             <form method="POST" role="form" id="{{ $client->idCliente }}"
                                 action="{{route('clients.destroy',$client)}}"
                                 data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
@@ -371,7 +346,7 @@
                                 <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
                                     data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            @endif
+
 
                         </td>
                     </tr>
