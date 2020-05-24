@@ -20,9 +20,9 @@
                     "targets": 2
                 },
                 {
-                    "orderable": true,
-                    "width": "100",
-                    "targets": 3
+                    "orderable": false,
+                    "width": "130px",
+                    "targets": -1
                 },
                 {
                     "orderable": false,
