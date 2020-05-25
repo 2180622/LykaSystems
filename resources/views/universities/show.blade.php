@@ -130,9 +130,6 @@
                         <a href="#" id="titleModalNew" class="top-button" data-toggle="modal"
                            data-target="#modalCalendar"><i
                                 class="fas fa-plus mr-2"></i>Adicionar evento</a><br><br>
-                        <a href="{{route('contacts.create',$university)}}" class="top-button"><i
-                                class="fas fa-plus mr-2"></i>Adicionar contacto</a>
-
                     </div>
 
 
@@ -256,27 +253,32 @@
 
                         @if($clients)
 
-                        <div class="row mb-3">
+                        <div class="row">
+
                             <div class="col">
-                                <div class="text-center text-secondary">Existe {{count($clients)}} estudante(s) associados a esta Universidade</div>
+                                <div class="text-secondary">Existe {{count($clients)}} estudante(s) associados a esta Universidade</div>
+                                <br>
+                                {{-- Input de procura nos resultados da dataTable --}}
+                                <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..." aria-label="Procurar">
                             </div>
+
+                            <div class="col col-2 text-center" style="max-width: 130px">
+                                <a class="name_link " href="{{route('clients.searchIndex')}}">
+                                    <div class="bg-light border shadow-sm p-2">
+                                        <div><i class="fas fa-search" style="font-size:30px"></i></div>
+                                        <div>Pesquisa avançada</div>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
 
-                    {{-- Input de procura nos resultados da dataTable --}}
-                    <div class="row p-3 ">
-                        <div class="col text-center ">
-                            <div class="mx-auto p-1" style="width: 70%; border-radius:10px;">
-                                <input type="text" class="shadow-sm" id="customSearchBox"
-                                    placeholder="Procurar nos resultados..." aria-label="Procurar">
-                            </div>
-                        </div>
-                    </div>
 
                     <br>
 
 
                     <div class="table-responsive">
-                        <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
+                        <table id="dataTable" class="display table table-bordered table-hover " style="width:100%">
 
                                     {{-- Cabeçalho da tabela --}}
                                     <thead>
@@ -335,14 +337,7 @@
                                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                                                 <a href="{{route('clients.edit',$client)}}"
                                                    class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                                        class="fas fa-pencil-alt mr-2"></i></a>
-
-                                                {{--                                         <form method="POST" role="form" id="{{ $client->idCliente }}" action="{{route('clients.destroy',$client)}}" data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
-                                                                                            @csrf
-                                                                                            @method('DELETE')
-                                                                                            <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                                                                        </form> --}}
-
+                                                       class="fas fa-pencil-alt mr-2"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -363,38 +358,95 @@
                     {{-- Lista de contactos --}}
                     <div class="tab-pane fade" id="contactos" role="tabpanel" aria-labelledby="contactos-tab">
                         @if ($contacts)
-                            <div class="row mx-auto" style="max-height:1000px; overflow:auto ">
-                                @foreach ($contacts as $contact)
 
-                                    <a class="name_link text-center m-2"
-                                       href="{{route('contacts.show',[$contact,$university])}}">
-                                        <div class="col">
-                                            <div style="width: 200px; height:210px; overflow:hidden">
-                                                @if($contact->fotografia)
-                                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                         src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}"
-                                                         style="width:100%; height:auto ">
-                                                @else
-                                                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                                                         src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
-                                                         style="width:100%">
-                                                @endif
-                                            </div>
-                                            <div>
-                                                @if($contact->favorito)
+                        {{-- PESQUISA?--}}
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="text-secondary">Existe {{count($contacts)}} registo(s) no sistema</div>
+                            </div>
+                            <div class="col text-right">
+                                <a href="{{route('contacts.create',$university)}}" class="top-button">
+                                    <i class="fas fa-plus mr-2"></i>Adicionar contacto</a>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="table-responsive">
+                            <table id="dataTableContacts" class="display table table-bordered table-hover " style="width:100%">
+
+                                        {{-- Cabeçalho da tabela --}}
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center align-content-center ">Foto</th>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Telefone</th>
+                                            <th class="text-center">Opções</th>
+                                        </tr>
+                                        </thead>
+
+                                        {{-- Corpo da tabela --}}
+                                        <tbody>
+
+                                        @foreach ($contacts as $contact)
+                                            <tr>
+                                                <td>
+                                                    <div class="align-middle mx-auto shadow-sm rounded bg-white"
+                                                         style="overflow:hidden; width:50px; height:50px">
+                                                        <a class="name_link" href="{{route('clients.show',$client)}}">
+                                                            @if($contact->fotografia)
+                                                                <img
+                                                                    src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}" width="100%" class="mx-auto">
+                                                            @else
+                                                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
+                                                            @endif
+                                                        </a>
+                                                    </div>
+
+                                                </td>
+
+                                                {{-- Nome --}}
+                                                <td class="align-middle">
+                                                    {{-- Contacto favorito?? --}}
+                                                    @if($contact->favorito)
                                                     <i class="fas fa-star text-warning mr-1" title="Contacto favorito"
                                                        style="font-size:12px"></i>
-                                                @endif
-                                                {{$contact->nome}}<br><small>{{$contact->telefone1}}</small>
-                                            </div>
-                                        </div>
-                                    </a>
+                                                    @endif
+                                                    <a class="name_link" href="{{route('contacts.show',[$contact,$university])}}">{{$contact->nome}}</a>
+                                                </td>
+
+                                                {{-- numPassaporte --}}
+                                                <td class="align-middle">{{ $contact->email }}</td>
 
 
-                                @endforeach
-                            </div>
+                                                {{-- paisNaturalidade --}}
+                                                <td class="align-middle">{{ $contact->telefone1 }}</td>
 
 
+                                                {{-- OPÇÔES --}}
+                                                <td class="text-center align-middle">
+                                                    <a href="{{route('contacts.show',[$contact,$university])}}" class="btn_list_opt "
+                                                       title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                                    <a href="{{route('contacts.edit',[$contact,$university])}}"
+                                                       class="btn_list_opt btn_list_opt_edit" title="Editar"><i
+                                                            class="fas fa-pencil-alt mr-2"></i></a>
+
+                                                    <form method="POST" role="form" id="{{ $contact->idContacto }}" action="{{route('contacts.destroy',$contact)}}" data="{{ $contact->nome }}"
+                                                    class="d-inline-block form_contact_id">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn_delete" title="Eliminar contacto" data-toggle="modal" data-target="#staticBackdrop">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
 
                         @else
                             <div class="border rounded bg-light p-3">

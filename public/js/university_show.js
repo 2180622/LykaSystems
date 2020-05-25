@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var table = $('#dataTable').DataTable({
+    var table = $('table.display').DataTable({
 
         "pageLength": 100,
 
@@ -11,7 +11,7 @@ $(document).ready(function () {
             },
             {
                 "orderable": false,
-                "width": "130px",
+                "width": "100px",
                 "targets": -1
             },
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
 
 
 
-    /* OPÇÃO DE APAGAR */
+    /* OPÇÃO DE APAGAR Universidade */
     var formToSubmit //Variavel para indicar o forumulário a submeter
 
     $(".form_university_event").submit(function (e) {
@@ -81,6 +81,27 @@ $(document).ready(function () {
     $(".btn_submitx").click(function (e) {
         formToSubmit.submit();
     });
+
+
+
+
+
+    /* OPÇÃO DE APAGAR CONTACTO DA UNIVERSIDADE */
+        var formToSubmitContact //Variavel para indicar o forumulário a submeter
+
+        $(".form_contact_id").submit(function (e) {
+            e.preventDefault();
+            formToSubmitContact = this;
+            $("#contact_name").text($(this).attr("data"));
+            return false;
+        });
+
+        //click sim na modal
+        $(".btn_submit").click(function (e) {
+            formToSubmitContact.submit();
+        });
+
+
 
 
 
