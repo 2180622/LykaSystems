@@ -58,12 +58,22 @@
 
 
     <div class="row text-secondary p-2">
+
         <div class="col">
             <div>
                 <i class="fas fa-info-circle mr-1 active"></i>
                 <a class="name_link" href="#" data-toggle="modal" data-target="#infosModal" role="button" aria-expanded="false" aria-controls="modal">Ver informações sobre permissões
                 </a>
             </div>
+        </div>
+
+        <div class="col text-right">
+            <div id="div_execao" class="mr-1">
+                @if (Auth::user()->tipo == "admin")
+                    <label class="checkbox-inline">Este subagente é uma exceção<input id="checkbox_exepcao" type="checkbox" {{old('exepcao',$agent->exepcao)=='1'?"checked":""}} class="ml-2"></label>
+                @endif
+                <input type="hidden" id="exepcao" name="exepcao" value="{{old('exepcao',$agent->exepcao)}}">
+                </div>
         </div>
     </div>
 </div>

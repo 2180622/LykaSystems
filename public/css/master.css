@@ -12,6 +12,22 @@ html, body {
     font-family: 'Nunito', sans-serif;
 }
 
+.active {
+    color: #6A74C9;
+    font-weight: 700;
+}
+
+.name_link {
+    color: gray;
+}
+
+.name_link:hover {
+    color: #6A74C9;
+    text-decoration: none;
+}
+
+
+
 .content {
     margin-top: 80px;
     margin-left: 250px;
