@@ -1,4 +1,3 @@
-@include('layout.partials.modal')
 
 {{-- AJUDA + Terminar Sessão --}}
 <div class="text-center mb-4">

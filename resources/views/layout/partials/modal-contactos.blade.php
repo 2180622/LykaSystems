@@ -70,16 +70,50 @@
         color: #747474;
         text-decoration: none;
     }
+
+    #modalContacts, .modal-footer {
+        border: 0px !important;
+    }
+
+    #modalContacts #modalLabel {
+        color: #3c3c3c;
+        font-weight: 700;
+    }
+
+    #modalContacts #a-close-modal {
+        font-weight: 700;
+        cursor: pointer;
+        color: #3c3c3c;
+        top: 1px;
+        position: relative;
+        transition: 0.5s ease-in-out;
+    }
+
+    #modalContacts #submit-button {
+        background-color: #6A74C9;
+        color: white;
+        font-weight: 600;
+        border-radius: 0px;
+    }
+
+    #modalContacts #submit-button:focus {
+        box-shadow: none;
+        border-radius: 0px;
+    }
 </style>
 
-<div class="modal fade bd-example-modal-lg" id="modalContacts" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal modal-style fade bd-example-modal-lg" id="modalContacts" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="padding-bottom:0px;">
-                <h5 class="modal-title text-center" id="modalLabel">Procura de contactos</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <div class="row">
+                    <div class="ml-3">
+                        Procura de contactos
+                    </div>
+                    <div class="ml-auto mr-3">
+                        <ion-icon name="close" id="close-icon-modal" data-dismiss="modal"></ion-icon>
+                    </div>
+                </div>
             </div>
             <form id="form-contact" method="POST" class="mt-2">
                 <div class="modal-body" id="modal-body-contact">
