@@ -1,8 +1,8 @@
 /* General Style */
 * {
     outline: none;
-  }
-  
+}
+
 html, body {
     height: 100%;
     min-width: 750px;
@@ -10,6 +10,20 @@ html, body {
     transition: all 0.3 ease;
     background-color: #EAEAEA;
     font-family: 'Nunito', sans-serif;
+}
+
+.active {
+    color: #6A74C9;
+    font-weight: 700;
+}
+
+.name_link {
+    color: gray;
+}
+
+.name_link:hover {
+    color: #6A74C9;
+    text-decoration: none;
 }
 
 .content {
@@ -27,10 +41,11 @@ html, body {
 }
 
 .user-image {
-    width: 40px;
-    height: 40px;
+    width: 40px !important;
+    height: 40px !important;
     cursor: pointer;
     border-radius: 50%;
+    overflow: hidden;
 }
 
 .top-bar ion-icon {
@@ -104,14 +119,62 @@ html, body {
 /* Settings Modal */
 #settingsModal .modal-content {
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 #settingsModal .modal-header {
+    color: white;
+    height: 55px;
     display: block;
+    font-weight: 600;
+    background-color: #6A74C9;
+}
+
+#settingsModal .modal-header #close-icon-modal {
+    top: 2px;
+    cursor: pointer;
+    font-size: 20px;
+    position: relative;
+}
+
+#settingsModal .modal-body {
+    padding: 30px 10px;
+}
+
+#settingsModal .modal-body .bg-white {
+    width: 100%;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    border: 2px solid rgba(200, 200, 200);
+}
+
+#settingsModal .modal-body .bg-white:hover {
+    border: 2px solid #6A74C9;
 }
 
 /* Buttons */
+.top-button {
+    border: none;
+    color: white;
+    font-weight: 800;
+    padding: 8px 18px;
+    font-size: 0.6rem;
+    border-radius: 25px;
+    text-transform: uppercase;
+    background-color: #6A74C9;
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
+}
+
+.top-button:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.top-button:focus {
+    outline: none;
+}
+
 .cancel-button {
     color: #A9A9A9;
     font-weight: 800;

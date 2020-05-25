@@ -34,7 +34,6 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
         <a href="{{route('contacts.create')}}" class="top-button">Adicionar Contacto</a>
     </div>
 

@@ -25,6 +25,7 @@ class UpdateAgenteRequest extends FormRequest
     {
         return [
             'idAgenteAssociado'=> 'nullable',
+            'exepcao' => 'required',
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',

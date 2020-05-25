@@ -35,13 +35,10 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
-
         {{-- Botão para administradores --}}
         {{-- @if (Auth::user()->tipo == "admin") --}}
         {{-- <a href="{{route('agents.create')}}" class="top-button">Adicionar Qualquer Coisa</a> --}}
         {{-- @endif --}}
-
     </div>
 
     <br><br>

@@ -36,7 +36,6 @@ class Agente extends Migration
 
 
             $table->string('num_doc',255)->unique();
-
             $table->string('img_doc',255)->nullable();
 
             $table->string('telefone1',255);
