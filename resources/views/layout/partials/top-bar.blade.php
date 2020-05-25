@@ -15,7 +15,7 @@
                 Notificações
             </div>
             <div class="dropdown-content">
-                <p class="text-center">wow, such empty :(</p>
+                <p class="text-center"><img src="{{asset("/media/cat.jpg")}}" width="200px"><br>I'm Back!!</p>
             </div>
         </div>
     </div>
