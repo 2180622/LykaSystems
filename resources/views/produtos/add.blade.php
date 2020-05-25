@@ -86,7 +86,6 @@
                                     <option {{old('idAgente',$produto->idAgente)}} value="{{$agente->idAgente}}">{{$agente->nome.' '.$agente->apelido.' -> '.$agente->email}}</option>
                                 @endforeach
                             </select><br>
-                            {{--
                             <label for="subagente">Sub-Agente:</label><br>
                             <select id="subagente" name="subagente" class="form-control">
                                 <option value="" selected></option>
@@ -94,7 +93,6 @@
                                     <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
                                 @endforeach
                             </select><br>
-                            --}}
                             <label for="uni1">Universidade Principal:</label><br>
                             <select id="uni1" name="uni1" class="form-control" required>
                                 <option value="" selected></option>
@@ -184,6 +182,14 @@
 
                                         <label for="resp-data-agente-fase{{$num}}">Data de vencimento do pagamento ao agente:</label><br>
                                         <input type="date" class="form-control" name="resp-data-agente-fase{{$num}}" id="resp-data-agente-fase{{$num}}"
+                                        value="" style="width:250px" ><br>
+
+                                        <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
+                                        <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
+                                        value="{{old('valorSubAgente',$Responsabilidades[$num-1]->valorSubAgente)}}" style="width:250px"><br>
+                                    
+                                        <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao subagente:</label><br>
+                                        <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
                                         value="" style="width:250px" ><br>
 
                                         <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>

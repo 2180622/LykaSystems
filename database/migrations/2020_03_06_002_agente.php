@@ -25,6 +25,7 @@ class Agente extends Migration
             $table->string('apelido',255);
             $table->enum('genero',['F','M']);
             $table->enum('tipo',['Agente', 'Subagente']);
+            $table->boolean('exepcao')->default(false);
             $table->string('email',255)->unique();
 
             $table->date('dataNasc');

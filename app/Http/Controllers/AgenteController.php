@@ -88,6 +88,9 @@ class AgenteController extends Controller
         $agent = new Agente;
         $fields = $requestAgent->validated();
         $agent->fill($fields);
+        if($agente->tipo == "Agente"){
+            $agente->exepcao = false;
+        }
 
         /* obtem os dados para criar o utilizador */
         $user = new User;

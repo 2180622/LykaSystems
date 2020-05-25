@@ -77,7 +77,7 @@ class ProdutoController extends Controller
             $produto->anoAcademico = $fields['anoAcademico'];
             $produto->idCliente = $fields['idCliente'];
             $produto->idAgente = $fields['agente'];
-            $produto->idSubAgente = null;
+            $produto->idSubAgente = $fields['subagente'];
             $produto->idUniversidade1 = $fields['uni1'];
             $produto->idUniversidade2 = $fields['uni2'];
             $produto->valorTotal = 0;
@@ -109,6 +109,11 @@ class ProdutoController extends Controller
                         $responsabilidade->dataVencimentoAgente = date("Y-m-d",strtotime($fields['resp-data-agente-fase'.$i]));
                     }else{
                         $responsabilidade->dataVencimentoAgente = null;
+                    }
+                    if($fields['resp-data-subagente-fase'.$i]){
+                        $responsabilidade->dataVencimentoSubAgente = date("Y-m-d",strtotime($fields['resp-data-subagente-fase'.$i]));
+                    }else{
+                        $responsabilidade->dataVencimentoSubAgente = null;
                     }
                     $responsabilidade->valorSubAgente = null;
                     $responsabilidade->dataVencimentoSubAgente = null;
