@@ -27,17 +27,19 @@ use App\Responsabilidade;
 use App\RelatorioProblema;
 use App\PagoResponsabilidade;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class FactoryTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
 
     /** @test */
     public function Factory_Administrador_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $administrador = factory(Administrador::class)->make();
 
         $this->assertNotEmpty($administrador);
@@ -47,6 +49,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Agente_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $agente = factory(Agente::class)->make();
 
         $this->assertNotEmpty($agente);
@@ -56,6 +60,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Biblioteca_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $biblioteca = factory(Biblioteca::class)->make();
 
         $this->assertNotEmpty($biblioteca);
@@ -65,6 +71,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Cliente_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
 
         $this->assertNotEmpty($cliente);
@@ -74,6 +82,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Conta_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $conta = factory(Conta::class)->make();
 
         $this->assertNotEmpty($conta);
@@ -83,6 +93,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Fornecedor_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $fornecedor = factory(Fornecedor::class)->make();
 
         $this->assertNotEmpty($fornecedor);
@@ -92,6 +104,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Produto_Stock_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $produtoStock = factory(ProdutoStock::class)->make();
 
         $this->assertNotEmpty($produtoStock);
@@ -101,6 +115,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Fase_Stock_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $produtoStock = factory(ProdutoStock::class)->make();
 
         $faseStock = factory(FaseStock::class)->make([
@@ -114,6 +130,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Doc_Stock_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $produtoStock = factory(ProdutoStock::class)->make();
         $faseStock = factory(FaseStock::class)->make([
             'idProdutoStock' => $produtoStock->idProdutoStock,
@@ -130,6 +148,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Universidade_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $universidade = factory(Universidade::class)->make();
 
         $this->assertNotEmpty($universidade);
@@ -139,6 +159,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_User_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $administrador = factory(Administrador::class)->make();
 
         $user = factory(User::class)->make([
@@ -154,6 +176,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Contacto_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $contacto = factory(Contacto::class)->make();
 
         $this->assertNotEmpty($contacto);
@@ -163,6 +187,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Agenda_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $administrador = factory(Administrador::class)->make();
         $user = factory(User::class)->make([
             'email' => $administrador->email,
@@ -181,6 +207,8 @@ class FactoryTest extends TestCase
     /** @test *//*
     public function Factory_Notificacao_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $notificacao = factory(Notificacao::class)->make();
 
         $this->assertNotEmpty($notificacao);
@@ -190,6 +218,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Produto_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -207,6 +237,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Responsabilidade_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -224,6 +256,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Fase_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -250,6 +284,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Doc_Necessario_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -279,6 +315,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Doc_Academico_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -309,6 +347,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Doc_Pessoal_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -339,6 +379,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Doc_Transacao_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -370,6 +412,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Pago_Responsabilidade_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -401,6 +445,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Relacao_Fornecedor_Responsabilidade_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $cliente = factory(Cliente::class)->make();
         $agente = factory(Agente::class)->make();
         $universidade = factory(Universidade::class)->make();
@@ -423,6 +469,8 @@ class FactoryTest extends TestCase
     /** @test */
     public function Factory_Relatorio_Problema_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $relatorioProblema = factory(RelatorioProblema::class)->make();
 
         $this->assertNotEmpty($relatorioProblema);
@@ -432,6 +480,8 @@ class FactoryTest extends TestCase
     /** @test *//*
     public function Factory_Create_Jobs_Test()
     {
+        $this->withoutExceptionHandling();
+        
         $createJobs = factory(CreateJobs::class)->make();
 
         $this->assertNotEmpty($createJobs);

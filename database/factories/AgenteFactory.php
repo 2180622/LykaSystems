@@ -14,7 +14,7 @@ $factory->define(Agente::class, function (Faker $faker) {
         $nome = $faker->firstNameMale;
     }
     return [
-        'idAgente' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idAgente' => Agente::all()->random()->id,
         'nome' => $nome,
         'apelido' => $faker->lastName,
         'genero' => $gender,

@@ -15,7 +15,7 @@ $factory->define(Cliente::class, function (Faker $faker) {
     }
     $apelido = $faker->lastName;
     return [
-        'idCliente' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idCliente' => Cliente::all()->random()->id,
         'nome' => $nome,
         'apelido' => $apelido,
         'genero' => $gender,

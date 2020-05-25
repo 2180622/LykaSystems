@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Universidade::class, function (Faker $faker) {
     return [
-        'idUniversidade' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idUniversidade' => Universidade::all()->random()->id,
         'nome' => $faker->company,
         'morada' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,
         'telefone' => $faker->numberBetween($min = 100000000, $max = 999999999),
