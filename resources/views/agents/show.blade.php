@@ -26,14 +26,10 @@
         </a>
     </div>
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
-
         @if (Auth::user()->tipo == "admin")
         <a href="{{route('agents.edit',$agent)}}" class="top-button mr-2">Editar informação</a>
         @endif
-
         <a href="{{route('agents.print',$agent)}}" target="_blank" class="top-button">Imprimir</a>
-
     </div>
 
     <br><br>

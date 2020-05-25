@@ -31,8 +31,6 @@
         </a>
     </div>
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
-
 
         {{-- Permissões para editar --}}
         @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" && $client->editavel == 1)

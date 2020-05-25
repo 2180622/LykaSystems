@@ -21,10 +21,6 @@
         </a>
     </div>
 
-    <div class="float-right">
-        <a href="{{route('report')}}" class="top-button">reportar problema</a>
-    </div>
-
     <br><br>
 
     <?php

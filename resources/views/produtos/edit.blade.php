@@ -20,9 +20,6 @@
             <a href="javascript:window.history.forward();" title="Avançar"><i
                     class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
         </div>
-        <div class="float-right">
-            <a href="#" class="top-button">reportar problema</a>
-        </div>
 
         <br><br>
 
@@ -40,7 +37,7 @@
                 <div class="row">
                     <div class="col">
                         {{-- INPUT nome --}}
-                        <label for="nome">Cliente: 
+                        <label for="nome">Cliente:
                             <a class="name_link" href="{{route('clients.show',$produto->cliente)}}">
                                 {{$produto->cliente->nome.' '.$produto->cliente->apelido}}
                             </a>
@@ -51,24 +48,24 @@
                 <div class="row">
                     <div class="col">
                         <div><span><b>Produto</b></span></div><br>
-                
+
                         <label for="tipo">Tipo:</label><br>
-                        <input type="text" class="form-control" name="tipo" id="tipo" 
+                        <input type="text" class="form-control" name="tipo" id="tipo"
                         value="{{old('tipo',$produto->tipo)}}" placeholder="Tipo" maxlength="20" readonly><br>
-                
+
                         <label for="descricao">Descrição:</label><br>
-                        <input type="text" class="form-control" name="descricao" id="descricao" 
+                        <input type="text" class="form-control" name="descricao" id="descricao"
                         value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" readonly><br>
-                
+
                         <label for="anoAcademico">Ano académico:</label><br>
                         @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
-                            <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
+                            <input type="text" class="form-control" name="anoAcademico" id="anoAcademico"
                             value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required><br>
                         @else
-                            <input type="text" class="form-control" name="anoAcademico" id="anoAcademico" 
+                            <input type="text" class="form-control" name="anoAcademico" id="anoAcademico"
                             value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" readonly><br>
                         @endIf
-                
+
                         <label for="agente">Agente:</label><br>
                         @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                             <select id="agente" name="agente" class="form-control" required>
@@ -84,7 +81,7 @@
                                 @endif
                             @endforeach
                         </select><br>
-                
+
                         @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null))
                             <label for="subagente">Sub-Agente:</label><br>
                             <select id="subagente" name="subagente" class="form-control" onchange="AlteraInputSubAgente($(this))">
@@ -122,7 +119,7 @@
                                 @endif
                             @endforeach
                         </select><br>
-                
+
                         <label for="uni2">Universidade Secundária:</label><br>
                         @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                             <select id="uni2" name="uni2" class="form-control">
@@ -138,7 +135,7 @@
                                 @endif
                             @endforeach
                         </select>
-                
+
                     </div>
                 </div>
                 <div class="tab-content p-2 mt-3" id="myTabContent">
@@ -163,7 +160,7 @@
                             @endif
                         @endforeach
                     </ul>
-                
+
                     @php
                         $num=0;
                     @endphp
@@ -182,30 +179,30 @@
                         @endif
                             <div class="row">
                                 <div class="col-md-12">
-                
+
                                     <div><span><b>Fase {{$num}}</b></span></div><br>
-                
+
                                     <label for="descricao-fase{{$fase->idFase}}">Descrição:</label><br>
-                                    <input type="text" class="form-control" name="descricao-fase{{$fase->idFase}}" id="descricao-fase{{$fase->idFase}}" 
+                                    <input type="text" class="form-control" name="descricao-fase{{$fase->idFase}}" id="descricao-fase{{$fase->idFase}}"
                                     value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
-                
+
                                     <label for="data-fase{{$fase->idFase}}">Data de vencimento:</label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
-                        
+
                                         <label for="valor-fase{{$num}}">Valor da fase:</label><br>
                                         <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
                                         value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required><br>
                                     @else
                                         <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" readonly><br>
-                        
+
                                         <label for="valor-fase{{$num}}">Valor da fase:</label><br>
                                         <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
                                         value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" readonly/><br>
                                     @endIf
-                                    
+
                                 </div>
                                 <div class="col mr-3" id="responsabilidades{{$responsabilidade->idResponsabilidade}}">
                                     <div><span><b>Responsabilidades</b></span></div><br>
@@ -225,7 +222,7 @@
                                         <input type="date" class="form-control" name="resp-data-cliente-fase{{$num}}" id="resp-data-cliente-fase{{$num}}"
                                         value="" style="width:250px" readonly><br>
                                     @endIf
-                
+
                                     <label for="resp-agente-fase{{$fase->idFase}}">Valor a pagar ao agente:</label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="number" class="form-control valor-pagar-agente" name="resp-agente-fase{{$fase->idFase}}" id="resp-agente-fase{{$fase->idFase}}"
@@ -242,7 +239,7 @@
                                         <input type="date" class="form-control" name="resp-data-agente-fase{{$num}}" id="resp-data-agente-fase{{$num}}"
                                         value="" style="width:250px" readonly><br>
                                     @endIf
-                
+
                                     <div class="valor-responsabilidade-subagente" style="display: none;">
                                         <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
                                         @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && $subagente->exepcao)
@@ -259,7 +256,7 @@
                                             @else
                                                 <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
                                                 value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"
-                                                onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'), 
+                                                onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'),
                                                 {{$responsabilidade->valorAgente + $responsabilidade->valorSubAgente}})"><br>
                                             @endif
 
@@ -275,7 +272,7 @@
                                             <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
                                             value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"
                                             onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'), {{$responsabilidade->valorAgente + $responsabilidade->valorSubAgente}})"><br>
-                                        
+
                                             <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao subagente:</label><br>
                                             <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
                                             value="" style="width:250px" ><br>
@@ -298,7 +295,7 @@
                                         <input type="date" class="form-control" name="resp-data-uni1-fase{{$num}}" id="resp-data-uni1-fase{{$num}}"
                                         value="" style="width:250px" readonly><br>
                                     @endIf
-                
+
                                     <label for="resp-uni2-fase{{$fase->idFase}}">Valor a pagar á universidade secundária:</label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="number" class="form-control" name="resp-uni2-fase{{$fase->idFase}}" id="resp-uni2-fase{{$fase->idFase}}"
@@ -470,7 +467,7 @@
                     inputAgente.text(novoValorAgente);
                 }
             }
-        } 
+        }
     </script>
 
 @endsection
