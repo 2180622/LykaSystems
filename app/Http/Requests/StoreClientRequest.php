@@ -31,6 +31,7 @@ class StoreClientRequest extends FormRequest
             'paisNaturalidade' => 'nullable',
             'dataNasc' => 'nullable',
             'obsPessoais' => 'nullable',
+            'obsAgente'=> 'nullable',
             'fotografia' => 'nullable',
 
             'num_docOficial'=> 'nullable|unique:Cliente',

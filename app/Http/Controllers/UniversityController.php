@@ -23,6 +23,8 @@ class UniversityController extends Controller
       }
 
         $universities = Universidade::all();
+
+
         return view('universities.list', compact('universities'));
 
 
@@ -65,7 +67,7 @@ class UniversityController extends Controller
         /* Obtem os eventos da universidade */
         $eventos = Agenda::
         where('idUniversidade', $university->idUniversidade)
-        ->orderBy('dataInicio')
+        ->orderBy('dataInicio', 'asc')
         ->get();
 
         if ($eventos->isEmpty()) {

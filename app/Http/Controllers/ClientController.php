@@ -31,6 +31,7 @@ class ClientController extends Controller
 
         $user = User::where('idCliente', '=', $client->idCliente)->first();
 
+
         /* Cria o UTILIZADOR se ainda não existir */
 
         if ( !$user ){
@@ -54,11 +55,16 @@ class ClientController extends Controller
             $auth_key = $user->auth_key;
             dispatch(new SendWelcomeEmail($email, $name, $auth_key));
 
+
+            if ($client->email==""){
+                return back()->with('success', 'É necessário inserir um e-mail válido');
+            }
+
             return back()->with('success', 'E-mail de ativação enviado com sucesso');
 
         }else{
 
-            return back()->with('error', 'O utilizador já existe');
+            return back()->with('success', 'A conta para este utilizador já existe');
 
         }
 
@@ -121,9 +127,7 @@ class ClientController extends Controller
 
         }
 
-        if ($clients->isEmpty()) {
-            $clients=null;
-        }
+
 
         /* mostra a lista */
         return view('clients.list', compact('clients'));
@@ -401,15 +405,18 @@ class ClientController extends Controller
 
         /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
 
+        $infosPassaporte=null;
+
         $passaporte = DocPessoal::
         where ("idCliente","=",$client->idCliente)
         ->where("tipo","=","Passaporte")
         ->first();
 
-        if($passaporte!=null){
+        if($passaporte!=null || !isEmpty($passaporte)){
             $infosPassaporte = json_decode($passaporte->info);
+        }else{
+            $infosPassaporte=null;
         }
-
 
         return view('clients.print',compact("client","produtos","infosPassaporte"));
     }
@@ -689,7 +696,7 @@ class ClientController extends Controller
         $cidadesOrigem = array_unique(Cliente::pluck('cidade')->toArray());
         $instituicoesOrigem = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
 
-        $agents= Agente::where("tipo","=","Agente")->get();
+        $agents= Agente::all();
         $universidades = Universidade::all();
 
         return view('clients.search',compact('paises','cidadesOrigem','instituicoesOrigem','agents','universidades'));
@@ -703,6 +710,7 @@ class ClientController extends Controller
     public function searchResults(Request $request){
 
         request()->all();
+        $clients= null;
 
         $nomeCampo= $request->search_options;
 
@@ -730,7 +738,8 @@ class ClientController extends Controller
 
             case "Agente":
                 $clients= Cliente::where("idAgente","=",$request->agente)->get();
-                $valor=$request->agente;
+                $valor = Agente:: where("idAgente","=",$request->agente)->first();
+                $valor = $valor->nome.' '.$valor->apelido;
             break;
 
 
@@ -761,16 +770,16 @@ class ClientController extends Controller
 
 
         /* Se não encontrar resultados */
-        if ( !isset($clients) || $clients->isEmpty() ) {
-            $clients=0;
+/*         if ( !isset($clients) || $clients->isEmpty() ) {
+            $clients=[];
         }
-
+ */
         /* dd($clients); */
 
         $paises = array_unique(Cliente::pluck('paisNaturalidade')->toArray());
         $cidadesOrigem = array_unique(Cliente::pluck('cidade')->toArray());
         $instituicoesOrigem = array_unique(Cliente::pluck('nomeInstituicaoOrigem')->toArray());
-        $agents= Agente::where("tipo","=","Agente")->get();
+        $agents= Agente::all();
         $universidades = Universidade::all();
 
 

@@ -28,15 +28,48 @@ class LibraryController extends Controller
         }else{
             /* Ficheiros para os admins */
             $files = Biblioteca::all();
+
+
+
+            /* Calcula o espaço oucupado por todos os ficheiros na pasta da biblioteca */
+            function folderSize ($dir)
+            {
+                $size = 0;
+
+                foreach (glob(rtrim($dir, '/').'/*', GLOB_NOSORT) as $each) {
+                    $size += is_file($each) ? filesize($each) : folderSize($each);
+                }
+
+                return $size;
+            }
+            function formatSize($bytes){
+                $kb = 1024;
+                $mb = $kb * 1024;
+                $gb = $mb * 1024;
+                $tb = $gb * 1024;
+                if (($bytes >= 0) && ($bytes < $kb)) {
+                return $bytes . ' B';
+                } elseif (($bytes >= $kb) && ($bytes < $mb)) {
+                return ceil($bytes / $kb) . ' KB';
+                } elseif (($bytes >= $mb) && ($bytes < $gb)) {
+                return ceil($bytes / $mb) . ' MB';
+                } elseif (($bytes >= $gb) && ($bytes < $tb)) {
+                return ceil($bytes / $gb) . ' GB';
+                } elseif ($bytes >= $tb) {
+                return ceil($bytes / $tb) . ' TB';
+                } else {
+                return $bytes . ' B';
+                }
+                }
+
+
+           $size = formatSize (folderSize(storage_path('app/public/library')));
+
+
         }
 
-        /* Se não encontrar resultados */
-        if ( $files->isEmpty() ) {
-            $files=null;
-        }
 
-
-        return view('libraries.list', compact('files'));
+        return view('libraries.list', compact('files','size'));
 
     }
 

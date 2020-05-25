@@ -31,6 +31,7 @@ class StoreAgenteRequest extends FormRequest
         'telefone1' => 'required',
         'telefone2' => 'nullable',
         'IBAN' => 'nullable',
+        'observacoes'=> 'nullable',
         ];
     }
 

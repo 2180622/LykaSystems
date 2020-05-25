@@ -1,17 +1,80 @@
-<div class="alert alert-danger mb-3" id="warning_msg" style="display: none"><i
+<div class="alert alert-danger mb-4" id="warning_msg" style="display: none"><i
         class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos
     assinalados.</div>
+
+{{-- Conteudo: Tipo de Agente --}}
+
+<div id="agent-type-tab" class="bg-white shadow-sm mb-3 p-4 rounded border" >
+    <div class="row p-2" >
+        <div class="col"  style="min-width: 300px">
+
+            {{-- INPUT Tipo de agente --}}
+            <label for="tipo">Tipo de agente:</label><br>
+            <select id="tipo" name="tipo" class="form-control select_style" required>
+                <option {{old('tipo',$agent->tipo)=='Agente'?"selected":""}} value="Agente">Agente</option>
+                <option {{old('tipo',$agent->tipo)=='Subagente'?"selected":""}} value="Subagente">Subagente
+                </option>
+            </select>
+
+            <br>
+
+        </div>
+
+
+        <div class="col" style="min-width: 300px">
+
+            <div id="div_subagente" >
+                {{-- INPUT Subagente de...... --}}
+                <label for="subagent">Subagente de:</label><br>
+
+                {{-- campo auxiliar: id do agente --}}
+                <input type="hidden" id="aux_idAgenteAssociado"
+                    value="{{old('idAgenteAssociado',$agent->idAgenteAssociado)}}">
+
+
+                {{-- disabled se o tipo escolhido for "subagente" --}}
+
+                <select id="idAgenteAssociado" name="idAgenteAssociado" class="form-control select_style" required>
+
+                    <option hidden value="0">(escolha o agente)</option>
+
+                    {{-- Lista todos os agentes exepto o que esta a ser editado --}}
+                    @foreach($listagents as $agentx)
+                    @if ($agentx->idAgente != $agent->idAgente && $agentx->tipo != "Subagente" )
+                    <option value="{{$agentx->idAgente}}">{{$agentx->nome}} {{$agentx->apelido}}
+                        ({{$agentx->pais}})
+                    </option>
+                    @endif
+                    @endforeach
+
+                </select>
+
+                <div class="invalid-feedback mt-2"><i class="fas fa-times mr-2"></i>Escolha um subagente</div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="row text-secondary p-2">
+        <div class="col">
+            <div>
+                <i class="fas fa-info-circle mr-1 active"></i>
+                <a class="name_link" href="#" data-toggle="modal" data-target="#infosModal" role="button" aria-expanded="false" aria-controls="modal">Ver informações sobre permissões
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 <div class="row nav nav-fill w-100 text-center mx-auto p-3 ">
 
-    <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link" id="agent-type-tab"
-        data-toggle="tab" href="#agent_type" role="tab" aria-controls="agent_type" aria-selected="true">
-        <div class="col"><i class="fas fa-share-alt mr-2"></i>Tipo de agente</div>
-    </a>
 
-
-    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="personal-tab" data-toggle="tab"
+    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link active" id="personal-tab" data-toggle="tab"
         href="#personal" role="tab" aria-controls="documentation" aria-selected="false">
         <div class="col"><i class="fas fa-user mr-2"></i>Dados pessoais</div>
     </a>
@@ -44,132 +107,8 @@
     <div class="tab-content p-2 mt-3" id="myTabContent">
 
 
-        {{-- Conteudo: Tipo de Agente --}}
-        <div class="tab-pane fade show active" id="agent_type" role="tabpanel" aria-labelledby="agent-type-tab">
-
-            <div class="row">
-                <div class="col" style="min-width: 300px">
-
-                    {{-- INPUT Tipo de agente --}}
-                    <label for="tipo">Tipo de agente:</label><br>
-                    <select id="tipo" name="tipo" class="form-control select_style" required>
-                        <option {{old('tipo',$agent->tipo)=='Agente'?"selected":""}} value="Agente">Agente</option>
-                        <option {{old('tipo',$agent->tipo)=='Subagente'?"selected":""}} value="Subagente">Subagente
-                        </option>
-                    </select>
-
-                    <br>
-
-                </div>
-
-
-                <div class="col" style="min-width: 300px">
-
-                    <div id="div_subagente" style="display: none">
-                        {{-- INPUT Subagente de...... --}}
-                        <label for="subagent">Subagente de:</label><br>
-
-                        {{-- campo auxiliar: id do agente --}}
-                        <input type="hidden" id="aux_idAgenteAssociado"
-                            value="{{old('idAgenteAssociado',$agent->idAgenteAssociado)}}">
-
-
-                        {{-- disabled se o tipo escolhido for "subagente" --}}
-
-                        <select id="idAgenteAssociado" name="idAgenteAssociado" class="form-control select_style"
-                            required>
-
-                            <option hidden value="0">(escolha o agente)</option>
-
-                            {{-- Lista todos os agentes exepto o que esta a ser editado --}}
-                            @foreach($listagents as $agentx)
-                            @if ($agentx->idAgente != $agent->idAgente && $agentx->tipo != "Subagente" )
-                            <option value="{{$agentx->idAgente}}">{{$agentx->nome}} {{$agentx->apelido}}
-                                ({{$agentx->pais}})
-                            </option>
-                            @endif
-                            @endforeach
-
-                        </select>
-
-                        <div class="invalid-feedback mt-2"><i class="fas fa-times mr-2"></i>Escolha um subagente</div>
-                    </div>
-                </div>
-
-                <br>
-
-            </div>
-
-            <hr>
-
-            <div class="row text-secondary mt-4">
-                <div class="col">
-
-                    <div>
-                        <i class="far fa-question-circle"></i>
-                        <a class="name_link" data-toggle="collapse" href="#collapseExample"
-                            role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Ver informações sobre permissões
-                        </a>
-                    </div>
-
-                    <div class="collapse mt-3 fade" id="collapseExample">
-                            <div class="row text-secondary">
-
-                                <div class="col p-3 m-2 bg-light border rounded" style="min-width: 280px">
-                                    <div><strong>O agente:</strong></div>
-                                    <div class="my-3">- Tem acesso à lista dos seus clientes e à dos seus subagentes
-                                    </div>
-                                    <div class="my-3">- Tem acesso à lista dos seus subagentes</div>
-
-
-
-                                </div>
-
-                                <br><br>
-
-                                <div class="col p-3 m-2 bg-light border rounded" style="min-width: 280px">
-                                    <div><strong>O subagente:</strong></div>
-                                    <div class="my-3">- Apenas tem acesso à lista dos seus clientes</div>
-{{--                                     <div class="my-3">- Tem acesso à página de perfil do seu superior</div> --}}
-                                </div>
-
-                            </div>
-
-
-                            <div class="row  text-secondary">
-
-                                <div class="col m-2 p-3 bg-light border rounded">
-                                    <div><strong>Ambos:</strong></div>
-                                    <div class="my-3">- Podem carregar documentos nas fichas dos seus clientes</div>
-                                    <div class="my-3">- Têm acesso às notificações públicas</div>
-                                    <div class="my-3">- Podem visualizar os ficheiros públicos inseridos na biblioteca
-                                    </div>
-                                    <div class="my-3">- Têm agenda e lista telefónica privada</div>
-                                    <div class="mt-3">- Podem utilizar a funcionalidade de "Reportar problema"</div>
-                                </div>
-
-                            </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-
         {{-- Conteudo: Dados pessoais --}}
-        <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+        <div class="tab-pane fade active show" id="personal" role="tabpanel" aria-labelledby="personal-tab">
 
             <div class="row">
                 <div class="col">
@@ -217,6 +156,13 @@
                                 value="{{old('dataNasc',$agent->dataNasc)}}" required>
                         </div>
 
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="observacoes">Observacões:</label><br>
+                            <textarea name="observacoes" id="observacoes" rows="5" style="width:100%">{{old('observacoes',$agent->observacoes)}}</textarea>
+                        </div>
                     </div>
 
                     <br>
@@ -391,4 +337,60 @@
 
     </div>
 
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infosModal"><i class="fas fa-info-circle mr-2 active"></i>Permissões dos agentes / subagentes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row">
+
+                    <div class="col " >
+                        {{-- Agente --}}
+                        <div class="p-3 bg-light border rounded">
+                            <div class="active"><strong>O agente:</strong></div>
+                            <div class="my-3">- Tem acesso à lista dos seus clientes e à dos seus subagentes</div>
+                            <div class="my-3">- Tem acesso à lista dos seus subagentes</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        {{-- SubAgente --}}
+                        <div class="p-3 bg-light border rounded">
+                            <div class="active"><strong>O subagente:</strong></div>
+                            <div class="my-3">- Apenas tem acesso à lista dos seus clientes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        {{-- Ambos --}}
+                        <div class="p-3 bg-light border rounded">
+                            <div class="active"><strong>Ambos:</strong></div>
+                            <div class="my-3">- Podem carregar documentos nas fichas dos seus clientes</div>
+                            <div class="my-3">- Quando autorizados, podem alterar as informações dos seus clientes
+                            </div>
+                            <div class="my-3">- Têm acesso às notificações públicas</div>
+                            <div class="my-3">- Podem visualizar os ficheiros públicos inseridos na biblioteca</div>
+                            <div class="my-3">- Têm agenda e lista telefónica privada</div>
+                            <div class="mt-3">- Podem utilizar a funcionalidade de "Reportar problema"</div>
+                        </div>
+                        <div class="mt-3 text-right"><button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

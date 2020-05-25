@@ -16,8 +16,8 @@
                 },
                 {
                     "orderable": false,
-                    "width": "130px",
-                    "targets": 3
+                    "width": "100px",
+                    "targets": -1
                 },
 
             ],
@@ -67,7 +67,8 @@
         /* FIM configs DATATABLES */
 
         /* Variavel para permitir/negar pesquisa */
-        var pesquisaOk = 0 ;
+        var pesquisaOk = 1 ;
+       /*  console.log('Inicial: '+pesquisaOk); */
 
         /* Inicialmente, esconde todos os DIV's dentro do div "searchfields", exepto "divPaisOrigem" */
         $('#searchfields div:not(#divPaisOrigem)').hide();
@@ -75,7 +76,11 @@
 
         /* Quando os dados da pesquisa são alterados */
         $('#searchfields :input').on('change', function() {
-            pesquisaOk++;
+            if (pesquisaOk==1){
+                pesquisaOk++;
+            }
+
+            /* console.log('searchFields: '+pesquisaOk); */
         });
 
 
@@ -127,9 +132,32 @@
                     $("#divEstadoCliente").show();
                 }
 
-                pesquisaOk ++;
+                pesquisaOk = 1 ;
+                /* console.log('Campos: '+pesquisaOk); */
 
         });
+
+
+
+
+        /* Opções de campos visiveis na ListeningStateChangedEvent( checkbox) */
+        $(function () {
+            var $chk = $("#grpChkBox input:checkbox");
+            var $tbl = $("#dataTable");
+            var $tblhead = $("#dataTable th");
+
+
+            $chk.click(function () {
+                var colToHide = $tblhead.filter("." + $(this).attr("name"));
+                var index = $(colToHide).index();
+                $tbl.find('tr :nth-child(' + (index + 1) + ')').not(".btn_delete").toggle();
+            });
+        });
+
+
+
+
+
 
 
 
@@ -137,6 +165,8 @@
         /* Verifica se os campos de pesquisa foram modificados. Se sim, permite a pesquisa */
         $( "#searchForm" ).submit(function( event ) {
             if ( pesquisaOk >= 2 ) {
+                /* mostrar div de espera */
+                $("#wait_screen").show();
                 return;
             }
               event.preventDefault();
@@ -154,7 +184,7 @@
             return false;
         });
 
-        //click sim na modal
+        //click sim
         $(".btn_submit").click(function (e) {
             formToSubmit.submit();
         });
