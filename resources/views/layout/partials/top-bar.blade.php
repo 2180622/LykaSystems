@@ -21,7 +21,9 @@
     </div>
     {{-- User image --}}
     <div class="bd-highlight pr-2 align-self-center" data-toggle="modal" data-target="#settingsModal">
-        <img src="{{asset("/media/profile-photo.jpg")}}" alt="user-image" class="user-image">
+        <div class="user-image"  >
+            <img src="{{asset("/media/profile-photo.jpg")}}" alt="Imagem de apresentação" width="100%">
+        </div>
     </div>
     {{-- User info --}}
     <div class="bd-highlight align-self-center user-info" data-toggle="modal" data-target="#settingsModal">
