@@ -75,8 +75,6 @@
     @include('layout.partials.footer')
 
     <script type="text/javascript">
-        $("#settingsModal").modal("show");
-
         $("#procurar-contactos-icon").click(function(event) {
             event.preventDefault();
             $('#modalContacts').modal('show');
