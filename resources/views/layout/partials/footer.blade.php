@@ -5,9 +5,9 @@
   <!-- Data Tables-->
   <script src="{{asset('/vendor/datatables/datatables.min.js')}}" type="text/javascript"></script>
 
-
   <!-- Pack de icons -->
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
+  <script src="{{asset('/js/master.js')}}"></script>
   <!-- Individual Scripts -->
   @yield('scripts')

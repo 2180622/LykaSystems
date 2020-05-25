@@ -1,7 +1,7 @@
 /* General Style */
 * {
     outline: none;
-  }
+}
 
 html, body {
     height: 100%;
@@ -31,8 +31,7 @@ html, body {
     height: 40px !important;
     cursor: pointer;
     border-radius: 50%;
-    overflow:hidden;
-
+    overflow: hidden;
 }
 
 .top-bar ion-icon {
@@ -106,11 +105,32 @@ html, body {
 /* Settings Modal */
 #settingsModal .modal-content {
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 #settingsModal .modal-header {
+    color: white;
+    height: 55px;
     display: block;
+    font-weight: 600;
+    background-color: #6A74C9;
+}
+
+#settingsModal .modal-header #close-icon-modal {
+    top: 2px;
+    cursor: pointer;
+    font-size: 20px;
+    position: relative;
+}
+
+#settingsModal .modal-body {
+    padding: 30px 10px;
+}
+
+#settingsModal .modal-body .bg-white {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
 }
 
 /* Buttons */

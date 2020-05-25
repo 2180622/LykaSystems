@@ -1,7 +1,7 @@
 <div class="d-flex align-content-center flex-wrap">
     {{-- Menu icon --}}
     <div class="mr-auto bd-highlight align-self-center">
-        <ion-icon name="menu-outline" class="align-self-cente"></ion-icon>
+        <ion-icon name="menu-outline" id="menu-icon"></ion-icon>
     </div>
     {{-- Phone icon --}}
     <div class="bd-highlight pr-5 pt-1 align-self-center">

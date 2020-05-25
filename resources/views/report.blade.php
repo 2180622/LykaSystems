@@ -11,22 +11,6 @@
 {{-- Page Content --}}
 @section('content')
 <div class="container mt-2">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
-
-    <div class="float-right">
-        <a href="{{route('report')}}" class="top-button">reportar problema</a>
-    </div>
-
-    <br><br>
-
     <?php
       if (Auth()->user()->tipo == 'admin') {
         $user = Auth()->user()->admin;

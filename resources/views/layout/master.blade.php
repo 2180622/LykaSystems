@@ -9,10 +9,8 @@
     <link rel="shortcut icon" href="{{asset('/media/favicon.png')}}" type="image/x-icon">
     <!-- Bootstrap core CSS -->
     <link href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
     {{-- DataTables --}}
     <link type="text/css" href="{{asset('/vendor/datatables/datatables.min.css')}} " rel="stylesheet">
-
     <!-- Fontawesome core CSS -->
     <link href="{{asset('/vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
     <!-- Lyka Font -->
@@ -51,7 +49,7 @@
     <div class="container-fluid ">
         <div class="row" style="min-height:100vh">
             {{-- Menu lateral --}}
-            <div class="col main-menu shadow">
+            <div class="col main-menu shadow" id="side-menu">
                 @include('layout.partials.main-menu')
             </div>
             {{-- Barra de topo --}}
@@ -74,9 +72,11 @@
     </div>
 
     <!-- Scripts -->
-    @include('layout.partials.footer') {{-- <<<<  Lista de scripts --}}
+    @include('layout.partials.footer')
 
     <script type="text/javascript">
+        $("#settingsModal").modal("show");
+
         $("#procurar-contactos-icon").click(function(event) {
             event.preventDefault();
             $('#modalContacts').modal('show');
