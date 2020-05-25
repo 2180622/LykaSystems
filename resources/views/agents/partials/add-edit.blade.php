@@ -72,7 +72,7 @@
                 @if (Auth::user()->tipo == "admin")
                     <label class="checkbox-inline">Este subagente é uma exceção<input id="checkbox_exepcao" type="checkbox" {{old('exepcao',$agent->exepcao)=='1'?"checked":""}} class="ml-2"></label>
                 @endif
-                <input type="hidden" id="exepcao" name="exepcao" value="{{old('exepcao',$agent->exepcao)}}">
+                <input type="hidden" id="exepcao" name="exepcao" value="{{old('exepcao',$agent->exepcao)=='1'?"1":"0"}}">
                 </div>
         </div>
     </div>

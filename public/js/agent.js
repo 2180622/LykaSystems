@@ -211,6 +211,7 @@
             $("#div_execao").hide();
             $("#idAgenteAssociado").prop("disabled", true);
             $("#idAgenteAssociado").val(null);
+
         }
 
 
@@ -224,7 +225,8 @@
                 $("#idAgenteAssociado").focus();
 
             } else {
-
+                $('#checkbox_exepcao').prop('checked', false);
+                $("#exepcao").val("0");
                 $("#div_subagente").hide();
                 $("#div_execao").hide();
                 $("#idAgenteAssociado").prop("disabled", true);
