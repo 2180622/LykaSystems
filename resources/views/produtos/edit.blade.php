@@ -243,22 +243,31 @@
                                         value="" style="width:250px" readonly><br>
                                     @endIf
                 
-                                    <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
-                                    @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && $subagente->exepcao)
-                                        <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
-                                        value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px" readonly><br>
+                                    <div class="valor-responsabilidade-subagente" style="display: none;">
+                                        <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
+                                        @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && $subagente->exepcao)
+                                            <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
+                                            value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px" readonly><br>
 
-                                        <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao sub-agente:</label><br>
-                                        <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
-                                        value="" style="width:250px" ><br>
-                                    @else
-                                        <input type="number" class="form-control" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
-                                        value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"><br>
+                                            <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao sub-agente:</label><br>
+                                            <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
+                                            value="" style="width:250px" ><br>
+                                        @else
+                                            @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)
+                                                <input type="number" class="form-control" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
+                                                value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"><br>
+                                            @else
+                                                <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
+                                                value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"
+                                                onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'), 
+                                                {{$responsabilidade->valorAgente + $responsabilidade->valorSubAgente}})"><br>
+                                            @endif
 
-                                        <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao sub-agente:</label><br>
-                                        <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
-                                        value="" style="width:250px" readonly><br>
-                                    @endIf
+                                            <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao sub-agente:</label><br>
+                                            <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
+                                            value="" style="width:250px" readonly><br>
+                                        @endIf
+                                    </div>
                                     {{--
                                     <div class="valor-responsabilidade-subagente" style="display: none;">
                                         @if((Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)||$produto->idSubAgente)

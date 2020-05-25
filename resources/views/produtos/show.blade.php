@@ -167,7 +167,7 @@
                                         @elseif(date("Y-m-d",strtotime($fase->dataVencimento))>=$Today)
                                             <span class="text-warning">Pendente</span>
                                         @else
-                                            <span class="text-danger">Não pago</span>
+                                            <span class="text-danger">Vencido</span>
                                         @endif
                                     </div><br>
                                 @endif
@@ -187,7 +187,7 @@
                                         @elseif(date("Y-m-d",strtotime($fase->dataVencimento))>=$Today)
                                             <span class="text-warning">Pendente</span>
                                         @else
-                                            <span class="text-danger">Não pago</span>
+                                            <span class="text-danger">Vencido</span>
                                         @endif
                                     </div><br>
                                 @endif
@@ -208,7 +208,7 @@
                                             @elseif(date("Y-m-d",strtotime($fase->dataVencimento))>=$Today)
                                                 <span class="text-warning">Pendente</span>
                                             @else
-                                                <span class="text-danger">Não pago</span>
+                                                <span class="text-danger">Vencido</span>
                                             @endif
                                         </div><br>
                                     @endif
@@ -228,7 +228,7 @@
                                         @elseif(date("Y-m-d",strtotime($fase->dataVencimento))>=$Today)
                                             <span class="text-warning">Pendente</span>
                                         @else
-                                            <span class="text-danger">Não pago</span>
+                                            <span class="text-danger">Vencido</span>
                                         @endif
                                     </div><br>
                                 @endif
@@ -249,7 +249,7 @@
                                             @elseif(date("Y-m-d",strtotime($fase->dataVencimento))>=$Today)
                                                 <span class="text-warning">Pendente</span>
                                             @else
-                                                <span class="text-danger">Não pago</span>
+                                                <span class="text-danger">Vencido</span>
                                             @endif
                                         </div><br>
                                     @endif
@@ -271,7 +271,7 @@
                                                 @elseif(date("Y-m-d",strtotime($fase->dataVencimento))>=$Today)
                                                     <span class="text-warning">Pendente</span>
                                                 @else
-                                                    <span class="text-danger">Não pago</span>
+                                                    <span class="text-danger">Vencido</span>
                                                 @endif
                                             </div><br>
                                         @endif

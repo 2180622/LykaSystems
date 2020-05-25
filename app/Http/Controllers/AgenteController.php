@@ -283,6 +283,9 @@ class AgenteController extends Controller
         $fields = $request->validated();
 
         $agent->fill($fields);
+        if($agente->tipo == "Agente"){
+            $agente->exepcao = false;
+        }
 
 
         /* Registo antigo: para verificar se existem ficheiros para apagar/substituir */
