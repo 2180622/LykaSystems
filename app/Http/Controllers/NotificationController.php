@@ -40,23 +40,25 @@ class NotificationController extends Controller
             $Assunto = 'PARABÉNS '.Auth()->user()->cliente->nome.' '.Auth()->user()->cliente->apelido;
         }
         $DataHoje = new DateTime();
-        $diff = (date_diff($dataNasc,$DataHoje))->format("%R%a");
-        if($diff >= 0 && $diff <= 20){
-            $Descricao = 'Hoje um ciclo de sua vida se finaliza e outro recomeça. Faça deste novo recomeço uma nova oportunidade para fazer tudo o que sempre sonhou! \nParabéns!';
-            $date = (new DateTime())->add(new DateInterval('P'.$diff.'D'));
-            $code = Auth()->user()->idUser.'_aniversario_'.$date->format('d-m-Y');
-            $existe=false;
-            if($AllNotifications){
-                foreach($AllNotifications as $notification){
-                    $dados = json_decode($notification->data);
-                    if($dados->code == $code){
-                        $existe = true;
+        if($dataNasc){
+            $diff = (date_diff($dataNasc,$DataHoje))->format("%R%a");
+            if($diff >= 0 && $diff <= 20){
+                $Descricao = 'Hoje um ciclo de sua vida se finaliza e outro recomeça. Faça deste novo recomeço uma nova oportunidade para fazer tudo o que sempre sonhou! \nParabéns!';
+                $date = (new DateTime())->add(new DateInterval('P'.$diff.'D'));
+                $code = Auth()->user()->idUser.'_aniversario_'.$date->format('d-m-Y');
+                $existe=false;
+                if($AllNotifications){
+                    foreach($AllNotifications as $notification){
+                        $dados = json_decode($notification->data);
+                        if($dados->code == $code){
+                            $existe = true;
+                        }
                     }
                 }
-            }
-            if(!$existe){
-                $Notdate = (new DateTime())->add(new DateInterval('P'.$diff.'D'));
-                Auth()->user()->notify(new Aniversario($code,false,$Notdate->format('Y-m-d'),'Aniversario',null,null,$Assunto,$Descricao));
+                if(!$existe){
+                    $Notdate = (new DateTime())->add(new DateInterval('P'.$diff.'D'));
+                    Auth()->user()->notify(new Aniversario($code,false,$Notdate->format('Y-m-d'),'Aniversario',null,null,$Assunto,$Descricao));
+                }
             }
         }
     }

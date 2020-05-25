@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(FaseStock::class, function (Faker $faker) {
     return [
-        'idFaseStock' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idFaseStock' => FaseStock::all()->random()->id,
         'descricao' => $faker->randomElement($array = array ('Inscricao','Matricula', 'Final')),
         
         /*  'idProdutoStock'  */

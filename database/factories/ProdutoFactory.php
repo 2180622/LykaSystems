@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Produto::class, function (Faker $faker) {
     return [
-        'idProduto' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idProduto' => Produto::all()->random()->id,
         'descricao' => $faker->sentence($nbWords = 2, $variableNbWords = true),
         'tipo' => $faker->randomElement($array = array ('Licenciatura','Mestrado','Curso de Verão')),
         'anoAcademico' => '2020/21',

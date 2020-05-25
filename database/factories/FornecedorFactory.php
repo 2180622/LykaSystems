@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Fornecedor::class, function (Faker $faker) {
     return [
-        'idFornecedor' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idFornecedor' => Fornecedor::all()->random()->id,
         'nome' => $faker->firstNameFemale.' '.$faker->lastName,
         'morada' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,
         'contacto' => $faker->numberBetween($min = 100000000, $max = 999999999),
