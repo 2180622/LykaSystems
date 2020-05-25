@@ -32,10 +32,7 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
-        @if (Auth::user()->tipo == "admin")
         <a href="{{route('agents.create')}}" class="top-button">Adicionar Agente</a>
-        @endif
     </div>
 
     <br><br>

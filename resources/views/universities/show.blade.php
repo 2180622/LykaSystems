@@ -64,7 +64,6 @@
             </a>
         </div>
         <div class="float-right">
-            <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
             <a href="{{route('universities.edit',$university)}}" class="top-button mr-2">Editar informação</a>
         </div>
 

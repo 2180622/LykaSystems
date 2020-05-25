@@ -16,6 +16,7 @@ class StoreAgenteRequest extends FormRequest
 
         return [
         'idAgenteAssociado'=> 'nullable',
+        'exepcao' => 'required',
         'nome' => 'required',
         'apelido' => 'required',
         'genero'=>'required',

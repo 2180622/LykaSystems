@@ -19,9 +19,6 @@
         <a href="javascript:window.history.forward();" title="Avançar"><i
                 class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
     </div>
-    <div class="float-right">
-        <a href="#" class="top-button">reportar problema</a>
-    </div>
 
     <br><br>
     <div class="cards-navigation">
@@ -187,7 +184,7 @@
                                         <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
                                         <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
                                         value="{{old('valorSubAgente',$Responsabilidades[$num-1]->valorSubAgente)}}" style="width:250px"><br>
-                                    
+
                                         <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao subagente:</label><br>
                                         <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
                                         value="" style="width:250px" ><br>

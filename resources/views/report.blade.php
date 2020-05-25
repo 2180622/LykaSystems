@@ -11,6 +11,16 @@
 {{-- Page Content --}}
 @section('content')
 <div class="container mt-2">
+            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
+        </a>
+        <a href="javascript:window.history.forward();" title="Avançar">
+            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
+        </a>
+    </div>
+
+    <br><br>
+
+>>>>>>> master
     <?php
       if (Auth()->user()->tipo == 'admin') {
         $user = Auth()->user()->admin;

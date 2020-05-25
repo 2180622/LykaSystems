@@ -12,6 +12,22 @@ html, body {
     font-family: 'Nunito', sans-serif;
 }
 
+.active {
+    color: #6A74C9;
+    font-weight: 700;
+}
+
+.name_link {
+    color: gray;
+}
+
+.name_link:hover {
+    color: #6A74C9;
+    text-decoration: none;
+}
+
+
+
 .content {
     margin-top: 80px;
     margin-left: 250px;
@@ -134,6 +150,28 @@ html, body {
 }
 
 /* Buttons */
+
+.top-button {
+    border: none;
+    color: white;
+    font-weight: 800;
+    padding: 8px 18px;
+    font-size: 0.6rem;
+    border-radius: 25px;
+    text-transform: uppercase;
+    background-color: #6A74C9;
+    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
+}
+
+.top-button:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.top-button:focus {
+    outline: none;
+}
+
 .cancel-button {
     color: #A9A9A9;
     font-weight: 800;

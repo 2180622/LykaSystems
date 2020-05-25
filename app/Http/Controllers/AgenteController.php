@@ -283,8 +283,11 @@ class AgenteController extends Controller
         $fields = $request->validated();
 
         $agent->fill($fields);
-        if($agente->tipo == "Agente"){
-            $agente->exepcao = false;
+
+
+        /* Definição de exeçao */
+        if($agent->tipo == "Agente"){
+            $agent->exepcao = false;
         }
 
 

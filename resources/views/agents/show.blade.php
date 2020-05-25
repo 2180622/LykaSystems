@@ -26,14 +26,10 @@
         </a>
     </div>
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
-
         @if (Auth::user()->tipo == "admin")
         <a href="{{route('agents.edit',$agent)}}" class="top-button mr-2">Editar informação</a>
         @endif
-
         <a href="{{route('agents.print',$agent)}}" target="_blank" class="top-button">Imprimir</a>
-
     </div>
 
     <br><br>
@@ -129,9 +125,13 @@
                 @if (Auth::user()->tipo == "admin")
                     <div class="col" style="min-width: 320px">
                         <div class="font-weight-bold text-secondary">Observacões:</div>
-                        <div class="border rounded bg-light p-2 mt-2 active" style="height:155px; width:100%; overflow: auto">
+                        <div class="border rounded bg-light p-2 mt-2 active" style="height:130px; width:100%; overflow: auto">
                             {{ $agent->observacoes}}
                         </div>
+
+                        @if ( $agent->exepcao == 1)
+                            <div class="p-2 mt-2 active"><i class="fas fa-info-circle mr-2"></i>Subagente assinalado como exeção</div>
+                        @endif
 
                     </div>
                 @endif
