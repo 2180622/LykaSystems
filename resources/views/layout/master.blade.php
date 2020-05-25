@@ -20,7 +20,7 @@
     <!-- CSS Link -->
     <link href="{{asset('/css/master.css')}}" rel="stylesheet">
 
-    @yield('style-links')
+    @yield('styleLinks')
 
     {{-- Notificações --}}
     @php

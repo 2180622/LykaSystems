@@ -4,7 +4,7 @@
 @section('title', 'Página Inicial')
 
 {{-- CSS Style Link --}}
-@section('style-links')
+@section('styleLinks')
 <link href="{{asset('/css/dashboard.css')}}" rel="stylesheet">
 @endsection
 
@@ -16,8 +16,6 @@
             <h6>Navegação rápida</h6>
         </div>
         <br>
-
-
         @if (Auth::user()->tipo == "admin")
         @include('dashboard.partials.admin')
         @else
