@@ -1,35 +1,113 @@
-/* LYKA BLUE: #6A74C9 */
 /* General Style */
 html, body {
     height: 100%;
     min-width: 750px;
+    scroll-behavior: smooth;
+    transition: all 0.3 ease;
     background-color: #EAEAEA;
     font-family: 'Nunito', sans-serif;
-    transition: all 0.3 ease;
-    scroll-behavior: smooth;
 }
 
-.top-button {
-    border: none;
+.content {
+    margin-top: 80px;
+    margin-left: 250px;
+}
+
+/* Top-Bar Style */
+.top-bar {
+    z-index: 2;
+    margin-left: 250px;
+    position: absolute;
+    padding: 20px 30px;
+    width: calc(100% - 270px);
+}
+
+.user-image {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.top-bar ion-icon {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.top-bar #procurar-contactos-icon {
+    color: #999;
+    transform: rotateY(180deg);
+    transition: 0.2s ease-in-out;
+}
+
+.top-bar #procurar-contactos-icon:hover {
+    color: #000;
+}
+
+.top-bar .dropdown-menu {
+    width: 280px;
+    border: 0px !important;
+}
+
+.top-bar .dropdown-content {
+    padding: 15px 0px;
+}
+
+.top-bar .dropdown-menu p {
+    margin: 0px !important;
+    font-size: 14px;
+}
+
+.top-bar .dropdown-header {
+    bottom: 8px;
     color: white;
-    font-weight: 800;
-    padding: 8px 18px;
-    font-size: 0.6rem;
-    border-radius: 25px;
-    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
     background-color: #6A74C9;
-    box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .15);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 0.7rem 1.5rem !important;
 }
 
-.top-button:hover {
-    color: white;
-    text-decoration: none;
+.top-bar .user-info {
+    top: 4px;
+    position: relative;
 }
 
-.top-button:focus {
-    outline: none;
+.top-bar .user-info p, .top-bar .user-info {
+    cursor: pointer;
+    display: inline-block;
 }
 
+.top-bar .user-info p {
+    font-size: 0.8rem;
+    position: relative;
+    margin-bottom: 0 !important;
+}
+
+.top-bar .user-info p:first-child {
+    font-weight: 800;
+}
+
+.top-bar .user-info p:last-child {
+    bottom: 7px;
+    color: #646464;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+}
+
+/* Settings Modal */
+#settingsModal .modal-content {
+    border: none;
+    border-radius: 5px;
+}
+
+#settingsModal .modal-header {
+    display: block;
+}
+
+/* Buttons */
 .cancel-button {
     color: #A9A9A9;
     font-weight: 800;
@@ -101,7 +179,7 @@ html, body {
     height: 110px;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 11px;
+    border-radius: 5px;
     background-color: white;
     transition: 0.3s ease-in-out;
     box-shadow: 0 .2rem 1rem rgba(0, 0, 0, .10);
@@ -170,9 +248,17 @@ html, body {
 }
 
 .main-menu {
-    flex: 0 0 260px;
-    -ms-flex: 0 0 260px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    overflow-x: hidden;
     background-color: white;
+}
+
+.menu-content {
+    padding-bottom: 100px;
 }
 
 .menu-list {
@@ -364,7 +450,6 @@ html, body {
     background-color: #A9A9A9;
 }
 
-
 #modalContacts .modal-content {
     border: none !important;
     border-radius: 0px !important;
@@ -397,11 +482,10 @@ html, body {
     border-radius: 0px;
 }
 
-#modalContacts #submit-button:focus{
+#modalContacts #submit-button:focus {
     box-shadow: none;
     border-radius: 0px;
 }
-
 
 /* Responsive */
 @media screen and (max-width: 950px) {
