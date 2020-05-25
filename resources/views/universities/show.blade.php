@@ -256,21 +256,26 @@
 
                         @if($clients)
 
-                        <div class="row mb-3">
+                        <div class="row">
+
                             <div class="col">
-                                <div class="text-center text-secondary">Existe {{count($clients)}} estudante(s) associados a esta Universidade</div>
+                                <div class="text-secondary">Existe {{count($clients)}} estudante(s) associados a esta Universidade</div>
+                                <br>
+                                {{-- Input de procura nos resultados da dataTable --}}
+                                <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..." aria-label="Procurar">
                             </div>
+
+                            <div class="col col-2 text-center" style="max-width: 130px">
+                                <a class="name_link " href="{{route('clients.searchIndex')}}">
+                                    <div class="bg-light border shadow-sm p-2">
+                                        <div><i class="fas fa-search" style="font-size:30px"></i></div>
+                                        <div>Pesquisa avançada</div>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
 
-                    {{-- Input de procura nos resultados da dataTable --}}
-                    <div class="row p-3 ">
-                        <div class="col text-center ">
-                            <div class="mx-auto p-1" style="width: 70%; border-radius:10px;">
-                                <input type="text" class="shadow-sm" id="customSearchBox"
-                                    placeholder="Procurar nos resultados..." aria-label="Procurar">
-                            </div>
-                        </div>
-                    </div>
 
                     <br>
 
