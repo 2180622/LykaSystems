@@ -9,6 +9,10 @@
     <link rel="shortcut icon" href="{{asset('/media/favicon.png')}}" type="image/x-icon">
     <!-- Bootstrap core CSS -->
     <link href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    {{-- DataTables --}}
+    <link type="text/css" href="{{asset('/vendor/datatables/datatables.min.css')}} " rel="stylesheet">
+
     <!-- Fontawesome core CSS -->
     <link href="{{asset('/vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
     <!-- Lyka Font -->
@@ -70,7 +74,7 @@
     </div>
 
     <!-- Scripts -->
-    @include('layout.partials.footer')
+    @include('layout.partials.footer') {{-- <<<<  Lista de scripts --}}
 
     <script type="text/javascript">
         $("#procurar-contactos-icon").click(function(event) {

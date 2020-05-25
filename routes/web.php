@@ -21,20 +21,14 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::post('/procurar-contacto', 'ExtraFunctionsController@searchcontact')->name('search.contact');
 
     /* Contacts */
-    /* Route::resource('/contacts', 'ContactoController'); */
-/*     Route::get('/contacts', 'ContactoController@index')->name('contacts.index'); */
-/*
-    Route::post('/contacts/{contact}', 'ContactoController@store')->name('contacts.store');
-    Route::get('/contacts/{contact}', 'ContactoController@edit')->name('contacts.edit');
-    Route::put('/contacts/{contact}', 'ContactoController@update')->name('contacts.update');
-    Route::delete('/contacts/{contact}', 'ContactoController@destroy')->name('contacts.destroy'); */
-
+    Route::get('/contactos', 'ContactoController@index')->name('contacts.index');
+    Route::delete('/contactos/{contact}', 'ContactoController@destroy')->name('contacts.destroy');
+    Route::put('/contactos/{contact}', 'ContactoController@update')->name('contacts.update');
     Route::get('/contactos/criar/{university?}', 'ContactoController@create')->name('contacts.create');
     Route::get('/contactos/show/{contact}/{university?}', 'ContactoController@show')->name('contacts.show');
     Route::get('/contactos/editar/{contact}/{university?}', 'ContactoController@edit')->name('contacts.edit');
-    Route::resource('/contactos', 'ContactoController')->only(['index','destroy', 'update','store']);
+    Route::post('/contactos', 'ContactoController@store')->name('contacts.store');
 
-/*     Route::resource('/contacts', 'ContactoController', ['except' => ['create']]); */
 
     /* Universidades */
     Route::resource('/universidades', 'UniversityController')->parameters([

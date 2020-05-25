@@ -5,7 +5,8 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 
     <style>
         .active {
@@ -199,17 +200,12 @@
                                                         @method('DELETE')
 
                                                         <button type="submit"
-                                                                class="delete_event_btn shadow-sm text-center btn_list_opt btn_list_opt_delete mr-2"
+                                                                class="delete_event_btn shadow-sm text-center btn_list_opt btn_delete mr-2"
                                                                 title="Eliminar Evento" data-toggle="modal"
                                                                 data-target="#exampleModal">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
-
-                                                    {{-- EDITAR --}}
-                                                    {{--                                         <a href="#"
-                                                                                                class="btn_list_opt btn_list_opt_edit edit_event_btn shadow-sm text-center "
-                                                                                                title="Editar"><i class="fas fa-pencil-alt mt-1"></i></a> --}}
 
                                                 </div>
                                             </div>
@@ -260,38 +256,40 @@
 
                         @if($clients)
 
-                        <div class="row mb-3">
+                        <div class="row">
+
                             <div class="col">
-                                <div class="text-center text-secondary"><small>Existe <strong>{{count($clients)}} estudante(s)</strong> associados a esta Universidade</small></div>
+                                <div class="text-secondary">Existe {{count($clients)}} estudante(s) associados a esta Universidade</div>
+                                <br>
+                                {{-- Input de procura nos resultados da dataTable --}}
+                                <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..." aria-label="Procurar">
                             </div>
-                        </div>
 
-                        <div class="row p-3 ">
-                            <div class="col text-center mb-3">
-                                <div class="input-group pl-0  search-section mx-auto" style="width:50%">
-                                    <input class="shadow-sm" type="text" id="customSearchBox"
-                                        placeholder="Secção de procura" aria-label="Procurar">
-                                    <div class="search-button input-group-append">
-                                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                            <div class="col col-2 text-center" style="max-width: 130px">
+                                <a class="name_link " href="{{route('clients.searchIndex')}}">
+                                    <div class="bg-light border shadow-sm p-2">
+                                        <div><i class="fas fa-search" style="font-size:30px"></i></div>
+                                        <div>Pesquisa avançada</div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
+
                         </div>
-                        <br>
-                        <hr>
-
-                            <div class="table-responsive " style="overflow:hidden">
 
 
-                                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                                       style="overflow:hidden;">
+                    <br>
+
+
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
 
                                     {{-- Cabeçalho da tabela --}}
                                     <thead>
                                     <tr>
                                         <th class="text-center align-content-center ">Foto</th>
                                         <th>Nome</th>
-                                        <th>Naturalidade</th>
+                                        <th>N.º Passaporte</th>
+                                        <th>País</th>
                                         <th class="text-center">Opções</th>
                                     </tr>
                                     </thead>
@@ -327,6 +325,9 @@
                                             <td class="align-middle"><a class="name_link"
                                                                         href="{{route('clients.show',$client)}}">{{ $client->nome }} {{ $client->apelido }}</a>
                                             </td>
+
+                                            {{-- numPassaporte --}}
+                                            <td class="align-middle">{{ $client->numPassaporte }}</td>
 
 
                                             {{-- paisNaturalidade --}}

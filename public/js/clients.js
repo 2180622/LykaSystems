@@ -16,7 +16,7 @@
                 {
                     "orderable": false,
                     "width": "130px",
-                    "targets": 3
+                    "targets": -1
                 },
 
             ],
@@ -187,9 +187,10 @@
         /* Para novo cliente */
 
 
-
-        if( $('#editavel').val().length<=1){
-            $('#editavel').val("1");
+        if ($('#editavel').length) {
+            if( $('#editavel').val().length<=1){
+                $('#editavel').val("1");
+            }
         }
 
         /* Caso a edição seja permitida */

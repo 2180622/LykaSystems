@@ -6,8 +6,8 @@
 {{-- CSS Style Link --}}
 @section('styleLinks')
 
-<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
-<link href="{{asset('css/inputs.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 
 @endsection
 
@@ -67,7 +67,7 @@
 
 
         <div class="card shadow-sm p-3" style="border-radius:10px">
-            <div class="row font-weight-bold p-2" style="color:#6A74C9">
+            <div class="row p-2" style="color:#6A74C9">
                 <div class="col col-md-12 text-center my-auto "
                     style="min-width:195px; max-width:230px; max-height:295px; overflow:hidden">
 
@@ -85,7 +85,7 @@
 
                 </div>
 
-                <div class="col p-2" style="min-width:280px !important">
+                <div class="col font-weight-bold p-2" style="min-width:280px !important">
 
 
 
@@ -125,6 +125,16 @@
                     @endif
 
                 </div>
+
+                @if (Auth::user()->tipo == "admin")
+                    <div class="col" style="min-width: 320px">
+                        <div class="font-weight-bold text-secondary">Observacões:</div>
+                        <div class="border rounded bg-light p-2 mt-2 active" style="height:155px; width:100%; overflow: auto">
+                            {{ $agent->observacoes}}
+                        </div>
+
+                    </div>
+                @endif
 
             </div>
         </div>
@@ -229,44 +239,45 @@
 
 
                 {{-- Clientes --}}
-                <div class="tab-pane fade {{ $agent->tipo == 'Subagente' ? 'show active' : '' }}" id="clients"
-                    role="tabpanel" aria-labelledby="clients-tab">
+                <div class="tab-pane fade {{ $agent->tipo == 'Subagente' ? 'show active' : '' }}" id="clients" role="tabpanel" aria-labelledby="clients-tab">
 
                     @if($clients)
 
-                    <div class="row mb-3">
+
+                    <div class="row">
+
                         <div class="col">
-                            <div class="text-center text-secondary"><small>Existe <strong>{{count($clients)}} estudante(s)</strong> associados a este agente</small></div>
+                            <div class="text-secondary">Existe {{count($clients)}} estudante(s) associados a este agente</div>
+                            <br>
+                            {{-- Input de procura nos resultados da dataTable --}}
+                            <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..." aria-label="Procurar">
                         </div>
-                    </div>
 
-                    <div class="row p-3 ">
-                        <div class="col text-center mb-3">
-                            <div class="input-group pl-0  search-section mx-auto" style="width:50%">
-                                <input class="shadow-sm" type="text" id="customSearchBox"
-                                    placeholder="Secção de procura" aria-label="Procurar">
-                                <div class="search-button input-group-append">
-                                    <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                        <div class="col col-2 text-center" style="max-width: 130px">
+                            <a class="name_link " href="{{route('clients.searchIndex')}}">
+                                <div class="bg-light border shadow-sm p-2">
+                                    <div><i class="fas fa-search" style="font-size:30px"></i></div>
+                                    <div>Pesquisa avançada</div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
+
                     </div>
+
+
                     <br>
-                    <hr>
 
 
-                    <div class="table-responsive " style="overflow:hidden">
-
-
-                        <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                            style="overflow:hidden;">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
 
                             {{-- Cabeçalho da tabela --}}
                             <thead>
                                 <tr>
                                     <th class="text-center align-content-center ">Foto</th>
                                     <th>Nome</th>
-                                    <th>Naturalidade</th>
+                                    <th>N.º Passaporte</th>
+                                    <th>País</th>
                                     <th class="text-center">Opções</th>
                                 </tr>
                             </thead>
@@ -300,6 +311,8 @@
                                             href="{{route('clients.show',$client)}}">{{ $client->nome }}
                                             {{ $client->apelido }}</a></td>
 
+                                   {{-- numPassaporte --}}
+                                    <td class="align-middle">{{ $client->numPassaporte }}</td>
 
                                     {{-- paisNaturalidade --}}
                                     <td class="align-middle">{{ $client->paisNaturalidade }}</td>

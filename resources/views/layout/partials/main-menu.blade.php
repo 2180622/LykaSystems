@@ -103,8 +103,8 @@
 
             <!-- Lista telefónica -->
             <li class="menu-option">
-                <a href="{{route('contactos.index')}}">
-                    <span class="option-name {{Route::is('contactos.*') ? 'active' : ''}}">Lista telefónica</span>
+                <a href="{{route('contacts.index')}}">
+                    <span class="option-name {{Route::is('contacts.*') ? 'active' : ''}}">Lista telefónica</span>
                 </a>
             </li>
 

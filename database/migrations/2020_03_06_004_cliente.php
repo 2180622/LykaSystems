@@ -51,6 +51,7 @@ class Cliente extends Migration
             $table->longText('obsPessoais')->nullable();
             $table->longText('obsFinanceiras')->nullable();
             $table->longText('obsAcademicas')->nullable();
+            $table->longText('obsAgente')->nullable();
 
             $table->enum('estado',['Inativo','Ativo', 'Proponente'])->default('Inativo');
             $table->boolean('editavel')->default(true);

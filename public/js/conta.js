@@ -8,7 +8,11 @@ $(document).ready(function () {
             {
                 "orderable": false,
                 "width": "130px",
-                "targets": -1
+                "targets": 3
+            },
+            {
+                "orderable": false,
+                "targets": 2
             },
 
         ],
@@ -53,48 +57,37 @@ $(document).ready(function () {
         table.page.len($(this).val()).draw();
     });
 
+
+
+
     /* FIM configs DATATABLES */
 
 
 
 
+    $('#deleteModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var name = button.data('name');
+        var modal = $(this);
+        modal.find('#text').text('Pretende eliminar a conta bancária ' + name + '?');
+        modal.find("form").attr('action', '/conta-bancaria/' + button.data('slug'));
+    });
 
+    // Context Menu
+/*     window.onclick = hideContextMenu;
+    var contextMenu = document.getElementById("contextMenu");
 
-
-
-
-    /* Isto é utilizado??? */
-
-    var clones = $('.clonar').clone();
-    $('.fases').html('');
-    function AtualizaProduto(Produtos){
-        var idproduto = new Array;
-        $("select.toolbar-escolha#produto").each(function () {
-            idproduto.push(this.value);
-        });
-        var filtros = null;
-        var i;
-        for (i = 0; i < Produtos.length; i++) {
-            filtros = filtros + filtroCB[i] + "_" + checkbox[i] + "__";
-            if(Produtos[i].idProduto == idproduto){
-                var clone = clones.clone();
-                $('#fases-tab', clone).attr('href','fase-'+Produtos[i].idProduto);
-                $('#fases-tab', clone).attr('aria-controls','fase-'+Produtos[i].idProduto);
-                $('#fases-tab', clone).attr('id','fase'+Produtos[i].idProduto+'-tab');
-                $('.fases').append(clone);
-            }
-        }
+    function showContextMenu() {
+        contextMenu.style.display = "inline-block";
+        contextMenu.style.left = event.clientX - '260' + 'px';
+        contextMenu.style.top = event.clientY + 'px';
+        return false;
     }
+
+    function hideContextMenu() {
+        contextMenu.style.display = "none";
+    } */
+
 
 
 });
-
-
-
-
-
-
-
-
-
-
