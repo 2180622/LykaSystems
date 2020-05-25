@@ -30,8 +30,8 @@
     {{-- Modal de contactos --}}
     @include('layout.partials.modal-contactos')
 
-    {{-- Modal de definições do cliente --}}
-    @include('layout.partials.modal-settings')
+    {{-- Modal para terminar a sessão --}}
+    @include('layout.partials.modal')
 
     {{-- Mensagem de carregamento / processamento --}}
     <div id="wait_screen" style="display:none; position:fixed; top:0; left:0; width:100% ; height:100%; background-color:black; opacity:0.7;z-index:999;">
