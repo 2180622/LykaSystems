@@ -173,6 +173,7 @@
                             $numF = 0;
                             $responsabilidade = $fase->responsabilidade;
                             $relacoes = $responsabilidade->relacao;
+                            $subagente = $responsabilidade->subagente;
                         @endphp
                         @if($num == 1)
                             <div class="tab-pane fade show active" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
@@ -241,6 +242,33 @@
                                         <input type="date" class="form-control" name="resp-data-agente-fase{{$num}}" id="resp-data-agente-fase{{$num}}"
                                         value="" style="width:250px" readonly><br>
                                     @endIf
+                
+                                    <div class="valor-responsabilidade-subagente" style="display: none;">
+                                        <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
+                                        @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && $subagente->exepcao)
+                                            <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
+                                            value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px" readonly><br>
+
+                                            <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao sub-agente:</label><br>
+                                            <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
+                                            value="" style="width:250px" ><br>
+                                        @else
+                                            @if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)
+                                                <input type="number" class="form-control" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
+                                                value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"><br>
+                                            @else
+                                                <input type="number" class="form-control valor-pagar-subagente" name="resp-subagente-fase{{$fase->idFase}}" id="resp-subagente-fase{{$fase->idFase}}"
+                                                value="{{old('valorSubAgente',$responsabilidade->valorSubAgente)}}" style="width:250px"
+                                                onchange="adicionaValorSubAgente({{$responsabilidade->valorAgente}}, $(this).closest('#responsabilidades{{$responsabilidade->idResponsabilidade}}'), 
+                                                {{$responsabilidade->valorAgente + $responsabilidade->valorSubAgente}})"><br>
+                                            @endif
+
+                                            <label for="resp-data-subagente-fase{{$num}}">Data de vencimento do pagamento ao sub-agente:</label><br>
+                                            <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
+                                            value="" style="width:250px" readonly><br>
+                                        @endIf
+                                    </div>
+                                    {{--
                                     <div class="valor-responsabilidade-subagente" style="display: none;">
                                         @if((Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)||$produto->idSubAgente)
                                             <label for="resp-subagente-fase{{$fase->idFase}}">Valor a pagar ao sub-agente:</label><br>
@@ -253,7 +281,7 @@
                                             value="" style="width:250px" ><br>
                                         @endIf
                                     </div>
-                
+                                    --}}
                                     <label for="resp-uni1-fase{{$fase->idFase}}">Valor a pagar á universidade principal:</label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="number" class="form-control" name="resp-uni1-fase{{$fase->idFase}}" id="resp-uni1-fase{{$fase->idFase}}"

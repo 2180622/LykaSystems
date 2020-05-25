@@ -112,6 +112,14 @@ class PermissionTest extends TestCase
 
         $response = $this->get('/agentes'.'/'.$agente->slug.'/editar')->assertRedirect('/login');
     }
+    
+    /** @test */
+    public function redirecionar_de_print_agentes_para_login()
+    {
+        $agente = factory(Agente::class)->make();
+
+        $response = $this->get('/agentes/print'.'/'.$agente->slug)->assertRedirect('/login');
+    }
 
     /********************************************************************************************************** */
 
@@ -165,6 +173,21 @@ class PermissionTest extends TestCase
         $cliente = factory(Cliente::class)->make();
 
         $response = $this->get('/clientes'.'/'.$cliente->slug.'/editar')->assertRedirect('/login');
+    }
+    
+    /** @test */
+    public function redirecionar_de_pesquisa_cliente_para_login()
+    {
+
+        $response = $this->get('/clientes/pesquisa')->assertRedirect('/login');
+    }
+    
+    /** @test */
+    public function redirecionar_de_print_cliente_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+
+        $response = $this->get('/clientes/print'.'/'.$cliente->slug)->assertRedirect('/login');
     }
 
     /********************************************************************************************************** */
@@ -467,7 +490,7 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
 
         $response = $this->get('/produtos'.'/'.$produto->slug)->assertRedirect('/login');
@@ -483,7 +506,7 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
 
         $response = $this->get('/produtos/criar/'.$cliente->slug)->assertRedirect('/login');
@@ -499,7 +522,7 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
 
         $response = $this->get('/produtos'.'/'.$produto->slug.'/editar')->assertRedirect('/login');
@@ -516,12 +539,12 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $responsabilidade = factory(Responsabilidade::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $fase = factory(Fase::class)->make([
             'idProduto' => $produto->idProduto,
@@ -539,8 +562,29 @@ class PermissionTest extends TestCase
     /** @test */
     public function redirecionar_de_create_doc_academico_para_login()
     {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
 
-        $response = $this->get('/documento-academico/criar')->assertRedirect('/login');
+        $docNecessario = factory(DocNecessario::class)->make([
+            'idFase' => $fase->idFase,
+        ]);
+
+        $response = $this->get('/documento-academico/criar/'.$fase->slug.'/'.$docNecessario->idDocNecessario)->assertRedirect('/login');
     }
     
     /** @test */
@@ -552,12 +596,12 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $responsabilidade = factory(Responsabilidade::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $fase = factory(Fase::class)->make([
             'idProduto' => $produto->idProduto,
@@ -571,6 +615,35 @@ class PermissionTest extends TestCase
 
         $response = $this->get('/documento-academico'.'/'.$docAcademico->slug.'/editar')->assertRedirect('/login');
     }
+    
+    /** @test */
+    public function redirecionar_de_verifica_doc_academico_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $docAcademico = factory(DocAcademico::class)->make([
+            'idFase' => $fase->idFase,
+            'idCliente' => $cliente->idCliente,
+        ]);
+
+        $response = $this->get('/documento-academico'.'/'.$docAcademico->slug.'/verifica')->assertRedirect('/login');
+    }
 
     /********************************************************************************************************** */
     
@@ -583,12 +656,12 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $responsabilidade = factory(Responsabilidade::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $fase = factory(Fase::class)->make([
             'idProduto' => $produto->idProduto,
@@ -606,8 +679,29 @@ class PermissionTest extends TestCase
     /** @test */
     public function redirecionar_de_create_doc_pessoal_para_login()
     {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
 
-        $response = $this->get('/documento-pessoal/criar')->assertRedirect('/login');
+        $docNecessario = factory(DocNecessario::class)->make([
+            'idFase' => $fase->idFase,
+        ]);
+
+        $response = $this->get('/documento-pessoal/criar/'.$fase->slug.'/'.$docNecessario->idDocNecessario)->assertRedirect('/login');
     }
     
     /** @test */
@@ -619,12 +713,12 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $responsabilidade = factory(Responsabilidade::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $fase = factory(Fase::class)->make([
             'idProduto' => $produto->idProduto,
@@ -638,6 +732,35 @@ class PermissionTest extends TestCase
 
         $response = $this->get('/documento-pessoal'.'/'.$docPessoal->slug.'/editar')->assertRedirect('/login');
     }
+    
+    /** @test */
+    public function redirecionar_de_verifica_doc_pessoal_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $docPessoal = factory(DocPessoal::class)->make([
+            'idFase' => $fase->idFase,
+            'idCliente' => $cliente->idCliente,
+        ]);
+
+        $response = $this->get('/documento-pessoal'.'/'.$docPessoal->slug.'/verifica')->assertRedirect('/login');
+    }
 
     /********************************************************************************************************** */
 
@@ -650,12 +773,12 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $responsabilidade = factory(Responsabilidade::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $fase = factory(Fase::class)->make([
             'idProduto' => $produto->idProduto,
@@ -687,12 +810,12 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $responsabilidade = factory(Responsabilidade::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $fase = factory(Fase::class)->make([
             'idProduto' => $produto->idProduto,
@@ -725,12 +848,12 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $responsabilidade = factory(Responsabilidade::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $fase = factory(Fase::class)->make([
             'idProduto' => $produto->idProduto,
@@ -755,12 +878,12 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $responsabilidade = factory(Responsabilidade::class)->make([
             'idAgente' => $agente->idAgente,
             'idCliente' => $cliente->idCliente,
-            'idUniversidade1' => $universidade->idUniversidade1,
+            'idUniversidade1' => $universidade->idUniversidade,
         ]);
         $fase = factory(Fase::class)->make([
             'idProduto' => $produto->idProduto,
@@ -774,6 +897,220 @@ class PermissionTest extends TestCase
         ]);
 
         $response = $this->get('/pagamentos'.'/'.$pagoResponsabilidade->idPagoResp.'/editar')->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_agente_pago_responsabilidade_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $response = $this->get('/pagamentos/agente/'.$agente->slug.'/fase'.'/'.$fase->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_cliente_pago_responsabilidade_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $response = $this->get('/pagamentos/cliente/'.$cliente->slug.'/fase'.'/'.$fase->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_fornecedor_pago_responsabilidade_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+        $fornecedor = factory(Fornecedor::class)->make();
+
+        $relFornResp = factory(RelFornResp::class)->make([
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+            'idFornecedor' => $fornecedor->idFornecedor,
+        ]);
+
+        $response = $this->get('/pagamentos/fornecedor/'.$fornecedor->slug.'/fase'.'/'.$fase->slug.'/'.$relFornResp->idRelacao)->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_cliente_pdf_pago_responsabilidade_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $response = $this->get('/pagamentos/nota-pagamento/cliente/'.$cliente->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_download_pago_responsabilidade_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+        $conta = factory(Conta::class)->make();
+
+        $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make([
+            'idFase' => $fase->idFase,
+            'idConta' => $conta->idConta,
+        ]);
+
+        $response = $this->get('/pagamentos/nota-pagamento/'.$pagoResponsabilidade->idPagoResp.'/transferir')->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_pesquisa_pago_responsabilidade_para_login()
+    {
+
+        $response = $this->get('/pagamentos/pesquisa')->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_subagente_pago_responsabilidade_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $subagente = factory(Agente::class)->make(['tipo'=>'Subagente','idAgenteAssociado'=>$agente->idAgente]);
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $response = $this->get('/pagamentos/subagente/'.$subagente->slug.'/fase'.'/'.$fase->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_universidade_principal_pago_responsabilidade_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $response = $this->get('/pagamentos/universidade-principal/'.$universidade->slug.'/fase'.'/'.$fase->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_universidade_secundaria_pago_responsabilidade_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade1 = factory(Universidade::class)->make();
+        $universidade2 = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade1,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade1->idUniversidade,
+            'idUniversidade2' => $universidade2->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $response = $this->get('/pagamentos/universidade-secundaria/'.$universidade2->slug.'/fase'.'/'.$fase->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
     }
 
     /********************************************************************************************************** */
@@ -805,5 +1142,119 @@ class PermissionTest extends TestCase
         $relatorioProblema = factory(RelatorioProblema::class)->make();
 
         $response = $this->get('/reportar-problema'.'/'.$relatorioProblema->idRelatorioProblema.'/editar')->assertRedirect('/login');
+    }
+
+    /********************************************************************************************************** */
+
+    /** @teste */
+    public function redirecionar_de_lista_cobrancas_para_login()
+    {
+        $response = $this->get('/cobrancas')->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_show_cobrancas_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+
+        $response = $this->get('/cobrancas'.'/'.$produto->slug)->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_create_cobrancas_para_login()
+    {
+
+        $response = $this->get('/cobrancas/criar')->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_edit_cobrancas_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+        $conta = factory(Conta::class)->make();
+
+        $docTransacao = factory(DocTransacao::class)->make([
+            'idFase' => $fase->idFase,
+            'idConta' => $conta->idConta,
+        ]);
+
+        $response = $this->get('/cobrancas'.'/'.$produto->slug.'/'.$fase->slug.'/'.$docTransacao->slug.'/editar')->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_download_cobrancas_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+        $conta = factory(Conta::class)->make();
+
+        $docTransacao = factory(DocTransacao::class)->make([
+            'idFase' => $fase->idFase,
+            'idConta' => $conta->idConta,
+        ]);
+
+        $response = $this->get('/cobrancas'.'/'.$docTransacao->slug.'/download')->assertRedirect('/login');
+    }
+    
+    /** @teste */
+    public function redirecionar_de_showcharge_cobrancas_para_login()
+    {
+        $cliente = factory(Cliente::class)->make();
+        $agente = factory(Agente::class)->make();
+        $universidade = factory(Universidade::class)->make();
+        $produto = factory(Produto::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $responsabilidade = factory(Responsabilidade::class)->make([
+            'idAgente' => $agente->idAgente,
+            'idCliente' => $cliente->idCliente,
+            'idUniversidade1' => $universidade->idUniversidade,
+        ]);
+        $fase = factory(Fase::class)->make([
+            'idProduto' => $produto->idProduto,
+            'idResponsabilidade' => $responsabilidade->idResponsabilidade,
+        ]);
+
+        $response = $this->get('/cobrancas'.'/'.$produto->slug.'/'.$fase->slug)->assertRedirect('/login');
     }
 }

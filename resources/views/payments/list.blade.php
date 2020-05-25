@@ -338,7 +338,7 @@
                             <p class="text-truncate">{{number_format((float) $responsabilidade->valorUniversidade1, 2, ',', '').'€'}}</p>
                         </div>
                         <div class="col-md-2 align-self-center ml-4">
-                            <p class="text-truncate" title="{{$responsabilidade->dataVencimentoUni1->format('d/m/Y')}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoUni1))}}</p>
+                            <p class="text-truncate" title="{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoUni1))}}">{{date('d/m/Y', strtotime($responsabilidade->dataVencimentoUni1))}}</p>
                         </div>
                         <div class="col-md-2 text-truncate align-self-center ml-auto">
                             <p class="text-truncate" @if($responsabilidade->verificacaoPagoUni1 == true) style="color:#47BC00;" @elseif($responsabilidade->verificacaoPagoUni1 == false && $responsabilidade->dataVencimentoUni1 <
