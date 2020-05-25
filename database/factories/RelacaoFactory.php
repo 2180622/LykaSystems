@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(RelFornResp::class, function (Faker $faker) {
     return [
-        'idRelacao' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idRelacao' => RelFornResp::all()->random()->id,
         'valor' => $faker->numberBetween($min = 10, $max = 100),
         'verificacaoPago' => false,
         'dataVencimento' => $faker->date($format = 'Y-m-d', $max = '+1 month'),

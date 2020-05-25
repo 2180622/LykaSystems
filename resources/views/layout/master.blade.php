@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- CSS Link -->
     <link href="{{asset('/css/master.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/modal.css')}}" rel="stylesheet">
 
     @yield('styleLinks')
 
@@ -31,7 +32,7 @@
     @include('layout.partials.modal-contactos')
 
     {{-- Modal para terminar a sessão --}}
-    @include('layout.partials.modal')
+    @include('layout.partials.modal-logout')
 
     {{-- Mensagem de carregamento / processamento --}}
     <div id="wait_screen" style="display:none; position:fixed; top:0; left:0; width:100% ; height:100%; background-color:black; opacity:0.7;z-index:999;">

@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Agenda::class, function (Faker $faker) {
     return [
-        'idAgenda' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idAgenda' => Agenda::all()->random()->id,
         'titulo' => $faker->sentence($nbWords = 4, $variableNbWords = true),
         'descricao' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         'visibilidade' => 0,

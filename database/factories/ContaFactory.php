@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Conta::class, function (Faker $faker) {
     return [
-        'idConta' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idConta' => Conta::all()->random()->id,
         'descricao' => $faker->sentence($nbWords = 4, $variableNbWords = true),
         'instituicao' => $faker->company,
         'titular' => $faker->firstNameFemale.' '.$faker->lastName,

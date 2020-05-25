@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Biblioteca::class, function (Faker $faker) {
     return [
-        'idBiblioteca' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idBiblioteca' => Biblioteca::all()->random()->id,
         'acesso' => 'Privado',
         'descricao' => $faker->sentence($nbWords = 4, $variableNbWords = true),
         'ficheiro' => 'default-photos/university.png',
