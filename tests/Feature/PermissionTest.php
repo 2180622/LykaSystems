@@ -112,6 +112,14 @@ class PermissionTest extends TestCase
 
         $response = $this->get('/agentes'.'/'.$agente->slug.'/editar')->assertRedirect('/login');
     }
+    
+    /** @test */
+    public function redirecionar_de_print_agentes_para_login()
+    {
+        $agente = factory(Agente::class)->make();
+
+        $response = $this->get('/agentes/print'.'/'.$agente->slug)->assertRedirect('/login');
+    }
 
     /********************************************************************************************************** */
 
