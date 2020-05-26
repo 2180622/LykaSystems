@@ -14,8 +14,13 @@ $factory->define(Cliente::class, function (Faker $faker) {
         $nome = $faker->firstNameMale;
     }
     $apelido = $faker->lastName;
+    $idCliente = 1;
+    $Clientes = Cliente::all();
+    if($Clientes->toArray()){
+        $idCliente = Cliente::all()->random()->id;
+    }
     return [
-        'idCliente' => Cliente::all()->random()->id,
+        'idCliente' => $idCliente,
         'nome' => $nome,
         'apelido' => $apelido,
         'genero' => $gender,
@@ -49,6 +54,8 @@ $factory->define(Cliente::class, function (Faker $faker) {
         'editavel' => 1,
 
         'slug' => $nome,
-        /*  'idAgente'  */
+
+        
+        'idAgente' => factory(App\Agente::class),
     ];
 });

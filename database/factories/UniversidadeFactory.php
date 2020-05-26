@@ -6,8 +6,13 @@ use App\Universidade;
 use Faker\Generator as Faker;
 
 $factory->define(Universidade::class, function (Faker $faker) {
+    $idUniversidade = 1;
+    $Universidades = Universidade::all();
+    if($Universidades->toArray()){
+        $idUniversidade = Universidade::all()->random()->id;
+    }
     return [
-        'idUniversidade' => Universidade::all()->random()->id,
+        'idUniversidade' => $idUniversidade,
         'nome' => $faker->company,
         'morada' => $faker->streetAddress.' '.$faker->streetName.', '.$faker->city,
         'telefone' => $faker->numberBetween($min = 100000000, $max = 999999999),

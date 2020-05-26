@@ -6,8 +6,13 @@ use App\RelatorioProblema;
 use Faker\Generator as Faker;
 
 $factory->define(RelatorioProblema::class, function (Faker $faker) {
+    $idRelatorioProblema = 1;
+    $RelatorioProblemas = RelatorioProblema::all();
+    if($RelatorioProblemas->toArray()){
+        $idRelatorioProblema = RelatorioProblema::all()->random()->id;
+    }
     return [
-        'idRelatorioProblema' => RelatorioProblema::all()->random()->id,
+        'idRelatorioProblema' => $idRelatorioProblema,
         'nome' => $faker->firstNameMale.' '.$faker->lastName,
         'email' => $faker->freeEmail,
         'telemovel' => $faker->numberBetween($min = 100000000, $max = 999999999),

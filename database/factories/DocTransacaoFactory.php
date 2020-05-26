@@ -6,8 +6,13 @@ use App\DocTransacao;
 use Faker\Generator as Faker;
 
 $factory->define(DocTransacao::class, function (Faker $faker) {
+    $idDocTransacao = 1;
+    $DocTransacaos = DocTransacao::all();
+    if($DocTransacaos->toArray()){
+        $idDocTransacao = DocTransacao::all()->random()->id;
+    }
     return [
-        'idDocTransacao' => DocTransacao::all()->random()->id,
+        'idDocTransacao' => $idDocTransacao,
         'descricao' => $faker->sentence($nbWords = 5, $variableNbWords = true),
         'valorRecebido' => null,
         'tipoPagamento' => $faker->randomElement($array = array ('Transferencia Bancaria','Paypal')),
@@ -18,6 +23,9 @@ $factory->define(DocTransacao::class, function (Faker $faker) {
         'verificacao' => false,
 
         'slug' => 'doctransacao',
-        /*  'idConta'  'idFase'  */
+
+
+        'idConta' => factory(App\Conta::class),
+        'idFase' => factory(App\Fase::class),
     ];
 });

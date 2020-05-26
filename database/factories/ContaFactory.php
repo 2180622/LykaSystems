@@ -6,8 +6,13 @@ use App\Conta;
 use Faker\Generator as Faker;
 
 $factory->define(Conta::class, function (Faker $faker) {
+    $idConta = 1;
+    $Contas = Conta::all();
+    if($Contas->toArray()){
+        $idConta = Conta::all()->random()->id;
+    }
     return [
-        'idConta' => Conta::all()->random()->id,
+        'idConta' => $idConta,
         'descricao' => $faker->sentence($nbWords = 4, $variableNbWords = true),
         'instituicao' => $faker->company,
         'titular' => $faker->firstNameFemale.' '.$faker->lastName,

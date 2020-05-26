@@ -6,8 +6,13 @@ use App\Fase;
 use Faker\Generator as Faker;
 
 $factory->define(Fase::class, function (Faker $faker) {
+    $idFase = 1;
+    $Fases = Fase::all();
+    if($Fases->toArray()){
+        $idFase = Fase::all()->random()->id;
+    }
     return [
-        'idFase' => Fase::all()->random()->id,
+        'idFase' => $idFase,
         'descricao' => $faker->randomElement($array = array ('Inscricao','Matricula', 'Final')),
         'dataVencimento' => $faker->date($format = 'Y-m-d', $max = '+5 days'),
         'valorFase' => $faker->numberBetween($min = 100, $max = 1000),
@@ -16,6 +21,9 @@ $factory->define(Fase::class, function (Faker $faker) {
         'estado' => $faker->randomElement($array = array ('Pendente','Pago', 'Dívida', 'Crédito')),
 
         'slug' => 'fase',
-        /*  'idProduto'  'idResponsabilidade'  */
+
+
+        'idProduto' => factory(App\Produto::class),
+        'idResponsabilidade' => factory(App\Responsabilidade::class),
     ];
 });
