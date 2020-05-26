@@ -499,8 +499,8 @@ class ClientController extends Controller
         $client->fill($fields);
 
         /* (Tratamento de strings, casos especificos) */
-        $client->nomeInstituicaoOrigem = ucwords(strtolower($request->nomeInstituicaoOrigem));
-        $client->cidadeInstituicaoOrigem = ucwords(strtolower($request->cidadeInstituicaoOrigem));
+        $client->nomeInstituicaoOrigem = ucwords(mb_strtolower($request->nomeInstituicaoOrigem,'UTF-8'));
+        $client->cidadeInstituicaoOrigem = ucwords(mb_strtolower($request->cidadeInstituicaoOrigem,'UTF-8'));
 
 
         /* Verifica se existem ficheiros antigos e apaga do storage*/
