@@ -46,6 +46,9 @@ class Responsabilidade extends Migration
             $table->unsignedBigInteger('idUniversidade2')->nullable();
                 $table->foreign('idUniversidade2')->references('idUniversidade')->on('Universidade');
 
+            $table->unsignedBigInteger('idFase');
+                $table->foreign('idFase')->references('idFase')->on('Fase');
+
             $table->enum('estado', ['Pendente', 'Pago', 'Dívida'])->default('Pendente');
             $table->timestamps();
             $table->softDeletes();

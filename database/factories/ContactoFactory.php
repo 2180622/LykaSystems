@@ -6,8 +6,13 @@ use App\Contacto;
 use Faker\Generator as Faker;
 
 $factory->define(Contacto::class, function (Faker $faker) {
+    $idContacto = 1;
+    $Contactos = Contacto::all();
+    if($Contactos->toArray()){
+        $idContacto = Contacto::all()->random()->id;
+    }
     return [
-        'idContacto' => Contacto::all()->random()->id,
+        'idContacto' => $idContacto,
         'nome' => $faker->firstNameFemale,
         'fotografia' => null,
         'telefone1' => $faker->numberBetween($min = 100000000, $max = 999999999),
@@ -19,6 +24,9 @@ $factory->define(Contacto::class, function (Faker $faker) {
         'visibilidade' => true,
 
         'slug' => 'contacto',
-        /*  'idUser'  'idUniversidade'  */
+
+        
+        'idUser' => factory(App\User::class),
+        'idUniversidade' => factory(App\Universidade::class),
     ];
 });

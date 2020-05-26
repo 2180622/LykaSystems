@@ -6,8 +6,13 @@ use App\DocAcademico;
 use Faker\Generator as Faker;
 
 $factory->define(DocAcademico::class, function (Faker $faker) {
+    $idDocAcademico = 1;
+    $DocAcademicos = DocAcademico::all();
+    if($DocAcademicos->toArray()){
+        $idDocAcademico = DocAcademico::all()->random()->id;
+    }
     return [
-        'idDocAcademico' => DocAcademico::all()->random()->id,
+        'idDocAcademico' => $idDocAcademico,
         'nome' => $faker->sentence($nbWords = 2, $variableNbWords = true),
         'tipo' => $faker->randomElement($array = array ('Certificado','Diploma')),
         'imagem' => 'default-photos/university.png',
@@ -15,6 +20,9 @@ $factory->define(DocAcademico::class, function (Faker $faker) {
         'verificacao' => false,
 
         'slug' => 'docacademico',
-        /*  'idCliente'  'idFase'  */
+
+        
+        'idCliente' => factory(App\Cliente::class),
+        'idFase' => factory(App\Fase::class),
     ];
 });

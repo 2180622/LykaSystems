@@ -14,8 +14,13 @@ $factory->define(Administrador::class, function (Faker $faker) {
     }else{
         $nome = $faker->firstNameMale;
     }
+    $idAdministrador = 1;
+    $Administradors = Administrador::all();
+    if($Administradors->toArray()){
+        $idAdministrador = Administrador::all()->random()->id;
+    }
     return [
-        'idAdmin' => Administrador::all()->random()->id,
+        'idAdmin' => $idAdministrador,
         'nome' => $nome,
         'apelido' => $faker->lastName,
         'genero' => $gender,

@@ -13,8 +13,13 @@ $factory->define(Agente::class, function (Faker $faker) {
     }else{
         $nome = $faker->firstNameMale;
     }
+    $idAgente = 1;
+    $Agentes = Agente::all();
+    if($Agentes->toArray()){
+        $idAgente = Agente::all()->random()->id;
+    }
     return [
-        'idAgente' => Agente::all()->random()->id,
+        'idAgente' => $idAgente,
         'nome' => $nome,
         'apelido' => $faker->lastName,
         'genero' => $gender,
@@ -32,6 +37,8 @@ $factory->define(Agente::class, function (Faker $faker) {
         'IBAN' => $faker->iban('351'),
 
         'slug' => $nome,
+
+        
         /*  'idAgenteAssociado'  */
     ];
 });
