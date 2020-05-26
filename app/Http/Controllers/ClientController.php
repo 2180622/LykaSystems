@@ -182,8 +182,8 @@ class ClientController extends Controller
         $client->fill($fields);
 
         /* (Tratamento de strings, casos especificos) */
-        $client->nomeInstituicaoOrigem = ucwords(mb_strtolower($request->nomeInstituicaoOrigem,'UTF-8'));
-        $client->cidadeInstituicaoOrigem = ucwords(mb_strtolower($request->cidadeInstituicaoOrigem,'UTF-8'));
+        $client->nomeInstituicaoOrigem = ucwords(mb_strtolower($requestClient->nomeInstituicaoOrigem,'UTF-8'));
+        $client->cidadeInstituicaoOrigem = ucwords(mb_strtolower($requestClient->cidadeInstituicaoOrigem,'UTF-8'));
 
 
         $client->save();
@@ -299,7 +299,6 @@ class ClientController extends Controller
 
         }
 
-
         /* AGENTE RESPONSAVEL   +++++++++++++++++++++++++ */
         $agente = Agente::
         where("idAgente","=",$client->idAgente)
@@ -312,12 +311,7 @@ class ClientController extends Controller
             $query->select('idAgente')
             ->from('Produto')
             ->where('idCliente', $client->idCliente);
-/*             ->where('idAgente','!=',$client->idAgente) */
-/*             ->distinct('idAgente'); */
         })->get();
-/*         if ($agents->isEmpty()) {
-            $agents=null;
-        } */
 
 
         /* Subagentes associados: : apartir da tabela dos produtos */
@@ -326,20 +320,11 @@ class ClientController extends Controller
             $query->select('idSubAgente')
             ->from('Produto')
             ->where('idCliente', $client->idCliente);
-/*             ->where('idSubAgente','!=',$client->idAgente)
-            ->distinct('idSubAgente'); */
+
         })->get();
-/*         if ($subagents->isEmpty()) {
-            $subagents=null;
-        } */
 
-
-        /* Junta as duas listas */
-/*         dd($agents,$subagents); */
 
         $associados = $agents->merge($subagents);
-/*      $associados = $associados->unique(); */
-
 
 
         /* Lê os dados do passaporte JSON: numPassaporte dataValidPP passaportPaisEmi localEmissaoPP */
@@ -381,7 +366,7 @@ class ClientController extends Controller
 
 /*      dd($dividas); */
 
-        return view('clients.show',compact("client","agente","associados","dividas",/* "agents","subagents", */"produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
+        return view('clients.show',compact("client","agente","associados",/* "dividas","agents","subagents", */"produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
     }
 
 

@@ -660,25 +660,19 @@
 
                             <br>
 
-                            <div class="text-secondary mb-2">Estado financeiro:</div>
+                            {{-- <div class="text-secondary mb-2">Estado financeiro:</div>
                             <div class="border rounded bg-light p-3">
-                                {{-- +++++++++ Falta a lógica  ++++++++++++--}}
                                 <span class="text-success">Regularizado</span>
 
                                 @foreach ($dividas as $divida)
 
-                                    {{$divida->estado}} {{$divida->estado}}<br><br>
-                                    
+                                    {{$divida->estado}}<br><br>
 
                                 @endforeach
 
-
-
-
-
                             </div>
 
-                            <br>
+                            <br> --}}
 
                             <div class="text-secondary mb-2">Observações Financeiras:</div>
                             <div class="border rounded bg-light p-3">
