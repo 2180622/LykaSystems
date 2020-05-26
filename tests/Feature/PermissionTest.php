@@ -624,7 +624,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/reportar-problema')->assertRedirect('/login');
     }
     
-    /** @test */
+    /** @teste *//*
     public function redirecionar_de_show_relatorio_problema_para_login()
     {
         $relatorioProblema = factory(RelatorioProblema::class)->make();
@@ -637,14 +637,6 @@ class PermissionTest extends TestCase
     {
 
         $response = $this->get('/reportar-problema/criar')->assertRedirect('/login');
-    }
-    
-    /** @test */
-    public function redirecionar_de_edit_relatorio_problema_para_login()
-    {
-        $relatorioProblema = factory(RelatorioProblema::class)->make();
-
-        $response = $this->get('/reportar-problema'.'/'.$relatorioProblema->idRelatorioProblema.'/editar')->assertRedirect('/login');
     }
 
     /********************************************************************************************************** */
@@ -675,7 +667,7 @@ class PermissionTest extends TestCase
     {
         $docTransacao = factory(DocTransacao::class)->make();
 
-        $response = $this->get('/cobrancas'.'/'.$produto->slug.'/'.$fase->slug.'/'.$docTransacao->slug.'/editar')->assertRedirect('/login');
+        $response = $this->get('/cobrancas'.'/'.$docTransacao->fase->produto->slug.'/'.$docTransacao->fase->slug.'/'.$docTransacao->slug.'/editar')->assertRedirect('/login');
     }
     
     /** @test */
@@ -687,10 +679,10 @@ class PermissionTest extends TestCase
     }
     
     /** @test */
-    public function redirecionar_de_showcharge_cobrancas_para_login()
+    public function redirecionar_de_show_charge_cobrancas_para_login()
     {
         $fase = factory(Fase::class)->make();
 
-        $response = $this->get('/cobrancas'.'/'.$produto->slug.'/'.$fase->slug)->assertRedirect('/login');
+        $response = $this->get('/cobrancas'.'/'.$fase->produto->slug.'/'.$fase->slug)->assertRedirect('/login');
     }
 }
