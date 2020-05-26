@@ -9,6 +9,7 @@ use App\Universidade;
 use App\DocPessoal;
 use App\DocAcademico;
 use App\DocNecessario;
+use App\Responsabilidade;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -181,13 +182,11 @@ class ClientController extends Controller
         $client->fill($fields);
 
         /* (Tratamento de strings, casos especificos) */
-        $client->nomeInstituicaoOrigem = ucwords(strtolower($requestClient->nomeInstituicaoOrigem));
-        $client->cidadeInstituicaoOrigem = ucwords(strtolower($requestClient->cidadeInstituicaoOrigem));
+        $client->nomeInstituicaoOrigem = ucwords(mb_strtolower($request->nomeInstituicaoOrigem,'UTF-8'));
+        $client->cidadeInstituicaoOrigem = ucwords(mb_strtolower($request->cidadeInstituicaoOrigem,'UTF-8'));
 
 
         $client->save();
-
-
 
         /* Criação de cliente */
         if ($requestClient->hasFile('fotografia')) {
@@ -357,8 +356,6 @@ class ClientController extends Controller
             }
 
 
-
-
         /* Documentos pessoais */
         $documentosPessoais = DocPessoal::where("idCliente","=",$client->idCliente)->get();
         if ($documentosPessoais->isEmpty()) {
@@ -376,8 +373,15 @@ class ClientController extends Controller
         $novosDocumentos = DocNecessario::all();
 
 
+        /* Dívidas */
+        $dividas = Responsabilidade::where("idCliente","=",$client->idCliente)
+        ->where("estado","=","Pendente")
+        ->orWhere("estado","=","Dívida")
+        ->get();
 
-        return view('clients.show',compact("client","agente","associados",/* "agents","subagents", */"produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
+/*      dd($dividas); */
+
+        return view('clients.show',compact("client","agente","associados","dividas",/* "agents","subagents", */"produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
     }
 
 
