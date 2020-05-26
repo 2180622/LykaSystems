@@ -32,13 +32,6 @@
             <div class="col">
                 <div class="title">
                     <h6>Editar informações do estudante {{$client->nome}} {{$client->apelido}}</h6>
-                        @if ( $client->estado == "Ativo")
-                            <div><small>Estado do cliente: <strong><span class="text-success">ATIVO</span></small></strong></div>
-                        @elseif( $client->estado == "Inativo")
-                            <div><small>Estado do cliente: <strong><span class="text-danger">INATIVO</span></small></strong></div>
-                        @else
-                            <div><small>Estado do cliente: <strong><span class="text-info">PROPONENTE</span></small></strong></div>
-                        @endif
                 </div>
             </div>
             <div class="col text-right">
@@ -51,7 +44,7 @@
         </div>
 
 
-        <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation " id="form_client" enctype="multipart/form-data" novalidate>
             @csrf
             @method("PUT")
             @include('clients.partials.add-edit')
