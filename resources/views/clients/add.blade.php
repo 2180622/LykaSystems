@@ -32,7 +32,7 @@
         </div>
 
 
-        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation " id="form_client" enctype="multipart/form-data" novalidate>
             @csrf
             @include('clients.partials.add-edit')
             <div class="row mt-4">
