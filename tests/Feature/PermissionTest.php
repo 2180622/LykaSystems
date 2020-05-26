@@ -591,17 +591,13 @@ class PermissionTest extends TestCase
     }
     
     /** @test */
-    public function redirecionar_de_pesquisa_pago_responsabilidade_para_login()
-    {
-        $response = $this->get('/pagamentos/pesquisa')->assertRedirect('/login');
-    }
-    
-    /** @test */
     public function redirecionar_de_subagente_pago_responsabilidade_para_login()
     {
         $responsabilidade = factory(Responsabilidade::class)->make();
+        $responsabilidade->subagente->tipo = 'Subagente';
+        $responsabilidade->subagente->idAgenteAssociado = $responsabilidade->agente->idAgente;
 
-        $response = $this->get('/pagamentos/subagente/'.$fase->responsabilidade->subagente->slug.'/fase'.'/'.$fase->slug.'/'.$fase->responsabilidade->idResponsabilidade)->assertRedirect('/login');
+        $response = $this->get('/pagamentos/subagente/'.$responsabilidade->subagente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
     }
     
     /** @test */
@@ -609,7 +605,7 @@ class PermissionTest extends TestCase
     {
         $responsabilidade = factory(Responsabilidade::class)->make();
 
-        $response = $this->get('/pagamentos/universidade-principal/'.$fase->responsabilidade->universidade->slug.'/fase'.'/'.$fase->slug.'/'.$fase->responsabilidade->idResponsabilidade)->assertRedirect('/login');
+        $response = $this->get('/pagamentos/universidade-principal/'.$responsabilidade->universidade1->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
     }
     
     /** @test */
@@ -617,7 +613,7 @@ class PermissionTest extends TestCase
     {
         $responsabilidade = factory(Responsabilidade::class)->make();
 
-        $response = $this->get('/pagamentos/universidade-secundaria/'.$fase->responsabilidade->universidade2->slug.'/fase'.'/'.$fase->slug.'/'.$fase->responsabilidade->idResponsabilidade)->assertRedirect('/login');
+        $response = $this->get('/pagamentos/universidade-secundaria/'.$responsabilidade->universidade2->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade)->assertRedirect('/login');
     }
 
     /********************************************************************************************************** */

@@ -34,8 +34,8 @@ $factory->define(Responsabilidade::class, function (Faker $faker) {
         'idFase' => factory(App\Fase::class),
         'idCliente' => factory(App\Cliente::class),
         'idAgente' => factory(App\Agente::class),
+        'idSubAgente' => factory(App\Agente::class),
         'idUniversidade1' => factory(App\Universidade::class),
         'idUniversidade2' => factory(App\Universidade::class),
-        /*  idSubAgente  */
     ];
 });

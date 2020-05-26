@@ -210,6 +210,8 @@ class FactoryTest extends TestCase
         $this->withoutExceptionHandling();
         
         $responsabilidade = factory(Responsabilidade::class)->make();
+        $responsabilidade->subagente->tipo = 'Subagente';
+        $responsabilidade->subagente->idAgenteAssociado = $responsabilidade->agente->idAgente;
 
         $this->assertNotEmpty($responsabilidade);
     }
