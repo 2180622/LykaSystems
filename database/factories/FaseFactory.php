@@ -24,6 +24,5 @@ $factory->define(Fase::class, function (Faker $faker) {
 
 
         'idProduto' => factory(App\Produto::class),
-        'idResponsabilidade' => factory(App\Responsabilidade::class),
     ];
 });

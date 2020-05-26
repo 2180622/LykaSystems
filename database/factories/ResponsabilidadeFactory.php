@@ -31,6 +31,7 @@ $factory->define(Responsabilidade::class, function (Faker $faker) {
         'estado' => $faker->randomElement($array = array ('Pendente','Pago', 'Dívida', 'Crédito')),
 
 
+        'idFase' => factory(App\Fase::class),
         'idCliente' => factory(App\Cliente::class),
         'idAgente' => factory(App\Agente::class),
         'idUniversidade1' => factory(App\Universidade::class),

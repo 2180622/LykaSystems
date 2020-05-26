@@ -28,7 +28,8 @@ class Responsabilidade extends Model
         '$idSubAgente',
         '$idCliente',
         '$idUniversidade1',
-        '$idUniversidade2'
+        '$idUniversidade2',
+        '$idFase'
     ];
 
     protected $dates = [
@@ -60,7 +61,7 @@ class Responsabilidade extends Model
     }
 
     public function fase(){
-        return $this->belongsTo("App\Fase","idResponsabilidade","idResponsabilidade")->withTrashed();
+        return $this->belongsTo("App\Fase","idFase","idFase")->withTrashed();
     }
 
     public function relacao(){
