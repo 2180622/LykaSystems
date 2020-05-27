@@ -623,21 +623,6 @@ class PermissionTest extends TestCase
     {
         $response = $this->get('/reportar-problema')->assertRedirect('/login');
     }
-    
-    /** @teste *//*
-    public function redirecionar_de_show_relatorio_problema_para_login()
-    {
-        $relatorioProblema = factory(RelatorioProblema::class)->make();
-
-        $response = $this->get('/reportar-problema'.'/'.$relatorioProblema->idRelatorioProblema)->assertRedirect('/login');
-    }
-    
-    /** @test */
-    public function redirecionar_de_create_relatorio_problema_para_login()
-    {
-
-        $response = $this->get('/reportar-problema/criar')->assertRedirect('/login');
-    }
 
     /********************************************************************************************************** */
 

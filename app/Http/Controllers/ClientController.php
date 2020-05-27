@@ -401,7 +401,7 @@ class ClientController extends Controller
         ->where("tipo","=","Passaporte")
         ->first();
 
-        if($passaporte!=null || !isEmpty($passaporte)){
+        if($passaporte!=null || !$passaporte->toArray()){
             $infosPassaporte = json_decode($passaporte->info);
         }else{
             $infosPassaporte=null;

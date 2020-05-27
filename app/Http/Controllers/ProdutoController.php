@@ -96,6 +96,15 @@ class ProdutoController extends Controller
             for($i=1;$i<=20;$i++){
                 if($fields['descricao-fase'.$i]!=null){
                     $fase = new Fase;
+
+                    $fase->descricao = $fields['descricao-fase'.$i];
+                    $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$i]));
+                    $fase->valorFase = $fields['valor-fase'.$i];
+                    $fase->create_at == date("Y-m-d",$t);
+                    $fase->idProduto = $produto->idProduto;
+                    $fase->save();
+
+
                     $responsabilidade = new Responsabilidade;
                     $valorRelacoes = 0;
                     $responsabilidade->valorCliente = $fields['resp-cliente-fase'.$i];
@@ -146,6 +155,8 @@ class ProdutoController extends Controller
                     $responsabilidade->idUniversidade1 = $produto->idUniversidade1;
                     $responsabilidade->idUniversidade2 = $produto->idUniversidade2;
 
+                    $responsabilidade->idFase = $fase->idFase;
+
                     $responsabilidade->save();
 
                     for($numF=1;$numF<=500;$numF++){
@@ -169,14 +180,6 @@ class ProdutoController extends Controller
                             break;
                         }
                     }
-
-                    $fase->descricao = $fields['descricao-fase'.$i];
-                    $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$i]));
-                    $fase->valorFase = $fields['valor-fase'.$i];
-                    $fase->create_at == date("Y-m-d",$t);
-                    $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
-                    $fase->idProduto = $produto->idProduto;
-                    $fase->save();
 
                     $docsStock = $fasesStock[$i-1]->docStock;
                     foreach($docsStock as $doc){
@@ -302,6 +305,14 @@ class ProdutoController extends Controller
             $valorTSubAgente = 0;
 
             foreach($fases as $fase){
+
+                $fase->descricao = $fields['descricao-fase'.$fase->idFase];
+                $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$fase->idFase]));
+                $fase->valorFase = $fields['valor-fase'.$fase->idFase];
+                $fase->create_at == date("Y-m-d",$t);
+                $fase->idProduto = $produto->idProduto;
+                $fase->save();
+
                 $responsabilidade = $fase->responsabilidade;
                 $relacoes = $responsabilidade->relacao;
                 $valorRelacoes = 0;
@@ -372,6 +383,8 @@ class ProdutoController extends Controller
                 $responsabilidade->idUniversidade1 = $produto->idUniversidade1;
                 $responsabilidade->idUniversidade2 = $produto->idUniversidade2;
 
+                $responsabilidade->idFase = $fase->idFase;
+
                 $responsabilidade->save();
 
                 if($relacoes->toArray()){
@@ -425,15 +438,6 @@ class ProdutoController extends Controller
                         break;
                     }
                 }
-
-
-                $fase->descricao = $fields['descricao-fase'.$fase->idFase];
-                $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$fase->idFase]));
-                $fase->valorFase = $fields['valor-fase'.$fase->idFase];
-                $fase->create_at == date("Y-m-d",$t);
-                $fase->idResponsabilidade = $responsabilidade->idResponsabilidade;
-                $fase->idProduto = $produto->idProduto;
-                $fase->save();
 
                 $valorProduto = $valorProduto + $fase->valorFase;
                 $valorTAgente = $valorTAgente + $responsabilidade->valorAgente;
