@@ -58,6 +58,10 @@
 {{-- script contem: datatable configs, input configs, validações --}}
 <script src="{{asset('/js/produtos.js')}}"></script>
 
+<script>
+    
+</script>
+
 {{-- script permite definir se um input recebe só numeros OU so letras --}}
 <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 

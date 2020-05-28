@@ -17,7 +17,7 @@ class DocStock extends Migration
             $table->charset = 'latin1';
             $table->collation = 'latin1_swedish_ci';
             $table->bigIncrements('idDocStock');
-            $table->enum('tipo',['Pessoal', 'Academico', 'Financeiro', 'Familiar', 'País', 'Outros']);
+            $table->enum('tipo',['Pessoal', 'Academico']);
             $table->string('tipoDocumento', 255);
             $table->timestamps();
             $table->unsignedBigInteger('idFaseStock');

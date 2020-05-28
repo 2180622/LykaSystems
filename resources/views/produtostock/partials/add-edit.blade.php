@@ -1,4 +1,4 @@
-<div class="tab-content p-2 mt-3" id="myTabContent">
+<div class="tab-content p-2 mt-3">
 
     {{-- Conteudo: Informação pessoal --}}
     <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">

@@ -53,7 +53,6 @@
                     {{-- Cabeçalho da tabela --}}
                     <thead>
                         <tr>
-                            <th>Número de Documentos da Fase</th>
                             <th>Tipo</th>
                             <th>Documento</th>
                             <th class="text-center">Opções</th>
@@ -63,15 +62,13 @@
                     <tbody>
                         @foreach ($docstocks as $docstock)
                         <tr>
-                            {{-- Número de Documentos --}}
-                            <td><a class="name_link" href="/documentostock/{{$docstock->idDocStock}}">{{$nrDocs++}}</a></td>
                             {{-- Tipo --}}
-                            <td>{{$docstock->tipo}}</td>
+                            <td >{{$docstock->tipo}}</td>
                             {{-- Documento --}}
                             <td>{{$docstock->tipoDocumento}}</td>
                             {{-- OPÇÔES --}}
                             <td class="text-center align-middle">
-                                <a href="{{route('fasestock.show',$fasestock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="{{route('documentostock.show',$docstock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                                 <a href="{{route('documentostock.edit', $docstock)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
                                 <form method="POST" role="form" id="{{ $docstock->idDocStock }}"

@@ -53,8 +53,7 @@
                     {{-- Cabeçalho da tabela --}}
                     <thead>
                         <tr>
-                            <th>Número de Fases</th>
-                            <th>Descrição</th>
+                            <th class="text-center">Descrição</th>
                             <th class="text-center">Opções</th>
                         </tr>
                     </thead>
@@ -62,10 +61,8 @@
                     <tbody>
                         @foreach ($faseStocks as $faseStock)
                         <tr>
-                            {{-- Número de fases --}}
-                            <td><a class="name_link" href="/fasestock/{{$faseStock->idFaseStock}}">{{$nrfases++}}</a></td>
                             {{-- Descrição --}}
-                            <td>{{$faseStock->descricao}}</td>
+                            <td class="text-center align-middle">{{$faseStock->descricao}}</td>
                             {{-- OPÇÔES --}}
                             <td class="text-center align-middle">
                                 <a href="{{route('fasestock.show',$faseStock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
