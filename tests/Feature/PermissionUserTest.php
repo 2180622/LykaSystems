@@ -55,7 +55,7 @@ class PermissionUserTest extends TestCase
         $response->assertSuccessful();
         $response->assertViewIs('dashboard.index');
     }
-
+    
     /********************************************************************************************************** */
 
     /** @test */
@@ -71,12 +71,13 @@ class PermissionUserTest extends TestCase
         $response->assertViewIs('users.list');
     }
     
-    /** @test *//*
+    /** @test */
     public function admin_ir_para_show_administrador()
     {
         $this->withoutExceptionHandling();
 
         $administrador = factory(User::class)->make();
+        $administrador->save();
         $user = factory(User::class)->make();
         $user->email = $user->admin->email;
         
@@ -98,18 +99,19 @@ class PermissionUserTest extends TestCase
         $response->assertViewIs('users.add');
     }
     
-    /** @test *//*
+    /** @test */
     public function admin_ir_para_edit_administrador()
     {
         $this->withoutExceptionHandling();
 
         $administrador = factory(User::class)->make();
+        $administrador->save();
         $user = factory(User::class)->make();
         $user->email = $user->admin->email;
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('users.edit');
     }
 
     /********************************************************************************************************** */
@@ -136,6 +138,7 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $agente = factory(Agente::class)->make();
+        $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes'.'/'.$agente->slug);
         $response->assertSuccessful();
@@ -165,6 +168,7 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $agente = factory(Agente::class)->make();
+        $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes'.'/'.$agente->slug.'/editar');
         $response->assertSuccessful();
@@ -180,6 +184,7 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $agente = factory(Agente::class)->make();
+        $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/print'.'/'.$agente->slug);
         $response->assertSuccessful();
@@ -188,7 +193,7 @@ class PermissionUserTest extends TestCase
 
     /********************************************************************************************************** */
 
-    /** @test */
+    /** @test *//*
     public function admin_ir_para_lista_biblioteca()
     {
         $this->withoutExceptionHandling();
@@ -198,7 +203,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('libraries.list');
     }
     
     /** @test */
@@ -212,7 +217,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('libraries.add');
     }
     
     /** @test */
@@ -224,10 +229,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $biblioteca = factory(Biblioteca::class)->make();
+        $biblioteca->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca'.'/'.$biblioteca->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('libraries.edit');
     }
 
     /********************************************************************************************************** */
@@ -242,7 +248,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('clients.list');
     }
     
     /** @test */
@@ -254,10 +260,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $cliente = factory(Cliente::class)->make();
+        $cliente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes'.'/'.$cliente->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('clients.show');
     }
     
     /** @test */
@@ -271,7 +278,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('clients.add');
     }
     
     /** @test */
@@ -283,10 +290,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $cliente = factory(Cliente::class)->make();
+        $cliente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes'.'/'.$cliente->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('clients.edit');
     }
     
     /** @test */
@@ -300,7 +308,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/pesquisa');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('clients.search');
     }
     
     /** @test */
@@ -308,14 +316,25 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
-
         $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+
+        $user = factory(User::class)->make();
+        $infoDoc = null;
+        $infoDoc['numPassaporte'] = 2343423424423;
+        $infoDoc['passaportPaisEmi'] = 'Italia';
+        $infoDoc['dataValidPP'] = '11/21';
+        $infoDoc['localEmissaoPP'] = 'Roma';
+        $docPessoal = factory(DocPessoal::class)->make([
+            'tipo' => 'Passaporte',
+            'info' => json_encode($infoDoc),
+            'idCliente' => $cliente,
+        ]);
+        $docPessoal->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/print'.'/'.$cliente->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('clients.print');
     }
 
     /********************************************************************************************************** */
@@ -330,7 +349,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('conta.list');
     }
     
     /** @test */
@@ -342,10 +361,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $conta = factory(Conta::class)->make();
+        $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('conta.show');
     }
     
     /** @test */
@@ -358,7 +378,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('conta.add');
     }
     
     /** @test */
@@ -370,10 +390,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $conta = factory(Conta::class)->make();
+        $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('conta.edit');
     }
 
     /********************************************************************************************************** */
@@ -388,7 +409,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('providers.list');
     }
     
     /** @test */
@@ -400,10 +421,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $fornecedor = factory(Fornecedor::class)->make();
+        $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('providers.show');
     }
     
     /** @test */
@@ -417,7 +439,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('providers.add');
     }
     
     /** @test */
@@ -429,10 +451,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $fornecedor = factory(Fornecedor::class)->make();
+        $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('providers.edit');
     }
 
     /********************************************************************************************************** */
@@ -447,7 +470,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('produtostock.list');
     }
     
     /** @test */
@@ -459,10 +482,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $produtoStock = factory(ProdutoStock::class)->make();
+        $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('produtostock.show');
     }
     
     /** @test */
@@ -476,7 +500,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('produtostock.add');
     }
     
     /** @test */
@@ -488,10 +512,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $produtoStock = factory(ProdutoStock::class)->make();
+        $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('produtostock.edit');
     }
 
     /********************************************************************************************************** */
@@ -506,7 +531,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('fasestock.list');
     }
     
     /** @test */
@@ -518,10 +543,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $faseStock = factory(FaseStock::class)->make();
+        $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('fasestock.show');
     }
     
     /** @test */
@@ -534,7 +560,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('fasestock.add');
     }
     
     /** @test */
@@ -546,10 +572,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $faseStock = factory(FaseStock::class)->make();
+        $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('fasestock.edit');
     }
 
     /********************************************************************************************************** */
@@ -564,7 +591,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentostock.list');
     }
     
     /** @test */
@@ -576,10 +603,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docStock = factory(DocStock::class)->make();
+        $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentostock.show');
     }
     
     /** @test */
@@ -592,7 +620,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentostock.add');
     }
     
     /** @test */
@@ -604,10 +632,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docStock = factory(DocStock::class)->make();
+        $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentostock.edit');
     }
 
     /********************************************************************************************************** */
@@ -622,7 +651,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('universities.list');
     }
     
     /** @test */
@@ -634,10 +663,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $universidade = factory(Universidade::class)->make();
+        $universidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades'.'/'.$universidade->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('universities.show');
     }
     
     /** @test */
@@ -651,7 +681,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('universities.add');
     }
     
     /** @test */
@@ -663,10 +693,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $universidade = factory(Universidade::class)->make();
+        $universidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades'.'/'.$universidade->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('universities.edit');
     }
 
     /********************************************************************************************************** */
@@ -681,7 +712,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('contacts.list');
     }
     
     /** @test */
@@ -693,10 +724,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $contacto = factory(Contacto::class)->make();
+        $contacto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/show/'.$contacto->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('contacts.show');
     }
     
     /** @test */
@@ -710,7 +742,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('contacts.add');
     }
     
     /** @test */
@@ -722,10 +754,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $contacto = factory(Contacto::class)->make();
+        $contacto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/editar/'.$contacto->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('contacts.edit');
     }
 
     /********************************************************************************************************** */
@@ -740,7 +773,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('agends.list');
     }
     
     /** @test */
@@ -752,10 +785,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $agenda = factory(Agenda::class)->make();
+        $agenda->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda'.'/'.$agenda->idAgenda);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('agends.show');
     }
     
     /** @test */
@@ -768,7 +802,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('agends.add');
     }
     
     /** @test */
@@ -780,10 +814,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $agenda = factory(Agenda::class)->make();
+        $agenda->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda'.'/'.$agenda->idAgenda.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('agends.edit');
     }
 
     /********************************************************************************************************** */
@@ -797,10 +832,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $produto = factory(Produto::class)->make();
+        $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos'.'/'.$produto->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('produtos.show');
     }
     
     /** @test */
@@ -812,10 +848,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $produto = factory(Produto::class)->make();
+        $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos/criar/'.$produto->cliente->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('produtos.add');
     }
     
     /** @test */
@@ -827,10 +864,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $produto = factory(Produto::class)->make();
+        $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos'.'/'.$produto->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('produtos.edit');
     }
 
     /********************************************************************************************************** */
@@ -844,10 +882,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docAcademico = factory(DocAcademico::class)->make();
+        $docAcademico->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico'.'/'.$docAcademico->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.show');
     }
     
     /** @test */
@@ -859,10 +898,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docNecessario = factory(DocNecessario::class)->make();
+        $docNecessario->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico/criar/'.$docNecessario->fase->slug.'/'.$docNecessario->idDocNecessario);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.add');
     }
     
     /** @test */
@@ -874,10 +914,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docAcademico = factory(DocAcademico::class)->make();
+        $docAcademico->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico'.'/'.$docAcademico->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.edit');
     }
     
     /** @test */
@@ -889,10 +930,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docAcademico = factory(DocAcademico::class)->make();
+        $docAcademico->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico'.'/'.$docAcademico->slug.'/verifica');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.verify');
     }
 
     /********************************************************************************************************** */
@@ -906,10 +948,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docPessoal = factory(DocPessoal::class)->make();
+        $docPessoal->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal'.'/'.$docPessoal->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.show');
     }
     
     /** @test */
@@ -921,10 +964,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docNecessario = factory(DocNecessario::class)->make();
+        $docNecessario->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal/criar/'.$docNecessario->fase->slug.'/'.$docNecessario->idDocNecessario);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.add');
     }
     
     /** @test */
@@ -936,10 +980,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docPessoal = factory(DocPessoal::class)->make();
+        $docPessoal->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal'.'/'.$docPessoal->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.edit');
     }
     
     /** @test */
@@ -951,10 +996,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docPessoal = factory(DocPessoal::class)->make();
+        $docPessoal->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal'.'/'.$docPessoal->slug.'/verifica');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.verify');
     }
 
     /********************************************************************************************************** */
@@ -968,10 +1014,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docTransacao = factory(DocTransacao::class)->make();
+        $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao'.'/'.$docTransacao->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.show');
     }
     
     /** @test */
@@ -984,7 +1031,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.add');
     }
     
     /** @test */
@@ -996,10 +1043,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docTransacao = factory(DocTransacao::class)->make();
+        $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao'.'/'.$docTransacao->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('documentos.edit');
     }
 
     /********************************************************************************************************** */
@@ -1014,7 +1062,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.list');
     }
     
     /** @test */
@@ -1026,10 +1074,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
+        $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos'.'/'.$pagoResponsabilidade->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.show');
     }
     
     /** @test */
@@ -1041,10 +1090,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $responsabilidade = factory(Responsabilidade::class)->make();
+        $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/agente/'.$responsabilidade->agente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.add');
     }
     
     /** @test */
@@ -1056,10 +1106,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $responsabilidade = factory(Responsabilidade::class)->make();
+        $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/cliente/'.$responsabilidade->cliente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.add');
     }
     
     /** @test */
@@ -1071,10 +1122,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $relFornResp = factory(RelFornResp::class)->make();
+        $relFornResp->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/fornecedor/'.$relFornResp->fornecedor->slug.'/fase'.'/'.$relFornResp->responsabilidade->fase->slug.'/'.$relFornResp->idRelacao);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.add');
     }
     
     /** @test */
@@ -1086,10 +1138,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
+        $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/nota-pagamento/'.$pagoResponsabilidade->idPagoResp.'/transferir');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.add');
     }
     
     /** @test */
@@ -1103,10 +1156,11 @@ class PermissionUserTest extends TestCase
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->subagente->tipo = 'Subagente';
         $responsabilidade->subagente->idAgenteAssociado = $responsabilidade->agente->idAgente;
+        $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/subagente/'.$responsabilidade->subagente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.add');
     }
     
     /** @test */
@@ -1118,10 +1172,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $responsabilidade = factory(Responsabilidade::class)->make();
+        $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-principal/'.$responsabilidade->universidade1->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.add');
     }
     
     /** @test */
@@ -1133,10 +1188,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $responsabilidade = factory(Responsabilidade::class)->make();
+        $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-secundaria/'.$responsabilidade->universidade2->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('payments.add');
     }
 
     /********************************************************************************************************** */
@@ -1151,21 +1207,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/reportar-problema');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
-    }
-    
-    /** @test */
-    public function admin_ir_para_create_relatorio_problema()
-    {
-        $this->withoutExceptionHandling();
-
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
-
-
-        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/reportar-problema/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('report');
     }
 
     /********************************************************************************************************** */
@@ -1180,7 +1222,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('charges.list');
     }
     
     /** @test */
@@ -1192,10 +1234,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $produto = factory(Produto::class)->make();
+        $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$produto->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('charges.show');
     }
     
     /** @test */
@@ -1209,7 +1252,7 @@ class PermissionUserTest extends TestCase
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas/criar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('charges.add');
     }
     
     /** @test */
@@ -1221,10 +1264,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docTransacao = factory(DocTransacao::class)->make();
+        $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->fase->produto->slug.'/'.$docTransacao->fase->slug.'/'.$docTransacao->slug.'/editar');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('charges.edit');
     }
     
     /** @test */
@@ -1236,10 +1280,11 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $docTransacao = factory(DocTransacao::class)->make();
+        $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->slug.'/download');
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('charges.download');
     }
     
     /** @test */
@@ -1251,9 +1296,10 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $fase = factory(Fase::class)->make();
+        $fase->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$fase->produto->slug.'/'.$fase->slug);
         $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertViewIs('charges.show');
     }
 }

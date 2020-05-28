@@ -401,7 +401,7 @@ class ClientController extends Controller
         ->orderby("created_at","desc")/*  Ordena por data: do mais recente para o mais antigo */
         ->first(); /* Seleciona o registo mais recente */
 
-        if($passaporte!=null){
+        if($passaporte!=null || !$passaporte->toArray()){
             $infosPassaporte = json_decode($passaporte->info);
         }else{
             $infosPassaporte=null;
