@@ -5,7 +5,7 @@
         return jQuery(n).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
     };
 
-    jQuery('#searchHelper').on('change keyup paste click', function () {
+    jQuery('#customSearchBox').on('change keyup paste click', function () {
         searchTerm = jQuery(this).val();
         if (searchTerm.length >= 3) {
             jQuery('#accordion > .panel').each(function () {

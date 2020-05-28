@@ -25,6 +25,7 @@ class Agente extends Migration
             $table->string('apelido',255);
             $table->enum('genero',['F','M']);
             $table->enum('tipo',['Agente', 'Subagente']);
+            $table->boolean('exepcao')->default(false);
             $table->string('email',255)->unique();
 
             $table->date('dataNasc');
@@ -35,13 +36,14 @@ class Agente extends Migration
 
 
             $table->string('num_doc',255)->unique();
-
             $table->string('img_doc',255)->nullable();
 
             $table->string('telefone1',255);
             $table->string('telefone2',255)->nullable();
 
             $table->string('IBAN',255)->nullable();
+            $table->longText('observacoes')->nullable();
+
 
             $table->string('slug')->nullable();
             $table->timestamps();

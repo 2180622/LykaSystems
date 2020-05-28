@@ -88,6 +88,9 @@ class AgenteController extends Controller
         $agent = new Agente;
         $fields = $requestAgent->validated();
         $agent->fill($fields);
+        if($agent->tipo == "Agente"){
+            $agent->exepcao = false;
+        }
 
         /* obtem os dados para criar o utilizador */
         $user = new User;
@@ -278,7 +281,15 @@ class AgenteController extends Controller
     public function update(UpdateAgenteRequest $request, Agente $agent)
     {
         $fields = $request->validated();
+
         $agent->fill($fields);
+
+
+        /* Definição de exeçao */
+        if($agent->tipo == "Agente"){
+            $agent->exepcao = false;
+        }
+
 
         /* Registo antigo: para verificar se existem ficheiros para apagar/substituir */
         $oldfile=Agente::
@@ -320,15 +331,6 @@ class AgenteController extends Controller
         }
 
 
-
-
-
-        // data em que foi modificado
-        $t=time();
-        $agent->updated_at == date("Y-m-d",$t);
-        $agent->save();
-
-
         // Caso se mude o  agente para subagente, garante que nenhum agente não tem id de subagente
         if($request->idAgenteAssociado == null){
         DB::table('Agente')
@@ -337,9 +339,14 @@ class AgenteController extends Controller
         }
 
 
+
         /* Update das slugs */
         $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
 
+        // data em que foi modificado
+        $t=time();
+        $agent->updated_at == date("Y-m-d",$t);
+        $agent->save();
 
         /* update do user->email */
         DB::table('User')
@@ -347,7 +354,7 @@ class AgenteController extends Controller
         ->update(['email' => $agent->email]);
 
 
-         return redirect()->route('agents.index')->with('success', 'Dados do agente modificados com sucesso');
+         return redirect()->route('agents.show',$agent)->with('success', 'Dados do agente modificados com sucesso');
     }
 
     /**

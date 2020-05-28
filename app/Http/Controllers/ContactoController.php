@@ -24,16 +24,8 @@ class ContactoController extends Controller
         where('Contacto.idUser', '=', Auth::user()->idUser)
         ->get();
 
-        if ($contacts->isEmpty()) {
-            $contacts=null;
-            $totalcontacts=0;
-        }else{
-            $totalcontacts = $contacts->count();
-        }
-
-
-
-        return view('contacts.list', compact('contacts', 'totalcontacts'));
+        
+        return view('contacts.list', compact('contacts'));
     }
 
     /**
@@ -134,6 +126,13 @@ class ContactoController extends Controller
 
 
         if ($request->hasFile('fotografia')) {
+        /* Verifica se o ficheiro antigo existe e apaga do storage*/
+        $oldfile=Contacto::where('idContacto', '=',$contact->idContacto)->first();
+
+        if(Storage::disk('public')->exists('contact-photos/'. $oldfile->fotografia)){
+            Storage::disk('public')->delete('contact-photos/'. $oldfile->fotografia);
+        }
+
             $photo = $request->file('fotografia');
             $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
             if (!empty($contact->fotografia)) {

@@ -6,8 +6,13 @@ use App\Produto;
 use Faker\Generator as Faker;
 
 $factory->define(Produto::class, function (Faker $faker) {
+    $idProduto = 1;
+    $Produtos = Produto::all();
+    if($Produtos->toArray()){
+        $idProduto = Produto::all()->random()->id;
+    }
     return [
-        'idProduto' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idProduto' => $idProduto,
         'descricao' => $faker->sentence($nbWords = 2, $variableNbWords = true),
         'tipo' => $faker->randomElement($array = array ('Licenciatura','Mestrado','Curso de Verão')),
         'anoAcademico' => '2020/21',
@@ -17,6 +22,12 @@ $factory->define(Produto::class, function (Faker $faker) {
         'estado' => $faker->randomElement($array = array ('Pendente','Pago', 'Dívida', 'Crédito')),
 
         'slug' => 'produto',
-        /*  'idAgente'  'idSubAgente'  'idCliente'  'idUniversidade1'  'idUniversidade2'  */
+
+
+        'idCliente' => factory(App\Cliente::class),
+        'idAgente' => factory(App\Agente::class),
+        'idUniversidade1' => factory(App\Universidade::class),
+        'idUniversidade2' => factory(App\Universidade::class),
+        /*  idSubAgente  */
     ];
 });

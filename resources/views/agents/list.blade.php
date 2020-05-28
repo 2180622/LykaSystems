@@ -8,7 +8,8 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 
 @endsection
 
@@ -31,10 +32,7 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
-        @if (Auth::user()->tipo == "admin")
-            <a href="{{route('agents.create')}}" class="top-button">Adicionar Agente</a>
-        @endif
+        <a href="{{route('agents.create')}}" class="top-button">Adicionar Agente</a>
     </div>
 
     <br><br>
@@ -51,121 +49,123 @@
                 @endif
             </h6>
         </div>
+
         <br>
 
-        <div class="row mt-3 mb-3">
-            <div class="col">
-                <div class="text-center"><small>Existe <strong>{{$totalagents}}</strong> registo(s) no sistema</small></div>
+        <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px;">
+
+            @if($agents==null)
+
+            <div class="border rounded bg-light p-3 text-muted"><small>(sem registos)</small></div>
+
+
+            @else
+
+            <div class="row mx-1">
+                <div class="col col-2" style="max-width: 120px">
+                    <i class="fas fa-user-tie active" style="font-size:80px"></i>
+                </div>
+                <div class="col">
+                    <div class="text-secondary"><strong>Existe {{$totalagents}} registo(s) no sistema</strong></div>
+                    <br>
+                    {{-- Input de procura nos resultados da dataTable --}}
+
+                    <div style="width: 100%; border-radius:10px;">
+                        <input type="text" class="shadow-sm" id="customSearchBox"
+                            placeholder="Procurar nos resultados..." aria-label="Procurar">
+
+                    </div>
+                </div>
             </div>
-        </div>
+            <br>
 
 
-        <div class="row p-3 ">
-            {{--                              <div class="col">
-                                        <span class="mr-2">Mostrar</span>
-                                        <select class="custom-select" id="records_per_page" style="width:80px">
-                                            <option selected>10</option>
-                                            <option>25</option>
-                                            <option>50</option>
-                                            <option>100</option>
-                                        </select>
-                                        <span class="ml-2">por página</span>
-                                    </div> --}}
-                                    <div class="col text-center mb-3">
-                                        <div class="input-group pl-0  search-section mx-auto" style="width:50%">
-                                            <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura"
-                                                aria-label="Procurar">
-                                            <div class="search-button input-group-append">
-                                                <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
+
+                    {{-- Cabeçalho da tabela --}}
+                    <thead>
+                        <tr>
+                            <th class="text-center align-content-center ">Foto</th>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            {{-- <th>E-mail</th> --}}
+                            <th>País</th>
+                            <th class="text-center">Opções</th>
+                        </tr>
+                    </thead>
+
+                    {{-- Corpo da tabela --}}
+                    <tbody>
+
+                        @foreach ($agents as $agent)
+                        <tr>
+                            <td>
+                                <div class="align-middle mx-auto shadow-sm rounded  bg-white"
+                                    style="overflow:hidden; width:50px; height:50px">
+                                    <a class="name_link" href="{{route('agents.show',$agent)}}">
+                                        @if($agent->fotografia)
+                                        <img src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}"
+                                            width="100%" class="mx-auto">
+                                        @elseif($agent->genero == 'F')
+                                        <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
+                                            class="mx-auto">
+                                        @else
+                                        <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
+                                            class="mx-auto">
+                                        @endif
+                                    </a>
                                 </div>
-        <br>
-        <hr>
+
+                            </td>
+
+                            {{-- Nome e Apelido --}}
+                            <td class="align-middle"><a class="name_link"
+                                    href="{{route('agents.show',$agent)}}">{{ $agent->nome }}
+                                    {{ $agent->apelido }}</a>
+                            </td>
+
+                            {{-- Tipo --}}
+                            <td class="align-middle">{{ $agent->tipo }}</td>
+
+                            {{-- e-mail --}}
+                            {{-- <td class="align-middle">{{ $agent->email }}</td> --}}
+
+                            {{-- País --}}
+                            <td class="align-middle">{{ $agent->pais }}</td>
 
 
-        <div class="table-responsive " style="overflow:hidden">
+                            {{-- OPÇÔES --}}
+                            <td class="text-center align-middle">
+                                <a href="{{route('agents.show',$agent)}}" class="btn_list_opt "
+                                    title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                <a href="{{route('agents.edit',$agent)}}" class="btn_list_opt btn_list_opt_edit"
+                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+
+                                <form method="POST" role="form" id="{{ $agent->idAgente }}"
+                                    action="{{route('agents.destroy',$agent)}}"
+                                    data="{{ $agent->nome }} {{ $agent->apelido }}"
+                                    class="d-inline-block form_agent_id">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn_list_opt btn_delete" title="Eliminar agente"
+                                        data-toggle="modal" data-target="#deleteModal"><i
+                                            class="fas fa-trash-alt"></i></button>
+                                </form>
+
+                            </td>
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
 
 
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                style="overflow:hidden;">
-
-                {{-- Cabeçalho da tabela --}}
-                <thead>
-                    <tr>
-                        <th class="text-center align-content-center ">Foto</th>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        {{-- <th>E-mail</th> --}}
-                        <th>País</th>
-                        <th class="text-center">Opções</th>
-                    </tr>
-                </thead>
-
-                {{-- Corpo da tabela --}}
-                <tbody>
-
-                    @foreach ($agents as $agent)
-                    <tr>
-                        <td>
-                            <div class="align-middle mx-auto shadow-sm rounded  bg-white"
-                                style="overflow:hidden; width:50px; height:50px">
-                                <a class="name_link" href="{{route('agents.show',$agent)}}">
-                                    @if($agent->fotografia)
-                                    <img src="{{Storage::disk('public')->url('agent-documents/'.$agent->idAgente.'/').$agent->fotografia}}"
-                                        width="100%" class="mx-auto">
-                                    @elseif($agent->genero == 'F')
-                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
-                                        class="mx-auto">
-                                    @else
-                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
-                                        class="mx-auto">
-                                    @endif
-                                </a>
-                            </div>
-
-                        </td>
-
-                        {{-- Nome e Apelido --}}
-                        <td class="align-middle"><a class="name_link"
-                                href="{{route('agents.show',$agent)}}">{{ $agent->nome }} {{ $agent->apelido }}</a></td>
-
-                        {{-- Tipo --}}
-                        <td class="align-middle">{{ $agent->tipo }}</td>
-
-                        {{-- e-mail --}}
-                        {{-- <td class="align-middle">{{ $agent->email }}</td> --}}
-
-                        {{-- País --}}
-                        <td class="align-middle">{{ $agent->pais }}</td>
+            @endif
 
 
-                        {{-- OPÇÔES --}}
-                        <td class="text-center align-middle">
-                            <a href="{{route('agents.show',$agent)}}" class="btn_list_opt "
-                                title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                            <a href="{{route('agents.edit',$agent)}}" class="btn_list_opt btn_list_opt_edit"
-                                title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-
-                            <form method="POST" role="form" id="{{ $agent->idAgente }}"
-                                action="{{route('agents.destroy',$agent)}}"
-                                data="{{ $agent->nome }} {{ $agent->apelido }}" class="d-inline-block form_agent_id">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn_delete" title="Eliminar agente" data-toggle="modal"
-                                    data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                            </form>
-
-                        </td>
-                    </tr>
-                    @endforeach
-
-                </tbody>
-            </table>
         </div>
-
-
 
     </div>
 </div>

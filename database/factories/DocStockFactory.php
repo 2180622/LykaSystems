@@ -6,11 +6,17 @@ use App\DocStock;
 use Faker\Generator as Faker;
 
 $factory->define(DocStock::class, function (Faker $faker) {
+    $idDocStock = 1;
+    $DocStocks = DocStock::all();
+    if($DocStocks->toArray()){
+        $idDocStock = DocStock::all()->random()->id;
+    }
     return [
-        'idDocStock' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idDocStock' => $idDocStock,
         'tipo' => $faker->randomElement($array = array ('Pessoal','Academico')),
         'tipoDocumento' => $faker->randomElement($array = array ('Diploma','Doc. Oficial')),
 
-        /*  'idFaseStock'  */
+
+        'idFaseStock' => factory(App\FaseStock::class),
     ];
 });

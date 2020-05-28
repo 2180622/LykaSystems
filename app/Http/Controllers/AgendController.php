@@ -41,7 +41,7 @@ class AgendController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -115,6 +115,7 @@ class AgendController extends Controller
      */
     public function show(Agenda $agenda)
     {
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -125,7 +126,7 @@ class AgendController extends Controller
      */
     public function edit(Agenda $agenda)
     {
-        //
+        return redirect()->route('dashboard');
     }
 
     /**

@@ -16,6 +16,7 @@ class StoreAgenteRequest extends FormRequest
 
         return [
         'idAgenteAssociado'=> 'nullable',
+        'exepcao' => 'required',
         'nome' => 'required',
         'apelido' => 'required',
         'genero'=>'required',
@@ -31,6 +32,7 @@ class StoreAgenteRequest extends FormRequest
         'telefone1' => 'required',
         'telefone2' => 'nullable',
         'IBAN' => 'nullable',
+        'observacoes'=> 'nullable',
         ];
     }
 

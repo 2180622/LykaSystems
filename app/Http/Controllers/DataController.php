@@ -76,6 +76,7 @@ class DataController extends Controller
         $agente->telefone1 = 932354453;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
+        $agente->observacoes ="Lorem Ipsum Tuli creme";
         $agente->save();
 
         $agente = new Agente;
@@ -92,6 +93,7 @@ class DataController extends Controller
         $agente->telefone1 = 932355555;
         $agente->telefone2 = null;
         $agente->tipo = 'Agente';
+        $agente->observacoes ="Gosta de pão com manteiga";
         $agente->save();
 
         $agente = new Agente;
@@ -109,6 +111,7 @@ class DataController extends Controller
         $agente->telefone2 = null;
         $agente->tipo = 'Subagente';
         $agente->idAgenteAssociado = 1;
+        $agente->observacoes ="Tem como hoby contar os riscos da estrada";
         $agente->save();
 
         /*******************          Clientes          ********************/
@@ -427,6 +430,44 @@ class DataController extends Controller
         $produto->idUniversidade2 = 1;
         $produto->save();
 
+        /*********************          Fases          *********************/
+
+        $fase = new Fase;
+        $fase->descricao = 'Inscrição';
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('16-03-2020 15:00'));
+        $fase->valorFase = 50;
+        $fase->verificacaoPago = false;
+        $fase->icon = 'cube';
+        $fase->idProduto = 1;
+        $fase->save();
+
+        $fase = new Fase;
+        $fase->descricao = 'Matrícula';
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
+        $fase->valorFase = 300;
+        $fase->verificacaoPago = false;
+        $fase->icon = 'layers';
+        $fase->idProduto = 1;
+        $fase->save();
+
+        $fase = new Fase;
+        $fase->descricao = 'Propinas';
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $fase->valorFase = 1000;
+        $fase->verificacaoPago = false;
+        $fase->icon = 'school';
+        $fase->idProduto = 1;
+        $fase->save();
+
+        $fase = new Fase;
+        $fase->descricao = 'Final';
+        $fase->dataVencimento = date('Y-m-d H:i',strtotime('01-07-2021 18:30'));
+        $fase->valorFase = 150;
+        $fase->verificacaoPago = false;
+        $fase->icon = 'pie-chart';
+        $fase->idProduto = 1;
+        $fase->save();
+
         /***************          Responsabilidades          ***************/
 
         $responsabilidade = new Responsabilidade;
@@ -454,6 +495,7 @@ class DataController extends Controller
         $responsabilidade->idUniversidade2 = 2;
         $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->dataVencimentoUni2 = null;
+        $responsabilidade->idFase = 1;
         $responsabilidade->save();
 
 
@@ -482,6 +524,7 @@ class DataController extends Controller
         $responsabilidade->idUniversidade2 = 2;
         $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->dataVencimentoUni2 = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
+        $responsabilidade->idFase = 2;
         $responsabilidade->save();
 
 
@@ -510,6 +553,7 @@ class DataController extends Controller
         $responsabilidade->idUniversidade2 = 2;
         $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->dataVencimentoUni2 = null;
+        $responsabilidade->idFase = 3;
         $responsabilidade->save();
 
 
@@ -538,6 +582,7 @@ class DataController extends Controller
         $responsabilidade->idUniversidade2 = 2;
         $responsabilidade->verificacaoPagoUni2 = false;
         $responsabilidade->dataVencimentoUni2 = null;
+        $responsabilidade->idFase = 4;
         $responsabilidade->save();
 
         /*****************          Rel Forn Resp          *****************/
@@ -562,48 +607,6 @@ class DataController extends Controller
         $relacao->idResponsabilidade = 4;
         $relacao->idFornecedor = 2;
         $relacao->save();
-
-        /*********************          Fases          *********************/
-
-        $fase = new Fase;
-        $fase->descricao = 'Inscrição';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('16-03-2020 15:00'));
-        $fase->valorFase = 50;
-        $fase->verificacaoPago = false;
-        $fase->icon = 'cube';
-        $fase->idProduto = 1;
-        $fase->idResponsabilidade = 1;
-        $fase->save();
-
-        $fase = new Fase;
-        $fase->descricao = 'Matrícula';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('06-09-2020 18:30'));
-        $fase->valorFase = 300;
-        $fase->verificacaoPago = false;
-        $fase->icon = 'layers';
-        $fase->idProduto = 1;
-        $fase->idResponsabilidade = 2;
-        $fase->save();
-
-        $fase = new Fase;
-        $fase->descricao = 'Propinas';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('25-09-2020 23:59'));
-        $fase->valorFase = 1000;
-        $fase->verificacaoPago = false;
-        $fase->icon = 'school';
-        $fase->idProduto = 1;
-        $fase->idResponsabilidade = 3;
-        $fase->save();
-
-        $fase = new Fase;
-        $fase->descricao = 'Final';
-        $fase->dataVencimento = date('Y-m-d H:i',strtotime('01-07-2021 18:30'));
-        $fase->valorFase = 150;
-        $fase->verificacaoPago = false;
-        $fase->icon = 'pie-chart';
-        $fase->idProduto = 1;
-        $fase->idResponsabilidade = 4;
-        $fase->save();
 
         /******************          Docs Necessarios          *******************/
 

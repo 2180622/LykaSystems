@@ -6,8 +6,13 @@ use App\DocPessoal;
 use Faker\Generator as Faker;
 
 $factory->define(DocPessoal::class, function (Faker $faker) {
+    $idDocPessoal = 1;
+    $DocPessoals = DocPessoal::all();
+    if($DocPessoals->toArray()){
+        $idDocPessoal = DocPessoal::all()->random()->id;
+    }
     return [
-        'idDocPessoal' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idDocPessoal' => $idDocPessoal,
         'tipo' => $faker->randomElement($array = array ('Doc. Pessoal','Passaport')),
         'imagem' => 'default-photos/university.png',
         'info' => '{"valor":"'.$faker->sentence($nbWords = 3, $variableNbWords = true).'"}',
@@ -15,6 +20,9 @@ $factory->define(DocPessoal::class, function (Faker $faker) {
         'verificacao' => false,
 
         'slug' => 'docpessoal',
-        /*  'idCliente'  'idFase'  */
+
+        
+        'idCliente' => factory(App\Cliente::class),
+        'idFase' => factory(App\Fase::class),
     ];
 });

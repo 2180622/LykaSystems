@@ -21,8 +21,6 @@ class Fase extends Migration
             $table->string('slug')->nullable();
             $table->unsignedBigInteger('idProduto');
                 $table->foreign('idProduto')->references('idProduto')->on('Produto');
-            $table->unsignedBigInteger('idResponsabilidade');
-                $table->foreign('idResponsabilidade')->references('idResponsabilidade')->on('Responsabilidade');
             $table->timestamps();
             $table->softDeletes();
             });

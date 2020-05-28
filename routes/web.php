@@ -21,20 +21,14 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::post('/procurar-contacto', 'ExtraFunctionsController@searchcontact')->name('search.contact');
 
     /* Contacts */
-    /* Route::resource('/contacts', 'ContactoController'); */
-/*     Route::get('/contacts', 'ContactoController@index')->name('contacts.index'); */
-/*
-    Route::post('/contacts/{contact}', 'ContactoController@store')->name('contacts.store');
-    Route::get('/contacts/{contact}', 'ContactoController@edit')->name('contacts.edit');
-    Route::put('/contacts/{contact}', 'ContactoController@update')->name('contacts.update');
-    Route::delete('/contacts/{contact}', 'ContactoController@destroy')->name('contacts.destroy'); */
-
+    Route::get('/contactos', 'ContactoController@index')->name('contacts.index');
+    Route::delete('/contactos/{contact}', 'ContactoController@destroy')->name('contacts.destroy');
+    Route::put('/contactos/{contact}', 'ContactoController@update')->name('contacts.update');
     Route::get('/contactos/criar/{university?}', 'ContactoController@create')->name('contacts.create');
     Route::get('/contactos/show/{contact}/{university?}', 'ContactoController@show')->name('contacts.show');
     Route::get('/contactos/editar/{contact}/{university?}', 'ContactoController@edit')->name('contacts.edit');
-    Route::resource('/contactos', 'ContactoController')->only(['index','destroy', 'update','store']);
+    Route::post('/contactos', 'ContactoController@store')->name('contacts.store');
 
-/*     Route::resource('/contacts', 'ContactoController', ['except' => ['create']]); */
 
     /* Universidades */
     Route::resource('/universidades', 'UniversityController')->parameters([
@@ -68,7 +62,7 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     ]);
 
     /* Agentes */
-    Route::get('/agents/print/{agent}', 'AgenteController@print')->name('agents.print');
+    Route::get('/agentes/print/{agent}', 'AgenteController@print')->name('agents.print');
     Route::resource('/agentes', 'AgenteController')->parameters([
         'agentes' => 'agent'
     ])->names([
@@ -162,29 +156,29 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/produtos', 'ProdutoController')->only(['destroy','update','show','edit']);
 
     /* Documentos Pessoais */
-    Route::get('/documento-pessoal/create/{fase}/{docnecessario}', 'DocPessoalController@create')->name('documento-pessoal.create');
+    Route::get('/documento-pessoal/criar/{fase}/{docnecessario}', 'DocPessoalController@create')->name('documento-pessoal.create');
     Route::post('/documento-pessoal/store/{fase}/{docnecessario}', 'DocPessoalController@store')->name('documento-pessoal.store');
     Route::get('/documento-pessoal/{documento}/editar', 'DocPessoalController@edit')->name('documento-pessoal.edit');
     Route::put('/documento-pessoal/{documento}/update', 'DocPessoalController@update')->name('documento-pessoal.update');
     Route::get('/documento-pessoal/{documento}/verifica', 'DocPessoalController@verify')->name('documento-pessoal.verify');
     Route::put('/documento-pessoal/{documento}/verify', 'DocPessoalController@verifica')->name('documento-pessoal.verifica');
-    Route::resource('/documento-pessoal', 'DocPessoalController')->only(['destroy','show']);
+    Route::resource('/documento-pessoal', 'DocPessoalController')->only(['destroy']);
 
     /* Documentos Academicos */
-    Route::get('/documento-academico/create/{fase}/{docnecessario}', 'DocAcademicoController@create')->name('documento-academico.create');
+    Route::get('/documento-academico/criar/{fase}/{docnecessario}', 'DocAcademicoController@create')->name('documento-academico.create');
     Route::post('/documento-academico/store/{fase}/{docnecessario}', 'DocAcademicoController@store')->name('documento-academico.store');
     Route::get('/documento-academico/{documento}/editar', 'DocAcademicoController@edit')->name('documento-academico.edit');
     Route::put('/documento-academico/{documento}/update', 'DocAcademicoController@update')->name('documento-academico.update');
     Route::get('/documento-academico/{documento}/verifica', 'DocAcademicoController@verify')->name('documento-academico.verify');
     Route::put('/documento-academico/{documento}/verify', 'DocAcademicoController@verifica')->name('documento-academico.verifica');
-    Route::resource('/documento-academico', 'DocAcademicoController')->only(['destroy','show']);
+    Route::resource('/documento-academico', 'DocAcademicoController')->only(['destroy']);
 
     /* Documentos Transações */
-    Route::get('/documento-transacao/create/{fase}', 'DocTransacaoController@create')->name('documento-transacao.create');
+    Route::get('/documento-transacao/criar/{fase}', 'DocTransacaoController@create')->name('documento-transacao.create');
     Route::post('/documento-transacao/store/{fase}', 'DocTransacaoController@store')->name('documento-transacao.store');
     Route::get('/documento-transacao/{documento}/editar', 'DocTransacaoController@edit')->name('documento-transacao.edit');
     Route::put('/documento-transacao/{documento}/update', 'DocTransacaoController@update')->name('documento-transacao.update');
-    Route::resource('/documento-transacao', 'DocTransacaoController')->only(['destroy','show']);
+    Route::resource('/documento-transacao', 'DocTransacaoController')->only(['destroy']);
 
     /* Conta */
     Route::resource('/conta-bancaria', 'ContaController')->parameters([
@@ -231,9 +225,6 @@ Route::post('/restaurar-passwords/confirmacao-telemovel', 'AccountConfirmationCo
 Route::get('/restaurar-password/{user}', 'AccountConfirmationController@restorepassword');
 Route::post('/restaurar-password/confirmacao-utilizador', 'AccountConfirmationController@checkuser')->name('check.user');
 Route::post('/restaurar-password/confirmacao-password', 'AccountConfirmationController@checkpassword')->name('check.password');
-
-/* Ajuda */
-Route::get('/ajuda', 'HelpController@show')->name('ajuda');
 
 /* Edgar Teste -> Eliminar no futuro */
 Route::get('/data', 'EdgarTesteController@index');

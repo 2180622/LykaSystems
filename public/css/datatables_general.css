@@ -1,48 +1,17 @@
-table {
+
+th,td{
+    color:gray;
+    font-weight:bold
+}
+
+
+/* Botões da lista ( view, Edit, delete) */
+.btn_list_opt, .btn_delete {
     color: gray;
-}
-
-.pagination {
-    float: right;
-}
-
-.table td,
-.table th {
+    outline: none;
     border: 0;
-    color: gray;
-    font-weight: bold;
-}
-
-.table tbody td:first-child {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.table tbody td:last-child {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.table tbody tr {
-    transition: 0.2s ease-in-out;
-}
-
-.table tbody tr:hover {
-    border-radius: 20% !important;
-    background-color: white;
-}
-
-.name_link {
-    color: gray;
-}
-
-.name_link:hover {
-    color: #6A74C9;
-    text-decoration: none;
-}
-
-.btn_list_opt {
-    color: gray;
+    background: none;
+    box-shadow: none;
 }
 
 .btn_list_opt:hover {
@@ -53,66 +22,12 @@ table {
     color: #eac300;
 }
 
-.btn_list_opt_delete:hover {
-    color: #FF0000;
-}
-
-.btn_list_opt_download:hover {
-    color: #1a9b00;
-}
-
-.btn_delete {
-    color: gray;
-    border: 0;
-    background: none;
-    box-shadow: none;
-    border-radius: 0px;
-}
-
 .btn_delete:hover {
     color: red;
 }
 
-/* Searchbox */
-#customSearchBox {
-    right: 0;
-    width: 90%;
-    height: 32px;
-    border: none;
-    color: #BBBBBB;
-    font-weight: 800;
-    font-size: 0.6rem;
-    padding: 8px 15px;
-    position: absolute;
-    border-radius: 30px;
-    display: inline-block;
-    background-color: white;
-    text-transform: uppercase;
-}
 
-#customSearchBox::placeholder {
-    color: #BBBBBB;
-    font-weight: 800;
-    font-size: 0.6rem;
-    padding: 8px 15px;
-    display: inline-block;
-    text-transform: uppercase;
-}
+#customSearchBox{
+    width:100%;
 
-#customSearchBox:focus {
-    border: none;
-    box-shadow: none;
-}
-
-.search-section .search-button {
-    right: 0;
-    left: auto;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    position: absolute !important;
-}
-
-.search-section .search-button .search-icon {
-    font-size: 0.9rem;
 }

@@ -21,9 +21,6 @@
         <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
     </a>
 </div>
-    <div class="float-right">
-        <a href="#" class="top-button">reportar problema</a>
-    </div>
 
     <br><br>
     <div class="cards-navigation">
@@ -31,7 +28,7 @@
             <h6>Novo contacto</h6>
         </div>
 
-        <form method="POST" action="{{route('contactos.store')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('contacts.store')}}" class="form-group needs-validation pt-3" id="form_client" enctype="multipart/form-data" novalidate>
             @csrf
             @include('contacts.partials.add-edit')
             <div class="form-group text-right">

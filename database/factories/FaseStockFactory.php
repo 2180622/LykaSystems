@@ -6,10 +6,16 @@ use App\FaseStock;
 use Faker\Generator as Faker;
 
 $factory->define(FaseStock::class, function (Faker $faker) {
+    $idFaseStock = 1;
+    $FaseStocks = FaseStock::all();
+    if($FaseStocks->toArray()){
+        $idFaseStock = FaseStock::all()->random()->id;
+    }
     return [
-        'idFaseStock' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idFaseStock' => $idFaseStock,
         'descricao' => $faker->randomElement($array = array ('Inscricao','Matricula', 'Final')),
-        
-        /*  'idProdutoStock'  */
+
+
+        'idProdutoStock' => factory(App\ProdutoStock::class),
     ];
 });

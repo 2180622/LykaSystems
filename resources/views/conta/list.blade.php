@@ -5,8 +5,11 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/conta.css')}}" rel="stylesheet">
+
+{{-- <link href="{{asset('/css/conta.css')}}" rel="stylesheet"> --}}
 <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
+
 @endsection
 
 {{-- Conteúdo da Página --}}
@@ -34,27 +37,39 @@
             <div class="col-md-6">
                 <h6>Listagem de contas bancárias</h6>
             </div>
-            <div class="col-md-6" style="bottom:5px; height:32px;">
-                <div class="input-group pl-0 float-right search-section" style="width:250px">
-                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
-                    <div class="search-button input-group-append">
-                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                    </div>
+        </div>
+
+        <br>
+
+
+        <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px;">
+
+            <div class="row mx-1">
+                <div class="col col-2" style="max-width: 120px">
+                    <i class="fas fa-piggy-bank active" style="font-size:80px"></i>
+                </div>
+                <div class="col">
+                    @if (count($contas) == 1)
+                        <div>Existe <strong>{{count($contas)}}</strong> conta registada no sistema.</div>
+                    @else
+                        <div>Existem <strong>{{count($contas)}}</strong> contas registadas no sistema.</div>
+                    @endif
+                    <br>
+            {{-- Input de procura nos resultados da dataTable --}}
+
+                    <div style="width: 100%; border-radius:10px;">
+                        <input type="text" class="shadow-sm" id="customSearchBox"
+                            placeholder="Procurar nos resultados..." aria-label="Procurar">
+
+            </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="row mt-2 mb-4">
-            <div class="col-md-6">
-                @if (count($contas) == 1)
-                Existe <strong>{{count($contas)}}</strong> conta registada no sistema.
-                @else
-                Existem <strong>{{count($contas)}}</strong> contas registadas no sistema.
-                @endif
-            </div>
-        </div>
-        <div class="table-responsive" style="overflow:hidden">
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+
+
+            <br>
+
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
                 <thead>
                     <tr style="border-bottom: 2px solid #dee2e6;">
                         <th>Descrição</th>
@@ -79,8 +94,15 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
+
         </div>
+
+
+
+
     </div>
+
 </div>
 
 <!-- Modal -->
@@ -111,30 +133,9 @@
 </div>
 
 @section('scripts')
-<script type="text/javascript">
-    $('#deleteModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var name = button.data('name');
-        var modal = $(this);
-        modal.find('#text').text('Pretende eliminar a conta bancária ' + name + '?');
-        modal.find("form").attr('action', '/conta-bancaria/' + button.data('slug'));
-    });
 
-    // Context Menu
-    window.onclick = hideContextMenu;
-    var contextMenu = document.getElementById("contextMenu");
+<script src="{{asset('/js/conta.js')}}"></script>
 
-    function showContextMenu() {
-        contextMenu.style.display = "inline-block";
-        contextMenu.style.left = event.clientX - '260' + 'px';
-        contextMenu.style.top = event.clientY + 'px';
-        return false;
-    }
-
-    function hideContextMenu() {
-        contextMenu.style.display = "none";
-    }
-</script>
 @endsection
 
 @endsection

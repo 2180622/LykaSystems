@@ -3,7 +3,6 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Administrador;
-use Faker\Provider\en_HK\Phone;
 use Faker\Generator as Faker;
 
 $factory->define(Administrador::class, function (Faker $faker) {
@@ -15,13 +14,18 @@ $factory->define(Administrador::class, function (Faker $faker) {
     }else{
         $nome = $faker->firstNameMale;
     }
+    $idAdministrador = 1;
+    $Administradors = Administrador::all();
+    if($Administradors->toArray()){
+        $idAdministrador = Administrador::all()->random()->id;
+    }
     return [
-        'idAdmin' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idAdmin' => $idAdministrador,
         'nome' => $nome,
         'apelido' => $faker->lastName,
         'genero' => $gender,
         'email' => $faker->unique()->freeEmail,
-        'dataNasc' => $faker->date($format = 'Y-m-d', $max = '-30 years'),
+        'dataNasc' => $faker->date($format = 'Y-m-d', '1997-30-5'),
         'fotografia' => null,
         'telefone1' => $faker->numberBetween($min = 100000000, $max = 999999999),
         'telefone2' => $faker->numberBetween($min = 100000000, $max = 999999999),

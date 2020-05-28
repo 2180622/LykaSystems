@@ -6,8 +6,13 @@ use App\Responsabilidade;
 use Faker\Generator as Faker;
 
 $factory->define(Responsabilidade::class, function (Faker $faker) {
+    $idResponsabilidade = 1;
+    $Responsabilidades = Responsabilidade::all();
+    if($Responsabilidades->toArray()){
+        $idResponsabilidade = Responsabilidade::all()->random()->id;
+    }
     return [
-        'idResponsabilidade' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idResponsabilidade' => $idResponsabilidade,
         'valorCliente' => $faker->numberBetween($min = 100, $max = 500),
         'valorAgente' => $faker->numberBetween($min = 100, $max = 500),
         'valorSubAgente' => null,
@@ -25,6 +30,12 @@ $factory->define(Responsabilidade::class, function (Faker $faker) {
         'verificacaoPagoUni2' => false,
         'estado' => $faker->randomElement($array = array ('Pendente','Pago', 'Dívida', 'Crédito')),
 
-        /*  'idCliente'  'idAgente'  'idSubAgente'  'idUniversidade1'  'idUniversidade2'  */
+
+        'idFase' => factory(App\Fase::class),
+        'idCliente' => factory(App\Cliente::class),
+        'idAgente' => factory(App\Agente::class),
+        'idSubAgente' => factory(App\Agente::class),
+        'idUniversidade1' => factory(App\Universidade::class),
+        'idUniversidade2' => factory(App\Universidade::class),
     ];
 });

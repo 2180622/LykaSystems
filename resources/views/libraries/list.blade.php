@@ -8,7 +8,8 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 
-<link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 
 @endsection
 
@@ -30,8 +31,8 @@
         </a>
     </div>
 
+
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button mr-2">reportar problema</a>
         @if (Auth::user()->tipo == "admin")
         <a href="{{route('libraries.create')}}" class="top-button">Adicionar Ficheiro</a>
         @endif
@@ -41,48 +42,57 @@
 
 
     <div class="cards-navigation">
-        <div class="title">
-            <h6>Biblioteca</h6>
-        </div>
-        <br>
-
-
-        @if($files==null)
-            <div class="border rounded bg-light p-3 text-muted"><small>(sem ficheiros disponiveis)</small></div>
-        @else
-
-        <div class="row mb-3">
+  <div class="row">
             <div class="col">
-                <div class="text-center text-secondary"><small>Existe <strong>{{count($files)}} ficheiros(s)</strong> listados</small></div>
-            </div>
-        </div>
-
-        <div class="row p-3 ">
-            <div class="col text-center mb-3">
-                <div class="input-group pl-0  search-section mx-auto" style="width:50%">
-                    <input class="shadow-sm" type="text" id="customSearchBox"
-                        placeholder="Secção de procura" aria-label="Procurar">
-                    <div class="search-button input-group-append">
-                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                    </div>
+                <div class="title">
+                    <h6>Biblioteca
+                    </h6>
                 </div>
             </div>
+
+            @if (Auth::user()->tipo == "admin")
+            {{-- Espaço oucupado em armazenamento --}}
+                <div class="col text-right">
+                <div class="text-muted"><small><strong>Espaço ocupado: {{$size}}</strong></small></div>
+                </div>
+            @endif
+
         </div>
         <br>
-        <hr>
 
 
-        <div class="table-responsive " style="overflow:hidden">
+        <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px">
+            @if($files)
+
+            <div class="row mx-1">
+                <div class="col col-2" style="max-width: 120px">
+                    <i class="fas fa-download active" style="font-size:80px"></i>
+                </div>
+                <div class="col">
+                    <div class="text-secondary"><strong>Existe {{count($files)}} ficheiro(s) disponíveis no sistema</strong></div>
+                    <br>
+            {{-- Input de procura nos resultados da dataTable --}}
+
+                    <div style="width: 100%; border-radius:10px;">
+                        <input type="text" class="shadow-sm" id="customSearchBox"
+                            placeholder="Procurar nos resultados..." aria-label="Procurar">
+
+            </div>
+                </div>
+            </div>
 
 
-            <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0"
-                style="overflow:hidden;">
+            <br>
+
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
 
                 {{-- Cabeçalho da tabela --}}
                 <thead>
                     <tr>
                         <th class="align-content-center ">Descrição do ficheiro</th>
                         <th class="align-content-center">Tamanho</th>
+                        <th class="align-content-center">Tipo</th>
                         <th class="align-content-center">Data</th>
                         <th class="text-center">Opções</th>
                     </tr>
@@ -105,6 +115,9 @@
 
                     {{-- Tamanho --}}
                     <td>{{ $library->tamanho }} </td>
+
+                    {{-- tipo de ficheiro --}}
+                    <td>{{ $library->tipo }} </td>
 
 
                     {{-- Data de criação --}}
@@ -143,9 +156,7 @@
         </div>
 
         @endif
-
-
-
+        </div>
 
 
     </div>

@@ -25,6 +25,7 @@ class UpdateAgenteRequest extends FormRequest
     {
         return [
             'idAgenteAssociado'=> 'nullable',
+            'exepcao' => 'required',
             'nome' => 'required',
             'apelido' => 'required',
             'genero'=>'required',
@@ -40,6 +41,7 @@ class UpdateAgenteRequest extends FormRequest
             'telefone1' => 'required',
             'telefone2' => 'nullable',
             'IBAN' => 'nullable',
+            'observacoes'=> 'nullable',
         ];
     }
 

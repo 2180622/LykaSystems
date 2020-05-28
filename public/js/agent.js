@@ -16,7 +16,7 @@
                 {
                     "orderable": false,
                     "width": "130px",
-                    "targets": 4
+                    "targets": -1
                 },
 
             ],
@@ -71,6 +71,23 @@
         /* Definir pais */
         var str_pais = $("#hidden_pais").val();
         $('#pais').val(str_pais);
+
+
+
+
+
+        /* Definiçao inicial: É exeçao ? */
+        if ( $('#exepcao').val()==1 ){
+            $('#checkbox_exepcao').prop('checked', true);
+        }else{
+            $('#checkbox_exepcao').prop('checked', false);
+        }
+
+        /* mudança de estado */
+        $('#checkbox_exepcao').change(function() {
+            $('#exepcao').val($(this).is(":checked") ? 1 : 0);
+        });
+
 
 
 
@@ -186,12 +203,15 @@
         if ($("#aux_idAgenteAssociado").val() != "") {
             $("#idAgenteAssociado").val($("#aux_idAgenteAssociado").val());
             $("#div_subagente").show();
+            $("#div_execao").show();
         }
 
         if ($("#tipo").val() == "Agente") {
             $("#div_subagente").hide();
+            $("#div_execao").hide();
             $("#idAgenteAssociado").prop("disabled", true);
             $("#idAgenteAssociado").val(null);
+
         }
 
 
@@ -199,13 +219,16 @@
         $('#tipo').change(function () {
             if ($("#tipo").val() == "Subagente") {
                 $("#div_subagente").show();
+                $("#div_execao").show();
                 $("#idAgenteAssociado").prop("disabled", false);
                 $("#idAgenteAssociado").val(null);
                 $("#idAgenteAssociado").focus();
 
             } else {
-
+                $('#checkbox_exepcao').prop('checked', false);
+                $("#exepcao").val("0");
                 $("#div_subagente").hide();
+                $("#div_execao").hide();
                 $("#idAgenteAssociado").prop("disabled", true);
                 $("#idAgenteAssociado").val(null);
                 $("#idAgenteAssociado").prop("disabled", true);

@@ -24,7 +24,6 @@ class Fase extends Model
         'estado',
         '$idProduto',
         '$idFaseStock',
-        '$idResponsabilidade'
     ];
 
     public function produto(){
@@ -32,7 +31,7 @@ class Fase extends Model
     }
 
     public function responsabilidade(){
-        return $this->belongsTo("App\Responsabilidade","idResponsabilidade","idResponsabilidade")->withTrashed();
+        return $this->belongsTo("App\Responsabilidade","idFase","idFase")->withTrashed();
     }
 
     public function docTransacao(){

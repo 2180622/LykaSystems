@@ -6,10 +6,15 @@ use App\DocTransacao;
 use Faker\Generator as Faker;
 
 $factory->define(DocTransacao::class, function (Faker $faker) {
+    $idDocTransacao = 1;
+    $DocTransacaos = DocTransacao::all();
+    if($DocTransacaos->toArray()){
+        $idDocTransacao = DocTransacao::all()->random()->id;
+    }
     return [
-        'idDocTransacao' => $faker->unique()->numberBetween($min = 100000000, $max = 999999999),
+        'idDocTransacao' => $idDocTransacao,
         'descricao' => $faker->sentence($nbWords = 5, $variableNbWords = true),
-        'valorRecebido' => null,
+        'valorRecebido' => 0,
         'tipoPagamento' => $faker->randomElement($array = array ('Transferencia Bancaria','Paypal')),
         'dataOperacao' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'dataRecebido' => null,
@@ -18,6 +23,9 @@ $factory->define(DocTransacao::class, function (Faker $faker) {
         'verificacao' => false,
 
         'slug' => 'doctransacao',
-        /*  'idConta'  'idFase'  */
+
+
+        'idConta' => factory(App\Conta::class),
+        'idFase' => factory(App\Fase::class),
     ];
 });

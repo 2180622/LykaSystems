@@ -23,7 +23,7 @@
     </div>
 
     <div class="float-right">
-        <a href="{{route('report')}}" class="top-button">reportar problema</a>
+        <a href="{{route('provider.edit', $provider)}}" class="top-button mr-2">Editar informação</a>
     </div>
 
     <br><br>
