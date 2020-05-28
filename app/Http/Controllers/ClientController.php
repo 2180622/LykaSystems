@@ -224,6 +224,12 @@ class ClientController extends Controller
 
             /* Guarda documento de identificação Pessoal */
             $doc_id->create_at == date("Y-m-d",$t);
+
+            /* Se for o admin a inserir o ficheiro, é marcado como valido */
+            if (Auth::user()->tipo == "admin"){
+                $doc_id->verificacao=true;
+            }
+
             $doc_id->save();
         }
 
@@ -256,6 +262,13 @@ class ClientController extends Controller
 
             /* Guarda passaporte */
             $passaporte->create_at == date("Y-m-d",$t);
+
+            /* Se for o admin a inserir o ficheiro, é marcado como valido */
+            if (Auth::user()->tipo == "admin"){
+                $passaporte->verificacao=true;
+            }
+
+
             $passaporte->save();
         }
 
@@ -575,6 +588,12 @@ class ClientController extends Controller
             /* Guarda documento de identificação Pessoal */
             $doc_id->imagem = $nome_imgDocOff;
             $doc_id->create_at == date("Y-m-d",$t);
+
+            /* Se for o admin a inserir o ficheiro, é marcado como valido */
+            if (Auth::user()->tipo == "admin"){
+                $doc_id->verificacao=true;
+            }
+
             $doc_id->save();
 
         }
@@ -638,6 +657,12 @@ class ClientController extends Controller
                 /* Guarda o passaporte */
                 $passaporte->imagem = $nome_imgPassaporte;
                 $passaporte->create_at == date("Y-m-d",$t);
+
+                /* Se for o admin a inserir o ficheiro, é marcado como valido */
+                if (Auth::user()->tipo == "admin"){
+                    $passaporte->verificacao=true;
+                }
+
                 $passaporte->save();
 
             }
