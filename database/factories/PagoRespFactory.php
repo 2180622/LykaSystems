@@ -19,7 +19,7 @@ $factory->define(PagoResponsabilidade::class, function (Faker $faker) {
         'dataPagamento' => $faker->date($format = 'Y-m-d', $max = 'now'),
 
 
-        'idFase' => factory(App\Fase::class),
+        'idResponsabilidade' => factory(App\Responsabilidade::class),
         'idConta' => factory(App\Conta::class),
     ];
 });

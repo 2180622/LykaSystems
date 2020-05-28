@@ -14,7 +14,7 @@ $factory->define(DocTransacao::class, function (Faker $faker) {
     return [
         'idDocTransacao' => $idDocTransacao,
         'descricao' => $faker->sentence($nbWords = 5, $variableNbWords = true),
-        'valorRecebido' => null,
+        'valorRecebido' => 0,
         'tipoPagamento' => $faker->randomElement($array = array ('Transferencia Bancaria','Paypal')),
         'dataOperacao' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'dataRecebido' => null,

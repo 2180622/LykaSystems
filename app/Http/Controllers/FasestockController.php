@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class FasestockController extends Controller
 {
-    public function create(){
-        $fasestock = new FaseStock();
+    public function index()
+    {
+        return redirect()->route('dashboard');
+    }
 
-        return view('fasestock.add', compact('fasestock'));
+    public function create(){
+        return redirect()->route('dashboard');
     }
 
     public function store(StoreFasestockRequest $requestFase, ProdutoStock $produtostock){

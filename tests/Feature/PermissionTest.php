@@ -273,12 +273,6 @@ class PermissionTest extends TestCase
     }
 
     /********************************************************************************************************** */
-
-    /** @test */
-    public function redirecionar_de_lista_fase_stock_para_login()
-    {
-        $response = $this->get('/fasestock')->assertRedirect('/login');
-    }
     
     /** @test */
     public function redirecionar_de_show_fase_stock_para_login()
@@ -453,14 +447,6 @@ class PermissionTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function redirecionar_de_show_doc_academico_para_login()
-    {
-        $docAcademico = factory(DocAcademico::class)->make();
-
-        $response = $this->get('/documento-academico'.'/'.$docAcademico->slug)->assertRedirect('/login');
-    }
-    
-    /** @test */
     public function redirecionar_de_create_doc_academico_para_login()
     {
         $docNecessario = factory(DocNecessario::class)->make();
@@ -487,14 +473,6 @@ class PermissionTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function redirecionar_de_show_doc_pessoal_para_login()
-    {
-        $docPessoal = factory(DocPessoal::class)->make();
-
-        $response = $this->get('/documento-pessoal'.'/'.$docPessoal->slug)->assertRedirect('/login');
-    }
-    
-    /** @test */
     public function redirecionar_de_create_doc_pessoal_para_login()
     {
         $docNecessario = factory(DocNecessario::class)->make();
@@ -519,19 +497,13 @@ class PermissionTest extends TestCase
     }
 
     /********************************************************************************************************** */
-
-    /** @test */
-    public function redirecionar_de_show_doc_transacao_para_login()
-    {
-        $docTransacao = factory(DocTransacao::class)->make();
-
-        $response = $this->get('/documento-transacao'.'/'.$docTransacao->slug)->assertRedirect('/login');
-    }
     
     /** @test */
     public function redirecionar_de_create_doc_transacao_para_login()
     {
-        $response = $this->get('/documento-transacao/criar')->assertRedirect('/login');
+        $fase = factory(Fase::class)->make();
+
+        $response = $this->get('/documento-transacao/criar/'.$fase->slug)->assertRedirect('/login');
     }
     
     /** @test */
@@ -638,13 +610,6 @@ class PermissionTest extends TestCase
         $produto = factory(Produto::class)->make();
 
         $response = $this->get('/cobrancas'.'/'.$produto->slug)->assertRedirect('/login');
-    }
-    
-    /** @test */
-    public function redirecionar_de_create_cobrancas_para_login()
-    {
-
-        $response = $this->get('/cobrancas/criar')->assertRedirect('/login');
     }
     
     /** @test */

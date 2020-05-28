@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DocumentostockController extends Controller
 {
+    public function index()
+    {
+        return redirect()->route('dashboard');
+    }
     public function create(){
-        $docStock = new DocStock();
-
-        return view('documentostock.add', compact('docStock'));
+        return redirect()->route('dashboard');
     }
 
     public function store(StoreDocstockRequest $requestDoc, FaseStock $fasestock){
