@@ -25,10 +25,8 @@
         <div class="cards-navigation">
             <div class="title">
                 <h6><b>Documento Stock:</b><br><br><br>
-                  Tipo {{$documentostock->tipo}},  {{$documentostock->tipoPessoal}} {{$documentostock->tipoAcademico}}</h6>
+                  Tipo {{$documentostock->tipo}},  {{$documentostock->tipoDocumento}}</h6>
             </div>
-            <br>
-            <hr>
         </div>
     </div>
 

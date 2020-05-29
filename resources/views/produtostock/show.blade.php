@@ -27,7 +27,7 @@
             <div class="title">
                 <h6>Ficha de Produto - {{ $produtostock->descricao }}</h6>
             </div>
-            <div class="bg-white shadow-sm mb-4 p-4">
+            <div class="bg-white shadow-sm mb-4 p-4" style="border-radius:10px;">
               <div class="table-responsive ">
                 <table nowarp class="table table-bordered table-hover " id="dataTable" style="width:100%">
                     {{-- Cabeçalho da tabela --}}
@@ -60,6 +60,7 @@
                         </tr>
                         @endforeach
                     </tbody>
+                </table>
 
                     <form class="form-group needs-validation pt-3" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase"
                       enctype="multipart/form-data" novalidate>
@@ -69,7 +70,7 @@
                       <div class="tab-content p-2 mt-3" id="myTabContent" style="width: 100%; border-radius:10px;">
                                       {{-- INPUT descricao fasestock --}}
                                       <label for="">Descrição (FaseStock):</label><br>
-                                      <input type="text" class="form-control" name="descricao" id="descricaofase"required><br>
+                                      <input type="text" class="shadow-sm" style="width: 100%;" name="descricao" id="descricaofase"required><br>
                       </div>
 
 
@@ -78,7 +79,6 @@
                           <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Fase Stock</button>
                       </div>
                     </form>
-                </table>
             </div>
           </div>
         </div>
