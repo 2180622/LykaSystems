@@ -60,25 +60,25 @@
                         </tr>
                         @endforeach
                     </tbody>
-
-                    <form class="form-group needs-validation pt-3" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase"
-                      enctype="multipart/form-data" novalidate>
-                      @csrf
-
-
-                      <div class="tab-content p-2 mt-3" id="myTabContent" style="width: 100%; border-radius:10px;">
-                                      {{-- INPUT descricao fasestock --}}
-                                      <label for="">Descrição (FaseStock):</label><br>
-                                      <input type="text" class="form-control" name="descricao" id="descricaofase"required><br>
-                      </div>
-
-
-                      <div class="form-group text-right">
-                          <br><br>
-                          <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Fase Stock</button>
-                      </div>
-                    </form>
                 </table>
+
+                <form class="form-group needs-validation pt-3" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase"
+                    enctype="multipart/form-data" novalidate>
+                    @csrf
+
+
+                    <div class="tab-content p-2 mt-3" id="myTabContent" style="width: 100%; border-radius:10px;">
+                                    {{-- INPUT descricao fasestock --}}
+                                    <label for="">Descrição (FaseStock):</label><br>
+                                    <input type="text" class="form-control" name="descricao" id="descricaofase"required><br>
+                    </div>
+
+
+                    <div class="form-group text-right">
+                        <br><br>
+                        <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Fase Stock</button>
+                    </div>
+                </form>
             </div>
           </div>
         </div>

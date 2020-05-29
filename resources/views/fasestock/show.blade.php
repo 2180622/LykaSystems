@@ -62,36 +62,36 @@
                         </tr>
                         @endforeach
                     </tbody>
+                </table>
 
-                    <form class="form-group needs-validation pt-3" action="{{route('documentostock.store', $fasestock)}}" method="post" id="form_documentos"
-                      enctype="multipart/form-data" novalidate>
-                      @csrf
-                      <div class="tab-content p-2 mt-3" id="myTabContent">
-                          <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
-                              <div class="row">
-                                  <div class="col">
-                                      {{-- INPUT tipo --}}
-                                      <label for="">Tipo (DocumentoStock):</label><br>
-                                      <select type="text" class="form-control" name="tipo" id="tipodocstock"
-                                        onchange="myFunction()" required>
-                                         <option value="Pessoal">Pessoal</option>
-                                         <option value="Academico">Academico</option>
-                                      </select><br><br><br>
-                                      {{-- INPUT tipoDocumento --}}
-                                      <div class="" id="tipoacademico">
-                                        <label for="">Tipo de Documento</label>
-                                        <input class="form-control" name="tipoDocumento" required>
-                                      </div>
-                                  </div>
+                <form class="form-group needs-validation pt-3" action="{{route('documentostock.store', $fasestock)}}" method="post" id="form_documentos"
+                    enctype="multipart/form-data" novalidate>
+                    @csrf
+                    <div class="tab-content p-2 mt-3" id="myTabContent">
+                        <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
+                            <div class="row">
+                                <div class="col">
+                                    {{-- INPUT tipo --}}
+                                    <label for="">Tipo (DocumentoStock):</label><br>
+                                    <select type="text" class="form-control" name="tipo" id="tipodocstock"
+                                    onchange="myFunction()" required>
+                                        <option value="Pessoal">Pessoal</option>
+                                        <option value="Academico">Academico</option>
+                                    </select><br><br><br>
+                                    {{-- INPUT tipoDocumento --}}
+                                    <div class="" id="tipoacademico">
+                                    <label for="">Tipo de Documento</label>
+                                    <input class="form-control" name="tipoDocumento" required>
+                                    </div>
                                 </div>
                             </div>
-                      </div>
-                      <div class="form-group text-right">
-                          <br><br>
-                          <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Documento Stock</button>
-                      </div>
-                    </form>
-                </table>
+                        </div>
+                    </div>
+                    <div class="form-group text-right">
+                        <br><br>
+                        <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Documento Stock</button>
+                    </div>
+                </form>
             </div>
           </div>
         </div>
