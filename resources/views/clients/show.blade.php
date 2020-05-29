@@ -423,7 +423,7 @@
                                     @foreach($novosDocumentos as $docPessoal)
                                     @if($docPessoal->tipo=="Pessoal")
                                     <a class="dropdown-item"
-                                        href="{{route('documento-pessoal.create',["matricula",$docPessoal->idDocNecessario])}}">{{$docPessoal->tipoDocumento}}</a>
+                                        href="{{route('documento-pessoalFromClient.create',$docPessoal->idDocNecessario)}}">{{$docPessoal->tipoDocumento}}</a>
                                     @endif
                                     @endforeach
                                 </div>
@@ -531,7 +531,7 @@
                                     @foreach($novosDocumentos as $docAcademico)
                                     @if($docAcademico->tipo=="Academico")
                                     <a class="dropdown-item"
-                                        href="{{route('documento-pessoal.create',["matricula",$docAcademico->idDocNecessario])}}">{{$docAcademico->tipoDocumento}}</a>
+                                        href="{{route('documento-pessoalFromClient.create',$docAcademico)}}">{{$docAcademico->tipoDocumento}}</a>
                                     @endif
                                     @endforeach
                                 </div>
