@@ -1,6 +1,7 @@
 textarea,
 input[type="text"],
 input[type="date"],
+input[type="month"],
 input[type="email"] {
     border: none;
     resize: none;
