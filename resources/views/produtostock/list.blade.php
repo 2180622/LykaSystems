@@ -7,10 +7,8 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-
 <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
 <link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
-
 @endsection
 
 
@@ -35,17 +33,12 @@
     <div class="float-right">
         <a href="{{route('produtostock.create')}}" class="top-button">Adicionar Produto Stock</a>
     </div>
-
     <br><br>
-
-
     <div class="cards-navigation">
         <div class="title">
             <h6>Listagem de Produtos Stock</h6>
         </div>
-
         <br>
-
         <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px;">
             <div class="row mx-1">
                 <div class="col col-2" style="max-width: 120px">
@@ -60,15 +53,14 @@
                         <input type="text" class="shadow-sm" id="customSearchBox"
                             placeholder="Procurar nos resultados..." aria-label="Procurar">
 
-            </div>
+                    </div>
                 </div>
             </div>
-
 
             <br>
 
             <div class="table-responsive">
-                <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
+                <table id="dataTable" class="table table-bordered table-hover" style="width:100%">
 
                     {{-- Cabeçalho da tabela --}}
                     <thead>

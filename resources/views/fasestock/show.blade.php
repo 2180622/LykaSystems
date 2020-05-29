@@ -5,7 +5,8 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-
+    <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -26,30 +27,9 @@
             <div class="title">
                 <h6>Ficha de Fase - {{ $fasestock->descricao }}</h6>
             </div>
-            <br>
-            <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
-              <div class="col">
-                  <span class="mr-2">Mostrar</span>
-                  <select class="custom-select" id="records_per_page" style="width:80px">
-                      <option selected>10</option>
-                      <option>25</option>
-                      <option>50</option>
-                      <option>100</option>
-                  </select>
-                  <span class="ml-2">por página</span>
-              </div>
-              <div class="col ">
-                  <div class="input-group pl-0 float-right" style="width:250px">
-                      <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
-                      <div class="input-group-append">
-                          <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <hr>
-            <div class="table-responsive " style="overflow:hidden">
-                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+            <div class="bg-white shadow-sm mb-4 p-4">
+              <div class="table-responsive " style="overflow:hidden">
+                <table class="table table-bordered table-hover" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
                     {{-- Cabeçalho da tabela --}}
                     <thead>
                         <tr>
@@ -113,6 +93,7 @@
                     </form>
                 </table>
             </div>
+          </div>
         </div>
     </div>
 

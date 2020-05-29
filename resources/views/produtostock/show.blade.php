@@ -5,7 +5,8 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
@@ -22,34 +23,13 @@
             </a>
         </div>
         <br><br>
-        <div class="cards-navigation">
+        <div class="">
             <div class="title">
                 <h6>Ficha de Produto - {{ $produtostock->descricao }}</h6>
             </div>
-            <br>
-            <div class="row font-weight-bold border p-2 pt-3 pb-3" style="color:#6A74C9">
-              <div class="col">
-                  <span class="mr-2">Mostrar</span>
-                  <select class="custom-select" id="records_per_page" style="width:80px">
-                      <option selected>10</option>
-                      <option>25</option>
-                      <option>50</option>
-                      <option>100</option>
-                  </select>
-                  <span class="ml-2">por página</span>
-              </div>
-              <div class="col ">
-                  <div class="input-group pl-0 float-right" style="width:250px">
-                      <input class="form-control my-0 py-1 red-border" type="text" id="customSearchBox" placeholder="Procurar" aria-label="Procurar">
-                      <div class="input-group-append">
-                          <span class="input-group-text red lighten-3"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <hr>
-            <div class="table-responsive " style="overflow:hidden">
-                <table nowarp class="table table-borderless" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
+            <div class="bg-white shadow-sm mb-4 p-4">
+              <div class="table-responsive ">
+                <table nowarp class="table table-bordered table-hover " id="dataTable" style="width:100%">
                     {{-- Cabeçalho da tabela --}}
                     <thead>
                         <tr>
@@ -62,10 +42,11 @@
                         @foreach ($faseStocks as $faseStock)
                         <tr>
                             {{-- Descrição --}}
-                            <td class="text-center align-middle">{{$faseStock->descricao}}</td>
+                            <td class="text-center align-middle">
+                                <a class="name_link" href="{{route('fasestock.show',$faseStock)}}">{{$faseStock->descricao}}</a>
+                            </td>
                             {{-- OPÇÔES --}}
                             <td class="text-center align-middle">
-                                <a href="{{route('fasestock.show',$faseStock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                                 <a href="{{route('fasestock.edit', $faseStock)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
                                 <form method="POST" role="form" id="{{ $faseStock->idFaseStock }}"
@@ -83,17 +64,15 @@
                     <form class="form-group needs-validation pt-3" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase"
                       enctype="multipart/form-data" novalidate>
                       @csrf
-                      <div class="tab-content p-2 mt-3" id="myTabContent">
-                          <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
-                              <div class="row">
-                                  <div class="col">
+
+
+                      <div class="tab-content p-2 mt-3" id="myTabContent" style="width: 100%; border-radius:10px;">
                                       {{-- INPUT descricao fasestock --}}
                                       <label for="">Descrição (FaseStock):</label><br>
                                       <input type="text" class="form-control" name="descricao" id="descricaofase"required><br>
-                                  </div>
-                                </div>
-                            </div>
                       </div>
+
+
                       <div class="form-group text-right">
                           <br><br>
                           <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Fase Stock</button>
@@ -101,6 +80,7 @@
                     </form>
                 </table>
             </div>
+          </div>
         </div>
     </div>
 
