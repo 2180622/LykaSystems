@@ -68,7 +68,7 @@ class DashboardController extends Controller{
             } else {
             return $bytes . ' B';
             }
-            }
+        }
 
 
        $size = formatSize (folderSize(storage_path('app')));

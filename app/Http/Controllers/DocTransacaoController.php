@@ -73,7 +73,7 @@ class DocTransacaoController extends Controller
             if($fields['img_doc']) {
                 $ficheiro = $fields['img_doc'];
                 $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiro, $nomeficheiro);
                 /* $source = 'client-documents/'.$fase->produto->cliente->idCliente.'/'.$nomeficheiro; */
             }
 
@@ -148,7 +148,7 @@ class DocTransacaoController extends Controller
                 if($fields['img_doc']) {
                     $ficheiro = $fields['img_doc'];
                     $nomeficheiro = 'cliente_'.$fase->produto->cliente->idCliente.'_fase_'.$fase->idFase.'_documento_transacao_'.$documento->idDocTransacao.'.'.$ficheiro->getClientOriginalExtension();
-                    Storage::disk('public')->putFileAs('client-documents/'.$fase->produto->cliente->idCliente.'/', $ficheiro, $nomeficheiro);
+                    Storage::disk('public')->putFileAs('comprovativos-pagamento/', $ficheiro, $nomeficheiro);
                     $documento->comprovativoPagamento = $nomeficheiro;
                 }
             }

@@ -46,8 +46,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/');
         $response->assertSuccessful();
@@ -61,8 +68,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores');
         $response->assertSuccessful();
@@ -74,12 +88,17 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $administrador = factory(User::class)->make();
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
-        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug);
+        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$user->slug);
         $response->assertSuccessful();
         $response->assertViewIs('users.show');
     }
@@ -89,8 +108,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores/criar');
         $response->assertSuccessful();
@@ -102,12 +128,17 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $administrador = factory(User::class)->make();
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
-        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug.'/editar');
+        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$user->slug.'/editar');
         $response->assertSuccessful();
         $response->assertViewIs('users.edit');
     }
@@ -119,8 +150,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes');
         $response->assertSuccessful();
@@ -132,8 +170,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
@@ -148,8 +193,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/criar');
@@ -162,8 +214,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
@@ -178,8 +237,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
@@ -196,8 +262,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca');
         $response->assertSuccessful();
@@ -209,8 +282,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca/criar');
@@ -223,8 +303,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $biblioteca = factory(Biblioteca::class)->make();
         $biblioteca->save();
@@ -241,8 +328,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes');
         $response->assertSuccessful();
@@ -254,8 +348,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
@@ -270,8 +371,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/criar');
@@ -284,8 +392,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
@@ -300,8 +415,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/pesquisa');
@@ -317,7 +439,16 @@ class PermissionUserTest extends TestCase
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
 
-        $user = factory(User::class)->make();
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
+
         $infoDoc = null;
         $infoDoc['numPassaporte'] = 2343423424423;
         $infoDoc['passaportPaisEmi'] = 'Italia';
@@ -342,8 +473,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria');
         $response->assertSuccessful();
@@ -355,8 +493,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
@@ -371,8 +516,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria/criar');
         $response->assertSuccessful();
@@ -384,8 +536,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
@@ -402,8 +561,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores');
         $response->assertSuccessful();
@@ -415,8 +581,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
@@ -432,8 +605,15 @@ class PermissionUserTest extends TestCase
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores/criar');
         $response->assertSuccessful();
@@ -445,8 +625,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
@@ -463,8 +650,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock');
         $response->assertSuccessful();
@@ -476,8 +670,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
@@ -492,8 +693,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock/criar');
@@ -506,8 +714,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
@@ -524,8 +739,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
@@ -540,8 +762,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
@@ -558,8 +787,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
@@ -574,8 +810,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
@@ -592,8 +835,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades');
         $response->assertSuccessful();
@@ -605,8 +855,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
@@ -622,8 +879,15 @@ class PermissionUserTest extends TestCase
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades/criar');
         $response->assertSuccessful();
@@ -635,8 +899,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
@@ -653,8 +924,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos');
         $response->assertSuccessful();
@@ -666,8 +944,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
@@ -682,8 +967,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/criar');
@@ -696,8 +988,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
@@ -714,8 +1013,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda');
         $response->assertSuccessful();
@@ -729,8 +1035,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -745,8 +1058,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -761,8 +1081,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -779,8 +1106,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
@@ -795,8 +1129,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
@@ -811,8 +1152,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
@@ -829,8 +1177,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
@@ -845,8 +1200,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
@@ -861,8 +1223,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
@@ -879,8 +1248,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
@@ -895,8 +1271,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
@@ -913,8 +1296,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos');
         $response->assertSuccessful();
@@ -926,8 +1316,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
@@ -942,8 +1339,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
@@ -958,8 +1362,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
@@ -974,8 +1385,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $relFornResp = factory(RelFornResp::class)->make();
         $relFornResp->save();
@@ -990,8 +1408,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
@@ -1005,8 +1430,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->subagente->tipo = 'Subagente';
@@ -1023,8 +1455,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
@@ -1039,8 +1478,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
@@ -1057,8 +1503,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/reportar-problema');
         $response->assertSuccessful();
@@ -1072,8 +1525,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas');
         $response->assertSuccessful();
@@ -1085,8 +1545,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -1101,8 +1568,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
@@ -1117,8 +1591,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
@@ -1133,8 +1614,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 1,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
@@ -1151,8 +1639,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/');
         $response->assertSuccessful();
@@ -3353,7 +3848,7 @@ class PermissionUserTest extends TestCase
     }
     /*****************************************         Sub-Agente         ****************************************/
     /** @test */
-    public function admin_ir_para_dashboard()
+    public function sub_agente_ir_para_dashboard()
     {
         $this->withoutExceptionHandling();
 
@@ -3368,7 +3863,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_administrador()
+    public function sub_agente_ir_para_lista_administrador()
     {
         $this->withoutExceptionHandling();
 
@@ -3381,7 +3876,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_administrador()
+    public function sub_agente_ir_para_show_administrador()
     {
         $this->withoutExceptionHandling();
 
@@ -3396,7 +3891,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_administrador()
+    public function sub_agente_ir_para_create_administrador()
     {
         $this->withoutExceptionHandling();
 
@@ -3409,7 +3904,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_administrador()
+    public function sub_agente_ir_para_edit_administrador()
     {
         $this->withoutExceptionHandling();
 
@@ -3426,7 +3921,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_agente()
+    public function sub_agente_ir_para_lista_agente()
     {
         $this->withoutExceptionHandling();
 
@@ -3439,7 +3934,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_agentes()
+    public function sub_agente_ir_para_show_agentes()
     {
         $this->withoutExceptionHandling();
 
@@ -3455,7 +3950,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_agentes()
+    public function sub_agente_ir_para_create_agentes()
     {
         $this->withoutExceptionHandling();
 
@@ -3469,7 +3964,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_agentes()
+    public function sub_agente_ir_para_edit_agentes()
     {
         $this->withoutExceptionHandling();
 
@@ -3485,7 +3980,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_print_agentes()
+    public function sub_agente_ir_para_print_agentes()
     {
         $this->withoutExceptionHandling();
 
@@ -3503,7 +3998,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test *//*
-    public function admin_ir_para_lista_biblioteca()
+    public function sub_agente_ir_para_lista_biblioteca()
     {
         $this->withoutExceptionHandling();
 
@@ -3516,7 +4011,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_biblioteca()
+    public function sub_agente_ir_para_create_biblioteca()
     {
         $this->withoutExceptionHandling();
 
@@ -3530,7 +4025,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_biblioteca()
+    public function sub_agente_ir_para_edit_biblioteca()
     {
         $this->withoutExceptionHandling();
 
@@ -3548,7 +4043,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_cliente()
+    public function sub_agente_ir_para_lista_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -3561,7 +4056,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_cliente()
+    public function sub_agente_ir_para_show_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -3577,7 +4072,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_cliente()
+    public function sub_agente_ir_para_create_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -3591,7 +4086,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_cliente()
+    public function sub_agente_ir_para_edit_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -3607,7 +4102,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_pesquisa_cliente()
+    public function sub_agente_ir_para_pesquisa_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -3621,7 +4116,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_print_cliente()
+    public function sub_agente_ir_para_print_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -3649,7 +4144,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_conta()
+    public function sub_agente_ir_para_lista_conta()
     {
         $this->withoutExceptionHandling();
 
@@ -3662,7 +4157,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_conta()
+    public function sub_agente_ir_para_show_conta()
     {
         $this->withoutExceptionHandling();
 
@@ -3678,7 +4173,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_conta()
+    public function sub_agente_ir_para_create_conta()
     {
         $this->withoutExceptionHandling();
 
@@ -3691,7 +4186,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_conta()
+    public function sub_agente_ir_para_edit_conta()
     {
         $this->withoutExceptionHandling();
 
@@ -3709,7 +4204,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_fornecedor()
+    public function sub_agente_ir_para_lista_fornecedor()
     {
         $this->withoutExceptionHandling();
 
@@ -3722,7 +4217,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_fornecedor()
+    public function sub_agente_ir_para_show_fornecedor()
     {
         $this->withoutExceptionHandling();
 
@@ -3738,7 +4233,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_fornecedor()
+    public function sub_agente_ir_para_create_fornecedor()
     {
 
         $this->withoutExceptionHandling();
@@ -3752,7 +4247,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_fornecedor()
+    public function sub_agente_ir_para_edit_fornecedor()
     {
         $this->withoutExceptionHandling();
 
@@ -3770,7 +4265,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_produto_stock()
+    public function sub_agente_ir_para_lista_produto_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -3783,7 +4278,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_produto_stock()
+    public function sub_agente_ir_para_show_produto_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -3799,7 +4294,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_produto_stock()
+    public function sub_agente_ir_para_create_produto_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -3813,7 +4308,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_produto_stock()
+    public function sub_agente_ir_para_edit_produto_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -3831,7 +4326,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_show_fase_stock()
+    public function sub_agente_ir_para_show_fase_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -3847,7 +4342,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_fase_stock()
+    public function sub_agente_ir_para_edit_fase_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -3865,7 +4360,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_show_doc_stock()
+    public function sub_agente_ir_para_show_doc_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -3881,7 +4376,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_stock()
+    public function sub_agente_ir_para_edit_doc_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -3899,7 +4394,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_universidade()
+    public function sub_agente_ir_para_lista_universidade()
     {
         $this->withoutExceptionHandling();
 
@@ -3912,7 +4407,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_universidade()
+    public function sub_agente_ir_para_show_universidade()
     {
         $this->withoutExceptionHandling();
 
@@ -3928,7 +4423,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_universidade()
+    public function sub_agente_ir_para_create_universidade()
     {
 
         $this->withoutExceptionHandling();
@@ -3942,7 +4437,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_universidade()
+    public function sub_agente_ir_para_edit_universidade()
     {
         $this->withoutExceptionHandling();
 
@@ -3960,7 +4455,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_contacto()
+    public function sub_agente_ir_para_lista_contacto()
     {
         $this->withoutExceptionHandling();
 
@@ -3973,7 +4468,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_contacto()
+    public function sub_agente_ir_para_show_contacto()
     {
         $this->withoutExceptionHandling();
 
@@ -3989,7 +4484,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_contacto()
+    public function sub_agente_ir_para_create_contacto()
     {
         $this->withoutExceptionHandling();
 
@@ -4003,7 +4498,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_contacto()
+    public function sub_agente_ir_para_edit_contacto()
     {
         $this->withoutExceptionHandling();
 
@@ -4021,7 +4516,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_agenda()
+    public function sub_agente_ir_para_lista_agenda()
     {
         $this->withoutExceptionHandling();
 
@@ -4036,7 +4531,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_show_produto()
+    public function sub_agente_ir_para_show_produto()
     {
         $this->withoutExceptionHandling();
 
@@ -4052,7 +4547,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_produto()
+    public function sub_agente_ir_para_create_produto()
     {
         $this->withoutExceptionHandling();
 
@@ -4068,7 +4563,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_produto()
+    public function sub_agente_ir_para_edit_produto()
     {
         $this->withoutExceptionHandling();
 
@@ -4086,7 +4581,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_create_doc_academico()
+    public function sub_agente_ir_para_create_doc_academico()
     {
         $this->withoutExceptionHandling();
 
@@ -4102,7 +4597,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_academico()
+    public function sub_agente_ir_para_edit_doc_academico()
     {
         $this->withoutExceptionHandling();
 
@@ -4118,7 +4613,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_verifica_doc_academico()
+    public function sub_agente_ir_para_verifica_doc_academico()
     {
         $this->withoutExceptionHandling();
 
@@ -4136,7 +4631,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_create_doc_pessoal()
+    public function sub_agente_ir_para_create_doc_pessoal()
     {
         $this->withoutExceptionHandling();
 
@@ -4152,7 +4647,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_pessoal()
+    public function sub_agente_ir_para_edit_doc_pessoal()
     {
         $this->withoutExceptionHandling();
 
@@ -4168,7 +4663,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_verifica_doc_pessoal()
+    public function sub_agente_ir_para_verifica_doc_pessoal()
     {
         $this->withoutExceptionHandling();
 
@@ -4186,7 +4681,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_create_doc_transacao()
+    public function sub_agente_ir_para_create_doc_transacao()
     {
         $this->withoutExceptionHandling();
 
@@ -4202,7 +4697,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_transacao()
+    public function sub_agente_ir_para_edit_doc_transacao()
     {
         $this->withoutExceptionHandling();
 
@@ -4220,7 +4715,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_pago_responsabilidade()
+    public function sub_agente_ir_para_lista_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4233,7 +4728,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_pago_responsabilidade()
+    public function sub_agente_ir_para_show_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4249,7 +4744,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_agente_pago_responsabilidade()
+    public function sub_agente_ir_para_agente_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4265,7 +4760,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_cliente_pago_responsabilidade()
+    public function sub_agente_ir_para_cliente_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4281,7 +4776,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_fornecedor_pago_responsabilidade()
+    public function sub_agente_ir_para_fornecedor_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4297,7 +4792,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_download_pago_responsabilidade()
+    public function sub_agente_ir_para_download_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4312,7 +4807,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_subagente_pago_responsabilidade()
+    public function sub_agente_ir_para_subagente_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4330,7 +4825,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_universidade_principal_pago_responsabilidade()
+    public function sub_agente_ir_para_universidade_principal_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4346,7 +4841,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_universidade_secundaria_pago_responsabilidade()
+    public function sub_agente_ir_para_universidade_secundaria_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -4364,7 +4859,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_relatorio_problema()
+    public function sub_agente_ir_para_lista_relatorio_problema()
     {
         $this->withoutExceptionHandling();
 
@@ -4379,7 +4874,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_cobrancas()
+    public function sub_agente_ir_para_lista_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -4392,7 +4887,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_cobrancas()
+    public function sub_agente_ir_para_show_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -4408,7 +4903,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_cobrancas()
+    public function sub_agente_ir_para_edit_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -4424,7 +4919,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test *//*
-    public function admin_ir_para_download_cobrancas()
+    public function sub_agente_ir_para_download_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -4440,7 +4935,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_charge_cobrancas()
+    public function sub_agente_ir_para_show_charge_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -4456,7 +4951,7 @@ class PermissionUserTest extends TestCase
     }
     /******************************************         Cliente         ******************************************/
     /** @test */
-    public function admin_ir_para_dashboard()
+    public function cliente_ir_para_dashboard()
     {
         $this->withoutExceptionHandling();
 
@@ -4471,7 +4966,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_administrador()
+    public function cliente_ir_para_lista_administrador()
     {
         $this->withoutExceptionHandling();
 
@@ -4484,7 +4979,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_administrador()
+    public function cliente_ir_para_show_administrador()
     {
         $this->withoutExceptionHandling();
 
@@ -4499,7 +4994,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_administrador()
+    public function cliente_ir_para_create_administrador()
     {
         $this->withoutExceptionHandling();
 
@@ -4512,7 +5007,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_administrador()
+    public function cliente_ir_para_edit_administrador()
     {
         $this->withoutExceptionHandling();
 
@@ -4529,7 +5024,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_agente()
+    public function cliente_ir_para_lista_agente()
     {
         $this->withoutExceptionHandling();
 
@@ -4542,7 +5037,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_agentes()
+    public function cliente_ir_para_show_agentes()
     {
         $this->withoutExceptionHandling();
 
@@ -4558,7 +5053,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_agentes()
+    public function cliente_ir_para_create_agentes()
     {
         $this->withoutExceptionHandling();
 
@@ -4572,7 +5067,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_agentes()
+    public function cliente_ir_para_edit_agentes()
     {
         $this->withoutExceptionHandling();
 
@@ -4588,7 +5083,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_print_agentes()
+    public function cliente_ir_para_print_agentes()
     {
         $this->withoutExceptionHandling();
 
@@ -4606,7 +5101,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test *//*
-    public function admin_ir_para_lista_biblioteca()
+    public function cliente_ir_para_lista_biblioteca()
     {
         $this->withoutExceptionHandling();
 
@@ -4619,7 +5114,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_biblioteca()
+    public function cliente_ir_para_create_biblioteca()
     {
         $this->withoutExceptionHandling();
 
@@ -4633,7 +5128,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_biblioteca()
+    public function cliente_ir_para_edit_biblioteca()
     {
         $this->withoutExceptionHandling();
 
@@ -4651,7 +5146,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_cliente()
+    public function cliente_ir_para_lista_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -4664,7 +5159,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_cliente()
+    public function cliente_ir_para_show_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -4680,7 +5175,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_cliente()
+    public function cliente_ir_para_create_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -4694,7 +5189,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_cliente()
+    public function cliente_ir_para_edit_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -4710,7 +5205,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_pesquisa_cliente()
+    public function cliente_ir_para_pesquisa_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -4724,7 +5219,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_print_cliente()
+    public function cliente_ir_para_print_cliente()
     {
         $this->withoutExceptionHandling();
 
@@ -4752,7 +5247,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_conta()
+    public function cliente_ir_para_lista_conta()
     {
         $this->withoutExceptionHandling();
 
@@ -4765,7 +5260,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_conta()
+    public function cliente_ir_para_show_conta()
     {
         $this->withoutExceptionHandling();
 
@@ -4781,7 +5276,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_conta()
+    public function cliente_ir_para_create_conta()
     {
         $this->withoutExceptionHandling();
 
@@ -4794,7 +5289,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_conta()
+    public function cliente_ir_para_edit_conta()
     {
         $this->withoutExceptionHandling();
 
@@ -4812,7 +5307,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_fornecedor()
+    public function cliente_ir_para_lista_fornecedor()
     {
         $this->withoutExceptionHandling();
 
@@ -4825,7 +5320,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_fornecedor()
+    public function cliente_ir_para_show_fornecedor()
     {
         $this->withoutExceptionHandling();
 
@@ -4841,7 +5336,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_fornecedor()
+    public function cliente_ir_para_create_fornecedor()
     {
 
         $this->withoutExceptionHandling();
@@ -4855,7 +5350,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_fornecedor()
+    public function cliente_ir_para_edit_fornecedor()
     {
         $this->withoutExceptionHandling();
 
@@ -4873,7 +5368,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_produto_stock()
+    public function cliente_ir_para_lista_produto_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -4886,7 +5381,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_produto_stock()
+    public function cliente_ir_para_show_produto_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -4902,7 +5397,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_produto_stock()
+    public function cliente_ir_para_create_produto_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -4916,7 +5411,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_produto_stock()
+    public function cliente_ir_para_edit_produto_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -4934,7 +5429,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_show_fase_stock()
+    public function cliente_ir_para_show_fase_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -4950,7 +5445,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_fase_stock()
+    public function cliente_ir_para_edit_fase_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -4968,7 +5463,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_show_doc_stock()
+    public function cliente_ir_para_show_doc_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -4984,7 +5479,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_stock()
+    public function cliente_ir_para_edit_doc_stock()
     {
         $this->withoutExceptionHandling();
 
@@ -5002,7 +5497,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_universidade()
+    public function cliente_ir_para_lista_universidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5015,7 +5510,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_universidade()
+    public function cliente_ir_para_show_universidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5031,7 +5526,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_universidade()
+    public function cliente_ir_para_create_universidade()
     {
 
         $this->withoutExceptionHandling();
@@ -5045,7 +5540,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_universidade()
+    public function cliente_ir_para_edit_universidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5063,7 +5558,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_contacto()
+    public function cliente_ir_para_lista_contacto()
     {
         $this->withoutExceptionHandling();
 
@@ -5076,7 +5571,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_contacto()
+    public function cliente_ir_para_show_contacto()
     {
         $this->withoutExceptionHandling();
 
@@ -5092,7 +5587,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_contacto()
+    public function cliente_ir_para_create_contacto()
     {
         $this->withoutExceptionHandling();
 
@@ -5106,7 +5601,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_contacto()
+    public function cliente_ir_para_edit_contacto()
     {
         $this->withoutExceptionHandling();
 
@@ -5124,7 +5619,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_agenda()
+    public function cliente_ir_para_lista_agenda()
     {
         $this->withoutExceptionHandling();
 
@@ -5139,7 +5634,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_show_produto()
+    public function cliente_ir_para_show_produto()
     {
         $this->withoutExceptionHandling();
 
@@ -5155,7 +5650,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_produto()
+    public function cliente_ir_para_create_produto()
     {
         $this->withoutExceptionHandling();
 
@@ -5171,7 +5666,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_produto()
+    public function cliente_ir_para_edit_produto()
     {
         $this->withoutExceptionHandling();
 
@@ -5189,7 +5684,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_create_doc_academico()
+    public function cliente_ir_para_create_doc_academico()
     {
         $this->withoutExceptionHandling();
 
@@ -5205,7 +5700,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_academico()
+    public function cliente_ir_para_edit_doc_academico()
     {
         $this->withoutExceptionHandling();
 
@@ -5221,7 +5716,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_verifica_doc_academico()
+    public function cliente_ir_para_verifica_doc_academico()
     {
         $this->withoutExceptionHandling();
 
@@ -5239,7 +5734,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_create_doc_pessoal()
+    public function cliente_ir_para_create_doc_pessoal()
     {
         $this->withoutExceptionHandling();
 
@@ -5255,7 +5750,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_pessoal()
+    public function cliente_ir_para_edit_doc_pessoal()
     {
         $this->withoutExceptionHandling();
 
@@ -5271,7 +5766,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_verifica_doc_pessoal()
+    public function cliente_ir_para_verifica_doc_pessoal()
     {
         $this->withoutExceptionHandling();
 
@@ -5289,7 +5784,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_create_doc_transacao()
+    public function cliente_ir_para_create_doc_transacao()
     {
         $this->withoutExceptionHandling();
 
@@ -5305,7 +5800,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_transacao()
+    public function cliente_ir_para_edit_doc_transacao()
     {
         $this->withoutExceptionHandling();
 
@@ -5323,7 +5818,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_pago_responsabilidade()
+    public function cliente_ir_para_lista_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5336,7 +5831,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_pago_responsabilidade()
+    public function cliente_ir_para_show_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5352,7 +5847,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_agente_pago_responsabilidade()
+    public function cliente_ir_para_agente_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5368,7 +5863,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_cliente_pago_responsabilidade()
+    public function cliente_ir_para_cliente_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5384,7 +5879,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_fornecedor_pago_responsabilidade()
+    public function cliente_ir_para_fornecedor_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5400,7 +5895,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_download_pago_responsabilidade()
+    public function cliente_ir_para_download_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5415,7 +5910,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_subagente_pago_responsabilidade()
+    public function cliente_ir_para_subagente_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5433,7 +5928,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_universidade_principal_pago_responsabilidade()
+    public function cliente_ir_para_universidade_principal_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5449,7 +5944,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_universidade_secundaria_pago_responsabilidade()
+    public function cliente_ir_para_universidade_secundaria_pago_responsabilidade()
     {
         $this->withoutExceptionHandling();
 
@@ -5467,7 +5962,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_relatorio_problema()
+    public function cliente_ir_para_lista_relatorio_problema()
     {
         $this->withoutExceptionHandling();
 
@@ -5482,7 +5977,7 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_cobrancas()
+    public function cliente_ir_para_lista_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -5495,7 +5990,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_cobrancas()
+    public function cliente_ir_para_show_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -5511,7 +6006,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_edit_cobrancas()
+    public function cliente_ir_para_edit_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -5527,7 +6022,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test *//*
-    public function admin_ir_para_download_cobrancas()
+    public function cliente_ir_para_download_cobrancas()
     {
         $this->withoutExceptionHandling();
 
@@ -5543,7 +6038,7 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_show_charge_cobrancas()
+    public function cliente_ir_para_show_charge_cobrancas()
     {
         $this->withoutExceptionHandling();
 
