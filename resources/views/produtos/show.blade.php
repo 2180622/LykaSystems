@@ -344,7 +344,7 @@
                                             @else
                                                 <div><span class="text-secondary">{{$documento->tipoDocumento}}: <span class="text-danger">Em falta</span></span></div><br>
                                             @endif
-                                            <div><br>
+                                            <div>
                                                 <a href="{{route('documento-pessoal.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
                                             </div><br>
                                         @endif
@@ -416,7 +416,7 @@
                                             @else
                                                 <div><span class="text-secondary">{{$documento->tipoDocumento}}: <span class="text-danger">Em falta</span></span></div><br>
                                             @endif
-                                            <div><br>
+                                            <div>
                                                 <a href="{{route('documento-academico.create',[$fase,$documento])}}" class="top-button mr-2">Adicionar {{$documento->tipoDocumento}}</a>
                                             </div><br>
                                         @endif
