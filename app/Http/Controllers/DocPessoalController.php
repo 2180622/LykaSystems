@@ -38,6 +38,65 @@ class DocPessoalController extends Controller
 
 
 
+
+
+
+
+
+    /**
+    * Display the specified resource.
+    *
+    * @param  \App\Cliente  $client
+    * @return \Illuminate\Http\Response
+    */
+    public function createFromClient(DocNecessario $docnecessario)
+    {
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+
+            $documento = new DocPessoal;
+            $tipoPAT = $docnecessario->tipo;
+            $tipo = $docnecessario->tipoDocumento;
+
+            return view('documentos.add',compact('tipoPAT','tipo','documento', 'docnecessario'));
+        }else{
+            return redirect()->route('produtos.show',$fase->produto??'');
+        }
+
+
+    }
+
+
+    /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Cliente  $client
+    * @return \Illuminate\Http\Response
+    */
+    public function editFromClient(DocPessoal $documento)
+    {
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+            $infoDoc = (array)json_decode($documento->info);
+            $infoKeys = array_keys($infoDoc);
+            $tipoPAT = 'Pessoal';
+            $tipo = $documento->tipo;
+
+            return view('documentos.edit', compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
+        }else{
+            return redirect()->route('produtos.show',$documento->fase->produto);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     /***********************************************************************//*
     *
     * @param  \Illuminate\Http\Request  $request

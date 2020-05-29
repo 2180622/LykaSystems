@@ -44,7 +44,7 @@ return [
         ],
 
         /**************************************************************************************** */
-        
+
         'testing_db' => [
             'driver' => 'mysql',
             'host' => env('TEST_DB_HOST', 'localhost'),
@@ -56,7 +56,7 @@ return [
             'prefix' => '',
             'strict' => false,
         ],
- 
+
         /** Production or database DB **/
         'db' => [
             'driver' => 'mysql',
@@ -85,7 +85,7 @@ return [
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => true,
+            'strict' => false, /* Query conditions OK*/
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),

@@ -339,7 +339,7 @@
                                 </div>
                                 <br>
                                 <div><span class="text-secondary">Data de validade:</span>
-                                    {{$client->validade_docOficial}}
+                                    {{ date('M-Y', strtotime($client->validade_docOficial)) }}
                                 </div>
                             </div>
 
@@ -356,7 +356,7 @@
 
                                 {{-- dataValidPP --}}
                                 <div><span class="text-secondary my-3">Data de validade do passaporte:</span>
-                                    {{$passaporteData->dataValidPP}}</div><br>
+                                    {{ date('M-Y', strtotime($passaporteData->dataValidPP)) }} </div><br>
 
                                 {{-- passaportPaisEmi --}}
                                 <div><span class="text-secondary my-3">Pais emissor do passaporte:</span>
@@ -423,7 +423,7 @@
                                     @foreach($novosDocumentos as $docPessoal)
                                     @if($docPessoal->tipo=="Pessoal")
                                     <a class="dropdown-item"
-                                        href="{{route('documento-pessoal.create',["matricula",$docPessoal->idDocNecessario])}}">{{$docPessoal->tipoDocumento}}</a>
+                                        href="{{route('documento-pessoalFromClient.create',$docPessoal->idDocNecessario)}}">{{$docPessoal->tipoDocumento}}</a>
                                     @endif
                                     @endforeach
                                 </div>
@@ -491,29 +491,24 @@
                             @if ($documentosAcademicos!=null)
                             <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                                 @foreach ($documentosAcademicos as $docAcademico)
-                                @if ($docAcademico->imagem != null)
-                                <li class="my-3">
-
                                     @if ($docAcademico->imagem != null)
-                                    <i class="far fa-address-card mr-2"></i>
-                                    <a class="name_link" target="_blank"
-                                        href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
+                                    <li class="my-3">
 
-                                    <span
-                                        class="text-secondary"><small>({{ date('d-M-y', strtotime($docAcademico->created_at)) }})</small></span>
+                                        @if ($docAcademico->imagem != null)
+                                            <i class="far fa-address-card mr-2"></i>
+                                            <a class="name_link" target="_blank" href="{{Storage::disk('public')->url('client-documents/'.$client->idCliente .'/'. $docAcademico->imagem)}}">{{$docAcademico->tipo}}</a>
+                                            <span class="text-secondary"><small>({{ date('d-M-y', strtotime($docAcademico->created_at)) }})</small></span>
 
-                                    @if($docAcademico->verificacao==0)
-                                    <span class="text-danger"><small><i class="fas fa-exclamation ml-1 mr-2"
-                                                title="Aguarda validação"></i></small></span>
-                                    @else
-                                    <span class="text-success"><small><i class="fas fa-check ml-1 mr-1"
-                                                title="Ficheiro validado"></i></small></span>
+                                            @if($docAcademico->verificacao==0)
+                                                <span class="text-danger"><small><i class="fas fa-exclamation ml-1 mr-2" title="Aguarda validação"></i></small></span>
+                                            @else
+                                                <span class="text-success"><small><i class="fas fa-check ml-1 mr-1" title="Ficheiro validado"></i></small></span>
+                                            @endif
+
+                                        @endif
+
+                                    </li>
                                     @endif
-
-                                    @endif
-
-                                </li>
-                                @endif
                                 @endforeach
 
                             </ul>
@@ -536,7 +531,7 @@
                                     @foreach($novosDocumentos as $docAcademico)
                                     @if($docAcademico->tipo=="Academico")
                                     <a class="dropdown-item"
-                                        href="{{route('documento-pessoal.create',["matricula",$docAcademico->idDocNecessario])}}">{{$docAcademico->tipoDocumento}}</a>
+                                        href="{{route('documento-pessoalFromClient.create',$docAcademico)}}">{{$docAcademico->tipoDocumento}}</a>
                                     @endif
                                     @endforeach
                                 </div>

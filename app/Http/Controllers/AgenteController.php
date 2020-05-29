@@ -192,7 +192,6 @@ class AgenteController extends Controller
         $IBAN = $agent->IBAN;
 
 
-
         /* lista de alunos do agente Através de produtos  */
        $clients = Cliente::
         selectRaw("Cliente.*")
@@ -202,6 +201,7 @@ class AgenteController extends Controller
         ->groupBy('Cliente.idCliente')
         ->orderBy('Cliente.idCliente','asc')
         ->get();
+        
 
         if ($clients->isEmpty()) {
         /* lista de alunos do agente associação na ficha de cliente  */
@@ -209,7 +209,6 @@ class AgenteController extends Controller
         where('idAgente', '=', $agent->idAgente)
         ->get();
         }
-
 
         if ($clients->isEmpty()) {
             $clients=null;

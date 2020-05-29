@@ -242,7 +242,7 @@
                         </div>
                         <div class="col">
                             <label for="validade_docOficial">Data de validade:</label><br>
-                            <input type="date" class="form-control" name="validade_docOficial"
+                            <input type="month" class="form-control" name="validade_docOficial"
                                 id="validade_docOficial"
                                 value="{{old('validade_docOficial',$client->validade_docOficial)}}" >
                         </div>
@@ -282,7 +282,7 @@
                                 @else
                                     <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                                     <div id="name_doc_id_file">
-                                    <div>Ficheiro guardado</div>
+                                    <div>{{$docOfficial->imagem}}</div>
                                 @endif
 
                             </div>
@@ -328,7 +328,7 @@
                         <div class="col" style="min-width: 285px!important">
                             {{-- INUPUT dataValidPP --}}
                             <label for="dataValidPP">Data de validade do passaporte:</label><br>
-                            <input type="date" class="form-control" name="dataValidPP" id="dataValidPP"
+                            <input type="month" class="form-control" name="dataValidPP" id="dataValidPP"
                                 value="{{$passaporteData->dataValidPP ?? ''}}" >
                         </div>
                     </div>
