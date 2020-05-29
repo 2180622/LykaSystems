@@ -9,10 +9,12 @@ use App\User;
 
 class LoginEmailConfirmation extends Mailable
 {
+    use Queueable, SerializesModels;
+
     public $name;
     public $login_key;
 
-    public function __construct(string $name, string $login_key, User $user)
+    public function __construct(string $name, string $login_key)
     {
         $this->name = $name;
         $login_key = rand(10000 , 99999);

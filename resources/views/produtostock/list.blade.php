@@ -112,9 +112,6 @@
 
 {{-- Utilização de scripts: --}}
 @section('scripts')
-
-
-
 <script src="{{asset('/js/produtoStock.js')}}"></script>
 
 @endsection
