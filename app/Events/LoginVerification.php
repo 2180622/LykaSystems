@@ -2,8 +2,12 @@
 namespace App\Events;
 
 use App\User;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Foundation\Events\Dispatchable;
 
-class LoginVerification{
+class LoginVerification
+{
+    use Dispatchable, SerializesModels;
 
     public $user;
 

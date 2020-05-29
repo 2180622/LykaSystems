@@ -68,7 +68,7 @@
 
 
                       <div class="tab-content p-2 mt-3" id="myTabContent" style="width: 100%; border-radius:10px;">
-                                      {{-- INPUT descricao fasestock --}}
+                                    {{-- INPUT descricao fasestock --}}
                                       <label for="">Descrição (FaseStock):</label><br>
                                       <input type="text" class="shadow-sm" style="width: 100%;" name="descricao" id="descricaofase"required><br>
                       </div>

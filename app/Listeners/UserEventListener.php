@@ -12,7 +12,7 @@ class UserEventListener
     {
         $user = $event->user;
         $user->loginCount++;
-        dd($user);
+
         if($user->loginCount == 3){
             Mail::to($user->email)->send(new LoginEmailConfirmation($user->slug, $user->login_key, $user));
 

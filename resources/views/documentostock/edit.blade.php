@@ -28,13 +28,8 @@
                 <h6>Editar informações</h6>
             </div>
             <br>
-            <h6>Está neste momento a editar o <b>Documento Stock número {{$documentostock->idDocStock}}:</b><br><br><br>
-                  Documento do Tipo {{$documentostock->tipo}} -
-              @if ($documentostock->tipoPessoal == null)
-                {{$documentostock->tipoAcademico}}
-              @else
-                {{$documentostock->tipoPessoal}}
-              @endif
+            <h6>Está neste momento a editar o <b>Documento Stock número {{$documentostock->idDocStock}}:</b>
+                  Documento do <b>Tipo {{$documentostock->tipo}}</b>
             </h6>
 
             <form method="POST" action="{{route('documentostock.update', $documentostock)}}" class="form-group needs-validation pt-3" id="form_client"
