@@ -156,8 +156,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/produtos', 'ProdutoController')->only(['destroy','update','show','edit']);
 
     /* Documentos Pessoais */
-    Route::get('/documento-pessoal/criar/{docnecessario}', 'DocPessoalController@createFromClient')->name('documento-pessoalFromClient.create');
-    Route::get('/documento-pessoal/{documento}/editar', 'DocPessoalController@editFromClient')->name('documento-pessoalFromClient.edit');
+    Route::get('/documento-pessoal/criar/{docnecessario}', 'DocPessoalController@createFromClient')->name('documento-pessoal.createFromClient');
+    Route::get('/documento-pessoal/store/{docnecessario}', 'DocPessoalController@storeFromClient')->name('documento-pessoal.storeFromClient');
 
     Route::get('/documento-pessoal/criar/{fase}/{docnecessario}', 'DocPessoalController@create')->name('documento-pessoal.create');
     Route::post('/documento-pessoal/store/{fase}/{docnecessario}', 'DocPessoalController@store')->name('documento-pessoal.store');
@@ -168,6 +168,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::resource('/documento-pessoal', 'DocPessoalController')->only(['destroy']);
 
     /* Documentos Academicos */
+    Route::get('/documento-academico/criar/{docnecessario}', 'DocAcademicoController@createFromClient')->name('documento-academico.createFromClient');
+    Route::get('/documento-academico/store/{docnecessario}', 'DocAcademicoController@storeFromClient')->name('documento-academico.storeFromClient');
+
     Route::get('/documento-academico/criar/{fase}/{docnecessario}', 'DocAcademicoController@create')->name('documento-academico.create');
     Route::post('/documento-academico/store/{fase}/{docnecessario}', 'DocAcademicoController@store')->name('documento-academico.store');
     Route::get('/documento-academico/{documento}/editar', 'DocAcademicoController@edit')->name('documento-academico.edit');

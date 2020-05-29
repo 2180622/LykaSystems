@@ -31,12 +31,20 @@
         </div>
         <br>
         <div class="payment-card shadow-sm">
-            @if($tipoPAT == 'Pessoal')
-                <form action="{{route('documento-pessoal.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
-            @elseif($tipoPAT == 'Academico')
-                <form action="{{route('documento-academico.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+            @if($fase)
+                @if($tipoPAT == 'Pessoal')
+                    <form action="{{route('documento-pessoal.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+                @elseif($tipoPAT == 'Academico')
+                    <form action="{{route('documento-academico.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+                @else
+                    <form action="{{route('documento-transacao.store', $fase)}}" method="post" enctype="multipart/form-data">
+                @endif
             @else
-                <form action="{{route('documento-transacao.store', $fase)}}" method="post" enctype="multipart/form-data">
+                @if($tipoPAT == 'Pessoal')
+                    <form action="{{route('documento-pessoal.storeFromClient', $docnecessario)}}" method="post" enctype="multipart/form-data">
+                @else
+                    <form action="{{route('documento-academico.storeFromClient', $docnecessario)}}" method="post" enctype="multipart/form-data">
+                @endif
             @endif
                 @csrf
                 <div class="row">
