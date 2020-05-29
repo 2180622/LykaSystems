@@ -96,10 +96,6 @@
                                         onchange="myFunction()" required>
                                          <option value="Pessoal">Pessoal</option>
                                          <option value="Academico">Academico</option>
-                                         <option value="Financeiro">Financeiro</option>
-                                         <option value="Familiar">Familiar</option>
-                                         <option value="País">País</option>
-                                         <option value="Outros">Outro</option>
                                       </select><br><br><br>
                                       {{-- INPUT tipoDocumento --}}
                                       <div class="" id="tipoacademico">
