@@ -27,7 +27,7 @@
             <div class="title">
                 <h6>Ficha de Fase - {{ $fasestock->descricao }}</h6>
             </div>
-            <div class="bg-white shadow-sm mb-4 p-4">
+            <div class="bg-white shadow-sm mb-4 p-4" style="border-radius:10px;">
               <div class="table-responsive " style="overflow:hidden">
                 <table class="table table-bordered table-hover" id="dataTable" width="100%" row-border="0" style="overflow:hidden;">
                     {{-- Cabeçalho da tabela --}}
@@ -43,12 +43,11 @@
                         @foreach ($docstocks as $docstock)
                         <tr>
                             {{-- Tipo --}}
-                            <td >{{$docstock->tipo}}</td>
+                            <td><a class="name_link" href="{{route('documentostock.show',$docstock)}}">{{$docstock->tipo}}</a></td>
                             {{-- Documento --}}
-                            <td>{{$docstock->tipoDocumento}}</td>
+                            <td><a class="name_link" href="{{route('documentostock.show',$docstock)}}">{{$docstock->tipoDocumento}}</a></td>
                             {{-- OPÇÔES --}}
                             <td class="text-center align-middle">
-                                <a href="{{route('documentostock.show',$docstock)}}" class="btn_list_opt " title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
                                 <a href="{{route('documentostock.edit', $docstock)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
                                 <form method="POST" role="form" id="{{ $docstock->idDocStock }}"
@@ -64,34 +63,32 @@
                     </tbody>
                 </table>
 
-                <form class="form-group needs-validation pt-3" action="{{route('documentostock.store', $fasestock)}}" method="post" id="form_documentos"
-                    enctype="multipart/form-data" novalidate>
-                    @csrf
-                    <div class="tab-content p-2 mt-3" id="myTabContent">
-                        <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
-                            <div class="row">
-                                <div class="col">
-                                    {{-- INPUT tipo --}}
-                                    <label for="">Tipo (DocumentoStock):</label><br>
-                                    <select type="text" class="form-control" name="tipo" id="tipodocstock"
-                                    onchange="myFunction()" required>
-                                        <option value="Pessoal">Pessoal</option>
-                                        <option value="Academico">Academico</option>
-                                    </select><br><br><br>
-                                    {{-- INPUT tipoDocumento --}}
-                                    <div class="" id="tipoacademico">
-                                    <label for="">Tipo de Documento</label>
-                                    <input class="form-control" name="tipoDocumento" required>
-                                    </div>
+                    <form class="form-group needs-validation pt-3" action="{{route('documentostock.store', $fasestock)}}" method="post" id="form_documentos"
+                      enctype="multipart/form-data" novalidate>
+                      @csrf
+                      <div class="tab-content p-2 mt-3" id="myTabContent">
+                          <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
+                              <div class="row">
+                                  <div class="col">
+                                      {{-- INPUT tipo --}}
+                                      <label for="">Tipo (DocumentoStock):</label><br>
+                                      <select type="text" class="form-control" name="tipo" id="tipodocstock"
+                                        onchange="myFunction()" required>
+                                         <option value="Pessoal">Pessoal</option>
+                                         <option value="Academico">Academico</option>
+                                      </select><br><br><br>
+                                      {{-- INPUT tipoDocumento --}}
+                                        <label for="">Tipo de Documento:</label>
+                                        <input class="form-control" style="width: 100%;" name="tipoDocumento" required>
+                                  </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group text-right">
-                        <br><br>
-                        <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Documento Stock</button>
-                    </div>
-                </form>
+                      </div>
+                      <div class="form-group text-right">
+                          <br><br>
+                          <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Documento Stock</button>
+                      </div>
+                    </form>
             </div>
           </div>
         </div>
