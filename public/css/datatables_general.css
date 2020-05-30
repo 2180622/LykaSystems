@@ -1,7 +1,6 @@
 
 th,td{
-    color:gray;
-    font-weight:bold
+    color:black;
 }
 
 
@@ -29,5 +28,4 @@ th,td{
 
 #customSearchBox{
     width:100%;
-
 }

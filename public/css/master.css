@@ -12,28 +12,13 @@ html, body {
     font-family: 'Nunito', sans-serif;
 }
 
-a:hover{
-    text-decoration: none;
-}
-.active {
-    color: #6A74C9;
-    font-weight: 700;
-}
 
-.name_link {
-    color: gray;
-}
-
-.name_link:hover {
-    color: #6A74C9;
-    text-decoration: none;
-}
+/* ESPAÇO PARA CSS DE ESTRUTURA */
 
 .content {
     margin-top: 80px;
     margin-left: 250px;
 }
-
 /* Top-Bar Style */
 .top-bar {
     z-index: 2;
@@ -118,6 +103,47 @@ a:hover{
     font-size: 0.7rem;
     text-transform: uppercase;
 }
+
+
+/* FIM ESPAÇO PARA CSS DE ESTRUTURA */
+
+
+
+
+
+
+
+
+
+/* ESTILO DOS LINKS */
+
+a:hover{
+    text-decoration: none;
+}
+.active {
+    color: #6A74C9;
+    font-weight: 700;
+}
+
+.name_link {
+    color: gray;
+}
+
+.name_link:hover {
+    color: #6A74C9;
+    text-decoration: none;
+}
+
+/* ESTILO DOS LINKS */
+
+
+
+
+
+
+
+
+
 
 /* Buttons */
 .top-button {

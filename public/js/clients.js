@@ -4,15 +4,16 @@
 
             "pageLength": 100,
 
-            "columnDefs": [{
+            "columnDefs": [
+/*                 {
                     "orderable": false,
                     "width": "60px",
                     "targets": 0
-                },
-                {
+                }, */
+/*                 {
                     "orderable": false,
                     "targets": 2
-                },
+                }, */
                 {
                     "orderable": false,
                     "width": "130px",
