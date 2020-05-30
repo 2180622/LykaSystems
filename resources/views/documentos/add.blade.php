@@ -6,6 +6,7 @@
 {{-- Estilos de CSS --}}
 @section('styleLinks')
 <link href="{{asset('/css/providers.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
@@ -30,12 +31,20 @@
         </div>
         <br>
         <div class="payment-card shadow-sm">
-            @if($tipoPAT == 'Pessoal')
-                <form action="{{route('documento-pessoal.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
-            @elseif($tipoPAT == 'Academico')
-                <form action="{{route('documento-academico.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+            @if($fase)
+                @if($tipoPAT == 'Pessoal')
+                    <form action="{{route('documento-pessoal.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+                @elseif($tipoPAT == 'Academico')
+                    <form action="{{route('documento-academico.store', [$fase,$docnecessario])}}" method="post" enctype="multipart/form-data">
+                @else
+                    <form action="{{route('documento-transacao.store', $fase)}}" method="post" enctype="multipart/form-data">
+                @endif
             @else
-                <form action="{{route('documento-transacao.store', $fase)}}" method="post" enctype="multipart/form-data">
+                @if($tipoPAT == 'Pessoal')
+                    <form action="{{route('documento-pessoal.storeFromClient', $docnecessario)}}" method="post" enctype="multipart/form-data">
+                @else
+                    <form action="{{route('documento-academico.storeFromClient', $docnecessario)}}" method="post" enctype="multipart/form-data">
+                @endif
             @endif
                 @csrf
                 <div class="row">
@@ -145,8 +154,22 @@
                         <span class="num" style="display: none;">2</span>
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="img_doc">Upload:</label>
-                                <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
+                                <div class="text-center align-middle" style="min-width: 300px" >
+                                    {{-- INPUT fotografia --}}
+                                    <div>
+                                        <label for="img_doc">Upload ficheiro:</label>
+                                        <input type='file' id="img_doc" name="img_doc" style="display:none" accept="pplication/pdf, image/*" />
+                
+                                    </div>
+                
+                                    <div class="text-center align-self-center align-middle" style="max-height:150px; overflow:hidden;">
+                                        <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
+                                            class="m-2 p-1 border rounded bg-white shadow-sm" style="width:100px; cursor:pointer; min-width:50px; max-height:100px;"
+                                            alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+                                    </div>
+                                    <div class="mt-2"><small class="text-muted">(clique para mudar)</small></div>
+                                    <br>
+                                </div>
                             </div>
                             @if($tipoPAT == "Academico")
                                 <div class="col-md-5">
@@ -240,6 +263,37 @@
             $("#valor-campo"+num).attr("required", false);
             closest.css("display", "none");
         }
+        
+        
+        $('#passport_preview_file').on('click', function (e) {
+            e.preventDefault();
+            $('#img_Passaporte').trigger('click');
+        });
+
+        $('#passporte_preview').on('click', function (e) {
+            e.preventDefault();
+            $('#img_Passaporte').trigger('click');
+        });
+
+
+        function readPassaPortImgURL(input) {
+            if (input.files && input.files[0]) {
+                var iddocumento = new FileReader();
+                iddocumento.onload = function (e) {
+                    iddocumento.fileName = img_Passaporte.name;
+                    $('#name_passaporte_file').text(input.files[0].name);
+                }
+
+                iddocumento.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#img_Passaporte").change(function () {
+            readPassaPortImgURL(this);
+            $('#passport_preview_file').hide();
+            $('#passporte_preview').show();
+
+        });
     </script>
 @endsection
 

@@ -178,29 +178,37 @@
                             <div class="tab-pane fade" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
                         @endif
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="row col-md-12">
 
-                                    <div><span><b>Fase {{$num}}</b></span></div><br>
+                                    <div><span><b>Fase {{$num}}</b></span></div><br><br>
 
+                                    <div class="col-md-12">
                                     <label for="descricao-fase{{$fase->idFase}}">Descrição:</label><br>
-                                    <input type="text" class="form-control" name="descricao-fase{{$fase->idFase}}" id="descricao-fase{{$fase->idFase}}"
-                                    value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
-
+                                        <input type="text" class="form-control" name="descricao-fase{{$fase->idFase}}" id="descricao-fase{{$fase->idFase}}"
+                                        value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
+                                    </div>
+                                    <div class="col-md-5">
                                     <label for="data-fase{{$fase->idFase}}">Data de vencimento:</label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
+                                        </div>
 
-                                        <label for="valor-fase{{$num}}">Valor da fase:</label><br>
-                                        <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
-                                        value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required><br>
+                                        <div class="col-md-5">
+                                            <label for="valor-fase{{$num}}">Valor da fase:</label><br>
+                                            <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
+                                            value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required><br>
+                                        </div>
                                     @else
                                         <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" readonly><br>
-
-                                        <label for="valor-fase{{$num}}">Valor da fase:</label><br>
-                                        <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
-                                        value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" readonly/><br>
+                                        </div>
+                                        
+                                        <div class="col-md-5">
+                                            <label for="valor-fase{{$num}}">Valor da fase:</label><br>
+                                            <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
+                                            value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" readonly/><br>
+                                        </div>
                                     @endIf
 
                                 </div>

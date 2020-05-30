@@ -146,23 +146,28 @@
                                 <div class="tab-pane fade" id="fase{{$num}}" role="tabpanel" aria-labelledby="fase{{$num}}-tab">
                             @endif
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="row col-md-12">
 
-                                        <div><span><b>Fase {{$num}}</b></span></div><br>
+                                        <div><span><b>Fase {{$num}}</b></span></div><br><br>
 
-                                        <label for="descricao-fase{{$num}}">Descrição:</label><br>
-                                        <input type="text" class="form-control" name="descricao-fase{{$num}}" id="descricao-fase{{$num}}"
-                                        value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
+                                        <div class="col-md-12">
+                                            <label for="descricao-fase{{$num}}">Descrição:</label><br>
+                                            <input type="text" class="form-control" name="descricao-fase{{$num}}" id="descricao-fase{{$num}}"
+                                            value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
+                                        </div>
 
-                                        <label for="data-fase{{$num}}">Data de vencimento:</label><br>
-                                        <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
-                                        value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required/><br>
-
-                                        <label for="valor-fase{{$num}}">Valor total da fase:</label><br>
-                                        <input type="number" min="0" class="form-control form-required" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
-                                        value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required/><br>
-
+                                        <div class="col-md-5">
+                                            <label for="data-fase{{$num}}">Data de vencimento:</label><br>
+                                            <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
+                                            value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required/><br>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label for="valor-fase{{$num}}">Valor total da fase:</label><br>
+                                            <input type="number" min="0" class="form-control form-required" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
+                                            value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required/><br>
+                                        </div>
                                     </div>
+
                                     <div class="col mr-3">
                                         <div><span><b>Responsabilidades</b></span></div><br>
                                         <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
@@ -326,6 +331,7 @@
                             $('#descricao-fase'+num).attr('value', response.fases[i].descricao);
                             $('#fase-idStock'+num).attr('value', response.fases[i].idFaseStock);
                             $("#data-fase"+num).attr("required", true);
+                            $('#fase'+num+'-tab').text('Fase '+num+': '+response.fases[i].descricao);
                         }
                         if(num < 20){
                             num++;
