@@ -14,55 +14,52 @@
 
 
 
-<div class="container mt-2">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
+<div class="container-fluid mt-2 ">
 
-    <br><br>
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Adicionar estudante</h6>
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Adicionar Estudante</strong>
+                        <h4>
+                </div>
+            </div>
+
+            {{-- Opções --}}
+            <div class="col text-right">
+
+            </div>
+
         </div>
 
-
-        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation " id="form_client" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation " id="form_client"
+            enctype="multipart/form-data" novalidate>
             @csrf
             @include('clients.partials.add-edit')
             <div class="row mt-4">
-                <div class="col">
-{{--                     <div class="alert alert-primary " role="alert">
-                        <i class="fas fa-info-circle mr-1"></i><strong>Nota: </strong>O estudante irá receber um e-mail para ativação da sua conta pessoal
-                    </div> --}}
-
-                </div>
-                <div class="col col-4 text-right pt-2" style="min-width:285px">
-                    <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar estudante</button>
-                    <a href="{{route('clients.index')}}" class="cancel-button">Cancelar</a>
+                <div class="col text-right" style="min-width:285px">
+                    <button type="submit" class="btn btn-sm btn-success m-1" name="ok" id="buttonSubmit"><i class="fas fa-plus mr-2"></i>Adicionar
+                        Estudante</button>
+                    <a href="{{route('clients.index')}}" class="btn btn-sm btn-secondary">Cancelar</a>
                 </div>
             </div>
 
         </form>
     </div>
-</div>
 
-@endsection
+    @endsection
 
-{{-- Scripts --}}
-@section('scripts')
+    {{-- Scripts --}}
+    @section('scripts')
 
-{{-- script contem: datatable configs, input configs, validações --}}
-<script src="{{asset('/js/clients.js')}}"></script>
+    {{-- script contem: datatable configs, input configs, validações --}}
+    <script src="{{asset('/js/clients.js')}}"></script>
 
-{{-- script permite definir se um input recebe só numeros OU so letras --}}
-<script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
+    {{-- script permite definir se um input recebe só numeros OU so letras --}}
+    <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 
-<script src="{{asset('/js/editable_comboBox.js')}}"></script>
+    <script src="{{asset('/js/editable_comboBox.js')}}"></script>
 
-@endsection
+    @endsection

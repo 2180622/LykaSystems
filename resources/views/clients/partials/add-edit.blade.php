@@ -1,19 +1,11 @@
-<style>
-    .active {
-        color: #6A74C9
-    }
-
-</style>
-
-
-<div class="alert alert-danger mb-3" id="warning_msg" style="display: none"><i class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos assinalados.</div>
+<div class="alert alert-danger my-2" id="warning_msg" style="display: none"><i class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos assinalados.</div>
 
 @if (Auth::user()->tipo == "admin")
 <br>
-    <div style="border-radius: 10px;" class="mb-4" >
+    <div class="mb-2" >
 
         <div class="row">
-                <div id="div_agente" class="col m-3 py-4 bg-white shadow-sm rounded">
+                <div id="div_agente" class="col m-3 py-4 border shadow-sm">
                     <div class="mx-2 my-auto">
                         <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente responsável:</label>
                         <div class="mr-3">
@@ -30,7 +22,7 @@
 
                 </div>
 
-                <div class="col m-3 py-4 bg-white shadow-sm rounded" style="min-width: 412px">
+                <div class="col m-3 py-4 border shadow-sm" style="min-width: 412px">
                     <div class="mx-2 my-auto">
                         <div class="row">
                             <div class="col">
@@ -72,32 +64,32 @@
 <div class="row nav nav-fill w-100 text-center mx-auto p-3">
 
 
-    <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link" id="pessoal-tab"
+    <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm" id="pessoal-tab"
         data-toggle="tab" href="#pessoal" role="tab" aria-controls="pessoal" aria-selected="true">
         <div class="col"><i class="fas fa-user mr-2"></i>Dados pessoais</div>
     </a>
 
 
-    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="documentation-tab"
+    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm" id="documentation-tab"
         data-toggle="tab" href="#documentation" role="tab" aria-controls="documentation" aria-selected="false">
         <div class="col"><i class="far fa-id-card mr-2"></i>Documentos</div>
     </a>
 
 
-    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="academicos-tab"
+    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm" id="academicos-tab"
         data-toggle="tab" href="#school" role="tab" aria-controls="school" aria-selected="false">
         <div class="col" style="min-width: 197px"><i class="fas fa-graduation-cap mr-2"></i>Dados académicos
         </div>
     </a>
 
 
-    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="contacts-tab" data-toggle="tab"
+    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm" id="contacts-tab" data-toggle="tab"
         href="#contacts" role="tab" aria-controls="contacts" aria-selected="false">
         <div class="col"><i class="fas fa-comments mr-2"></i>Contactos</div>
     </a>
 
 
-    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link border" id="financas-tab" data-toggle="tab"
+    <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm border" id="financas-tab" data-toggle="tab"
         href="#financas" role="tab" aria-controls="financas" aria-selected="false">
         <div class="col"><i class="fas fa-chart-pie mr-2"></i>Financeiro</div>
     </a>
@@ -105,7 +97,7 @@
 
 </div>
 
-<div class="bg-white shadow-sm mb-4 p-4" style="margin-top:-30px">
+<div class="bg-white border shadow-sm mb-4 p-4" style="margin-top:-30px">
 
     <div class="tab-content p-2 mt-3" id="myTabContent">
 
@@ -183,7 +175,7 @@
 
                     </div>
 
-                    <div class="text-center align-self-center align-middle" style="max-height:300px; overflow:hidden;">
+                    <div class="text-center align-self-center align-middle mx-auto" style="width:300px; max-height:300px; overflow:hidden;">
                         <!-- Verifica se a imagem já existe-->
                         @if ($client->fotografia!=null)
                         <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
@@ -191,8 +183,9 @@
                             style="width:80%; height:auto; cursor:pointer; min-width:118px;" alt="Imagem de apresentação"
                             title="Clique para mudar a imagem de apresentação" />
                         @else
-                        <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
-                            class="m-2 p-1 border rounded bg-white shadow-sm" style="width:80%; cursor:pointer; min-width:118px; max-height:300px;"
+
+                        <img src="{{Storage::disk('public')->url('default-photos/m.jpg')}}" id="preview"
+                            class="p-1 border rounded bg-white shadow-sm " style="width:80%; cursor:pointer; min-width:118px; max-height:300px;"
                             alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
                         @endif
                     </div>
@@ -272,7 +265,7 @@
 
                         @if ( isset ($docOfficial) )
                         <a href="#" title="Clique para modificar o documento de identificação" id="doc_id_preview"
-                            class="name_link">
+                            class="">
                                 @if ($docOfficial->imagem == null)
                                     <div class="text-danger">
                                         <i class="far fa-id-card mt-2" style="font-size:50px"></i>
@@ -290,7 +283,7 @@
                         @else
                         <a style="display:none;cursor:pointer"
                             title="Clique para adicionar o documento de identificação" id="doc_id_preview"
-                            class="name_link">
+                            class="">
                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                             <div id="name_doc_id_file" class="text-muted">
 
@@ -369,7 +362,7 @@
 
                         @if ( isset ($passaporte) )
                             <a href="#" title="Clique para modificar o documento do passaporte" id="passporte_preview"
-                                class="name_link">
+                                class="">
                                     @if ($passaporte->imagem == null)
                                         <div class="text-danger">
                                             <i class="far fa-id-card mt-2" style="font-size:50px"></i>
@@ -387,7 +380,7 @@
                         @else
                             <a style="display:none;cursor:pointer"
                                 title="Clique para adicionar o documento do passaporte" id="passporte_preview"
-                                class="name_link">
+                                class="">
                                 <i class="far fa-id-card mt-2" style="font-size:50px"></i>
                                 <div id="name_passaporte_file" class="text-muted">
 
@@ -610,4 +603,5 @@
 
 
     </div>
+</div>
 </div>

@@ -47,7 +47,7 @@
     </div>
 
     {{-- Estrutura e navegação --}}
-    <div class="container-fluid ">
+    <div class="container-fluid text-black ">
         <div class="row" style="min-height:100vh">
             {{-- Menu lateral --}}
             <div class="col main-menu shadow" id="side-menu">

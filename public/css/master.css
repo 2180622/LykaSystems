@@ -12,6 +12,9 @@ html, body {
     font-family: 'Nunito', sans-serif;
 }
 
+label{
+    color:black !important;
+}
 
 /* ESPAÇO PARA CSS DE ESTRUTURA */
 
@@ -116,23 +119,19 @@ html, body {
 
 
 /* ESTILO DOS LINKS */
-
+a{
+    color:black;
+}
 a:hover{
     text-decoration: none;
+    color: #6A74C9;
 }
 .active {
     color: #6A74C9;
     font-weight: 700;
 }
 
-.name_link {
-    color: gray;
-}
 
-.name_link:hover {
-    color: #6A74C9;
-    text-decoration: none;
-}
 
 /* ESTILO DOS LINKS */
 

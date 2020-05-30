@@ -5,18 +5,11 @@
 
             "pageLength": 100,
 
-            "columnDefs": [{
-                    "orderable": false,
-                    "width": "60px",
-                    "targets": 0
-                },
+            "columnDefs": [
+
                 {
                     "orderable": false,
-                    "targets": 2
-                },
-                {
-                    "orderable": false,
-                    "width": "100px",
+                    "width": "130px",
                     "targets": -1
                 },
 
@@ -150,7 +143,7 @@
             $chk.click(function () {
                 var colToHide = $tblhead.filter("." + $(this).attr("name"));
                 var index = $(colToHide).index();
-                $tbl.find('tr :nth-child(' + (index + 1) + ')').not(".btn_delete").toggle();
+                $tbl.find('tr :nth-child(' + (index + 1) + ')').not(".btn-outline-danger, .btn-outline-warning, .btn-outline-primary").toggle();
             });
         });
 

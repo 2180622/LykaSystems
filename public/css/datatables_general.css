@@ -24,8 +24,3 @@ th,td{
 .btn_delete:hover {
     color: red;
 }
-
-
-#customSearchBox{
-    width:100%;
-}

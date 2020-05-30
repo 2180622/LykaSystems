@@ -22,13 +22,13 @@
 <div class="container-fluid mt-2 ">
 
     {{-- Conteúdo --}}
-    <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px">
+    <div class="bg-white shadow-sm mb-4 p-4 ">
 
         <div class="row">
 
             <div class="col">
                 <div class="title">
-                    <h4>Listagem de Estudantes<h4>
+                    <h4><strong>Listagem de Estudantes</strong><h4>
                 </div>
             </div>
 
@@ -47,125 +47,114 @@
 
         {{-- VERIFICA SE EXISTEM CLIENTES --}}
         @if($clients)
+        <div class="row">
+            <div class="col">
                 <div class="row">
                     <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                {{-- Contagem dos clientes ativos ou proponentes --}}
-                                <div class="text-muted my-2">
-                                    <strong>Existe {{count($clients)}} registo(s) no sistema</strong>
-                                </div>
-                                <div>
-                                    {{-- Input de procura nos resultados da dataTable --}}
-                                    <input type="text" class="shadow-sm" id="customSearchBox"
-                                        placeholder="Procurar nos resultados..." aria-label="Procurar">
-                                </div>
-                            </div>
+                        {{-- Contagem dos clientes ativos ou proponentes --}}
+                        <div class="text-muted my-2">
+                            <strong>Existe {{count($clients)}} registo(s) no sistema</strong>
                         </div>
-
+                        <div>
+                            {{-- Input de procura nos resultados da dataTable --}}
+                            <input type="text" class="shadow-sm" id="customSearchBox"
+                                placeholder="Procurar nos resultados..." aria-label="Procurar" style="width:100%;">
+                        </div>
                     </div>
                 </div>
 
-
-                <div class="table-responsive mt-3">
-                    <table id="dataTable" class="table table-bordered table-hover text-black" style="width:100%">
-
-                        {{-- Cabeçalho da tabela --}}
-                        <thead>
-                            <tr>
-                                {{--<th class="text-center align-content-center ">Foto</th> --}}
-                                <th>Nome</th>
-                                <th>N.º Passaporte</th>
-                                <th>País</th>
-                                <th>Estado</th>
-                                <th class="text-center">Opções</th>
-                            </tr>
-                        </thead>
-
-                        {{-- Corpo da tabela --}}
-                        <tbody>
-
-                            @foreach ($clients as $client)
-                            <tr>
-                                {{-- <td>
-                                                <div class="align-middle mx-auto shadow-sm rounded bg-white"
-                                                    style="overflow:hidden; width:50px; height:50px">
-                                                    <a class="name_link" href="{{route('clients.show',$client)}}">
-                                @if($client->fotografia)
-                                <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
-                                    width="100%" class="mx-auto">
-                                @elseif($client->genero == 'F')
-                                <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%"
-                                    class="mx-auto">
-                                @else
-                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%"
-                                    class="mx-auto">
-                                @endif
-                                </a>
-                </div>
-
-                </td> --}}
-
-                {{-- Nome e Apelido --}}
-                <td class="align-middle"><a class="name_link" href="{{route('clients.show',$client)}}">{{ $client->nome }}
-                        {{ $client->apelido }}</a>
-                </td>
-
-                {{-- numPassaporte --}}
-                <td class="align-middle">{{ $client->numPassaporte }}</td>
-
-                {{-- País de origem --}}
-                <td class="align-middle">{{ $client->numPassaporte }}</td>
-
-                {{-- Estado de cliente --}}
-                <td class="align-middle">
-
-                    @if ( $client->estado == "Ativo")
-                    <span class="text-success">Ativo</span>
-                    @elseif( $client->estado == "Inativo")
-                    <span class="text-danger">Inativo</span>
-                    @else
-                    <span class="text-info">Proponente</span>
-                    @endif
-
-                </td>
-
-
-                {{-- OPÇÔES --}}
-                <td class="text-center align-middle">
-                    <a href="{{route('clients.show',$client)}}" class="btn_list_opt " title="Ver ficha completa">
-                        <i class="far fa-eye mr-2"></i></a>
-
-
-                    {{-- Permissões para editar --}}
-                    @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" &&
-                    $client->editavel ==
-                    1)
-                    <a href="{{route('clients.edit',$client)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                            class="fas fa-pencil-alt mr-2"></i></a>
-                    @endif
-
-
-                    @if (Auth::user()->tipo == "admin")
-                    <form method="POST" role="form" id="{{ $client->idCliente }}" action="{{route('clients.destroy',$client)}}"
-                        data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
-                            data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                    @endif
-
-                </td>
-                </tr>
-                @endforeach
-                </tbody>
-                </table>
             </div>
+
+        </div>
+
+
+        <div class="table-responsive mt-4">
+            <table id="dataTable" class="table table-bordered table-hover text-black" style="width:100%">
+
+                {{-- Cabeçalho da tabela --}}
+                <thead>
+                    <tr>
+                        {{--<th class="text-center align-content-center ">Foto</th> --}}
+                        <th>Nome</th>
+                        <th>N.º Passaporte</th>
+                        <th>País</th>
+                        <th>Estado</th>
+                        <th class="text-center">Opções</th>
+                    </tr>
+                </thead>
+
+                {{-- Corpo da tabela --}}
+                <tbody>
+
+                    @foreach ($clients as $client)
+                    <tr>
+
+
+                        {{-- Nome e Apelido --}}
+                        <td class="align-middle"><a class="name_link"
+                                href="{{route('clients.show',$client)}}">{{ $client->nome }}
+                                {{ $client->apelido }}</a>
+                        </td>
+
+                        {{-- numPassaporte --}}
+                        <td class="align-middle">{{ $client->numPassaporte }}</td>
+
+                        {{-- País de origem --}}
+                        <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+
+                        {{-- Estado de cliente --}}
+                        <td class="align-middle">
+
+                            @if ( $client->estado == "Ativo")
+                            <span class="text-success">Ativo</span>
+                            @elseif( $client->estado == "Inativo")
+                            <span class="text-danger">Inativo</span>
+                            @else
+                            <span class="text-info">Proponente</span>
+                            @endif
+
+                        </td>
+
+
+                        {{-- OPÇÔES --}}
+                        <td class="text-center align-middle">
+
+                            {{-- Opção: Ver detalhes --}}
+                            <a href="{{route('clients.show',$client)}}" class="btn btn-sm btn-outline-primary "
+                                title="Ver ficha completa"><i class="far fa-eye"></i></a>
+
+                            {{-- Permissões para editar --}}
+                            @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" && $client->editavel ==
+                            1)
+                            <a href="{{route('clients.edit',$client)}}" class="btn btn-sm btn-outline-warning"
+                                title="Editar"><i class="fas fa-pencil-alt"></i>
+                            </a>
+                            @endif
+
+
+                            {{-- Opção APAGAR --}}
+                            @if (Auth::user()->tipo == "admin")
+                            <form method="POST" role="form" id="{{ $client->idCliente }}"
+                                action="{{route('clients.destroy',$client)}}"
+                                data="{{ $client->nome }} {{ $client->apelido }}" class="d-inline-block form_client_id">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar estudante"
+                                    data-toggle="modal" data-target="#deleteModal"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </form>
+                            @endif
+
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
         @endif
 
-</div>
+    </div>
 </div>
 
 
