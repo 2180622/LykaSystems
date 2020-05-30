@@ -237,7 +237,7 @@
                             <label for="validade_docOficial">Data de validade:</label><br>
                             <input type="month" class="form-control" name="validade_docOficial"
                                 id="validade_docOficial"
-                                value="{{old('validade_docOficial',$client->validade_docOficial)}}" >
+                                value="{{$client->validade_docOficial}}" >
                         </div>
                     </div>
 
@@ -410,12 +410,12 @@
                     <label for="nivEstudoAtual">Nível de estudos(atual):</label><br>
                     <select name="nivEstudoAtual" id="nivEstudoAtual" style="width:100%" class="form-control select_style" >
                         <option {{old('nivEstudoAtual',$client->nivEstudoAtual)==null?"selected":""}} value="0" selected hidden>Selecione nível</option>
-                        <option value="Secundário Incompleto">Secundário Incompleto</option>
-                        <option value="Secundário Completo">Secundário Completo</option>
-                        <option value="Curso Tecnológico">Curso Tecnológico</option>
-                        <option value="Estuda na Universidade">Estuda na Universidade</option>
-                        <option value="Licenciado">Licenciado</option>
-                        <option value="Mestrado">Mestrado</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='Secundário Incompleto'?"selected":""}} value="Secundário Incompleto">Secundário Incompleto</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='Secundário Completo'?"selected":""}} value="Secundário Completo">Secundário Completo</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='Curso Tecnológico'?"selected":""}} value="Curso Tecnológico">Curso Tecnológico</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='Estuda na Universidade'?"selected":""}} value="Estuda na Universidade">Estuda na Universidade</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='Licenciado'?"selected":""}} value="Licenciado">Licenciado</option>
+                        <option {{old('nivEstudoAtual',$client->nivEstudoAtual)=='Mestrado'?"selected":""}} value="Mestrado">Mestrado</option>
 
                     </select>
 

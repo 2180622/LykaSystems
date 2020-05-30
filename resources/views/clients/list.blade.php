@@ -35,9 +35,9 @@
             {{-- Opções --}}
             <div class="col text-right">
                 @if (Auth::user()->tipo == "admin")
-                <a class="btn btn-sm btn-primary m-1" href="{{route('clients.searchIndex')}}"><i
+                <a class="btn btn-sm btn-primary mr-2" href="{{route('clients.searchIndex')}}"><i
                         class="fas fa-search mr-2"></i>Pesquisa avançada</a>
-                <a class="btn btn-sm btn-success m-1" href="{{route('clients.create')}}"><i
+                <a class="btn btn-sm btn-success" href="{{route('clients.create')}}"><i
                         class="fas fa-plus mr-2"></i>Adicionar Estudante</a>
                 @endif
             </div>
