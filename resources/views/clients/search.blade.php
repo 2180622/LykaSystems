@@ -188,7 +188,7 @@
                 @if ( !$clients )
                     <div class="row mt-3">
                         <div class="col p-3 mx-4">
-                            <div class="alert alert-warning" role="alert">
+                            <div class="alert alert-primary" role="alert">
                                 A pesquisa de estudantes por "<strong>{{$valor}}</strong>" no campo
                                 "<strong>{{$nomeCampo}}</strong>" não encontrou nenhum registo no sistema
                               </div>
@@ -198,7 +198,7 @@
                 @else
                     <div class="row mt-3">
                         <div class="col">
-                            <div class="alert alert-warning" role="alert">
+                            <div class="alert alert-primary" role="alert">
                                 A pesquisa de estudantes por "<strong>{{$valor}}</strong>" no campo
                                     "<strong>{{$nomeCampo}}</strong>" encontrou <strong>{{count($clients)}}</strong> registo(s) no sistema
                               </div>

@@ -274,6 +274,8 @@
 
 
 
+/*           Validação do formulário / campos */
+
         $('#form_client').on('submit', function () {
 
             /* mostrar div de espera */

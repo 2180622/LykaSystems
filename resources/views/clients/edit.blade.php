@@ -50,14 +50,14 @@
             <div class="row mt-4">
                 <div class="col">
                     @if (Auth::user()->tipo == "admin")
-                    <a href="{{route('clients.sendActivationEmail', $client)}}" class="btn btn-sm btn-primary"><i class="fas fa-envelope mr-2"></i>Enviar
+                    <a href="{{route('clients.sendActivationEmail', $client)}}" class="btn btn-sm btn-primary px-3"><i class="fas fa-envelope mr-2"></i>Enviar
                         e-mail para ativção de conta</a>
                     @endif
                 </div>
                 <div class="col text-right" style="min-width:285px">
-                    <button type="submit" class="btn btn-sm btn-success mr-2" name="submit"><i class="fas fa-check-circle mr-2"></i></i>Guardar
+                    <button type="submit" class="btn btn-sm btn-success mr-2 px-3" name="submit"><i class="fas fa-check-circle mr-2"></i></i>Guardar
                         Informações</button>
-                    <a href="{{route('clients.index')}}" class="btn btn-sm btn-secondary">Cancelar</a>
+                    <a href="{{route('clients.index')}}" class="btn btn-sm btn-secondary px-3">Cancelar</a>
                 </div>
             </div>
 

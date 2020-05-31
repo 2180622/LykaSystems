@@ -570,10 +570,10 @@
                     <div class="row">
                         <div class="col">
                             {{-- Morada de residência no pais de origem --}}
-                            <div class=" mb-2">Morada de origem:</div>
+                            <div class="mb-2 font-weight-bold">Morada de origem:</div>
                             <div class="border rounded bg-light p-3">
-                                <div><span class="">Cidade (origem):</span> {{$client->cidade}}</div><br>
-                                <div><span class="">Morada (origem):</span> {{$client->morada}}</div>
+                                <div>Cidade (origem): <span class="font-weight-bold">{{$client->cidade}}</span></div><br>
+                                <div>Morada (origem): <span class="font-weight-bold">{{$client->morada}}</span></div>
                             </div>
                         </div>
                         <br>
@@ -585,24 +585,24 @@
                     {{-- Contactos dos PAIS --}}
                     <div class="row">
                         <div class="col">
-                            <div class=" mb-2">Identificação dos pais:</div>
+                            <div class="mb-2 font-weight-bold">Identificação dos pais:</div>
                         </div>
                     </div>
 
                     <div class="border rounded bg-light p-3">
                         <div class="row">
                             <div class="col " style="min-width: 300px">
-                                <div><span class="">Nome do pai:</span> {{$client->nomePai}}</div><br>
-                                <div><span class="">Telefone do pai:</span> {{$client->telefonePai}}</div>
+                                <div>Nome do pai: <span class="font-weight-bold">{{$client->nomePai}}</span></div><br>
+                                <div>Telefone do pai: <span class="font-weight-bold">{{$client->telefonePai}}</span></div>
                                 <br>
-                                <div><span class="">E-mail do pai:</span> {{$client->emailPai}}</div>
+                                <div>E-mail do pai: <span class="font-weight-bold">{{$client->emailPai}}</span></div>
                                 <br>
                             </div>
                             <div class="col" style="min-width: 300px">
-                                <div><span class="">Nome da mãe:</span> {{$client->nomeMae}}</div><br>
-                                <div><span class="">Telefone da mãe:</span> {{$client->telefoneMae}}</div>
+                                <div>Nome da mãe: <span class="font-weight-bold">{{$client->nomeMae}}</span></div><br>
+                                <div>Telefone da mãe: <span class="font-weight-bold">{{$client->telefoneMae}}</span></div>
                                 <br>
-                                <div><span class="">E-mail da mãe:</span> {{$client->emailMae}}</div>
+                                <div>E-mail da mãe: <span class="font-weight-bold">{{$client->emailMae}}</span></div>
                             </div>
                         </div>
                     </div>
@@ -619,37 +619,23 @@
                     <div class="row mt-2 pl-2">
                         <div class="col">
 
-                            <div class=" mb-2">IBAN:</div>
+                            <div class="mb-2 font-weight-bold">IBAN:</div>
                             <div class="border rounded bg-light p-3">
                                 @if ($client->IBAN==null)
-                                <span class="text-muted"><small>(sem dados para mostrar)</small></span>
+                                    <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                                 @else
-                                {{$client->IBAN}}
+                                    <span class="font-weight-bold">{{$client->IBAN}}</span>
                                 @endif
                             </div>
 
                             <br>
 
-                            {{-- <div class=" mb-2">Estado financeiro:</div>
-                            <div class="border rounded bg-light p-3">
-                                <span class="text-success">Regularizado</span>
-
-                                @foreach ($dividas as $divida)
-
-                                    {{$divida->estado}}<br><br>
-
-                                @endforeach
-
-                            </div>
-
-                            <br> --}}
-
                             <div class=" mb-2">Observações Financeiras:</div>
                             <div class="border rounded bg-light p-3">
                                 @if ($client->obsFinanceiras==null)
-                                <span class="text-muted"><small>(sem dados para mostrar)</small></span>
+                                    <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                                 @else
-                                {{$client->obsFinanceiras}}
+                                    <span class="font-weight-bold">{{$client->obsFinanceiras}}</span>
                                 @endif
                             </div>
 
