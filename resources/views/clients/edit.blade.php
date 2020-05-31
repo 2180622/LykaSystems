@@ -38,10 +38,6 @@
 
         </div>
 
-
-
-
-
         <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation "
             id="form_client" enctype="multipart/form-data" novalidate>
             @csrf

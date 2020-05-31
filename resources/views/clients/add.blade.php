@@ -22,14 +22,8 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Adicionar Estudante</strong>
-                        <h4>
+                    <h4><strong>Adicionar Estudante</strong><h4>
                 </div>
-            </div>
-
-            {{-- Opções --}}
-            <div class="col text-right">
-
             </div>
 
         </div>
