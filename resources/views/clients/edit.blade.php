@@ -51,7 +51,7 @@
                     @endif
                 </div>
                 <div class="col text-right" style="min-width:285px">
-                    <button type="submit" class="btn btn-sm btn-success mr-2 px-3" name="submit"><i class="fas fa-check-circle mr-2"></i></i>Guardar
+                    <button type="submit" class="btn btn-sm btn-success mr-2 px-3" name="submit"><i class="fas fa-check-circle mr-2"></i>Guardar
                         Informações</button>
                     <a href="{{route('clients.index')}}" class="btn btn-sm btn-secondary px-3">Cancelar</a>
                 </div>

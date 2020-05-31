@@ -11,36 +11,35 @@
 {{-- Conteudo da Página --}}
 @section('content')
 
-<div class="container mt-2">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
 
-    <br><br>
+<div class="container-fluid mt-2">
 
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Adicionar Universidade</h6>
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Adicionar Universidade</strong></h4>
+                </div>
+            </div>
         </div>
-        <br>
 
         <form method="POST" action="{{route('universities.store')}}" class="form-group needs-validation pt-3"
-        id="form_university" enctype="multipart/form-data" novalidate>
-        @csrf
-        @include('universities.partials.add-edit')
-        <div class="form-group text-right">
-            <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar universidade</button>
-            <a href="{{route('universities.index')}}" class="top-button">Cancelar</a>
-        </div>
-    </form>
+            id="form_university" enctype="multipart/form-data" novalidate>
+            @csrf
+            @include('universities.partials.add-edit')
 
+    </div>
+    <div class="text-right mt-4">
+
+        <button type="submit" class="btn btn-sm btn-success px-2 mr-2" name="ok" id="buttonSubmit"><i
+            class="fas fa-plus mr-2"></i>Adicionar
+            universidade</button>
+        <a href="{{route('libraries.index')}}" class="btn btn-sm btn-secondary px-2">Cancelar</a>
+
+        </form>
     </div>
 </div>
 

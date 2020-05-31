@@ -9,6 +9,8 @@ html, body {
     scroll-behavior: smooth;
     transition: all 0.3 ease;
     background-color: #EAEAEA;
+    font-weight: normal;
+    color: black;
     font-family: 'Nunito', sans-serif;
 }
 

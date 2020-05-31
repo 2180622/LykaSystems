@@ -9,10 +9,6 @@
 <link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 
 <style>
-    .active {
-        color: #6A74C9
-    }
-
     .edit_event_btn {
         display: inline-block;
         width: 26px;
@@ -30,6 +26,15 @@
         border-radius: 50%;
         background-color: white;
         border: 1px solid lightgray;
+    }
+
+    @media screen and (max-width: 1200px) {
+
+        #dataTableContacts th:nth-of-type(1),
+        #dataTableContacts td:nth-of-type(1) {
+            display: none;
+        }
+
     }
 
 </style>
@@ -53,87 +58,111 @@
 
 
 
-<div class="container mt-2">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
-    <div class="float-right">
-        <a href="{{route('universities.edit',$university)}}" class="top-button mr-2">Editar informação</a>
-    </div>
+<div class="container-fluid mt-2 ">
 
-    <br><br>
-
-    <div class="cards-navigation">
+    {{-- Conteúdo --}}
+    <div class="bg-white shadow-sm mb-4 p-4 ">
 
         <div class="row">
+
             <div class="col">
                 <div class="title">
-                    <h6>Ficha de Universidade</h6>
+                    <h4><strong>Ficha de Universidade <span class="active">{{$university->nome}}</span></strong></h4>
                 </div>
+                <div><small>Ultima atualização:
+                        <strong>{{ date('d-M-y', strtotime($university->updated_at)) }}</strong></small></div>
             </div>
-            <div class="col text-right">
-                <div class="text-muted"><small>Adicionado em:
-                        {{ date('d-M-y', strtotime($university->created_at)) }}</small></div>
 
-                <div class="text-muted"><small>Ultima atualização:
-                        {{ date('d-M-y', strtotime($university->updated_at)) }}</small></div>
+            {{-- Opções --}}
+            <div class="col text-right">
+                <a href="#" id="titleModalNew" class="btn btn-sm btn-primary m-1 mr-2 px-2" data-toggle="modal"
+                data-target="#modalCalendar" style="width: 156px"><i class="fas fa-calendar-alt mr-2"></i>Adicionar evento</a>
+
+            <a href="{{route('contacts.create',$university)}}" class="btn btn-sm btn-primary m-1 mr-2 px-2" style="width: 156px">
+                <i class="fas fa-address-book mr-2"></i>Adicionar contacto</a>
+
+                <a href="{{route('universities.edit',$university)}}" class="btn btn-sm btn-success m-1 mr-2 px-3">
+                    <i class="fas fa-pencil-alt mr-2"></i>Editar informação</a>
             </div>
+
         </div>
 
+        <hr class="my-3">
 
-        <br>
+        <div>
+            <div class="row p-2">
+
+                <div class="col p-2" style="min-width:250px !important">
+
+                    {{-- Informações --}}
+
+                    <div class="row">
+
+                        <div class="col">
+                            <div>Morada:<br>
+                                @if( $university->morada!="" )
+                                    <div class="border rounded bg-light p-2 font-weight-bold mt-2">{{$university->morada}}</div>
+                                @else
+                                    <div class="border rounded bg-light p-2 text-muted mt-2">Sem informação</div>
+                                @endif
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="col">
+                            <div>E-Mail:<br>
+                                @if( $university->email!="" )
+                                    <div class="border rounded bg-light p-2 font-weight-bold mt-2">{{$university->email}}</div>
+                                @else
+                                    <div class="border rounded bg-light p-2 text-muted mt-2">Sem informação</div>
+                                @endif
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="col">
+                            <div>Telefone:<br>
+                                @if( $university->telefone!="" )
+                                    <div class="border rounded bg-light p-2 font-weight-bold mt-2">{{$university->telefone}}</div>
+                                @else
+                                    <div class="border rounded bg-light p-2 text-muted mt-2">Sem informação</div>
+                                @endif
+                            </div>
+                            <br>
+                        </div>
 
 
-        <div class="card shadow-sm p-3" style="border-radius:10px">
-            <div class="row font-weight-bold p-2" style="color:#6A74C9">
-                <div class="col col-md-12 text-center my-auto "
-                    style="min-width:195px; max-width:230px; max-height:295px; overflow:hidden">
-                    <img class="align-middle p-1 rounded bg-white shadow-sm border"
-                        src="{{Storage::disk('public')->url('default-photos/university.png')}}" style="width:100%">
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col">
+                            <div>NIF:<br>
+                                @if( $university->NIF!="" )
+                                    <div class="border rounded bg-light p-2 font-weight-bold mt-2">{{$university->NIF}}</div>
+                                @else
+                                    <div class="border rounded bg-light p-2 text-muted mt-2">Sem informação</div>
+                                @endif
+                            </div>
+                            <br>
+                        </div>
+                        <div class="col">
+                            <div>IBAN:<br>
+                                @if( $university->IBAN!="" )
+                                    <div class="border rounded bg-light p-2 font-weight-bold mt-2">{{$university->IBAN}}</div>
+                                @else
+                                    <div class="border rounded bg-light p-2 text-muted mt-2">Sem informação</div>
+                                @endif
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+
                 </div>
-
-                <div class="col p-2" style="width:260px ; min-width:250px !important">
-
-                    {{-- Informações Pessoais --}}
-                    <div><span class="text-secondary ">Nome da Universidade:</span><br>{{$university->nome}}</div>
-                    <br>
-
-                    <div><span class="text-secondary ">Morada:</span><br>{{$university->morada}}</div>
-                    <br>
-
-                    <div><span class="text-secondary">NIF:</span> {{$university->NIF}}</div>
-                    <br>
-
-                    <div><span class="text-secondary">IBAN:</span><br>{{$university->IBAN}}</div>
-                    <br>
-
-
-                </div>
-
-                <div class="col p-2" style="min-width: 200px">
-
-                    <div><span class="text-secondary ">E-mail:</span> {{$university->email}}</div>
-                    <br>
-
-                    <div><span class="text-secondary">Telefone :</span> {{$university->telefone}}</div>
-                    <br>
-
-                    <br>
-
-                    <a href="#" id="titleModalNew" class="top-button" data-toggle="modal"
-                        data-target="#modalCalendar"><i class="fas fa-plus mr-2"></i>Adicionar evento</a><br><br>
-                    <a href="{{route('contacts.create',$university)}}" class="top-button">
-                        <i class="fas fa-plus mr-2"></i>Adicionar contacto</a>
-                </div>
-
-
             </div>
+
+
         </div>
 
 
@@ -170,9 +199,8 @@
         </div>
 
 
-        <div class="bg-white shadow-sm mb-4 p-4" style="margin-top:-30px">
+        <div class="border shadow-sm mb-4 p-4" style="margin-top:-30px">
             <div class="tab-content p-2 mt-3" id="myTabContent">
-
 
                 {{-- Eventos --}}
                 <div class="tab-pane fade show active" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
@@ -181,8 +209,8 @@
                         @foreach ($eventos as $agenda)
 
                         <div>
-                            <div class="col border rounded bg-light shadow-sm text-secondary m-2 mt-4 p-3"
-                                style="min-width: 320px; max-width: 320px; height:auto; max-height:240px">
+                            <div class="col border rounded bg-light shadow-sm  m-2 mt-4 p-3"
+                                style="min-width: 320px; max-width: 320px; height:auto; max-height:240px; color:black !important">
 
                                 <div class="row p-0 m-0" style="margin-top:-30px!important">
                                     <div class="col text-right p-0">
@@ -205,8 +233,8 @@
                                 </div>
 
                                 <div class="mt-2"><i class="fas fa-square mr-2" title="{{$agenda->titulo}}"
-                                        style="color:{{$agenda->cor}}"></i><strong>Evento:
-                                    </strong>{{ \Illuminate\Support\Str::limit($agenda->titulo, 50, $end=' (...)') }}</strong>
+                                        style="color:{{$agenda->cor}}"></i>Evento:
+                                    <strong>{{ \Illuminate\Support\Str::limit($agenda->titulo, 50, $end=' (...)') }}</strong>
                                 </div>
 
                                 <div class="mt-3">
@@ -217,13 +245,13 @@
 
                                     <div class="col border-right ">
                                         <div class="mt-3">
-                                            <strong>Inicio:</strong><br>{{ date('d-M-y', strtotime($agenda->dataInicio)) }}
+                                            Inicio:<br><strong>{{ date('d-M-y', strtotime($agenda->dataInicio)) }}</strong>
                                         </div>
                                     </div>
 
                                     <div class="col">
                                         <div class="mt-3">
-                                            <strong>Fim:</strong><br>{{ date('d-M-y', strtotime($agenda->dataFim)) }}
+                                            Fim:<br><strong>{{ date('d-M-y', strtotime($agenda->dataFim)) }}</strong>
                                         </div>
                                     </div>
 
@@ -239,7 +267,6 @@
                     <div class="border rounded bg-light p-3">
                         <div class="text-muted"><small>(sem registos)</small></div>
                     </div>
-                    <br>
                     @endif
 
 
@@ -259,16 +286,7 @@
                             <br>
                             {{-- Input de procura nos resultados da dataTable --}}
                             <input type="text" class="shadow-sm" id="customSearchBox"
-                                placeholder="Procurar nos resultados..." aria-label="Procurar">
-                        </div>
-
-                        <div class="col col-2 text-center" style="max-width: 130px">
-                            <a class="name_link " href="{{route('clients.searchIndex')}}">
-                                <div class="bg-light border shadow-sm p-2">
-                                    <div><i class="fas fa-search" style="font-size:30px"></i></div>
-                                    <div>Pesquisa avançada</div>
-                                </div>
-                            </a>
+                                placeholder="Procurar nos resultados..." aria-label="Procurar" style="width: 100%">
                         </div>
 
                     </div>
@@ -283,10 +301,10 @@
                             {{-- Cabeçalho da tabela --}}
                             <thead>
                                 <tr>
-                                    <th class="text-center align-content-center ">Foto</th>
                                     <th>Nome</th>
                                     <th>N.º Passaporte</th>
                                     <th>País</th>
+                                    <th>Estado</th>
                                     <th class="text-center">Opções</th>
                                 </tr>
                             </thead>
@@ -296,25 +314,6 @@
 
                                 @foreach ($clients as $client)
                                 <tr>
-                                    <td>
-                                        <div class="align-middle mx-auto shadow-sm rounded bg-white"
-                                            style="overflow:hidden; width:50px; height:50px">
-                                            <a class="name_link" href="{{route('clients.show',$client)}}">
-                                                @if($client->fotografia)
-                                                <img src="{{Storage::disk('public')->url('client-documents/'.$client->idCliente.'/').$client->fotografia}}"
-                                                    width="100%" class="mx-auto">
-                                                @elseif($client->genero == 'F')
-                                                <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}"
-                                                    width="100%" class="mx-auto">
-                                                @else
-                                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
-                                                    width="100%" class="mx-auto">
-                                                @endif
-                                            </a>
-                                        </div>
-
-                                    </td>
-
                                     {{-- Nome e Apelido --}}
                                     <td class="align-middle"><a class="name_link"
                                             href="{{route('clients.show',$client)}}">{{ $client->nome }}
@@ -327,6 +326,18 @@
 
                                     {{-- paisNaturalidade --}}
                                     <td class="align-middle">{{ $client->paisNaturalidade }}</td>
+
+
+                                    {{-- Estado --}}
+                                    <td class="align-middle">
+                                        @if ( $client->estado == "Ativo")
+                                        <span class="text-success">Ativo</span>
+                                        @elseif( $client->estado == "Inativo")
+                                        <span class="text-danger">Inativo</span>
+                                        @else
+                                        <span class="text-info">Proponente</span>
+                                        @endif
+                                    </td>
 
 
                                     {{-- OPÇÔES --}}
@@ -347,26 +358,16 @@
                     <div class="border rounded bg-light p-3">
                         <div class="text-muted"><small>(sem registos)</small></div>
                     </div>
-                    <br>
+
                     @endif
 
                 </div>
 
 
                 {{-- Lista de contactos --}}
-                <div class="tab-pane fade" id="contactos" role="tabpanel" aria-labelledby="contactos-tab">
+                <div class="tab-pane fade" id="contactos" role="tabpanel" aria-labelledby="contactos-tab"
+                    style="font-weight:normal">
                     @if ($contacts)
-
-                    {{-- PESQUISA?--}}
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-secondary">Existe {{count($contacts)}} registo(s) no sistema</div>
-                        </div>
-
-                    </div>
-
-                    <br>
 
                     <div class="table-responsive">
                         <table id="dataTableContacts" class="display table table-bordered table-hover "
@@ -391,7 +392,7 @@
                                     <td>
                                         <div class="align-middle mx-auto shadow-sm rounded bg-white"
                                             style="overflow:hidden; width:50px; height:50px">
-                                            <a class="name_link" href="{{route('clients.show',$client)}}">
+                                            <a class="name_link" href="{{route('contacts.show',$contact)}}">
                                                 @if($contact->fotografia)
                                                 <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}"
                                                     width="100%" class="mx-auto">
@@ -458,47 +459,51 @@
 
 
                 {{-- Observações --}}
-                <div class="tab-pane fade" id="observacoes" role="tabpanel" aria-labelledby="observacoes-tab">
+                <div class="tab-pane fade" id="observacoes" role="tabpanel" aria-labelledby="observacoes-tab" style="color: black; font-weight:normal">
 
-                    <div class="text-secondary mb-2">Observações gerais:</div>
+                    <div class="mb-2">Observações gerais:</div>
                     <div class="border rounded bg-light p-3">
                         @if ($university->observacoes)
-                        {{$university->observacoes}}
+                        <span class="font-weight-bold">{{$university->observacoes}}</span>
                         @else
                         <div class="text-muted"><small>(sem dados para mostrar)</small></div>
-                        @endif
+                    @endif
                     </div>
 
                     <br>
 
-                    <div class="text-secondary mb-2">Observação dos Candidaturas:</div>
+                    <div class="mb-2">Observação dos Candidaturas:</div>
                     <div class="border rounded bg-light p-3">
-                        @if ($university->obsCandidaturas)
-                        {{$university->obsCandidaturas}}
-                        @else
-                        <div class="text-muted"><small>(sem dados para mostrar)</small></div>
-                        @endif
+                    @if ($university->obsCandidaturas)
+                    <span class="font-weight-bold">{{$university->obsCandidaturas}}</span>
+                    @else
+                    <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                    @endif
                     </div>
 
                     <br>
 
-                    <div class="text-secondary mb-2">Observação dos Cursos:</div>
+                    <div class="mb-2">Observação dos Cursos:</div>
                     <div class="border rounded bg-light p-3">
-                        @if ($university->obsCursos)
-                        {{$university->obsCursos}}
-                        @else
-                        <div class="text-muted"><small>(sem dados para mostrar)</small></div>
-                        @endif
-                    </div>
-
+                    @if ($university->obsCursos)
+                    <span class="font-weight-bold">{{$university->obsCursos}}</span>
+                    @else
+                    <div class="text-muted"><small>(sem dados para mostrar)</small></div>
+                    @endif
                 </div>
-
-
             </div>
+
         </div>
+
 
     </div>
 </div>
+
+</div>
+</div>
+
+
+
 @endsection
 {{-- Scripts --}}
 @section('scripts')
