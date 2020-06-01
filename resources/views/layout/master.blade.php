@@ -14,7 +14,7 @@
     <!-- Fontawesome core CSS -->
     <link href="{{asset('/vendor/fontawesome-free/css/all.min.css')}}" rel=" stylesheet" type="text/css">
     <!-- Lyka Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <!-- CSS Link -->
     <link href="{{asset('/css/master.css')}}" rel="stylesheet">
     <link href="{{asset('/css/modal.css')}}" rel="stylesheet">
@@ -50,15 +50,11 @@
     <div class="container-fluid text-black ">
         <div class="row" style="min-height:100vh">
             {{-- Menu lateral --}}
-            <div class="col main-menu shadow" id="side-menu">
+            <div class="col main-menu shadow-sm" id="side-menu">
                 @include('layout.partials.main-menu')
             </div>
-            {{-- Barra de topo --}}
-            <div class="top-bar">
-                @include('layout.partials.top-bar')
-            </div>
             <!-- Content -->
-            <div class="col pb-5 pt-3 content">
+            <div class="col pb-5 content">
                 <!-- Error and Success Message -->
                 @if ($errors->any())
                 @include ('layout.msg-error-message.partials.errors')
@@ -231,5 +227,4 @@
         });
     </script>
 </body>
-
 </html>
