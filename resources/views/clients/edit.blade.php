@@ -25,7 +25,7 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Editar informações de <span class="active">{{$client->nome}} {{$client->apelido}}</span></strong>
+                    <h4><strong>Editar Informações de <span class="active">{{$client->nome}} {{$client->apelido}}</span></strong>
                         <h4>
                 </div>
             </div>
@@ -38,10 +38,6 @@
 
         </div>
 
-
-
-
-
         <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation "
             id="form_client" enctype="multipart/form-data" novalidate>
             @csrf
@@ -50,12 +46,12 @@
             <div class="row mt-4">
                 <div class="col">
                     @if (Auth::user()->tipo == "admin")
-                    <a href="{{route('clients.sendActivationEmail', $client)}}" class="btn btn-sm btn-primary px-3"><i class="fas fa-envelope mr-2"></i>Enviar
+                    <a href="{{route('clients.sendActivationEmail', $client)}}" class="btn btn-sm btn-primary m-1 px-3"><i class="fas fa-envelope mr-2"></i>Enviar
                         e-mail para ativção de conta</a>
                     @endif
                 </div>
                 <div class="col text-right" style="min-width:285px">
-                    <button type="submit" class="btn btn-sm btn-success mr-2 px-3" name="submit"><i class="fas fa-check-circle mr-2"></i></i>Guardar
+                    <button type="submit" class="btn btn-sm btn-success m-1 mr-2 px-3" name="submit"><i class="fas fa-check-circle mr-2"></i>Guardar
                         Informações</button>
                     <a href="{{route('clients.index')}}" class="btn btn-sm btn-secondary px-3">Cancelar</a>
                 </div>

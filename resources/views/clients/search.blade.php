@@ -39,8 +39,8 @@
 
             <div class="row mt-3">
 
-                <div class="col col-4" style="min-width:220px">
-                    <div>Escolha o campo:</div>
+                <div class="col col-3" style="min-width:220px">
+                    <div class="font-weight-bold">Escolha o campo:</div>
                     <select id="search_options" name="search_options" class="custom-select select_style mt-2">
                         <option value="País de origem" selected>País de origem</option>
                         <option value="Cidade de origem">Cidade de origem</option>
@@ -53,13 +53,13 @@
 
                 </div>
 
-                <div class="col col-4" style="min-width: 300px">
+                <div class="col" style="min-width: 300px">
 
                     <div id="searchfields" >
 
                         {{-- Pesquisa por País de origem --}}
                         <div id="divPaisOrigem">
-                            <span>Selecione o País de Origem:</span>
+                            <span class="font-weight-bold">Selecione o País de Origem:</span>
                             <select id="paisNaturalidade" name="paisNaturalidade"
                                 class="custom-select select_style mt-2" style="width:100%">
                                 @if(!empty($paises) )
@@ -76,7 +76,7 @@
 
                         {{-- Pesquisa por cidade de origem --}}
                         <div id="divCidade" style="display: none">
-                            <span>Selecione a Cidade de Origem:</span>
+                            <span class="font-weight-bold">Selecione a Cidade de Origem:</span>
                             <select id="cidade" name="cidade" class="custom-select select_style mt-2"
                                 style="width:100%">
                                 @if(!empty($cidadesOrigem) )
@@ -93,7 +93,7 @@
 
                         {{-- Pesquisa por Instituição de origem --}}
                         <div id="divInstituicaoOrigem" {{--  style="display: none" --}}>
-                            <span>Selecione a Instituição de Origem:</span>
+                            <span class="font-weight-bold">Selecione a Instituição de Origem:</span>
                             <select id="nomeInstituicaoOrigem" name="nomeInstituicaoOrigem"
                                 class="custom-select select_style mt-2 " style="width:100%">
                                 @if(!empty($instituicoesOrigem) )
@@ -110,7 +110,7 @@
 
                         {{-- Pesquisa por Agente --}}
                         <div id="divAgents" style="display: none">
-                            <span>Selecione o Agente:</span>
+                            <span class="font-weight-bold">Selecione o Agente:</span>
                             <select id="agente" name="agente" class="custom-select select_style mt-2"
                                 style="width:100%">
                                 @if( $agents )
@@ -127,7 +127,7 @@
 
                         {{-- Pesquisa por Universidades --}}
                         <div id="divUniversidades" style="display: none">
-                            <span>Selecione a Universidade:</span>
+                            <span class="font-weight-bold">Selecione a Universidade:</span>
                             <select id="universidade" name="universidade" class="custom-select select_style mt-2"
                                 style="width:100%">
                                 @if( $universidades )
@@ -145,7 +145,7 @@
 
                         {{-- Pesquisa por Nivel de estudos --}}
                         <div id="divNivelEstudos" style="display: none">
-                            <span>Selecione o Nível de Estudos:</span>
+                            <span class="font-weight-bold">Selecione o Nível de Estudos:</span>
                             <select id="nivelEstudos" name="nivelEstudos" class="custom-select select_style mt-2"
                                 style="width:100%">
                                 <option value="0" value="0" selected hidden>Selecione Nível de Estudos</option>
@@ -161,7 +161,7 @@
 
                         {{-- Pesquisa Estado de cliente --}}
                         <div id="divEstadoCliente" style="display: none">
-                            <span>Selecione o estado do cliente:</span>
+                            <span class="font-weight-bold">Selecione o estado do cliente:</span>
                             <select id="estado" name="estado" class="custom-select select_style mt-2"
                                 style="width:100%">
                                 <option hidden value="0">Selecione o Estado do Cliente</option>
@@ -176,7 +176,7 @@
                 </div>
 
 
-                <div class="col col-4 p-3" style="min-width: 100px">
+                <div class="col p-3" style="min-width: 100px">
                     <div class="mt-3">
                         <button type="submit" class="btn btn-sm btn-primary mr-2 px-3"><i class="fas fa-search mr-2"></i>Pesquisar</button>
                     </div>
@@ -224,14 +224,14 @@
 
                 <div class="row " >
                     {{-- procura nos resultados --}}
-                    <div class="col col-3" style=" min-with:450px!important">
+                    <div class="col">
                         {{-- <div><strong>Pesquisar nos resultados:</strong></div> --}}
                         <div class="align-middle">
                             <input type="text" class="shadow-sm" style="width:100%" id="customSearchBox" placeholder="Procurar nos resultados..." aria-label="Procurar" >
                         </div>
                     </div>
 
-                    <div class="col " style=" min-with:450px!important">
+                    <div class="col">
                         {{-- CheckBox: campos disponiveis --}}
                         <div id="grpChkBox" class="pt-2">
                             {{-- <div class="mb-2"><strong>Filtros:</strong></div> --}}

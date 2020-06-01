@@ -12,50 +12,48 @@
 @section('content')
 
 
-<div class="container mt-2">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
+<div class="container-fluid mt-2">
+
+    <div class="bg-white shadow-sm mb-4 p-4 ">
 
 
-    <br><br>
+        <div class="row">
 
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>@if ($agent->tipo=="Agente")
-                Editar informações do Agente
-            @else
-                Editar informações do Subagente<br>
-            @endif</h6>
+            <div class="col">
+                <div class="title">
+                    <h4><strong>@if ($agent->tipo=="Agente")
+                        Editar Informações do Agente <span class="active">{{$agent->nome}} {{$agent->apelido}}<span>
+                    @else
+                        Editar Informações do Subagente <span class="active">{{$agent->nome}} {{$agent->apelido}}<span>
+                    @endif</strong></h4>
+                </div>
+            </div>
         </div>
 
         <form method="POST" action="{{route('agents.update',$agent)}}" class="form-group needs-validation pt-3"
-            id="form_agent" enctype="multipart/form-data" novalidate>
+        id="form_agent" enctype="multipart/form-data" novalidate>
             @csrf
             @method("PUT")
             @include('agents.partials.add-edit')
-            <div class="form-group text-right" style="min-width:285px">
-                <button type="submit" class="top-button mr-2" name="submit"></i>Guardar informações</button>
-                <a href="{{route('agents.index')}}" class="cancel-button">Cancelar</a>
-            </div>
-        </form>
-
 
     </div>
+
+    <div class="row mt-4">
+        {{-- Butões Submit / Cancelar --}}
+        <div class="col text-right">
+            <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="submit" id="buttonSubmit"><i class="fas fa-check-circle mr-2"></i>Guardar
+                Informações</button>
+            <a href="{{route('agents.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
+        </div>
+
+    </div>
+
+    </form>
 </div>
 
 
 
 @endsection
-
-
-
 
 
 {{-- Scripts --}}

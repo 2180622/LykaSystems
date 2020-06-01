@@ -4,14 +4,10 @@ $(document).ready(function () {
 
         "pageLength": 100,
 
-        "columnDefs": [{
-                "orderable": false,
-                "width": "60px",
-                "targets": 0
-            },
+        "columnDefs": [
             {
                 "orderable": false,
-                "width": "100px",
+                "width": "130px",
                 "targets": -1
             },
 

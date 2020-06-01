@@ -35,9 +35,9 @@
             {{-- Opções --}}
             <div class="col text-right">
                 @if (Auth::user()->tipo == "admin")
-                <a class="btn btn-sm btn-primary mr-2" href="{{route('clients.searchIndex')}}"><i
+                    <a class="btn btn-sm btn-primary m-1 mr-2" href="{{route('clients.searchIndex')}}"><i
                         class="fas fa-search mr-2"></i>Pesquisa avançada</a>
-                <a class="btn btn-sm btn-success" href="{{route('clients.create')}}"><i
+                <a class="btn btn-sm btn-success m-1" href="{{route('clients.create')}}"><i
                         class="fas fa-plus mr-2"></i>Adicionar Estudante</a>
                 @endif
             </div>
@@ -49,8 +49,6 @@
         @if($clients)
         <div class="row">
             <div class="col">
-                <div class="row">
-                    <div class="col">
                         {{-- Contagem dos clientes ativos ou proponentes --}}
                         <div class="text-muted my-2">
                             <strong>Existe {{count($clients)}} registo(s) no sistema</strong>
@@ -60,9 +58,6 @@
                             <input type="text" class="shadow-sm" id="customSearchBox"
                                 placeholder="Procurar nos resultados..." aria-label="Procurar" style="width:100%;">
                         </div>
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -120,7 +115,7 @@
                         <td class="text-center align-middle">
 
                             {{-- Opção: Ver detalhes --}}
-                            <a href="{{route('clients.show',$client)}}" class="btn btn-sm btn-outline-primary "
+                            <a href="{{route('clients.show',$client)}}" class="btn btn-sm btn-outline-primary"
                                 title="Ver ficha completa"><i class="far fa-eye"></i></a>
 
                             {{-- Permissões para editar --}}
@@ -150,6 +145,13 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+
+        @else
+
+        <div class="border rounded bg-light p-2 mt-4" >
+                <span class="text-muted"><small>(sem dados para mostrar)</small></span>
         </div>
 
         @endif

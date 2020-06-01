@@ -39,11 +39,9 @@ class AgenteController extends Controller
     if (Auth::user()->tipo != "admin" ){
         abort (401);
     }
-
         $agents = Agente::all();
-        $totalagents = $agents->count();
 
-    return view('agents.list', compact('agents', 'totalagents'));
+    return view('agents.list', compact('agents'));
 
     }
 
@@ -201,7 +199,7 @@ class AgenteController extends Controller
         ->groupBy('Cliente.idCliente')
         ->orderBy('Cliente.idCliente','asc')
         ->get();
-        
+
 
         if ($clients->isEmpty()) {
         /* lista de alunos do agente associação na ficha de cliente  */

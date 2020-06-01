@@ -57,10 +57,18 @@
             <div class="col pb-5 content">
                 <!-- Error and Success Message -->
                 @if ($errors->any())
-                @include ('layout.msg-error-message.partials.errors')
+                <div class="row mx-1">
+                    <div class="col">
+                        @include ('layout.msg-error-message.partials.errors')
+                    </div>
+                </div>
                 @endif
                 @if (!empty(session('success')))
-                @include ('layout.msg-error-message.partials.success')
+                <div class="row mx-1">
+                    <div class="col">
+                        @include ('layout.msg-error-message.partials.success')
+                    </div>
+                </div>
                 @endif
                 <!-- Content -->
                 @yield('content')

@@ -24,6 +24,10 @@ class UniversityController extends Controller
 
         $universities = Universidade::all();
 
+        if( $universities->isEmpty()){
+            $universities=null;
+        }
+
 
         return view('universities.list', compact('universities'));
 

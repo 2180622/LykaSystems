@@ -4,11 +4,7 @@ $(document).ready(function () {
 
         "pageLength": 100,
 
-        "columnDefs": [{
-                "orderable": false,
-                "width": "60px",
-                "targets": 0
-            },
+        "columnDefs": [
             {
                 "orderable": false,
                 "targets": 2
@@ -114,13 +110,13 @@ $(document).ready(function () {
                         event.preventDefault();
                         event.stopPropagation();
 
-
                         /* valida os  Campos  */
                         if (($("#inputNome").val() == "") || ($("#inputNIF").val() == "") || ($("#inputEmail").val() == "") ) {
                             $("#wait_screen").hide();
                             $("#warning_msg").show();
                             $("#infos-tab").addClass("border-danger text-danger");
                         } else {
+                            $("#wait_screen").hide();
                             $("#infos-tab").removeClass("border-danger text-danger");
                         }
                     }

@@ -11,39 +11,35 @@
 {{-- Conteudo da Página --}}
 @section('content')
 
-<div class="container mt-2">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
+<div class="container-fluid mt-2">
 
-    <br><br>
+    <div class="bg-white shadow-sm mb-4 p-4 ">
 
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Editar informações da Universidade</h6>
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Editar Informações da Universidade</strong></h4>
+                </div>
+            </div>
         </div>
-        <br>
 
-        <form method="POST" action="{{route('universities.update',$university)}}" class="form-group needs-validation"
-            enctype="multipart/form-data" novalidate>
+        <form method="POST" action="{{route('universities.update',$university)}}" class="form-group needs-validation pt-3"
+            id="form_university" enctype="multipart/form-data" novalidate>
             @csrf
             @method("PUT")
             @include('universities.partials.add-edit')
-            <div class="form-group text-right">
-                <br>
-                <button type="submit" class="top-button mr-2" name="submit" title="Guardar">Guardar</button>
-                <a href="{{route('universities.index')}}" class="top-button" title="Cancelar">Cancelar</a>
-            </div>
+
+    </div>
+    <div class="text-right mt-4">
+
+        <button type="submit" class="btn btn-sm btn-success px-2 mr-2" name="ok" id="buttonSubmit"><i class="fas fa-check-circle mr-2"></i>Guardar Informações</button>
+        <a href="{{route('universities.index')}}" class="btn btn-sm btn-secondary px-2">Cancelar</a>
+
         </form>
     </div>
 </div>
-
 
 @endsection
 

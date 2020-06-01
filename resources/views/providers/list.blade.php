@@ -12,54 +12,57 @@
 {{-- Conteúdo da Página --}}
 @section('content')
 
-<div class="container mt-2 ">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
 
-    <div class="float-right">
-        <a href="{{route('provider.create')}}" class="top-button">Adicionar fornecedor</a>
-    </div>
 
-    <br><br>
 
-    <div class="cards-navigation">
-        <div class="title row">
-            <div class="col-md-6">
-                <h6>Listagem de fornecedores</h6>
+<div class="container-fluid mt-2 ">
+    {{-- Conteúdo --}}
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Listagem de fornecedores</strong></h4>
+                </div>
+            </div>
+
+            {{-- Opções --}}
+            <div class="col text-right">
+                <a href="{{route('provider.create')}}" class="btn btn-sm btn-success px-2"><i
+                        class="fas fa-plus mr-2"></i>Adicionar fornecedor</a>
+            </div>
+
+        </div>
+
+
+        <div class="row my-2">
+            <div class="col">
+                @if($providers)
+                <div class="text-secondary"><strong>Existe {{count($providers)}} registo(s) no sistema</strong>
+                </div>
+                @endif
             </div>
         </div>
 
-            <br>
+
+        <div class="row my-2">
+
+            {{-- Espaço ocupado no storage/library --}}
+            <div class="col ">
+                {{-- Input para pesquisa na datatable --}}
+                <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..."
+                    aria-label="Procurar" style="width: 100%">
+
+            </div>
+
+        </div>
 
 
-            <div class="bg-white shadow-sm mb-4 p-4 " style="border-radius:10px;">
-                <div class="row mx-1">
-                    <div class="col col-2" style="max-width: 120px">
-                        <i class="fas fa-cogs active" style="font-size:80px"></i>
-                    </div>
-                    <div class="col">
-                            <div class="text-secondary font-weight-bold">Existe {{count($providers)}} registo(s) no sistema</div>
-                        <br>
 
-                        {{-- Input de procura nos resultados da dataTable --}}
-                        <div style="width: 100%; border-radius:10px;">
-                            <input type="text" class="shadow-sm" id="customSearchBox"
-                                placeholder="Procurar nos resultados..." aria-label="Procurar">
+        <div class="row mt-4">
 
-                        </div>
-                    </div>
-                </div>
-
-
-                <br>
-
+            <div class="col">
                 <div class="table-responsive">
                     <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
                         <thead>
@@ -67,24 +70,33 @@
                                 <th>Nome</th>
                                 <th>Morada</th>
                                 <th>Contacto</th>
-                                <th>Opções</th>
+                                <th class="text-center">Opções</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($providers as $provider)
                             <tr>
-                                <td class="align-middle"> <a href="{{route('provider.show', $provider)}}" class="name_link"
-                                    title="Ver ficha completa">{{$provider->nome}}</a></td>
+                                <td class="align-middle">
+                                    <a href="{{route('provider.show', $provider)}}" class="name_link" title="Ver ficha completa">{{$provider->nome}}</a>
+                                </td>
+
                                 <td class="align-middle">{{$provider->morada}}</td>
+
                                 <td class="align-middle text-truncate">{{$provider->contacto}}</td>
 
+                                {{-- Opções --}}
                                 <td class="text-center align-middle" style="min-width: 120px;">
-                                    <a href="{{route('provider.show', $provider)}}" class="btn_list_opt "
-                                        title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                    <a href="{{route('provider.edit', $provider)}}" class="btn_list_opt btn_list_opt_edit"
-                                        title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
-                                    <button type="button" class="btn_delete" title="Eliminar fornecedor" data-toggle="modal"
-                                        data-target="#deleteModal" data-name="{{$provider->nome}}"
+
+                                    <a href="{{route('provider.show', $provider)}}" class="btn btn-sm btn-outline-primary"
+                                        title="Ver ficha completa"><i class="far fa-eye"></i></a>
+
+
+                                    <a href="{{route('provider.edit', $provider)}}"
+                                        class="btn btn-sm btn-outline-warning" title="Editar"><i
+                                            class="fas fa-pencil-alt"></i></a>
+
+                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Eliminar fornecedor"
+                                        data-toggle="modal" data-target="#deleteModal" data-name="{{$provider->nome}}"
                                         data-descricao="{{post_slug($provider->descricao)}}"><i
                                             class="fas fa-trash-alt"></i></button>
                                 </td>
@@ -95,47 +107,46 @@
                 </div>
 
             </div>
+        </div>
+
 
     </div>
+</div>
 
 
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Eliminar fornecedor</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="form" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <p id="text"></p>
-                        <br>
-                        <p style="font-weight:500;">Ao clicar "Sim, eliminar fornecedor", irá eliminar a conta
-                            definitivamente e perder todos os dados associados.</p>
-                        <input type="hidden" id="provider-delete-descricao" name="id">
-                </div>
-                <div class="modal-footer">
-                    <button class="top-button btn_submit bg-danger" type="submit"><i
-                            class="far fa-trash-alt mr-2"></i>Sim, eliminar fornecedor</button>
-                    <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
-                </div>
-                </form>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar fornecedor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
+                <form class="form" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <p id="text"></p>
+                    <br>
+                    <p style="font-weight:500;">Ao clicar "Sim, eliminar fornecedor", irá eliminar a conta
+                        definitivamente e perder todos os dados associados.</p>
+                    <input type="hidden" id="provider-delete-descricao" name="id">
+            </div>
+            <div class="modal-footer">
+                <button class="top-button btn_submit bg-danger" type="submit"><i class="far fa-trash-alt mr-2"></i>Sim,
+                    eliminar fornecedor</button>
+                <button type="button" class="top-button bg-secondary mr-2" data-dismiss="modal">Cancelar</button>
+            </div>
+            </form>
         </div>
     </div>
+</div>
 
-    @endsection
+@endsection
 
-    @section('scripts')
-    <script src="{{asset('/js/providers_list.js')}}"></script>
+@section('scripts')
+<script src="{{asset('/js/providers_list.js')}}"></script>
 
-    @endsection
-
+@endsection

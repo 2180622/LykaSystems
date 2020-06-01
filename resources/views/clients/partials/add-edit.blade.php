@@ -7,7 +7,7 @@
         <div class="row">
                 <div id="div_agente" class="col m-3 py-4 border shadow-sm">
                     <div class="mx-2 my-auto">
-                        <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente">Agente responsável:</label>
+                        <i class="fas fa-user-tie active mr-3 ml-3"></i><label for="idAgente" class="font-weight-bold">Agente responsável:</label>
                         <div class="mr-3">
                             <select class="form-control select_style ml-2" id="idAgente" name="idAgente" style="min-width: 200px" required>
                                 <option selected value="0">(selecione um agente)</option>
@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col">
                                 {{-- Estado do cliente --}}
-                                <i class="fas fa-traffic-light active mr-3 ml-3"></i><label for="estado">Estado do cliente:</label>
+                                <i class="fas fa-traffic-light active mr-3 ml-3"></i><label for="estado" class="font-weight-bold">Estado do cliente:</label>
                                     <select class="form-control select_style ml-2" id="estado" name="estado" style="min-width: 200px" required>
                                         <option {{old('idAgente', $client->estado ) == "Inativo" ? "selected" : "" }} value="Inativo">Inativo</option>
                                         <option {{old('idAgente', $client->estado ) == "Ativo" ? "selected" : "" }} value="Ativo">Ativo</option>
