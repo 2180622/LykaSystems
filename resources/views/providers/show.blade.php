@@ -10,55 +10,73 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-<div class="container mt-2 ">
 
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
 
-    <div class="float-right">
-        <a href="{{route('provider.edit', $provider)}}" class="top-button mr-2">Editar informação</a>
-    </div>
 
-    <br><br>
 
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Visualização do fornecedor: {{$provider->nome}}</h6>
+
+<div class="container-fluid mt-2" style="color: black">
+
+    {{-- Conteúdo --}}
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Ficha do fornecedor <span class="active">{{$provider->nome}}</span></strong></h4>
+                    <small>
+                        <div>
+                            <span>Ultima atualização:
+                                <strong>{{ date('d-M-y', strtotime($provider->updated_at)) }}</strong></span>
+                        </div>
+                    </small>
+                </div>
+            </div>
+
+            {{-- Opções --}}
+            <div class="col text-right">
+                <a href="{{route('provider.edit', $provider)}}" class="btn btn-sm btn-success m-1 mr-2 px-3 "><i class="fas fa-pencil-alt mr-2"></i>Editar informação</a>
+            </div>
+
         </div>
-        <br>
-        <div class="payment-card shadow-sm show-provider">
-            <div>
-                <p><b>Nome:</b> {{$provider->nome}}</p>
+
+        <hr class="my-3">
+
+
+            <div class="row">
+                <div class="col " style="min-width: 300px">
+                    <div class="font-weight-bold">Descrição:</div>
+                    <div class="border rounded bg-light p-3 font-weight-bold">{{$provider->descricao}}</div>
+
+                    <br>
+
+                    <div class="font-weight-bold">Morada:</div>
+                    <div class="border rounded bg-light p-3 font-weight-bold">{{$provider->morada}}</div>
+
+                    <br>
+
+                    <div class="font-weight-bold">Contacto:</div>
+                    <div class="border rounded bg-light p-3 font-weight-bold">{{$provider->contacto}}</div>
+
+                    <br>
+
+                    <div class="font-weight-bold">Observacões:</div>
+                    @if ($provider->observacoes != null)
+                        <div class="border rounded bg-light p-3">{{$provider->observacoes}}</div>
+                    @else
+                        <div class="border rounded bg-light p-3">
+                            <div class="text-muted"><small>(sem informação)</small></div>
+                        </div>
+                    @endif
+                </div>
             </div>
-            <br>
-            <div>
-                <p><b>Descrição:</b> {{$provider->descricao}}</p>
-            </div>
-            <br>
-            <div>
-                <p><b>Contacto:</b> {{$provider->contacto}}</p>
-            </div>
-            <br>
-            <div>
-                <p><b>Morada:</b> {{$provider->morada}}</p>
-            </div>
-            @if ($provider->observacoes != null)
-            <br>
-            <div>
-                <p><b>Observações:</b> {{$provider->observacoes}}</p>
-            </div>
-            @endif
-        </div>
-        <br>
+
     </div>
+
 </div>
+
 
 @section('scripts')
 <script type="text/javascript">

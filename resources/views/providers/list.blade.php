@@ -47,15 +47,11 @@
 
 
         <div class="row my-2">
-
-            {{-- Espaço ocupado no storage/library --}}
             <div class="col ">
                 {{-- Input para pesquisa na datatable --}}
                 <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..."
                     aria-label="Procurar" style="width: 100%">
-
             </div>
-
         </div>
 
 
@@ -77,7 +73,7 @@
                             @foreach ($providers as $provider)
                             <tr>
                                 <td class="align-middle">
-                                    <a href="{{route('provider.show', $provider)}}" class="name_link" title="Ver ficha completa">{{$provider->nome}}</a>
+                                    <a href="{{route('provider.show', $provider)}}" title="Ver ficha completa">{{$provider->nome}}</a>
                                 </td>
 
                                 <td class="align-middle">{{$provider->morada}}</td>

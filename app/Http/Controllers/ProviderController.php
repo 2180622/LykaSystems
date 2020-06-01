@@ -44,6 +44,7 @@ class ProviderController extends Controller
     {
       $fields = $providerRequest->validated();
       $provider->fill($fields);
+      $provider->updated_at=time();
       $provider->save();
       return redirect()->route('provider.index')->with('success', 'Fornecedor editado com sucesso.');
     }
