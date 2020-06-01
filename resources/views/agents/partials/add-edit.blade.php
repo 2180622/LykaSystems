@@ -105,7 +105,7 @@
 
 
                 {{-- DIVs com informações sobre os AGENTES / SUBAGENTES --}}
-                <div class="col bg-light border rounded p-3 mx-3" style="min-width: 200px">
+                <div class="col bg-light border rounded p-3 px-4 m-2" style="min-width: 200px">
 
                     {{-- Infos para Agente --}}
                     <div class="" id="div_infos_agente">
@@ -201,7 +201,7 @@
 
                 </div>
 
-                <div class="col col-4 text-center">
+                <div class="col col-4 text-center align-middle" style="max-width: 400px; min-width: 300px">
                     {{-- INPUT fotografia --}}
                     <div>
                         <label for="fotografia">Fotografia:</label>
@@ -236,32 +236,16 @@
         <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
 
             <div class="row">
-                <div class="col">
-
-                    {{-- INPUT DOC ID --}}
-                    <label for="num_doc">Número de identificação pessoal:</label><br>
-                    <input type="text" class="form-control" name="num_doc" id="num_doc"
-                        value="{{old('num_doc',$agent->num_doc)}}" placeholder="Numero de identificação pessoal"
-                        required maxlength="20" required>
-
-                    <br>
-
-                    {{-- INPUT NIF --}}
-                    <label for="NIF">NIF:</label><br>
-                    <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$agent->NIF)}}"
-                        placeholder="Insira o NIF" maxlength="20" required>
-                </div>
-
 
                 {{-- Documento de identificação --}}
-                <div class="col col-4 text-center">
+                <div class="col col-3 text-center" style="max-width: 450px; min-width:300px">
                     <label for="img_doc">Documento de identificação:</label>
                     <input type='file' id="img_doc" name="img_doc" style="display:none"
                         accept="application/pdf, image/*" />
 
 
                     <div class="card mx-auto p-4 rounded shadow-sm text-center "
-                        style="width:80%;min-width:118px;min-height:120px">
+                        style="width:80%;min-width:118px;min-height:130px">
 
                         @if ( $agent->img_doc!=null)
                         <a href="#" title="Ver documento" id="doc_preview" class="name_link">
@@ -282,6 +266,21 @@
                 </div>
 
 
+                <div class="col ">
+
+                    {{-- INPUT DOC ID --}}
+                    <label for="num_doc">Número de identificação pessoal:</label><br>
+                    <input type="text" class="form-control" name="num_doc" id="num_doc"
+                        value="{{old('num_doc',$agent->num_doc)}}" placeholder="Numero de identificação pessoal"
+                        required maxlength="20" required>
+
+                    <br>
+
+                    {{-- INPUT NIF --}}
+                    <label for="NIF">NIF:</label><br>
+                    <input type="text" class="form-control" name="NIF" id="NIF" value="{{old('NIF',$agent->NIF)}}"
+                        placeholder="Insira o NIF" maxlength="20" required>
+                </div>
 
             </div>
 

@@ -69,12 +69,8 @@
                         <thead>
                             <tr>
 
-
-                                <th class="text-center align-content-center ">Foto
-                                    {{-- <input class="table-check" type="checkbox" value="" id="check_all"> --}}
-                                </th>
-
                                 <th>Nome da universidade</th>
+                                <th>NIF</th>
                                 <th>E-mail</th>
                                 <th class="text-center">Opções</th>
                             </tr>
@@ -85,20 +81,14 @@
 
                             @foreach ($universities as $university)
                             <tr>
-                                <td>
-                                    <div class="align-middle mx-auto shadow-sm rounded"
-                                        style="overflow:hidden; width:50px; height:50px">
-                                        <a class="name_link" href="{{route('universities.show',$university)}}">
-                                            <img src="{{Storage::disk('public')->url('default-photos/university.png')}}"
-                                                width="100%" class="mx-auto">
-                                        </a>
-                                    </div>
-
-                                </td>
 
                                 {{-- Nome --}}
                                 <td class="align-middle"><a class="name_link"
                                         href="{{route('universities.show',$university)}}">{{ $university->nome }}</td>
+
+                                {{-- NIF --}}
+                                <td class="align-middle">{{ $university->NIF }}</td>
+
 
                                 {{-- E-Mail --}}
                                 <td class="align-middle">{{ $university->email }}</td>

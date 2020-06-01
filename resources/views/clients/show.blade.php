@@ -7,12 +7,6 @@
 @section('styleLinks')
 <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 
-<style>
-    .active {
-        color: #6A74C9
-    }
-
-</style>
 @endsection
 
 

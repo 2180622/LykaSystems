@@ -54,7 +54,7 @@
 
         <div class="row">
             <div class="col">
-                {{-- Contagem dos clientes ativos ou proponentes --}}
+                {{-- Contagem dos Agentes --}}
                 <div class="text-muted my-2">
                     <strong>Existe {{count($agents)}} registo(s) no sistema</strong>
                 </div>
@@ -129,10 +129,12 @@
 
                                 {{-- OPÇÔES --}}
                                 <td class="text-center align-middle">
-                                    <a href="{{route('agents.show',$agent)}}" class="btn_list_opt "
-                                        title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
-                                    <a href="{{route('agents.edit',$agent)}}" class="btn_list_opt btn_list_opt_edit"
-                                        title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                                    <a href="{{route('agents.show',$agent)}}" class="btn btn-sm btn-outline-primary"
+                                        title="Ver ficha completa"><i class="far fa-eye"></i></a>
+
+
+                                    <a href="{{route('agents.edit',$agent)}}" class="btn btn-sm btn-outline-warning"
+                                        title="Editar"><i class="fas fa-pencil-alt"></i></a>
 
                                     <form method="POST" role="form" id="{{ $agent->idAgente }}"
                                         action="{{route('agents.destroy',$agent)}}"
@@ -140,7 +142,7 @@
                                         class="d-inline-block form_agent_id">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn_list_opt btn_delete" title="Eliminar agente"
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar agente"
                                             data-toggle="modal" data-target="#deleteModal"><i
                                                 class="fas fa-trash-alt"></i></button>
                                     </form>
