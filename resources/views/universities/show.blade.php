@@ -92,7 +92,7 @@
         <div>
             <div class="row p-2">
 
-                <div class="col p-2" style="min-width:250px !important">
+                <div class="col p-2" style="min-width:350px !important">
 
                     {{-- Informações --}}
 

@@ -11,47 +11,52 @@
 {{-- Page Content --}}
 @section('content')
 
-<div class="container mt-2">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
-    </div>
 
-    <br><br>
 
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Adicionar agente</h6>
+<div class="container-fluid mt-2">
+
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Adicionar Agente</strong></h4>
+                </div>
+            </div>
         </div>
 
-        <form method="POST" action="{{route('agents.store')}}" class="form-group needs-validation pt-3" id="form_agent"
+        <form method="POST" action="" class="form-group needs-validation pt-3" id="form_agent"
             enctype="multipart/form-data" novalidate>
             @csrf
             @include('agents.partials.add-edit')
-            <div class="row mt-4">
-                <div class="col">
-                    <div class="alert alert-primary " role="alert">
-                        <i class="fas fa-info-circle mr-2"></i><strong>Nota: </strong>O agente irá receber um e-mail
-                        para ativação da sua conta pessoal
-                    </div>
 
-                </div>
-                <div class="col col-4 text-right pt-2" style="min-width:285px">
-                    <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar agente</button>
-                    <a href="{{route('agents.index')}}" class="cancel-button">Cancelar</a>
-                </div>
-            </div>
-            <div class="form-group text-right">
-
-            </div>
-        </form>
     </div>
+
+    <div class="row mt-4">
+
+        {{-- Informação de envio de e-mail --}}
+        <div class="col">
+            <div class="alert alert-primary " role="alert">
+                <i class="fas fa-info-circle mr-2"></i><strong>Nota: </strong>O agente irá receber um e-mail para
+                ativação da sua conta pessoal
+            </div>
+        </div>
+
+        {{-- Butões Submit / Cancelar --}}
+        <div class="col col-3 text-right">
+            <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="ok" id="buttonSubmit"><i
+                    class="fas fa-plus mr-2"></i>Adicionar agente</button>
+            <a href="{{route('agents.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
+        </div>
+
+    </div>
+
+    </form>
 </div>
+
+
 
 @endsection
 

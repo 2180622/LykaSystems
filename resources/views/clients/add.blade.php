@@ -36,7 +36,7 @@
                 <div class="col text-right" style="min-width:285px">
                     <button type="submit" class="btn btn-sm btn-success m-1" name="ok" id="buttonSubmit"><i class="fas fa-plus mr-2"></i>Adicionar
                         Estudante</button>
-                    <a href="{{route('clients.index')}}" class="btn btn-sm btn-secondary">Cancelar</a>
+                    <a href="{{route('clients.index')}}" class="btn btn-sm btn-secondary m-1">Cancelar</a>
                 </div>
             </div>
 

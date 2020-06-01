@@ -220,6 +220,8 @@
             if ($("#tipo").val() == "Subagente") {
                 $("#div_subagente").show();
                 $("#div_execao").show();
+                $("#div_infos_subagente").show();
+                $("#div_infos_agente").hide();
                 $("#idAgenteAssociado").prop("disabled", false);
                 $("#idAgenteAssociado").val(null);
                 $("#idAgenteAssociado").focus();
@@ -229,6 +231,8 @@
                 $("#exepcao").val("0");
                 $("#div_subagente").hide();
                 $("#div_execao").hide();
+                $("#div_infos_subagente").hide();
+                $("#div_infos_agente").show();
                 $("#idAgenteAssociado").prop("disabled", true);
                 $("#idAgenteAssociado").val(null);
                 $("#idAgenteAssociado").prop("disabled", true);
