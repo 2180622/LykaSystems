@@ -7,6 +7,7 @@
 
   <!-- Pack de icons -->
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
 
   <script src="{{asset('/js/master.js')}}"></script>
   <!-- Individual Scripts -->

@@ -1,72 +1,132 @@
 <div class="menu-content">
-    <!-- Lyka Name -->
-    <div class="row pt-3 pb-3 logo">
+    <!-- User info -->
+    <div class="row pt-4 pl-2">
         <div class="col">
-            <a class="logotype" href="{{route('dashboard')}}">lyka.</a>
+            <div class="user-image">
+                @if(Auth()->user()->admin->fotografia)
+                    <img src="{{Storage::disk('public')->url('admin-photos/').Auth()->user()->admin->fotografia}}" alt="Imagem de apresentação" width="100%">
+                @elseif(Auth()->user()->admin->genero == 'F')
+                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" alt="Imagem de apresentação" width="100%">
+                @else
+                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" alt="Imagem de apresentação" width="100%">
+                @endif
+            </div>
         </div>
     </div>
+    <div class="row pt-2 pl-2">
+        <div class="col">
+            <div class="user-info">
+                @if (Auth()->user()->tipo == "admin")
+                <p>{{Auth()->user()->admin->nome.' '.Auth()->user()->admin->apelido}}</p>
+                @elseif (Auth()->user()->tipo == "agente")
+                <p>{{Auth()->user()->agente->nome.' '.Auth()->user()->agente->apelido}}</p>
+                @else
+                <p>{{Auth()->user()->cliente->nome.' '.Auth()->user()->cliente->apelido}}</p>
+                @endif
+                @if (Auth()->user()->tipo == "admin")
+                <p>Administrador, Portugal</p>
+                @elseif (Auth()->user()->tipo == "agente")
+                <p>Agente, Portugal</p>
+                @else
+                <p>Cliente, Portugal</p>
+                @endif
+            </div>
+        </div>
+    </div>
+
     <!-- Menu Options -->
     <ul class="menu-list">
-
         <!-- Dashboard -->
         <li class="menu-option">
             <a href="{{route('dashboard')}}">
                 <div class="menu-icon">
-                    <ion-icon name="cloud-outline" style="font-size: 16pt;  --ionicon-stroke-width: 40px; position: relative; top: 3px; right: 3px;">
-                    </ion-icon>
+                    <span class="iconify {{Route::is('dashboard') ? 'active' : ''}}" data-inline="false" data-icon="ant-design:home-outlined"></span>
                 </div>
-                <span class="{{Route::is('dashboard') ? 'active' : ''}} option-name" style="bottom:2px;">Dashboard</span>
+                <span class="{{Route::is('dashboard') ? 'active' : ''}} option-name" style="top:1px;">Dashboard</span>
             </a>
-        </li>
-
-        <li class="menu-option-title mt-4 mb-1">
-            recursos humanos
         </li>
 
         <!-- Estudantes  -->
         <li class="menu-option">
             <a href="{{route('clients.index')}}">
                 <div class="menu-icon">
-                    <ion-icon name="person-circle-outline" style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 3px;"></ion-icon>
+                    <span class="iconify {{Route::is('clients.*') ? 'active' : ''}}" data-inline="false" data-icon="jam:user"></span>
                 </div>
                 <span class="option-name {{Route::is('clients.*') ? 'active' : ''}} option-name">Estudantes</span>
             </a>
         </li>
+
+        <!-- Agentes  -->
+        @if (Auth()->user()->tipo == "admin")
+        <li class="menu-option">
+            <a href="{{route('agents.index')}}">
+                <div class="menu-icon">
+                    <span class="iconify {{Route::is('agents.*') ? 'active' : ''}}" data-inline="false" data-icon="jam:users"></span>
+                </div>
+                <span class="option-name {{Route::is('agents.*') ? 'active' : ''}}">Agentes</span>
+            </a>
+        </li>
+        @endif
 
         <!-- Universidades  -->
         @if (Auth()->user()->tipo == 'admin')
         <li class="menu-option">
             <a href="{{route('universities.index')}}">
                 <div class="menu-icon">
-                    <i class="fas fa-university mr-2"></i>
+                    <span class="iconify {{Route::is('universities.*') ? 'active' : ''}}" data-inline="false" data-icon="uil:university"></span>
                 </div>
                 <span class="option-name {{Route::is('universities.*') ? 'active' : ''}}">Universidades</span>
             </a>
         </li>
         @endif
 
-        <!-- Agentes  -->
-        @if ( Auth::user()->tipo == "admin")
+        @if (Auth()->user()->tipo == "admin")
+        {{-- Financeiro Collapse --}}
         <li class="menu-option">
-            <a href="{{route('agents.index')}}">
+            <a data-toggle="collapse" href="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
                 <div class="menu-icon">
-                    <i class="fas fa-user-tie mr-2"></i>
+                    <span class="iconify <?php if (Route::is('payments.*') || Route::is('charges.*') || Route::is('conta.*')) { echo 'active'; } ?>" data-inline="false" data-icon="ant-design:bar-chart-outlined"></span>
                 </div>
-                <span class="option-name {{Route::is('agents.*') ? 'active' : ''}}">Agentes</span>
+                <span class="option-name <?php if (Route::is('payments.*') || Route::is('charges.*') || Route::is('conta.*')) { echo 'active'; } ?>">Finanças</span>
             </a>
         </li>
-        @endif
-        <br>
 
-        <li class="menu-option-title mt-2 mb-2">
-            ferramentas administrativas
-        </li>
+        <div class="collapse" id="collapseFinance">
+            <!-- Pagamentos -->
+            <li class="menu-option">
+                <a href="{{route('payments.index')}}">
+                    <span class="option-name {{Route::is('payments.*') ? 'active' : ''}}">Pagamentos</span>
+                </a>
+            </li>
+
+            <!-- Cobranças -->
+            <li class="menu-option">
+                <a href="{{route('charges.index')}}">
+                    <span class="option-name {{Route::is('charges.*') ? 'active' : ''}}">Cobranças</span>
+                </a>
+            </li>
+
+            <!-- Relatório de contas -->
+            <li class="menu-option">
+                <a href="#">
+                    <span class="option-name">Relatório e contas</span>
+                </a>
+            </li>
+
+            <!-- Conta bancária -->
+            <li class="menu-option">
+                <a href="{{route('conta.index')}}">
+                    <span class="option-name {{Route::is('conta.*') ? 'active' : ''}}">Conta bancária</span>
+                </a>
+            </li>
+        </div>
+        @endif
 
         {{-- Diversos Collapse --}}
         <li class="menu-option">
             <a data-toggle="collapse" href="#collapseDiv" aria-expanded="false" aria-controls="collapseDiv">
                 <div class="menu-icon">
-                    <i class="fas fa-tools mr-2"></i>
+                    <span class="iconify <?php if (Route::is('libraries.*') || Route::is('contacts.*') || Route::is('agends.*') || Route::is('produtostock.*')) { echo 'active'; } ?>" data-inline="false" data-icon="carbon:tools"></span>
                 </div>
                 <span class="option-name <?php if (Route::is('libraries.*') || Route::is('contacts.*') || Route::is('agends.*') || Route::is('produtostock.*')) { echo 'active'; } ?>">Diversos</span>
             </a>
@@ -114,61 +174,45 @@
                     <span class="option-name {{Route::is('agenda.*') ? 'active' : ''}}">Agenda</span>
                 </a>
             </li>
+
+            <!-- Utilizadores -->
+            @if (Auth()->user()->tipo == 'admin')
+            <li class="menu-option">
+                <a href="{{route('users.index')}}">
+                    <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Administradores</span>
+                </a>
+            </li>
+            @endif
         </div>
 
-        @if (Auth()->user()->tipo == "admin")
-        {{-- Financeiro Collapse --}}
         <li class="menu-option">
-            <a data-toggle="collapse" href="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
+            <a href="#">
                 <div class="menu-icon">
-                    <i class="fas fa-chart-pie"></i>
+                    <span class="iconify" data-inline="false" data-icon="ant-design:bell-outlined"></span>
                 </div>
-                <span class="option-name <?php if (Route::is('payments.*') || Route::is('charges.*') || Route::is('conta.*')) { echo 'active'; } ?>">Finanças</span>
+                <span class="option-name">Notificações</span>
             </a>
         </li>
 
-
-        <div class="collapse" id="collapseFinance">
-            <!-- Pagamentos -->
-            <li class="menu-option">
-                <a href="{{route('payments.index')}}">
-                    <span class="option-name {{Route::is('payments.*') ? 'active' : ''}}">Pagamentos</span>
-                </a>
-            </li>
-
-            <!-- Cobranças -->
-            <li class="menu-option">
-                <a href="{{route('charges.index')}}">
-                    <span class="option-name {{Route::is('charges.*') ? 'active' : ''}}">Cobranças</span>
-                </a>
-            </li>
-
-            <!-- Relatório de contas -->
-            <li class="menu-option">
-                <a href="#">
-                    <span class="option-name">Relatório e contas</span>
-                </a>
-            </li>
-
-            <!-- Conta bancária -->
-            <li class="menu-option">
-                <a href="{{route('conta.index')}}">
-                    <span class="option-name {{Route::is('conta.*') ? 'active' : ''}}">Conta bancária</span>
-                </a>
-            </li>
-        </div>
-        @endif
-
-        <!-- Utilizadores -->
-        @if (Auth()->user()->tipo == 'admin')
         <li class="menu-option">
-            <a href="{{route('users.index')}}">
+            <a href="#">
                 <div class="menu-icon">
-                    <i class="fas fa-users mr-2"></i>
+                    <span class="iconify" data-inline="false" data-icon="cil:cog"></span>
                 </div>
-                <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Administradores</span>
+                <span class="option-name">Definições</span>
             </a>
         </li>
-        @endif
+    </ul>
+</div>
+<div style="bottom:0; position:absolute;">
+    <ul class="menu-list">
+        <li class="menu-option">
+            <a data-toggle="modal" data-target="#modalLogout" style="cursor:pointer;">
+                <div class="menu-icon">
+                    <span class="iconify" data-inline="false" data-icon="ri:shut-down-line"></span>
+                </div>
+                <span class="option-name">Terminar sessão</span>
+            </a>
+        </li>
     </ul>
 </div>
