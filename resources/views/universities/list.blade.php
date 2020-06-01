@@ -96,18 +96,20 @@
 
                                 {{-- OPÇÔES --}}
                                 <td class="text-center align-middle">
-                                    <a href="{{route('universities.show',$university)}}" class="btn_list_opt "
-                                        title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+                                    <a href="{{route('universities.show',$university)}}" class="btn btn-sm btn-outline-primary"
+                                        title="Ver ficha completa"><i class="far fa-eye"></i></a>
+
+
                                     <a href="{{route('universities.edit',$university)}}"
-                                        class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                            class="fas fa-pencil-alt mr-2"></i></a>
+                                        class="btn btn-sm btn-outline-warning" title="Editar"><i
+                                            class="fas fa-pencil-alt"></i></a>
 
                                     <form method="POST" role="form" id="{{ $university->idUniversidade }}"
                                         action="{{route('universities.destroy',$university)}}"
                                         class="d-inline-block form_university_id" data="{{ $university->nome }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn_delete" title="Eliminar Universidade"
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar Universidade"
                                             data-toggle="modal" data-target="#eliminarUniversidade"
                                             data-title="{{$university->nome}}"><i class="fas fa-trash-alt"></i></button>
                                     </form>

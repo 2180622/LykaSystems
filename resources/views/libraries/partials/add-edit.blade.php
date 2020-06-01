@@ -47,14 +47,14 @@
             {{-- Quand EXISTE ficheiro --}}
             {{-- File info --}}
             <div id="div_propriedades">
-                <div><i class="fas fa-info-circle mr-2"></i>Informação sobre o ficheiro:</div>
+                <div class="font-weight-bold"><i class="fas fa-info-circle mr-2"></i>Informação sobre o ficheiro:</div>
                 <div class="mt-3">Tipo de ficheiro: <span id="info_fileType"
-                        class="text-secondary">{{old('ficheiro',$library->tipo)}}</span> </div>
+                        class="font-weight-bold">{{old('ficheiro',$library->tipo)}}</span> </div>
                 <div class="mt-2">Tamanho: <span id="info_fileSize"
-                        class="text-secondary">{{old('ficheiro',$library->tamanho)}}</span> </div>
+                        class="font-weight-bold">{{old('ficheiro',$library->tamanho)}}</span> </div>
 
                 <div class="mt-2">Última modificação: <span id="info_dateCreated"
-                        class="text-secondary">{{old('ficheiro',$library->created_ate)}}</span></div>
+                        class="font-weight-bold">{{old('ficheiro',$library->created_ate)}}</span></div>
             </div>
 
 

@@ -10,76 +10,84 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-<div class="container mt-2 ">
 
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
+
+
+
+
+<div class="container-fluid mt-2 ">
+
+    <div class="bg-white shadow-sm mb-2 p-4 ">
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Criação de um fornecedor</strong><h4>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <form action="{{route('provider.store')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="nome">Nome do fornecedor *</label>
+                    <br>
+                    <input type="text" name="nome" placeholder="Inserir o nome do fornecedor" autocomplete="off" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="descricao">Descrição do fornecedor *</label>
+                    <br>
+                    <input type="text" name="descricao" placeholder="Inserir uma descrição" autocomplete="off" required>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="help-button" id="tooltipContacto" data-toggle="tooltip" data-placement="top" title="São aceites como contactos números de telefone e/ou endereços eletrónicos.">
+                      <span>
+                          ?
+                      </span>
+                  </div>
+                    <label for="contacto">Contacto do fornecedor *</label>
+                    <br>
+                    <input type="text" name="contacto" placeholder="Inserir o contacto do fornecedor" autocomplete="off" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="morada">Morada do fornecedor *</label>
+                    <br>
+                    <input type="text" name="morada" placeholder="Inserir a morada do fornecedor" autocomplete="off" required>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col">
+                    <label for="observacoes">Observações do fornecedor</label>
+                    <br>
+                    <textarea name="observacoes" rows="5"></textarea>
+                </div>
+            </div>
+    </div>
+    <div class="form-group text-right">
+        <br>
+        <button type="submit" class="btn btn-sm btn-success m-1 px-2" name="ok" id="buttonSubmit"><i class="fas fa-plus mr-2"></i>Adicionar fornecedor</button>
+        <a href="{{route('provider.index')}}" class="btn btn-sm btn-secondary m-1">Cancelar</a>
     </div>
 
-    <br><br>
-
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Criação de um fornecedor</h6>
-        </div>
-        <br>
-        <div class="payment-card shadow-sm">
-            <form action="{{route('provider.store')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="nome">Nome do fornecedor *</label>
-                        <br>
-                        <input type="text" name="nome" placeholder="Inserir o nome do fornecedor" autocomplete="off" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="descricao">Descrição do fornecedor *</label>
-                        <br>
-                        <input type="text" name="descricao" placeholder="Inserir uma descrição" autocomplete="off" required>
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-6">
-                      <div class="help-button" id="tooltipContacto" data-toggle="tooltip" data-placement="top" title="São aceites como contactos números de telefone e/ou endereços eletrónicos.">
-                          <span>
-                              ?
-                          </span>
-                      </div>
-                        <label for="contacto">Contacto do fornecedor *</label>
-                        <br>
-                        <input type="text" name="contacto" placeholder="Inserir o contacto do fornecedor" autocomplete="off" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="morada">Morada do fornecedor *</label>
-                        <br>
-                        <input type="text" name="morada" placeholder="Inserir a morada do fornecedor" autocomplete="off" required>
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col">
-                        <label for="observacoes">Observações do fornecedor</label>
-                        <br>
-                        <textarea name="observacoes" rows="5"></textarea>
-                    </div>
-                </div>
-        </div>
-        <div class="form-group text-right">
-            <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar fornecedor</button>
-            <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
-        </div>
         </form>
-        <br>
+
+
+
+
     </div>
 </div>
+
+
+
 
 @section('scripts')
 <script type="text/javascript">

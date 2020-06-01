@@ -16,9 +16,9 @@
 
 {{-- Conteudo da Página --}}
 @section('content')
-@include('libraries.partials.modal')
-<!-- MODAL DE INFORMAÇÔES -->
 
+<!-- MODAL DE INFORMAÇÔES -->
+@include('libraries.partials.modal')
 
 
 <div class="container-fluid mt-2 ">
@@ -122,14 +122,14 @@
 
                                 {{-- Download --}}
                                 <a download href="{{Storage::disk('public')->url('library/'.$library->ficheiro)}}"
-                                    class="btn_list_opt " title="Fazer download do ficheiro"><i
-                                        class="fas fa-download mr-2"></i></a>
+                                    class="btn btn-sm btn-outline-primary " title="Fazer download do ficheiro"><i
+                                        class="fas fa-download"></i></a>
 
 
                                 {{-- Editar --}}
                                 @if (Auth()->user()->tipo == "admin")
-                                <a href="{{route('libraries.edit',$library)}}" class="btn_list_opt btn_list_opt_edit"
-                                    title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
+                                <a href="{{route('libraries.edit',$library)}}" class="btn btn-sm btn-outline-warning"
+                                    title="Editar"><i class="fas fa-pencil-alt"></i></a>
                                 @endif
 
                                 {{-- Admins: Apagar ficheiro --}}
@@ -139,7 +139,7 @@
                                     class="d-inline-block form_file_id">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn_delete" title="Eliminar ficheiro"
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar ficheiro"
                                         data-toggle="modal" data-target="#deleteModal"><i
                                             class="fas fa-trash-alt"></i></button>
                                 </form>
