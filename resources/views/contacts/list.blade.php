@@ -145,6 +145,8 @@
                                 <td class="text-center align-middle">
                                     <a href="{{route('contacts.show',$contact)}}" class="btn btn-sm btn-outline-primary "
                                         title="Ver ficha completa"><i class="far fa-eye"></i></a>
+
+                                        
                                     <a href="{{route('contacts.edit',$contact)}}" class="btn btn-sm btn-outline-warning"
                                         title="Editar"><i class="fas fa-pencil-alt"></i></a>
 

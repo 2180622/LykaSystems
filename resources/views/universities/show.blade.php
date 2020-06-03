@@ -342,11 +342,13 @@
 
                                     {{-- OPÇÔES --}}
                                     <td class="text-center align-middle">
-                                        <a href="{{route('clients.show',$client)}}" class="btn_list_opt "
-                                            title="Ver ficha completa"><i class="far fa-eye mr-2"></i></a>
+
+                                        <a href="{{route('clients.show',$client)}}" class="btn btn-sm btn-outline-primary"
+                                            title="Ver ficha completa"><i class="far fa-eye"></i></a>
+
                                         <a href="{{route('clients.edit',$client)}}"
-                                            class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                                class="fas fa-pencil-alt mr-2"></i></a>
+                                            class="btn btn-sm btn-outline-warning" title="Editar"><i
+                                                class="fas fa-pencil-alt"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -376,7 +378,6 @@
                             {{-- Cabeçalho da tabela --}}
                             <thead>
                                 <tr>
-                                    <th class="text-center align-content-center ">Foto</th>
                                     <th>Nome</th>
                                     <th>E-mail</th>
                                     <th>Telefone</th>
@@ -389,22 +390,6 @@
 
                                 @foreach ($contacts as $contact)
                                 <tr>
-                                    <td>
-                                        <div class="align-middle mx-auto shadow-sm rounded bg-white"
-                                            style="overflow:hidden; width:50px; height:50px">
-                                            <a class="name_link" href="{{route('contacts.show',$contact)}}">
-                                                @if($contact->fotografia)
-                                                <img src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}"
-                                                    width="100%" class="mx-auto">
-                                                @else
-                                                <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}"
-                                                    width="100%" class="mx-auto">
-                                                @endif
-                                            </a>
-                                        </div>
-
-                                    </td>
-
                                     {{-- Nome --}}
                                     <td class="align-middle">
                                         {{-- Contacto favorito?? --}}
@@ -427,18 +412,18 @@
                                     {{-- OPÇÔES --}}
                                     <td class="text-center align-middle">
                                         <a href="{{route('contacts.show',[$contact,$university])}}"
-                                            class="btn_list_opt " title="Ver ficha completa"><i
-                                                class="far fa-eye mr-2"></i></a>
+                                            class="btn btn-sm btn-outline-primary" title="Ver ficha completa"><i
+                                                class="far fa-eye"></i></a>
                                         <a href="{{route('contacts.edit',[$contact,$university])}}"
-                                            class="btn_list_opt btn_list_opt_edit" title="Editar"><i
-                                                class="fas fa-pencil-alt mr-2"></i></a>
+                                            class="btn btn-sm btn-outline-warning" title="Editar"><i
+                                                class="fas fa-pencil-alt"></i></a>
 
                                         <form method="POST" role="form" id="{{ $contact->idContacto }}"
                                             action="{{route('contacts.destroy',$contact)}}" data="{{ $contact->nome }}"
                                             class="d-inline-block form_contact_id">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn_delete" title="Eliminar contacto"
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar contacto"
                                                 data-toggle="modal" data-target="#staticBackdrop">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>

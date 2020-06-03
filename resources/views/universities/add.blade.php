@@ -37,7 +37,7 @@
         <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="ok" id="buttonSubmit"><i
             class="fas fa-plus mr-2"></i>Adicionar
             universidade</button>
-        <a href="{{route('libraries.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
+        <a href="{{route('universities.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
 
         </form>
     </div>

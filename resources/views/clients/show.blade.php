@@ -314,7 +314,7 @@
                 <div class="row mt-2 pl-2 ">
 
                     <div class="col mr-3 ">
-                        <div class=" mb-2 font-weight-bold">Documento de identificação pessoal:</div>
+                        <div class=" mb-2 ">Documento de identificação pessoal:</div>
 
                         <div class="border rounded bg-light p-3">
                             {{-- CC IDENTIFICAÇÃO --}}
@@ -331,7 +331,7 @@
 
                         <br><br>
 
-                        <div class=" mb-2 font-weight-bold">Passaporte:</div>
+                        <div class=" mb-2">Passaporte:</div>
 
                         <div class="border rounded bg-light p-3">
                             @if ( isset($passaporteData) && $passaporteData!=null)
@@ -366,7 +366,7 @@
 
                     {{-- DOCUMENTOS PESSOAIS --}}
                     <div class="col" style="min-width:250px">
-                        <div class=" mb-2 font-weight-bold">Ficheiros:</div>
+                        <div class=" mb-2">Ficheiros:</div>
                         @if ($documentosPessoais!=null )
                         <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                             @foreach ($documentosPessoais as $docpessoal)
@@ -439,7 +439,7 @@
                     <div class="col">
 
                         {{-- Informações Escolares --}}
-                        <div class=" mb-2 font-weight-bold">Nível de estudos:</div>
+                        <div class=" mb-2">Nível de estudos:</div>
 
                         <div class="border rounded bg-light p-3">
 
@@ -453,7 +453,7 @@
 
                         <br>
 
-                        <div class=" mb-2 font-weight-bold">Instituição de origem</div>
+                        <div class=" mb-2">Instituição de origem</div>
                         <div class="border rounded bg-light p-3">
                             <div>Nome: <span class="font-weight-bold">{{$client->nomeInstituicaoOrigem}}</span></div>
                             <br>
@@ -551,7 +551,7 @@
                     <div class="col">
 
                         {{-- Contactos --}}
-                        <div class=" mb-2 font-weight-bold" style="min-width: 256px">Contactos:</div>
+                        <div class=" mb-2" style="min-width: 256px">Contactos:</div>
 
                         <div class="border rounded bg-light p-3">
                             <div>Telefone (principal): <span class="font-weight-bold">{{$client->telefone1}}</span>
@@ -572,7 +572,7 @@
                     <div class="col">
 
                         {{-- Morada PT --}}
-                        <div class=" mb-2 font-weight-bold" style="min-width: 256px">Morada de residência em Portugal:
+                        <div class=" mb-2" style="min-width: 256px">Morada de residência em Portugal:
                         </div>
                         <div class="border rounded bg-light p-3">
                             @if ($client->moradaResidencia==null)
@@ -591,7 +591,7 @@
                 <div class="row">
                     <div class="col">
                         {{-- Morada de residência no pais de origem --}}
-                        <div class="mb-2 font-weight-bold">Morada de origem:</div>
+                        <div class="mb-2">Morada de origem:</div>
                         <div class="border rounded bg-light p-3">
                             <div>Cidade (origem): <span class="font-weight-bold">{{$client->cidade}}</span></div><br>
                             <div>Morada (origem): <span class="font-weight-bold">{{$client->morada}}</span></div>
@@ -606,7 +606,7 @@
                 {{-- Contactos dos PAIS --}}
                 <div class="row">
                     <div class="col">
-                        <div class="mb-2 font-weight-bold">Identificação dos pais:</div>
+                        <div class="mb-2">Identificação dos pais:</div>
                     </div>
                 </div>
 
@@ -641,7 +641,7 @@
                 <div class="row mt-2 pl-2">
                     <div class="col">
 
-                        <div class="mb-2 font-weight-bold">IBAN:</div>
+                        <div class="mb-2">IBAN:</div>
                         <div class="border rounded bg-light p-3">
                             @if ($client->IBAN==null)
                             <span class="text-muted"><small>(sem dados para mostrar)</small></span>
@@ -652,7 +652,7 @@
 
                         <br>
 
-                        <div class=" mb-2 font-weight-bold">Observações Financeiras:</div>
+                        <div class=" mb-2">Observações Financeiras:</div>
                         <div class="border rounded bg-light p-3">
                             @if ($client->obsFinanceiras==null)
                             <span class="text-muted"><small>(sem dados para mostrar)</small></span>

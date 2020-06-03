@@ -1,4 +1,4 @@
-<div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+<div class="mt-2 alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
     {{session('success')}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>

@@ -1,4 +1,4 @@
-<div class="alert alert-danger alert-dismissible fade show" role="alert" id="error-alert">
+<div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert" id="error-alert">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     @foreach ($errors ->all() as $message)
        <h6 style="font-size: 15px; position:relative; top:4px;">{{$message}}</h6>
