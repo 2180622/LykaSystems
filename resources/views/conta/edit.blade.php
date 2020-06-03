@@ -5,102 +5,55 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/payment.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
 @section('content')
-<div class="container mt-2 ">
 
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
+
+<div class="container-fluid my-4">
+
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Edição da conta bancária <span class="active">{{$conta->descricao}}</span></strong></h4>
+                </div>
+            </div>
+        </div>
+
+
+        <hr class="my-3">
+
+        <div class="row mt-4">
+            <div class="col">
+        <form method="POST" action="{{route('conta.update', $conta)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method("PUT")
+            @include('conta.partials.add-edit')
+            </div>
+        </div>
+
     </div>
 
-    <br><br>
+    <div class="row mt-4">
+        {{-- Butões Submit / Cancelar --}}
+        <div class="col">
+            <span class="text-info">* Os campos assinalados com asterisco são de preenchimento obrigatório</span>
+        </div>
+        <div class="col text-right">
+            <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="submit" id="buttonSubmit"><i class="fas fa-check-circle mr-2"></i>Guardar
+                Informações</button>
+            <a href="{{route('conta.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
+        </div>
 
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Edição da conta bancária: {{$conta->descricao}}</h6>
-        </div>
-        <br>
-        <div class="payment-card shadow-sm">
-            <form action="{{route('conta.update', $conta)}}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="descricao">Descrição da conta *</label>
-                        <br>
-                        <input type="text" name="descricao" placeholder="Inserir uma descrição" autocomplete="off" value="{{old('descricao', $conta->descricao)}}" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="instituicao">Nome da instituição *</label>
-                        <br>
-                        <input type="text" name="instituicao" placeholder="Inserir o nome da instituição" autocomplete="off" value="{{old('instituicao', $conta->instituicao)}}" required>
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="titular">Nome do titular *</label>
-                        <br>
-                        <input type="text" name="titular" placeholder="Inserir o nome do titular" autocomplete="off" value="{{old('titular', $conta->titular)}}" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="morada">Morada da instituição *</label>
-                        <br>
-                        <input type="text" name="morada" placeholder="Inserir a morada da instituição" autocomplete="off" value="{{old('morada', $conta->morada)}}" required>
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="numConta">Número de conta *</label>
-                        <br>
-                        <input type="text" name="numConta" placeholder="Inserir o número de conta" autocomplete="off" value="{{old('numConta', $conta->numConta)}}" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="IBAN">Código IBAN *</label>
-                        <br>
-                        <input type="text" name="IBAN" placeholder="Inserir o código IBAN" autocomplete="off" value="{{old('IBAN', $conta->IBAN)}}" required>
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="SWIFT">Código SWIFT *</label>
-                        <br>
-                        <input type="text" name="SWIFT" placeholder="Inserir o código SWIFT" autocomplete="off" value="{{old('SWIFT', $conta->SWIFT)}}" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="contacto">Contacto da instituição</label>
-                        <br>
-                        <input type="text" name="contacto" placeholder="Inserir um contacto da instituição" autocomplete="off" value="{{old('contacto', $conta->contacto)}}">
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col">
-                        <label for="obsConta">Observações da conta</label>
-                        <br>
-                        <textarea name="obsConta" rows="5" placeholder="@if($conta->obsConta == null) Nada a apresentar. @else {{old('obsConta', $conta->obsConta)}} @endif"></textarea>
-                    </div>
-                </div>
-        </div>
-        <div class="form-group text-right">
-            <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Editar conta bancária</button>
-            <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
-        </div>
-        </form>
-        <br>
     </div>
+
+    </form>
 </div>
 
 @section('scripts')

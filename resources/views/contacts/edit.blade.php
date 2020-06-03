@@ -25,6 +25,8 @@
                 </div>
             </div>
         </div>
+        
+        <hr>
 
         <form method="POST" action="{{route('contacts.update',$contact)}}" class="form-group needs-validation pt-3"
         id="form_contacts" enctype="multipart/form-data" novalidate>

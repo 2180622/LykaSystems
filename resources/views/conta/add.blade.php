@@ -5,92 +5,51 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/payment.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Conteudo da Página --}}
 @section('content')
-<div class="container mt-2 ">
 
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
+
+
+
+<div class="container-fluid my-4">
+
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Criação de uma Conta Bancária</strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-3">
+
+        <div class="row mt-4">
+            <div class="col">
+                <form action="{{route('conta.store')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @include('conta.partials.add-edit')
+            </div>
+        </div>
     </div>
 
-    <br><br>
+    <div class="row mt-4">
+        {{-- Butões Submit / Cancelar --}}
+        <div class="col text-right">
+            <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="submit" id="buttonSubmit"><i
+                class="fas fa-plus mr-2"></i>Criar Conta Bancária</button>
+            <a href="{{route('conta.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
+        </div>
 
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Criação de uma conta bancária</h6>
-        </div>
-        <br>
-        <div class="payment-card shadow-sm">
-            <form action="{{route('conta.store')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="help-button" id="tooltipDescricao" data-toggle="tooltip" data-placement="top" title="A decrição inserida irá servir para identificar a conta a utilizar no futuro.">
-                            <span>
-                                ?
-                            </span>
-                        </div>
-                        <label for="descricao">Descrição da conta *</label>
-                        <br>
-                        <input type="text" name="descricao" placeholder="Inserir uma descrição" autocomplete="off" required value="{{old('descricao', $conta->descricao)}}">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="instituicao">Nome da instituição *</label>
-                        <br>
-                        <input type="text" name="instituicao" placeholder="Inserir o nome da instituição" autocomplete="off" required value="{{old('instituicao', $conta->instituicao)}}">
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="numConta">Número de conta *</label>
-                        <br>
-                        <input type="text" name="numConta" placeholder="Inserir o número de conta" autocomplete="off" value="{{old('numConta', $conta->numConta)}}" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="IBAN">Código IBAN *</label>
-                        <br>
-                        <input type="text" name="IBAN" placeholder="Inserir o código IBAN" autocomplete="off" value="{{old('IBAN', $conta->IBAN)}}" required>
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="SWIFT">Código SWIFT *</label>
-                        <br>
-                        <input type="text" name="SWIFT" placeholder="Inserir o código SWIFT" autocomplete="off" value="{{old('SWIFT', $conta->SWIFT)}}" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="contacto">Contacto da instituição</label>
-                        <br>
-                        <input type="text" name="contacto" placeholder="Inserir um contacto da instituição" autocomplete="off" value="{{old('contacto', $conta->contacto)}}">
-                    </div>
-                </div>
-                <br><br>
-                <div class="row mb-2">
-                    <div class="col">
-                        <label for="obsConta">Observações da conta</label>
-                        <br>
-                        <textarea name="obsConta" rows="5" value="{{old('obsConta', $conta->obsConta)}}"></textarea>
-                    </div>
-                </div>
-        </div>
-        <div class="form-group text-right">
-            <br>
-            <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar conta bancária</button>
-            <a href="javascript:history.go(-1)" class="cancel-button">Cancelar</a>
-        </div>
-        </form>
     </div>
+
+    </form>
 </div>
 
 @section('scripts')

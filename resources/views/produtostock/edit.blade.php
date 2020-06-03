@@ -27,7 +27,9 @@
             </div>
         </div>
 
-        <form method="POST" action="{{route('produtostock.update',$produtostock)}}" class="form-group needs-validation pt-3" id="form_client"
+        <hr>
+
+        <form method="POST" action="{{route('produtostock.update',$produtostock)}}" class="form-group needs-validation " id="form_client"
         enctype="multipart/form-data" novalidate>
         @csrf
         @method("PUT")

@@ -42,7 +42,9 @@
         </div>
 
 
+        <hr>
 
+        
         <hr class="my-3">
 
         <div class="row">

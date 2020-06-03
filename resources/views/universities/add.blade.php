@@ -26,7 +26,9 @@
             </div>
         </div>
 
-        <form method="POST" action="{{route('universities.store')}}" class="form-group needs-validation pt-3"
+        <hr>
+
+        <form method="POST" action="{{route('universities.store')}}" class="form-group needs-validation"
             id="form_university" enctype="multipart/form-data" novalidate>
             @csrf
             @include('universities.partials.add-edit')

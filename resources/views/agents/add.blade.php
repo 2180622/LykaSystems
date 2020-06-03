@@ -17,8 +17,7 @@
 
     <div class="bg-white shadow-sm mb-4 p-4 ">
 
-
-        <div class="row">
+                <div class="row">
 
             <div class="col">
                 <div class="title">
@@ -27,7 +26,9 @@
             </div>
         </div>
 
-        <form method="POST" action="{{route('agents.store')}}" class="form-group needs-validation pt-3" id="form_agent"
+        <hr>
+
+        <form method="POST" action="{{route('agents.store')}}" class="form-group needs-validation" id="form_agent"
             enctype="multipart/form-data" novalidate>
             @csrf
             @include('agents.partials.add-edit')

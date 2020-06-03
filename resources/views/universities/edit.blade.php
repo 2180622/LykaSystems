@@ -25,7 +25,10 @@
             </div>
         </div>
 
-        <form method="POST" action="{{route('universities.update',$university)}}" class="form-group needs-validation pt-3"
+        <hr>
+
+
+        <form method="POST" action="{{route('universities.update',$university)}}" class="form-group needs-validation"
             id="form_university" enctype="multipart/form-data" novalidate>
             @csrf
             @method("PUT")

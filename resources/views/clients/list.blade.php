@@ -44,6 +44,8 @@
 
         </div>
 
+        <hr>
+        
 
         {{-- VERIFICA SE EXISTEM CLIENTES --}}
         @if($clients)

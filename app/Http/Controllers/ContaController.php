@@ -65,6 +65,7 @@ class ContaController extends Controller
       if (Auth()->user()->tipo == "admin" && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $fields = $contaRequest->validated();
         $conta->fill($fields);
+        $conta->updated_at = time();
         $conta->save();
         return redirect()->route('conta.index')->with('success', 'Conta bancária editada com sucesso.');
       }else{

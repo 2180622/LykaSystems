@@ -13,10 +13,6 @@
 @section('content')
 
 
-
-
-
-
 <div class="container-fluid my-4">
 
     <div class="bg-white shadow-sm mb-4 p-4 ">
@@ -37,6 +33,8 @@
             </div>
 
         </div>
+        
+        <hr>
 
         <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation "
             id="form_client" enctype="multipart/form-data" novalidate>

@@ -30,7 +30,10 @@
             </div>
         </div>
 
-        <form method="POST" action="{{route('agents.update',$agent)}}" class="form-group needs-validation pt-3"
+
+        <hr>
+
+        <form method="POST" action="{{route('agents.update',$agent)}}" class="form-group needs-validation "
         id="form_agent" enctype="multipart/form-data" novalidate>
             @csrf
             @method("PUT")
