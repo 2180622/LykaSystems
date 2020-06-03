@@ -12,81 +12,130 @@
 {{-- Page Content --}}
 @section('content')
 
-    <div class="container mt-2">
-        {{-- Navegação --}}
-        <div class="float-left buttons">
-            <a href="javascript:history.go(-1)" title="Voltar">
-                <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-            </a>
-            <a href="javascript:window.history.forward();" title="Avançar">
-                <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-            </a>
-        </div>
-        <br><br>
-        <div class="">
-            <div class="title">
-                <h6>Ficha de Produto - {{ $produtostock->descricao }}</h6>
+
+<div class="container-fluid my-4" style="color: black">
+
+    {{-- Conteúdo --}}
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Ficha de Produto: <span class="active">{{ $produtostock->descricao }}</span></strong>
+                    </h4>
+                    <small>
+                        <div>
+                            <span>Ultima atualização:
+                                <strong>{{ date('d-M-y', strtotime($produtostock->updated_at)) }}</strong></span>
+                        </div>
+                    </small>
+                </div>
             </div>
-            <div class="bg-white shadow-sm mb-4 p-4" style="border-radius:10px;">
-              <div class="table-responsive ">
-                <table nowarp class="table table-bordered table-hover " id="dataTable" style="width:100%">
-                    {{-- Cabeçalho da tabela --}}
-                    <thead>
-                        <tr>
-                            <th class="text-center">Descrição</th>
-                            <th class="text-center">Opções</th>
-                        </tr>
-                    </thead>
-                    {{-- Corpo da tabela --}}
-                    <tbody>
-                        @foreach ($faseStocks as $faseStock)
-                        <tr>
-                            {{-- Descrição --}}
-                            <td class="text-center align-middle">
-                                <a class="name_link" href="{{route('fasestock.show',$faseStock)}}">{{$faseStock->descricao}}</a>
-                            </td>
-                            {{-- OPÇÔES --}}
-                            <td class="text-center align-middle">
-                                <a href="{{route('fasestock.edit', $faseStock)}}" class="btn_list_opt btn_list_opt_edit" title="Editar"><i class="fas fa-pencil-alt mr-2"></i></a>
 
-                                <form method="POST" role="form" id="{{ $faseStock->idFaseStock }}"
-                                    action="{{route('fasestock.destroy',$faseStock)}}" class="d-inline-block form_client_id">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn_delete" title="Eliminar estudante" data-toggle="modal"
-                                        data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                    <form class="form-group needs-validation pt-3" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase"
-                      enctype="multipart/form-data" novalidate>
-                      @csrf
-
-
-                      <div class="tab-content p-2 mt-3" id="myTabContent" style="width: 100%; border-radius:10px;">
-                                    {{-- INPUT descricao fasestock --}}
-                                      <label for="">Descrição (FaseStock):</label><br>
-                                      <input type="text" class="shadow-sm" style="width: 100%;" name="descricao" id="descricaofase"required><br>
-                      </div>
-
-
-                      <div class="form-group text-right">
-                          <br><br>
-                          <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Fase Stock</button>
-                      </div>
-                    </form>
+            {{-- Opções --}}
+            <div class="col text-right">
+                <a href="#" class="btn btn-sm btn-success m-1 mr-2 px-3 " data-toggle="modal" data-target="#novaFaseModal"><i class="fas fa-plus mr-2 "></i>Adicionar Fase Stock</a>
             </div>
-          </div>
+
         </div>
+
+
+        <hr class="my-3">
+
+        <div class="font-weight-bold mt-4">Lista de Fases associadas a este Produto:</div>
+
+        {{-- LISTA DE FASES --}}
+        <div class="row mt-4">
+            <div class="col">
+                <div class="table-responsive ">
+                    <table nowarp class="table table-bordered table-hover " id="dataTable" style="width:100%">
+                        {{-- Cabeçalho da tabela --}}
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th class="text-center" style="width: 130px">Opções</th>
+                            </tr>
+                        </thead>
+                        {{-- Corpo da tabela --}}
+                        <tbody>
+                            @foreach ($faseStocks as $faseStock)
+                            <tr>
+                                {{-- Descrição --}}
+                                <td class="align-middle">
+                                    <a class="name_link"
+                                        href="{{route('fasestock.show',$faseStock)}}">{{$faseStock->descricao}}</a>
+                                </td>
+
+                                {{-- OPÇÔES --}}
+                                <td class="text-center align-middle" style="width: 130px">
+                                    <a href="{{route('fasestock.edit', $faseStock)}}"
+                                        class="btn btn-sm btn-outline-warning mr-1" title="Editar"><i
+                                            class="fas fa-pencil-alt"></i></a>
+
+                                    <form method="POST" role="form" id="{{ $faseStock->idFaseStock }}"
+                                        action="{{route('fasestock.destroy',$faseStock)}}"
+                                        class="d-inline-block form_client_id">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                            title="Eliminar estudante" data-toggle="modal" data-target="#deleteModal"><i
+                                                class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<form class="form-group needs-validation" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase" enctype="multipart/form-data" novalidate>
+    @csrf
+
+<div class="modal fade" id="novaFaseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nova Fase Stock</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+        <label for="descricao" class="font-weight-bold">Descrição da Nova Fase Stock:</label><br>
+        <input type="text" class="form-control" name="descricao" id="descricaofase" style="width:100%" required>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-success px-2"><i class="fas fa-plus mr-2 "></i>Adicionar Fase Stock</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancelar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+
+
+
 
 @endsection
 
 {{-- Scripts --}}
 @section('scripts')
-    {{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
+{{-- <script src="{{asset('/js/NOME_DO_FICHEIR.js')}}"></script> --}}
 @endsection
