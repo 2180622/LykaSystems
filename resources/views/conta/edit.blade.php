@@ -43,9 +43,11 @@
     <div class="row mt-4">
         {{-- Butões Submit / Cancelar --}}
         <div class="col">
-            <span class="text-info">* Os campos assinalados com asterisco são de preenchimento obrigatório</span>
+            <div class="alert alert-info" role="alert">
+                <strong>* Os campos assinalados com asterisco são de preenchimento obrigatório</strong>
+              </div>
         </div>
-        <div class="col text-right">
+        <div class="col text-right pt-2" style="max-width: 300px">
             <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="submit" id="buttonSubmit"><i class="fas fa-check-circle mr-2"></i>Guardar
                 Informações</button>
             <a href="{{route('conta.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>

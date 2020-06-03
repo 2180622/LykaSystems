@@ -40,9 +40,15 @@
     </div>
 
     <div class="row mt-4">
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                <strong>* Os campos assinalados com asterisco são de preenchimento obrigatório</strong>
+              </div>
+        </div>
+
         {{-- Butões Submit / Cancelar --}}
-        <div class="col text-right">
-            <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="submit" id="buttonSubmit"><i
+        <div class="col text-right pt-2" style="max-width: 300px">
+            <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2 " name="submit" id="buttonSubmit"><i
                 class="fas fa-plus mr-2"></i>Criar Conta Bancária</button>
             <a href="{{route('conta.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
         </div>
