@@ -11,35 +11,43 @@
 {{-- Page Content --}}
 @section('content')
 
-<div class="container mt-2">
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
+<div class="container-fluid my-4">
+
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Adicionar Produto Stock</strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <form method="POST" action="{{route('produtostock.store')}}" class="form-group needs-validation pt-3" id="form_produto"
+        enctype="multipart/form-data" novalidate>
+        @csrf
+        @include('produtostock.partials.add-edit')
+
     </div>
 
-    <br><br>
-    <div class="cards-navigation">
-        <div class="title">
-            <h6>Adicionar Produto de Stock</h6>
+    <div class="row mt-4">
+
+        {{-- Butões Submit / Cancelar --}}
+        <div class="col text-right pt-2">
+            <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="ok" id="buttonSubmit"><i
+                    class="fas fa-plus mr-2"></i>Adicionar Produto Stock</button>
+            <a href="{{route('produtostock.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
         </div>
-        <br>
-        <form method="POST" action="{{route('produtostock.store')}}" class="form-group needs-validation pt-3" id="form_produto"
-            enctype="multipart/form-data" novalidate>
-            @csrf
-            @include('produtostock.partials.add-edit')
-            <div class="form-group text-right">
-                <br><br>
-                <button type="submit" class="top-button mr-2" name="ok" id="buttonSubmit">Adicionar Produto de Stock</button>
-                <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
-            </div>
-        </form>
+
     </div>
+
+    </form>
 </div>
+
+
+
 
 @endsection
 
@@ -56,7 +64,7 @@
 <script src="{{asset('/js/produtos.js')}}"></script>
 
 <script>
-    
+
 </script>
 
 {{-- script permite definir se um input recebe só numeros OU so letras --}}
