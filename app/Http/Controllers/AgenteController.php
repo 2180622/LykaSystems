@@ -68,7 +68,7 @@ class AgenteController extends Controller
     public function create()
     {
 
-        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
+        if (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
             $agent = new Agente;
 
             /* lista dos agentes principais */
@@ -94,79 +94,81 @@ class AgenteController extends Controller
      */
     public function store(StoreAgenteRequest $requestAgent, StoreUserRequest $requestUser)
     {
-        /* Permissões */
-        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
+        if (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+
+            /* obtem os dados para criar o agente */
+            $agent = new Agente;
+            $fields = $requestAgent->validated();
+            $agent->fill($fields);
+            if($agent->tipo == "Agente"){
+                $agent->exepcao = false;
+                $agent->tipo = 'Subagente';
+            }
+
+            /* obtem os dados para criar o utilizador */
+            $user = new User;
+            $fieldsUser = $requestUser->validated();
+            $user->fill($fieldsUser);
+
+
+
+            /* Criação de SubAgente */
+            $agent->idAgenteAssociado= $requestAgent->idAgenteAssociado;
+
+            // data em que foi criado
+            $t=time();
+            $agent->create_at == date("Y-m-d",$t);
+
+            /* Slugs */
+            $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
+
+            $agent->save();
+
+            /* Fotografia do agente */
+            if ($requestAgent->hasFile('fotografia')) {
+                $photo = $requestAgent->file('fotografia');
+                $profileImg = $agent->idAgente .'.'. $photo->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
+                $agent->fotografia = $profileImg;
+                $agent->save();
+            }
+
+
+
+            /* Documento de identificação */
+            if ($requestAgent->hasFile('img_doc')) {
+                $docfile = $requestAgent->file('img_doc');
+                $docImg = $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $docfile, $docImg);
+                $agent->img_doc = $docImg;
+                $agent->save();
+            }
+
+
+
+            /* Criação de utilizador */
+
+            $user->tipo = "agente";
+            $user->idAgente = $agent->idAgente;
+            $user->slug = post_slug($agent->nome.' '.$agent->apelido);
+            $user->auth_key = strtoupper(random_str(5));
+            $password = random_str(64);
+            $user->password = Hash::make($password);
+
+            $user->save();
+
+            /* Envia o e-mail para ativação */
+            $name = $agent->nome .' '. $agent->apelido;
+            $email = $agent->email;
+            $auth_key = $user->auth_key;
+            dispatch(new SendWelcomeEmail($email, $name, $auth_key));
+
+            return redirect()->route('agents.index')->with('success', 'Registo criado com sucesso. Aguarda Ativação');
+
+        }else{
+            /* não tem permissões */
             abort (401);
         }
-
-        /* obtem os dados para criar o agente */
-        $agent = new Agente;
-        $fields = $requestAgent->validated();
-        $agent->fill($fields);
-        if($agent->tipo == "Agente"){
-            $agent->exepcao = false;
-            $agent->tipo = 'Subagente';
-        }
-
-        /* obtem os dados para criar o utilizador */
-        $user = new User;
-        $fieldsUser = $requestUser->validated();
-        $user->fill($fieldsUser);
-
-
-
-        /* Criação de SubAgente */
-        $agent->idAgenteAssociado= $requestAgent->idAgenteAssociado;
-
-        // data em que foi criado
-        $t=time();
-        $agent->create_at == date("Y-m-d",$t);
-
-        /* Slugs */
-        $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
-
-        $agent->save();
-
-        /* Fotografia do agente */
-        if ($requestAgent->hasFile('fotografia')) {
-            $photo = $requestAgent->file('fotografia');
-            $profileImg = $agent->idAgente .'.'. $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
-            $agent->fotografia = $profileImg;
-            $agent->save();
-        }
-
-
-
-        /* Documento de identificação */
-        if ($requestAgent->hasFile('img_doc')) {
-            $docfile = $requestAgent->file('img_doc');
-            $docImg = $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $docfile, $docImg);
-            $agent->img_doc = $docImg;
-            $agent->save();
-        }
-
-
-
-        /* Criação de utilizador */
-
-        $user->tipo = "agente";
-        $user->idAgente = $agent->idAgente;
-        $user->slug = post_slug($agent->nome.' '.$agent->apelido);
-        $user->auth_key = strtoupper(random_str(5));
-        $password = random_str(64);
-        $user->password = Hash::make($password);
-
-        $user->save();
-
-        /* Envia o e-mail para ativação */
-        $name = $agent->nome .' '. $agent->apelido;
-        $email = $agent->email;
-        $auth_key = $user->auth_key;
-        dispatch(new SendWelcomeEmail($email, $name, $auth_key));
-
-        return redirect()->route('agents.index')->with('success', 'Registo criado com sucesso. Aguarda Ativação');
     }
 
     /**
@@ -282,7 +284,7 @@ class AgenteController extends Controller
      */
     public function edit(Agente $agent)
     {
-        if (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+        if (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
             /* lista dos agentes principais */
             $listagents = Agente::
             whereNull('idAgenteAssociado')
@@ -308,86 +310,87 @@ class AgenteController extends Controller
      */
     public function update(UpdateAgenteRequest $request, Agente $agent)
     {
-        /* Permissões */
-        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
-            abort (401);
-        }
+        if (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
 
-        $fields = $request->validated();
+            $fields = $request->validated();
 
-        $agent->fill($fields);
+            $agent->fill($fields);
 
 
-        /* Definição de exeçao */
-        if($agent->tipo == "Agente"){
-            $agent->exepcao = false;
-        }
-
-
-        /* Registo antigo: para verificar se existem ficheiros para apagar/substituir */
-        $oldfile=Agente::
-        where('idAgente', '=',$agent->idAgente)
-        ->first();
-
-
-        /* Fotografia */
-        if ($request->hasFile('fotografia')) {
-
-            /* Verifica se o ficheiro antigo existe e apaga do storage*/
-            if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/' . $oldfile->fotografia)){
-                Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/' . $oldfile->fotografia);
+            /* Definição de exeçao */
+            if($agent->tipo == "Agente"){
+                $agent->exepcao = false;
             }
 
-        /* Guarda a nova fotografia */
-            $photo = $request->file('fotografia');
-            $profileImg = $agent->idAgente .'.'. $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
-            $agent->fotografia = $profileImg;
-        }
+
+            /* Registo antigo: para verificar se existem ficheiros para apagar/substituir */
+            $oldfile=Agente::
+            where('idAgente', '=',$agent->idAgente)
+            ->first();
+
+
+            /* Fotografia */
+            if ($request->hasFile('fotografia')) {
+
+                /* Verifica se o ficheiro antigo existe e apaga do storage*/
+                if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/' . $oldfile->fotografia)){
+                    Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/' . $oldfile->fotografia);
+                }
+
+            /* Guarda a nova fotografia */
+                $photo = $request->file('fotografia');
+                $profileImg = $agent->idAgente .'.'. $photo->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $photo, $profileImg);
+                $agent->fotografia = $profileImg;
+            }
 
 
 
 
 
-        /* Documento de identificação */
-        if ($request->hasFile('img_doc')) {
+            /* Documento de identificação */
+            if ($request->hasFile('img_doc')) {
 
-        /* Verifica se o ficheiro antigo existe e apaga do storage*/
-        if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/' . $oldfile->img_doc)){
-            Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/' . $oldfile->img_doc);
-        }
+            /* Verifica se o ficheiro antigo existe e apaga do storage*/
+            if(Storage::disk('public')->exists('agent-documents/'.$agent->idAgente.'/' . $oldfile->img_doc)){
+                Storage::disk('public')->delete('agent-documents/'.$agent->idAgente.'/' . $oldfile->img_doc);
+            }
 
-            $docfile = $request->file('img_doc');
-            $docImg = $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $docfile, $docImg);
-            $agent->img_doc = $docImg;
-        }
-
-
-        // Caso se mude o  agente para subagente, garante que nenhum agente não tem id de subagente
-        if($request->idAgenteAssociado == null){
-        DB::table('Agente')
-        ->where('idAgente', $agent->idAgente)
-        ->update(['idAgenteAssociado' => null]);
-        }
+                $docfile = $request->file('img_doc');
+                $docImg = $agent->idAgente. '_DocID'.  '.' . $docfile->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('agent-documents/'.$agent->idAgente.'/', $docfile, $docImg);
+                $agent->img_doc = $docImg;
+            }
 
 
-
-        /* Update das slugs */
-        $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
-
-        // data em que foi modificado
-        $t=time();
-        $agent->updated_at == date("Y-m-d",$t);
-        $agent->save();
-
-        /* update do user->email */
-        DB::table('User')
-        ->where('idAgente', $agent->idAgente)
-        ->update(['email' => $agent->email]);
+            // Caso se mude o  agente para subagente, garante que nenhum agente não tem id de subagente
+            if($request->idAgenteAssociado == null){
+            DB::table('Agente')
+            ->where('idAgente', $agent->idAgente)
+            ->update(['idAgenteAssociado' => null]);
+            }
 
 
-         return redirect()->route('agents.show',$agent)->with('success', 'Dados do agente modificados com sucesso');
+
+            /* Update das slugs */
+            $agent->slug = post_slug($agent->nome.' '.$agent->apelido);
+
+            // data em que foi modificado
+            $t=time();
+            $agent->updated_at == date("Y-m-d",$t);
+            $agent->save();
+
+            /* update do user->email */
+            DB::table('User')
+            ->where('idAgente', $agent->idAgente)
+            ->update(['email' => $agent->email]);
+
+
+            return redirect()->route('agents.show',$agent)->with('success', 'Dados do agente modificados com sucesso');
+            }else{
+                /* não tem permissões */
+                abort (401);
+            }
     }
 
     /**
@@ -398,49 +401,50 @@ class AgenteController extends Controller
      */
     public function destroy(Agente $agent)
     {
-        /* Permissões */
-        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
+        if (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        
+            /* "Apaga" dos agentes */
+            $agent->delete();
+
+
+            /* Apaga subagentes se o seu agente for apagado */
+            $subagents =DB::table('Agente')
+            ->where('idAgenteAssociado', $agent->idAgente)
+            ->get();
+
+            /* apaga a lista de subagentes do agente que esta a ser apagado */
+            if (!$subagents->isEmpty()) {
+                foreach ($subagents as $subagent) {
+                    DB::table('Agente')
+                    ->where('idAgenteAssociado', $agent->idAgente)
+                    ->update(['deleted_at' => $agent->deleted_at]);
+                }
+            }
+
+
+
+            /* "Apaga" dos utilizadores */
+            DB::table('User')
+            ->where('idAgente', $agent->idAgente)
+            ->update(['deleted_at' => $agent->deleted_at]);
+
+
+            /* "Apaga" dos utilizadores os subagentes que tiveram o seu agente apagado */
+
+            /* apaga a lista de subagentes do agente que esta a ser apagado */
+            if (!$subagents->isEmpty()) {
+                foreach ($subagents as $subagent) {
+                    DB::table('User')
+                    ->where('idAgente', '=', $subagent->idAgente)
+                    ->update(['deleted_at' => $agent->deleted_at]);
+                }
+            }
+
+
+            return redirect()->route('agents.index')->with('success', 'Agente eliminado com sucesso');
+        }else{
+            /* não tem permissões */
             abort (401);
         }
-        
-        /* "Apaga" dos agentes */
-        $agent->delete();
-
-
-        /* Apaga subagentes se o seu agente for apagado */
-        $subagents =DB::table('Agente')
-        ->where('idAgenteAssociado', $agent->idAgente)
-        ->get();
-
-        /* apaga a lista de subagentes do agente que esta a ser apagado */
-        if (!$subagents->isEmpty()) {
-            foreach ($subagents as $subagent) {
-                DB::table('Agente')
-                ->where('idAgenteAssociado', $agent->idAgente)
-                ->update(['deleted_at' => $agent->deleted_at]);
-            }
-        }
-
-
-
-        /* "Apaga" dos utilizadores */
-        DB::table('User')
-        ->where('idAgente', $agent->idAgente)
-        ->update(['deleted_at' => $agent->deleted_at]);
-
-
-        /* "Apaga" dos utilizadores os subagentes que tiveram o seu agente apagado */
-
-        /* apaga a lista de subagentes do agente que esta a ser apagado */
-        if (!$subagents->isEmpty()) {
-            foreach ($subagents as $subagent) {
-                DB::table('User')
-                ->where('idAgente', '=', $subagent->idAgente)
-                ->update(['deleted_at' => $agent->deleted_at]);
-            }
-        }
-
-
-        return redirect()->route('agents.index')->with('success', 'Agente eliminado com sucesso');
     }
 }

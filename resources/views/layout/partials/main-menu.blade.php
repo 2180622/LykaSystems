@@ -66,6 +66,8 @@
         @endif{{----}}
 
         <!-- Estudantes  -->
+        @if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null))
         <li class="menu-option">
             <a href="{{route('clients.index')}}">
                 <div class="menu-icon">
@@ -74,9 +76,10 @@
                 <span class="option-name {{Route::is('clients.*') ? 'active' : ''}} option-name">Estudantes</span>
             </a>
         </li>
+        @endif
 
         <!-- Agentes  -->
-        @if (Auth()->user()->tipo == "admin")
+        @if (Auth()->user()->tipo == "admin" && Auth()->user()->idAdmin != null)
         <li class="menu-option">
             <a href="{{route('agents.index')}}">
                 <div class="menu-icon">
@@ -88,7 +91,8 @@
         @endif
 
         <!-- Universidades  -->
-        @if (Auth()->user()->tipo == 'admin')
+        @if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+        (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null))
         <li class="menu-option">
             <a href="{{route('universities.index')}}">
                 <div class="menu-icon">
@@ -99,7 +103,6 @@
         </li>
         @endif
 
-        @if (Auth()->user()->tipo == "admin")
         {{-- Financeiro Collapse --}}
         <li class="menu-option">
             <a data-toggle="collapse" href="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
@@ -112,11 +115,13 @@
 
         <div class="collapse" id="collapseFinance">
             <!-- Pagamentos -->
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)
             <li class="menu-option">
                 <a href="{{route('payments.index')}}">
                     <span class="option-name {{Route::is('payments.*') ? 'active' : ''}}">Pagamentos</span>
                 </a>
             </li>
+            @endif
 
             <!-- Cobranças -->
             <li class="menu-option">
@@ -126,20 +131,23 @@
             </li>
 
             <!-- Relatório de contas -->
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
             <li class="menu-option">
                 <a href="#">
                     <span class="option-name">Relatório e contas</span>
                 </a>
             </li>
+            @endif
 
             <!-- Conta bancária -->
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)
             <li class="menu-option">
                 <a href="{{route('conta.index')}}">
                     <span class="option-name {{Route::is('conta.*') ? 'active' : ''}}">Conta bancária</span>
                 </a>
             </li>
+            @endif
         </div>
-        @endif
 
         {{-- Diversos Collapse --}}
         <li class="menu-option">
@@ -153,49 +161,62 @@
 
         <div class="collapse" id="collapseDiv">
             {{-- Produtos--}}
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)
             <li class="menu-option">
                 <a href="{{route('produtostock.index')}}">
                     <span class="option-name {{Route::is('produtostock.*') ? 'active' : ''}}">Produtos Stock</span>
                 </a>
             </li>
+            @endif
 
             <!-- Listagens -->
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)
             <li class="menu-option">
                 <a href="#">
                     <span class="option-name">Listagens</span>
                 </a>
             </li>
+            @endif
 
             <!-- Fornecedores -->
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)
             <li class="menu-option">
                 <a href="{{route('provider.index')}}">
                     <span class="option-name {{Route::is('fornecedores.*') ? 'active' : ''}}">Fornecedores</span>
                 </a>
             </li>
+            @endif
 
             <!-- Biblioteca -->
+            @if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null))
             <li class="menu-option">
                 <a href="{{route('libraries.index')}}">
                     <span class="option-name {{Route::is('libraries.*') ? 'active' : ''}}">Biblioteca</span>
                 </a>
             </li>
+            @endif
 
             <!-- Lista telefónica -->
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
             <li class="menu-option">
                 <a href="{{route('contacts.index')}}">
                     <span class="option-name {{Route::is('contacts.*') ? 'active' : ''}}">Lista telefónica</span>
                 </a>
             </li>
+            @endif
 
             <!-- Agenda -->
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
             <li class="menu-option">
                 <a href="{{route('agenda.index')}}">
                     <span class="option-name {{Route::is('agenda.*') ? 'active' : ''}}">Agenda</span>
                 </a>
             </li>
+            @endif
 
             <!-- Utilizadores -->
-            @if (Auth()->user()->tipo == 'admin')
+            @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)
             <li class="menu-option">
                 <a href="{{route('users.index')}}">
                     <span class="{{Route::is('users.*') ? 'active' : ''}} option-name">Administradores</span>
@@ -248,7 +269,7 @@
         {{--@endif--}}
 
         <!-- Utilizadores -->
-        @if (Auth()->user()->tipo == 'admin' && Auth()->user()->admin->superAdmin)
+        @if (Auth()->user()->tipo == 'admin' &&  Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)
         <li class="menu-option">
             <a href="#">
                 <div class="menu-icon">
