@@ -21,7 +21,7 @@ class UserController extends Controller
             return view('users.list', compact('users'));
         }else{
             /* não tem permissões */
-            abort (401);
+            abort(401);
         }
     }
 
