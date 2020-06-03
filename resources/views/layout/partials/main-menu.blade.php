@@ -46,6 +46,25 @@
             </a>
         </li>
 
+        <li class="menu-option-title mt-4 mb-1">
+            recursos humanos
+        </li>
+{{----}}
+        @if(Auth()->user()->tipo == 'cliente' && Auth()->user()->idCliente != null)
+            <!-- Estudantes  -->
+            <li class="menu-option">
+                @php
+                    $cliente = Auth()->user()->cliente;
+                @endphp
+                <a href="{{route('clients.show',$cliente)}}">
+                    <div class="menu-icon">
+                        <ion-icon name="person-circle-outline" style="font-size: 16pt; --ionicon-stroke-width: 40px; position: relative; top: 5px; right: 3px;"></ion-icon>
+                    </div>
+                    <span>Meus cursos</span>
+                </a>
+            </li>
+        @endif{{----}}
+
         <!-- Estudantes  -->
         <li class="menu-option">
             <a href="{{route('clients.index')}}">
@@ -185,6 +204,8 @@
             @endif
         </div>
 
+        {{--@if (Auth()->user()->tipo == "admin")--}}
+        {{-- Financeiro Collapse --}}
         <li class="menu-option">
             <a href="#">
                 <div class="menu-icon">
@@ -194,6 +215,40 @@
             </a>
         </li>
 
+
+        <div class="collapse" id="collapseFinance">
+            <!-- Pagamentos -->
+            <li class="menu-option">
+                <a href="{{route('payments.index')}}">
+                    <span class="option-name {{Route::is('payments.*') ? 'active' : ''}}">Pagamentos</span>
+                </a>
+            </li>
+
+            <!-- Cobranças -->
+            <li class="menu-option">
+                <a href="{{route('charges.index')}}">
+                    <span class="option-name {{Route::is('charges.*') ? 'active' : ''}}">Cobranças</span>
+                </a>
+            </li>
+
+            <!-- Relatório de contas -->
+            <li class="menu-option">
+                <a href="#">
+                    <span class="option-name">Relatório e contas</span>
+                </a>
+            </li>
+
+            <!-- Conta bancária -->
+            <li class="menu-option">
+                <a href="{{route('conta.index')}}">
+                    <span class="option-name {{Route::is('conta.*') ? 'active' : ''}}">Conta bancária</span>
+                </a>
+            </li>
+        </div>
+        {{--@endif--}}
+
+        <!-- Utilizadores -->
+        @if (Auth()->user()->tipo == 'admin' && Auth()->user()->admin->superAdmin)
         <li class="menu-option">
             <a href="#">
                 <div class="menu-icon">
