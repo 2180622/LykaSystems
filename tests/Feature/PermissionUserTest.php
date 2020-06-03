@@ -1615,7 +1615,7 @@ class PermissionUserTest extends TestCase
         $this->withoutExceptionHandling();
 
         $administrador = factory(Administrador::class)->make([
-            'superAdmin' => 1,
+            'superAdmin' => 0,
         ]);
         $administrador->save();
         $user = factory(User::class)->make([
@@ -1634,7 +1634,9 @@ class PermissionUserTest extends TestCase
 
 
     /***************************************         Administrador         ***************************************/
-    /** @test */
+
+    
+    /** @test *//*
     public function admin_ir_para_dashboard()
     {
         $this->withoutExceptionHandling();
@@ -1657,59 +1659,80 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_administrador()
+    public function admin_ir_para_lista_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
-        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.list');
+        $response = $this->actingAs($user)->withSession(['foo' => 'bar']);
+        $response->get('/administradores');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_show_administrador()
+    public function admin_ir_para_show_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $administrador = factory(User::class)->make();
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('users.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_create_administrador()
+    public function admin_ir_para_create_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_edit_administrador()
+    public function admin_ir_para_edit_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $administrador = factory(User::class)->make();
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -1719,8 +1742,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes');
         $response->assertSuccessful();
@@ -1732,8 +1762,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
@@ -1744,33 +1781,45 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function admin_ir_para_create_agentes()
+    public function admin_ir_para_create_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_edit_agentes()
+    public function admin_ir_para_edit_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes'.'/'.$agente->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.edit');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -1778,8 +1827,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
@@ -1791,13 +1847,20 @@ class PermissionUserTest extends TestCase
 
     /********************************************************************************************************** */
 
-    /** @test *//*
+    /** @test */
     public function admin_ir_para_lista_biblioteca()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca');
         $response->assertSuccessful();
@@ -1809,8 +1872,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca/criar');
@@ -1823,8 +1893,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $biblioteca = factory(Biblioteca::class)->make();
         $biblioteca->save();
@@ -1841,8 +1918,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes');
         $response->assertSuccessful();
@@ -1854,8 +1938,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
@@ -1870,8 +1961,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/criar');
@@ -1884,8 +1982,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
@@ -1900,8 +2005,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/pesquisa');
@@ -1917,7 +2029,15 @@ class PermissionUserTest extends TestCase
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
 
-        $user = factory(User::class)->make();
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         $infoDoc = null;
         $infoDoc['numPassaporte'] = 2343423424423;
         $infoDoc['passaportPaisEmi'] = 'Italia';
@@ -1938,251 +2058,347 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_conta()
+    public function admin_ir_para_lista_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_show_conta()
+    public function admin_ir_para_show_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_create_conta()
+    public function admin_ir_para_create_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_edit_conta()
+    public function admin_ir_para_edit_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_fornecedor()
+    public function admin_ir_para_lista_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_show_fornecedor()
+    public function admin_ir_para_show_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_create_fornecedor()
+    public function admin_ir_para_create_fornecedor_dar_erro_401()
     {
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_edit_fornecedor()
+    public function admin_ir_para_edit_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_produto_stock()
+    public function admin_ir_para_lista_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_show_produto_stock()
+    public function admin_ir_para_show_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_create_produto_stock()
+    public function admin_ir_para_create_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_edit_produto_stock()
+    public function admin_ir_para_edit_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_show_fase_stock()
+    public function admin_ir_para_show_fase_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('fasestock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_edit_fase_stock()
+    public function admin_ir_para_edit_fase_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('fasestock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function admin_ir_para_show_doc_stock()
+    public function admin_ir_para_show_doc_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentostock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_edit_doc_stock()
+    public function admin_ir_para_edit_doc_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentostock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -2192,8 +2408,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades');
         $response->assertSuccessful();
@@ -2205,8 +2428,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
@@ -2222,8 +2452,15 @@ class PermissionUserTest extends TestCase
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades/criar');
         $response->assertSuccessful();
@@ -2235,8 +2472,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
@@ -2253,8 +2497,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos');
         $response->assertSuccessful();
@@ -2266,8 +2517,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
@@ -2282,8 +2540,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/criar');
@@ -2296,8 +2561,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
@@ -2314,8 +2586,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda');
         $response->assertSuccessful();
@@ -2329,8 +2608,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -2345,8 +2631,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -2361,8 +2654,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -2379,8 +2679,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
@@ -2395,8 +2702,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
@@ -2411,8 +2725,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
@@ -2429,8 +2750,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
@@ -2445,8 +2773,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
@@ -2461,8 +2796,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
@@ -2479,8 +2821,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
@@ -2495,8 +2844,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
@@ -2509,104 +2865,148 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function admin_ir_para_lista_pago_responsabilidade()
+    public function admin_ir_para_lista_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos');
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_show_pago_responsabilidade()
+    public function admin_ir_para_show_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos'.'/'.$pagoResponsabilidade->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_agente_pago_responsabilidade()
+    public function admin_ir_para_agente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/agente/'.$responsabilidade->agente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_cliente_pago_responsabilidade()
+    public function admin_ir_para_cliente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/cliente/'.$responsabilidade->cliente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_fornecedor_pago_responsabilidade()
+    public function admin_ir_para_fornecedor_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $relFornResp = factory(RelFornResp::class)->make();
         $relFornResp->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/fornecedor/'.$relFornResp->fornecedor->slug.'/fase'.'/'.$relFornResp->responsabilidade->fase->slug.'/'.$relFornResp->idRelacao);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_download_pago_responsabilidade()
+    public function admin_ir_para_download_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/nota-pagamento/'.$pagoResponsabilidade->idPagoResp.'/transferir');
-        $response->assertSuccessful();
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_subagente_pago_responsabilidade()
+    public function admin_ir_para_subagente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->subagente->tipo = 'Subagente';
@@ -2614,40 +3014,51 @@ class PermissionUserTest extends TestCase
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/subagente/'.$responsabilidade->subagente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_universidade_principal_pago_responsabilidade()
+    public function admin_ir_para_universidade_principal_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-principal/'.$responsabilidade->universidade1->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function admin_ir_para_universidade_secundaria_pago_responsabilidade()
+    public function admin_ir_para_universidade_secundaria_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-secundaria/'.$responsabilidade->universidade2->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -2657,8 +3068,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/reportar-problema');
         $response->assertSuccessful();
@@ -2672,8 +3090,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas');
         $response->assertSuccessful();
@@ -2685,8 +3110,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -2701,8 +3133,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
@@ -2712,20 +3151,26 @@ class PermissionUserTest extends TestCase
         $response->assertViewIs('charges.edit');
     }
     
-    /** @test *//*
-    public function admin_ir_para_download_cobrancas()
+    /** @test */
+    public function admin_ir_para_download_cobrancas_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->slug.'/download');
-        $response->assertSuccessful();
-        $response->assertViewIs('charges.download');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -2733,8 +3178,15 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $administrador = factory(Administrador::class)->make([
+            'superAdmin' => 0,
+        ]);
+        $administrador->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => $administrador->idAdmin,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
@@ -2749,8 +3201,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/');
         $response->assertSuccessful();
@@ -2760,59 +3220,90 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function agente_ir_para_lista_administrador()
+    public function agente_ir_para_lista_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_show_administrador()
+    public function agente_ir_para_show_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
+
         $administrador = factory(User::class)->make();
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('users.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_create_administrador()
+    public function agente_ir_para_create_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_administrador()
+    public function agente_ir_para_edit_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
+
 
         $administrador = factory(User::class)->make();
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -2822,8 +3313,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes');
         $response->assertSuccessful();
@@ -2835,11 +3334,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
-
-        $agente = factory(Agente::class)->make();
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
         $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes'.'/'.$agente->slug);
         $response->assertSuccessful();
@@ -2847,60 +3351,83 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function agente_ir_para_create_agentes()
+    public function agente_ir_para_create_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_agentes()
+    public function agente_ir_para_edit_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
-
-        $agente = factory(Agente::class)->make();
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
         $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes'.'/'.$agente->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.edit');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_print_agentes()
+    public function agente_ir_para_print_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
-
-        $agente = factory(Agente::class)->make();
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
         $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/print'.'/'.$agente->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.print');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
-    /** @test *//*
+    /** @test */
     public function agente_ir_para_lista_biblioteca()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca');
         $response->assertSuccessful();
@@ -2908,33 +3435,47 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function agente_ir_para_create_biblioteca()
+    public function agente_ir_para_create_biblioteca_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('libraries.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_biblioteca()
+    public function agente_ir_para_edit_biblioteca_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $biblioteca = factory(Biblioteca::class)->make();
         $biblioteca->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca'.'/'.$biblioteca->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('libraries.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -2944,8 +3485,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes');
         $response->assertSuccessful();
@@ -2957,8 +3506,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
@@ -2969,17 +3526,24 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function agente_ir_para_create_cliente()
+    public function agente_ir_para_create_cliente_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('clients.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -2987,8 +3551,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
@@ -3003,8 +3575,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/pesquisa');
@@ -3020,7 +3600,19 @@ class PermissionUserTest extends TestCase
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
 
-        $user = factory(User::class)->make();
+
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
+
+
         $infoDoc = null;
         $infoDoc['numPassaporte'] = 2343423424423;
         $infoDoc['passaportPaisEmi'] = 'Italia';
@@ -3041,251 +3633,363 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function agente_ir_para_lista_conta()
+    public function agente_ir_para_lista_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_show_conta()
+    public function agente_ir_para_show_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_create_conta()
+    public function agente_ir_para_create_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_conta()
+    public function agente_ir_para_edit_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function agente_ir_para_lista_fornecedor()
+    public function agente_ir_para_lista_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_show_fornecedor()
+    public function agente_ir_para_show_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_create_fornecedor()
+    public function agente_ir_para_create_fornecedor_dar_erro_401()
     {
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_fornecedor()
+    public function agente_ir_para_edit_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function agente_ir_para_lista_produto_stock()
+    public function agente_ir_para_lista_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_show_produto_stock()
+    public function agente_ir_para_show_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_create_produto_stock()
+    public function agente_ir_para_create_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_produto_stock()
+    public function agente_ir_para_edit_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function agente_ir_para_show_fase_stock()
+    public function agente_ir_para_show_fase_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('fasestock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_fase_stock()
+    public function agente_ir_para_edit_fase_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('fasestock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function agente_ir_para_show_doc_stock()
+    public function agente_ir_para_show_doc_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentostock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_doc_stock()
+    public function agente_ir_para_edit_doc_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentostock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -3295,8 +3999,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades');
         $response->assertSuccessful();
@@ -3308,8 +4020,17 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
@@ -3320,109 +4041,158 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function agente_ir_para_create_universidade()
+    public function agente_ir_para_create_universidade_dar_erro_401()
     {
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('universities.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_universidade()
+    public function agente_ir_para_edit_universidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades'.'/'.$universidade->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('universities.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function agente_ir_para_lista_contacto()
+    public function agente_ir_para_lista_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos');
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_show_contacto()
+    public function agente_ir_para_show_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/show/'.$contacto->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_create_contacto()
+    public function agente_ir_para_create_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_contacto()
+    public function agente_ir_para_edit_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/editar/'.$contacto->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function agente_ir_para_lista_agenda()
+    public function agente_ir_para_lista_agenda_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda');
-        $response->assertSuccessful();
-        $response->assertViewIs('agends.list');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -3432,8 +4202,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -3444,19 +4222,26 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function agente_ir_para_create_produto()
+    public function agente_ir_para_create_produto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos/criar/'.$produto->cliente->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('produtos.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -3464,8 +4249,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -3482,8 +4275,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
@@ -3498,8 +4299,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
@@ -3510,19 +4319,26 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function agente_ir_para_verifica_doc_academico()
+    public function agente_ir_para_verifica_doc_academico_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico'.'/'.$docAcademico->slug.'/verifica');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.verify');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -3532,8 +4348,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
@@ -3548,8 +4372,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
@@ -3560,156 +4392,228 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function agente_ir_para_verifica_doc_pessoal()
+    public function agente_ir_para_verifica_doc_pessoal_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal'.'/'.$docPessoal->slug.'/verifica');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.verify');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function agente_ir_para_create_doc_transacao()
+    public function agente_ir_para_create_doc_transacao_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao/criar/'.$fase->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_edit_doc_transacao()
+    public function agente_ir_para_edit_doc_transacao_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao'.'/'.$docTransacao->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function agente_ir_para_lista_pago_responsabilidade()
+    public function agente_ir_para_lista_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos');
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_show_pago_responsabilidade()
+    public function agente_ir_para_show_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos'.'/'.$pagoResponsabilidade->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_agente_pago_responsabilidade()
+    public function agente_ir_para_agente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/agente/'.$responsabilidade->agente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_cliente_pago_responsabilidade()
+    public function agente_ir_para_cliente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/cliente/'.$responsabilidade->cliente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_fornecedor_pago_responsabilidade()
+    public function agente_ir_para_fornecedor_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $relFornResp = factory(RelFornResp::class)->make();
         $relFornResp->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/fornecedor/'.$relFornResp->fornecedor->slug.'/fase'.'/'.$relFornResp->responsabilidade->fase->slug.'/'.$relFornResp->idRelacao);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_download_pago_responsabilidade()
+    public function agente_ir_para_download_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/nota-pagamento/'.$pagoResponsabilidade->idPagoResp.'/transferir');
-        $response->assertSuccessful();
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_subagente_pago_responsabilidade()
+    public function agente_ir_para_subagente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->subagente->tipo = 'Subagente';
@@ -3717,40 +4621,53 @@ class PermissionUserTest extends TestCase
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/subagente/'.$responsabilidade->subagente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_universidade_principal_pago_responsabilidade()
+    public function agente_ir_para_universidade_principal_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-principal/'.$responsabilidade->universidade1->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function agente_ir_para_universidade_secundaria_pago_responsabilidade()
+    public function agente_ir_para_universidade_secundaria_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-secundaria/'.$responsabilidade->universidade2->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -3760,8 +4677,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/reportar-problema');
         $response->assertSuccessful();
@@ -3775,8 +4700,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas');
         $response->assertSuccessful();
@@ -3788,8 +4721,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -3800,35 +4741,49 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function agente_ir_para_edit_cobrancas()
+    public function agente_ir_para_edit_cobrancas_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->fase->produto->slug.'/'.$docTransacao->fase->slug.'/'.$docTransacao->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('charges.edit');
+        $response->assertStatus(401);
     }
     
-    /** @test *//*
-    public function agente_ir_para_download_cobrancas()
+    /** @test */
+    public function agente_ir_para_download_cobrancas_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->slug.'/download');
-        $response->assertSuccessful();
-        $response->assertViewIs('charges.download');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -3836,8 +4791,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Agente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
@@ -3852,8 +4815,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/');
         $response->assertSuccessful();
@@ -3863,74 +4834,111 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function sub_agente_ir_para_lista_administrador()
+    public function sub_agente_ir_para_lista_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_show_administrador()
+    public function sub_agente_ir_para_show_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
         $administrador = factory(User::class)->make();
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('users.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_administrador()
+    public function sub_agente_ir_para_create_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_administrador()
+    public function sub_agente_ir_para_edit_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
         $administrador = factory(User::class)->make();
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function sub_agente_ir_para_lista_agente()
+    public function sub_agente_ir_para_lista_agente_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -3938,8 +4946,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
@@ -3950,60 +4966,89 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_agentes()
+    public function sub_agente_ir_para_create_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_agentes()
+    public function sub_agente_ir_para_edit_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes'.'/'.$agente->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.edit');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_print_agentes()
+    public function sub_agente_ir_para_print_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/print'.'/'.$agente->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.print');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
-    /** @test *//*
+    /** @test */
     public function sub_agente_ir_para_lista_biblioteca()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca');
         $response->assertSuccessful();
@@ -4011,33 +5056,47 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_biblioteca()
+    public function sub_agente_ir_para_create_biblioteca_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('libraries.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_biblioteca()
+    public function sub_agente_ir_para_edit_biblioteca_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $biblioteca = factory(Biblioteca::class)->make();
         $biblioteca->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca'.'/'.$biblioteca->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('libraries.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -4047,8 +5106,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes');
         $response->assertSuccessful();
@@ -4060,8 +5127,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
@@ -4072,17 +5147,24 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_cliente()
+    public function sub_agente_ir_para_create_cliente_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('clients.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -4090,8 +5172,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
@@ -4106,8 +5196,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/pesquisa');
@@ -4123,7 +5221,16 @@ class PermissionUserTest extends TestCase
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
 
-        $user = factory(User::class)->make();
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         $infoDoc = null;
         $infoDoc['numPassaporte'] = 2343423424423;
         $infoDoc['passaportPaisEmi'] = 'Italia';
@@ -4144,251 +5251,363 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function sub_agente_ir_para_lista_conta()
+    public function sub_agente_ir_para_lista_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_show_conta()
+    public function sub_agente_ir_para_show_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_conta()
+    public function sub_agente_ir_para_create_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_conta()
+    public function sub_agente_ir_para_edit_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function sub_agente_ir_para_lista_fornecedor()
+    public function sub_agente_ir_para_lista_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_show_fornecedor()
+    public function sub_agente_ir_para_show_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_fornecedor()
+    public function sub_agente_ir_para_create_fornecedor_dar_erro_401()
     {
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_fornecedor()
+    public function sub_agente_ir_para_edit_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function sub_agente_ir_para_lista_produto_stock()
+    public function sub_agente_ir_para_lista_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_show_produto_stock()
+    public function sub_agente_ir_para_show_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_produto_stock()
+    public function sub_agente_ir_para_create_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_produto_stock()
+    public function sub_agente_ir_para_edit_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function sub_agente_ir_para_show_fase_stock()
+    public function sub_agente_ir_para_show_fase_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('fasestock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_fase_stock()
+    public function sub_agente_ir_para_edit_fase_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('fasestock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function sub_agente_ir_para_show_doc_stock()
+    public function sub_agente_ir_para_show_doc_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentostock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_doc_stock()
+    public function sub_agente_ir_para_edit_doc_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentostock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -4398,8 +5617,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades');
         $response->assertSuccessful();
@@ -4411,8 +5638,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
@@ -4423,109 +5658,158 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_universidade()
+    public function sub_agente_ir_para_create_universidade_dar_erro_401()
     {
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('universities.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_universidade()
+    public function sub_agente_ir_para_edit_universidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades'.'/'.$universidade->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('universities.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function sub_agente_ir_para_lista_contacto()
+    public function sub_agente_ir_para_lista_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos');
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_show_contacto()
+    public function sub_agente_ir_para_show_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/show/'.$contacto->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_contacto()
+    public function sub_agente_ir_para_create_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_contacto()
+    public function sub_agente_ir_para_edit_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/editar/'.$contacto->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function sub_agente_ir_para_lista_agenda()
+    public function sub_agente_ir_para_lista_agenda_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda');
-        $response->assertSuccessful();
-        $response->assertViewIs('agends.list');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -4535,8 +5819,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -4547,35 +5839,49 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function sub_agente_ir_para_create_produto()
+    public function sub_agente_ir_para_create_produto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos/criar/'.$produto->cliente->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('produtos.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_produto()
+    public function sub_agente_ir_para_edit_produto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos'.'/'.$produto->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtos.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -4585,8 +5891,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
@@ -4601,8 +5915,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
@@ -4613,19 +5935,26 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function sub_agente_ir_para_verifica_doc_academico()
+    public function sub_agente_ir_para_verifica_doc_academico_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico'.'/'.$docAcademico->slug.'/verifica');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.verify');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -4635,8 +5964,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
@@ -4651,8 +5988,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
@@ -4663,156 +6008,228 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function sub_agente_ir_para_verifica_doc_pessoal()
+    public function sub_agente_ir_para_verifica_doc_pessoal_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal'.'/'.$docPessoal->slug.'/verifica');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.verify');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function sub_agente_ir_para_create_doc_transacao()
+    public function sub_agente_ir_para_create_doc_transacao_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao/criar/'.$fase->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_doc_transacao()
+    public function sub_agente_ir_para_edit_doc_transacao_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao'.'/'.$docTransacao->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function sub_agente_ir_para_lista_pago_responsabilidade()
+    public function sub_agente_ir_para_lista_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos');
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_show_pago_responsabilidade()
+    public function sub_agente_ir_para_show_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos'.'/'.$pagoResponsabilidade->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_agente_pago_responsabilidade()
+    public function sub_agente_ir_para_agente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/agente/'.$responsabilidade->agente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_cliente_pago_responsabilidade()
+    public function sub_agente_ir_para_cliente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/cliente/'.$responsabilidade->cliente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_fornecedor_pago_responsabilidade()
+    public function sub_agente_ir_para_fornecedor_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $relFornResp = factory(RelFornResp::class)->make();
         $relFornResp->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/fornecedor/'.$relFornResp->fornecedor->slug.'/fase'.'/'.$relFornResp->responsabilidade->fase->slug.'/'.$relFornResp->idRelacao);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_download_pago_responsabilidade()
+    public function sub_agente_ir_para_download_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/nota-pagamento/'.$pagoResponsabilidade->idPagoResp.'/transferir');
-        $response->assertSuccessful();
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_subagente_pago_responsabilidade()
+    public function sub_agente_ir_para_subagente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->subagente->tipo = 'Subagente';
@@ -4820,40 +6237,53 @@ class PermissionUserTest extends TestCase
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/subagente/'.$responsabilidade->subagente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_universidade_principal_pago_responsabilidade()
+    public function sub_agente_ir_para_universidade_principal_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-principal/'.$responsabilidade->universidade1->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function sub_agente_ir_para_universidade_secundaria_pago_responsabilidade()
+    public function sub_agente_ir_para_universidade_secundaria_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-secundaria/'.$responsabilidade->universidade2->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -4863,8 +6293,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/reportar-problema');
         $response->assertSuccessful();
@@ -4878,8 +6316,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas');
         $response->assertSuccessful();
@@ -4891,8 +6337,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -4903,35 +6357,49 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function sub_agente_ir_para_edit_cobrancas()
+    public function sub_agente_ir_para_edit_cobrancas_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->fase->produto->slug.'/'.$docTransacao->fase->slug.'/'.$docTransacao->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('charges.edit');
+        $response->assertStatus(401);
     }
     
-    /** @test *//*
-    public function sub_agente_ir_para_download_cobrancas()
+    /** @test */
+    public function sub_agente_ir_para_download_cobrancas_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->slug.'/download');
-        $response->assertSuccessful();
-        $response->assertViewIs('charges.download');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -4939,8 +6407,16 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $agente = factory(Agente::class)->make([
+            'tipo' => 'Subagente',
+        ]);
+        $agente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idAgente' => $agente->idAgente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
@@ -4949,14 +6425,24 @@ class PermissionUserTest extends TestCase
         $response->assertSuccessful();
         $response->assertViewIs('charges.showcharge');
     }
+
+
     /******************************************         Cliente         ******************************************/
+
+
     /** @test */
     public function cliente_ir_para_dashboard()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/');
         $response->assertSuccessful();
@@ -4966,142 +6452,189 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_administrador()
+    public function cliente_ir_para_lista_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_administrador()
+    public function cliente_ir_para_show_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
         $administrador = factory(User::class)->make();
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('users.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_administrador()
+    public function cliente_ir_para_create_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_administrador()
+    public function cliente_ir_para_edit_administrador_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
         $administrador = factory(User::class)->make();
         $administrador->save();
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/administradores'.'/'.$administrador->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('users.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_agente()
+    public function cliente_ir_para_lista_agente_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_agentes()
+    public function cliente_ir_para_show_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes'.'/'.$agente->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_agentes()
+    public function cliente_ir_para_create_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_agentes()
+    public function cliente_ir_para_edit_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes'.'/'.$agente->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.edit');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_print_agentes()
+    public function cliente_ir_para_print_agentes_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $agente = factory(Agente::class)->make();
         $agente->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agentes/print'.'/'.$agente->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('agents.print');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
-    /** @test *//*
-    public function cliente_ir_para_lista_biblioteca()
+    /** @test */
+    public function cliente_ir_para_lista_biblioteca_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
@@ -5109,53 +6642,67 @@ class PermissionUserTest extends TestCase
         $user->email = $user->admin->email;
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca');
-        $response->assertSuccessful();
-        $response->assertViewIs('libraries.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_biblioteca()
+    public function cliente_ir_para_create_biblioteca_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('libraries.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_biblioteca()
+    public function cliente_ir_para_edit_biblioteca_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $biblioteca = factory(Biblioteca::class)->make();
         $biblioteca->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/biblioteca'.'/'.$biblioteca->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('libraries.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_cliente()
+    public function cliente_ir_para_lista_cliente_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes');
-        $response->assertSuccessful();
-        $response->assertViewIs('clients.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -5163,11 +6710,14 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
-
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes'.'/'.$cliente->slug);
         $response->assertSuccessful();
@@ -5175,47 +6725,58 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function cliente_ir_para_create_cliente()
+    public function cliente_ir_para_create_cliente_dar_erro_401()
     {
         $this->withoutExceptionHandling();
-
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
-
-
-        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('clients.add');
-    }
-    
-    /** @test */
-    public function cliente_ir_para_edit_cliente()
-    {
-        $this->withoutExceptionHandling();
-
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
-        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes'.'/'.$cliente->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('clients.edit');
+
+        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/criar');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_pesquisa_cliente()
+    public function cliente_ir_para_edit_cliente_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
+        $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes'.'/'.$cliente->slug.'/editar');
+        $response->assertStatus(401);
+    }
+    
+    /** @test */
+    public function cliente_ir_para_pesquisa_cliente_dar_erro_401()
+    {
+        $this->withoutExceptionHandling();
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/clientes/pesquisa');
-        $response->assertSuccessful();
-        $response->assertViewIs('clients.search');
+        $response->assertStatus(401);
     }
     
     /** @test */
@@ -5225,8 +6786,12 @@ class PermissionUserTest extends TestCase
 
         $cliente = factory(Cliente::class)->make();
         $cliente->save();
-
-        $user = factory(User::class)->make();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         $infoDoc = null;
         $infoDoc['numPassaporte'] = 2343423424423;
         $infoDoc['passaportPaisEmi'] = 'Italia';
@@ -5247,675 +6812,899 @@ class PermissionUserTest extends TestCase
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_conta()
+    public function cliente_ir_para_lista_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_conta()
+    public function cliente_ir_para_show_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_conta()
+    public function cliente_ir_para_create_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_conta()
+    public function cliente_ir_para_edit_conta_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $conta = factory(Conta::class)->make();
         $conta->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/conta-bancaria'.'/'.$conta->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('conta.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_fornecedor()
+    public function cliente_ir_para_lista_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_fornecedor()
+    public function cliente_ir_para_show_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_fornecedor()
+    public function cliente_ir_para_create_fornecedor_dar_erro_401()
     {
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_fornecedor()
+    public function cliente_ir_para_edit_fornecedor_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fornecedor = factory(Fornecedor::class)->make();
         $fornecedor->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fornecedores'.'/'.$fornecedor->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('providers.edit');
+        $response->assertStatus(401);
     }
-
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_produto_stock()
+    public function cliente_ir_para_lista_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_produto_stock()
+    public function cliente_ir_para_show_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_produto_stock()
+    public function cliente_ir_para_create_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_produto_stock()
+    public function cliente_ir_para_edit_produto_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produtoStock = factory(ProdutoStock::class)->make();
         $produtoStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtostock'.'/'.$produtoStock->idProdutoStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtostock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function cliente_ir_para_show_fase_stock()
+    public function cliente_ir_para_show_fase_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('fasestock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_fase_stock()
+    public function cliente_ir_para_edit_fase_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
         
         $faseStock = factory(FaseStock::class)->make();
         $faseStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/fasestock'.'/'.$faseStock->idFaseStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('fasestock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function cliente_ir_para_show_doc_stock()
+    public function cliente_ir_para_show_doc_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentostock.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_doc_stock()
+    public function cliente_ir_para_edit_doc_stock_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docStock = factory(DocStock::class)->make();
         $docStock->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documentostock'.'/'.$docStock->idDocStock.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentostock.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_universidade()
+    public function cliente_ir_para_lista_universidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades');
-        $response->assertSuccessful();
-        $response->assertViewIs('universities.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_universidade()
+    public function cliente_ir_para_show_universidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades'.'/'.$universidade->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('universities.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_universidade()
+    public function cliente_ir_para_create_universidade_dar_erro_401()
     {
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('universities.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_universidade()
+    public function cliente_ir_para_edit_universidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $universidade = factory(Universidade::class)->make();
         $universidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/universidades'.'/'.$universidade->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('universities.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_contacto()
+    public function cliente_ir_para_lista_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos');
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_contacto()
+    public function cliente_ir_para_show_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/show/'.$contacto->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_contacto()
+    public function cliente_ir_para_create_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/criar');
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_contacto()
+    public function cliente_ir_para_edit_contacto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $contacto = factory(Contacto::class)->make();
         $contacto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/contactos/editar/'.$contacto->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('contacts.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_agenda()
+    public function cliente_ir_para_lista_agenda_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/agenda');
-        $response->assertSuccessful();
-        $response->assertViewIs('agends.list');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function cliente_ir_para_show_produto()
+    public function cliente_ir_para_show_produto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos'.'/'.$produto->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('produtos.show');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_create_produto()
+    public function cliente_ir_para_create_produto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos/criar/'.$produto->cliente->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('produtos.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_produto()
+    public function cliente_ir_para_edit_produto_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/produtos'.'/'.$produto->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('produtos.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function cliente_ir_para_create_doc_academico()
+    public function cliente_ir_para_create_doc_academico_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico/criar/'.$docNecessario->fase->slug.'/'.$docNecessario->idDocNecessario);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_doc_academico()
+    public function cliente_ir_para_edit_doc_academico_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico'.'/'.$docAcademico->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.edit');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_verifica_doc_academico()
+    public function cliente_ir_para_verifica_doc_academico_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docAcademico = factory(DocAcademico::class)->make();
         $docAcademico->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-academico'.'/'.$docAcademico->slug.'/verifica');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.verify');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function cliente_ir_para_create_doc_pessoal()
+    public function cliente_ir_para_create_doc_pessoal_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docNecessario = factory(DocNecessario::class)->make();
         $docNecessario->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal/criar/'.$docNecessario->fase->slug.'/'.$docNecessario->idDocNecessario);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_doc_pessoal()
+    public function cliente_ir_para_edit_doc_pessoal_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal'.'/'.$docPessoal->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.edit');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_verifica_doc_pessoal()
+    public function cliente_ir_para_verifica_doc_pessoal_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docPessoal = factory(DocPessoal::class)->make();
         $docPessoal->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-pessoal'.'/'.$docPessoal->slug.'/verifica');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.verify');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
     
     /** @test */
-    public function cliente_ir_para_create_doc_transacao()
+    public function cliente_ir_para_create_doc_transacao_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao/criar/'.$fase->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_edit_doc_transacao()
+    public function cliente_ir_para_edit_doc_transacao_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/documento-transacao'.'/'.$docTransacao->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('documentos.edit');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
 
     /** @test */
-    public function cliente_ir_para_lista_pago_responsabilidade()
+    public function cliente_ir_para_lista_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos');
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_pago_responsabilidade()
+    public function cliente_ir_para_show_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos'.'/'.$pagoResponsabilidade->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.list');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_agente_pago_responsabilidade()
+    public function cliente_ir_para_agente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/agente/'.$responsabilidade->agente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_cliente_pago_responsabilidade()
+    public function cliente_ir_para_cliente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/cliente/'.$responsabilidade->cliente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_fornecedor_pago_responsabilidade()
+    public function cliente_ir_para_fornecedor_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $relFornResp = factory(RelFornResp::class)->make();
         $relFornResp->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/fornecedor/'.$relFornResp->fornecedor->slug.'/fase'.'/'.$relFornResp->responsabilidade->fase->slug.'/'.$relFornResp->idRelacao);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_download_pago_responsabilidade()
+    public function cliente_ir_para_download_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $pagoResponsabilidade = factory(PagoResponsabilidade::class)->make();
         $pagoResponsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/nota-pagamento/'.$pagoResponsabilidade->idPagoResp.'/transferir');
-        $response->assertSuccessful();
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_subagente_pago_responsabilidade()
+    public function cliente_ir_para_subagente_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->subagente->tipo = 'Subagente';
@@ -5923,40 +7712,49 @@ class PermissionUserTest extends TestCase
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/subagente/'.$responsabilidade->subagente->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_universidade_principal_pago_responsabilidade()
+    public function cliente_ir_para_universidade_principal_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-principal/'.$responsabilidade->universidade1->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_universidade_secundaria_pago_responsabilidade()
+    public function cliente_ir_para_universidade_secundaria_pago_responsabilidade_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $responsabilidade = factory(Responsabilidade::class)->make();
         $responsabilidade->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/pagamentos/universidade-secundaria/'.$responsabilidade->universidade2->slug.'/fase'.'/'.$responsabilidade->fase->slug.'/'.$responsabilidade->idResponsabilidade);
-        $response->assertSuccessful();
-        $response->assertViewIs('payments.add');
+        $response->assertStatus(401);
     }
 
     /********************************************************************************************************** */
@@ -5966,8 +7764,14 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/reportar-problema');
         $response->assertSuccessful();
@@ -5981,8 +7785,14 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas');
         $response->assertSuccessful();
@@ -5994,8 +7804,14 @@ class PermissionUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $produto = factory(Produto::class)->make();
         $produto->save();
@@ -6006,51 +7822,66 @@ class PermissionUserTest extends TestCase
     }
     
     /** @test */
-    public function cliente_ir_para_edit_cobrancas()
+    public function cliente_ir_para_edit_cobrancas_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->fase->produto->slug.'/'.$docTransacao->fase->slug.'/'.$docTransacao->slug.'/editar');
-        $response->assertSuccessful();
-        $response->assertViewIs('charges.edit');
+        $response->assertStatus(401);
     }
     
-    /** @test *//*
-    public function cliente_ir_para_download_cobrancas()
+    /** @test */
+    public function cliente_ir_para_download_cobrancas_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $docTransacao = factory(DocTransacao::class)->make();
         $docTransacao->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$docTransacao->slug.'/download');
-        $response->assertSuccessful();
-        $response->assertViewIs('charges.download');
+        $response->assertStatus(401);
     }
     
     /** @test */
-    public function cliente_ir_para_show_charge_cobrancas()
+    public function cliente_ir_para_show_charge_cobrancas_dar_erro_401()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->make();
-        $user->email = $user->admin->email;
+        $cliente = factory(Cliente::class)->make();
+        $cliente->save();
+        $user = factory(User::class)->make([
+            'idAdmin' => null,
+            'idCliente' => $cliente->idCliente,
+            'email' => $administrador->email,
+        ]);
+        $user->save();
 
         $fase = factory(Fase::class)->make();
         $fase->save();
 
         $response = $this->actingAs($user)->withSession(['foo' => 'bar'])->get('/cobrancas'.'/'.$fase->produto->slug.'/'.$fase->slug);
-        $response->assertSuccessful();
-        $response->assertViewIs('charges.showcharge');
+        $response->assertStatus(401);
     }
     
 }
