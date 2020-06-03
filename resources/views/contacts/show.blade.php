@@ -15,17 +15,17 @@
 @section('content')
 
 
-<div class="container-fluid mt-2" style="color: black">
+<div class="container-fluid my-4" style="color: black">
 
     {{-- Conteúdo --}}
-    <div class="bg-white shadow-sm mb-4 p-4 ">
+    <div class="bg-white shadow-sm  p-4 ">
 
 
         <div class="row">
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Detalhes do contacto</strong></h4>
+                    <h4><strong>Detalhes do contacto <span class="active">{{$contact->nome}}</span></strong></h4>
                     <small>
                         <div>
                             <span>Ultima atualização:
@@ -38,7 +38,7 @@
             {{-- Opções --}}
             <div class="col text-right">
                 <a href="{{route('contacts.edit',$contact)}}" class="btn btn-sm btn-success m-1 mr-2 px-3 "><i
-                        class="fas fa-pencil-alt mr-2"></i>Editar informação</a>
+                        class="fas fa-pencil-alt mr-2"></i>Editar Informação</a>
             </div>
 
         </div>
@@ -65,7 +65,7 @@
 
 
             {{-- FOTOGRAFIA --}}
-            <div class="col p-0 text-center" style="max-width: 340px; min-width:300px">
+            <div class="coltext-center" style="max-width: 340px; min-width:300px">
 
                 @if($contact->fotografia)
                 <img class="m-2 p-1 rounded bg-white shadow-sm"
@@ -75,82 +75,75 @@
                     src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
                 @endif
 
-                @if( $contact->favorito==1 )
-                <div class="text-center mt-2" >
-                    <i class="fas fa-star text-warning " style="font-size:30px"></i><br>
-                    <small class="font-weight-bold">Marcado como favorito</small>
-                </div>
-                @endif
-
             </div>
 
 
             <div class="col mr-3" style="min-width:350px">
 
-                <div>Nome: <span class="font-weight-bold">{{$contact->nome}}</span></div>
+
+                @if( $contact->favorito==1 )
+                <div style="font-size:20px">
+                    <i class="fas fa-star text-warning " ></i>
+                    <small class="font-weight-bold">Marcado como favorito</small>
+                    <br><br>
+                </div>
+                @endif
+
+                <div>Telefone (principal):
+                    @if ($contact->telefone1!=null)
+                        <span class="font-weight-bold">{{$contact->telefone1}}</span>
+                    @else
+                        <span class="text-muted"><small>(Sem informação)</small></span>
+                    @endif
+
+                </div>
 
                 <br>
 
-                <div>Telefone (principal):</div>
-
-                    @if ($contact->telefone1!=null)
-                    <span class="font-weight-bold">{{$contact->telefone1}}</span>
-                    @else
-                    <span class="text-muted"><small>(Sem informação)</small></span>
-                    @endif
-
-
-                <br><br>
-
-                <div>Telefone (alternativo):</div>
-
+                <div>Telefone (alternativo):
                     @if ($contact->telefone2!=null)
-                    {{$contact->telefone2}}</span>
+                        <span class="font-weight-bold">{{$contact->telefone2}}</span>
                     @else
                     <span class="text-muted"><small>(Sem informação)</small></span>
                     @endif
+                </div>
 
+                <br>
 
-                <br><br>
-
-                <div>Fax:</div>
-
+                <div>Fax:
                     @if ($contact->fax!=null)
-                    {{$contact->fax}}</span>
+                        <span class="font-weight-bold">{{$contact->fax}}</span>
                     @else
-                    <span class="text-muted"><small>(Sem informação)</small></span>
+                        <span class="text-muted"><small>(Sem informação)</small></span>
                     @endif
+                </div>
 
+                <br>
 
-                <br><br>
-
-                <div>E-mail:</div>
-
+                <div>E-mail:
                     @if ($contact->email!=null)
-                    {{$contact->email}}</span>
+                        <span class="font-weight-bold">{{$contact->email}}</span>
                     @else
-                    <span class="text-muted"><small>(Sem informação)</small></span>
+                        <span class="text-muted"><small>(Sem informação)</small></span>
                     @endif
-
-
-                <br><br>
+                </div>
 
             </div>
 
+        </div>
+
+        <div class="row mt-4">
             <div class="col" style="min-width:350px">
 
                 <div>Observações:</div>
-
+                <div class="border rounded bg-light p-2 mt-2">
                     @if ($contact->observacao!=null)
                     {{$contact->observacao}}
                     @else
                     <span class="text-muted"><small>(Sem observações)</small></span>
                     @endif
-
-
+                </div>
             </div>
-
-
         </div>
 
     </div>

@@ -11,7 +11,7 @@
 {{-- Conteudo da Página --}}
 @section('content')
 
-<div class="container-fluid mt-2">
+<div class="container-fluid my-4">
 
     <div class="bg-white shadow-sm mb-4 p-4 ">
 

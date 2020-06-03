@@ -22,7 +22,7 @@
                     class="fas fa-arrow-right rounded-circle p-2 nav_btns"></i></a>
         </div>
         <div class="float-right">
-            <a href="{{route('produtos.edit',$produto)}}" class="top-button mr-2">Editar informação</a>
+            <a href="{{route('produtos.edit',$produto)}}" class="top-button mr-2">Editar Informação</a>
             <form method="POST" role="form" id="{{ $produto->idCliente }}" action="{{route('produtos.destroy',$produto)}}" class="d-inline-block form_produto_id">
                 @csrf
                 @method('DELETE')

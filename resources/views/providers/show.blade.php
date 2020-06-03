@@ -15,7 +15,7 @@
 
 
 
-<div class="container-fluid mt-2" style="color: black">
+<div class="container-fluid my-4" style="color: black">
 
     {{-- Conteúdo --}}
     <div class="bg-white shadow-sm mb-4 p-4 ">
@@ -37,7 +37,7 @@
 
             {{-- Opções --}}
             <div class="col text-right">
-                <a href="{{route('provider.edit', $provider)}}" class="btn btn-sm btn-success m-1 mr-2 px-3 "><i class="fas fa-pencil-alt mr-2"></i>Editar informação</a>
+                <a href="{{route('provider.edit', $provider)}}" class="btn btn-sm btn-success m-1 mr-2 px-3 "><i class="fas fa-pencil-alt mr-2"></i>Editar Informação</a>
             </div>
 
         </div>

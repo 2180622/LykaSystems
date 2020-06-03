@@ -19,7 +19,7 @@
 @include('clients.partials.modal')
 <!-- MODAL DE INFORMAÇÔES -->
 
-<div class="container-fluid mt-2 ">
+<div class="container-fluid my-4">
 
     {{-- Conteúdo --}}
     <div class="bg-white shadow-sm mb-4 p-4 ">
