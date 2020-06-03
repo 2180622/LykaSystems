@@ -305,7 +305,7 @@ class ClientController extends Controller
         }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
             $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
         }
-        if($produts->toArray()){
+        if($produts){
             $permissao = true;
         }
 
@@ -425,7 +425,7 @@ class ClientController extends Controller
         }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
             $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
         }
-        if($produts->toArray()){
+        if($produts){
             $permissao = true;
         }
 
@@ -482,7 +482,7 @@ class ClientController extends Controller
         }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
             $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
         }
-        if($produts->toArray() && $cliente->editavel){
+        if($produts && $cliente->editavel){
             $permissao = true;
         }
 
