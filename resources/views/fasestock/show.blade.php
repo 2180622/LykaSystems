@@ -21,7 +21,7 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Ficha de Fase <span class="active">{{ $fasestock->descricao }}</span></strong></h4>
+                    <h4><strong>Ficha da Fase <span class="active">{{ $fasestock->descricao }}</span></strong></h4>
                     <small>
                         <div>
                             <span>Ultima atualização:
@@ -63,12 +63,14 @@
                             @foreach ($docstocks as $docstock)
                             <tr>
                                 {{-- Tipo --}}
-                                <td><a class="name_link"
-                                        href="{{route('documentostock.show',$docstock)}}">{{$docstock->tipo}}</a></td>
+                                <td>{{-- <a class="name_link" href="{{route('documentostock.show',$docstock)}}"> --}}{{$docstock->tipo}}{{-- </a> --}}</td>
+
+
                                 {{-- Documento --}}
-                                <td><a class="name_link"
-                                        href="{{route('documentostock.show',$docstock)}}">{{$docstock->tipoDocumento}}</a>
-                                </td>
+                                <td>{{-- <a class="name_link" href="{{route('documentostock.show',$docstock)}}"> --}}{{$docstock->tipoDocumento}}{{-- </a> --}}</td>
+
+
+
                                 {{-- OPÇÔES --}}
                                 <td class="text-center align-middle" style="width: 130px">
                                     <a href="{{route('documentostock.edit', $docstock)}}"

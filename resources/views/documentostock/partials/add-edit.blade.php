@@ -1,4 +1,4 @@
-<div class="bg-white shadow-sm mb-4 p-4" style="border-radius:10px;" id="myTabContent">
+<div class="" style="border-radius:10px;" id="myTabContent">
   <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
       <div class="row">
           <div class="col">
@@ -6,14 +6,14 @@
               <label for="">Tipo (DocumentoStock):</label><br>
               <select type="text" class="form-control" name="tipo" id="tipodocstock"
                 onchange="myFunction()" required>
-                <option value="None"></option>
-                 <option value="Pessoal">Pessoal</option>
-                 <option value="Academico">Academico</option>
+                <option selected hidden value="None"></option>
+                 <option {{old('tipo',$documentostock->tipo)=='Pessoal'?"selected":""}} value="Pessoal" >Pessoal</option>
+                 <option {{old('tipo',$documentostock->tipo)=='Academico'?"selected":""}} value="Academico">Academico</option>
               </select><br>
               {{-- INPUT Documento --}}
               <div class="shadow-ms" id="tipoacademico">
                 <label >Documento:</label>
-                <input type="text" class="form-control" name="tipoDocumento" required>
+                <input type="text" class="form-control" name="tipoDocumento" value="{{old('tipoDocumento',$documentostock->tipoDocumento)}}" required>
               </div>
           </div>
         </div>

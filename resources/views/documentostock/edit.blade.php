@@ -5,53 +5,75 @@
 
 {{-- CSS Style Link --}}
 @section('styleLinks')
-    <link href="{{asset('css/produtos.css')}}" rel="stylesheet">
+<link href="{{asset('css/produtos.css')}}" rel="stylesheet">
 @endsection
 
 {{-- Page Content --}}
 @section('content')
-    <div class="container mt-2">
-        {{-- Navegação --}}
-        <div class="float-left buttons">
-            <a href="javascript:history.go(-1)" title="Voltar">
-                <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-            </a>
-            <a href="javascript:window.history.forward();" title="Avançar">
-                <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-            </a>
+
+
+<div class="container-fluid my-4">
+
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+
+        <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Editar Informações do Documento Stock</strong></h4>
+                </div>
+            </div>
         </div>
 
-        <br><br>
 
-        <div class="cards-navigation">
-            <div class="title">
-                <h6>Editar informações</h6>
+        <div class="row">
+            <div class="col ">
+                <small>Documento Stock Nº : <strong>{{$documentostock->idDocStock}}</strong></small>
             </div>
-            <br>
-            <h6>Está neste momento a editar o <b>Documento Stock número {{$documentostock->idDocStock}}:</b>
-                  Documento do <b>Tipo {{$documentostock->tipo}}</b>
-            </h6>
+        </div>
 
-            <form method="POST" action="{{route('documentostock.update', $documentostock)}}" class="form-group needs-validation pt-3" id="form_client"
-                  enctype="multipart/form-data" novalidate>
-                @csrf
-                @method("PUT")
-                @include('documentostock.partials.add-edit')
-                <div class="form-group text-right">
-                    <br><br>
-                    <button type="submit" class="top-button mr-2" name="submit"></i>Guardar ficha</button>
-                    <a href="javascript:history.go(-1)" class="top-button">Cancelar</a>
-                </div>
-            </form>
+
+        <hr class="my-3">
+
+
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="{{route('documentostock.update', $documentostock)}}"
+                    class="form-group needs-validation " id="form_client" enctype="multipart/form-data" novalidate>
+                    @csrf
+                    @method("PUT")
+                    @include('documentostock.partials.add-edit')
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+    {{-- Butões Submit / Cancelar --}}
+    <div class="row mt-4 mx-1">
+        <div class="col text-right">
+            <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="submit" id="buttonSubmit"><i
+                    class="fas fa-check-circle mr-2"></i>Guardar
+                Informações</button>
+            <a href="#" onclick="javascript:window.history.back();"class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>
         </div>
     </div>
+
+    </form>
+
+
+
+</div>
+
+
 @endsection
 {{-- Scripts --}}
 @section('scripts')
 
-    {{-- script contem: datatable configs, input configs, validações --}}
-    <script src="{{asset('/js/produtos.js')}}"></script>
+{{-- script contem: datatable configs, input configs, validações --}}
+<script src="{{asset('/js/produtos.js')}}"></script>
 
-    {{-- script permite definir se um input recebe só numeros OU so letras --}}
-    <script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
+{{-- script permite definir se um input recebe só numeros OU so letras --}}
+<script src="{{asset('/js/jquery-key-restrictions.min.js')}}"></script>
 @endsection
