@@ -118,7 +118,7 @@
 
                     {{-- INPUT tipo --}}
                     <label for="tipo" class="font-weight-bold">Tipo de Documento:</label><br>
-                    <select type="text" class="form-control" name="tipo" id="tipodocstock" onchange="myFunction()"
+                    <select type="text" class="form-control" name="tipo" id="tipodocstock" onchange="/* myFunction() */"
                         required>
                         <option value="Pessoal">Pessoal</option>
                         <option value="Academico">Academico</option>

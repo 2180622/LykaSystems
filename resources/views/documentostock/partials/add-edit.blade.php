@@ -1,11 +1,9 @@
-<div class="" style="border-radius:10px;" id="myTabContent">
-  <div class="tab-pane fade show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
       <div class="row">
           <div class="col">
               {{-- INPUT tipo --}}
               <label for="">Tipo (DocumentoStock):</label><br>
               <select type="text" class="form-control" name="tipo" id="tipodocstock"
-                onchange="myFunction()" required>
+                onchange="/* myFunction() */" required>
                 <option selected hidden value="None"></option>
                  <option {{old('tipo',$documentostock->tipo)=='Pessoal'?"selected":""}} value="Pessoal" >Pessoal</option>
                  <option {{old('tipo',$documentostock->tipo)=='Academico'?"selected":""}} value="Academico">Academico</option>
@@ -17,8 +15,6 @@
               </div>
           </div>
         </div>
-    </div>
-</div>
 
 {{-- Scripts --}}
 @section('scripts')

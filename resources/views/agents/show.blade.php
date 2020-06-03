@@ -132,7 +132,7 @@
 
 
 
-        <div class="row nav nav-fill w-100 text-center mx-auto p-3 ">
+        <div class="row nav nav-fill w-100 text-center mx-auto p-3 mt-3">
 
             @if ( $agent->tipo == "Agente" )
             <a class="nav-item nav-link active border p-3 m-1 bg-white rounded shadow-sm name_link"
@@ -173,7 +173,8 @@
 
         </div>
 
-        <div class="bg-white shadow-sm mb-4 p-4 border" style="margin-top:-30px">
+
+        <div class="bg-white shadow-sm mb-4 p-4 border " style="margin-top:-30px">
 
             <div class="tab-content p-2 mt-3 " id="myTabContent">
 
