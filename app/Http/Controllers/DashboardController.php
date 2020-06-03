@@ -85,7 +85,6 @@ class DashboardController extends Controller{
         if ($agends->isEmpty()) {
             $agends=null;
         }
-
         return view('dashboard.index', compact('agentes', 'clientes', 'universidades', 'size', 'agends','todayAgends'));
     }
 

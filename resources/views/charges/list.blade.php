@@ -49,7 +49,11 @@
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number">{{count($fasesPendentes)}}</p>
+                        @if($fasesPendentes)
+                            <p class="number">{{count($fasesPendentes)}}</p>
+                        @else
+                            <p class="number">0</p>
+                        @endif
                         <p class="word">cobranças pendentes</p>
                     </div>
                 </div>
@@ -62,7 +66,11 @@
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number" style="color:#47BC00;">{{count($fasesPagas)}}</p>
+                        @if($fasesPagas)
+                            <p class="number" style="color:#47BC00;">{{count($fasesPagas)}}</p>
+                        @else
+                            <p class="number" style="color:#47BC00;">0</p>
+                        @endif
                         <p class="word">cobranças pagas</p>
                     </div>
                 </div>
@@ -75,7 +83,11 @@
                         </span>
                     </div>
                     <div class="info">
-                        <p class="number" style="color:#FF3D00;">{{count($fasesDivida)}}</p>
+                        @if($fasesPagas)
+                            <p class="number" style="color:#FF3D00;">{{count($fasesDivida)}}</p>
+                        @else
+                            <p class="number" style="color:#FF3D00;">0</p>
+                        @endif
                         <p class="word">cobranças em dívida</p>
                     </div>
                 </div>
@@ -83,7 +95,7 @@
         </div>
         <br>
         <div class="container">
-            @if (count($products))
+            @if ($products)
             @foreach ($products as $product)
             <a href="{{route('charges.show', $product)}}">
                 <div class="row charge-div">

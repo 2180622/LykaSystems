@@ -20,12 +20,16 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        $contacts = Contacto::
-        where('Contacto.idUser', '=', Auth::user()->idUser)
-        ->get();
+        if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
+            $contacts = Contacto::
+            where('Contacto.idUser', '=', Auth::user()->idUser)
+            ->get();
 
-        
-        return view('contacts.list', compact('contacts'));
+            
+            return view('contacts.list', compact('contacts'));
+        }else{
+            abort(401);
+        }
     }
 
     /**
@@ -35,9 +39,13 @@ class ContactoController extends Controller
      */
     public function create(Universidade $university=null)
     {
-        $contact = new Contacto;
+        if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
+            $contact = new Contacto;
 
-        return view('contacts.add',compact('contact','university'));
+            return view('contacts.add',compact('contact','university'));
+        }else{
+            abort(401);
+        }
     }
 
     /**
@@ -48,43 +56,47 @@ class ContactoController extends Controller
      */
     public function store(StoreContactoRequest $request)
     {
-        $fields = $request->validated();
-        $contact = new Contacto;
-        $contact->fill($fields);
+        if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
+            $fields = $request->validated();
+            $contact = new Contacto;
+            $contact->fill($fields);
 
-        if ($request->hasFile('fotografia')) {
-            $photo = $request->file('fotografia');
-            $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
-            $contact->fotografia = $profileImg;
-        }
+            if ($request->hasFile('fotografia')) {
+                $photo = $request->file('fotografia');
+                $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
+                $contact->fotografia = $profileImg;
+            }
 
-        $contact->idUser = Auth::user()->idUser;
+            $contact->idUser = Auth::user()->idUser;
 
-        // data em que foi criado
-        $t=time();
-        $contact->create_at == date("Y-m-d",$t);
-
-
-        if($request->idUniversidade!=null){
-            $contact->idUser = null;
-            $contact->idUniversidade=$request->idUniversidade;
-        }
-
-        $contact->save();
+            // data em que foi criado
+            $t=time();
+            $contact->create_at == date("Y-m-d",$t);
 
 
+            if($request->idUniversidade!=null){
+                $contact->idUser = null;
+                $contact->idUniversidade=$request->idUniversidade;
+            }
 
-        if($request->idUniversidade!=null){
+            $contact->save();
 
-            $university=Universidade::
-            where('idUniversidade', $request->idUniversidade)
-            ->first();
 
-            return redirect()->route('universities.show',$university)->with('success', 'Novo contacto criado com sucesso');
 
+            if($request->idUniversidade!=null){
+
+                $university=Universidade::
+                where('idUniversidade', $request->idUniversidade)
+                ->first();
+
+                return redirect()->route('universities.show',$university)->with('success', 'Novo contacto criado com sucesso');
+
+            }else{
+                return redirect()->route('contacts.index',$contact)->with('success', 'Novo contacto criado com sucesso');
+            }
         }else{
-            return redirect()->route('contacts.index',$contact)->with('success', 'Novo contacto criado com sucesso');
+            abort(401);
         }
 
     }
@@ -98,7 +110,11 @@ class ContactoController extends Controller
     public function show(contacto $contact, Universidade $university=null)
     {
 
-        return view('contacts.show',compact('contact','university'));
+        if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
+            return view('contacts.show',compact('contact','university'));
+        }else{
+            abort(401);
+        }
     }
 
     /**
@@ -109,7 +125,11 @@ class ContactoController extends Controller
      */
     public function edit(contacto $contact, Universidade $university=null)
     {
-        return view('contacts.edit', compact('contact','university'));
+        if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
+            return view('contacts.edit', compact('contact','university'));
+        }else{
+            abort(401);
+        }
     }
 
     /**
@@ -121,46 +141,50 @@ class ContactoController extends Controller
      */
     public function update(UpdateContactoRequest $request, contacto $contact)
     {
-        $fields = $request->validated();
-        $contact->fill($fields);
+        if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
+            $fields = $request->validated();
+            $contact->fill($fields);
 
 
-        if ($request->hasFile('fotografia')) {
-        /* Verifica se o ficheiro antigo existe e apaga do storage*/
-        $oldfile=Contacto::where('idContacto', '=',$contact->idContacto)->first();
+            if ($request->hasFile('fotografia')) {
+            /* Verifica se o ficheiro antigo existe e apaga do storage*/
+            $oldfile=Contacto::where('idContacto', '=',$contact->idContacto)->first();
 
-        if(Storage::disk('public')->exists('contact-photos/'. $oldfile->fotografia)){
-            Storage::disk('public')->delete('contact-photos/'. $oldfile->fotografia);
-        }
-
-            $photo = $request->file('fotografia');
-            $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
-            if (!empty($contact->fotografia)) {
-                Storage::disk('public')->delete('contact-photos/' . $contact->fotografia);
+            if(Storage::disk('public')->exists('contact-photos/'. $oldfile->fotografia)){
+                Storage::disk('public')->delete('contact-photos/'. $oldfile->fotografia);
             }
-            Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
-            $contact->fotografia = $profileImg;
-        }
 
-        // data em que foi modificado
-        $t=time();
-        $contact->updated_at == date("Y-m-d",$t);
+                $photo = $request->file('fotografia');
+                $profileImg = $contact->nome . '_' . time() . '.' . $photo->getClientOriginalExtension();
+                if (!empty($contact->fotografia)) {
+                    Storage::disk('public')->delete('contact-photos/' . $contact->fotografia);
+                }
+                Storage::disk('public')->putFileAs('contact-photos/', $photo, $profileImg);
+                $contact->fotografia = $profileImg;
+            }
 
-        $contact->save();
+            // data em que foi modificado
+            $t=time();
+            $contact->updated_at == date("Y-m-d",$t);
+
+            $contact->save();
 
 
 
-        if($request->idUniversidade!=null){
+            if($request->idUniversidade!=null){
 
-            $university=Universidade::
-            where('idUniversidade', $request->idUniversidade)
-            ->first();
+                $university=Universidade::
+                where('idUniversidade', $request->idUniversidade)
+                ->first();
 
-            return redirect()->route('universities.show',$university)->with('success', 'Informações do contacto alteradas com sucesso');
+                return redirect()->route('universities.show',$university)->with('success', 'Informações do contacto alteradas com sucesso');
 
+            }else{
+                return redirect()->route('contacts.index',$contact)->with('success', 'Informações do contacto alteradas com sucesso');
+
+            }
         }else{
-            return redirect()->route('contacts.index',$contact)->with('success', 'Informações do contacto alteradas com sucesso');
-
+            abort(401);
         }
 
     }
@@ -173,7 +197,11 @@ class ContactoController extends Controller
      */
     public function destroy(contacto $contact)
     {
-        $contact->delete();
-        return back()->with('success', 'Contacto eliminado com sucesso');
+        if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
+            $contact->delete();
+            return back()->with('success', 'Contacto eliminado com sucesso');
+        }else{
+            abort(401);
+        }
     }
 }

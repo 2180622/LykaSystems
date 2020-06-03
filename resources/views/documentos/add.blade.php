@@ -56,14 +56,37 @@
                 <br>
                 @if(strtolower($tipo) == "transacao")
                     <div class="row documento-transacao">
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <label for="descricao">Descrição</label>
                             <br>
                             <input type="text" class="form-control" name="descricao" placeholder="Descrição" autocomplete="off" required><br>
                         </div>
-                        <div class="col-md-2">
-                            <label for="img_doc">Upload:</label>
-                            <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/><br>
+                        <div class="col-md-4">
+                            <div class="col text-center" style="max-width:380px;min-width:298px;">
+                                <div>
+                                    <label for="img_doc">Imagem:</label>
+                                    <input type='file' id="img_doc" name="img_doc" style="display:none"
+                                        accept="application/pdf, image/*" />
+                                </div>
+            
+                                <div class="card mx-auto p-4 rounded shadow-sm text-center "
+                                    style="width:80%;min-width:118px;min-height:120px">
+                                    <a style="display:none;cursor:pointer"
+                                        title="Clique para adicionar o documento do passaporte" id="doc_preview"
+                                        class="">
+                                        <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                                        <div id="name_doc_file" class="text-muted">
+        
+                                        </div>
+                                    </a>
+                                    <i id="passport_preview_file" class="fas fa-plus-circle mt-2"
+                                        style="font-size:60px;cursor:pointer"
+                                        title="Clique para adicionar o documento do passaporte"></i>
+            
+                                </div>
+                                <small class="text-muted">(clique para mudar)</small>
+            
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <label for="valorRecebido">Valor recebido</label>
@@ -105,8 +128,31 @@
                         <span class="num" style="display: none;">2</span>
 
                         <div class="col-md-6">
-                            <label for="img_doc">Upload:</label>
-                            <input type='file' class="form-control" id="img_doc" name="img_doc" accept="application/pdf, image/*" required/>
+                            <div class="col text-center" style="max-width:380px;min-width:298px;">
+                                <div>
+                                    <label for="img_doc">Imagem:</label>
+                                    <input type='file' id="img_doc" name="img_doc" style="display:none"
+                                        accept="application/pdf, image/*" />
+                                </div>
+            
+                                <div class="card mx-auto p-4 rounded shadow-sm text-center "
+                                    style="width:80%;min-width:118px;min-height:120px">
+                                    <a style="display:none;cursor:pointer"
+                                        title="Clique para adicionar o documento do passaporte" id="doc_preview"
+                                        class="">
+                                        <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                                        <div id="name_doc_file" class="text-muted">
+        
+                                        </div>
+                                    </a>
+                                    <i id="passport_preview_file" class="fas fa-plus-circle mt-2"
+                                        style="font-size:60px;cursor:pointer"
+                                        title="Clique para adicionar o documento do passaporte"></i>
+            
+                                </div>
+                                <small class="text-muted">(clique para mudar)</small>
+            
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <label for="numPassaporte">Nº Passaporte: </label>
@@ -154,21 +200,30 @@
                         <span class="num" style="display: none;">2</span>
                         <div class="row">
                             <div class="col-md-5">
-                                <div class="text-center align-middle" style="min-width: 300px" >
-                                    {{-- INPUT fotografia --}}
+                                <div class="col text-center" style="max-width:380px;min-width:298px;">
                                     <div>
-                                        <label for="img_doc">Upload ficheiro:</label>
-                                        <input type='file' id="img_doc" name="img_doc" style="display:none" accept="pplication/pdf, image/*" />
-                
+                                        <label for="img_doc">Imagem:</label>
+                                        <input type='file' id="img_doc" name="img_doc" style="display:none"
+                                            accept="application/pdf, image/*" />
                                     </div>
                 
-                                    <div class="text-center align-self-center align-middle" style="max-height:150px; overflow:hidden;">
-                                        <img src="{{Storage::disk('public')->url('default-photos/addImg.png')}}" id="preview"
-                                            class="m-2 p-1 border rounded bg-white shadow-sm" style="width:100px; cursor:pointer; min-width:50px; max-height:100px;"
-                                            alt="Imagem de apresentação" title="Clique para mudar a imagem de apresentação" />
+                                    <div class="card mx-auto p-4 rounded shadow-sm text-center "
+                                        style="width:80%;min-width:118px;min-height:120px">
+                                        <a style="display:none;cursor:pointer"
+                                            title="Clique para adicionar o documento do passaporte" id="doc_preview"
+                                            class="">
+                                            <i class="far fa-id-card mt-2" style="font-size:50px"></i>
+                                            <div id="name_doc_file" class="text-muted">
+            
+                                            </div>
+                                        </a>
+                                        <i id="passport_preview_file" class="fas fa-plus-circle mt-2"
+                                            style="font-size:60px;cursor:pointer"
+                                            title="Clique para adicionar o documento do passaporte"></i>
+                
                                     </div>
-                                    <div class="mt-2"><small class="text-muted">(clique para mudar)</small></div>
-                                    <br>
+                                    <small class="text-muted">(clique para mudar)</small>
+                
                                 </div>
                             </div>
                             @if($tipoPAT == "Academico")
@@ -265,14 +320,15 @@
         }
         
         
+        //Preview do Passporte+++++++++++++++
         $('#passport_preview_file').on('click', function (e) {
             e.preventDefault();
-            $('#img_Passaporte').trigger('click');
+            $('#img_doc').trigger('click');
         });
 
-        $('#passporte_preview').on('click', function (e) {
+        $('#doc_preview').on('click', function (e) {
             e.preventDefault();
-            $('#img_Passaporte').trigger('click');
+            $('#img_doc').trigger('click');
         });
 
 
@@ -280,18 +336,18 @@
             if (input.files && input.files[0]) {
                 var iddocumento = new FileReader();
                 iddocumento.onload = function (e) {
-                    iddocumento.fileName = img_Passaporte.name;
-                    $('#name_passaporte_file').text(input.files[0].name);
+                    iddocumento.fileName = img_doc.name;
+                    $('#name_doc_file').text(input.files[0].name);
                 }
 
                 iddocumento.readAsDataURL(input.files[0]);
             }
         }
 
-        $("#img_Passaporte").change(function () {
+        $("#img_doc").change(function () {
             readPassaPortImgURL(this);
             $('#passport_preview_file').hide();
-            $('#passporte_preview').show();
+            $('#doc_preview').show();
 
         });
     </script>

@@ -19,7 +19,7 @@ class AgendController extends Controller
     public function index()
     {
         /* Permissões */
-        if (Auth::user()->tipo != "admin" ){
+        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
             abort (401);
         }
 
@@ -52,6 +52,11 @@ class AgendController extends Controller
      */
     public function store(Request $request)
     {
+        /* Permissões */
+        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
+            abort (401);
+        }
+
         switch($request->input('action')) {
             case "save":
 
@@ -138,7 +143,7 @@ class AgendController extends Controller
      */
     public function update(Request $request, Agenda $agenda)
     {
-        //
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -149,6 +154,10 @@ class AgendController extends Controller
      */
     public function destroy(Agenda $agenda)
     {
+        /* Permissões */
+        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
+            abort (401);
+        }
         $agenda->delete();
         return redirect()->back()->with('success', 'Evento Eliminado!');
     }

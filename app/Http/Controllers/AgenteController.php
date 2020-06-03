@@ -35,13 +35,26 @@ class AgenteController extends Controller
     public function index()
     {
 
-    /* Permissões */
-    if (Auth::user()->tipo != "admin" ){
-        abort (401);
-    }
-        $agents = Agente::all();
+        /* Permissões */
+        if ((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+            $agents =null;
+            if(Auth()->user()->tipo == 'admin'){
+                $agents = Agente::all();
+            }else{
+                $agents = Agente::where(['idAgenteAssociado','=',Auth()->user()->idAgente],['tipo','like','Subagente'])->get();
+            }
+            if($agents || $agents->toArray()){
+                $totalagents = $agents->count();
+            }else{
+                $totalagents = 0;
+            }
 
-    return view('agents.list', compact('agents'));
+        }else{
+            abort (401);
+        }
+            return view('agents.list', compact('agents', 'totalagents'));
+
+    return view('agents.list', compact('agents', 'totalagents'));
 
     }
 
@@ -55,7 +68,7 @@ class AgenteController extends Controller
     public function create()
     {
 
-        if (Auth::user()->tipo == "admin"){
+        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
             $agent = new Agente;
 
             /* lista dos agentes principais */
@@ -81,6 +94,10 @@ class AgenteController extends Controller
      */
     public function store(StoreAgenteRequest $requestAgent, StoreUserRequest $requestUser)
     {
+        /* Permissões */
+        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
+            abort (401);
+        }
 
         /* obtem os dados para criar o agente */
         $agent = new Agente;
@@ -88,6 +105,7 @@ class AgenteController extends Controller
         $agent->fill($fields);
         if($agent->tipo == "Agente"){
             $agent->exepcao = false;
+            $agent->tipo = 'Subagente';
         }
 
         /* obtem os dados para criar o utilizador */
@@ -159,75 +177,81 @@ class AgenteController extends Controller
      */
     public function show(Agente $agent)
     {
+        /* Permissões */
+        if ((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null &&
+            (Auth()->user()->idAgente == $agent->idAgenteAssociado||Auth()->user()->idAgente == $agent->idAgente))){
 
-        /* Só os administradores podem ver os perfis dos agentes */
-        /* Cada agente só pode ver o seu perfil */
-        if(Auth::user()->tipo == "agente" && Auth::user()->idAgente != $agent->idAgente){
-            abort(401);
-        }
+            /* Só os administradores podem ver os perfis dos agentes */
+            /* Cada agente só pode ver o seu perfil *//*
+            if(Auth::user()->tipo == "agente" && Auth::user()->idAgente != $agent->idAgente){
+                abort(401);
+            }/** */
 
+            /* Lista de sub-agentes do $agente */
+            $listagents = Agente::
+            where('idAgenteAssociado', '=',$agent->idAgente)
+            ->get();
 
-        /* Lista de sub-agentes do $agente */
-        $listagents = Agente::
-        where('idAgenteAssociado', '=',$agent->idAgente)
-        ->get();
-
-        if ($listagents->isEmpty()) {
-            $listagents=null;
-        }
-
-
-/*       caso seja um sub-agente, obtem o agente que o adicionou */
-        if($agent->tipo=="Subagente"){
-            $mainAgent=Agente::
-            where('idAgente', '=',$agent->idAgenteAssociado)
-            ->first();
-        }else{
-            $mainAgent=null;
-        }
-
-        $telefone2 = $agent->telefone2;
-        $IBAN = $agent->IBAN;
+            if ($listagents->isEmpty()) {
+                $listagents=null;
+            }
 
 
-        /* lista de alunos do agente Através de produtos  */
-       $clients = Cliente::
-        selectRaw("Cliente.*")
-        ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
-        ->where('Produto.idAgente', '=', $agent->idAgente)
-        ->orWhere('Produto.idSubAgente', '=', $agent->idAgente)
-        ->groupBy('Cliente.idCliente')
-        ->orderBy('Cliente.idCliente','asc')
-        ->get();
+    /*       caso seja um sub-agente, obtem o agente que o adicionou */
+            if($agent->tipo=="Subagente"){
+                $mainAgent=Agente::
+                where('idAgente', '=',$agent->idAgenteAssociado)
+                ->first();
+            }else{
+                $mainAgent=null;
+            }
+
+            $telefone2 = $agent->telefone2;
+            $IBAN = $agent->IBAN;
 
 
-        if ($clients->isEmpty()) {
-        /* lista de alunos do agente associação na ficha de cliente  */
+            /* lista de alunos do agente Através de produtos  */
         $clients = Cliente::
-        where('idAgente', '=', $agent->idAgente)
-        ->get();
-        }
+            selectRaw("Cliente.*")
+            ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
+            ->where('Produto.idAgente', '=', $agent->idAgente)
+            ->orWhere('Produto.idSubAgente', '=', $agent->idAgente)
+            ->groupBy('Cliente.idCliente')
+            ->orderBy('Cliente.idCliente','asc')
+            ->get();
+            
 
-        if ($clients->isEmpty()) {
-            $clients=null;
-        }
-
-
-        /* Valor total das comissões */
-
-        /* Caso seja do tipo Agente */
-        if ($agent->tipo=="Agente"){
-            $comissoes = Responsabilidade::
+            if ($clients->isEmpty()) {
+            /* lista de alunos do agente associação na ficha de cliente  */
+            $clients = Cliente::
             where('idAgente', '=', $agent->idAgente)
-            ->sum('valorAgente');
+            ->get();
+            }
 
-        }elseif($agent->tipo=="Subagente"){
-            $comissoes = Responsabilidade::
-            where('idSubAgente', '=', $agent->idAgente)
-            ->sum('valorSubAgente');
+            if ($clients->isEmpty()) {
+                $clients=null;
+            }
+
+
+            /* Valor total das comissões */
+
+            /* Caso seja do tipo Agente */
+            if ($agent->tipo=="Agente"){
+                $comissoes = Responsabilidade::
+                where('idAgente', '=', $agent->idAgente)
+                ->sum('valorAgente');
+
+            }elseif($agent->tipo=="Subagente"){
+                $comissoes = Responsabilidade::
+                where('idSubAgente', '=', $agent->idAgente)
+                ->sum('valorSubAgente');
+            }
+
+            return view('agents.show',compact("agent" ,'listagents','mainAgent','telefone2','IBAN','clients','comissoes'));
+        }else{
+            abord(401);
         }
-
-        return view('agents.show',compact("agent" ,'listagents','mainAgent','telefone2','IBAN','clients','comissoes'));
 
     }
 
@@ -240,7 +264,14 @@ class AgenteController extends Controller
     */
     public function print(Agente $agent)
     {
-        return view('agents.print',compact("agent"));
+        /* Permissões */
+        if ((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null &&
+            (Auth()->user()->idAgente == $agent->idAgenteAssociado||Auth()->user()->idAgente == $agent->idAgente))){
+            return view('agents.print',compact("agent"));
+        }else{
+            abord(401);
+        }
     }
 
     /**
@@ -251,7 +282,7 @@ class AgenteController extends Controller
      */
     public function edit(Agente $agent)
     {
-        if (Auth::user()->tipo == "admin"){
+        if (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
             /* lista dos agentes principais */
             $listagents = Agente::
             whereNull('idAgenteAssociado')
@@ -277,6 +308,11 @@ class AgenteController extends Controller
      */
     public function update(UpdateAgenteRequest $request, Agente $agent)
     {
+        /* Permissões */
+        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
+            abort (401);
+        }
+
         $fields = $request->validated();
 
         $agent->fill($fields);
@@ -362,6 +398,11 @@ class AgenteController extends Controller
      */
     public function destroy(Agente $agent)
     {
+        /* Permissões */
+        if (Auth()->user()->tipo != 'admin' || Auth()->user()->idAdmin == null){
+            abort (401);
+        }
+        
         /* "Apaga" dos agentes */
         $agent->delete();
 

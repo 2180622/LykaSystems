@@ -20,15 +20,18 @@ class LibraryController extends Controller
     public function index()
     {
 
-        /* Ficheiros para os agentes */
-        if (Auth::user()->tipo != "admin" ){
-            $files = Biblioteca::
-            where('acesso', '=', "Público")
-            ->get();
-        }else{
-            /* Ficheiros para os admins */
-            $files = Biblioteca::all();
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+            /* Ficheiros para os agentes */
+            if (Auth::user()->tipo != "admin" ){
+                $files = Biblioteca::
+                where('acesso', '=', "Público")
+                ->get();
+            }else{
+                /* Ficheiros para os admins */
+                $files = Biblioteca::all();
 
+            }
 
 
             /* Calcula o espaço oucupado por todos os ficheiros na pasta da biblioteca */
@@ -63,13 +66,13 @@ class LibraryController extends Controller
                 }
 
 
-           $size = formatSize (folderSize(storage_path('app/public/library')));
+            $size = formatSize (folderSize(storage_path('app/public/library')));
 
-
+            return view('libraries.list', compact('files','size'));
+        }else{
+            /* não tem permissões */
+            abort (401);
         }
-
-
-        return view('libraries.list', compact('files','size'));
 
     }
 
@@ -80,12 +83,13 @@ class LibraryController extends Controller
      */
     public function create()
     {
-        /* Permissões */
-        if (Auth::user()->tipo != "admin" ){
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+            $library = new Biblioteca;
+            return view('libraries.add' , compact('library'));
+        }else{
+            /* não tem permissões */
             abort (401);
         }
-        $library = new Biblioteca;
-        return view('libraries.add' , compact('library'));
     }
 
     /**
@@ -96,23 +100,28 @@ class LibraryController extends Controller
      */
     public function store(StoreLibraryRequest $request)
     {
-        $file = new Biblioteca;
-        $fields = $request->validated();
-        $file->fill($fields);
-
-        $file->save();
-
-        if ($request->hasFile('ficheiro')) {
-            $uploadfile = $request->file('ficheiro');
-
-            $file_name = $request->file_name . '('. $file->idBiblioteca.').'.$uploadfile->getClientOriginalExtension();
-            $file->ficheiro = $file_name;
-            Storage::disk('public')->putFileAs('library/', $uploadfile, $file_name);
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+            $file = new Biblioteca;
+            $fields = $request->validated();
+            $file->fill($fields);
 
             $file->save();
-        }
 
-        return redirect()->route('libraries.index')->with('success', 'Ficheiro carregado com sucesso!');
+            if ($request->hasFile('ficheiro')) {
+                $uploadfile = $request->file('ficheiro');
+
+                $file_name = $request->file_name . '('. $file->idBiblioteca.').'.$uploadfile->getClientOriginalExtension();
+                $file->ficheiro = $file_name;
+                Storage::disk('public')->putFileAs('library/', $uploadfile, $file_name);
+
+                $file->save();
+            }
+
+            return redirect()->route('libraries.index')->with('success', 'Ficheiro carregado com sucesso!');
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
 
     }
 
@@ -124,7 +133,7 @@ class LibraryController extends Controller
      */
     public function show(Biblioteca $library)
     {
-        //
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -135,12 +144,17 @@ class LibraryController extends Controller
      */
     public function edit(Biblioteca $library)
     {
-        /* Permissões */
-        if (Auth::user()->tipo != "admin" ){
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+            /* Permissões */
+            if (Auth::user()->tipo != "admin" ){
+                abort (401);
+            }
+
+            return view('libraries.edit', compact('library'));
+        }else{
+            /* não tem permissões */
             abort (401);
         }
-
-        return view('libraries.edit', compact('library'));
 
     }
 
@@ -153,37 +167,42 @@ class LibraryController extends Controller
      */
     public function update(UpdateLibraryRequest $request, Biblioteca $library)
     {
-        $fields = $request->validated();
-        $library->fill($fields);
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+            $fields = $request->validated();
+            $library->fill($fields);
 
-        if ($request->hasFile('ficheiro')) {
+            if ($request->hasFile('ficheiro')) {
 
 
-        /* Verifica se o ficheiro antigo existe e apaga do storage*/
-        $oldfile=Biblioteca::
-        where('idBiblioteca', '=',$library->idBiblioteca)
-        ->first();
+            /* Verifica se o ficheiro antigo existe e apaga do storage*/
+            $oldfile=Biblioteca::
+            where('idBiblioteca', '=',$library->idBiblioteca)
+            ->first();
 
-        if(Storage::disk('public')->exists('library/' . $oldfile->ficheiro)){
-            Storage::disk('public')->delete('library/' . $oldfile->ficheiro);
-        }
+            if(Storage::disk('public')->exists('library/' . $oldfile->ficheiro)){
+                Storage::disk('public')->delete('library/' . $oldfile->ficheiro);
+            }
 
-            /* Guarda o novo ficheiro */
-            $uploadfile = $request->file('ficheiro');
-            $file_name = $request->file_name . '('. $library->idBiblioteca.').'.$uploadfile->getClientOriginalExtension();
-            $library->ficheiro = $file_name;
-            Storage::disk('public')->putFileAs('library/', $uploadfile, $file_name);
+                /* Guarda o novo ficheiro */
+                $uploadfile = $request->file('ficheiro');
+                $file_name = $request->file_name . '('. $library->idBiblioteca.').'.$uploadfile->getClientOriginalExtension();
+                $library->ficheiro = $file_name;
+                Storage::disk('public')->putFileAs('library/', $uploadfile, $file_name);
+
+                $library->save();
+            }
+
+            // data em que foi modificado
+            $t=time();
+            $library->updated_at == date("Y-m-d",$t);
 
             $library->save();
+
+            return redirect()->route('libraries.index')->with('success', 'Informações do ficheiro editadas com sucesso!');
+        }else{
+            /* não tem permissões */
+            abort (401);
         }
-
-        // data em que foi modificado
-        $t=time();
-        $library->updated_at == date("Y-m-d",$t);
-
-        $library->save();
-
-        return redirect()->route('libraries.index')->with('success', 'Informações do ficheiro editadas com sucesso!');
     }
 
     /**
@@ -194,25 +213,26 @@ class LibraryController extends Controller
      */
     public function destroy(Biblioteca $library)
     {
-        /* Permissões */
-        if (Auth::user()->tipo != "admin" ){
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+
+
+
+            /* Verifica se o ficheiro antigo existe e apaga do storage*/
+            $oldfile=Biblioteca::
+            where('idBiblioteca', '=',$library->idBiblioteca)
+            ->first();
+
+            if(Storage::disk('public')->exists('library/' . $oldfile->ficheiro)){
+                Storage::disk('public')->delete('library/' . $oldfile->ficheiro);
+            }
+
+            $library->delete();
+
+            return redirect()->route('libraries.index')->with('success', 'Ficheiro eliminado com sucesso!');
+        }else{
+            /* não tem permissões */
             abort (401);
         }
-
-
-
-        /* Verifica se o ficheiro antigo existe e apaga do storage*/
-        $oldfile=Biblioteca::
-        where('idBiblioteca', '=',$library->idBiblioteca)
-        ->first();
-
-        if(Storage::disk('public')->exists('library/' . $oldfile->ficheiro)){
-            Storage::disk('public')->delete('library/' . $oldfile->ficheiro);
-        }
-
-        $library->delete();
-
-        return redirect()->route('libraries.index')->with('success', 'Ficheiro eliminado com sucesso!');
 
     }
 

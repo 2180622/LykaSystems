@@ -11,46 +11,74 @@ class ContaController extends Controller
 {
     public function index()
     {
-      $contas = Conta::all();
-      return view('conta.list', compact('contas'));
+      if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        $contas = Conta::all();
+        return view('conta.list', compact('contas'));
+      }else{
+          abort(401);
+      }
     }
 
     public function create()
     {
-      $conta = new Conta;
-      return view('conta.add', compact('conta'));
+      if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        $conta = new Conta;
+        return view('conta.add', compact('conta'));
+      }else{
+          abort(401);
+      }
     }
 
     public function store(StoreContaRequest $contaRequest)
     {
+      if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
       $fields = $contaRequest->validated();
-      $conta = new Conta;
-      $conta->fill($fields);
-      $conta->save();
-      return redirect()->route('conta.index')->with('success', 'Conta bancária adicionada com sucesso.');
+        $conta = new Conta;
+        $conta->fill($fields);
+        $conta->save();
+        return redirect()->route('conta.index')->with('success', 'Conta bancária adicionada com sucesso.');
+      }else{
+          abort(401);
+      }
     }
 
     public function show(Conta $conta)
     {
-      return view('conta.show', compact('conta'));
+      if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        return view('conta.show', compact('conta'));
+      }else{
+          abort(401);
+      }
     }
 
     public function edit(Conta $conta)
     {
-      return view('conta.edit', compact('conta'));
+      if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        return view('conta.edit', compact('conta'));
+      }else{
+          abort(401);
+      }
     }
 
     public function update(UpdateContaRequest $contaRequest, Conta $conta)
     {
-      $fields = $contaRequest->validated();
-      $conta->fill($fields);
-      $conta->save();
-      return redirect()->route('conta.index')->with('success', 'Conta bancária editada com sucesso.');
+      if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        $fields = $contaRequest->validated();
+        $conta->fill($fields);
+        $conta->save();
+        return redirect()->route('conta.index')->with('success', 'Conta bancária editada com sucesso.');
+      }else{
+          abort(401);
+      }
     }
 
     public function destroy(Conta $conta)
     {
-      $conta->delete();
-      return redirect()->route('conta.index')->with('success', 'Conta bancária eliminada com sucesso.');
+      if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        $conta->delete();
+        return redirect()->route('conta.index')->with('success', 'Conta bancária eliminada com sucesso.');
+      }else{
+          abort(401);
+      }
     }
 }

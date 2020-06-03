@@ -9,143 +9,102 @@ html, body {
     scroll-behavior: smooth;
     transition: all 0.3 ease;
     background-color: #EAEAEA;
-    font-weight: normal;
-    color: black;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
-label{
-    color:black !important;
+label {
+    color: black !important;
 }
 
-/* ESPAÇO PARA CSS DE ESTRUTURA */
-
-.content {
-    margin-top: 80px;
-    margin-left: 250px;
-}
-/* Top-Bar Style */
-.top-bar {
-    z-index: 2;
-    margin-left: 250px;
-    position: absolute;
-    padding: 20px 30px;
-    width: calc(100% - 270px);
+/* Layout Style -> Main Menu */
+.main-menu {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 230px;
+    position: fixed;
+    overflow-x: hidden;
+    background-color: white;
 }
 
 .user-image {
-    width: 40px !important;
-    height: 40px !important;
-    cursor: pointer;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
     overflow: hidden;
+    border-radius: 50%;
 }
 
-.top-bar ion-icon {
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.top-bar #procurar-contactos-icon {
-    color: #999;
-    transform: rotateY(180deg);
-    transition: 0.2s ease-in-out;
-}
-
-.top-bar #procurar-contactos-icon:hover {
-    color: #000;
-}
-
-.top-bar .dropdown-menu {
-    width: 280px;
-    border: 0px !important;
-}
-
-.top-bar .dropdown-content {
-    padding: 15px 0px;
-}
-
-.top-bar .dropdown-menu p {
-    margin: 0px !important;
-    font-size: 14px;
-}
-
-.top-bar .dropdown-header {
-    bottom: 8px;
-    color: white;
+.user-info p:first-child {
     font-weight: 700;
-    position: relative;
-    background-color: #6A74C9;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    padding: 0.7rem 1.5rem !important;
+    margin-bottom: 0px !important;
 }
 
-.top-bar .user-info {
-    top: 4px;
-    position: relative;
+.user-info p:last-child {
+    color: #919191;
+    font-size: 12px;
 }
 
-.top-bar .user-info p, .top-bar .user-info {
-    cursor: pointer;
-    display: inline-block;
+.menu-list {
+    width: 100%;
+    font-size: 16px;
+    padding-top: 25px;
+    padding-left: 0px;
+    list-style-type: none;
 }
 
-.top-bar .user-info p {
-    font-size: 0.8rem;
-    position: relative;
-    margin-bottom: 0 !important;
+.menu-option {
+    padding-top: 12px;
+    padding-left: 8px;
+    padding-bottom: 8px;
 }
 
-.top-bar .user-info p:first-child {
+.menu-icon .iconify {
+    color: #454545;
+}
+
+.menu-list .active {
+    color: #5E9DF5;
     font-weight: 800;
 }
 
-.top-bar .user-info p:last-child {
-    bottom: 7px;
-    color: #646464;
-    font-weight: 700;
-    font-size: 0.7rem;
-    text-transform: uppercase;
+.menu-list a span {
+    color: #454545;
+    font-weight: 500;
+    position: relative;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
 }
 
+.menu-icon {
+    width: 18px;
+    color: #454545;
+    text-align: center;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.content {
+    margin-left: 250px;
+}
 
 /* FIM ESPAÇO PARA CSS DE ESTRUTURA */
-
-
-
-
-
-
-
-
-
 /* ESTILO DOS LINKS */
-a{
-    color:black;
+a {
+    color: black;
 }
-a:hover{
+
+a:hover {
     text-decoration: none;
     color: #6A74C9;
 }
+
 .active {
     color: #6A74C9;
     font-weight: bold;
 }
 
-
-
 /* ESTILO DOS LINKS */
-
-
-
-
-
-
-
-
-
-
 /* Buttons */
 .top-button {
     border: none;
@@ -289,142 +248,6 @@ a:hover{
     text-transform: uppercase;
 }
 
-/* Main Menu Style */
-.logotype {
-    color: #6A74C9;
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-.logotype:hover {
-    text-decoration: none;
-    color: #6A74C9;
-}
-
-.logo {
-    padding-left: 20px;
-    padding-top: 60px !important;
-}
-
-.main-menu {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    overflow-x: hidden;
-    background-color: white;
-}
-
-.menu-content {
-    padding-bottom: 100px;
-}
-
-.menu-list {
-    margin: 0px;
-    width: 100%;
-    padding-top: 10px;
-    font-size: 16px;
-    padding-left: 4px;
-    list-style-type: none;
-}
-
-.menu-option {
-    padding-top: 12px;
-    padding-left: 15px;
-    padding-bottom: 8px;
-}
-
-.menu-option-title {
-    color: #C8C8C8;
-    font-weight: 800;
-    font-size: 0.6rem;
-    padding-top: 12px;
-    padding-left: 15px;
-    text-transform: uppercase;
-}
-
-.active {
-    color: #6A74C9;
-    font-weight: 700;
-}
-
-.menu-list .active {
-    color: #6A74C9;
-    font-weight: 800;
-}
-
-.menu-list a span {
-    color: #252525;
-    font-weight: 700;
-    position: relative;
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: 0.3s ease-in-out;
-}
-
-.menu-list a:hover {
-    color: #6A74C9;
-    text-decoration: none;
-}
-
-.menu-list span:hover {
-    color: #6A74C9;
-}
-
-.menu-icon {
-    width: 18px;
-    color: #6A74C9;
-    text-align: center;
-    margin-right: 10px;
-    display: inline-block;
-}
-
-.user_photo {
-    height: 120px;
-    width: 120px;
-    border: 1px solid lightgray;
-    overflow: hidden;
-}
-
-.opts_btn {
-    position: relative;
-    left: 65px;
-    top: 145px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: white;
-    border: 1px solid lightgray;
-}
-
-.user_opts {
-    position: relative;
-    left: 140px;
-    top: 120px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: white;
-    border: 1px solid lightgray;
-}
-
-.user_btn {
-    color: #6A74C9;
-}
-
-.user_btn:hover {
-    color: black;
-}
-
-/* Right Sidebar Style */
-.sidebar {
-    flex: 0 0 270px;
-    min-height: 100%;
-    background-color: white;
-    padding: 0px !important;
-}
-
 .close_btn {
     position: absolute;
     right: -5px;
@@ -488,11 +311,4 @@ a:hover{
 .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
     background-color: rgba(255, 255, 255, 0.8);
-}
-
-/* Responsive */
-@media screen and (max-width: 950px) {
-    .sidebar {
-        display: none;
-    }
 }

@@ -53,7 +53,7 @@ class ProdutoController extends Controller
 
             return view('produtos.add',compact('produto','produtoStock','cliente','Agentes','SubAgentes','Universidades','Fases','Responsabilidades','Fornecedores','relacao'));
         }else{
-            return redirect()->route('clients.show',$produto->cliente);
+            abort(401);
         }
     }
 
@@ -205,7 +205,7 @@ class ProdutoController extends Controller
 
             return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto criada com sucesso');
         }else{
-            return redirect()->route('clients.show',$produto->cliente);
+            abort(401);
         }
     }
 
@@ -220,9 +220,24 @@ class ProdutoController extends Controller
     */
     public function show(Produto $produto)
     {
-        $Fases = $produto->fase;
-        $Today = (new DateTime)->format('Y-m-d');
-        return view('produtos.show',compact("produto",'Fases','Today'));
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
+            $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
+            $Fases = $produto->fase;
+            $Today = (new DateTime)->format('Y-m-d');
+            return view('produtos.show',compact("produto",'Fases','Today'));
+        }else{
+            abort(401);
+        }
     }
 
 
@@ -236,7 +251,7 @@ class ProdutoController extends Controller
     */
     public function print(Produto $produto)
     {
-        return view('produtos.print',compact("produto"));
+        return redirect()->route('dashboard');
     }
 
 
@@ -253,8 +268,16 @@ class ProdutoController extends Controller
     */
     public function edit(Produto $produto)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
-        (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == "Agente")){
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
             $Fornecedores = Fornecedor::all();
             $Agentes = Agente::where('tipo','=','Agente')->orderBy('nome')->get();
             $SubAgentes = Agente::where('tipo','=','Subagente')->orderBy('nome')->get();
@@ -264,7 +287,7 @@ class ProdutoController extends Controller
             $fases = $produto->fase;
             return view('produtos.edit', compact('produto','Agentes','SubAgentes','Universidades','fases','Fornecedores','relacao'));
         }else{
-            return redirect()->route('clients.show',$produto->cliente);
+            abort(401);
         }
     }
 
@@ -280,8 +303,18 @@ class ProdutoController extends Controller
 
     public function update(UpdateProdutoRequest $request, Produto $produto)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
-        (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == "Agente")){
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
+            $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
             $fases = $produto->fase;
             $fields = $request->all();
             //dd($fields);
@@ -453,7 +486,7 @@ class ProdutoController extends Controller
 
             return redirect()->route('clients.show',$produto->cliente)->with('success', 'Dados do produto modificados com sucesso');
         }else{
-            return redirect()->route('clients.show',$produto->cliente);
+            abort(401);
         }
 
     }
@@ -482,7 +515,7 @@ class ProdutoController extends Controller
             }
             return redirect()->route('clients.show',$produto->cliente)->with('success', 'Produto eliminado com sucesso');
         }else{
-            return redirect()->route('clients.show',$produto->cliente);
+            abort(401);
         }
     }
 }

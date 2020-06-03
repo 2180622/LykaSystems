@@ -19,51 +19,71 @@ class FasestockController extends Controller
     }
 
     public function store(StoreFasestockRequest $requestFase, ProdutoStock $produtostock){
-        $faseFields = $requestFase->validated();
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+            $faseFields = $requestFase->validated();
 
-        $faseStock = new FaseStock();
-        $faseStock->fill($faseFields);
-        $idProdutoStock = $produtostock->idProdutoStock;
+            $faseStock = new FaseStock();
+            $faseStock->fill($faseFields);
+            $idProdutoStock = $produtostock->idProdutoStock;
 
-        $faseStock->idProdutoStock = $idProdutoStock;
+            $faseStock->idProdutoStock = $idProdutoStock;
 
-        $faseStock->save();
+            $faseStock->save();
 
-        return redirect()->back()->with('success', 'Fase stock adicionada com sucesso');
+            return redirect()->back()->with('success', 'Fase stock adicionada com sucesso');
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
     }
 
     public function show(DocStock $docstocks, FaseStock $fasestock){
-        $nrDocs = 1;
-        $docstocks = DocStock::where('idFaseStock', '=', $fasestock->idFaseStock)->get();
-        return view('fasestock.show', compact('fasestock', 'docstocks', 'nrDocs'));
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+            $nrDocs = 1;
+            $docstocks = DocStock::where('idFaseStock', '=', $fasestock->idFaseStock)->get();
+            return view('fasestock.show', compact('fasestock', 'docstocks', 'nrDocs'));
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
     }
 
     public function edit(FaseStock $fasestock)
     {
-        if (Auth::user()->tipo == "admin"){
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
             return view('fasestock.edit', compact('fasestock'));
         }else{
             /* não tem permissões */
             abort (401);
-      }
+        }
     }
 
     public function update(StoreFasestockRequest $request, FaseStock $fasestock)
     {
-        $fields = $request->validated();
-        $fasestock->fill($fields);
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+            $fields = $request->validated();
+            $fasestock->fill($fields);
 
-        // data em que foi modificado
-        $t=time();
-        $fasestock->updated_at == date("Y-m-d",$t);
-        $fasestock->save();
+            // data em que foi modificado
+            $t=time();
+            $fasestock->updated_at == date("Y-m-d",$t);
+            $fasestock->save();
 
-        return redirect()->back()->with('success', 'Dados da fase de stock modificados com sucesso');
+            return redirect()->back()->with('success', 'Dados da fase de stock modificados com sucesso');
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
     }
 
     public function destroy(FaseStock $fasestock){
-        $fasestock->delete();
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+            $fasestock->delete();
 
-        return redirect()->back()->with('success', 'Fase stock eliminada com sucesso');
+            return redirect()->back()->with('success', 'Fase stock eliminada com sucesso');
+        }else{
+            /* não tem permissões */
+            abort (401);
+        }
     }
 }

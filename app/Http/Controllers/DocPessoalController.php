@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DocPessoal;
 use App\DocNecessario;
 use App\Fase;
+use App\Produto;
 use App\Http\Requests\UpdateDocumentoRequest;
 use App\Http\Requests\StoreDocumentoRequest;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,19 @@ class DocPessoalController extends Controller
     */
     public function create(Fase $fase, DocNecessario $docnecessario)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
+            $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
 
             $documento = new DocPessoal;
             $tipoPAT = $docnecessario->tipo;
@@ -29,7 +42,7 @@ class DocPessoalController extends Controller
 
             return view('documentos.add',compact('fase','tipoPAT','tipo','documento', 'docnecessario'));
         }else{
-            return redirect()->route('produtos.show',$fase->produto);
+            abort(401);
         }
 
 
@@ -51,7 +64,19 @@ class DocPessoalController extends Controller
     */
     public function createFromClient(DocNecessario $docnecessario)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
+            $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
 
             $documento = new DocPessoal;
             $tipoPAT = $docnecessario->tipo;
@@ -60,7 +85,7 @@ class DocPessoalController extends Controller
 
             return view('documentos.add',compact('fase','tipoPAT','tipo','documento', 'docnecessario'));
         }else{
-            return redirect()->route('produtos.show',$fase->produto??'');
+            abort(401);
         }
 
 
@@ -77,7 +102,19 @@ class DocPessoalController extends Controller
     */
     public function storeFromClient(StoreDocumentoRequest $request, DocNecessario $docnecessario){
 
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
+            $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
 
             $fields = $request->all();
             //dd($fields);
@@ -133,7 +170,7 @@ class DocPessoalController extends Controller
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', $docnecessario->tipoDocumento.' adicionado com sucesso');
         }else{
-            return redirect()->route('produtos.show',$fase->produto);
+            abort(401);
         }
     }
 
@@ -156,7 +193,19 @@ class DocPessoalController extends Controller
     */
     public function store(StoreDocumentoRequest $request,Fase $fase, DocNecessario $docnecessario){
 
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
+            $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
 
             $fields = $request->all();
             //dd($fields);
@@ -213,7 +262,7 @@ class DocPessoalController extends Controller
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', $docnecessario->tipoDocumento.' adicionado com sucesso');
         }else{
-            return redirect()->route('produtos.show',$fase->produto);
+            abort(401);
         }
     }
 
@@ -229,7 +278,7 @@ class DocPessoalController extends Controller
             $tipo = $documento->tipo;
             return view('documentos.verify',compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
         }else{
-            return redirect()->route('produtos.show',$documento->fase->produto);
+            abort(401);
         }
     }
 
@@ -240,8 +289,10 @@ class DocPessoalController extends Controller
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)){
             $documento->verificacao = true;
             $documento->save();
+            return redirect()->route('produtos.show',$documento->fase->produto);
+        }else{
+            abort(401);
         }
-        return redirect()->route('produtos.show',$documento->fase->produto);
     }
 
 
@@ -255,7 +306,19 @@ class DocPessoalController extends Controller
     */
     public function edit(DocPessoal $documento)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
+            $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
             $infoDoc = (array)json_decode($documento->info);
             $infoKeys = array_keys($infoDoc);
             $tipoPAT = 'Pessoal';
@@ -263,7 +326,7 @@ class DocPessoalController extends Controller
 
             return view('documentos.edit', compact('documento','infoDoc','infoKeys','tipo','tipoPAT'));
         }else{
-            return redirect()->route('produtos.show',$documento->fase->produto);
+            abort(401);
         }
     }
 
@@ -279,7 +342,19 @@ class DocPessoalController extends Controller
 
     public function update(UpdateDocumentoRequest $request, DocPessoal $documento)
     {
-        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null) || (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null)){
+        $produts = null;
+        $permissao = false;
+        if(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Agente'){
+            $produts = Produto::whereRaw('idAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
+            $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
+        }
+        if($produts){
+            $permissao = true;
+        }
+
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
+            (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
 
             $fields = $request->all();
             //dd($documento);
@@ -331,7 +406,7 @@ class DocPessoalController extends Controller
             $documento->save();
             return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados do '.$documento->tipo.' editados com sucesso');
         }else{
-            return redirect()->route('produtos.show',$documento->fase->produto);
+            abort(401);
         }
 
     }
@@ -356,7 +431,7 @@ class DocPessoalController extends Controller
 
             return redirect()->route('produtos.show',$documento->fase->produto)->with('success', $tipo.' eliminado com sucesso');
         }else{
-            return redirect()->route('produtos.show',$documento->fase->produto);
+            abort(401);
         }
     }
 }

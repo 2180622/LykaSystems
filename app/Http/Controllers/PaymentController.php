@@ -24,141 +24,147 @@ class PaymentController extends Controller
 {
     public function index()
     {
-      $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")
-      ->with(["cliente", "agente", "subAgente", "universidade1", "universidade2", "relacao", "relacao.fornecedor", "fase"])
-      ->get();
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        $responsabilidades = Responsabilidade::orderByRaw("FIELD(estado, \"Dívida\", \"Pendente\", \"Pago\")")
+        ->with(["cliente", "agente", "subAgente", "universidade1", "universidade2", "relacao", "relacao.fornecedor", "fase"])
+        ->get();
 
-      $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
-      $responsabilidadesPagas = Responsabilidade::where('estado', '=', 'Pago')->get();
-      $responsabilidadesDivida = Responsabilidade::where('estado', '=', 'Dívida')->get();
+        $responsabilidadesPendentes = Responsabilidade::where('estado', '=', 'Pendente')->get();
+        $responsabilidadesPagas = Responsabilidade::where('estado', '=', 'Pago')->get();
+        $responsabilidadesDivida = Responsabilidade::where('estado', '=', 'Dívida')->get();
 
-      $relacoes = RelFornResp::all();
-      $estudantes = Cliente::all();
-      $universidades = Universidade::all();
-      $agentes = Agente::where('tipo', 'Agente')->get();
-      $subagentes = Agente::where('tipo', 'Subagente')->get();
-      $fornecedores = Fornecedor::all();
-      $currentdate = new DateTime();
+        $relacoes = RelFornResp::all();
+        $estudantes = Cliente::all();
+        $universidades = Universidade::all();
+        $agentes = Agente::where('tipo', 'Agente')->get();
+        $subagentes = Agente::where('tipo', 'Subagente')->get();
+        $fornecedores = Fornecedor::all();
+        $currentdate = new DateTime();
 
-      $valorTotalPendente = 0;
-      $valorTotalPago = 0;
-      $valorTotalDivida = 0;
+        $valorTotalPendente = 0;
+        $valorTotalPago = 0;
+        $valorTotalDivida = 0;
 
-      // Responsabilidades com estado = PENDENTE
-      foreach ($responsabilidadesPendentes as $responsabilidadePendente) {
-        if ($responsabilidadePendente->verificacaoPagoCliente == 0 && $responsabilidadePendente->valorCliente != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePendente->verificacaoPagoCliente == 1 && $responsabilidadePendente->valorCliente != null){
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadePendente->verificacaoPagoAgente == 0 && $responsabilidadePendente->valorAgente != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePendente->verificacaoPagoAgente == 1 && $responsabilidadePendente->valorAgente != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadePendente->verificacaoPagoSubAgente == 0 && $responsabilidadePendente->valorSubAgente != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePendente->verificacaoPagoSubAgente == 1 && $responsabilidadePendente->valorSubAgente != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadePendente->verificacaoPagoUni1 == 0 && $responsabilidadePendente->valorUniversidade1 != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePendente->verificacaoPagoUni1 == 1 && $responsabilidadePendente->valorUniversidade1 != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadePendente->verificacaoPagoUni2 == 0 && $responsabilidadePendente->valorUniversidade2 != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePendente->verificacaoPagoUni2 == 1 && $responsabilidadePendente->valorUniversidade2 != null) {
-          $valorTotalPago++;
-        }
-      }
-
-      // Responsabilidades com estado = PAGO
-      foreach ($responsabilidadesPagas as $responsabilidadePaga) {
-        if ($responsabilidadePaga->verificacaoPagoCliente == 0 && $responsabilidadePaga->valorCliente != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePaga->verificacaoPagoCliente == 1 && $responsabilidadePaga->valorCliente != null){
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadePaga->verificacaoPagoAgente == 0 && $responsabilidadePaga->valorAgente != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePaga->verificacaoPagoAgente == 1 && $responsabilidadePaga->valorAgente != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadePaga->verificacaoPagoSubAgente == 0 && $responsabilidadePaga->valorSubAgente != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePaga->verificacaoPagoSubAgente == 1 && $responsabilidadePaga->valorSubAgente != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadePaga->verificacaoPagoUni1 == 0 && $responsabilidadePaga->valorUniversidade1 != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePaga->verificacaoPagoUni1 == 1 && $responsabilidadePaga->valorUniversidade1 != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadePaga->verificacaoPagoUni2 == 0 && $responsabilidadePaga->valorUniversidade2 != null) {
-          $valorTotalPendente++;
-        }elseif ($responsabilidadePaga->verificacaoPagoUni2 == 1 && $responsabilidadePaga->valorUniversidade2 != null) {
-          $valorTotalPago++;
-        }
-      }
-
-      // Responsabilidades com estado = DÍVIDA
-      foreach ($responsabilidadesDivida as $responsabilidadeDivida) {
-        if ($responsabilidadeDivida->verificacaoPagoCliente == 0 && $responsabilidadeDivida->valorCliente != null) {
-          $valorTotalDivida++;
-        }elseif ($responsabilidadeDivida->verificacaoPagoCliente == 1 && $responsabilidadeDivida->valorCliente != null){
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadeDivida->verificacaoPagoAgente == 0 && $responsabilidadeDivida->valorAgente != null) {
-          $valorTotalDivida++;
-        }elseif ($responsabilidadeDivida->verificacaoPagoAgente == 1 && $responsabilidadeDivida->valorAgente != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadeDivida->verificacaoPagoSubAgente == 0 && $responsabilidadeDivida->valorSubAgente != null) {
-          $valorTotalDivida++;
-        }elseif ($responsabilidadeDivida->verificacaoPagoSubAgente == 1 && $responsabilidadeDivida->valorSubAgente != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadeDivida->verificacaoPagoUni1 == 0 && $responsabilidadeDivida->valorUniversidade1 != null) {
-          $valorTotalDivida++;
-        }elseif ($responsabilidadeDivida->verificacaoPagoUni1 == 1 && $responsabilidadeDivida->valorUniversidade1 != null) {
-          $valorTotalPago++;
-        }
-
-        if ($responsabilidadeDivida->verificacaoPagoUni2 == 0 && $responsabilidadeDivida->valorUniversidade2 != null) {
-          $valorTotalDivida++;
-        }elseif ($responsabilidadeDivida->verificacaoPagoUni2 == 1 && $responsabilidadeDivida->valorUniversidade2 != null) {
-          $valorTotalPago++;
-        }
-      }
-
-      if (count($relacoes)) {
-        foreach ($relacoes as $relacao) {
-          if ($relacao->estado == 'Dívida' && $relacao->verificacaoPago == 0) {
-            $valorTotalDivida++;
-          }elseif($relacao->verificacaoPago == 1) {
-            $valorTotalPago++;
-          }else {
+        // Responsabilidades com estado = PENDENTE
+        foreach ($responsabilidadesPendentes as $responsabilidadePendente) {
+          if ($responsabilidadePendente->verificacaoPagoCliente == 0 && $responsabilidadePendente->valorCliente != null) {
             $valorTotalPendente++;
+          }elseif ($responsabilidadePendente->verificacaoPagoCliente == 1 && $responsabilidadePendente->valorCliente != null){
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadePendente->verificacaoPagoAgente == 0 && $responsabilidadePendente->valorAgente != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePendente->verificacaoPagoAgente == 1 && $responsabilidadePendente->valorAgente != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadePendente->verificacaoPagoSubAgente == 0 && $responsabilidadePendente->valorSubAgente != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePendente->verificacaoPagoSubAgente == 1 && $responsabilidadePendente->valorSubAgente != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadePendente->verificacaoPagoUni1 == 0 && $responsabilidadePendente->valorUniversidade1 != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePendente->verificacaoPagoUni1 == 1 && $responsabilidadePendente->valorUniversidade1 != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadePendente->verificacaoPagoUni2 == 0 && $responsabilidadePendente->valorUniversidade2 != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePendente->verificacaoPagoUni2 == 1 && $responsabilidadePendente->valorUniversidade2 != null) {
+            $valorTotalPago++;
           }
         }
+
+        // Responsabilidades com estado = PAGO
+        foreach ($responsabilidadesPagas as $responsabilidadePaga) {
+          if ($responsabilidadePaga->verificacaoPagoCliente == 0 && $responsabilidadePaga->valorCliente != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePaga->verificacaoPagoCliente == 1 && $responsabilidadePaga->valorCliente != null){
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadePaga->verificacaoPagoAgente == 0 && $responsabilidadePaga->valorAgente != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePaga->verificacaoPagoAgente == 1 && $responsabilidadePaga->valorAgente != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadePaga->verificacaoPagoSubAgente == 0 && $responsabilidadePaga->valorSubAgente != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePaga->verificacaoPagoSubAgente == 1 && $responsabilidadePaga->valorSubAgente != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadePaga->verificacaoPagoUni1 == 0 && $responsabilidadePaga->valorUniversidade1 != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePaga->verificacaoPagoUni1 == 1 && $responsabilidadePaga->valorUniversidade1 != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadePaga->verificacaoPagoUni2 == 0 && $responsabilidadePaga->valorUniversidade2 != null) {
+            $valorTotalPendente++;
+          }elseif ($responsabilidadePaga->verificacaoPagoUni2 == 1 && $responsabilidadePaga->valorUniversidade2 != null) {
+            $valorTotalPago++;
+          }
+        }
+
+        // Responsabilidades com estado = DÍVIDA
+        foreach ($responsabilidadesDivida as $responsabilidadeDivida) {
+          if ($responsabilidadeDivida->verificacaoPagoCliente == 0 && $responsabilidadeDivida->valorCliente != null) {
+            $valorTotalDivida++;
+          }elseif ($responsabilidadeDivida->verificacaoPagoCliente == 1 && $responsabilidadeDivida->valorCliente != null){
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadeDivida->verificacaoPagoAgente == 0 && $responsabilidadeDivida->valorAgente != null) {
+            $valorTotalDivida++;
+          }elseif ($responsabilidadeDivida->verificacaoPagoAgente == 1 && $responsabilidadeDivida->valorAgente != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadeDivida->verificacaoPagoSubAgente == 0 && $responsabilidadeDivida->valorSubAgente != null) {
+            $valorTotalDivida++;
+          }elseif ($responsabilidadeDivida->verificacaoPagoSubAgente == 1 && $responsabilidadeDivida->valorSubAgente != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadeDivida->verificacaoPagoUni1 == 0 && $responsabilidadeDivida->valorUniversidade1 != null) {
+            $valorTotalDivida++;
+          }elseif ($responsabilidadeDivida->verificacaoPagoUni1 == 1 && $responsabilidadeDivida->valorUniversidade1 != null) {
+            $valorTotalPago++;
+          }
+
+          if ($responsabilidadeDivida->verificacaoPagoUni2 == 0 && $responsabilidadeDivida->valorUniversidade2 != null) {
+            $valorTotalDivida++;
+          }elseif ($responsabilidadeDivida->verificacaoPagoUni2 == 1 && $responsabilidadeDivida->valorUniversidade2 != null) {
+            $valorTotalPago++;
+          }
+        }
+
+        if (count($relacoes)) {
+          foreach ($relacoes as $relacao) {
+            if ($relacao->estado == 'Dívida' && $relacao->verificacaoPago == 0) {
+              $valorTotalDivida++;
+            }elseif($relacao->verificacaoPago == 1) {
+              $valorTotalPago++;
+            }else {
+              $valorTotalPendente++;
+            }
+          }
+        }
+        return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores', 'currentdate'));
+      }else{
+          /* não tem permissões */
+          abort (401);
       }
-      return view('payments.list', compact('responsabilidades', 'valorTotalPendente', 'valorTotalPago', 'valorTotalDivida', 'estudantes', 'agentes', 'subagentes', 'universidades', 'fornecedores', 'currentdate'));
     }
 
     public function search(Request $request)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
       $idEstudante = ($request->input('estudante') != 'default') ? $request->input('estudante') : null;
       $idAgente = ($request->input('agente') != 'default') ? $request->input('agente') : null;
       $idSubagente = ($request->input('subagente') != 'default') ? $request->input('subagente') : null;
@@ -303,52 +309,87 @@ class PaymentController extends Controller
         }else {
             return response()->json('NOK', 404);
         }
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 
     public function createcliente(Cliente $cliente, Fase $fase, Responsabilidade $responsabilidade)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $contas = Conta::all();
         $fase = Fase::where('idFase', $fase->idFase)->with(["produto", "produto.universidade1", "produto.agente"])->first();
         return view('payments.add', compact('cliente', 'fase', 'responsabilidade', 'contas'));
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 
     public function createagente(Agente $agente, Fase $fase, Responsabilidade $responsabilidade)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $contas = Conta::all();
         $fase = Fase::where('idFase', $fase->idFase)->with(["produto", "produto.universidade1", "produto.cliente"])->first();
         return view('payments.add', compact('agente', 'fase', 'responsabilidade', 'contas'));
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 
     public function createsubagente(Agente $subagente, Fase $fase, Responsabilidade $responsabilidade)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $contas = Conta::all();
         $fase = Fase::where('idFase', $fase->idFase)->with(["produto", "produto.universidade1", "produto.cliente"])->first();
         return view('payments.add', compact('subagente', 'fase', 'responsabilidade', 'contas'));
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 
     public function createuni1(Universidade $universidade1, Fase $fase, Responsabilidade $responsabilidade)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $contas = Conta::all();
         $fase = Fase::where('idFase', $fase->idFase)->with(["produto", "produto.agente", "produto.cliente"])->first();
         return view('payments.add', compact('universidade1', 'fase', 'responsabilidade', 'contas'));
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 
     public function createuni2(Universidade $universidade2, Fase $fase, Responsabilidade $responsabilidade)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $contas = Conta::all();
         $fase = Fase::where('idFase', $fase->idFase)->with(["produto", "produto.agente", "produto.cliente"])->first();
         return view('payments.add', compact('universidade2', 'fase', 'responsabilidade', 'contas'));
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 
     public function createfornecedor(Fornecedor $fornecedor, Fase $fase, RelFornResp $relacao)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $contas = Conta::all();
         $fase = Fase::where('idFase', $fase->idFase)->with(["produto", "produto.agente", "produto.cliente", "produto.universidade1", "responsabilidade"])->first();
         return view('payments.add', compact('fornecedor', 'fase', 'contas', 'relacao'));
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 
     public function store(Request $request, Responsabilidade $responsabilidade)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->with(["cliente", "agente", "subAgente", "universidade1", "universidade2", "fase"])->first();
         // Campos de CLIENTE
         $valorCliente = ($request->input('valorPagoCliente') != null ? $request->input('valorPagoCliente') : null);
@@ -545,13 +586,22 @@ class PaymentController extends Controller
         $responsabilidade = Responsabilidade::where('idResponsabilidade', $responsabilidade->idResponsabilidade)->first();
         event(new StorePayment($responsabilidade));
         return response()->json($pagoResponsabilidade, 200);
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 
     public function download(PagoResponsabilidade $pagoresponsabilidade)
     {
+      if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
         $pagoresponsabilidade = PagoResponsabilidade::where("idPagoResp", $pagoresponsabilidade->idPagoResp)->with(["responsabilidade", "responsabilidade.cliente"])->first();
         $pdf = PDF::loadView('payments.pdf.nota-pagamento', ['pagoresponsabilidade' => $pagoresponsabilidade])->setPaper('a4', 'portrait');
         $file = post_slug($pagoresponsabilidade->responsabilidade->cliente->nome.' '.$pagoresponsabilidade->responsabilidade->fase->descricao);
         return $pdf->stream('nota-pagamento-'.$file.'.pdf');
+      }else{
+          /* não tem permissões */
+          abort (401);
+      }
     }
 }

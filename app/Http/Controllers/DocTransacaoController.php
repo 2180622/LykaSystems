@@ -30,7 +30,7 @@ class DocTransacaoController extends Controller
 
             return view('documentos.add',compact('fase','tipoPAT','tipo','documento','Contas'));
         }else{
-            return redirect()->route('produtos.show',$fase->produto);
+            abort(401);
         }
     }
 
@@ -82,7 +82,7 @@ class DocTransacaoController extends Controller
 
             return redirect()->route('produtos.show',$fase->produto)->with('success', 'Transação adicionado com sucesso');
         }else{
-            return redirect()->route('produtos.show',$fase->produto);
+            abort(401);
         }
     }
 
@@ -105,7 +105,7 @@ class DocTransacaoController extends Controller
 
             return view('documentos.edit', compact('documento','tipo','tipoPAT','Contas'));
         }else{
-            return redirect()->route('produtos.show',$documento->fase->produto);
+            abort(401);
         }
     }
 
@@ -156,7 +156,7 @@ class DocTransacaoController extends Controller
 
             return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Dados da Transação editados com sucesso');
         }else{
-            return redirect()->route('produtos.show',$documento->fase->produto);
+            abort(401);
         }
 
     }
@@ -175,11 +175,11 @@ class DocTransacaoController extends Controller
 
     public function destroy(DocTransacao $documento)
     {
-        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
             $documento->delete();
             return redirect()->route('produtos.show',$documento->fase->produto)->with('success', 'Transação eliminada com sucesso');
         }else{
-            return redirect()->route('produtos.show',$documento->fase->produto);
+            abort(401);
         }
     }
 }
