@@ -257,6 +257,7 @@
                 <span class="option-name">Definições</span>
             </a>
         </li>
+        @endif
     </ul>
 </div>
 <div style="bottom:0; position:absolute;">
