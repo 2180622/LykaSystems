@@ -14,7 +14,7 @@
 {{-- Page Content --}}
 @section('content')
 
-<div class="container-fluid mt-2 ">
+<div class="container-fluid my-4">
 
 
     {{-- Conteúdo --}}
@@ -48,7 +48,7 @@
                 {{-- Permissões para editar --}}
                 @if (Auth::user()->tipo == "admin" || Auth::user()->tipo == "agente" && $client->editavel == 1)
                 <a href="{{route('clients.edit',$client)}}" class="btn btn-sm btn-success m-1 mr-2 px-3 "><i
-                        class="fas fa-pencil-alt mr-2"></i>Editar informação</a>
+                        class="fas fa-pencil-alt mr-2"></i>Editar Informação</a>
                 @endif
 
                 <a href="{{route('clients.print',$client)}}" target="_blank" class="btn btn-sm btn-light border m-1 mr-2"><i

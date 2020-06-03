@@ -23,7 +23,7 @@
 
 
 
-<div class="container-fluid mt-2 ">
+<div class="container-fluid my-4">
     {{-- Conteúdo --}}
     <div class="bg-white shadow-sm mb-4 p-4 ">
 
@@ -146,7 +146,7 @@
                                     <a href="{{route('contacts.show',$contact)}}" class="btn btn-sm btn-outline-primary "
                                         title="Ver ficha completa"><i class="far fa-eye"></i></a>
 
-                                        
+
                                     <a href="{{route('contacts.edit',$contact)}}" class="btn btn-sm btn-outline-warning"
                                         title="Editar"><i class="fas fa-pencil-alt"></i></a>
 

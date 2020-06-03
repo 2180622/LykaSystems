@@ -16,7 +16,7 @@
 
 
 
-<div class="container-fluid mt-2" style="color: black">
+<div class="container-fluid my-4" style="color: black">
 
     {{-- Conteúdo --}}
     <div class="bg-white shadow-sm mb-4 p-4 ">
@@ -44,7 +44,7 @@
                 {{-- Permissões para editar --}}
                 @if (Auth::user()->tipo == "admin")
                 <a href="{{route('agents.edit',$agent)}}" class="btn btn-sm btn-success m-1 mr-2 px-3 "><i
-                        class="fas fa-pencil-alt mr-2"></i>Editar informação</a>
+                        class="fas fa-pencil-alt mr-2"></i>Editar Informação</a>
                 @endif
                 <a href="{{route('agents.print',$agent)}}" target="_blank"
                     class="btn btn-sm btn-light border m-1 mr-2"><i class="fas fa-print mr-2"></i>Imprimir</a>

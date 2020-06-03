@@ -21,7 +21,7 @@
     </div>
     <div class="float-right">
         @if (Auth::user()->tipo == "admin")
-        <a href="{{route('users.edit', $user)}}" class="top-button mr-2">Editar informação</a>
+        <a href="{{route('users.edit', $user)}}" class="top-button mr-2">Editar Informação</a>
         {{-- <a href="{{route('users.print',$user)}}" target="_blank" class="top-button">Imprimir</a> --}}
         @endif
     </div>

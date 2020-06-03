@@ -12,7 +12,7 @@
 {{-- Page Content --}}
 @section('content')
 
-<div class="container-fluid mt-2">
+<div class="container-fluid my-4">
 
     <div class="bg-white shadow-sm mb-4 p-4 ">
 
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        
+
             <form method="POST" action="{{route('libraries.store')}}" class="form-group needs-validation pt-3" id="form_library" enctype="multipart/form-data" novalidate>
                 @csrf
                 @include('libraries.partials.add-edit')

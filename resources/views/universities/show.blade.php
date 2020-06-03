@@ -58,7 +58,7 @@
 
 
 
-<div class="container-fluid mt-2 ">
+<div class="container-fluid my-4">
 
     {{-- Conteúdo --}}
     <div class="bg-white shadow-sm mb-4 p-4 ">
@@ -82,7 +82,7 @@
                 <i class="fas fa-address-book mr-2"></i>Adicionar contacto</a>
 
                 <a href="{{route('universities.edit',$university)}}" class="btn btn-sm btn-success m-1 mr-2 px-3">
-                    <i class="fas fa-pencil-alt mr-2"></i>Editar informação</a>
+                    <i class="fas fa-pencil-alt mr-2"></i>Editar Informação</a>
             </div>
 
         </div>

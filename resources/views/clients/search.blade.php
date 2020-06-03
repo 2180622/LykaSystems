@@ -14,7 +14,7 @@
 @include('clients.partials.modal')
 
 
-<div class="container-fluid mt-2 ">
+<div class="container-fluid my-4">
 
 
     {{-- Conteúdo --}}
