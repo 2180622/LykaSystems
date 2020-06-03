@@ -45,7 +45,7 @@
         </div>
 
         {{-- Butões Submit / Cancelar --}}
-        <div class="col col-3 text-right">
+        <div class="col col-3 text-right pt-2">
             <button type="submit" class="btn btn-sm btn-success px-2 m-1 mr-2" name="ok" id="buttonSubmit"><i
                     class="fas fa-plus mr-2"></i>Adicionar agente</button>
             <a href="{{route('agents.index')}}" class="btn btn-sm btn-secondary m-1 px-2">Cancelar</a>

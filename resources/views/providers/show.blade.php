@@ -47,22 +47,22 @@
 
             <div class="row">
                 <div class="col " style="min-width: 300px">
-                    <div class="font-weight-bold">Descrição:</div>
+                    <div class="">Descrição:</div>
                     <div class="border rounded bg-light p-3 font-weight-bold">{{$provider->descricao}}</div>
 
                     <br>
 
-                    <div class="font-weight-bold">Morada:</div>
+                    <div class="">Morada:</div>
                     <div class="border rounded bg-light p-3 font-weight-bold">{{$provider->morada}}</div>
 
                     <br>
 
-                    <div class="font-weight-bold">Contacto:</div>
+                    <div class="">Contacto:</div>
                     <div class="border rounded bg-light p-3 font-weight-bold">{{$provider->contacto}}</div>
 
                     <br>
 
-                    <div class="font-weight-bold">Observacões:</div>
+                    <div class="">Observacões:</div>
                     @if ($provider->observacoes != null)
                         <div class="border rounded bg-light p-3">{{$provider->observacoes}}</div>
                     @else
