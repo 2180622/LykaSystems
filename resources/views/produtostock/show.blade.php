@@ -36,7 +36,7 @@
 
             {{-- Opções --}}
             <div class="col text-right">
-
+                <a href="#" class="btn btn-sm btn-success m-1 mr-2 px-3 " data-toggle="modal" data-target="#novaFaseModal"><i class="fas fa-plus mr-2 "></i>Adicionar Fase Stock</a>
             </div>
 
         </div>
@@ -44,6 +44,7 @@
 
         <hr class="my-3">
 
+        <div class="font-weight-bold mt-4">Lista de Fases associadas a este Produto:</div>
 
         {{-- LISTA DE FASES --}}
         <div class="row mt-4">
@@ -91,36 +92,46 @@
             </div>
         </div>
 
-
-
-
-
-        {{-- ADICIONAR FASE STOCK --}}
-        <form class="form-group needs-validation" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase" enctype="multipart/form-data" novalidate>
-            @csrf
-        <div class="row mt-4 mx-1">
-
-
-                {{-- INPUT descricao fasestock --}}
-                <div class="col" style="min-width: 350px">
-                    <label for="descricao" class="font-weight-bold">Descrição da Nova Fase Stock:</label><br>
-                    <input type="text" class="form-control" name="descricao" id="descricaofase" style="width:100%" required><br>
-                </div>
-
-
-                {{-- Botão de submit --}}
-                <div class="col text-right my-auto " style="min-width: 200px; max-width: 200px !important">
-                        <button type="submit" class="btn btn-sm btn-success px-2 " name="ok" id="buttonSubmit"><i class="fas fa-plus mr-2 "></i>Adicionar Fase Stock</button>
-                </div>
-
-        </div>
-    </form>
-
-
     </div>
 </div>
 
-</div>
+
+
+
+
+<!-- Modal -->
+<form class="form-group needs-validation" action="{{route('fasestock.store', $produtostock)}}" method="post" id="form_fase" enctype="multipart/form-data" novalidate>
+    @csrf
+
+<div class="modal fade" id="novaFaseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nova Fase Stock</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+        <label for="descricao" class="font-weight-bold">Descrição da Nova Fase Stock:</label><br>
+        <input type="text" class="form-control" name="descricao" id="descricaofase" style="width:100%" required>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-success px-2"><i class="fas fa-plus mr-2 "></i>Adicionar Fase Stock</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancelar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+
+
+
 
 @endsection
 
