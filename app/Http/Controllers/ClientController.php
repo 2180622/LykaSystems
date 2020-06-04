@@ -82,9 +82,10 @@ class ClientController extends Controller
 
             /* Lista de clientes caso seja admin */
             if (Auth::user()->tipo == "admin"){
-                $clients = Cliente::where("estado","=","Ativo")
+                $clients = Cliente::all();
+                /* where("estado","=","Ativo")
                 ->orWhere("estado","=","Proponente")
-                ->get();
+                ->get(); */
             if ($clients->isEmpty() ){
                 $clients=null;
             }
@@ -310,7 +311,7 @@ class ClientController extends Controller
         }
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
-            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && 
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null &&
             $client->idAgente == Auth()->user()->idAgente) || $permissao){
 
             $totalprodutos=null;
@@ -401,7 +402,7 @@ class ClientController extends Controller
     /*      dd($dividas); */
 
             return view('clients.show',compact("client","agente","associados",/* "dividas","agents","subagents", */"produtos","totalprodutos","passaporteData",'documentosPessoais','documentosAcademicos','novosDocumentos'));
-        
+
         }else{
             /* não tem permissões */
             abort (401);
@@ -431,7 +432,7 @@ class ClientController extends Controller
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
             (Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
-            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && 
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null &&
             $client->idAgente == Auth()->user()->idAgente) || $permissao){
 
             // Produtos adquiridos pelo cliente
@@ -487,7 +488,7 @@ class ClientController extends Controller
         }
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
-            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && 
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null &&
             $client->idAgente == Auth()->user()->idAgente && $cliente->editavel) || $permissao){
 
             /* Obtem as informações sobre os documentos */
@@ -558,7 +559,7 @@ class ClientController extends Controller
     public function update(UpdateClienteRequest $request, Cliente $client){
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
-            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && 
+            (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null &&
             $client->idAgente == Auth()->user()->idAgente && $cliente->editavel) || $permissao){
 
             $t=time(); /*  data atual */
