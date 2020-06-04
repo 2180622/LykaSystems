@@ -168,7 +168,7 @@
                             <!-- Listagens -->
                             @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)
                                 <li class="menu-option">
-                                    <a href="#">
+                                    <a href="{{route('listagens.index')}}">
                                         <span class="option-name">Listagens</span>
                                     </a>
                                 </li>

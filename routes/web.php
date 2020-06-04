@@ -232,5 +232,8 @@ Route::get('/restaurar-password/{user}', 'AccountConfirmationController@restorep
 Route::post('/restaurar-password/confirmacao-utilizador', 'AccountConfirmationController@checkuser')->name('check.user');
 Route::post('/restaurar-password/confirmacao-password', 'AccountConfirmationController@checkpassword')->name('check.password');
 
+/* Listagens */
+Route::resource('/listagens', 'ListagemController');
+
 /* Edgar Teste -> Eliminar no futuro */
 Route::get('/data', 'EdgarTesteController@index');
