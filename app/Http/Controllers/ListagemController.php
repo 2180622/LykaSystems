@@ -7,6 +7,10 @@ class ListagemController extends Controller
 {
     public function index()
     {
-      return view('listagens.list');
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+            return view('listagens.list');
+        }else{
+            abort(401);
+        }
     }
 }
