@@ -1,7 +1,6 @@
 <div class="alert alert-danger my-2" id="warning_msg" style="display: none"><i class="fas fa-exclamation-triangle mr-2"></i>Existem dados obrigatórios por preencher. Verifique os campos assinalados.</div>
 
 @if (Auth::user()->tipo == "admin")
-<br>
     <div class="mb-2" >
 
         <div class="row">

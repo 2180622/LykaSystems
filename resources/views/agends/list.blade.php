@@ -8,12 +8,13 @@
 
     <link href="{{asset('css/datatables_general.css')}}" rel="stylesheet">
 
-    <link href="{{asset('css/agends.css')}}" rel="stylesheet"/>
+    {{-- <link href="{{asset('css/agends.css')}}" rel="stylesheet"/> --}}
 
     <link href="{{asset('vendor/fullcalendar/core/main.css')}}" rel='stylesheet'/>
     <link href="{{asset('vendor/fullcalendar/daygrid/main.css')}}" rel='stylesheet'/>
     <link href="{{asset('vendor/fullcalendar/list/main.css')}}" rel='stylesheet'/>
     <link href="{{asset('vendor/fullcalendar/timegrid/main.css')}}" rel='stylesheet'/>
+
 @endsection
 
 
@@ -21,44 +22,51 @@
 @section('content')
     @include('agends.partials.modal')
     <!-- MODAL DE INFORMAÇÔES -->
+    <div class="container-fluid my-4">
 
-    <div class="container mt-2 ">
+        {{-- Conteúdo --}}
+        <div class="bg-white shadow-sm mb-4 p-4 ">
 
-        {{-- Navegação --}}
-        <div class="float-left buttons">
-            <a href="javascript:history.go(-1)" title="Voltar">
-                <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-            </a>
-            <a href="javascript:window.history.forward();" title="Avançar">
-                <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-            </a>
-        </div>
+            <div class="row">
 
-        <button type="button" class="float-right top-button limpar" id="titleModalNew" data-toggle="modal"
-                data-target="#modalCalendar">
-            Novo Evento
-        </button>
+                <div class="col">
+                    <div class="title">
+                        <h4><strong>Agenda</strong><h4>
+                    </div>
+                </div>
 
+                {{-- Opções --}}
+                <div class="col text-right">
+                    <a class="btn btn-sm btn-success m-1" href="#" id="titleModalNew" data-toggle="modal"
+                    data-target="#modalCalendar"><i class="fas fa-plus mr-2"></i>Novo Evento</a>
 
-        <br><br>
+                </div>
 
-        <div class="cards-navigation">
-            <div class="title">
-                <h6>Agenda</h6>
             </div>
 
-            <br>
+            <hr class="my-3">
 
-            <div id='calendar'></div>
-
-            <br><br>
+            <div class="row p-2">
+                <div class="col" >
+                    <div id='calendar'></div>
+                </div>
+            </div>
 
         </div>
     </div>
+
 @endsection
 
 {{-- Utilização de scripts: --}}
+
 @section('scripts')
+{{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> --}}
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+
     <script src="{{asset('/vendor/fullcalendar/core/main.js')}}"></script>
     <script src="{{asset('/vendor/fullcalendar/rrule.js')}}"></script>
     <script src="{{asset('/vendor/fullcalendar/interaction/main.js')}}"></script>
@@ -68,10 +76,6 @@
     <script src="{{asset('/vendor/fullcalendar/list/main.js')}}"></script>
     <script src="{{asset('/vendor/fullcalendar/rrule/main.js')}}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <script src="{{asset('/js/agends.js')}}"></script>
     <script src="{{asset('/js/newEventModalDefault.js')}}"></script>
@@ -103,6 +107,8 @@
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: ['interaction', 'dayGrid', 'timeGrid', 'list', 'rrule'],
+                height:700,
+                aspectRatio: 1.5,
                 header: {
                     left: 'prev,next today',
                     center: 'title',

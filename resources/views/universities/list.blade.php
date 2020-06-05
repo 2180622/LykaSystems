@@ -43,6 +43,9 @@
 
         </div>
 
+
+        <hr>
+
         @if($universities)
 
         <div class="row">

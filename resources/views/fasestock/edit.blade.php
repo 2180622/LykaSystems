@@ -28,9 +28,10 @@
 
         <hr class="my-3">
 
+        <hr>
+        
         <div class="row">
             <div class="col">
-
                 <form method="POST" action="{{route('fasestock.update',$fasestock)}}"
                     class="form-group needs-validation " id="form_client" enctype="multipart/form-data" novalidate>
                     @csrf

@@ -31,6 +31,9 @@
         </div>
 
 
+        <hr>
+
+
         {{-- Formulário de pesquisa --}}
 
         <form method="POST" id="searchForm" action="{{route('clients.searchResults')}}" class="form-group"

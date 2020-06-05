@@ -89,7 +89,7 @@
 
         <hr class="my-3">
 
-        <div>
+
             <div class="row p-2">
 
                 <div class="col p-2" style="min-width:350px !important">
@@ -134,8 +134,6 @@
 
                     </div>
 
-
-
                     <div class="row">
                         <div class="col">
                             <div>NIF:<br>
@@ -162,8 +160,6 @@
                 </div>
             </div>
 
-
-        </div>
 
 
         <div class="row nav nav-fill w-100 text-center mx-auto p-3 ">

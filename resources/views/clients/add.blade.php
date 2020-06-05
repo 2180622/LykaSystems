@@ -28,6 +28,8 @@
 
         </div>
 
+        <hr>
+        
         <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation " id="form_client"
             enctype="multipart/form-data" novalidate>
             @csrf

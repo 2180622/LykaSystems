@@ -50,6 +50,8 @@
 
         </div>
 
+        <hr>
+        
         @if($agents)
 
         <div class="row">
@@ -66,6 +68,7 @@
             </div>
 
         </div>
+
 
 
 

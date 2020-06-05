@@ -39,6 +39,7 @@
 
         </div>
 
+        <hr>
 
         <div class="row my-2">
             <div class="col">
@@ -95,7 +96,7 @@
                                 {{-- OPÇÔES --}}
                                 <td class="text-center align-middle">
                                     <a href="{{route('produtostock.show',$produtoStock)}}" class="btn btn-sm btn-outline-primary" title="Ver ficha completa"><i class="far fa-eye"></i></a>
-                                    
+
                                     <a href="{{route('produtostock.edit', $produtoStock)}}" class="btn btn-sm btn-outline-warning" title="Editar"><i class="fas fa-pencil-alt"></i></a>
 
                                     <form method="POST" role="form" id="{{ $produtoStock->idProdutoStock }}"
