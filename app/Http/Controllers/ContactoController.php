@@ -21,11 +21,10 @@ class ContactoController extends Controller
     public function index()
     {
         if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
-            $contacts = Contacto::
-            where('Contacto.idUser', '=', Auth::user()->idUser)
-            ->get();
+            $contacts = Contacto::all();
+/*             where('Contacto.idUser', '=', Auth::user()->idUser)
+            ->get(); */
 
-            
             return view('contacts.list', compact('contacts'));
         }else{
             abort(401);
@@ -111,6 +110,11 @@ class ContactoController extends Controller
     {
 
         if (Auth::user()->tipo == "admin" && Auth()->user()->idAdmin != null){
+
+            /* Se tiver universidade, identifica-a */
+            $university=Universidade::where("idUniversidade","=",$contact->idUniversidade)->first();
+
+
             return view('contacts.show',compact('contact','university'));
         }else{
             abort(401);

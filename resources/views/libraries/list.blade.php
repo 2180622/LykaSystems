@@ -56,7 +56,9 @@
             </div>
             <div class="col text-right">
                 @if (Auth::user()->tipo == "admin")
+                <span class="p-2 px-3 border bg-light">
                 <small><strong>Espaço ocupado: {{$size}}</strong></small>
+                </span>
                 @endif
             </div>
         </div>

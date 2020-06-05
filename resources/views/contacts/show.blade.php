@@ -53,8 +53,7 @@
             <div class="col p-3 mx-2 border bg-light rounded">
 
                 <i class="fas fa-university mr-1"></i>
-                <span class="text-muted">Associado à universidade:<span style="color:#6A74C9">
-                        {{$university->nome}}</span></span>
+                <span class="text-muted">Associado à universidade: <a class="font-weight-bold" href="{{route('universities.show',$university)}}">{{$university->nome}}</a></span>
                 <input type="hidden" id="idUniversidade" name="idUniversidade" value="{{$university ->idUniversidade}}">
             </div>
         </div>
@@ -128,13 +127,7 @@
                     @endif
                 </div>
 
-            </div>
-
-        </div>
-
-        <div class="row mt-4">
-            <div class="col" style="min-width:350px">
-
+                <br>
                 <div>Observações:</div>
                 <div class="border rounded bg-light p-2 mt-2">
                     @if ($contact->observacao!=null)
@@ -143,7 +136,9 @@
                     <span class="text-muted"><small>(Sem observações)</small></span>
                     @endif
                 </div>
+
             </div>
+
         </div>
 
     </div>
