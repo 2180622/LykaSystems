@@ -13,4 +13,13 @@ class ListagemController extends Controller
             abort(401);
         }
     }
+
+    public function getList($tipo, $pais, $cidade, $agente, $subagente, $universidade, $curso, $intitutoOrigem, $atividade)
+    {
+        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+            return view('listagens.list');
+        }else{
+            abort(401);
+        }
+    }
 }
