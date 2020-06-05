@@ -21,8 +21,7 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Editar Informações de <span class="active">{{$client->nome}} {{$client->apelido}}</span></strong>
-                        <h4>
+                    <h4><strong>Editar Informações de <span class="active">{{$client->nome}} {{$client->apelido}}</span></strong></h4>
                 </div>
             </div>
 
@@ -33,7 +32,7 @@
             </div>
 
         </div>
-        
+
         <hr>
 
         <form method="POST" action="{{route('clients.update',$client)}}" class="form-group needs-validation "

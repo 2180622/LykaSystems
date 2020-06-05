@@ -25,7 +25,7 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Pesquisa avançada</strong><h4>
+                    <h4><strong>Pesquisa avançada</strong></h4>
                 </div>
             </div>
         </div>

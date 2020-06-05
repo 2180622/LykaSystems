@@ -22,14 +22,14 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Adicionar Estudante</strong><h4>
+                    <h4><strong>Adicionar Estudante</strong></h4>
                 </div>
             </div>
 
         </div>
 
         <hr>
-        
+
         <form method="POST" action="{{route('clients.store')}}" class="form-group needs-validation " id="form_client"
             enctype="multipart/form-data" novalidate>
             @csrf

@@ -44,11 +44,13 @@
 
         </div>
 
+        <hr class="my-3">
+
 
         <div class="row my-2">
             <div class="col">
                 @if($files)
-                <div class="text-secondary"><strong>Existe {{count($files)}} ficheiro(s) disponíveis no sistema</strong>
+                <div class="text-secondary m-1"><strong>Existe {{count($files)}} ficheiro(s) disponíveis no sistema</strong>
                 </div>
                 @endif
             </div>
@@ -59,14 +61,13 @@
             </div>
         </div>
 
-        <div class="row my-2">
 
+        <div class="row my-2">
             {{-- Espaço ocupado no storage/library --}}
             <div class="col ">
                 {{-- Input para pesquisa na datatable --}}
                 <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..."
                     aria-label="Procurar" style="width: 100%">
-
             </div>
 
         </div>

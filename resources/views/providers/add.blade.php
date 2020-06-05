@@ -23,7 +23,7 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Criação de um fornecedor</strong><h4>
+                    <h4><strong>Criação de um fornecedor</strong></h4>
                 </div>
             </div>
 

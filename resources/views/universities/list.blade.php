@@ -30,8 +30,7 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Listagem de Universidades</strong>
-                        <h4>
+                    <h4><strong>Listagem de Universidades</strong></h4>
                 </div>
             </div>
 
