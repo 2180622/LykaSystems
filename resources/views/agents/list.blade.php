@@ -38,7 +38,7 @@
                             {{-- se for admin --}}
                             Agentes
                             @endif</strong>
-                        <h4>
+                    </h4>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
         </div>
 
         <hr>
-        
+
         @if($agents)
 
         <div class="row">
@@ -167,23 +167,6 @@
         </div>
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

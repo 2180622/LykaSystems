@@ -24,8 +24,7 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Ficha de estudante de <span class="active">{{$client->nome}}
-                                {{$client->apelido}}</span></strong></h4>
+                    <h4><strong>Ficha de estudante de <span class="active">{{$client->nome}} {{$client->apelido}}</span></strong></h4>
                     <small>
                         <div>
                             <span>Estado do cliente:</span>

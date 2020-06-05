@@ -28,14 +28,15 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Listagem de Estudantes</strong><h4>
+                    <h4><strong>Listagem de Estudantes</strong></h4>
+                    <span><small>A mostrar clientes ativos e proponentes</small></span>
                 </div>
             </div>
 
             {{-- Opções --}}
             <div class="col text-right">
                 @if (Auth::user()->tipo == "admin")
-                    <a class="btn btn-sm btn-primary m-1 mr-2" href="{{route('clients.searchIndex')}}"><i
+                <a class="btn btn-sm btn-primary m-1 mr-2" href="{{route('clients.searchIndex')}}"><i
                         class="fas fa-search mr-2"></i>Pesquisa avançada</a>
                 <a class="btn btn-sm btn-success m-1" href="{{route('clients.create')}}"><i
                         class="fas fa-plus mr-2"></i>Adicionar Estudante</a>
@@ -45,23 +46,35 @@
         </div>
 
         <hr>
-        
+
 
         {{-- VERIFICA SE EXISTEM CLIENTES --}}
         @if($clients)
+
         <div class="row">
             <div class="col">
-                        {{-- Contagem dos clientes ativos ou proponentes --}}
-                        <div class="text-muted my-2">
-                            <strong>Existe {{count($clients)}} registo(s) no sistema</strong>
-                        </div>
-                        <div>
-                            {{-- Input de procura nos resultados da dataTable --}}
-                            <input type="text" class="shadow-sm" id="customSearchBox"
-                                placeholder="Procurar nos resultados..." aria-label="Procurar" style="width:100%;">
-                        </div>
+                {{-- Contagem dos clientes ativos ou proponentes --}}
+                <span class="text-muted">Existe {{count($clients)}} registo(s) no sistema.</span>
             </div>
 
+            <div class="col text-right">
+                <span class="bg-light border p-2 px-3">
+                    <small>
+                        {{ $clients->where("estado", "Ativo")->count() }} Ativo |
+                            {{ $clients->where("estado", "Proponente")->count() }} Proponente |
+                            {{ $clients->where("estado", "Inativo")->count() }} Inativo
+                    </small>
+                </span>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <div class="col">
+                {{-- Input de procura nos resultados da dataTable --}}
+                <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..."
+                    aria-label="Procurar" style="width:100%;">
+            </div>
         </div>
 
 
@@ -84,7 +97,10 @@
                 <tbody>
 
                     @foreach ($clients as $client)
+
+                    @if ( $client->estado=="Ativo" || $client->estado=="Proponente")
                     <tr>
+                        {{-- Só mostras os clientes ativos ou proponentes --}}
 
 
                         {{-- Nome e Apelido --}}
@@ -144,6 +160,7 @@
 
                         </td>
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
@@ -152,8 +169,8 @@
 
         @else
 
-        <div class="border rounded bg-light p-2 mt-4" >
-                <span class="text-muted"><small>(sem dados para mostrar)</small></span>
+        <div class="border rounded bg-light p-2 mt-4">
+            <span class="text-muted"><small>(sem dados para mostrar)</small></span>
         </div>
 
         @endif

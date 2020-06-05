@@ -5,190 +5,219 @@
 
 {{-- Estilos de CSS --}}
 @section('styleLinks')
-<link href="{{asset('/css/charges.css')}}" rel="stylesheet">
+
+<link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
+<link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
+
 @endsection
 
 {{-- Conteudo da Página --}}
 @section('content')
 
-<div class="container mt-2 ">
+<div class="container-fluid my-4">
 
-    {{-- Navegação --}}
-    <div class="float-left buttons">
-        <a href="javascript:history.go(-1)" title="Voltar">
-            <ion-icon name="arrow-back-outline" class="button-back"></ion-icon>
-        </a>
-        <a href="javascript:window.history.forward();" title="Avançar">
-            <ion-icon name="arrow-forward-outline" class="button-foward"></ion-icon>
-        </a>
+    {{-- Conteúdo --}}
+    <div class="bg-white shadow-sm mb-4 p-4 ">
+
+        <div class="row">
+
+            <div class="col">
+                <div class="title">
+                    <h4><strong>Listagem de cobranças de clientes</strong></h4>
+                </div>
+            </div>
+
+            {{-- Opções --}}
+            <div class="col text-right">
+                {{-- ESPAÇO PARA BOTÔES --}}
+            </div>
+
+        </div>
+
+
+        <hr class="my-3">
+
+
+
+        <div class="row mt-4 mx-auto text-center">
+
+            {{-- COBRANÇAS PENDENTES --}}
+            <div class="col p-3 border bg-light shadow-sm m-2" style="min-width: 240px">
+                @if($fasesPendentes)
+                    <div><h1><strong>{{count($fasesPendentes)}}</strong></h1></div>
+                @else
+                    <div><h1><strong>0</strong></h1></div>
+                @endif
+                    <div class="text-uppercase" style="color:gray; font-weight:600">cobranças pendentes</div>
+            </div>
+
+            {{-- COBRANÇAS PAGAS --}}
+            <div class="col p-3 border bg-light shadow-sm m-2" style="min-width: 240px">
+                @if($fasesPagas)
+                        <div style="color:#47BC00;"><h1><strong>{{count($fasesPagas)}}</h1></div>
+                @else
+                    <div style="color:#47BC00;"><h1><strong>0</h1></strong></div>
+                @endif
+                    <div class="text-uppercase" style="color:gray; font-weight:600">cobranças pagas</div>
+            </div>
+
+
+            {{-- COBRANÇAS EM DÍVIDA --}}
+            <div class="col p-3 border bg-light shadow-sm m-2" style="min-width: 240px">
+                @if($fasesPagas)
+                    <div style="color:#FF3D00;"><h1><strong>{{count($fasesDivida)}}</div>
+                @else
+                    <div style="color:#FF3D00;"><h1><strong>0</strong></div>
+                @endif
+                    <div class="text-uppercase" style="color:gray; font-weight:600">cobranças em dívida</div>
+            </div>
+
+        </div>
+
+
+
+        {{-- Input de procura nos resultados da dataTable --}}
+        <div class="row mt-4">
+            <div class="col">
+
+            <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..."
+                aria-label="Procurar" style="width:100%;">
+            </div>
+        </div>
+
+
+
+        {{-- Tabela --}}
+        <div class="row mt-4">
+            <div class="col">
+
+                @if ($products)
+                <div class="table-responsive">
+                    <table id="dataTable" class="table table-bordered table-hover " style="width:100%">
+
+                        {{-- Cabeçalho da tabela --}}
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Estado</th>
+                                <th class="text-center">Opções</th>
+                            </tr>
+                        </thead>
+
+                        {{-- Corpo da tabela --}}
+                        <tbody>
+
+                                @foreach ($products as $product)
+
+                                    {{-- Linha modelo --}}
+
+                                    <tr>
+
+                                        {{-- Nome e apelido --}}
+                                        <td>{{$product->cliente->nome.' '.$product->cliente->apelido}}</td>
+
+
+                                        {{-- Descrição --}}
+                                        <td>{{$product->descricao}}</td>
+
+
+                                        {{-- Valor --}}
+                                        <td>
+                                            <?php
+                                            $valorPago = 0;
+                                            foreach ($product->fase as $fase) {
+                                              if (count($fase->DocTransacao)) {
+                                                foreach ($fase->DocTransacao as $document) {
+                                                  $valorPago = $valorPago + $document->valorRecebido;
+                                                }
+                                              }
+                                            }
+
+                                            $valorDivida = 0;
+                                            foreach ($product->fase as $fase) {
+                                              if (count($fase->DocTransacao)) {
+                                                foreach ($fase->DocTransacao as $document) {
+                                                  if ($document->valorRecebido < $fase->valorFase) {
+                                                    $valorDivida = $valorDivida + ($fase->valorFase - $document->valorRecebido);
+                                                  }
+                                                }
+                                              }
+                                            }
+
+                                        ?>
+                                          @if ($valorPago != 0)
+                                            <div style="color:#47BC00;">{{number_format((float)$valorPago, 2, ',', '')}}€</div>
+                                          @endif
+                                          @if ($valorDivida != 0)
+                                            <div style="color:#FF3D00;">{{number_format((float)$valorDivida, 2, ',', '')}}€</div>
+                                          @endif
+                                          <div>{{number_format((float)$product->valorTotal, 2, ',', '')}}€</div>
+
+                                        </td>
+
+                                        {{-- Estado --}}
+                                        <td>
+                                            @php
+                                            switch ($product->estado) {
+                                            case 'Pendente':
+                                            printf('Pendente');
+                                            break;
+
+                                            case 'Pago':
+                                            printf('Pago');
+                                            break;
+
+                                            case 'Dívida':
+                                            printf('Dívida');
+                                            break;
+
+                                            case 'Crédito':
+                                            printf('Crédito');
+                                            break;
+                                            }
+                                            @endphp
+                                        </td>
+
+
+
+                                        {{-- Opções --}}
+                                        <td class="text-center">
+                                            <a href="{{route('charges.show', $product)}}" class="btn btn-sm btn-outline-primary"
+                                                title="Ver detalhes"><i class="far fa-eye"></i></a>
+                                        </td>
+
+                                    </tr>
+
+
+                                @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
+                @else
+                    <div class="border rounded bg-light p-3 text-muted"><small>Não existem cobranças registadas.</small></div>
+                @endif
+
+            </div>
+        </div>
+
+
     </div>
 
-    <br><br>
-
-    <div class="cards-navigation">
-        <div class="title row">
-            <div class="col-md-6">
-                <h6>Listagem de cobranças de clientes</h6>
-            </div>
-            <div class="col-md-6" style="bottom:5px; height:32px;">
-                <div class="input-group pl-0 float-right search-section" style="width:250px">
-                    <input class="shadow-sm" type="text" id="customSearchBox" placeholder="Secção de procura" aria-label="Procurar">
-                    <div class="search-button input-group-append">
-                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row cards-group mt-3">
-            <div class="col-md-4">
-                <div class="card-navigation">
-                    <div class="help-button" id="tooltipClient" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de fases pendentes registados no sistema.">
-                        <span>
-                            ?
-                        </span>
-                    </div>
-                    <div class="info">
-                        @if($fasesPendentes)
-                            <p class="number">{{count($fasesPendentes)}}</p>
-                        @else
-                            <p class="number">0</p>
-                        @endif
-                        <p class="word">cobranças pendentes</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card-navigation">
-                    <div class="help-button" id="tooltipUni" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número total de fases pagas registadas no sistema.">
-                        <span>
-                            ?
-                        </span>
-                    </div>
-                    <div class="info">
-                        @if($fasesPagas)
-                            <p class="number" style="color:#47BC00;">{{count($fasesPagas)}}</p>
-                        @else
-                            <p class="number" style="color:#47BC00;">0</p>
-                        @endif
-                        <p class="word">cobranças pagas</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card-navigation">
-                    <div class="help-button" id="tooltipAgent" data-toggle="tooltip" data-placement="top" title="O número apresentado neste cartão representa o número de fases em dívida registados no sistema.">
-                        <span>
-                            ?
-                        </span>
-                    </div>
-                    <div class="info">
-                        @if($fasesPagas)
-                            <p class="number" style="color:#FF3D00;">{{count($fasesDivida)}}</p>
-                        @else
-                            <p class="number" style="color:#FF3D00;">0</p>
-                        @endif
-                        <p class="word">cobranças em dívida</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="container">
-            @if ($products)
-            @foreach ($products as $product)
-            <a href="{{route('charges.show', $product)}}">
-                <div class="row charge-div">
-                    <div class="col-md-1 align-self-center">
-                        <div class="white-circle">
-                            @if($product->cliente->fotografia)
-                                <img src="{{Storage::disk('public')->url('client-documents/'.$product->cliente->idCliente.'/').$product->cliente->fotografia}}" width="100%" class="mx-auto">
-                                @elseif($product->cliente->genero == 'F')
-                                    <img src="{{Storage::disk('public')->url('default-photos/F.jpg')}}" width="100%" class="mx-auto">
-                                    @else
-                                    <img src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" width="100%" class="mx-auto">
-                                    @endif
-                        </div>
-                    </div>
-                    <div class="col-md-3 text-truncate align-self-center ml-4">
-                        <p class="text-truncate" title="{{$product->cliente->nome.' '.$product->cliente->apelido}}">{{$product->cliente->nome.' '.$product->cliente->apelido}}</p>
-                    </div>
-                    <div class="col-md-2 align-self-center">
-                        <p class="text-truncate" title="{{$product->descricao}}">{{$product->descricao}}</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <?php
-                          $valorPago = 0;
-                          foreach ($product->fase as $fase) {
-                            if (count($fase->DocTransacao)) {
-                              foreach ($fase->DocTransacao as $document) {
-                                $valorPago = $valorPago + $document->valorRecebido;
-                              }
-                            }
-                          }
-
-                          $valorDivida = 0;
-                          foreach ($product->fase as $fase) {
-                            if (count($fase->DocTransacao)) {
-                              foreach ($fase->DocTransacao as $document) {
-                                if ($document->valorRecebido < $fase->valorFase) {
-                                  $valorDivida = $valorDivida + ($fase->valorFase - $document->valorRecebido);
-                                }
-                              }
-                            }
-                          }
-
-                      ?>
-                        @if ($valorPago != 0)
-                        <p class="text-truncate" style="color:#47BC00;">{{number_format((float)$valorPago, 2, ',', '')}}€</p>
-                        @endif
-                        @if ($valorDivida != 0)
-                        <p class="text-truncate" style="color:#FF3D00;">{{number_format((float)$valorDivida, 2, ',', '')}}€</p>
-                        @endif
-                        <p class="text-truncate">{{number_format((float)$product->valorTotal, 2, ',', '')}}€</p>
-                    </div>
-                    <div class="col-md-2 text-truncate align-self-center ml-auto">
-                        <p class="text-truncate">
-                            @php
-                            switch ($product->estado) {
-                            case 'Pendente':
-                            printf('Pendente');
-                            break;
-
-                            case 'Pago':
-                            printf('Pago');
-                            break;
-
-                            case 'Dívida':
-                            printf('Dívida');
-                            break;
-
-                            case 'Crédito':
-                            printf('Crédito');
-                            break;
-                            }
-                            @endphp
-                        </p>
-                    </div>
-                </div>
-            </a>
-            @endforeach
-            @else
-              <div class="row" style="padding: 0px 18px;">
-                  <div class="container no-data-div text-center mt-3">
-                      <p style="color:#252525;">Não existem cobranças registadas.</p>
-                  </div>
-              </div>
-            @endif
-        </div>
-    </div>
 </div>
 
+
 @section('scripts')
-<script>
+
+<script src="{{asset('/js/charges.js')}}"></script>
+
+{{-- <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
-</script>
+</script> --}}
 @endsection
 @endsection

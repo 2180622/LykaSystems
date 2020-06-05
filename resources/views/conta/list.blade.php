@@ -28,8 +28,7 @@
 
             <div class="col">
                 <div class="title">
-                    <h4><strong>Listagem de Contas Bancárias</strong>
-                        <h4>
+                    <h4><strong>Listagem de Contas Bancárias</strong></h4>
                 </div>
             </div>
 
