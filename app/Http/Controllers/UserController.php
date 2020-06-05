@@ -16,7 +16,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        $countUser = 0;
+        if(Auth()->user()->tipo == 'admin'){
+            $Admins = User::all();
+            $countAdmin = count($Admins);
+        }
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)||
+            (Auth()->user()->tipo == 'admin' && $countAdmin == 1)){
+
             $users = User::where('tipo', '=', 'admin')->with('admin')->get();
             return view('users.list', compact('users'));
         }else{
@@ -37,7 +44,13 @@ class UserController extends Controller
 
     public function create()
     {
-        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        $countUser = 0;
+        if(Auth()->user()->tipo == 'admin'){
+            $Admins = User::all();
+            $countAdmin = count($Admins);
+        }
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)||
+            (Auth()->user()->tipo == 'admin' && $countAdmin == 1)){
             $user = new User;
             return view('users.add', compact('user'));
         }else{
@@ -48,7 +61,13 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $requestUser, StoreAdministradorRequest $requestAdmin)
     {
-        if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin){
+        $countUser = 0;
+        if(Auth()->user()->tipo == 'admin'){
+            $Admins = User::all();
+            $countAdmin = count($Admins);
+        }
+        if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null && Auth()->user()->admin->superAdmin)||
+            (Auth()->user()->tipo == 'admin' && $countAdmin == 1)){
             $fieldsUser = $requestUser->validated();
             $fieldsAdmin = $requestAdmin->validated();
 
@@ -58,6 +77,10 @@ class UserController extends Controller
 
             $admin = new Administrador;
             $admin->fill($fieldsAdmin);
+
+            if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin == null){
+                $admin->superAdmin = true;
+            }
 
             $name = $admin->nome.' '.$admin->apelido;
             $admin->save();

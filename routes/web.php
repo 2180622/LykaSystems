@@ -186,6 +186,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::put('/documento-transacao/{documento}/update', 'DocTransacaoController@update')->name('documento-transacao.update');
     Route::resource('/documento-transacao', 'DocTransacaoController')->only(['destroy']);
 
+    /* Listagem */
+    Route::resource('/listagem', 'ListagemController')->only(['index']);
+
     /* Conta */
     Route::resource('/conta-bancaria', 'ContaController')->parameters([
       'conta-bancaria' => 'conta'
