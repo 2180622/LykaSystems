@@ -11,6 +11,18 @@
 <link href="{{asset('/css/datatables_general.css')}}" rel="stylesheet">
 <link href="{{asset('/css/inputs.css')}}" rel="stylesheet">
 
+<style>
+    @media screen and (max-width: 1000px) {
+
+#dataTable th:nth-of-type(4),
+#dataTable td:nth-of-type(4) {
+    display: none;
+}
+
+}
+</style>
+
+
 @endsection
 
 
@@ -29,7 +41,6 @@
             <div class="col">
                 <div class="title">
                     <h4><strong>Listagem de Estudantes</strong></h4>
-                    <span><small>A mostrar clientes ativos e proponentes</small></span>
                 </div>
             </div>
 
@@ -54,17 +65,16 @@
         <div class="row">
             <div class="col">
                 {{-- Contagem dos clientes ativos ou proponentes --}}
-                <span class="text-muted">Existe {{count($clients)}} registo(s) no sistema.</span>
+                <span class="text-muted font-weight-bold">Existe {{count($clients)}} registo(s) no sistema.</span>
             </div>
 
             <div class="col text-right">
-                <span class="bg-light border p-2 px-3">
-                    <small>
-                        {{ $clients->where("estado", "Ativo")->count() }} Ativo |
-                            {{ $clients->where("estado", "Proponente")->count() }} Proponente |
-                            {{ $clients->where("estado", "Inativo")->count() }} Inativo
+                    <span class="p-2 px-3 border bg-light " ><small>
+                        <span class="mx-1">{{ $clients->where("estado", "Ativo")->count() }} Ativos</span><span class="mx-1">|</span>
+                        <span class="mx-1">{{ $clients->where("estado", "Proponente")->count() }} Proponentes</span><span class="mx-1">|</span>
+                        <span class="mx-1">{{ $clients->where("estado", "Inativo")->count() }} Inativos</span>
                     </small>
-                </span>
+                    </span>
             </div>
         </div>
 

@@ -45,7 +45,7 @@
         </div>
 
         <hr>
-        
+
         <div class="row my-2">
             <div class="col">
                 @if($contacts)

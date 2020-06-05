@@ -57,19 +57,17 @@
         <div class="row">
             <div class="col">
                 {{-- Contagem dos Agentes --}}
-                <div class="text-muted my-2">
-                    <strong>Existe {{count($agents)}} registo(s) no sistema</strong>
-                </div>
-                <div>
-                    {{-- Input de procura nos resultados da dataTable --}}
-                    <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..."
-                        aria-label="Procurar" style="width:100%;">
-                </div>
+                <span class="text-muted font-weight-bold">Existe {{count($agents)}} registo(s) no sistema</span>
             </div>
-
         </div>
 
-
+        <div class="row mt-3">
+            <div class="col">
+            {{-- Input de procura nos resultados da dataTable --}}
+            <input type="text" class="shadow-sm" id="customSearchBox" placeholder="Procurar nos resultados..."
+                aria-label="Procurar" style="width:100%;">
+            </div>
+        </div>
 
 
         <div class="row mt-4">

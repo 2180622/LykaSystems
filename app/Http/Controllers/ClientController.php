@@ -82,10 +82,10 @@ class ClientController extends Controller
 
             /* Lista de clientes caso seja admin */
             if (Auth::user()->tipo == "admin"){
-                $clients = Cliente::all();
-                /* where("estado","=","Ativo")
+                $clients = Cliente::/* all(); */
+                where("estado","=","Ativo")
                 ->orWhere("estado","=","Proponente")
-                ->get(); */
+                ->get();
             if ($clients->isEmpty() ){
                 $clients=null;
             }
@@ -118,7 +118,7 @@ class ClientController extends Controller
                 where('idAgente', '=', Auth::user()->agente->idAgente)
                 ->get();
 
-                /* Lista todos os produtos registados em nome do agente que está logado */
+                /* Lista todos os produtos registados em nome do subagente que está logado */
                 $clients_produto = Cliente::
                 selectRaw("Cliente.*")
                 ->join('Produto', 'Cliente.idCliente', '=', 'Produto.idCliente')
@@ -137,7 +137,7 @@ class ClientController extends Controller
             /* mostra a lista */
             return view('clients.list', compact('clients'));
         }else{
-            abord(401);
+            abort(401);
         }
     }
 
@@ -453,7 +453,7 @@ class ClientController extends Controller
             ->orderby("created_at","desc")/*  Ordena por data: do mais recente para o mais antigo */
             ->first(); /* Seleciona o registo mais recente */
 
-            if($passaporte!=null || !$passaporte->toArray()){
+            if($passaporte!=null/*  || !$passaporte->toArray() */){
                 $infosPassaporte = json_decode($passaporte->info);
             }else{
                 $infosPassaporte=null;

@@ -197,8 +197,6 @@
         }
 
 
-
-
         /* Verificação inicial */
         if ($("#aux_idAgenteAssociado").val() != "") {
             $("#idAgenteAssociado").val($("#aux_idAgenteAssociado").val());
@@ -211,7 +209,12 @@
             $("#div_execao").hide();
             $("#idAgenteAssociado").prop("disabled", true);
             $("#idAgenteAssociado").val(null);
+            $("#div_infos_agente").show();
+            $("#div_infos_subagente").hide();
 
+        }else{
+            $("#div_infos_agente").hide();
+            $("#div_infos_subagente").show();
         }
 
 

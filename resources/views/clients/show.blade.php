@@ -463,7 +463,7 @@
 
 
 
-                        <div class=" mb-2 font-weight-bold">Observações académicas:</div>
+                        <div class=" mb-2 ">Observações académicas:</div>
                         <div class="border rounded bg-light p-3">
                             @if ($client->obsAcademicas==null)
                             <div class="text-muted "><small>(sem dados para mostrar)</small></div>
@@ -477,7 +477,7 @@
 
                     {{-- DOCUMENTOS Académicos --}}
                     <div class="col" style="min-width:250px">
-                        <div class=" mb-2 font-weight-bold">Ficheiros:</div>
+                        <div class=" mb-2">Ficheiros:</div>
                         @if ($documentosAcademicos!=null)
                         <ul class="border rounded bg-light pl-3" style="list-style-type:none;margin:0px;padding:0">
                             @foreach ($documentosAcademicos as $docAcademico)
