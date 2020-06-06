@@ -26,14 +26,17 @@
                 </div>
             </div>
         </div>
-            <form method="POST" action="{{route('libraries.update',$library)}}" class="form-group needs-validation pt-3" id="form_library" enctype="multipart/form-data" novalidate>
+
+        <hr class="my-3">
+
+            <form method="POST" action="{{route('libraries.update',$library)}}" class="form-group needs-validation" id="form_library" enctype="multipart/form-data" novalidate>
                 @csrf
                 @method("PUT")
                 @include('libraries.partials.add-edit')
 
     </div>
     <div class="text-right mt-4">
-        <button type="submit" class="btn btn-sm btn-success px-2 mr-2" name="submit"><i class="fas fa-check mr-2"></i>Guardar alterações</button>
+        <button type="submit" class="btn btn-sm btn-success px-2 mr-2" name="submit"><i class="fas fa-check-circle mr-2"></i>Guardar alterações</button>
     <a href="{{route('libraries.index')}}" class="btn btn-sm btn-secondary px-2">Cancelar</a>
 
 
@@ -49,3 +52,4 @@
 <script src="{{asset('/js/library.js')}}"></script>
 
 @endsection
+

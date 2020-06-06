@@ -26,7 +26,9 @@
             </div>
         </div>
 
-            <form method="POST" action="{{route('libraries.store')}}" class="form-group needs-validation pt-3" id="form_library" enctype="multipart/form-data" novalidate>
+        <hr class="my-3">
+
+            <form method="POST" action="{{route('libraries.store')}}" class="form-group needs-validation" id="form_library" enctype="multipart/form-data" novalidate>
                 @csrf
                 @include('libraries.partials.add-edit')
 

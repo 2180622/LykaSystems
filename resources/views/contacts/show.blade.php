@@ -60,25 +60,24 @@
         @endif
 
 
-        <div class="row p-2 pt-3 pb-3">
+        <div class="row mt-4">
 
 
             {{-- FOTOGRAFIA --}}
-            <div class="coltext-center" style="max-width: 340px; min-width:300px">
+            <div class="col " style="max-width: 340px; min-width:300px">
 
                 @if($contact->fotografia)
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
+                <img class="p-1 rounded border bg-white shadow-sm"
                     src="{{Storage::disk('public')->url('contact-photos/').$contact->fotografia}}" style="width:90%">
                 @else
-                <img class="m-2 p-1 rounded bg-white shadow-sm"
+                <img class="p-1 rounded border bg-white shadow-sm"
                     src="{{Storage::disk('public')->url('default-photos/M.jpg')}}" style="width:90%">
                 @endif
 
             </div>
 
 
-            <div class="col mr-3" style="min-width:350px">
-
+            <div class="col" style="min-width:350px">
 
                 @if( $contact->favorito==1 )
                 <div style="font-size:20px">
