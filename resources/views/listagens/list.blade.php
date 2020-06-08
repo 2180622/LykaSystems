@@ -105,7 +105,6 @@
             var clone = $('#clonar').clone();
             $('#clonar').remove();
 
-            GetList();
             function GetList(){
                 $('#table-body').html("");
 
