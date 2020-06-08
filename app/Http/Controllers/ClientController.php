@@ -82,10 +82,10 @@ class ClientController extends Controller
 
             /* Lista de clientes caso seja admin */
             if (Auth::user()->tipo == "admin"){
-                $clients = Cliente::/* all(); */
-                where("estado","=","Ativo")
+                $clients = Cliente::all();
+/*                 where("estado","=","Ativo")
                 ->orWhere("estado","=","Proponente")
-                ->get();
+                ->get(); */
             if ($clients->isEmpty() ){
                 $clients=null;
             }

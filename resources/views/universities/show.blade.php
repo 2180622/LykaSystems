@@ -74,17 +74,18 @@
             </div>
 
             {{-- Opções --}}
-            <div class="col text-right">
-                <a href="#" id="titleModalNew" class="btn btn-sm btn-primary m-1 mr-2 px-2" data-toggle="modal"
-                data-target="#modalCalendar" style="width: 156px"><i class="fas fa-calendar-alt mr-2"></i>Adicionar evento</a>
+            @if (Auth::user()->tipo == "admin")
+                <div class="col text-right">
+                    <a href="#" id="titleModalNew" class="btn btn-sm btn-primary m-1 mr-2 px-2" data-toggle="modal"
+                    data-target="#modalCalendar" style="width: 156px"><i class="fas fa-calendar-alt mr-2"></i>Adicionar evento</a>
 
-            <a href="{{route('contacts.create',$university)}}" class="btn btn-sm btn-primary m-1 mr-2 px-2" style="width: 156px">
-                <i class="fas fa-address-book mr-2"></i>Adicionar contacto</a>
+                <a href="{{route('contacts.create',$university)}}" class="btn btn-sm btn-primary m-1 mr-2 px-2" style="width: 156px">
+                    <i class="fas fa-address-book mr-2"></i>Adicionar contacto</a>
 
-                <a href="{{route('universities.edit',$university)}}" class="btn btn-sm btn-success m-1 mr-2 px-3">
-                    <i class="fas fa-pencil-alt mr-2"></i>Editar Informação</a>
-            </div>
-
+                    <a href="{{route('universities.edit',$university)}}" class="btn btn-sm btn-success m-1 mr-2 px-3">
+                        <i class="fas fa-pencil-alt mr-2"></i>Editar Informação</a>
+                </div>
+            @endif
         </div>
 
         <hr class="my-3">
@@ -171,6 +172,7 @@
             </a>
 
 
+            @if (Auth::user()->tipo == "admin")
             <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="estudantes-tab"
                 data-toggle="tab" href="#estudantes" role="tab" aria-controls="estudantes" aria-selected="false">
                 <div class="col">
@@ -180,11 +182,15 @@
                     Estudantes
                 </div>
             </a>
+            @endif
 
-            <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="contactos-tab"
-                data-toggle="tab" href="#contactos" role="tab" aria-controls="contactos" aria-selected="false">
-                <div class="col"><i class="fas fa-address-book mr-2"></i>Lista telefónica</div>
-            </a>
+
+            @if (Auth::user()->tipo == "admin")
+                <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link" id="contactos-tab"
+                    data-toggle="tab" href="#contactos" role="tab" aria-controls="contactos" aria-selected="false">
+                    <div class="col"><i class="fas fa-address-book mr-2"></i>Lista telefónica</div>
+                </a>
+            @endif
 
 
             <a class="nav-item nav-link border p-3 m-1 bg-white rounded shadow-sm name_link border" id="observacoes-tab"
@@ -270,6 +276,8 @@
 
 
                 {{-- Lista de estudantes --}}
+
+                @if (Auth::user()->tipo == "admin")
                 <div class="tab-pane fade " id="estudantes" role="tabpanel" aria-labelledby="estudantes-tab">
 
                     @if($clients)
@@ -287,9 +295,7 @@
 
                     </div>
 
-
                     <br>
-
 
                     <div class="table-responsive">
                         <table id="dataTable" class="display table table-bordered table-hover " style="width:100%">
@@ -342,9 +348,11 @@
                                         <a href="{{route('clients.show',$client)}}" class="btn btn-sm btn-outline-primary"
                                             title="Ver ficha completa"><i class="far fa-eye"></i></a>
 
+                                        @if (Auth::user()->tipo == "admin")
                                         <a href="{{route('clients.edit',$client)}}"
                                             class="btn btn-sm btn-outline-warning" title="Editar"><i
                                                 class="fas fa-pencil-alt"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -360,9 +368,12 @@
                     @endif
 
                 </div>
+                @endif
+
 
 
                 {{-- Lista de contactos --}}
+                @if (Auth::user()->tipo == "admin")
                 <div class="tab-pane fade" id="contactos" role="tabpanel" aria-labelledby="contactos-tab"
                     style="font-weight:normal">
                     @if ($contacts)
@@ -437,6 +448,7 @@
                     </div>
                     @endif
                 </div>
+                @endif
 
 
                 {{-- Observações --}}
