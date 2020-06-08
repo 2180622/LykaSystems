@@ -47,7 +47,7 @@
                 </thead>
 
                 {{-- Corpo da tabela --}}
-                <tbody class="table-body">
+                <tbody id="table-body">
                     
                     <tr id="clonar">
                         {{-- Só mostras os clientes ativos ou proponentes --}}
@@ -62,7 +62,7 @@
                         <td class="numPassaporte align-middle"></td>
 
                         {{-- País de origem --}}
-                        <td class="paiisNaturalidade align-middle"></td>
+                        <td class="paisNaturalidade align-middle"></td>
 
                         {{-- Estado de cliente --}}
                         <td class="align-middle">
@@ -74,11 +74,11 @@
                         <td class="text-center align-middle">
 
                             {{-- Opção: Ver detalhes --}}
-                            <a class="butao-show" href="#" class="btn btn-sm btn-outline-primary"
+                            <a href="#" class="butao-show btn btn-sm btn-outline-primary"
                                 title="Ver ficha completa"><i class="far fa-eye"></i></a>
 
                             {{-- Permissões para editar --}}
-                            <a class="butao-editar" href="#" class="btn btn-sm btn-outline-warning"
+                            <a href="#" class="butao-editar btn btn-sm btn-outline-warning"
                                 title="Editar"><i class="fas fa-pencil-alt"></i>
                             </a>
 
@@ -105,6 +105,107 @@
             var clone = $('#clonar').clone();
             $('#clonar').remove();
 
+            GetList();
+            function GetList(){
+                $('#table-body').html("");
+
+                var lista = null;
+
+                if($('#pais').value() != "null"){
+                    lista = "pais-"+$('#pais').value();
+                }else{
+                    lista = "pais-null";
+                }
+
+                if($('#cidade').value() != "null"){
+                    lista = "_cidade-"+$('#cidade').value();
+                }else{
+                    lista = "_cidade-null";
+                }
+
+                if($('#agente').value() != "null"){
+                    lista = "_agente-"+$('#agente').value();
+                }else{
+                    lista = "_agente-null";
+                }
+
+                if($('#subagente').value() != "null"){
+                    lista = "_subagente-"+$('#subagente').value();
+                }else{
+                    lista = "_subagente-null";
+                }
+
+                if($('#universidade').value() != "null"){
+                    lista = "_universidade-"+$('#universidade').value();
+                }else{
+                    lista = "_universidade-null";
+                }
+
+                if($('#curso').value() != "null"){
+                    lista = "_curso-"+$('#curso').value();
+                }else{
+                    lista = "_curso-null";
+                }
+
+                if($('#institutoOrigem').value() != "null"){
+                    lista = "_institutoOrigem-"+$('#institutoOrigem').value();
+                }else{
+                    lista = "_institutoOrigem-null";
+                }
+
+                if($('#atividade').value() != "null"){
+                    lista = "_atividade-"+$('#atividade').value();
+                }else{
+                    lista = "_atividade-null";
+                }
+
+                /***********    Para Eliminar   ************//*para testes*/
+                //lista = "pais-russia_cidade-null_agente-null_subagente-null_universidade-null_curso-null_institutoOrigem-null_atividade-null";
+                /*******************************************/
+
+                var link = '/../api/listagem/'+lista;
+                $.ajax({
+                    method:"GET",
+                    url:link
+                })
+                .done(function(response){
+                    if(response != null){
+                        for (i=0; i<response.results.length; i++) {
+                            var resultClone = clone.clone();
+
+                            $('.routa-show',resultClone).attr('href',"{{route('clients.show',"+response.results[i].idCliente+")}}");
+                            $('.routa-show',resultClone).text(response.results[i].nome+" "+response.results[i].apelido);
+
+                            $('.numPassaporte',resultClone).text(response.results[i].numPassaporte);
+
+                            $('.paisNaturalidade',resultClone).text(response.results[i].paisNaturalidade);
+
+                            if(response.results[i].estado == "Inativo"){
+                                $('.span-estado',resultClone).text('Inativo');
+                                    $('.span-estado',resultClone).attr('class','span-estado text-danger');
+                            }else{
+                                if(response.results[i].estado == "Ativo"){
+                                    $('.span-estado',resultClone).text('Ativo');
+                                $('.span-estado',resultClone).attr('class','span-estado text-success');
+                                }else{
+                                    $('.span-estado',resultClone).text('Proponente');
+                                    $('.span-estado',resultClone).attr('class','span-estado text-info');
+                                }
+                            }
+
+                            $('.butao-show',resultClone).attr('href',"{{route('clients.show',"+response.results[i].idCliente+")}}");
+
+                            $('.butao-editar',resultClone).attr('href',"{{route('clients.edit',"+response.results[i].idCliente+")}}");
+
+                            $('.butao-delete',resultClone).attr('href',"{{route('clients.destroy',"+response.results[i].idCliente+")}}");
+                            $('.butao-delete',resultClone).attr('id',response.results[i].idCliente);
+                            $('.butao-delete',resultClone).attr('data',response.results[i].nome+" "+response.results[i].apelido);
+
+                            $('#table-body').append(resultClone);
+                        }
+                    }
+                })
+            }
         </script>
     @endsection
 @endsection

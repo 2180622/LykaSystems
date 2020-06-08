@@ -30,5 +30,5 @@ Route::namespace('Api')->name('api.')->group(function(){
         Route::get('fase/{id}/documentos', 'StockController@documentos')->name('documentos');
 
     });
-    Route::get('listagem/{pesquisa}', 'StockController@getList')->name('getList');
+    Route::get('listagem/{pesquisa}', 'ListagemController@getList')->name('getList');
 });
