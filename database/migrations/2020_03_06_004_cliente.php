@@ -48,6 +48,8 @@ class Cliente extends Migration
 
             $table->longText('numPassaporte')->nullable();
 
+
+            $table->longText('refCliente')->nullable();
             $table->longText('obsPessoais')->nullable();
             $table->longText('obsFinanceiras')->nullable();
             $table->longText('obsAcademicas')->nullable();

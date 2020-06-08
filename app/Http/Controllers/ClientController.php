@@ -483,13 +483,13 @@ class ClientController extends Controller
         }elseif(Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null && Auth()->user()->agente->tipo == 'Subagente'){
             $produts = Produto::whereRaw('idSubAgente = '.Auth()->user()->idAgente.' and idCliente = '.$client->idCliente)->get();
         }
-        if($produts && $cliente->editavel){
+        if($produts && $client->editavel){
             $permissao = true;
         }
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
             (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null &&
-            $client->idAgente == Auth()->user()->idAgente && $cliente->editavel) || $permissao){
+            $client->idAgente == Auth()->user()->idAgente && $client->editavel) || $permissao){
 
             /* Obtem as informações sobre os documentos */
 
@@ -560,7 +560,7 @@ class ClientController extends Controller
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)||
             (Auth()->user()->tipo == 'agente' && Auth()->user()->idAgente != null &&
-            $client->idAgente == Auth()->user()->idAgente && $cliente->editavel) || $permissao){
+            $client->idAgente == Auth()->user()->idAgente && $client->editavel) || $permissao){
 
             $t=time(); /*  data atual */
 

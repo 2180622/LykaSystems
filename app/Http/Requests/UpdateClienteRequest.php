@@ -67,6 +67,8 @@ class UpdateClienteRequest extends FormRequest
             'IBAN' => 'nullable',
             'obsFinanceiras' => 'nullable',
 
+            'refCliente' => 'nullable',
+
             'estado' => 'nullable',
             'editavel' => 'nullable',
 

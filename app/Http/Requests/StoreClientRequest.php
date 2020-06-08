@@ -66,6 +66,7 @@ class StoreClientRequest extends FormRequest
             'IBAN' => 'nullable',
             'obsFinanceiras' => 'nullable',
 
+            'refCliente' => 'nullable',
 
             'estado' => 'required',
             'editavel' => 'required',

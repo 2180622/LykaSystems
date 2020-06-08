@@ -106,11 +106,11 @@
 
                     @if ($agente!=null )
                     <div class="mb-3">Agente: <a class="font-weight-bold"
-                            href="{{route('agents.show',$agente)}}">{{$agente->nome}} {{$agente->apelido}}</a> </div>
+                            href="{{route('agents.show',$agente)}}">{{$agente->nome}} {{$agente->apelido}}</a></div>
                     @endif
 
                     @if ($associados!=null )
-                    <div class="mb-2">Agente(s) associados:
+                    <div class="mb-3">Agente(s) associados:
 
                         @foreach ($associados as $agent)
                         <a class="font-weight-bold" href="{{route('agents.show',$agent)}}">{{$agent->nome}}
@@ -124,8 +124,13 @@
                     @endif
 
 
+                    {{--Referências do cliente --}}
+                    @if (Auth::user()->tipo == "admin")
+                        <div class="mb-3">Referências do cliente: <span class="font-weight-bold">{{ $client->refCliente }}</span></div>
+                    @endif
 
-                    {{-- <div class="">Observações: <a href="#">Pessoais</a> | <a href="#">Dos Agentes</a> </div> --}}
+
+                    {{-- Separadores com obs do Agente / Admin --}}
 
                     @if (Auth::user()->tipo == "admin")
 
@@ -142,7 +147,7 @@
                     <div class="tab-content " id="ObsTabs">
                         <div class="tab-pane fade active show mt-1" id="obsPessoais" role="tabpanel"
                             aria-labelledby="obsPessoais-tab">
-                            <div class="border rounded bg-light p-2" style="height:155px; overflow: auto; color:black">
+                            <div class="border rounded bg-light p-2" style="height:120px; overflow: auto; color:black">
                                 @if ($client->obsPessoais==null)
                                 <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                                 @else
@@ -155,7 +160,7 @@
                         {{-- Tab das Obs dos Agentes --}}
                         <div class="tab-pane fade mt-1" id="obsAgentes" role="tabpanel"
                             aria-labelledby="obsAgentes-tab">
-                            <div class="border rounded bg-light p-2" style="height:155px; overflow: auto; color:black">
+                            <div class="border rounded bg-light p-2" style="height:120px; overflow: auto; color:black">
                                 @if ($client->obsAgente==null)
                                 <span class="text-muted"><small>(sem dados para mostrar)</small></span>
                                 @else

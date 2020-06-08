@@ -189,12 +189,26 @@
                         @endif
                     </div>
                     <div class="mt-2"><small class="text-muted">(clique para mudar)</small></div>
-                    <br>
                 </div>
             </div>
 
+
+            {{-- Campo de referência do cliente para o admin --}}
+            @if (Auth::user()->tipo == "admin")
+            <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{-- INPUT obsPessoais --}}
+                        <label for="obsPessoais">Referência do cliente:</label><br>
+                        <textarea name="refCliente" id="refCliente" rows="2" style="width:100%">{{old('refCliente',$client->refCliente)}}</textarea>
+                    </div>
+                </div>
+            @endif
+
+
             {{-- Campo de Observações para o admin --}}
             @if (Auth::user()->tipo == "admin")
+            <br>
                 <div class="row">
                     <div class="col-md-12">
                         {{-- INPUT obsPessoais --}}
@@ -204,7 +218,7 @@
                 </div>
             @endif
 
-            {{-- Campo de Observações para o admin --}}
+            {{-- Campo de Observações para o agente / admin --}}
             <div class="row">
                 <div class="col-md-12">
                     <br>
