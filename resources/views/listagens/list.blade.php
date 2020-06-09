@@ -28,6 +28,14 @@
         <div class="cards-navigation">
             <div class="title">
                 <h6>Listagem:</h6>
+                <select id="">
+                  <option>Escolher Opção:</option>
+                  <option value="Administradores">Administradores</option>
+                  <option value="Agentes">Agentes</option>
+                  <option value="Clientes">Clientes</option>
+                  <option value="Universidades">Universidades</option>
+                  <option value="Produtos Stock">Produtos Stock</option>
+                </select>
             </div>
             <br>
             <br>
@@ -48,7 +56,9 @@
 
                 {{-- Corpo da tabela --}}
                 <tbody id="table-body">
-                    
+                    {{-- @foreach ($iterable as $key => $value)
+
+                    @endforeach --}}
                     <tr id="clonar">
                         {{-- Só mostras os clientes ativos ou proponentes --}}
 
