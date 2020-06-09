@@ -71,6 +71,20 @@ class ProdutoController extends Controller
         if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null){
             $fields = $request->all();
             //dd($fields);
+
+            if(!$fields['anoAcademico']){
+                return redirect()->back()->withErrors(['required' => 'Ano académico é obrigatório']);
+            }
+            if(!$fields['agente']){
+                return redirect()->back()->withErrors(['required' => 'Agente é obrigatório']);
+            }
+            if(!$fields['uni1']){
+                return redirect()->back()->withErrors(['required' => 'Universidade principal é obrigatório']);
+            }
+
+
+
+
             $produto = new Produto;
             $produto->tipo = $fields['tipo'];
             $produto->descricao = $fields['descricao'];
@@ -86,7 +100,6 @@ class ProdutoController extends Controller
             $t=time();
             $produto->create_at == date("Y-m-d",$t);
 
-            $produto->save();
             $valorProduto = 0;
             $valorTAgente = 0;
             $valorTSubAgente = 0;
@@ -95,14 +108,30 @@ class ProdutoController extends Controller
 
             for($i=1;$i<=20;$i++){
                 if($fields['descricao-fase'.$i]!=null){
+
+
+                    if(!$fields['data-fase'.$i]){
+                        return redirect()->back()->withErrors(['required' => 'Data vencimento da fase '.$i.' é obrigatória']);
+                    }
+                    if(!$fields['valor-fase'.$i]){
+                        return redirect()->back()->withErrors(['required' => 'Valor da fase '.$i.' é obrigatório']);
+                    }
+                    if(!$fields['resp-cliente-fase'.$i]){
+                        return redirect()->back()->withErrors(['required' => 'pickpocket do cliente na fase '.$i.' é obrigatório']);
+                    }
+                    if(!$fields['resp-data-agente-fase'.$i]){
+                        return redirect()->back()->withErrors(['required' => 'Valor do agente na fase '.$i.' é obrigatório']);
+                    }
+                    if(!$fields['resp-data-uni1-fase'.$i]){
+                        return redirect()->back()->withErrors(['required' => 'Valor do agente na fase '.$i.' é obrigatório']);
+                    }
+
                     $fase = new Fase;
 
                     $fase->descricao = $fields['descricao-fase'.$i];
                     $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$i]));
                     $fase->valorFase = $fields['valor-fase'.$i];
                     $fase->create_at == date("Y-m-d",$t);
-                    $fase->idProduto = $produto->idProduto;
-                    $fase->save();
 
 
                     $responsabilidade = new Responsabilidade;
@@ -155,8 +184,17 @@ class ProdutoController extends Controller
                     $responsabilidade->idUniversidade1 = $produto->idUniversidade1;
                     $responsabilidade->idUniversidade2 = $produto->idUniversidade2;
 
-                    $responsabilidade->idFase = $fase->idFase;
 
+
+
+
+
+                    $produto->save();
+
+                    $fase->idProduto = $produto->idProduto;
+                    $fase->save();
+
+                    $responsabilidade->idFase = $fase->idFase;
                     $responsabilidade->save();
 
                     for($numF=1;$numF<=500;$numF++){
@@ -315,9 +353,24 @@ class ProdutoController extends Controller
         }
 
         if((Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)|| $permissao){
+            
             $fases = $produto->fase;
             $fields = $request->all();
             //dd($fields);
+
+
+
+            if(!$fields['anoAcademico']){
+                return redirect()->back()->withErrors(['required' => 'Ano académico é obrigatório']);
+            }
+            if(!$fields['agente']){
+                return redirect()->back()->withErrors(['required' => 'Agente é obrigatório']);
+            }
+            if(!$fields['uni1']){
+                return redirect()->back()->withErrors(['required' => 'Universidade principal é obrigatório']);
+            }
+
+
             $produto->tipo = $fields['tipo'];
             $produto->descricao = $fields['descricao'];
             $produto->anoAcademico = $fields['anoAcademico'];
@@ -332,18 +385,36 @@ class ProdutoController extends Controller
             $t=time();
             $produto->updated_at == date("Y-m-d",$t);
 
-            $produto->save();
             $valorProduto = 0;
             $valorTAgente = 0;
             $valorTSubAgente = 0;
 
             foreach($fases as $fase){
 
+
+
+                if(!$fields['data-fase'.$fase->idFase]){
+                    return redirect()->back()->withErrors(['required' => 'Data vencimento da fase '.$fase->idFase.' é obrigatória']);
+                }
+                if(!$fields['valor-fase'.$fase->idFase]){
+                    return redirect()->back()->withErrors(['required' => 'Valor da fase '.$fase->idFase.' é obrigatório']);
+                }
+                if(!$fields['resp-cliente-fase'.$fase->idFase]){
+                    return redirect()->back()->withErrors(['required' => 'pickpocket do cliente na fase '.$fase->idFase.' é obrigatório']);
+                }
+                if(!$fields['resp-data-agente-fase'.$fase->idFase]){
+                    return redirect()->back()->withErrors(['required' => 'Valor do agente na fase '.$fase->idFase.' é obrigatório']);
+                }
+                if(!$fields['resp-data-uni1-fase'.$fase->idFase]){
+                    return redirect()->back()->withErrors(['required' => 'Valor do agente na fase '.$fase->idFase.' é obrigatório']);
+                }
+
                 $fase->descricao = $fields['descricao-fase'.$fase->idFase];
                 $fase->dataVencimento = date("Y-m-d",strtotime($fields['data-fase'.$fase->idFase]));
                 $fase->valorFase = $fields['valor-fase'.$fase->idFase];
                 $fase->create_at == date("Y-m-d",$t);
-                $fase->idProduto = $produto->idProduto;
+
+                $produto->save();
                 $fase->save();
 
                 $responsabilidade = $fase->responsabilidade;
@@ -416,7 +487,6 @@ class ProdutoController extends Controller
                 $responsabilidade->idUniversidade1 = $produto->idUniversidade1;
                 $responsabilidade->idUniversidade2 = $produto->idUniversidade2;
 
-                $responsabilidade->idFase = $fase->idFase;
 
                 $responsabilidade->save();
 

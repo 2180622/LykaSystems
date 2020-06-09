@@ -48,7 +48,7 @@
                     <br>
                     <div class="row">
                         <div class="col">
-                            <label for="nome">Escolha o produto: </label>
+                            <label for="nome">Escolha o produto: <span class="text-danger">*</span></label>
                             <select class="form-control" id="produto" onchange="AtualizaProduto(this.value, $(this).closest('#form_produto'))" required>
                                 <option value="0" selected></option>
                                 @foreach($produtoStock as $prodS)
@@ -72,11 +72,11 @@
                             <input type="text" class="form-control" name="descricao" id="descricao"
                             value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" readonly><br>
 
-                            <label for="AnoAcademico">Ano académico:</label><br>
+                            <label for="AnoAcademico">Ano académico: <span class="text-danger">*</span></label><br>
                             <input type="text" class="form-control" name="anoAcademico" id="anoAcademico"
                             value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required><br>
 
-                            <label for="agente">Agente:</label><br>
+                            <label for="agente">Agente: <span class="text-danger">*</span></label><br>
                             <select id="agente" name="agente" class="form-control" required>
                                 <option value="" selected></option>
                                 @foreach($Agentes as $agente)
@@ -90,7 +90,7 @@
                                     <option {{old('idSubAgente',$produto->idSubAgente)}} value="{{$subagente->idAgente}}">{{$subagente->nome.' '.$subagente->apelido.' -> '.$subagente->email}}</option>
                                 @endforeach
                             </select><br>
-                            <label for="uni1">Universidade Principal:</label><br>
+                            <label for="uni1">Universidade Principal: <span class="text-danger">*</span></label><br>
                             <select id="uni1" name="uni1" class="form-control" required>
                                 <option value="" selected></option>
                                 @foreach($Universidades as $uni)
@@ -157,12 +157,12 @@
                                         </div>
 
                                         <div class="col-md-5">
-                                            <label for="data-fase{{$num}}">Data de vencimento:</label><br>
+                                            <label for="data-fase{{$num}}">Data de vencimento: <span class="text-danger">*</span></label><br>
                                             <input type="date" class="form-control" name="data-fase{{$num}}" id="data-fase{{$num}}"
                                             value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required/><br>
                                         </div>
                                         <div class="col-md-5">
-                                            <label for="valor-fase{{$num}}">Valor total da fase:</label><br>
+                                            <label for="valor-fase{{$num}}">Valor total da fase: <span class="text-danger">*</span></label><br>
                                             <input type="number" min="0" class="form-control form-required" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
                                             value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required/><br>
                                         </div>
@@ -170,7 +170,7 @@
 
                                     <div class="col mr-3">
                                         <div><span><b>Responsabilidades</b></span></div><br>
-                                        <label for="resp-cliente-fase{{$num}}">Valor a pagar ao cliente:</label><br>
+                                        <label for="resp-cliente-fase{{$num}}">PickPocket para cliente: <span class="text-danger">*</span></label><br>
                                         <input type="number" min="0" class="form-control" name="resp-cliente-fase{{$num}}" id="resp-cliente-fase{{$num}}"
                                         value="{{old('valorCliente',$Responsabilidades[$num-1]->valorCliente)}}" style="width:250px" required><br>
 
@@ -178,7 +178,7 @@
                                         <input type="date" class="form-control" name="resp-data-cliente-fase{{$num}}" id="resp-data-cliente-fase{{$num}}"
                                         value="" style="width:250px" ><br>
 
-                                        <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente:</label><br>
+                                        <label for="resp-agente-fase{{$num}}">Valor a pagar ao agente: <span class="text-danger">*</span></label><br>
                                         <input type="number" min="0" class="form-control" name="resp-agente-fase{{$num}}" id="resp-agente-fase{{$num}}"
                                         value="{{old('valorAgente',$Responsabilidades[$num-1]->valorAgente)}}" style="width:250px" required><br>
 
@@ -194,7 +194,7 @@
                                         <input type="date" class="form-control" name="resp-data-subagente-fase{{$num}}" id="resp-data-subagente-fase{{$num}}"
                                         value="" style="width:250px" ><br>
 
-                                        <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal:</label><br>
+                                        <label for="resp-uni1-fase{{$num}}">Valor a pagar á universidade principal: <span class="text-danger">*</span></label><br>
                                         <input type="number" min="0" class="form-control" name="resp-uni1-fase{{$num}}" id="resp-uni1-fase{{$num}}"
                                         value="{{old('valorUniversidade1',$Responsabilidades[$num-1]->valorUniversidade1)}}" style="width:250px" required><br>
 

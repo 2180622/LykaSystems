@@ -57,7 +57,7 @@
                         <input type="text" class="form-control" name="descricao" id="descricao"
                         value="{{old('descricao',$produto->descricao)}}" placeholder="Descricao" maxlength="20" readonly><br>
 
-                        <label for="anoAcademico">Ano académico:</label><br>
+                        <label for="anoAcademico">Ano académico: <span class="text-danger">*</span></label><br>
                         @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                             <input type="text" class="form-control" name="anoAcademico" id="anoAcademico"
                             value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" required><br>
@@ -66,7 +66,7 @@
                             value="{{old('anoAcademico',$produto->anoAcademico)}}" placeholder="Ano Academico" maxlength="20" readonly><br>
                         @endIf
 
-                        <label for="agente">Agente:</label><br>
+                        <label for="agente">Agente: <span class="text-danger">*</span></label><br>
                         @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                             <select id="agente" name="agente" class="form-control" required>
                         @else
@@ -104,7 +104,7 @@
                                 @endforeach
                             </select><br>
                         @endif
-                        <label for="uni1">Universidade Principal:</label><br>
+                        <label for="uni1">Universidade Principal: <span class="text-danger">*</span></label><br>
                         @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                             <select id="uni1" name="uni1" class="form-control" required>
                         @else
@@ -188,14 +188,14 @@
                                         value="{{old('descricao',$fase->descricao)}}" placeholder="descricao" maxlength="20" readonly><br>
                                     </div>
                                     <div class="col-md-5">
-                                    <label for="data-fase{{$fase->idFase}}">Data de vencimento:</label><br>
+                                    <label for="data-fase{{$fase->idFase}}">Data de vencimento: <span class="text-danger">*</span></label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="date" class="form-control" name="data-fase{{$fase->idFase}}" id="data-fase{{$fase->idFase}}"
                                         value="{{date_create(old('dataVencimento',$fase->dataVencimento))->format('Y-m-d')}}" style="width:250px" required><br>
                                         </div>
 
                                         <div class="col-md-5">
-                                            <label for="valor-fase{{$num}}">Valor da fase:</label><br>
+                                            <label for="valor-fase{{$num}}">Valor da fase: <span class="text-danger">*</span></label><br>
                                             <input type="number" min="0" class="form-control" name="valor-fase{{$num}}" id="valor-fase{{$num}}"
                                             value="{{old('valorFase',$fase->valorFase)}}" style="width:250px" required><br>
                                         </div>
@@ -214,7 +214,7 @@
                                 </div>
                                 <div class="col mr-3" id="responsabilidades{{$responsabilidade->idResponsabilidade}}">
                                     <div><span><b>Responsabilidades</b></span></div><br>
-                                    <label for="resp-cliente-fase{{$fase->idFase}}">Valor a pagar ao cliente:</label><br>
+                                    <label for="resp-cliente-fase{{$fase->idFase}}">Valor a pagar ao cliente: <span class="text-danger">*</span></label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="number" class="form-control" name="resp-cliente-fase{{$fase->idFase}}" id="resp-cliente-fase{{$fase->idFase}}"
                                         value="{{old('valorCliente',$responsabilidade->valorCliente)}}" style="width:250px" required><br>
@@ -231,7 +231,7 @@
                                         value="" style="width:250px" readonly><br>
                                     @endIf
 
-                                    <label for="resp-agente-fase{{$fase->idFase}}">Valor a pagar ao agente:</label><br>
+                                    <label for="resp-agente-fase{{$fase->idFase}}">Valor a pagar ao agente: <span class="text-danger">*</span></label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="number" class="form-control valor-pagar-agente" name="resp-agente-fase{{$fase->idFase}}" id="resp-agente-fase{{$fase->idFase}}"
                                         value="{{old('valorAgente',$responsabilidade->valorAgente)}}" style="width:250px" required><br>
@@ -287,7 +287,7 @@
                                         @endIf
                                     </div>
                                     --}}
-                                    <label for="resp-uni1-fase{{$fase->idFase}}">Valor a pagar á universidade principal:</label><br>
+                                    <label for="resp-uni1-fase{{$fase->idFase}}">Valor a pagar á universidade principal: <span class="text-danger">*</span></label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="number" class="form-control" name="resp-uni1-fase{{$fase->idFase}}" id="resp-uni1-fase{{$fase->idFase}}"
                                         value="{{old('valorUniversidade1',$responsabilidade->valorUniversidade1)}}" style="width:250px" required><br>
