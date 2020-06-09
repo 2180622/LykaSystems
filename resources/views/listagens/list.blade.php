@@ -56,27 +56,23 @@
 
                 {{-- Corpo da tabela --}}
                 <tbody id="table-body">
-                    {{-- @foreach ($iterable as $key => $value)
-
-                    @endforeach --}}
-                    <tr id="clonar">
+                    @foreach ($clientes as $cliente)
+                    <tr {{--id="clonar"--}}>
                         {{-- Só mostras os clientes ativos ou proponentes --}}
-
-
                         {{-- Nome e Apelido --}}
                         <td class="align-middle">
-                            <a class="routa-show name_link" href="#"></a>
+                            <a class="routa-show name_link" href="#">{{$cliente->nome ." ". $cliente->apelido}}</a>
                         </td>
 
                         {{-- numPassaporte --}}
-                        <td class="numPassaporte align-middle"></td>
+                        <td class="numPassaporte align-middle">{{$cliente->numPassaporte}}</td>
 
                         {{-- País de origem --}}
-                        <td class="paisNaturalidade align-middle"></td>
+                        <td class="paisNaturalidade align-middle">{{$cliente->paisNaturalidade}}</td>
 
                         {{-- Estado de cliente --}}
                         <td class="align-middle">
-                            <span class="span-estado"></span>
+                            <span class="span-estado">{{$cliente->estado}}</span>
                         </td>
 
 
@@ -105,6 +101,7 @@
 
                         </td>
                     </tr>
+                  @endforeach
                 </tbody>
             </table>
         </div>
