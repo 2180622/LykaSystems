@@ -214,7 +214,7 @@
                                 </div>
                                 <div class="col mr-3" id="responsabilidades{{$responsabilidade->idResponsabilidade}}">
                                     <div><span><b>Responsabilidades</b></span></div><br>
-                                    <label for="resp-cliente-fase{{$fase->idFase}}">Valor a pagar ao cliente: <span class="text-danger">*</span></label><br>
+                                    <label for="resp-cliente-fase{{$fase->idFase}}">PickPocket para cliente: <span class="text-danger">*</span></label><br>
                                     @if(Auth()->user()->tipo == 'admin' && Auth()->user()->idAdmin != null)
                                         <input type="number" class="form-control" name="resp-cliente-fase{{$fase->idFase}}" id="resp-cliente-fase{{$fase->idFase}}"
                                         value="{{old('valorCliente',$responsabilidade->valorCliente)}}" style="width:250px" required><br>
