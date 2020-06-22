@@ -105,7 +105,6 @@ class ProdutoController extends Controller
             $valorTSubAgente = 0;
 
             $fasesStock = $produtoStock->faseStock;
-
             for($i=1;$i<=20;$i++){
                 if($fields['descricao-fase'.$i]!=null){
 
@@ -119,10 +118,10 @@ class ProdutoController extends Controller
                     if(!$fields['resp-cliente-fase'.$i]){
                         return redirect()->back()->withErrors(['required' => 'pickpocket do cliente na fase '.$i.' é obrigatório']);
                     }
-                    if(!$fields['resp-data-agente-fase'.$i]){
+                    if(!$fields['resp-agente-fase'.$i]){
                         return redirect()->back()->withErrors(['required' => 'Valor do agente na fase '.$i.' é obrigatório']);
                     }
-                    if(!$fields['resp-data-uni1-fase'.$i]){
+                    if(!$fields['resp-uni1-fase'.$i]){
                         return redirect()->back()->withErrors(['required' => 'Valor do agente na fase '.$i.' é obrigatório']);
                     }
 
@@ -197,13 +196,17 @@ class ProdutoController extends Controller
                     $responsabilidade->idFase = $fase->idFase;
                     $responsabilidade->save();
 
-                    for($numF=1;$numF<=500;$numF++){
+                    for($numF=1;$numF<=10000;$numF++){
                         if(array_key_exists("fornecedor".$numF."-fase".$i, $fields)){
                             if($fields["fornecedor".$numF."-fase".$i]){
                                 $relacao = new RelFornResp;
                                 $relacao->idFornecedor = $fields["fornecedor".$numF."-fase".$i];
                                 $relacao->idResponsabilidade = $responsabilidade->idResponsabilidade;
-                                $relacao->valor = $fields["valor-fornecedor".$numF."-fase".$i];
+                                if($fields["valor-fornecedor".$numF."-fase".$i]){
+                                    $relacao->valor = $fields["valor-fornecedor".$numF."-fase".$i];
+                                }else{
+                                    $relacao->valor = 0;
+                                }
                                 $relacao->create_at == date("Y-m-d",$t);
                                 if($fields["data-fornecedor".$numF."-fase".$i]){
                                     $relacao->dataVencimento = date("Y-m-d",strtotime($fields["data-fornecedor".$numF."-fase".$i]));
@@ -402,10 +405,10 @@ class ProdutoController extends Controller
                 if(!$fields['resp-cliente-fase'.$fase->idFase]){
                     return redirect()->back()->withErrors(['required' => 'pickpocket do cliente na fase '.$fase->idFase.' é obrigatório']);
                 }
-                if(!$fields['resp-data-agente-fase'.$fase->idFase]){
+                if(!$fields['resp-agente-fase'.$fase->idFase]){
                     return redirect()->back()->withErrors(['required' => 'Valor do agente na fase '.$fase->idFase.' é obrigatório']);
                 }
-                if(!$fields['resp-data-uni1-fase'.$fase->idFase]){
+                if(!$fields['resp-uni1-fase'.$fase->idFase]){
                     return redirect()->back()->withErrors(['required' => 'Valor do agente na fase '.$fase->idFase.' é obrigatório']);
                 }
 
@@ -496,7 +499,11 @@ class ProdutoController extends Controller
                         for($i=1;$i<=10000;$i++){
                             if(array_key_exists("fornecedor".$i."-fase".$fase->idFase, $fields)){
                                 if($fields["fornecedor".$i."-fase".$fase->idFase]==$relacao->idFornecedor){
-                                    $relacao->valor = $fields["valor-fornecedor".$i."-fase".$fase->idFase];
+                                    if($fields["valor-fornecedor".$i."-fase".$fase->idFase]){
+                                        $relacao->valor = $fields["valor-fornecedor".$i."-fase".$fase->idFase];
+                                    }else{
+                                        $relacao->valor = 0;
+                                    }
                                     if($fields["data-fornecedor".$numF."-fase".$i]){
                                         $relacao->dataVencimento = date("Y-m-d",strtotime($fields["data-fornecedor".$numF."-fase".$i]));
                                     }else{
@@ -530,7 +537,11 @@ class ProdutoController extends Controller
                                 $relacao = new RelFornResp;
                                 $relacao->idFornecedor = $fields["fornecedor".$i."-fase".$fase->idFase];
                                 $relacao->idResponsabilidade = $responsabilidade->idResponsabilidade;
-                                $relacao->valor = $fields["valor-fornecedor".$i."-fase".$fase->idFase];
+                                if($fields["valor-fornecedor".$i."-fase".$fase->idFase]){
+                                    $relacao->valor = $fields["valor-fornecedor".$i."-fase".$fase->idFase];
+                                }else{
+                                    $relacao->valor = 0;
+                                }
                                 $relacao->create_at == date("Y-m-d",$t);
                                 $relacao->save();
 

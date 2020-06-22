@@ -152,7 +152,7 @@
 
                                 <div><span><b>Responsabilidades</b></span></div><br>
 
-                                <div><span class="text-secondary">Para cliente: </span>
+                                <div><span class="text-secondary">PickPocket de cliente: </span>
                                     @if($responsabilidade->valorCliente)
                                         {{$responsabilidade->valorCliente.'€'}}
                                     @else
