@@ -193,7 +193,7 @@
                         @foreach ($listagents as $agentx)
                         <a class="name_link text-center m-2" href="{{route('agents.show',$agentx)}}">
                             <div class="col">
-                                <div style="width: 200px; height:210px; overflow:hidden">
+                                <div style="width: 130px; height:120px; overflow:hidden">
                                     @if($agentx->fotografia)
                                     <img class="align-middle p-1 rounded bg-white shadow-sm border"
                                         src="{{Storage::disk('public')->url('agent-documents/'.$agentx->idAgente.'/').$agentx->fotografia}}"

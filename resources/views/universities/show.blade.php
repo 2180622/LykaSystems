@@ -315,7 +315,7 @@
                             <tbody>
 
                                 @foreach ($clients as $client)
-                                <tr>
+                                <tr class="font-weight-normal">
                                     {{-- Nome e Apelido --}}
                                     <td class="align-middle"><a class="name_link"
                                             href="{{route('clients.show',$client)}}">{{ $client->nome }}
